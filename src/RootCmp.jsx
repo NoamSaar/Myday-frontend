@@ -13,7 +13,7 @@ export function RootCmp() {
         <div>
             <AppHeader />
             <main>
-                {/* home */}
+                {/* home! */}
                 {/* board app */}
                 <Sidebar />
                 <Routes>
