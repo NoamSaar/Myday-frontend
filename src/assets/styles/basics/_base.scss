@@ -1,16 +1,13 @@
+@import '../setup/typography';
+
 * {
     box-sizing: border-box;
 }
 
-::selection {
-    background-color: $clr1;
-    color: $clr6;
-}
 
 html {
-    font-family: montserrat;
+    font-family: figtree;
     line-height: 1.6;
-    color: $clr2;
 }
 
 body {
@@ -18,16 +15,24 @@ body {
     margin: 0;
     max-width: 1024px;
     margin: auto;
+    font-family: figtree;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: caveat;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: poppins;
     margin: 0 0 0.6em;
     line-height: 1;
 }
 
 
-section, main, footer {
+section,
+main,
+footer {
     padding: 5px;
 }
 
@@ -42,7 +47,7 @@ p {
 a {
     text-decoration: none;
 }
+
 a:hover {
     text-decoration: underline;
 }
-

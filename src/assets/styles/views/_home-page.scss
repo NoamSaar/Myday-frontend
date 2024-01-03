@@ -1,0 +1,20 @@
+@import "../setup/functions";
+
+.home-page {
+    text-align: center;
+
+    & .home-hero {
+        justify-self: center;
+
+        & .main-header {
+
+            & h1 {
+                font-weight: 600;
+                font-size: rem(64px);
+                line-height: 85px;
+                max-width: 755px;
+            }
+        }
+    }
+
+}
