@@ -8,3 +8,15 @@
 @function em($pixels, $context: 16px) {
     @return calc(($pixels/$context) * 1em);
 }
+
+@function lh($pixels, $context: 16px) {
+    @return calc($pixels/$context);
+}
+
+@function darkenColor($color, $amount: 10%) {
+    @return darken($color, $amount);
+}
+
+@function lightenColor($color, $amount: 10%) {
+    @return lighten($color, $amount);
+}
