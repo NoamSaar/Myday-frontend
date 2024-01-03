@@ -13,12 +13,12 @@
 
 
 // Views
-@import "views/AboutUs";
-@import "views/HomePage";
-@import "views/Index";
-@import "views/UserDetails";
+@import "views/about-us";
+@import "views/home-page";
+@import "views/index";
+@import "views/user-details";
 
 // Components
-@import "cmps/AppHeader";
-@import "cmps/AppFooter";
-@import "cmps/UserMsg";
+@import "cmps/app-header";
+@import "cmps/app-footer";
+@import "cmps/user-msg";
