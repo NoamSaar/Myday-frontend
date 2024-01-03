@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
@@ -12,7 +12,7 @@ export function AppHeader() {
         try {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot login')
         }
     }
@@ -20,7 +20,7 @@ export function AppHeader() {
         try {
             const user = await signup(credentials)
             showSuccessMsg(`Welcome new user: ${user.fullname}`)
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot signup')
         }
     }
@@ -28,7 +28,7 @@ export function AppHeader() {
         try {
             await logout()
             showSuccessMsg(`Bye now`)
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot logout')
         }
     }
@@ -36,7 +36,7 @@ export function AppHeader() {
     return (
         <header className="app-header">
             <nav>
-                {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
+                {/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
                 {user &&
                     <span className="user-info">
@@ -52,9 +52,8 @@ export function AppHeader() {
                     <section className="user-info">
                         <LoginSignup onLogin={onLogin} onSignup={onSignup} />
                     </section>
-                }
+                } */}
             </nav>
-            <h1>My App</h1>
         </header>
     )
 }

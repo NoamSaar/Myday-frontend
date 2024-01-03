@@ -1,9 +1,7 @@
 import { HomePage } from './pages/HomePage.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
 import { CarIndex } from './pages/CarIndex.jsx'
-import { ReviewIndex } from './pages/ReviewIndex.jsx'
 import { ChatApp } from './pages/Chat.jsx'
-import { AdminApp } from './pages/AdminIndex.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -18,11 +16,6 @@ const routes = [
         label: 'Cars'
     },
     {
-        path: 'review',
-        component: <ReviewIndex />,
-        label: 'Reviews'
-    },
-    {
         path: 'chat',
         component: <ChatApp />,
         label: 'Chat'
@@ -32,11 +25,7 @@ const routes = [
         component: <AboutUs />,
         label: 'About us'
     },
-    {
-        path: 'admin',
-        component: <AdminApp />,
-        label: 'Admin Only'
-    }
+
 ]
 
 export default routes

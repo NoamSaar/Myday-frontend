@@ -10,6 +10,8 @@ export function CarIndex() {
 
     const cars = useSelector(storeState => storeState.carModule.cars)
     const loggedinUser = useSelector(storeState => storeState.userModule.user)
+    const isLoading = useSelector(storeState => storeState.userModule.isLoading)
+
 
     useEffect(() => {
         loadCars()
@@ -69,28 +71,9 @@ export function CarIndex() {
     }
 
     return (
-        <div>
-            <h3>Cars App</h3>
-            <main>
-                <button onClick={onAddCar}>Add Car ⛐</button>
-                <ul className="car-list">
-                    {cars.map(car =>
-                        <li className="car-preview" key={car._id}>
-                            <h4>{car.vendor}</h4>
-                            <h1>⛐</h1>
-                            <p>Price: <span>${car.price.toLocaleString()}</span></p>
-                            <p>Owner: <span>{car.owner && car.owner.fullname}</span></p>
-                            {shouldShowActionBtns(car) && <div>
-                                <button onClick={() => { onRemoveCar(car._id) }}>x</button>
-                                <button onClick={() => { onUpdateCar(car) }}>Edit</button>
-                            </div>}
+        <section className='car-index'>
+            {isLoading && 'Loading...'}
 
-                            <button onClick={() => { onAddCarMsg(car) }}>Add car msg</button>
-                            <button className="buy" onClick={() => { onAddToCart(car) }}>Add to cart</button>
-                        </li>)
-                    }
-                </ul>
-            </main>
-        </div>
+        </section>
     )
 }
