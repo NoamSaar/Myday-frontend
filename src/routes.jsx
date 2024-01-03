@@ -1,6 +1,7 @@
 import { HomePage } from './pages/HomePage.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
 
+// comment to test
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
     {
