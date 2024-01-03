@@ -5,6 +5,27 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { ADD_BOARD, ADD_TO_BOARDT, CLEAR_BOARDT, REMOVE_BOARD, REMOVE_FROM_BOARDT, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from '../reducers/board.reducer.js'
 import { SET_SCORE } from '../reducers/user.reducer.js'
 
+// Store - saveTask (from board.js)
+// function storeSaveTask(boardId, groupId, task, activity) {
+
+//     board = boardService.saveTask(boardId, groupId, task, activity)
+//     // commit(ACTION) // dispatch(ACTION)
+// }
+
+// function updateTask(cmpType, data) {
+// Switch by cmpType
+// case MEMBERS:
+//    task.members = data
+//    activity = boardService.getEmptyActivity()
+//    activity.txt = `Members changed for task ${}`
+//    activity.task = '{mini-task}'
+// case STATUS:
+//    task.status = data
+
+// dispatch to store: updateTask(task, activity)
+// }
+
+
 // Action Creators:
 export function getActionRemoveBoard(boardId) {
     return {
