@@ -15,9 +15,10 @@
 // Views
 @import "views/about-us";
 @import "views/home-page";
+@import "views/board-details";
 @import "views/user-details";
 
 // Components
 @import "cmps/app-header";
-@import "cmps/app-footer";
+@import "cmps/sidebar";
 @import "cmps/user-msg";

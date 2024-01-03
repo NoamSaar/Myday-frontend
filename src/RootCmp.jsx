@@ -1,22 +1,27 @@
 import React from 'react'
 import { Routes, Route } from 'react-router'
 
-import routes from './routes'
-
 import { AppHeader } from './cmps/AppHeader'
 import { Sidebar } from './cmps/Sidebar'
 import { TaskDetails } from './pages/TaskDetails'
+import { BoardDetails } from './pages/BoardDetails'
+import { HomePage } from './pages/HomePage'
 
 export function RootCmp() {
 
     return (
-        <div>
+        <div className="main-layout grid">
             <AppHeader />
-            <main>
+            <main className="content-container grid column">
+                {/* home */}
+                {/* board app */}
                 <Sidebar />
                 <Routes>
-                    {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
-                    <Route path="/board/:boardId/task/:taskId" element={<TaskDetails />} />
+                    <Route element={<HomePage />} path="/" />
+                    <Route element={<BoardDetails />} path="/board" >
+                        {/* <Route element={<BoardDetails />} path="/board/:boardId" > */}
+                        <Route path="/board/:boardId/task/:taskId" element={<TaskDetails />} />
+                    </Route>
                 </Routes>
             </main>
         </div>
