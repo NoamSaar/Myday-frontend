@@ -9,7 +9,6 @@ export function BoardDetails() {
     const [board, setBoard] = useState(null)
     const { boardId } = useParams()
     const user = useSelector((storeState) => storeState.userModule.loggedinUser)
-    console.log('board', board)
 
     useEffect(() => {
         loadBoard()
