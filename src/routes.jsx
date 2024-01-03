@@ -1,5 +1,5 @@
+import { BoardDetails } from './pages/BoardDetails.jsx'
 import { HomePage } from './pages/HomePage.jsx'
-import { AboutUs } from './pages/AboutUs.jsx'
 
 // comment to test
 // Routes accesible from the main navigation (in AppHeader)
@@ -7,13 +7,13 @@ const routes = [
     {
         path: '/',
         component: <HomePage />,
-        label: 'Home 🏠',
+        label: 'Home',
     },
-
     {
-        path: 'about',
-        component: <AboutUs />,
-        label: 'About us'
+        //change to /board/:boardId
+        path: '/board',
+        component: <BoardDetails />,
+        label: 'Board',
     },
 
 ]
