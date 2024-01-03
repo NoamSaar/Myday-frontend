@@ -1,7 +1,6 @@
-import { SquerePreviewList } from "./SquerePreviewList.jsx";
 
 export function HomeHero() {
-    const squeres = [
+    const squares = [
         { txt: 'Creative & design' },
         { txt: 'Operations' },
         { txt: 'Marketing' },
@@ -17,7 +16,12 @@ export function HomeHero() {
                 <h2>What would you like to manage?</h2>
             </div>
 
-            <SquerePreviewList squeres={squeres} />
+            <ul className="clean-list squares-list">
+
+                {squares.map((square, idx) => {
+                    return <li key={idx}>{square.txt}</li>
+                })}
+            </ul>
 
         </div>
     )
