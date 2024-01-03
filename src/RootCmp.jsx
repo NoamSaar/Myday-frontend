@@ -10,15 +10,16 @@ import { HomePage } from './pages/HomePage'
 export function RootCmp() {
 
     return (
-        <div>
+        <div className="main-layout grid">
             <AppHeader />
-            <main>
+            <main className="content-container grid column">
                 {/* home */}
                 {/* board app */}
                 <Sidebar />
                 <Routes>
                     <Route element={<HomePage />} path="/" />
-                    <Route element={<BoardDetails />} path="/board/:boardId" >
+                    <Route element={<BoardDetails />} path="/board" >
+                        {/* <Route element={<BoardDetails />} path="/board/:boardId" > */}
                         <Route path="/board/:boardId/task/:taskId" element={<TaskDetails />} />
                     </Route>
                 </Routes>
