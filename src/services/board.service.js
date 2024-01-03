@@ -12,6 +12,7 @@ export const boardService = {
     save,
     remove,
     getDefaultBoard,
+    saveTask,
 }
 window.cs = boardService
 
@@ -57,6 +58,17 @@ async function save(board) {
     }
 }
 
+function saveTask(boardId, groupId, task, activity) {
+    const board = getById(boardId)
+    // PUT /api/board/b123/task/t678
+
+    // TODO: find the task, and update
+    board.activities.unshift(activity)
+    saveBoard(board)
+    // return board
+    // return task
+}
+
 
 function getDefaultBoard() {
     return {
@@ -64,6 +76,9 @@ function getDefaultBoard() {
         price: utilService.getRandomIntInclusive(1000, 9000),
     }
 }
+
+
+
 
 
 

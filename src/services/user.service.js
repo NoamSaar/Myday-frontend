@@ -99,3 +99,29 @@ function getLoggedinUser() {
 
 
 
+const users = [
+    {
+        _id: 'u101',
+        fullname: 'Eden Rize',
+        username: 'edenrize@gmail.com',
+        password: '1234',
+        imgUrl: 'http://some-img.jpg',
+
+    },
+    {
+        _id: 'u102',
+        fullname: 'Mor Marzan',
+        username: 'mormarzan@gmail.com',
+        password: '4321',
+        imgUrl: 'http://some-img.jpg',
+
+    },
+    {
+        _id: 'u103',
+        fullname: 'Noam Saar',
+        username: 'noamsaar11@gmail.com',
+        password: '4321',
+        imgUrl: 'http://some-img.jpg',
+
+    },
+]
