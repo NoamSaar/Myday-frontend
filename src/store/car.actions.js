@@ -1,4 +1,4 @@
-import { carService } from '../services/car.service.js'
+import { carService } from '../services/board.service.js'
 import { userService } from '../services/user.service.js'
 import { store } from '../store/store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
