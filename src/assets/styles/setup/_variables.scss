@@ -1,11 +1,32 @@
 // Colors
-$clr1: #ce2e6c;
-$clr2: #4f3a65;
-$clr3: #574f7d;
-$clr4: #95adbe;
-$clr5: #dff0ea;
-$clr6: #fff;
-$clr7: #222;
+$clr1: #fff;
+$clr2: #000;
+
+$clr-bg-header: #eceff8;
+$clr-bg-open-modal: #292f4cb3;
+
+$clr-btn-active: #cce5ff;
+$clr-btn-hover: #dcdfec;
+$clr-btn-add: #0073ea;
+$clr-btn-add-hover: #0060b9;
+
+$clr-btn-feedback: #bb3354;
+
+$clr-status-done: #00c875;
+$clr-status-working: #fdab3d;
+$clr-status-stuck: #e2445c;
+$clr-status-not-started: #c4c4c4;
+
+$clr-priority-critical: #333333;
+$clr-priority-high: #401694;
+$clr-priority-medium: #5559df;
+$clr-priority-low: #579bfc;
+$clr-priority-neutral: #c4c4c4;
+
+:root {
+    --dark-mode-bg-header: #292f4c;
+    --dark-mode-bg: #181b34;
+}
 
 
 // Breakpoints
