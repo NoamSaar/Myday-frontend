@@ -4,9 +4,10 @@
 
     .content-container {
         grid-template-columns: minmax(30px, auto) 1fr;
-        gap: 6px;
+        gap: 10px;
         padding: 0;
         position: relative;
+        background-color: $clr-bg-header;
 
         .sidebar-container {
             padding: 0;

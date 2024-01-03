@@ -18,8 +18,8 @@ export function RootCmp() {
                 <Sidebar />
                 <Routes>
                     <Route element={<HomePage />} path="/" />
-                    <Route element={<BoardDetails />} path="/board" >
-                        {/* <Route element={<BoardDetails />} path="/board/:boardId" > */}
+                    {/* <Route element={<BoardDetails />} path="/board" > */}
+                    <Route element={<BoardDetails />} path="/board/:boardId" >
                         <Route path="/board/:boardId/task/:taskId" element={<TaskDetails />} />
                     </Route>
                 </Routes>

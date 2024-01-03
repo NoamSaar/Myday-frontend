@@ -1,5 +1,5 @@
 .app-header {
-    background-color: $clr4;
+    background-color: $clr-bg-header;
     padding: 10px;
 
 
@@ -9,13 +9,7 @@
         padding-left: 100px;
         color: $clr1;
 
-        .score {
-            background-color: $clr2;
-            color: $clr6;
-            padding: 8px;
-            margin: 10px;
-            border-radius: 50%;
-        }
+
 
         img {
             width: 32px;
