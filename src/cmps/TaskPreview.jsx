@@ -50,8 +50,7 @@ export function TaskPreview({ task, groupId }) {
     }
 
     function handleMouseLeave() {
-        setIsShowMenu(false)
-        setIsMenuOpen(false)
+        if (!isMenuOpen) setIsShowMenu(false)
     }
 
     function toggleMenu() {
