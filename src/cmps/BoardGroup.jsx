@@ -2,9 +2,14 @@ import { TaskList } from "./TaskList";
 
 export function BoardGroup({ group, titlesOrder, priorities, statuses }) {
 
+
     return (
         <section className='board-group'>
-            <h4 className="sticky-left">{group.title}</h4>
+            <div className="board-title-container sticky-left">
+                <img className="down-arrow" src="../../../public/icons/NavigationChevronDown.svg" alt="" />
+                <h4 >{group.title}</h4>
+                <p>{group.tasks.length} Tasks</p>
+            </div>
             <TaskList tasks={group.tasks} titlesOrder={titlesOrder} priorities={priorities} statuses={statuses} />
         </section>
     )

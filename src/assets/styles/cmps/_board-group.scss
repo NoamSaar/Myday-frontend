@@ -2,4 +2,40 @@
     display: flex;
     flex-direction: column;
     align-items: baseline;
+
+    .board-title-container {
+        display: flex;
+        align-items: center;
+        padding-inline-start: 4px;
+
+        h4 {
+            font-size: 18px;
+            padding: 0 4px;
+        }
+
+        p {
+
+            margin: 0;
+            font-size: .875rem;
+            font-weight: 400;
+            margin-block-start: 3px;
+            margin-inline-start: 8px;
+            opacity: 0;
+            transition: opacity .2s;
+
+        }
+
+        .down-arrow {
+            width: 12px;
+            margin-right: 2px;
+            margin-left: 9px;
+        }
+
+        &:hover {
+            p {
+                opacity: 1;
+                cursor: grab;
+            }
+        }
+    }
 }
