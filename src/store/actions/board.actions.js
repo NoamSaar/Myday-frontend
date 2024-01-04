@@ -120,13 +120,21 @@ export function onRemoveBoardOptimistic(boardId) {
         })
 }
 
-export function removeTask(boardId, taskId) {
-    console.log('boardId', boardId)
-    console.log('taskId', taskId)
 
-}
 
 export function setCurBoard(board) {
     store.dispatch({ type: SET_BOARD, board })
+}
+
+//tasks
+
+export async function removeTask(boardId, groupId, taskId) {
+    try {
+        const board = await boardService.removeTask(boardId, groupId, taskId)
+        setCurBoard(board)
+        store.dispatch(getActionUpdateBoard(board))
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing task')
+    }
 
 }

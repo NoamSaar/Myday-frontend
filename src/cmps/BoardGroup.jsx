@@ -11,7 +11,7 @@ export function BoardGroup({ group, titlesOrder }) {
                 <h4 >{group.title}</h4>
                 <p>{group.tasks.length} Tasks</p>
             </div>
-            <TaskList tasks={group.tasks} titlesOrder={titlesOrder} />
+            <TaskList titlesOrder={titlesOrder} groupId={group.id} />
         </section>
     )
 }

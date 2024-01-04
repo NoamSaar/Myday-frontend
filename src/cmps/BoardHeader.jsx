@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { BoardFilter } from "./BoardFilter"
 
 
 export function BoardHeader({ board }) {
@@ -59,10 +60,7 @@ export function BoardHeader({ board }) {
                 </button>
             </div>
 
-
-            <div className="filter-sec">
-                <button className="btn new-task">New Task</button>
-            </div>
+            <BoardFilter />
         </header>
     )
 }

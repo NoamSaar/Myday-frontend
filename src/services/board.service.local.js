@@ -10,6 +10,7 @@ export const boardService = {
     getById,
     save,
     remove,
+    removeTask,
 }
 
 window.boardService = boardService
@@ -694,8 +695,14 @@ async function query(filterBy = { txt: '' }) {
     return boards
 }
 
-function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+async function getById(boardId) {
+    try {
+        return await storageService.get(STORAGE_KEY, boardId)
+    } catch (error) {
+
+        throw new Error(error.message || 'An error occurred during getting board')
+
+    }
 }
 
 async function remove(boardId) {
@@ -704,33 +711,19 @@ async function remove(boardId) {
 }
 
 async function save(board) {
-    let savedBoard
-    if (board) {
-        savedBoard = await storageService.put(STORAGE_KEY, board)
-    } else {
-        // Later, owner is set by the backend
-        const defaultBoard = _getDefaultBoard()
-        defaultBoard.createdBy = userService.getLoggedinUser()
-        savedBoard = await storageService.post(STORAGE_KEY, defaultBoard)
+    try {
+        if (board) {
+            return await storageService.put(STORAGE_KEY, board)
+        } else {
+            const defaultBoard = _getDefaultBoard()
+            defaultBoard.createdBy = userService.getLoggedinUser()
+            return await storageService.post(STORAGE_KEY, defaultBoard)
+        }
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during saving board')
+
     }
-    return savedBoard
 }
-
-// async function addBoardMsg(boardId, txt) {
-//     // Later, this is all done by the backend
-//     const board = await getById(boardId)
-//     if (!board.msgs) board.msgs = []
-
-//     const msg = {
-//         id: utilService.makeId(),
-//         by: userService.getLoggedinUser(),
-//         txt
-//     }
-//     board.msgs.push(msg)
-//     await storageService.put(STORAGE_KEY, board)
-
-//     return msg
-// }
 
 function _getDefaultBoard() {
     return {
@@ -742,6 +735,31 @@ function _getDefaultBoard() {
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
+
+//tasks
+
+
+async function removeTask(boardId, groupId, taskId) {
+    try {
+        const board = await getById(boardId)
+        const groupIdx = board.groups.findIndex(group => group.id === groupId)
+        let group = board.groups[groupIdx]
+        const tasks = group.tasks.filter(task => task.id !== taskId)
+
+        group = { ...group, tasks }
+        board.groups.splice(groupIdx, 1, group)
+
+        return await save(board)
+
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing task')
+
+    }
+
+}
+
+
+//privet
 
 function _initBoards() {
     const boardsFromStorage = localStorage.getItem(STORAGE_KEY)

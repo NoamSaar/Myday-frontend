@@ -112,13 +112,33 @@
         }
     }
 
-    .filter-sec {
+    .board-filter {
         grid-area: filter;
-        border-top: 1px solid $clr-group-border;
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        gap: 6px;
         padding-block: 16px;
+        border-top: 1px solid $clr-group-border;
 
         .new-task {
             @include btn($type: clrblue);
+        }
+
+        .search-section {
+            border: 1px solid $clr-group-border;
+            border-radius: $border-radius-small;
+
+            &.active {
+                border-color: $clr-btn-add;
+            }
+        }
+
+        input {
+            width: 100px;
+            border: none;
+            outline: none;
+            padding-block: 0;
         }
     }
 }

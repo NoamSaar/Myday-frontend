@@ -33,6 +33,7 @@ export function BoardDetails() {
         }
     }
 
+
     if (!board) return <div className="board-details">Loading...</div>
     return (
         <section className="board-details">
