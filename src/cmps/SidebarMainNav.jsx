@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export function SidebarMainNav({ onToggleIsActive, isActive, onOpenSidebar }) {
+export function SidebarMainNav({ onToggleIsActive, isActive, isSidebarOpen, onOpenSidebar }) {
     return (
         <nav className="sidebar-main-nav">
             <NavLink to="/" title="Home Button" className={`btn ${isActive ? 'active' : ''}`}
@@ -14,7 +14,10 @@ export function SidebarMainNav({ onToggleIsActive, isActive, onOpenSidebar }) {
                 <img src="../../public/icons/Calendar.svg" alt="home-icon" />
                 <span>My work</span>
             </NavLink>
-            <button title="Menu Button" className="btn-menu" onClick={onOpenSidebar} >x</button>
+            <button title="Menu Button" className={`btn btn-menu ${isSidebarOpen ? 'open' : ''}`}
+                onClick={onOpenSidebar}>
+                <img src="../../public/icons/DropdownChevronRight.svg" alt="home-icon" />
+            </button>
         </nav>
     )
 }

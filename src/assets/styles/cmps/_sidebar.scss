@@ -5,34 +5,61 @@
     position: absolute;
     left: -170px;
     border-top-right-radius: 8px;
+    transition: left 150ms;
+
+    &>.sidebar-workspace,
+    .sidebar-board-nav {
+        opacity: 0;
+    }
 
     &:hover {
         left: 0;
+
+        &>* {
+            opacity: 1;
+        }
+
+        .btn-menu {
+            opacity: 1;
+        }
     }
 
     &.open {
         position: static;
+
+        &>* {
+            opacity: 1;
+        }
+
     }
 
     .sidebar-main-nav {
         position: relative;
         padding: 12px 40px 12px 12px;
-        border-bottom: 1px solid $clr-group-border;
 
         .btn-menu {
             position: absolute;
             top: 0;
             right: 0;
+            margin: 0;
+            padding-block: 12px;
+            background-color: #f6f7fb;
+
+            &.open {
+                transform: rotate(180deg);
+            }
         }
     }
 
     .sidebar-workspace {
         padding: 12px;
+        border-top: 1px solid $clr-group-border;
 
         .workspace-section {
             gap: 7px;
             justify-content: start;
             padding-inline-start: 7px;
+            margin-block-end: 10px;
             font-family: figtree-bold;
 
             span {
@@ -76,31 +103,31 @@
 
         .btn.clrblue {
             @include btn($type: clrblue);
+            margin: 0;
         }
 
-        // .btn-add-group {
-        //     height: 32px;
-        //     width: 32px;
-        //     background-color: $clr-btn-add;
-        //     border-radius: $border-radius-small;
-        // }
+        .sidebar-filter {
+            gap: 12px;
+
+            .search-section {
+                border: 1px solid $clr-group-border;
+                border-radius: $border-radius-small;
+
+                &.active {
+                    border-color: $clr-btn-add;
+                }
+            }
+
+            input {
+                width: 100px;
+                border: none;
+                outline: none;
+                padding-block: 0;
+            }
+        }
     }
 
-    // .sidebar-btn {
-    //     justify-content: start;
-    //     padding: 6px 8px;
-    //     height: 32px;
-    //     border-radius: $border-radius-small;
-    //     font-size: rem(14px);
-
-    //     &:hover {
-    //         background-color: $clr-btn-hover;
-    //     }
-
-    //     img {
-    //         height: 100%;
-    //         width: auto;
-    //         margin-inline-end: 8px;
-    //     }
-    // }
+    .sidebar-board-nav {
+        padding-inline: 12px;
+    }
 }

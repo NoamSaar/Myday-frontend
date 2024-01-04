@@ -4,62 +4,131 @@
 
     display: grid;
     grid-template-areas:
-        "info colleagues"
-        "display-opts actions"
-        "filter filter";
-    justify-content: space-between;
+        "title info-favorite activities invite"
+        "display-opts display-opts display-opts actions"
+        "filter filter filter filter";
+    grid-template-columns: auto 1fr 1fr auto;
+    align-items: center;
+    gap: 8px;
+    // justify-content: space-between;
 
     &.scrolled {
         grid-template-areas:
-            "info display-opts colleagues"
+            "title display-opts invite"
             "filter filter filter";
         grid-template-columns: auto 1fr 1fr;
+
+        .invite-more-bts {
+            justify-self: end;
+        }
 
         .actions {
             display: none;
         }
 
-        .colleagues {
-            justify-self: end;
+        .activities {
+            display: none;
+        }
+
+        .info-favorite {
+            display: none;
         }
     }
 
-    .info {
-        grid-area: info;
-        display: flex;
-        align-items: center;
-        // margin-right: 4px;
+    .title {
+        grid-area: title;
+        padding-inline: 4px;
 
-        .board-title {
-            padding-inline: 4px;
+        &:hover {
+            outline: 1px solid $clr-btn-border;
+            border-radius: $border-radius-small;
         }
-
     }
 
-    .colleagues {
-        grid-area: colleagues;
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-        gap: 8px;
+    .info-favorite {
+        grid-area: info-favorite;
+    }
 
-        .invite-container {
+    .activities {
+        grid-area: activities;
+        justify-self: end;
+    }
+
+    .invite-more-bts {
+        grid-area: invite;
+        justify-self: end;
+
+        .invite {
             border: 1px solid $clr-btn-border;
+            margin-inline-end: 8px;
+        }
 
+        .more {
+            padding-inline: 4px;
         }
     }
 
     .display-opts {
         grid-area: display-opts;
 
+        >*:not(:last-child) {
+            position: relative;
+
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                translate: 0 -50%;
+                height: 50%;
+                width: 1px;
+                background-color: $clr-group-border;
+            }
+        }
     }
 
     .actions {
         grid-area: actions;
+        justify-self: end;
 
+
+
+        .collapse {
+            rotate: 180deg;
+            border-radius: 50%;
+            border: 1px solid $clr-btn-border;
+            width: 26px;
+            height: 26px;
+            padding: 0;
+            margin-inline-start: 16px;
+
+            img:hover {
+                animation: bounce 0.5s ease 2;
+                /* Adjust timing and easing as needed */
+            }
+        }
     }
 
     .filter-sec {
         grid-area: filter;
+        border-top: 1px solid $clr-group-border;
+        padding-block: 16px;
+
+        .new-task {
+            @include btn($type: clrblue);
+        }
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
     }
 }
