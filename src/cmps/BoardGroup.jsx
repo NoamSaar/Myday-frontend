@@ -1,6 +1,6 @@
 import { TaskList } from "./TaskList";
 
-export function BoardGroup({ group, titlesOrder, priorities, statuses }) {
+export function BoardGroup({ group, titlesOrder }) {
 
 
     return (
@@ -11,7 +11,7 @@ export function BoardGroup({ group, titlesOrder, priorities, statuses }) {
                 <h4 >{group.title}</h4>
                 <p>{group.tasks.length} Tasks</p>
             </div>
-            <TaskList tasks={group.tasks} titlesOrder={titlesOrder} priorities={priorities} statuses={statuses} />
+            <TaskList tasks={group.tasks} titlesOrder={titlesOrder} />
         </section>
     )
 }

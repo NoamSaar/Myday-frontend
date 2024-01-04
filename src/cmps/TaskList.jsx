@@ -1,6 +1,6 @@
 import { TaskPreview } from "./TaskPreview"
 
-export function TaskList({ tasks, titlesOrder, priorities, statuses }) {
+export function TaskList({ tasks, titlesOrder, boardId }) {
     return (
         <ul className=" clean-list task-list">
             <ul className=" clean-list task-header-list">
@@ -21,7 +21,7 @@ export function TaskList({ tasks, titlesOrder, priorities, statuses }) {
             </ul>
 
             {tasks.map(task => {
-                return <TaskPreview key={task.id} task={task} titlesOrder={titlesOrder} priorities={priorities} statuses={statuses} />
+                return <TaskPreview key={task.id} task={task} titlesOrder={titlesOrder} boardId={boardId} />
             })}
         </ul>
 

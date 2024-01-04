@@ -1,9 +1,8 @@
 import { boardService } from '../../services/board.service.local.js'
-import { userService } from '../services/user.service.js'
+// import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, ADD_TO_BOARDT, CLEAR_BOARDT, REMOVE_BOARD, REMOVE_FROM_BOARDT, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from '../reducers/board.reducer.js'
-import { SET_SCORE } from '../reducers/user.reducer.js'
+// import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from '../reducers/board.reducer.js'
 
 // Store - saveTask (from board.js)
 // function storeSaveTask(boardId, groupId, task, activity) {
@@ -97,31 +96,6 @@ export function updateBoard(board) {
         })
 }
 
-export function addToBoardt(board) {
-    store.dispatch({
-        type: ADD_TO_BOARDT,
-        board
-    })
-}
-
-export function removeFromBoardt(boardId) {
-    store.dispatch({
-        type: REMOVE_FROM_BOARDT,
-        boardId
-    })
-}
-
-export async function checkout(total) {
-    try {
-        const score = await userService.changeScore(-total)
-        store.dispatch({ type: SET_SCORE, score })
-        store.dispatch({ type: CLEAR_BOARDT })
-        return score
-    } catch (err) {
-        console.log('BoardActions: err in checkout', err)
-        throw err
-    }
-}
 
 
 // Demo for Optimistic Mutation 
@@ -144,4 +118,15 @@ export function onRemoveBoardOptimistic(boardId) {
                 type: UNDO_REMOVE_BOARD,
             })
         })
+}
+
+export function removeTask(boardId, taskId) {
+    console.log('boardId', boardId)
+    console.log('taskId', taskId)
+
+}
+
+export function setCurBoard(board) {
+    store.dispatch({ type: SET_BOARD, board })
+
 }

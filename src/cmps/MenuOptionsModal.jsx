@@ -1,9 +1,25 @@
 
 export function MenuOptionsModal({ pos, options }) {
-    const style = { bottom: '-20px' }
+    let style = { bottom: '-20px' }
+
+    if (pos === 'top') style = { top: '20px' }
+
     return (
         <div style={style} className="menu-option-modal">
-            MODALL
+            {options.map((option, idx) => {
+                return <div key={idx} className="btn" onClick={option.onOptionClick}>
+                    <img src={option.icon} />
+                    <p>{option.title}</p>
+                </div>
+            })}
         </div>
     )
 }
+
+// options = [
+//     {
+//         icon: '.../../...',
+//         title: 'Delete',
+//         onOptionClick: func()
+//     }
+// ]

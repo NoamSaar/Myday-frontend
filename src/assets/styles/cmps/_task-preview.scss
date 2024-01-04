@@ -2,8 +2,8 @@
     display: flex;
 
     .menu-container {
-        // position: relative;
-        // z-index: 100;
+        position: relative;
+        min-width: fit-content;
 
 
         .btn {
