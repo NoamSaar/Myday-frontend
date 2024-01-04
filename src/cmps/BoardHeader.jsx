@@ -1,8 +1,18 @@
+import { useState } from "react"
 
 
 export function BoardHeader({ board }) {
+
+    const [isCollapsed, setIsCollapsed] = useState(false)
+
+    function onCollapseHeader() {
+        setIsCollapsed(!isCollapsed)
+    }
+
+    const dynCollapsedClass = isCollapsed ? 'collapsed' : ''
+
     return (
-        <header className="board-header">
+        <header className={dynCollapsedClass + ' board-header'}>
 
             <h3 className="title" title="Click to edit">{board.title}</h3>
 
@@ -44,14 +54,14 @@ export function BoardHeader({ board }) {
                     <img src="../../public/icons/Robot.svg" alt="Robot-icon" />
                     <span>Automate</span>
                 </button>
-                <button className="btn collapse" title="Collapse header">
+                <button className={dynCollapsedClass + ' btn collapse'} title="Collapse header" onClick={onCollapseHeader}>
                     <img src="../../public/icons/DropdownChevronDown.svg" alt="Dropdown-icon" />
                 </button>
             </div>
 
+
             <div className="filter-sec">
                 <button className="btn new-task">New Task</button>
-                {/* <input className="btn" type="search" placeholder="Search" /> */}
             </div>
         </header>
     )

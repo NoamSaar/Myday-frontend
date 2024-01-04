@@ -10,19 +10,18 @@
     grid-template-columns: auto 1fr 1fr auto;
     align-items: center;
     gap: 8px;
-    // justify-content: space-between;
 
-    &.scrolled {
+    &.collapsed {
         grid-template-areas:
-            "title display-opts invite"
-            "filter filter filter";
+            "title display-opts invite actions"
+            "filter filter filter filter";
         grid-template-columns: auto 1fr 1fr;
 
         .invite-more-bts {
             justify-self: end;
         }
 
-        .actions {
+        .automate {
             display: none;
         }
 
@@ -92,8 +91,6 @@
         grid-area: actions;
         justify-self: end;
 
-
-
         .collapse {
             rotate: 180deg;
             border-radius: 50%;
@@ -102,6 +99,11 @@
             height: 26px;
             padding: 0;
             margin-inline-start: 16px;
+            transition: 2ms;
+
+            &.collapsed {
+                rotate: 0deg;
+            }
 
             img:hover {
                 animation: bounce 0.5s ease 2;
