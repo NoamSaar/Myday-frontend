@@ -6,12 +6,10 @@
     }
 
     li {
+        white-space: nowrap;
+
         &:not(.task-title) {
             text-align: center;
-        }
-
-        &:first-child {
-            flex: 2;
         }
 
         cursor: pointer;

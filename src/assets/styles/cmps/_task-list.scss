@@ -8,9 +8,6 @@
         li {
             text-align: center;
 
-            &:first-child {
-                flex: 2;
-            }
         }
     }
 
@@ -20,9 +17,18 @@
     }
 
     li {
-        flex: 1;
+
+        &:not(.task-title) {
+            flex: 1;
+            max-width: 199.5px;
+        }
+
         outline: $clr-group-border 1px solid;
         padding: 10px;
+    }
+
+    .task-title {
+        flex: 2;
     }
 
 

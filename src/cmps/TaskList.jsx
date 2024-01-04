@@ -4,7 +4,7 @@ export function TaskList({ tasks, titlesOrder }) {
     return (
         <ul className="clean-list task-list">
             <ul className="clean-list task-header-list">
-                <li>Task</li>
+                <li className="task-title">Task</li>
                 {titlesOrder.map((title, idx) => {
                     return <li key={idx}>
                         {title}

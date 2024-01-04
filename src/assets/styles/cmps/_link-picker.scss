@@ -1,0 +1,10 @@
+.link-picker {
+
+    a {
+        color: $clr-link;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
