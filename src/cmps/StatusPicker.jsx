@@ -14,7 +14,7 @@ export function StatusPicker({ title, info, onUpdate, priorities, statuses }) {
 
 
     return (
-        <li style={style} className="status-picker" >
+        <li style={style} className="status-picker status-col priority-col" >
             {info.chosenOption}
         </li >
     )

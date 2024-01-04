@@ -27,17 +27,46 @@
 
         }
 
-        &:not(.task-title) {
-            flex: 1;
-            max-width: 199.5px;
-        }
+
+
+        // &:not(.task-title) {
+        //     flex: 1;
+        //     max-width: 199.5px;
+        // }
 
         outline: $clr-group-border 1px solid;
         padding: 10px;
     }
 
+    // .task-title {
+    //     flex: 2;
+    // }
+
     .task-title {
-        flex: 2;
+        min-width: 471px;
+        max-width: 471px;
+    }
+
+    .person-col {
+        min-width: 97px;
+        max-width: 97px;
+    }
+
+    .status-col,
+    .priority-col,
+    .file-col {
+        min-width: 139px;
+        max-width: 139px;
+    }
+
+    .date-col {
+        min-width: 174px;
+        max-width: 174px;
+    }
+
+    .link-col {
+        min-width: 138px;
+        max-width: 138px;
     }
 
 

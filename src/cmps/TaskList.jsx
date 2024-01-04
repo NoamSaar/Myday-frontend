@@ -6,7 +6,7 @@ export function TaskList({ tasks, titlesOrder, priorities, statuses }) {
             <ul className="clean-list task-header-list">
                 <li className="task-title">Task</li>
                 {titlesOrder.map((title, idx) => {
-                    return <li key={idx}>
+                    return <li key={idx} className={`${title.toLowerCase()}-col`}>
                         {title}
                     </li>
                 })}
