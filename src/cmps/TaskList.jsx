@@ -1,9 +1,12 @@
+import { useSelector } from "react-redux"
 import { TaskPreview } from "./TaskPreview"
 
-export function TaskList({ tasks, titlesOrder, boardId }) {
+export function TaskList({ tasks, boardId }) {
+    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+
     return (
-        <ul className=" clean-list task-list">
-            <ul className=" clean-list task-header-list">
+        <ul className="clean-list task-list">
+            <ul className="clean-list task-header-list">
                 <div className="sticky-left task-title-container">
 
                     <li className="task-selection">
@@ -13,7 +16,7 @@ export function TaskList({ tasks, titlesOrder, boardId }) {
                     <li className="task-title">Task</li>
                 </div>
 
-                {titlesOrder.map((title, idx) => {
+                {board.titlesOrder.map((title, idx) => {
                     return <li key={idx} className={`${title.toLowerCase()}-col`}>
                         {title}
                     </li>
@@ -21,7 +24,7 @@ export function TaskList({ tasks, titlesOrder, boardId }) {
             </ul>
 
             {tasks.map(task => {
-                return <TaskPreview key={task.id} task={task} titlesOrder={titlesOrder} boardId={boardId} />
+                return <TaskPreview key={task.id} task={task} boardId={boardId} />
             })}
         </ul>
 

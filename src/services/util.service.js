@@ -6,7 +6,8 @@ export const utilService = {
     randomPastTime,
     saveToStorage,
     loadFromStorage,
-    getFormatDate
+    getFormatDate,
+    getFormatName
 }
 
 function makeId(length = 6) {
@@ -68,4 +69,8 @@ function getFormatDate(timestamp) {
     const options = { day: 'numeric', month: 'short' };
     const formatter = new Intl.DateTimeFormat('en-US', options);
     return formatter.format(date);
+}
+
+function getFormatName(name) {
+    return name.split(' ')[0][0] + name.split(' ')[1][0]
 }

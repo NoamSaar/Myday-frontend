@@ -6,7 +6,7 @@ import { MenuOptionsModal } from "./MenuOptionsModal";
 import { removeTask } from "../store/actions/board.actions";
 import { useSelector } from "react-redux";
 
-export function TaskPreview({ task, titlesOrder }) {
+export function TaskPreview({ task }) {
     const [currTask, setCurrTask] = useState(null)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
 
@@ -27,11 +27,9 @@ export function TaskPreview({ task, titlesOrder }) {
                     date = utilService.getFormatDate(task.date)
                 }
 
+                setCurrTask({ ...task, person: newPersons, date })
             } catch (error) {
                 console.error("Error fetching data:", error)
-            }
-            finally {
-                setCurrTask({ ...task, person: newPersons, date })
             }
         }
 
@@ -69,7 +67,7 @@ export function TaskPreview({ task, titlesOrder }) {
                     <li className="task-title">{currTask.title}</li>
                 </div>
 
-                {titlesOrder.map((title, idx) => {
+                {board.titlesOrder.map((title, idx) => {
                     return <DynamicPicker key={idx} title={title} task={currTask} />
                 })}
             </ul>
