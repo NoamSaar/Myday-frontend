@@ -1,3 +1,5 @@
+import { utilService } from "../services/util.service"
+
 export function MemberPicker({ members, onUpdate }) {
     const extraMembers = members.length - 2
 
@@ -10,7 +12,7 @@ export function MemberPicker({ members, onUpdate }) {
                 {members.map((member, idx) => {
                     return idx < 2 ? member.startsWith('http') ?
                         <img key={idx} src={member} /> :
-                        <span key={idx} className="extra-members-box">{member.split(' ')[0][0] + member.split(' ')[1][0]}</span>
+                        <span key={idx} className="extra-members-box">{utilService.getFormatName(member)}</span>
                         :
                         ''
                 })}
