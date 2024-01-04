@@ -1,9 +1,11 @@
 
-export function SidebarWorkspace({ onToggleDropdown, isToggleDropdown }) {
+export function SidebarWorkspace(
+    { onToggleDropdown, onToggleIsActive, isDropdownOpen, isActive }
+) {
     return (
         <section className="sidebar-workspace">
             <div title="Main Workspace"
-                className={`btn workspace-section grid column ${isToggleDropdown ? 'open' : ''}`}
+                className={`btn workspace-section grid column ${isDropdownOpen ? 'open' : ''}`}
                 onClick={onToggleDropdown}>
                 <div className="workspace-logo flex justify-center align-center">
                     M
@@ -12,12 +14,13 @@ export function SidebarWorkspace({ onToggleDropdown, isToggleDropdown }) {
                 <span>Main workspace</span>
                 <img src="../../public/icons/DropdownChevronDown.svg" alt="dropdown-icon" />
             </div>
-            <div className="sidebar-filter">
-                <div className="search-section">
+            <div className="sidebar-filter grid column place-center">
+                <div className={`search-section flex justify-center aligh-center${isActive ? 'active' : ''}`}
+                    onClick={onToggleIsActive}>
                     <div className="btn">
                         <img src="../../public/icons/Search.svg" alt="search-icon" />
                     </div>
-                    <input type="text" />
+                    <input type="search" placeholder="Search" />
                 </div>
                 <button className="btn clrblue">
                     <img src="../../public/icons/AddSmall.svg" alt="add-icon" />
