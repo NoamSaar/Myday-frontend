@@ -12,16 +12,15 @@ export function TaskPreview({ task, groupId }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const newPersons = []
             let date = task.date
-            try {
 
-                if (task.person.length) {
-                    for (const person of task.person) {
+            try {
+                const newPersons = task.person.length ?
+                    await Promise.all(task.person.map(async person => {
                         const loadedUser = await getUser(person)
-                        newPersons.push(loadedUser.imgUrl || loadedUser.fullname)
-                    }
-                }
+                        return loadedUser.imgUrl || loadedUser.fullname
+                    }))
+                    : []
 
                 if (task.date) {
                     date = utilService.getFormatDate(task.date)
