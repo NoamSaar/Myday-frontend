@@ -32,12 +32,13 @@ export function getActionRemoveBoard(boardId) {
         boardId
     }
 }
-export function getActionAddBoard(board) {
+
+export function getActionAddBoard() {
     return {
         type: ADD_BOARD,
-        board
     }
 }
+
 export function getActionUpdateBoard(board) {
     return {
         type: UPDATE_BOARD,
@@ -58,7 +59,6 @@ export async function loadBoards() {
         console.log('Cannot load boards', err)
         throw err
     }
-
 }
 
 export async function removeBoard(boardId) {
