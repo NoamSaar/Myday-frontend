@@ -6,7 +6,12 @@
     }
 
     li {
-        cursor: pointer;
+        &:not(.task-title) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
+        cursor: pointer;
     }
 }

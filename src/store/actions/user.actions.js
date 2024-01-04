@@ -80,3 +80,13 @@ export async function loadUser(userId) {
         console.log('Cannot load user', err)
     }
 }
+
+export async function getUser(userId) {
+    try {
+        const user = await userService.getById(userId);
+        return user
+    } catch (err) {
+        showErrorMsg('Cannot load user')
+        console.log('Cannot load user', err)
+    }
+}

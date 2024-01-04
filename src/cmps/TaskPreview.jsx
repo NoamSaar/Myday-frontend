@@ -1,15 +1,36 @@
+import { useEffect, useState } from "react"
 import { DynamicPicker } from "./DynamicPicker"
+import { getUser } from "../store/actions/user.actions"
 
 export function TaskPreview({ task, titlesOrder }) {
+    const [currTask, setCurrTask] = useState(task)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if (currTask.person.length) {
+                    const newPersons = [];
+                    for (const person of currTask.person) {
+                        const loadedUser = await getUser(person);
+                        newPersons.push(loadedUser.imgUrl || loadedUser.fullname);
+                    }
+                    setCurrTask(prevCurrTask => ({ ...prevCurrTask, person: newPersons }));
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
     return (
-        <ul className="clean-list task-preview" key={task.id}>
-            <li>{task.title}</li>
+        <ul className="clean-list task-preview" key={currTask.id}>
+            <li className="task-title">{currTask.title}</li>
 
             {titlesOrder.map((title, idx) => {
-                console.log('title', title)
-                console.log('task[title]', task[title.toLowerCase()])
-                return <DynamicPicker key={idx} title={title} task={task} />
-                return <DynamicPicker key={idx} title={title} info={{ chosenOption: task[title.toLowerCase()] }} />
+                return <DynamicPicker key={idx} title={title} task={currTask} />
             })}
         </ul>
     )
