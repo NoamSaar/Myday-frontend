@@ -12,9 +12,10 @@
         }
     }
 
-    &ul,
     ul {
+
         outline: $clr-group-border .5px solid;
+
     }
 
     li {
@@ -34,7 +35,8 @@
         //     max-width: 199.5px;
         // }
 
-        outline: $clr-group-border 1px solid;
+        outline: $clr-group-border .5px solid;
+
         padding: 10px;
     }
 
@@ -45,6 +47,9 @@
     .task-title {
         min-width: 471px;
         max-width: 471px;
+        position: sticky;
+        left: 0;
+        background-color: white;
     }
 
     .person-col {

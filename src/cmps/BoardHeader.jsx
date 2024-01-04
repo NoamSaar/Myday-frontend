@@ -2,7 +2,7 @@
 
 export function BoardHeader({ board }) {
     return (
-        <header className="board-header">
+        <header className="board-header sticky-left">
             <div className="info">
                 <h3 className="board-title">{board.title}</h3>
 
