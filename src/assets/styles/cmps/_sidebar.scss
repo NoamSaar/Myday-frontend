@@ -17,7 +17,8 @@
         z-index: 10;
         box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
 
-        &>* {
+        &>.sidebar-workspace,
+        .sidebar-board-nav {
             opacity: 1;
         }
 
@@ -29,7 +30,8 @@
     &.open {
         position: static;
 
-        &>* {
+        &>.sidebar-workspace,
+        .sidebar-board-nav {
             opacity: 1;
         }
 
@@ -118,13 +120,19 @@
                 &.active {
                     border-color: $clr-btn-add;
                 }
-            }
 
-            input {
-                width: 100px;
-                border: none;
-                outline: none;
-                padding-block: 0;
+                .search-icon:hover {
+                    background-color: transparent;
+                    cursor: default;
+
+                }
+
+                input {
+                    width: 100px;
+                    border: none;
+                    outline: none;
+                    padding-block: 0;
+                }
             }
         }
     }
@@ -132,4 +140,5 @@
     .sidebar-board-nav {
         padding-inline: 12px;
     }
+
 }
