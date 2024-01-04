@@ -2,9 +2,8 @@ import { TaskPreview } from "./TaskPreview"
 
 export function TaskList({ tasks, titlesOrder, priorities, statuses }) {
     return (
-        <ul className="clean-list task-list">
-            <ul className="clean-list task-header-list">
-
+        <ul className=" clean-list task-list">
+            <ul className=" clean-list task-header-list">
                 <div className="sticky-left task-title-container">
 
                     <li className="task-selection">
@@ -25,5 +24,6 @@ export function TaskList({ tasks, titlesOrder, priorities, statuses }) {
                 return <TaskPreview key={task.id} task={task} titlesOrder={titlesOrder} priorities={priorities} statuses={statuses} />
             })}
         </ul>
+
     )
 }

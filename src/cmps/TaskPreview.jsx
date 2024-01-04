@@ -37,23 +37,25 @@ export function TaskPreview({ task, titlesOrder, priorities, statuses }) {
 
     if (!currTask) return <ul>Loading</ul>
     return (
-        <ul className="clean-list task-preview" key={currTask.id}>
+        <ul className="clean-list task-preview-container sticky-left">
+            <img className="btn" src="../../../public/icons/menu.svg" />
+            <ul className="clean-list task-preview" key={currTask.id}>
 
+                <div className="sticky-left task-title-container">
 
+                    <li className="task-selection">
+                        <input type="checkbox" />
+                    </li>
 
-            <div className="sticky-left task-title-container">
+                    <li className="task-title">{currTask.title}</li>
+                </div>
 
-                <li className="task-selection">
-                    <input type="checkbox" />
-                </li>
-
-                <li className="task-title">{currTask.title}</li>
-            </div>
-
-            {titlesOrder.map((title, idx) => {
-                return <DynamicPicker key={idx} title={title} task={currTask} priorities={priorities} statuses={statuses} />
-            })}
+                {titlesOrder.map((title, idx) => {
+                    return <DynamicPicker key={idx} title={title} task={currTask} priorities={priorities} statuses={statuses} />
+                })}
+            </ul>
         </ul>
+
     )
 }
 

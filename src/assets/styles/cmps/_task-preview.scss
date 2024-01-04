@@ -1,18 +1,26 @@
-.task-preview {
+.task-preview-container {
     display: flex;
 
-    &:hover {
-        background-color: $clr-task-hover;
-    }
+    .task-preview {
+        display: flex;
 
-    li {
-        white-space: nowrap;
-        height: 36px;
+        &:hover {
+            background-color: $clr-task-hover;
 
-        &:not(.task-title) {
-            text-align: center;
+            .task-title {
+                background-color: $clr-task-hover;
+            }
         }
 
-        cursor: pointer;
+        li {
+            white-space: nowrap;
+            height: 36px;
+
+            &:not(.task-title) {
+                text-align: center;
+            }
+
+            cursor: pointer;
+        }
     }
 }
