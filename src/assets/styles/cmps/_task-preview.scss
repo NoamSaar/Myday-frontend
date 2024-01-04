@@ -1,18 +1,37 @@
-.task-preview {
+.task-preview-container {
     display: flex;
 
-    &:hover {
-        background-color: $clr-task-hover;
+    .menu-container {
+        position: relative;
+        min-width: fit-content;
+
+
+        .btn {
+            width: 100%;
+            height: 100%;
+        }
     }
 
-    li {
-        white-space: nowrap;
-        height: 36px;
+    .task-preview {
+        display: flex;
 
-        &:not(.task-title) {
-            text-align: center;
+        &:hover {
+            background-color: $clr-task-hover;
+
+            .task-title {
+                background-color: $clr-task-hover;
+            }
         }
 
-        cursor: pointer;
+        li {
+            white-space: nowrap;
+            height: 36px;
+
+            &:not(.task-title) {
+                text-align: center;
+            }
+
+            cursor: pointer;
+        }
     }
 }

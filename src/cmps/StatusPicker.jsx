@@ -1,16 +1,9 @@
+import { useSelector } from "react-redux"
 
-export function StatusPicker({ title, info, onUpdate, priorities, statuses }) {
-    let color
-
-    if (priorities) {
-        color = priorities.find(priority => priority.title === info.chosenOption).color
-    }
-
-    if (statuses) {
-        color = statuses.find(status => status.title === info.chosenOption).color
-    }
-
-    var style = { backgroundColor: color }
+export function StatusPicker({ title, info, onUpdate }) {
+    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const color = board[title.toLowerCase()].find(option => option.title === info.chosenOption).color
+    const style = { backgroundColor: color }
 
 
     return (

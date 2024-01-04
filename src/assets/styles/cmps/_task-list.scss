@@ -1,9 +1,12 @@
 .task-list {
     display: flex;
     flex-direction: column;
+    position: relative;
+    width: 100%;
 
     .task-header-list {
         display: flex;
+        margin-inline-start: 32px;
 
         li {
 
@@ -12,9 +15,15 @@
         }
     }
 
-    &ul,
-    ul {
-        outline: $clr-group-border .5px solid;
+    ul:not(.task-preview-container) {
+
+        border: $clr-group-border 0.5px solid;
+        border-inline-end: unset;
+
+        &:not(:last-child) {
+            border-block-end: unset;
+        }
+
     }
 
     li {
@@ -34,7 +43,10 @@
         //     max-width: 199.5px;
         // }
 
-        outline: $clr-group-border 1px solid;
+        border-inline-end: $clr-group-border .5px solid;
+
+        &:not(:last-child) {}
+
         padding: 10px;
     }
 
@@ -42,10 +54,24 @@
     //     flex: 2;
     // }
 
-    .task-title {
-        min-width: 471px;
-        max-width: 471px;
+    .task-title-container {
+        display: flex;
+        min-width: 505px;
+        max-width: 505px;
+
+        .task-title {
+            display: flex;
+            width: 100%;
+            background-color: white;
+
+            &:hover:not(.task-header-list .task-title) {
+                background-color: $clr-task-hover;
+            }
+        }
+
+
     }
+
 
     .person-col {
         min-width: 97px;

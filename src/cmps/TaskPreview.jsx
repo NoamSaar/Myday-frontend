@@ -2,20 +2,24 @@ import { useEffect, useState } from "react"
 import { DynamicPicker } from "./DynamicPicker"
 import { getUser } from "../store/actions/user.actions"
 import { utilService } from "../services/util.service";
+import { MenuOptionsModal } from "./MenuOptionsModal";
+import { removeTask } from "../store/actions/board.actions";
+import { useSelector } from "react-redux";
 
-export function TaskPreview({ task, titlesOrder, priorities, statuses }) {
+export function TaskPreview({ task, titlesOrder }) {
     const [currTask, setCurrTask] = useState(null)
+    const board = useSelector((storeState) => storeState.boardModule.currBoard)
 
     useEffect(() => {
         const fetchData = async () => {
-            const newPersons = [];
+            const newPersons = []
             let date = task.date
             try {
 
                 if (task.person.length) {
                     for (const person of task.person) {
-                        const loadedUser = await getUser(person);
-                        newPersons.push(loadedUser.imgUrl || loadedUser.fullname);
+                        const loadedUser = await getUser(person)
+                        newPersons.push(loadedUser.imgUrl || loadedUser.fullname)
                     }
                 }
 
@@ -24,26 +28,53 @@ export function TaskPreview({ task, titlesOrder, priorities, statuses }) {
                 }
 
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching data:", error)
             }
             finally {
-                setCurrTask({ ...task, person: newPersons, date });
+                setCurrTask({ ...task, person: newPersons, date })
             }
-        };
+        }
 
-        fetchData();
-    }, []);
+        fetchData()
+    }, [])
+
+    function onDeleteTask() {
+        removeTask(board._id, currTask.id)
+    }
+
+    const menuOptions = [
+        {
+            icon: '../../../public/icons/delete.svg',
+            title: 'Delete',
+            onOptionClick: onDeleteTask
+        }
+    ]
 
 
     if (!currTask) return <ul>Loading</ul>
     return (
-        <ul className="clean-list task-preview" key={currTask.id}>
-            <li className="task-title">{currTask.title}</li>
+        <ul className="clean-list task-preview-container sticky-left">
+            <div className="menu-container">
+                <MenuOptionsModal options={menuOptions} />
+                <img className="btn" src="../../../public/icons/menu.svg" />
+            </div>
+            <ul className="clean-list task-preview" key={currTask.id}>
 
-            {titlesOrder.map((title, idx) => {
-                return <DynamicPicker key={idx} title={title} task={currTask} priorities={priorities} statuses={statuses} />
-            })}
+                <div className="sticky-left task-title-container">
+
+                    <li className="task-selection">
+                        <input type="checkbox" />
+                    </li>
+
+                    <li className="task-title">{currTask.title}</li>
+                </div>
+
+                {titlesOrder.map((title, idx) => {
+                    return <DynamicPicker key={idx} title={title} task={currTask} />
+                })}
+            </ul>
         </ul>
+
     )
 }
 

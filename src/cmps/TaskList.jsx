@@ -1,10 +1,18 @@
 import { TaskPreview } from "./TaskPreview"
 
-export function TaskList({ tasks, titlesOrder, priorities, statuses }) {
+export function TaskList({ tasks, titlesOrder, boardId }) {
     return (
-        <ul className="clean-list task-list">
-            <ul className="clean-list task-header-list">
-                <li className="task-title">Task</li>
+        <ul className=" clean-list task-list">
+            <ul className=" clean-list task-header-list">
+                <div className="sticky-left task-title-container">
+
+                    <li className="task-selection">
+                        <input type="checkbox" />
+                    </li>
+
+                    <li className="task-title">Task</li>
+                </div>
+
                 {titlesOrder.map((title, idx) => {
                     return <li key={idx} className={`${title.toLowerCase()}-col`}>
                         {title}
@@ -13,8 +21,9 @@ export function TaskList({ tasks, titlesOrder, priorities, statuses }) {
             </ul>
 
             {tasks.map(task => {
-                return <TaskPreview key={task.id} task={task} titlesOrder={titlesOrder} priorities={priorities} statuses={statuses} />
+                return <TaskPreview key={task.id} task={task} titlesOrder={titlesOrder} boardId={boardId} />
             })}
         </ul>
+
     )
 }
