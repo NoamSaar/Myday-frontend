@@ -14,6 +14,7 @@ export function SidebarBoardNav({ onToggleIsActive, isActive }) {
                 <img src="../../public/icons/Board.svg" alt="home-icon" />
                 <span>Backend</span>
             </NavLink>
+
         </nav>
     )
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SidebarMainNav } from "./SidebarMainNav";
 import { SidebarWorkspace } from "./SidebarWorkspace";
 import { SidebarBoardNav } from "./SidebarBoardNav";
+// import { LottieAnimation } from "./LottieAnimation";
 
 export function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -35,8 +36,8 @@ export function Sidebar() {
                     isDropdownOpen={isDropdownOpen}
                     isActive={isActive} />
                 <SidebarBoardNav
-
                     isActive={isActive} />
+                {/* <LottieAnimation /> */}
             </article>
         </section>
 

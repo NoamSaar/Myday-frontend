@@ -7,7 +7,8 @@
     border-top-right-radius: 8px;
     transition: left 150ms;
 
-    &>* {
+    &>.sidebar-workspace,
+    .sidebar-board-nav {
         opacity: 0;
     }
 
@@ -15,6 +16,10 @@
         left: 0;
 
         &>* {
+            opacity: 1;
+        }
+
+        .btn-menu {
             opacity: 1;
         }
     }
@@ -25,12 +30,12 @@
         &>* {
             opacity: 1;
         }
+
     }
 
     .sidebar-main-nav {
         position: relative;
         padding: 12px 40px 12px 12px;
-        border-bottom: 1px solid $clr-group-border;
 
         .btn-menu {
             position: absolute;
@@ -48,6 +53,7 @@
 
     .sidebar-workspace {
         padding: 12px;
+        border-top: 1px solid $clr-group-border;
 
         .workspace-section {
             gap: 7px;
