@@ -1,0 +1,25 @@
+.task-list {
+    display: flex;
+    flex-direction: column;
+
+    .task-header-list {
+        display: flex;
+
+        li {
+            text-align: center;
+        }
+    }
+
+    &ul,
+    ul {
+        outline: $clr-label-6 .5px solid;
+    }
+
+    li {
+        flex: 1;
+        outline: $clr-label-6 1px solid;
+        padding: 10px;
+    }
+
+
+}

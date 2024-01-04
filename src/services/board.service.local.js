@@ -76,7 +76,7 @@ const gBoards = [
                     {
                         id: 'c101',
                         title: 'Add chat',
-                        memberIds: ['u103'],
+                        person: ['u103'],
                         status: 'Stuck',
                         priority: 'Low',
                         date: '1703706909537',
@@ -98,7 +98,7 @@ const gBoards = [
                     {
                         id: 'c102',
                         title: 'Add paging',
-                        memberIds: ['u102', 'u103'],
+                        person: ['u102', 'u103'],
                         status: 'Needs QA',
                         priority: 'Medium',
                         date: '1704241608991',
@@ -110,9 +110,9 @@ const gBoards = [
                         updates: [],
                     },
                     {
-                        id: 'c102',
+                        id: 'c103',
                         title: 'Add about puki page',
-                        memberIds: ['u101'],
+                        person: ['u101'],
                         status: 'Working on it',
                         priority: 'High',
                         updates: [
@@ -136,7 +136,7 @@ const gBoards = [
                     {
                         id: 'c201',
                         title: 'Reactor css files to scss',
-                        memberIds: ['u101', 'u103'],
+                        person: ['u101', 'u103'],
                         status: 'Working on it',
                         priority: 'High',
                         date: '1704074068766',
@@ -156,7 +156,7 @@ const gBoards = [
                     {
                         id: 'c202',
                         title: 'Refactor Filter.jsx into Components',
-                        memberIds: [],
+                        person: [],
                         status: 'Needs QA',
                         priority: 'Medium',
                         updates: [],
@@ -164,7 +164,7 @@ const gBoards = [
                     {
                         id: 'c203',
                         title: 'Refactor to use Store Redux',
-                        memberIds: ['u101', 'u102', 'u103'],
+                        person: ['u101', 'u102', 'u103'],
                         status: 'Stuck',
                         priority: 'Critical',
                         date: '1703703756181',
@@ -184,7 +184,7 @@ const gBoards = [
                     {
                         id: 'c204',
                         title: 'Refactor vars/lets to const',
-                        memberIds: ['u102'],
+                        person: ['u102'],
                         status: 'Done',
                         date: '1703720101090',
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704304383/large-Screenshot_2024-01-03_at_11.35.48_qclnrt.png',
@@ -193,7 +193,7 @@ const gBoards = [
                     {
                         id: 'c205',
                         title: 'Refactor service to use http',
-                        memberIds: ['u103'],
+                        person: ['u103'],
                         priority: 'Low',
                         date: '1703728412860',
                         updates: [],
@@ -209,7 +209,7 @@ const gBoards = [
                     {
                         id: 'c301',
                         title: 'Unresponsive Button on Click',
-                        memberIds: ['u102'],
+                        person: ['u102'],
                         status: 'Done',
                         priority: 'Critical',
                         date: '1703785617881',
@@ -239,7 +239,7 @@ const gBoards = [
                     {
                         id: 'c302',
                         title: 'Misaligned Layout on Mobile Devices',
-                        memberIds: ['u101', 'u102'],
+                        person: ['u101', 'u102'],
                         status: 'Working on it',
                         priority: 'Low',
                         date: '1703894345657',
@@ -253,7 +253,7 @@ const gBoards = [
                     {
                         id: 'c303',
                         title: 'Broken Image Links',
-                        memberIds: ['u103'],
+                        person: ['u103'],
                         status: 'Working on it',
                         priority: 'Low',
                         updates: [],
@@ -261,7 +261,7 @@ const gBoards = [
                     {
                         id: 'c304',
                         title: 'Inconsistent Styling Across Browsers',
-                        memberIds: ['u102'],
+                        person: ['u102'],
                         status: 'Done',
                         priority: 'High',
                         date: '1703995874889',
@@ -270,7 +270,7 @@ const gBoards = [
                     {
                         id: 'c305',
                         title: 'Slow Page Load Times',
-                        memberIds: ['u101'],
+                        person: ['u101'],
                         status: 'Needs QA',
                         priority: 'Critical',
                         date: '1704299392298',
@@ -385,7 +385,7 @@ const gBoards = [
                     title: 'Features',
                 },
                 task: {
-                    id: 'c102',
+                    id: 'c103',
                     title: 'Add about puki page',
                 },
             },
@@ -421,7 +421,7 @@ const gBoards = [
                     title: 'Features',
                 },
                 task: {
-                    id: 'c102',
+                    id: 'c103',
                     title: 'Add about puki page',
                 },
             },
@@ -493,7 +493,7 @@ const gBoards = [
                     title: 'Features',
                 },
                 task: {
-                    id: 'c102',
+                    id: 'c103',
                     title: 'Add about puki page',
                 },
             },
@@ -511,7 +511,7 @@ const gBoards = [
                     title: 'Features',
                 },
                 task: {
-                    id: 'c102',
+                    id: 'c103',
                     title: 'Add about puki page',
                 },
             },
@@ -660,7 +660,7 @@ const gBoards = [
                 },
             },
         ],
-        cmpsOrder: ['person', 'Status', 'Priority', 'Due Date', 'File', 'Link'],
+        titlesOrder: ['person', 'Status', 'Priority', 'Date', 'File', 'Link'],
     },
 ]
 

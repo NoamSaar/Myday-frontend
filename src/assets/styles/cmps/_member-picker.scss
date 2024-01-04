@@ -1,0 +1,32 @@
+.member-picker {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    .member-img-container {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+
+        .extra-members-box {
+            align-items: center;
+            background-color: #333;
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            font-size: .75rem;
+            height: 25px;
+            justify-content: center;
+            width: 25px;
+        }
+    }
+
+    img {
+        border: 2px solid #fff;
+        border-radius: 50%;
+        max-height: 30px;
+        max-width: 30px;
+        min-height: 30px;
+        min-width: 30px;
+    }
+}

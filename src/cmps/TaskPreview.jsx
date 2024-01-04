@@ -1,9 +1,17 @@
 import { DynamicPicker } from "./DynamicPicker"
 
-export function TaskPreview() {
+export function TaskPreview({ task, titlesOrder }) {
     return (
-        <section className="task-preview">
-        </section>
+        <ul className="clean-list task-preview" key={task.id}>
+            <li>{task.title}</li>
+
+            {titlesOrder.map((title, idx) => {
+                console.log('title', title)
+                console.log('task[title]', task[title.toLowerCase()])
+                return <DynamicPicker key={idx} title={title} task={task} />
+                return <DynamicPicker key={idx} title={title} info={{ chosenOption: task[title.toLowerCase()] }} />
+            })}
+        </ul>
     )
 }
 

@@ -1,0 +1,12 @@
+.task-preview {
+    display: flex;
+
+    &:hover {
+        background-color: $clr-label-6;
+    }
+
+    li {
+        cursor: pointer;
+
+    }
+}

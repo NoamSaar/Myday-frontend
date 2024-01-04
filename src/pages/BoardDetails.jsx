@@ -31,13 +31,12 @@ export function BoardDetails() {
         }
     }
 
-
     if (!board) return <div className="board-details">Loading...</div>
     return (
         <section className="board-details">
             <BoardHeader board={board} />
 
-            <BoardGroup />
+            {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
             <Outlet />
             {/* the outlet is to display the nested route- task details */}
         </section>
