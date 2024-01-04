@@ -12,7 +12,7 @@ export function BoardHeader({ board }) {
     const dynCollapsedClass = isCollapsed ? 'collapsed' : ''
 
     return (
-        <header className={dynCollapsedClass + ' board-header'}>
+        <header className={dynCollapsedClass + ' board-header sticky-left'}>
 
             <h3 className="title" title="Click to edit">{board.title}</h3>
 
