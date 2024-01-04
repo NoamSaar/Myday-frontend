@@ -1,3 +1,5 @@
+@import '../setup/typography.scss';
+
 * {
     box-sizing: border-box;
 }
@@ -42,6 +44,7 @@ p {
 
 a {
     text-decoration: none;
+    font-family: figtree;
 }
 
 a:hover {
