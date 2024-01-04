@@ -14,23 +14,58 @@
         position: static;
     }
 
-    .btn-menu {
-        position: absolute;
-        right: 0;
-    }
+    .sidebar-main-nav {
+        position: relative;
+        padding: 12px 40px 12px 12px;
+        border-bottom: 1px solid $clr-group-border;
 
-    .sidebar-btn {
-        justify-content: start;
-        padding: 6px 8px;
-        height: 32px;
-
-        img {
-            height: 100%;
-            width: auto;
+        .btn-menu {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 
-    .sidebar-nav {
-        padding: 12px 40px 12px 12px;
+    .sidebar-workspace {
+        .workspace-section {}
+
+        .workspace-logo {
+            position: relative;
+            background-color: $clr-workspace-logo;
+
+
+            img {
+                position: absolute;
+            }
+        }
+
+        .btn.clrblue {
+            @include btn($type: clrblue);
+        }
+
+        // .btn-add-group {
+        //     height: 32px;
+        //     width: 32px;
+        //     background-color: $clr-btn-add;
+        //     border-radius: $border-radius-small;
+        // }
     }
+
+    // .sidebar-btn {
+    //     justify-content: start;
+    //     padding: 6px 8px;
+    //     height: 32px;
+    //     border-radius: $border-radius-small;
+    //     font-size: rem(14px);
+
+    //     &:hover {
+    //         background-color: $clr-btn-hover;
+    //     }
+
+    //     img {
+    //         height: 100%;
+    //         width: auto;
+    //         margin-inline-end: 8px;
+    //     }
+    // }
 }

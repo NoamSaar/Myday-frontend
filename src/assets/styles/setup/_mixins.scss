@@ -24,35 +24,77 @@
     }
 }
 
+@mixin btn($type: regular, $width: auto) {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+
+    width: $width;
+    padding-inline: 6px;
+    padding-block: 6px;
+
+    font-size: rem(14px);
+    line-height: normal;
+    border-radius: $border-radius-small;
+
+    img {
+        height: 100%;
+        width: auto;
+    }
+
+    @if $type ==regular {
+        background-color: $clr0;
+        color: $clr-font;
+
+        &:hover {
+            background-color: $clr-btn-hover;
+        }
+    }
+
+    @else if $type ==clrblue {
+        background-color: $clr-btn-add;
+        color: $clr0;
+
+        &:hover {
+            background-color: $clr-btn-add-hover;
+        }
+    }
+
+}
+
 /* Media  Mixins */
 @mixin aspect-ratio($width, $height) {
     position: relative;
     overflow: hidden;
+
     &::before {
-      display: block;
-      content: "";
-      width: 100%;
-      padding-top: calc(($height / $width) * 100%);
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: calc(($height / $width) * 100%);
     }
-    > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+
+    >* {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
-  
-    > img {
-      height: 100%;
-      object-fit: cover;
+
+    >img {
+        height: 100%;
+        object-fit: cover;
     }
-  }
-  
-  // Mixin for removing hover efects on iphone screen
-  @mixin hover-supported {    
+}
+
+// Mixin for removing hover efects on iphone screen
+@mixin hover-supported {
     @media not all and (pointer: coarse) {
         &:hover {
             @content;
         }
     }
-  }
+}

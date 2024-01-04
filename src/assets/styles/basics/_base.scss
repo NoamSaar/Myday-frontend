@@ -7,13 +7,12 @@
 
 html {
     font-family: figtree;
+    font-size: rem(16px);
     line-height: 1.6;
 }
 
 body {
-    font-size: rem(18px);
     margin: 0;
-    font-family: figtree;
 }
 
 h1,
@@ -44,9 +43,14 @@ p {
 
 a {
     text-decoration: none;
+    color: $clr-font;
     font-family: figtree;
 }
 
-a:hover {
-    text-decoration: underline;
+.btn {
+    @include btn;
 }
+
+// a:hover {
+//     text-decoration: underline;
+// }
