@@ -6,8 +6,9 @@
         display: flex;
 
         li {
-            text-align: center;
 
+            padding-block: 0;
+            height: 35px;
         }
     }
 
@@ -17,6 +18,14 @@
     }
 
     li {
+
+        display: flex;
+        align-items: center;
+
+        &:not(.task-preview .task-title) {
+            justify-content: center;
+
+        }
 
         &:not(.task-title) {
             flex: 1;
