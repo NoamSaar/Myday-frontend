@@ -18,4 +18,19 @@
         position: absolute;
         right: 0;
     }
+
+    .sidebar-btn {
+        justify-content: start;
+        padding: 6px 8px;
+        height: 32px;
+
+        img {
+            height: 100%;
+            width: auto;
+        }
+    }
+
+    .sidebar-nav {
+        padding: 12px 40px 12px 12px;
+    }
 }
