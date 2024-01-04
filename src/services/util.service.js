@@ -5,7 +5,8 @@ export const utilService = {
     debounce,
     randomPastTime,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
+    getFormatDate
 }
 
 function makeId(length = 6) {
@@ -62,3 +63,9 @@ function loadFromStorage(key) {
     return (data) ? JSON.parse(data) : undefined
 }
 
+function getFormatDate(timestamp) {
+    const date = new Date(timestamp);
+    const options = { day: 'numeric', month: 'short' };
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    return formatter.format(date);
+}

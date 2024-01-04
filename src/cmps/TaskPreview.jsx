@@ -1,23 +1,33 @@
 import { useEffect, useState } from "react"
 import { DynamicPicker } from "./DynamicPicker"
 import { getUser } from "../store/actions/user.actions"
+import { utilService } from "../services/util.service";
 
 export function TaskPreview({ task, titlesOrder }) {
-    const [currTask, setCurrTask] = useState(task)
+    const [currTask, setCurrTask] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
+            const newPersons = [];
+            let date = task.date
             try {
-                if (currTask.person.length) {
-                    const newPersons = [];
-                    for (const person of currTask.person) {
+
+                if (task.person.length) {
+                    for (const person of task.person) {
                         const loadedUser = await getUser(person);
                         newPersons.push(loadedUser.imgUrl || loadedUser.fullname);
                     }
-                    setCurrTask(prevCurrTask => ({ ...prevCurrTask, person: newPersons }));
                 }
+
+                if (task.date) {
+                    date = utilService.getFormatDate(task.date)
+                }
+
             } catch (error) {
                 console.error("Error fetching data:", error);
+            }
+            finally {
+                setCurrTask({ ...task, person: newPersons, date });
             }
         };
 
@@ -25,6 +35,7 @@ export function TaskPreview({ task, titlesOrder }) {
     }, []);
 
 
+    if (!currTask) return <ul>Loading</ul>
     return (
         <ul className="clean-list task-preview" key={currTask.id}>
             <li className="task-title">{currTask.title}</li>

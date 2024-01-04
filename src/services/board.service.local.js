@@ -653,7 +653,7 @@ const gBoards = [
                 },
             },
         ],
-        titlesOrder: ['person', 'Status', 'Priority', 'Date', 'File', 'Link'],
+        titlesOrder: ['Person', 'Status', 'Priority', 'Date', 'File', 'Link'],
     },
 ]
 
