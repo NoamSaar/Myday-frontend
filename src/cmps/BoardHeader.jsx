@@ -19,7 +19,8 @@ export function BoardHeader({ board }) {
             <div className="colleagues">
 
                 <div className="btn invite-container">
-                    <img src="../../public/icons/invite.svg" /> <p>Invite / 1</p>
+                    <img src="../../public/icons/invite.svg" />
+                    <span>Invite / 1</span>
                 </div>
 
                 <div className="btn">

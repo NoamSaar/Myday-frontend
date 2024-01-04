@@ -34,13 +34,6 @@
             padding-inline: 4px;
         }
 
-        .btn {
-
-            &>* {
-                width: 27px;
-            }
-        }
-
     }
 
     .colleagues {
@@ -51,18 +44,8 @@
         gap: 8px;
 
         .invite-container {
-            border: 1px solid;
-            font-size: 15px;
+            border: 1px solid $clr-btn-border;
 
-            p {
-                margin: 0;
-                padding-inline: 0 8px;
-            }
-
-            img {
-                margin-inline-end: 8px;
-                padding-inline-start: 8px;
-            }
         }
     }
 
@@ -74,24 +57,6 @@
     .actions {
         grid-area: actions;
 
-    }
-
-    .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 32px;
-        min-width: 32px;
-        border-radius: $border-radius-small;
-        cursor: pointer;
-
-        &>* {
-            padding: 4px;
-        }
-
-        &:hover {
-            background-color: $clr-btn-hover;
-        }
     }
 
     .filter-sec {
