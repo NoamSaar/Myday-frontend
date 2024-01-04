@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { DynamicPicker } from "./DynamicPicker"
 import { getUser } from "../store/actions/user.actions"
 import { utilService } from "../services/util.service";
+import { MenuOptionsModal } from "./MenuOptionsModal";
 
 export function TaskPreview({ task, titlesOrder, priorities, statuses }) {
     const [currTask, setCurrTask] = useState(null)
@@ -38,7 +39,10 @@ export function TaskPreview({ task, titlesOrder, priorities, statuses }) {
     if (!currTask) return <ul>Loading</ul>
     return (
         <ul className="clean-list task-preview-container sticky-left">
-            <img className="btn" src="../../../public/icons/menu.svg" />
+            <div className="menu-container">
+                {/* <MenuOptionsModal /> */}
+                <img className="btn" src="../../../public/icons/menu.svg" />
+            </div>
             <ul className="clean-list task-preview" key={currTask.id}>
 
                 <div className="sticky-left task-title-container">
