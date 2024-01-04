@@ -1,78 +1,100 @@
 .board-header {
-    padding: 30px 30px 0px 30px;
+    padding-inline: 34px;
     padding-top: 16px;
-    padding-left: 38px;
 
-    & h1 {
-        margin: 0;
+    display: grid;
+    grid-template-areas:
+        "info colleagues"
+        "display-opts actions"
+        "filter filter";
+    justify-content: space-between;
+
+    &.scrolled {
+        grid-template-areas:
+            "info display-opts colleagues"
+            "filter filter filter";
+        grid-template-columns: auto 1fr 1fr;
+
+        .actions {
+            display: none;
+        }
+
+        .colleagues {
+            justify-self: end;
+        }
     }
 
-    & .board-header-top-container {
+    .info {
+        grid-area: info;
         display: flex;
         align-items: center;
+        // margin-right: 4px;
 
-        & .board-title-info-container {
-            display: flex;
-            align-items: center;
-            flex: 1 0;
-            min-width: 100px;
-            margin-right: 8px;
-            margin-left: -5px;
-
-            & h1 {
-                margin: 0;
-                margin-inline-end: 5px;
-                padding-inline: 4px;
-            }
-
-            & .btn-container {
-
-                &>* {
-                    width: 27px;
-                }
-            }
-
-
+        .board-title {
+            padding-inline: 4px;
         }
 
-        & .board-header-actions {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-            gap: 8px;
-
-            & .invite-container {
-                border: 1px solid;
-                font-size: 15px;
-
-                & p {
-                    margin: 0;
-                    padding-inline: 0 8px;
-                }
-
-                & img {
-                    margin-inline-end: 8px;
-                    padding-inline-start: 8px;
-                }
-            }
-        }
-
-        & .btn-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 32px;
-            min-width: 32px;
-            border-radius: 4px;
-            cursor: pointer;
+        .btn {
 
             &>* {
-                padding: 4px;
-            }
-
-            &:hover {
-                background-color: $clr-btn-hover;
+                width: 27px;
             }
         }
+
+    }
+
+    .colleagues {
+        grid-area: colleagues;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 8px;
+
+        .invite-container {
+            border: 1px solid;
+            font-size: 15px;
+
+            p {
+                margin: 0;
+                padding-inline: 0 8px;
+            }
+
+            img {
+                margin-inline-end: 8px;
+                padding-inline-start: 8px;
+            }
+        }
+    }
+
+    .display-opts {
+        grid-area: display-opts;
+
+    }
+
+    .actions {
+        grid-area: actions;
+
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        min-width: 32px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &>* {
+            padding: 4px;
+        }
+
+        &:hover {
+            background-color: $clr-btn-hover;
+        }
+    }
+
+    .filter-sec {
+        grid-area: filter;
     }
 }
