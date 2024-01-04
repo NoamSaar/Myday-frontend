@@ -48,9 +48,11 @@ async function remove(boardId) {
 
 async function save(board) {
     try {
-        if (board._id) {
+        if (board) {
             return await httpService.put(BASE_URL, board)
         } else {
+            const defaultBoard = getDefaultBoard()
+            defaultBoard.createdBy = userService.getLoggedinUser()
             return await httpService.post(BASE_URL, board)
         }
     } catch (error) {
@@ -72,12 +74,10 @@ function saveTask(boardId, groupId, task, activity) {
 
 
 function getDefaultBoard() {
-    const user = userService.getLoggedinUser()
     return {
         title: 'New Board',
         isStarred: false,
         archivedAt: null,
-        createdBy: user,
         status: [
             {
                 id: 'l100',

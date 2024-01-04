@@ -2,17 +2,17 @@ import { useState } from "react";
 import { SidebarMainNav } from "./SidebarMainNav";
 import { SidebarWorkspace } from "./SidebarWorkspace";
 import { SidebarBoardNav } from "./SidebarBoardNav";
-import { boardService } from "../services/board.service";
+import { boardService } from "../services/board.service.local";
+// import { boardService } from "../services/board.service";
 // import { LottieAnimation } from "./LottieAnimation";
 
 export function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [isActive, setIsActive] = useState(false)
-    // const [isNotActive, setIsNotActive] = useState(true)
 
     function onAddNewBoard() {
-        const newBoard = boardService.getDefaultBoard()
+        boardService.save()
     }
 
     function onOpenSidebar() {
