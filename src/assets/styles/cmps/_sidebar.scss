@@ -27,15 +27,50 @@
     }
 
     .sidebar-workspace {
-        .workspace-section {}
+        padding: 12px;
+
+        .workspace-section {
+            gap: 7px;
+            justify-content: start;
+            padding-inline-start: 7px;
+            font-family: figtree-bold;
+
+            span {
+                font-size: rem(16px);
+                white-space: nowrap;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &>img {
+                width: 18px;
+                height: 18px;
+            }
+
+            &.open {
+                background-color: $clr-btn-active;
+
+                &>img {
+                    transform: rotate(180deg);
+                }
+            }
+        }
 
         .workspace-logo {
             position: relative;
+            width: 20px;
+            height: 20px;
+            border-radius: $border-radius-small;
             background-color: $clr-workspace-logo;
 
+            color: $clr0;
 
             img {
                 position: absolute;
+                bottom: -10px;
+                right: -12px;
+                height: 20px;
+                width: 20px;
             }
         }
 
