@@ -1,12 +1,7 @@
 
 export function SidebarWorkspace(
-    { onToggleDropdown, onToggleIsActive, isDropdownOpen, isActive }
+    { onToggleDropdown, onToggleIsActive, isDropdownOpen, isActive, onAddNewBoard }
 ) {
-
-    function onAddNewBoard() {
-
-    }
-
     return (
         <section className="sidebar-workspace">
             <div title="Main Workspace"
