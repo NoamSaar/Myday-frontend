@@ -1,7 +1,7 @@
 
 export function DatePicker({ date, onUpdate }) {
     return (
-        <li className="date-picker">
+        <li className="date-col">
             {date}
         </li>
     )

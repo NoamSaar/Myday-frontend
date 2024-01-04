@@ -2,7 +2,7 @@ export function MemberPicker({ members, onUpdate }) {
     const extraMembers = members.length - 2
 
     return (
-        <li className="member-picker">
+        <li className="member-picker person-col">
 
             {!members.length && <img src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg" />}
 
