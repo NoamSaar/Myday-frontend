@@ -22,7 +22,7 @@ const gBoards = [
         createdBy: {
             _id: 'u101',
             fullname: 'Eden Rize',
-            imgUrl: 'http://some-img',
+            imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
         },
         labels: [
             {
@@ -54,17 +54,16 @@ const gBoards = [
             {
                 _id: 'u101',
                 fullname: 'Eden Rize',
-                imgUrl: 'http://some-img.jpg',
+                imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
             },
             {
                 _id: 'u102',
                 fullname: 'Mor Marzan',
-                imgUrl: 'http://some-img.jpg',
             },
             {
                 _id: 'u103',
                 fullname: 'Noam Saar',
-                imgUrl: 'http://some-img.jpg',
+                imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
             },
         ],
         groups: [
@@ -288,7 +287,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u101',
                     fullname: 'Eden Rize',
-                    imgUrl: 'http://some-img',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -306,7 +305,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u101',
                     fullname: 'Eden Rize',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -324,7 +323,6 @@ const gBoards = [
                 byMember: {
                     _id: 'u102',
                     fullname: 'Mor Marzan',
-                    imgUrl: 'http://some-img.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -342,7 +340,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u103',
                     fullname: 'Noam Saar',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                 },
                 group: {
                     id: 'g103',
@@ -360,7 +358,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u103',
                     fullname: 'Noam Saar',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -378,7 +376,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u103',
                     fullname: 'Noam Saar',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -396,7 +394,6 @@ const gBoards = [
                 byMember: {
                     _id: 'u102',
                     fullname: 'Mor Marzan',
-                    imgUrl: 'http://some-img.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -414,7 +411,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u101',
                     fullname: 'Eden Rize',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -432,7 +429,6 @@ const gBoards = [
                 byMember: {
                     _id: 'u102',
                     fullname: 'Mor Marzan',
-                    imgUrl: 'http://some-img.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -450,7 +446,6 @@ const gBoards = [
                 byMember: {
                     _id: 'u102',
                     fullname: 'Mor Marzan',
-                    imgUrl: 'http://some-img.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -468,7 +463,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u103',
                     fullname: 'Noam Saar',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -486,7 +481,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u101',
                     fullname: 'Eden Rize',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -504,7 +499,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u103',
                     fullname: 'Noam Saar',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -522,7 +517,6 @@ const gBoards = [
                 byMember: {
                     _id: 'u102',
                     fullname: 'Mor Marzan',
-                    imgUrl: 'http://some-img.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -540,7 +534,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u101',
                     fullname: 'Eden Rize',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -558,7 +552,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u103',
                     fullname: 'Noam Saar',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -576,7 +570,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u103',
                     fullname: 'Noam Saar',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -594,7 +588,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u101',
                     fullname: 'Eden Rize',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
                 group: {
                     id: 'g102',
@@ -612,7 +606,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u101',
                     fullname: 'Eden Rize',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
                 group: {
                     id: 'g103',
@@ -630,7 +624,7 @@ const gBoards = [
                 byMember: {
                     _id: 'u101',
                     fullname: 'Eden Rize',
-                    imgUrl: 'http://some-img.jpg',
+                    imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
                 group: {
                     id: 'g101',
@@ -648,7 +642,6 @@ const gBoards = [
                 byMember: {
                     _id: 'u102',
                     fullname: 'Mor Marzan',
-                    imgUrl: 'http://some-img.jpg',
                 },
                 group: {
                     id: 'g103',

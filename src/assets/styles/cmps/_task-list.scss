@@ -12,12 +12,12 @@
 
     &ul,
     ul {
-        outline: $clr-label-6 .5px solid;
+        outline: $clr-group-border .5px solid;
     }
 
     li {
         flex: 1;
-        outline: $clr-label-6 1px solid;
+        outline: $clr-group-border 1px solid;
         padding: 10px;
     }
 

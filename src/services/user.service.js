@@ -2,6 +2,8 @@ import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+const STORAGE_KEY = 'userDB'
+
 
 export const userService = {
     login,
@@ -12,49 +14,96 @@ export const userService = {
     getUsers,
     getById,
     remove,
-    update,
-    changeScore
+    save,
 }
 
 window.userService = userService
 
+const gUsers = [
+    {
+        _id: 'u101',
+        fullname: 'Eden Rize',
+        username: 'edenrize@gmail.com',
+        password: '1234',
+        imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
 
-function getUsers() {
-    // return storageService.query('user')
-    return httpService.get(`user`)
+    },
+    {
+        _id: 'u102',
+        fullname: 'Mor Marzan',
+        username: 'mormarzan@gmail.com',
+        password: '4321',
+
+    },
+    {
+        _id: 'u103',
+        fullname: 'Noam Saar',
+        username: 'noamsaar11@gmail.com',
+        password: '4321',
+        imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
+
+    },
+]
+
+_initUsers()
+
+async function getUsers() {
+    try {
+        return await storageService.query(STORAGE_KEY)
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during getting boards')
+    }
+    // return httpService.get(`user`)
 }
 
 
 
 async function getById(userId) {
-    // const user = await storageService.get('user', userId)
-    const user = await httpService.get(`user/${userId}`)
-    return user
+    try {
+        const user = await storageService.get(STORAGE_KEY, userId)
+        // const user = await httpService.get(`user/${userId}`)
+        return user
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during getting user')
+    }
 }
 
 function remove(userId) {
-    // return storageService.remove('user', userId)
-    return httpService.delete(`user/${userId}`)
+    try {
+        return storageService.remove(STORAGE_KEY, userId)
+        // return httpService.delete(`user/${userId}`)
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing user')
+    }
 }
 
-async function update({ _id, score }) {
-    // const user = await storageService.get('user', _id)
-    // user.score = score
-    // await storageService.put('user', user)
+async function save(user) {
+    try {
+        if (user._id) {
+            return await storageService.put(STORAGE_KEY, user)
+            // const user = await httpService.put(`user/${_id}`, user)
+        } else {
+            return await storageService.post(STORAGE_KEY, user)
+        }
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during saving user')
+    }
 
-    const user = await httpService.put(`user/${_id}`, { _id, score })
 
     // When admin updates other user's details, do not update loggedinUser
-    if (getLoggedinUser()._id === user._id) saveLocalUser(user)
-    return user
+    // if (getLoggedinUser()._id === user._id) saveLocalUser(user)
 }
 
 async function login(userCred) {
+    try {
+        const user = await httpService.post('auth/login', userCred)
+        if (user) return saveLocalUser(user)
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during login')
+    }
     // const users = await storageService.query('user')
     // const user = users.find(user => user.username === userCred.username)
 
-    const user = await httpService.post('auth/login', userCred)
-    if (user) return saveLocalUser(user)
 }
 
 async function signup(userCred) {
@@ -71,13 +120,6 @@ async function logout() {
     // return await httpService.post('auth/logout')
 }
 
-async function changeScore(by) {
-    const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
-}
 
 
 function saveLocalUser(user) {
@@ -98,30 +140,11 @@ function getLoggedinUser() {
 // })()
 
 
+function _initUsers() {
+    const usersFromStorage = localStorage.getItem(STORAGE_KEY)
+    if (usersFromStorage && usersFromStorage.length) return
 
-const users = [
-    {
-        _id: 'u101',
-        fullname: 'Eden Rize',
-        username: 'edenrize@gmail.com',
-        password: '1234',
-        imgUrl: 'http://some-img.jpg',
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(gUsers))
+}
 
-    },
-    {
-        _id: 'u102',
-        fullname: 'Mor Marzan',
-        username: 'mormarzan@gmail.com',
-        password: '4321',
-        imgUrl: 'http://some-img.jpg',
 
-    },
-    {
-        _id: 'u103',
-        fullname: 'Noam Saar',
-        username: 'noamsaar11@gmail.com',
-        password: '4321',
-        imgUrl: 'http://some-img.jpg',
-
-    },
-]

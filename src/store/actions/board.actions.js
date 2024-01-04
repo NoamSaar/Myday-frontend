@@ -1,4 +1,4 @@
-import { boardService } from '../services/board.service.local.js'
+import { boardService } from '../../services/board.service.local.js'
 import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
