@@ -38,7 +38,17 @@ export function TaskPreview({ task, titlesOrder, priorities, statuses }) {
     if (!currTask) return <ul>Loading</ul>
     return (
         <ul className="clean-list task-preview" key={currTask.id}>
-            <li className="task-title">{currTask.title}</li>
+
+
+
+            <div className="sticky-left task-title-container">
+
+                <li className="task-selection">
+                    <input type="checkbox" />
+                </li>
+
+                <li className="task-title">{currTask.title}</li>
+            </div>
 
             {titlesOrder.map((title, idx) => {
                 return <DynamicPicker key={idx} title={title} task={currTask} priorities={priorities} statuses={statuses} />

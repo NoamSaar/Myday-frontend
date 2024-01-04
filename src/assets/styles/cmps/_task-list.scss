@@ -52,17 +52,22 @@
     //     flex: 2;
     // }
 
-    .task-title {
-        min-width: 471px;
-        max-width: 471px;
-        position: sticky;
-        left: 0;
-        background-color: white;
+    .task-title-container {
+        display: flex;
+        min-width: 505px;
+        max-width: 505px;
 
-        &:hover:not(.task-header-list .task-title) {
-            background-color: $clr-task-hover;
+        .task-title {
+            display: flex;
+            width: 100%;
+            background-color: white;
+
+            &:hover:not(.task-header-list .task-title) {
+                background-color: $clr-task-hover;
+            }
         }
     }
+
 
     .person-col {
         min-width: 97px;
