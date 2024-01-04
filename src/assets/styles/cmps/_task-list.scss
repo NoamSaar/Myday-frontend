@@ -7,6 +7,10 @@
 
         li {
             text-align: center;
+
+            &:first-child {
+                flex: 2;
+            }
         }
     }
 
