@@ -3,7 +3,7 @@ import { DynamicPicker } from "./DynamicPicker"
 import { getUser } from "../store/actions/user.actions"
 import { utilService } from "../services/util.service";
 
-export function TaskPreview({ task, titlesOrder }) {
+export function TaskPreview({ task, titlesOrder, priorities, statuses }) {
     const [currTask, setCurrTask] = useState(null)
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export function TaskPreview({ task, titlesOrder }) {
             <li className="task-title">{currTask.title}</li>
 
             {titlesOrder.map((title, idx) => {
-                return <DynamicPicker key={idx} title={title} task={currTask} />
+                return <DynamicPicker key={idx} title={title} task={currTask} priorities={priorities} statuses={statuses} />
             })}
         </ul>
     )

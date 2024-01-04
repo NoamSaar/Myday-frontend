@@ -36,7 +36,7 @@ export function BoardDetails() {
         <section className="board-details">
             <BoardHeader board={board} />
 
-            {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
+            {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} priorities={board.priority} statuses={board.status} />)}
             <Outlet />
             {/* the outlet is to display the nested route- task details */}
         </section>

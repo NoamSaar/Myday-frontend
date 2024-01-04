@@ -24,7 +24,7 @@ const gBoards = [
             fullname: 'Eden Rize',
             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
         },
-        labels: [
+        status: [
             {
                 id: 'l100',
                 color: '#c4c4c4',
@@ -48,6 +48,32 @@ const gBoards = [
                 id: 'l104',
                 title: 'Needs QA',
                 color: '#faa1f1',
+            },
+        ],
+        priority: [
+            {
+                id: 'l200',
+                color: '#c4c4c4',
+            },
+            {
+                id: 'l201',
+                title: 'Critical',
+                color: '#333333',
+            },
+            {
+                id: 'l202',
+                title: 'High',
+                color: '#401694',
+            },
+            {
+                id: 'l203',
+                title: 'Medium',
+                color: '#5559df',
+            },
+            {
+                id: 'l204',
+                title: 'Low',
+                color: '#579bfc',
             },
         ],
         members: [
