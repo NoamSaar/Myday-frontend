@@ -20,6 +20,9 @@ $clr7: #222;
 // $clr1: #fff;
 // $clr2: #000;
 
+// group border clr
+$clr-group-border: #d0d4e4;
+
 // fonts colors
 $clr-font: #323338;
 $clr-light-font: #676879;
@@ -35,6 +38,7 @@ $clr-btn-add: #0073ea;
 $clr-btn-add-hover: #0060b9;
 
 $clr-btn-feedback: #bb3354;
+$clr-workspace-logo: #ff642e;
 
 // labels color pallete
 $clr-label-1: #ffcb00;
@@ -66,6 +70,7 @@ $clr-priority-neutral: #c4c4c4;
 
 // layout
 $layout-padding: 18px;
+$border-radius-small: 4px;
 
 // Breakpoints
 $mobile-breakpoint: 460px;

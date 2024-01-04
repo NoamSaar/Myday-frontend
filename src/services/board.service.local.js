@@ -79,7 +79,7 @@ const gBoards = [
                         memberIds: ['u103'],
                         status: 'Stuck',
                         priority: 'Low',
-                        date: '1703706909537',
+                        date: 1703706909537,
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704302004/Screenshot_2024-01-03_113623_igieu2.png',
                         link: {
                             url: 'https://socket.io/get-started/chat',
@@ -89,7 +89,7 @@ const gBoards = [
                             {
                                 id: 'u123',
                                 memberId: 'u101',
-                                createdAt: '1704302734753',
+                                createdAt: 1704302734753,
                                 txt: 'Init socket service 👍',
                                 likes: [],
                             },
@@ -101,7 +101,7 @@ const gBoards = [
                         memberIds: ['u102', 'u103'],
                         status: 'Needs QA',
                         priority: 'Medium',
-                        date: '1704241608991',
+                        date: 1704241608991,
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704303178/Screenshot_2024-01-03_113811_kqd5pv.png',
                         link: {
                             url: 'https://www.turing.com/kb/implementing-javascript-pagination',
@@ -119,7 +119,7 @@ const gBoards = [
                             {
                                 id: 'u555',
                                 memberId: 'u101',
-                                createdAt: '1704303445060',
+                                createdAt: 1704303445060,
                                 txt: 'Research about puki',
                                 likes: ['u102'],
                             },
@@ -139,7 +139,7 @@ const gBoards = [
                         memberIds: ['u101', 'u103'],
                         status: 'Working on it',
                         priority: 'High',
-                        date: '1704074068766',
+                        date: 1704074068766,
                         link: {
                             url: 'https://bryanlrobinson.com/blog/refactoring-css-into-sass-mixin/',
                         },
@@ -147,7 +147,7 @@ const gBoards = [
                             {
                                 id: 'u127',
                                 memberId: 'u103',
-                                createdAt: '1704303744452',
+                                createdAt: 1704303744452,
                                 txt: 'Added the imports, missing the vars',
                                 likes: ['u101'],
                             },
@@ -167,7 +167,7 @@ const gBoards = [
                         memberIds: ['u101', 'u102', 'u103'],
                         status: 'Stuck',
                         priority: 'Critical',
-                        date: '1703703756181',
+                        date: 1703703756181,
                         link: {
                             url: 'https://redux.js.org/',
                         },
@@ -175,7 +175,7 @@ const gBoards = [
                             {
                                 id: 'u777',
                                 memberId: 'u103',
-                                createdAt: '1704304108853',
+                                createdAt: 1704304108853,
                                 txt: "i've begun the refactor but couldn't figure out how to use the dispatch. @Mor Marzan",
                                 likes: [],
                             },
@@ -186,7 +186,7 @@ const gBoards = [
                         title: 'Refactor vars/lets to const',
                         memberIds: ['u102'],
                         status: 'Done',
-                        date: '1703720101090',
+                        date: 1703720101090,
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704304383/large-Screenshot_2024-01-03_at_11.35.48_qclnrt.png',
                         updates: [],
                     },
@@ -195,7 +195,7 @@ const gBoards = [
                         title: 'Refactor service to use http',
                         memberIds: ['u103'],
                         priority: 'Low',
-                        date: '1703728412860',
+                        date: 1703728412860,
                         updates: [],
                     },
                 ],
@@ -212,7 +212,7 @@ const gBoards = [
                         memberIds: ['u102'],
                         status: 'Done',
                         priority: 'Critical',
-                        date: '1703785617881',
+                        date: 1703785617881,
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704305129/large-Screenshot_2024-01-03_at_11.39.56_dx6zkv.png',
                         link: {
                             url: 'https://stackoverflow.com/questions/22776702/unresponsive-button-after-calling-javascript',
@@ -222,14 +222,14 @@ const gBoards = [
                             {
                                 id: 'u157',
                                 memberId: 'u102',
-                                createdAt: '1704305297046',
+                                createdAt: 1704305297046,
                                 txt: 'Desperate here, needs help! @Eden Rize',
                                 likes: ['u101'],
                                 comments: [
                                     {
                                         id: 'u457',
                                         memberId: 'u101',
-                                        createdAt: '1704305400521',
+                                        createdAt: 1704305400521,
                                         txt: 'Done 😄',
                                     },
                                 ],
@@ -242,7 +242,7 @@ const gBoards = [
                         memberIds: ['u101', 'u102'],
                         status: 'Working on it',
                         priority: 'Low',
-                        date: '1703894345657',
+                        date: 1703894345657,
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704305602/large-Screenshot_2024-01-03_at_11.48.45_tomxco.png',
                         link: {
                             url: 'https://stackoverflow.com/questions/29740966/layout-distorted-when-viewed-on-mobile',
@@ -264,7 +264,7 @@ const gBoards = [
                         memberIds: ['u102'],
                         status: 'Done',
                         priority: 'High',
-                        date: '1703995874889',
+                        date: 1703995874889,
                         updates: [],
                     },
                     {
@@ -273,7 +273,7 @@ const gBoards = [
                         memberIds: ['u101'],
                         status: 'Needs QA',
                         priority: 'Critical',
-                        date: '1704299392298',
+                        date: 1704299392298,
                         updates: [],
                     },
                 ],
@@ -660,7 +660,7 @@ const gBoards = [
                 },
             },
         ],
-        cmpsOrder: ['person', 'Status', 'Priority', 'Due Date', 'File', 'Link'],
+        cmpsOrder: ['Person', 'Status', 'Priority', 'Date', 'File', 'Link'],
     },
 ]
 
