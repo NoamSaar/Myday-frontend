@@ -6,7 +6,7 @@ import { MenuOptionsModal } from "./MenuOptionsModal";
 import { removeTask } from "../store/actions/board.actions";
 import { useSelector } from "react-redux";
 
-export function TaskPreview({ task }) {
+export function TaskPreview({ task, groupId }) {
     const [currTask, setCurrTask] = useState(null)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
 
@@ -36,8 +36,12 @@ export function TaskPreview({ task }) {
         fetchData()
     }, [])
 
-    function onDeleteTask() {
-        removeTask(board._id, currTask.id)
+    async function onDeleteTask() {
+        try {
+            removeTask(board._id, groupId, currTask.id)
+        } catch (error) {
+            console.error("Error removing task:", error)
+        }
     }
 
     const menuOptions = [
@@ -70,6 +74,8 @@ export function TaskPreview({ task }) {
                 {board.titlesOrder.map((title, idx) => {
                     return <DynamicPicker key={idx} title={title} task={currTask} />
                 })}
+
+                <div className="line-end"></div>
             </ul>
         </ul>
 
