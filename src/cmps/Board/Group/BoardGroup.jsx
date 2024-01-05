@@ -44,7 +44,7 @@ export function BoardGroup({ group, titlesOrder }) {
 
                 <div className="board-title-container sticky-left" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     <div className="menu-container sticky-left">
-                        {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
+                        {isMenuOpen && <MenuOptionsModal options={menuOptions} pos={'top'} />}
                         <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />
                     </div>
                     <div className="sticky-left-36 title-container">
