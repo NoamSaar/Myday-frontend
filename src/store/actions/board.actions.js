@@ -26,6 +26,7 @@ import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD,
 // }
 
 
+
 /**************** board actions ****************/
 
 //maybe needs getAction as the rest for consistency?
@@ -142,7 +143,7 @@ export async function removeGroup(boardId, groupId) {
 export async function addTask(boardId, groupId, taskTitle) {
     try {
         const board = await boardService.addTask(boardId, groupId, taskTitle)
-        setCurBoard(board)
+        setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
@@ -159,6 +160,44 @@ export async function removeTask(boardId, groupId, taskId) {
         throw new Error(error.message || 'An error occurred during removing task')
     }
 
+}
+
+export async function updateTask(boardId, groupId, task) {
+    const board = await boardService.updateTask(boardId, groupId, task)
+    setCurrBoard(board)
+    store.dispatch(getActionUpdateBoard(board))
+
+
+
+    // switch (cmpType) {
+
+    //     case 'title':
+    //         task.title = data
+    //         break;
+
+    //     case 'members':
+    //         task.person = data
+    //         break;
+
+    //     case 'status':
+    //         task.status = data
+    //         break;
+
+    //     case 'priority':
+    //         task.priority = data
+    //         break;
+
+    //     case 'file':
+    //         task.file = data
+    //         break;
+
+    //     case 'link':
+    //         task.link = data
+    //         break;
+
+    //     default:
+    //         break;
+    // }
 }
 
 
