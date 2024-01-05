@@ -2,7 +2,7 @@ import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY } from '../reducers/board.reducer.js'
 
 
 // Store - saveTask (from board.js)
@@ -26,6 +26,10 @@ import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDA
 // }
 
 
+
+/**************** board actions ****************/
+
+//maybe needs getAction as the rest for consistency?
 export async function loadBoards() {
     try {
         const filterBy = store.getState().boardModule.filterBy
@@ -47,6 +51,7 @@ export async function removeBoard(boardId) {
     }
 }
 
+//not working currently on the store!
 export async function addBoard(board) {
     console.log('board:', board)
     try {
@@ -59,17 +64,24 @@ export async function addBoard(board) {
     }
 }
 
-export function updateBoard(board) {
-    return boardService.save(board)
-        .then(savedBoard => {
-            console.log('Updated Board:', savedBoard)
-            store.dispatch(getActionUpdateBoard(savedBoard))
-            return savedBoard
-        })
-        .catch(err => {
-            console.log('Cannot save board', err)
-            throw err
-        })
+export async function updateBoard(board) {
+    try {
+        const savedBoard = await boardService.save(board)
+        // console.log('Updated Board:', savedBoard)
+        store.dispatch(getActionUpdateBoard(savedBoard))
+
+        const currBoardId = store.getState().boardModule.currBoard._id
+        if (savedBoard._id === currBoardId) {
+            // console.log('this is curr board!')
+            setCurrBoard(savedBoard)
+        }
+
+        return savedBoard
+
+    } catch (err) {
+        console.log('Cannot save board', err)
+        throw err
+    }
 }
 
 export function setFilterBy(filterBy) {
@@ -78,36 +90,36 @@ export function setFilterBy(filterBy) {
 
 // Demo for Optimistic Mutation 
 // (IOW - Assuming the server call will work, so updating the UI first)
-export function onRemoveBoardOptimistic(boardId) {
-    store.dispatch({
-        type: REMOVE_BOARD,
-        boardId
-    })
-    showSuccessMsg('Board removed')
+// export function onRemoveBoardOptimistic(boardId) {
+//     store.dispatch({
+//         type: REMOVE_BOARD,
+//         boardId
+//     })
+//     showSuccessMsg('Board removed')
 
-    boardService.remove(boardId)
-        .then(() => {
-            console.log('Server Reported - Deleted Succesfully');
-        })
-        .catch(err => {
-            showErrorMsg('Cannot remove board')
-            console.log('Cannot load boards', err)
-            store.dispatch({
-                type: UNDO_REMOVE_BOARD,
-            })
-        })
+//     boardService.remove(boardId)
+//         .then(() => {
+//             console.log('Server Reported - Deleted Succesfully');
+//         })
+//         .catch(err => {
+//             showErrorMsg('Cannot remove board')
+//             console.log('Cannot load boards', err)
+//             store.dispatch({
+//                 type: UNDO_REMOVE_BOARD,
+//             })
+//         })
+// }
+
+export function setCurrBoard(board) {
+    store.dispatch({ type: SET_CURR_BOARD, board })
 }
 
-export function setCurBoard(board) {
-    store.dispatch({ type: SET_BOARD, board })
-}
-
-//groups
+/**************** group actions ****************/
 
 export async function addGroup(boardId) {
     try {
         const board = await boardService.addGroup(boardId)
-        setCurBoard(board)
+        setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
@@ -118,7 +130,7 @@ export async function addGroup(boardId) {
 export async function removeGroup(boardId, groupId) {
     try {
         const board = await boardService.removeGroup(boardId, groupId)
-        setCurBoard(board)
+        setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
@@ -126,12 +138,12 @@ export async function removeGroup(boardId, groupId) {
 
 }
 
-//tasks
+/**************** task actions ****************/
 
 export async function addTask(boardId, groupId, taskTitle) {
     try {
         const board = await boardService.addTask(boardId, groupId, taskTitle)
-        setCurBoard(board)
+        setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
@@ -142,7 +154,7 @@ export async function addTask(boardId, groupId, taskTitle) {
 export async function removeTask(boardId, groupId, taskId) {
     try {
         const board = await boardService.removeTask(boardId, groupId, taskId)
-        setCurBoard(board)
+        setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
@@ -150,8 +162,47 @@ export async function removeTask(boardId, groupId, taskId) {
 
 }
 
+export async function updateTask(boardId, groupId, task) {
+    const board = await boardService.updateTask(boardId, groupId, task)
+    setCurrBoard(board)
+    store.dispatch(getActionUpdateBoard(board))
 
-// Action Creators:
+
+
+    // switch (cmpType) {
+
+    //     case 'title':
+    //         task.title = data
+    //         break;
+
+    //     case 'members':
+    //         task.person = data
+    //         break;
+
+    //     case 'status':
+    //         task.status = data
+    //         break;
+
+    //     case 'priority':
+    //         task.priority = data
+    //         break;
+
+    //     case 'file':
+    //         task.file = data
+    //         break;
+
+    //     case 'link':
+    //         task.link = data
+    //         break;
+
+    //     default:
+    //         break;
+    // }
+}
+
+
+/**************** get actions ****************/
+
 export function getActionRemoveBoard(boardId) {
     return {
         type: REMOVE_BOARD,
@@ -159,7 +210,8 @@ export function getActionRemoveBoard(boardId) {
     }
 }
 
-export function getActionAddBoard(board) {
+//has to receive board to add and send it to reducer!!
+export function getActionAddBoard() {
     return {
         type: ADD_BOARD,
         board

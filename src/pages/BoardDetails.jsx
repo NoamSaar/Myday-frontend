@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { boardService } from "../services/board.service.local";
 import { BoardHeader } from "../cmps/Board/BoardHeader";
-import { addGroup, setCurBoard } from "../store/actions/board.actions";
+import { addGroup, setCurrBoard } from "../store/actions/board.actions";
 
 export function BoardDetails() {
     const { boardId } = useParams()
@@ -25,7 +25,7 @@ export function BoardDetails() {
     async function loadBoard() {
         try {
             const board = await boardService.getById(boardId)
-            setCurBoard(board)
+            setCurrBoard(board)
         } catch (error) {
             console.log('Had issues in board details', error)
             // showErrorMsg('Cannot load board')

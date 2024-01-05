@@ -12,6 +12,7 @@ export const boardService = {
     remove,
     addTask,
     removeTask,
+    updateTask,
     addGroup,
     removeGroup,
     getDefaultFilter,
@@ -720,7 +721,6 @@ async function save(board) {
             return await storageService.put(STORAGE_KEY, board)
         } else {
             const defaultBoard = _getDefaultBoard()
-            console.log('defaultBoard in service:', defaultBoard)
             return await storageService.post(STORAGE_KEY, defaultBoard)
         }
     } catch (error) {
@@ -1171,6 +1171,24 @@ async function removeTask(boardId, groupId, taskId) {
 
         return await save(board)
 
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing task')
+
+    }
+
+}
+
+async function updateTask(boardId, groupId, task) {
+    try {
+        const board = await getById(boardId)
+        const groupIdx = board.groups.findIndex(group => group.id === groupId)
+        let group = board.groups[groupIdx]
+        const tasks = group.tasks.map(currTask => currTask.id === task.id ? task : currTask)
+
+        group = { ...group, tasks }
+        board.groups.splice(groupIdx, 1, group)
+
+        return await save(board)
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
 

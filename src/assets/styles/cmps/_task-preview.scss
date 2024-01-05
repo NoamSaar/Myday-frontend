@@ -7,19 +7,52 @@
         &:hover {
             background-color: $clr-task-hover;
 
-            .task-title {
+            .task-title:not(.active .task-title),
+            .task-selection:not(.active .task-selection) {
                 background-color: $clr-task-hover;
             }
+
         }
 
         li {
             white-space: nowrap;
             height: 36px;
-            cursor: pointer;
+
+            &:not(.task-selection) {
+                cursor: pointer;
+            }
 
             &:not(.task-title) {
                 text-align: center;
             }
+        }
+
+
+        .task-title {
+
+            input {
+                width: 100%;
+                padding: 2px;
+                border: 1px solid transparent;
+
+                &:focus {
+                    border-color: #0073ea;
+
+                    border-radius: $border-radius-small;
+                }
+            }
+
+            .task-title-span {
+                border: 1px solid transparent;
+                padding: 2px;
+                border-radius: $border-radius-small;
+                cursor: text;
+
+                &:hover {
+                    border-color: $clr-btn-border;
+                }
+            }
+
         }
     }
 }

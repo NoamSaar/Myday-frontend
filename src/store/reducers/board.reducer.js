@@ -3,7 +3,7 @@ import { boardService } from "../../services/board.service.local"
 export const SET_BOARDS = 'SET_BOARDS'
 export const REMOVE_BOARD = 'REMOVE_BOARD'
 export const ADD_BOARD = 'ADD_BOARD'
-export const SET_BOARD = 'SET_BOARD'
+export const SET_CURR_BOARD = 'SET_CURR_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
@@ -23,7 +23,7 @@ export function boardReducer(state = initialState, action) {
             newState = { ...state, boards: action.boards }
             break
 
-        case SET_BOARD:
+        case SET_CURR_BOARD:
             newState = { ...state, currBoard: action.board }
             break
 

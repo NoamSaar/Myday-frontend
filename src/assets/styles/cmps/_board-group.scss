@@ -14,11 +14,13 @@
             .title-container {
                 display: flex;
                 align-items: center;
+                margin-inline-start: 4px;
 
                 h4 {
                     font-size: 18px;
                     margin-block: 9px;
-                    padding: 0 4px;
+                    padding: 0 8px;
+                    border: 1px solid transparent;
                     cursor: pointer;
                 }
 
@@ -40,6 +42,10 @@
                     margin-left: 9px;
                     cursor: pointer;
                 }
+            }
+
+            .arrow-container {
+                display: flex;
             }
 
 
@@ -71,7 +77,7 @@
             justify-content: center;
             display: flex;
             align-items: center;
-            padding: 10px;
+            padding: 8px;
 
             &:not(.line-end) {
                 border-inline-end: $clr-group-border 0.5px solid;
@@ -107,13 +113,22 @@
                 display: flex;
                 width: 100%;
                 background-color: white;
+
             }
         }
     }
 
     .task-selection {
         border-inline-start: $clr-group-border 0.5px solid;
-        background-color: white;
+
+        &:not(.task-preview .task-selection) {
+
+            background-color: white;
+        }
+
+        input:not(.add-task input) {
+            cursor: pointer;
+        }
     }
 
     .color-display {
