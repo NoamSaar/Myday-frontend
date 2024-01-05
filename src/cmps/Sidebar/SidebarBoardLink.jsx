@@ -24,12 +24,13 @@ export function SidebarBoardLink({ board, isActive }) {
     }
 
     async function onRenameBoard() {
-        setIsEditing(false)
         try {
             await updateBoard({ ...board, title: editedTitle })
             navigate('board/b101')
         } catch (error) {
             console.error("Error removing task:", error)
+        } finally {
+            setIsEditing(false)
         }
     }
 
@@ -49,10 +50,18 @@ export function SidebarBoardLink({ board, isActive }) {
         }
     ]
 
+    // const posOptions = ['left', 'top', '30px', '145px']
+    const posOptions = {
+        dirInline: 'left',
+        dirBlock: 'top',
+        diffInline: '30px',
+        diffBlock: '145px'
+    }
+
     const style = { position: 'relative' }
 
     return (
-        <section style={style}>
+        <section>
             <NavLink className={`btn ${isActive ? 'active' : ''}`}
                 to={`/board/${board._id}`}
                 title={`${board.title} Board`}>
@@ -69,16 +78,17 @@ export function SidebarBoardLink({ board, isActive }) {
                     <>
                         <span>{board.title}</span>
                         <img
+                            style={style}
                             className="btn btn-option-menu"
                             src="../../public/icons/menu.svg"
                             alt="Board Menu"
                             onClick={onOpenModal}
                         />
+                        {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
                     </>
                 )}
             </NavLink>
 
-            {isModalOpen && <MenuOptionsModal options={menuOptions} />}
         </section>
 
     )

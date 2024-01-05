@@ -720,7 +720,7 @@ async function save(board) {
             return await storageService.put(STORAGE_KEY, board)
         } else {
             const defaultBoard = _getDefaultBoard()
-            console.log('defaultBoard:', defaultBoard)
+            console.log('defaultBoard in service:', defaultBoard)
             return await storageService.post(STORAGE_KEY, defaultBoard)
         }
     } catch (error) {
