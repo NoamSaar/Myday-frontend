@@ -1,7 +1,8 @@
 .sidebar-board-nav {
     padding-inline: $sidebar-padding;
 
-    a {
+    // a {
+    .btn {
         display: flex;
         justify-content: stretch;
         gap: 0;
@@ -26,7 +27,8 @@
         }
     }
 
-    a:hover .btn-option-menu {
+    // a:hover .btn-option-menu {
+    .btn:hover .btn-option-menu {
         opacity: 1;
         background-color: transparent;
 

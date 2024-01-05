@@ -10,14 +10,10 @@ export function SidebarBoardLink({ board, isActive }) {
     const [editedTitle, setEditedTitle] = useState(board.title)
     const navigate = useNavigate()
 
-    function onOpenModal() {
-        setisModalOpen(!isModalOpen)
-    }
-
     async function onDeleteBoard() {
         try {
             await removeBoard(board._id)
-            navigate('board/b101')
+            // navigate('board/b101')
         } catch (error) {
             console.error("Error removing task:", error)
         }
@@ -26,12 +22,15 @@ export function SidebarBoardLink({ board, isActive }) {
     async function onRenameBoard() {
         try {
             await updateBoard({ ...board, title: editedTitle })
-            navigate('board/b101')
         } catch (error) {
             console.error("Error removing task:", error)
         } finally {
             setIsEditing(false)
         }
+    }
+
+    function onOpenModal(ev) {
+        setisModalOpen(!isModalOpen)
     }
 
     const menuOptions = [
@@ -52,10 +51,10 @@ export function SidebarBoardLink({ board, isActive }) {
 
     // const posOptions = ['left', 'top', '30px', '145px']
     const posOptions = {
-        dirInline: 'left',
-        dirBlock: 'top',
-        diffInline: '30px',
-        diffBlock: '145px'
+        left: '145px',
+        right: 0,
+        top: '28px',
+        button: 0,
     }
 
     const style = { position: 'relative' }
@@ -64,8 +63,11 @@ export function SidebarBoardLink({ board, isActive }) {
         <section>
             <NavLink className={`btn ${isActive ? 'active' : ''}`}
                 to={`/board/${board._id}`}
-                title={`${board.title} Board`}>
+                title={`${board.title} Board`}
+            >
+
                 <img src="../../public/icons/Board.svg" alt="home-icon" />
+
                 {isEditing ? (
                     <input
                         type="text"
@@ -83,13 +85,12 @@ export function SidebarBoardLink({ board, isActive }) {
                             src="../../public/icons/menu.svg"
                             alt="Board Menu"
                             onClick={onOpenModal}
+                            title="Board Menu"
                         />
                         {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
                     </>
                 )}
             </NavLink>
-
         </section>
-
     )
 }

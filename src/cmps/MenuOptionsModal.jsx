@@ -1,15 +1,18 @@
 
 export function MenuOptionsModal({ pos, options, relative }) {
-    // console.log('relative:', relative)
+    console.log('relative:', relative)
     let style = { top: '30px' }
 
     if (pos === 'top') style = { bottom: '30px' }
 
     if (relative) {
-        const { dirInline, dirBlock, diffInline, diffBlock } = relative
-        console.log('dirline:', dirInline)
-        style = dirInline === 'left' ? { ...style, left: +diffInline } : { ...style, right: +diffInline }
-        style = dirBlock === 'top' ? { ...style, top: +diffBlock } : { ...style, right: +diffBlock }
+        const { left, right, top, bottom } = relative
+        console.log('left:', left)
+        console.log('right:', right)
+        console.log('top:', top)
+        console.log('bottom:', bottom)
+        style = left ? { ...style, left: left } : { ...style, right: right }
+        style = top ? { ...style, top: top } : { ...style, bottom: bottom }
     }
 
     return (

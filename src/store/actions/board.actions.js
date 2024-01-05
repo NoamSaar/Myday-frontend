@@ -53,9 +53,9 @@ export async function removeBoard(boardId) {
 
 //not working currently on the store!
 export async function addBoard(board) {
-    console.log('board:', board)
     try {
         const savedBoard = await boardService.save(board)
+        setCurrBoard(board)
         store.dispatch(getActionAddBoard(savedBoard))
         return savedBoard
     } catch (err) {
@@ -210,8 +210,7 @@ export function getActionRemoveBoard(boardId) {
     }
 }
 
-//has to receive board to add and send it to reducer!!
-export function getActionAddBoard() {
+export function getActionAddBoard(board) {
     return {
         type: ADD_BOARD,
         board
