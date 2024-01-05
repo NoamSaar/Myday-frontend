@@ -41,16 +41,9 @@ export function BoardFilter() {
                 }
             </div>
 
-            {/* <div className={`search-section flex justify-center aligh-center${isActive ? 'active' : ''}`}
-                onClick={onToggleIsActive}>
-                <div className="btn">
-                    <img src="../../public/icons/Search.svg" alt="search-icon" />
-                </div>
-                <input type="search" placeholder="Search" />
-            </div> */}
-
             <button className="btn person" title="Filter by person">
-                <img src="../../public/icons/Person.svg" alt="Person-icon" />
+                {/* <img src="../../public/icons/Person.svg" alt="Person-icon" /> */}
+                <img src="../../public/icons/CirceledPerson.svg" alt="Person-icon" />
                 <span>Person</span>
             </button>
 
@@ -60,8 +53,8 @@ export function BoardFilter() {
             </button>
 
             <button className="btn sort" title="Sort by column">
-                <img src="../../public/icons/Sort.svg" alt="Sort-icon" />
-                <span>Filter</span>
+                <img src="../../public/icons/SortArrows.svg" alt="Sort-icon" />
+                <span>Sort</span>
             </button>
 
             <button className="btn hide" title="Hidden columns">
