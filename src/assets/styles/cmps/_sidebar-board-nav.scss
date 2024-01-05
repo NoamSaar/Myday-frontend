@@ -26,13 +26,6 @@
         }
     }
 
-    img.btn-option-menu {
-        opacity: 0;
-        padding-inline: 0;
-        height: 24px;
-        width: 24px;
-    }
-
     a:hover .btn-option-menu {
         opacity: 1;
         background-color: transparent;
@@ -42,6 +35,13 @@
         }
 
         align-self: end;
+    }
+
+    img.btn-option-menu {
+        opacity: 0;
+        padding-inline: 0;
+        height: 24px;
+        width: 24px;
     }
 
     .btn.active {
