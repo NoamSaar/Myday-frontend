@@ -2,7 +2,8 @@ import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY } from '../reducers/board.reducer.js'
+
 
 // Store - saveTask (from board.js)
 // function storeSaveTask(boardId, groupId, task, activity) {
@@ -25,40 +26,14 @@ import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD,
 // }
 
 
-// Action Creators:
-export function getActionRemoveBoard(boardId) {
-    return {
-        type: REMOVE_BOARD,
-        boardId
-    }
-}
-
-//has to receive board to add and send it to reducer!!
-export function getActionAddBoard() {
-    return {
-        type: ADD_BOARD,
-    }
-}
-
-export function getActionUpdateBoard(board) {
-    return {
-        type: UPDATE_BOARD,
-        board
-    }
-}
-
 /**************** board actions ****************/
 
 //maybe needs getAction as the rest for consistency?
 export async function loadBoards() {
     try {
-        const boards = await boardService.query()
-        // console.log('Boards from DB:', boards)
-        store.dispatch({
-            type: SET_BOARDS,
-            boards
-        })
-
+        const filterBy = store.getState().boardModule.filterBy
+        const boards = await boardService.query(filterBy)
+        store.dispatch(getActionSetBoards(boards))
     } catch (err) {
         console.log('Cannot load boards', err)
         throw err
@@ -106,6 +81,10 @@ export async function updateBoard(board) {
         console.log('Cannot save board', err)
         throw err
     }
+}
+
+export function setFilterBy(filterBy) {
+    store.dispatch({ type: SET_FILTER_BY, filterBy })
 }
 
 // Demo for Optimistic Mutation 
@@ -160,6 +139,17 @@ export async function removeGroup(boardId, groupId) {
 
 /**************** task actions ****************/
 
+export async function addTask(boardId, groupId, taskTitle) {
+    try {
+        const board = await boardService.addTask(boardId, groupId, taskTitle)
+        setCurBoard(board)
+        store.dispatch(getActionUpdateBoard(board))
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing task')
+    }
+
+}
+
 export async function removeTask(boardId, groupId, taskId) {
     try {
         const board = await boardService.removeTask(boardId, groupId, taskId)
@@ -169,4 +159,35 @@ export async function removeTask(boardId, groupId, taskId) {
         throw new Error(error.message || 'An error occurred during removing task')
     }
 
+}
+
+
+/**************** get actions ****************/
+
+export function getActionRemoveBoard(boardId) {
+    return {
+        type: REMOVE_BOARD,
+        boardId
+    }
+}
+
+//has to receive board to add and send it to reducer!!
+export function getActionAddBoard() {
+    return {
+        type: ADD_BOARD,
+    }
+}
+
+export function getActionUpdateBoard(board) {
+    return {
+        type: UPDATE_BOARD,
+        board
+    }
+}
+
+export function getActionSetBoards(boards) {
+    return {
+        type: SET_BOARDS,
+        boards
+    }
 }

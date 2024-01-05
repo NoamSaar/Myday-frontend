@@ -1,5 +1,21 @@
+import { useRef, useState } from "react"
+import { utilService } from "../../services/util.service"
+import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 
-export function SidebarFilter({ onToggleIsFocus, isFocus, onAddNewBoard }) {
+export function SidebarFilter({ filterBy, onSetFilter, onToggleIsFocus, isFocus, onAddNewBoard }) {
+    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
+    onSetFilter = useRef(utilService.debounce(onSetFilter))
+
+    useEffectUpdate(() => {
+        onSetFilter.current(filterByToEdit)
+    }, [filterByToEdit])
+
+    function handleChange({ target }) {
+        let { value, name: field, type } = target
+        value = type === 'number' ? +value : value
+        setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+    }
+
     return (
         <>
             <div className="sidebar-filter grid column place-center">
@@ -11,7 +27,9 @@ export function SidebarFilter({ onToggleIsFocus, isFocus, onAddNewBoard }) {
                     <input
                         type="search"
                         placeholder="Search"
+                        name="title"
                         onBlur={onToggleIsFocus}
+                        onChange={handleChange}
                     />
                 </div>
 

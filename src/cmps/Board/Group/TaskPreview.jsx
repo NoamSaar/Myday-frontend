@@ -6,7 +6,7 @@ import { MenuOptionsModal } from "../../MenuOptionsModal";
 import { removeTask } from "../../../store/actions/board.actions";
 import { useSelector } from "react-redux";
 
-export function TaskPreview({ task, groupId }) {
+export function TaskPreview({ task, groupId, groupColor }) {
     const [currTask, setCurrTask] = useState(null)
     const [isShowMenu, setIsShowMenu] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -35,7 +35,7 @@ export function TaskPreview({ task, groupId }) {
         }
 
         fetchData()
-    }, [])
+    }, [task])
 
     async function onDeleteTask() {
         try {
@@ -68,14 +68,17 @@ export function TaskPreview({ task, groupId }) {
 
     if (!currTask) return <ul>Loading</ul>
     return (
-        <ul className="clean-list task-preview-container sticky-left-37" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <ul className="clean-list task-preview-container sticky-left-36" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
 
             <div className="menu-container sticky-left">
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
                 {isShowMenu && <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />}
             </div>
-            <ul className="clean-list task-preview" key={currTask.id}>
-                <div className="sticky-left-37 task-title-container">
+            <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
+            <ul className="clean-list task-preview">
+                <div className="task-title-container">
+
+
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>

@@ -10,9 +10,11 @@ export const boardService = {
     getById,
     save,
     remove,
+    addTask,
     removeTask,
     addGroup,
     removeGroup,
+    getDefaultFilter,
 }
 
 window.boardService = boardService
@@ -688,10 +690,10 @@ const gBoards = [
 
 _initBoards()
 
-async function query(filterBy = { txt: '' }) {
+async function query(filterBy = { title: '' }) {
     let boards = await storageService.query(STORAGE_KEY)
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
+    if (filterBy.title) {
+        const regex = new RegExp(filterBy.title, 'i')
         boards = boards.filter(board => regex.test(board.title))
     }
     return boards
@@ -725,6 +727,10 @@ async function save(board) {
         throw new Error(error.message || 'An error occurred during saving board')
 
     }
+}
+
+function getDefaultFilter() {
+    return { title: '' }
 }
 
 function _getDefaultBoard() {
@@ -1095,6 +1101,15 @@ function _getDefaultGroup() {
     }
 }
 
+function _getDefaultTask(title) {
+    return {
+        id: utilService.makeId(),
+        title,
+        person: [],
+        updates: [],
+    }
+}
+
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
@@ -1128,6 +1143,21 @@ async function removeGroup(boardId, groupId) {
 }
 
 //tasks
+
+async function addTask(boardId, groupId, taskTitle) {
+    try {
+        const board = await getById(boardId)
+        const groupIdx = board.groups.findIndex(group => group.id === groupId)
+        const group = board.groups[groupIdx]
+        group.tasks.push(_getDefaultTask(taskTitle))
+
+        return await save(board)
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing task')
+
+    }
+
+}
 
 async function removeTask(boardId, groupId, taskId) {
     try {
