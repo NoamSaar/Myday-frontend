@@ -14,7 +14,41 @@ export function TaskList({ groupId }) {
             {group.tasks.map(task => {
                 return <TaskPreview key={task.id} task={task} groupId={groupId} />
             })}
+
+            <ul className="clean-list task-preview-container add-task">
+
+                <ul className="clean-list task-preview">
+                    <div className="sticky-left-37 task-title-container">
+                        <li className="task-selection">
+                            <input disabled type="checkbox" />
+                        </li>
+                        <li className="task-title single-task">+ Add task</li>
+                    </div>
+
+
+
+                    <div className="line-end"></div>
+                </ul>
+            </ul>
+            {/* 
+            <ul className="clean-list task-preview-container sticky-left">
+                <ul className="clean-list task-preview add-task">
+                    <div className="task-title-container">
+                        <li className="task-selection">
+                            <input disabled type="checkbox" />
+                        </li>
+                        <li className="task-title single-task">+ Add task</li>
+                    </div>
+
+
+                    <div className="line-end"></div>
+                </ul>
+            </ul> */}
+
+
         </ul>
+
+        // </ul>
 
     )
 }

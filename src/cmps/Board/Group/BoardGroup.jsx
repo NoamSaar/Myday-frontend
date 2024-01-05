@@ -47,7 +47,7 @@ export function BoardGroup({ group, titlesOrder }) {
                         {isMenuOpen && <MenuOptionsModal options={menuOptions} pos={'top'} />}
                         <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />
                     </div>
-                    <div className="sticky-left-36 title-container">
+                    <div className="sticky-left-37 title-container">
                         <img className="down-arrow" src="../../../public/icons/NavigationChevronDown.svg" title="Collapse group" />
                         <h4 >{group.title}</h4>
                         <p>{group.tasks.length} Tasks</p>
@@ -55,7 +55,7 @@ export function BoardGroup({ group, titlesOrder }) {
                 </div>
 
                 <ul className="clean-list task-header-list">
-                    <div className="sticky-left-36 task-title-container">
+                    <div className="sticky-left-37 task-title-container">
 
                         <li className="task-selection">
                             <input type="checkbox" />
