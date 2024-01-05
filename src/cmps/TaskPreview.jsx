@@ -79,7 +79,7 @@ export function TaskPreview({ task, groupId }) {
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
-                    <li className="task-title">{currTask.title}</li>
+                    <li className="task-title single-task">{currTask.title}</li>
                 </div>
 
                 {board.titlesOrder.map((title, idx) => {

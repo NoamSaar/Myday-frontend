@@ -40,6 +40,12 @@ export function BoardDetails() {
             <BoardHeader board={board} />
 
             {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
+
+            <div className="btn add-group-btn">
+                <img src="../../../public/icons/add.svg" />
+                Add new group
+            </div>
+
             <Outlet />
             {/* the outlet is to display the nested route- task details */}
         </section>

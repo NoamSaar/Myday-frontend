@@ -56,6 +56,10 @@
             width: 100%;
             background-color: white;
 
+            &.single-task {
+                margin-inline-start: 26px;
+            }
+
             &:hover:not(.task-header-list .task-title) {
                 background-color: $clr-task-hover;
             }
