@@ -10,7 +10,7 @@ export function TaskList({ groupId }) {
     return (
         <ul className="clean-list task-list">
             <ul className="clean-list task-header-list">
-                <div className="sticky-left task-title-container">
+                <div className="sticky-left-36 task-title-container">
 
                     <li className="task-selection">
                         <input type="checkbox" />

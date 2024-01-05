@@ -5,4 +5,16 @@
     user-select: none;
     overflow: scroll;
     height: calc(100dvh - 48px);
+    padding-block-end: 40px;
+
+    .add-group-btn {
+        width: fit-content;
+        border: 1px solid $clr-btn-border;
+        margin-inline-start: 40px;
+        font-size: 17px;
+
+        img {
+            margin-inline-end: 8px;
+        }
+    }
 }

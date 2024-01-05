@@ -11,6 +11,7 @@ export const boardService = {
     save,
     remove,
     removeTask,
+    addGroup,
 }
 
 window.boardService = boardService
@@ -1059,12 +1060,59 @@ function _getDefaultBoard() {
     }
 }
 
+function _getDefaultGroup() {
+    return {
+        id: utilService.makeId(),
+        title: 'New Group',
+        archivedAt: null,
+        tasks: [
+            {
+                id: 'c101',
+                title: 'Item 1',
+                person: [],
+                status: 'Working on it',
+                date: 1703706909537,
+                updates: [],
+            },
+            {
+                id: 'c102',
+                title: 'Item 2',
+                person: [],
+                status: 'Done',
+                date: 1703708909537,
+                updates: [],
+            },
+            {
+                id: 'c103',
+                title: 'Item 3',
+                person: [],
+                date: 1703706909537,
+                updates: [],
+            },
+        ],
+        color: '#579bfc',
+    }
+}
+
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
 
-//tasks
+//group
 
+async function addGroup(boardId) {
+    try {
+        const board = await getById(boardId)
+        board.groups.push(_getDefaultGroup())
+        return await save(board)
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during adding group')
+
+    }
+
+}
+
+//tasks
 
 async function removeTask(boardId, groupId, taskId) {
     try {
