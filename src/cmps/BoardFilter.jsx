@@ -1,9 +1,28 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 
 export function BoardFilter() {
 
     const [isActive, setIsActive] = useState(false)
+    const filterSearchRef = useRef(null)
+
+
+    useEffect(() => {
+        function handleClickOutsideSearch(event) {
+            if (filterSearchRef.current
+                && !filterSearchRef.current.contains(event.target)
+                //missing logic: && !input.value
+            ) {
+                setIsActive(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutsideSearch)
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutsideSearch)
+        }
+    }, [])
+
     function onToggleIsActive() {
         setIsActive(!isActive)
     }
@@ -14,7 +33,7 @@ export function BoardFilter() {
         <div className="board-filter">
             <button title="New task" className="btn new-task">New Task</button>
 
-            <div className={dynActiveClass + ' btn search'} onClick={onToggleIsActive}>
+            <div className={dynActiveClass + ' btn search'} onClick={onToggleIsActive} ref={filterSearchRef}>
                 <img src="../../public/icons/Search.svg" alt="search-icon" />
                 <input className="reset" type="search" placeholder="Search" />
                 {isActive &&
