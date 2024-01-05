@@ -63,12 +63,8 @@
         }
 
         ul {
-            border: $clr-group-border 0.5px solid;
-            border-inline: unset;
-            border-block-end: unset;
-
-
-
+            border-block-start: $clr-group-border 0.5px solid;
+            border-radius: 8px;
         }
 
         li {
