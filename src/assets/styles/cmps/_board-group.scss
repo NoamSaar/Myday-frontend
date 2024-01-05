@@ -34,12 +34,30 @@
         }
 
 
+        .menu-container {
+            opacity: 0;
+
+        }
+
 
         &:hover {
             p {
                 opacity: 1;
                 cursor: grab;
             }
+
+            .menu-container {
+                opacity: 1;
+            }
+        }
+    }
+
+    .menu-container {
+        min-width: 36px;
+
+        .btn {
+            width: 100%;
+            height: 100%;
         }
     }
 }

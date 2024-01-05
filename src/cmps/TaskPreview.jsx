@@ -68,14 +68,14 @@ export function TaskPreview({ task, groupId }) {
 
     if (!currTask) return <ul>Loading</ul>
     return (
-        <ul className="clean-list task-preview-container sticky-left" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <ul className="clean-list task-preview-container sticky-left-36" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
 
-            <div className="menu-container">
+            <div className="menu-container sticky-left">
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
                 {isShowMenu && <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />}
             </div>
             <ul className="clean-list task-preview" key={currTask.id}>
-                <div className="sticky-left task-title-container">
+                <div className="sticky-left-36 task-title-container">
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
