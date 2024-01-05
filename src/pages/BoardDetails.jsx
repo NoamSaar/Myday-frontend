@@ -41,7 +41,7 @@ export function BoardDetails() {
 
             {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
 
-            <div className="btn add-group-btn">
+            <div className="btn add-group-btn sticky-left-40">
                 <img src="../../../public/icons/add.svg" />
                 Add new group
             </div>
