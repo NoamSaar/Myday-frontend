@@ -3,18 +3,26 @@ import { NavLink } from "react-router-dom";
 export function SidebarMainNav({ onToggleIsActive, isActive, isSidebarOpen, onOpenSidebar }) {
     return (
         <nav className="sidebar-main-nav">
-            <NavLink to="/" title="Home Button" className={`btn ${isActive ? 'active' : ''}`}
+            <NavLink className={`btn btn-nav ${isActive ? 'active' : ''}`}
+                to="/"
+                title="Home Button"
                 onClick={onToggleIsActive}>
+
                 <img src="../../public/icons/Home.svg" alt="home-icon" />
                 <span>Home</span>
             </NavLink>
 
-            <NavLink title="My Work Button" to="/board" className={`btn ${isActive ? 'active' : ''}`}
+            <NavLink className={`btn btn-nav ${isActive ? 'active' : ''}`}
+                to="/board"
+                title="My Work Button"
                 onClick={onToggleIsActive}>
+
                 <img src="../../public/icons/Calendar.svg" alt="home-icon" />
                 <span>My work</span>
             </NavLink>
-            <button title="Menu Button" className={`btn btn-menu ${isSidebarOpen ? 'open' : ''}`}
+
+            <button className={`btn btn-menu ${isSidebarOpen ? 'open' : ''}`}
+                title="Menu Button"
                 onClick={onOpenSidebar}>
                 <img src="../../public/icons/DropdownChevronRight.svg" alt="home-icon" />
             </button>

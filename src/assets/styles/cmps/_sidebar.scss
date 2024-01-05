@@ -49,25 +49,43 @@
             position: absolute;
             top: 0;
             right: 0;
+
             margin: 0;
-            padding-block: 12px;
+            padding-block: $sidebar-padding;
+
             background-color: #f6f7fb;
+            border-bottom-left-radius: 8px;
+            border-top-right-radius: 8px;
 
             &.open {
                 transform: rotate(180deg);
             }
         }
+
+        .btn-nav {
+            height: 32px;
+
+            img {
+                height: 20px;
+                width: 20px;
+            }
+        }
     }
 
     .sidebar-workspace {
-        padding: 12px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        row-gap: 12px;
+        padding: $sidebar-padding;
         border-top: 1px solid $clr-group-border;
 
         .workspace-section {
             gap: 7px;
             justify-content: start;
-            padding-inline-start: 7px;
-            margin-block-end: 10px;
+            height: 32px;
+
+            padding-inline: 8px 0;
+            margin-inline-end: 12px;
             font-family: figtree-bold;
 
             span {
@@ -109,6 +127,10 @@
             }
         }
 
+        .btn-option-menu {
+            padding: 6px;
+        }
+
         .btn.clrblue {
             @include btn($type: clrblue);
             margin: 0;
@@ -127,6 +149,10 @@
 
                 &.active {
                     border-color: $clr-btn-add;
+                }
+
+                .search-icon {
+                    padding: 6px;
                 }
 
                 .search-icon:hover {
@@ -157,7 +183,7 @@
     }
 
     .sidebar-board-nav {
-        padding-inline: 12px;
+        padding-inline: $sidebar-padding;
 
         a {
             grid-template-columns: auto auto 1fr;
@@ -175,11 +201,11 @@
             }
         }
 
-        .btn-board-menu {
+        .btn-option-menu {
             opacity: 0;
         }
 
-        a:hover .btn-board-menu {
+        a:hover .btn-option-menu {
             opacity: 1;
             background-color: $clr-btn-hover;
 
