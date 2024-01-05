@@ -47,15 +47,17 @@ export function BoardGroup({ group, titlesOrder }) {
                         {isMenuOpen && <MenuOptionsModal options={menuOptions} pos={'top'} />}
                         <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />
                     </div>
-                    <div className="sticky-left-37 title-container">
+                    <div className="sticky-left-36 title-container">
                         <img className="down-arrow" src="../../../public/icons/NavigationChevronDown.svg" title="Collapse group" />
-                        <h4 >{group.title}</h4>
+                        <h4 style={{ color: group.color }}>{group.title}</h4>
                         <p>{group.tasks.length} Tasks</p>
                     </div>
                 </div>
 
                 <ul className="clean-list task-header-list">
-                    <div className="sticky-left-37 task-title-container">
+                    <div style={{ backgroundColor: group.color }} className="color-display sticky-left-36"></div>
+
+                    <div className="task-title-container">
 
                         <li className="task-selection">
                             <input type="checkbox" />
@@ -75,6 +77,6 @@ export function BoardGroup({ group, titlesOrder }) {
             </div>
 
             <TaskList titlesOrder={titlesOrder} groupId={group.id} />
-        </section>
+        </section >
     )
 }

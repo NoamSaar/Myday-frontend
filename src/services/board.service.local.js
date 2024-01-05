@@ -10,6 +10,7 @@ export const boardService = {
     getById,
     save,
     remove,
+    addTask,
     removeTask,
     addGroup,
     removeGroup,
@@ -1100,6 +1101,15 @@ function _getDefaultGroup() {
     }
 }
 
+function _getDefaultTask(title) {
+    return {
+        id: utilService.makeId(),
+        title,
+        person: [],
+        updates: [],
+    }
+}
+
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
@@ -1133,6 +1143,21 @@ async function removeGroup(boardId, groupId) {
 }
 
 //tasks
+
+async function addTask(boardId, groupId, taskTitle) {
+    try {
+        const board = await getById(boardId)
+        const groupIdx = board.groups.findIndex(group => group.id === groupId)
+        const group = board.groups[groupIdx]
+        group.tasks.push(_getDefaultTask(taskTitle))
+
+        return await save(board)
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing task')
+
+    }
+
+}
 
 async function removeTask(boardId, groupId, taskId) {
     try {

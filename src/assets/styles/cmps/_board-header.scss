@@ -15,7 +15,7 @@
     top: 0;
     left: 0;
     background-color: $clr0;
-    z-index: 10;
+    z-index: 15;
 
     &.collapsed {
         grid-template-areas:
@@ -113,7 +113,6 @@
 
             img:hover {
                 animation: bounce 0.5s ease 2;
-                /* Adjust timing and easing as needed */
             }
         }
     }
@@ -167,22 +166,6 @@
             }
         }
 
-
-        // .search-section {
-        //     border: 1px solid $clr-group-border;
-        //     border-radius: $border-radius-small;
-
-        //     &.active {
-        //         border-color: $clr-btn-add;
-        //     }
-        // }
-
-        // input {
-        //     width: 100px;
-        //     border: none;
-        //     outline: none;
-        //     padding-block: 0;
-        // }
     }
 }
 
@@ -197,14 +180,3 @@
         transform: translateY(-3px);
     }
 }
-
-// input[type="search"]::-webkit-search-cancel-button {
-//     -webkit-appearance: none;
-//     height: 0px;
-//     // height: 16px;
-//     width: 0px;
-//     // width: 16px;
-//     // background: url('path_to_custom_clear_button_image') no-repeat center center;
-//     background-size: contain;
-//     cursor: pointer;
-// }
