@@ -14,7 +14,7 @@
 
     &:hover {
         left: 0;
-        z-index: 10;
+        z-index: 20;
         box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
 
         &>.sidebar-workspace,
@@ -33,6 +33,10 @@
         &>.sidebar-workspace,
         .sidebar-board-nav {
             opacity: 1;
+        }
+
+        &:hover {
+            box-shadow: none;
         }
 
     }
@@ -108,6 +112,7 @@
         .btn.clrblue {
             @include btn($type: clrblue);
             margin: 0;
+            padding: 6px;
         }
 
         .sidebar-filter {
