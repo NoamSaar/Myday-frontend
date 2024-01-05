@@ -1,4 +1,4 @@
-import { utilService } from "../services/util.service"
+import { utilService } from "../../../../services/util.service"
 
 export function MemberPicker({ members, onUpdate }) {
     const extraMembers = members.length - 2

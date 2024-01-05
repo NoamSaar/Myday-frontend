@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router'
 
 import { AppHeader } from './cmps/AppHeader'
-import { Sidebar } from './cmps/Sidebar'
+import { Sidebar } from './cmps/Sidebar/Sidebar'
 import { TaskDetails } from './pages/TaskDetails'
 import { BoardDetails } from './pages/BoardDetails'
 import { HomePage } from './pages/HomePage'

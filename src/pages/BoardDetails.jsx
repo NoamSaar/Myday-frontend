@@ -1,9 +1,9 @@
 import { Outlet, useParams } from "react-router";
-import { BoardGroup } from "../cmps/BoardGroup";
+import { BoardGroup } from "../cmps/Board/Group/BoardGroup";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { boardService } from "../services/board.service.local";
-import { BoardHeader } from "../cmps/BoardHeader";
+import { BoardHeader } from "../cmps/Board/BoardHeader";
 import { addGroup, setCurBoard } from "../store/actions/board.actions";
 
 export function BoardDetails() {

@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { TaskList } from "./TaskList";
-import { MenuOptionsModal } from "./MenuOptionsModal";
-import { useSelector } from "react-redux";
-import { removeGroup } from "../store/actions/board.actions";
+import { MenuOptionsModal } from "../../MenuOptionsModal";
 
 export function BoardGroup({ group, titlesOrder }) {
     const [isShowMenu, setIsShowMenu] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
 
     function handleMouseEnter() {
         setIsShowMenu(true)
@@ -20,22 +17,6 @@ export function BoardGroup({ group, titlesOrder }) {
     function toggleMenu() {
         setIsMenuOpen(prevIsOpen => !prevIsOpen)
     }
-
-    async function onDeleteGroup() {
-        try {
-            removeGroup(board._id, group.id)
-        } catch (error) {
-            console.error("Error removing task:", error)
-        }
-    }
-
-    const menuOptions = [
-        {
-            icon: '../../../public/icons/delete.svg',
-            title: 'Delete',
-            onOptionClick: onDeleteGroup
-        }
-    ]
 
 
     return (
