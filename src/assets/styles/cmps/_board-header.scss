@@ -11,6 +11,12 @@
     align-items: center;
     gap: 8px;
 
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: $clr0;
+    z-index: 10;
+
     &.collapsed {
         grid-template-areas:
             "title display-opts invite actions"
