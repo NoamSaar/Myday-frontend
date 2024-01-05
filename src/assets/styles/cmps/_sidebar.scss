@@ -116,11 +116,14 @@
         }
 
         .sidebar-filter {
-            gap: 12px;
+            grid-template-columns: 1fr auto;
+            align-items: stretch;
 
             .search-section {
+                justify-self: stretch;
                 border: 1px solid $clr-group-border;
                 border-radius: $border-radius-small;
+                margin-inline-end: 12px;
 
                 &.active {
                     border-color: $clr-btn-add;
@@ -129,14 +132,25 @@
                 .search-icon:hover {
                     background-color: transparent;
                     cursor: default;
-
                 }
 
                 input {
-                    width: 100px;
+                    width: 55px;
                     border: none;
                     outline: none;
                     padding-block: 0;
+                    background-color: transparent;
+                }
+
+                input[type="search"]::-webkit-search-cancel-button {
+                    -webkit-appearance: none;
+                    height: 0px;
+                    // height: 16px;
+                    width: 0px;
+                    // width: 16px;
+                    // background: url('path_to_custom_clear_button_image') no-repeat center center;
+                    background-size: contain;
+                    cursor: pointer;
                 }
             }
         }
@@ -144,6 +158,37 @@
 
     .sidebar-board-nav {
         padding-inline: 12px;
+
+        a {
+            grid-template-columns: auto auto 1fr;
+            justify-content: stretch;
+            gap: 0;
+
+            img:first-of-type {
+                width: 20px;
+                height: 20px;
+                margin-inline-end: 6px;
+            }
+
+            img:last-of-type {
+                justify-self: end;
+            }
+        }
+
+        .btn-board-menu {
+            opacity: 0;
+        }
+
+        a:hover .btn-board-menu {
+            opacity: 1;
+            background-color: $clr-btn-hover;
+
+            &:hover {
+                background-color: $clr-btn-hover;
+            }
+
+            align-self: end;
+        }
     }
 
 }

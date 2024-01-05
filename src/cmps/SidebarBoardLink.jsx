@@ -6,6 +6,7 @@ export function SidebarBoardLink({ title, id, isActive, onToggleIsActive }) {
             onClick={onToggleIsActive}>
             <img src="../../public/icons/Board.svg" alt="home-icon" />
             <span>{title}</span>
+            <img className="btn btn-board-menu" src="../../public/icons/menu.svg" alt="Board Menu" />
         </NavLink>
     )
 }
