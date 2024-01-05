@@ -47,7 +47,7 @@ export function BoardGroup({ group, titlesOrder }) {
                         {isMenuOpen && <MenuOptionsModal options={menuOptions} pos={'top'} />}
                         <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />
                     </div>
-                    <div className="sticky-left-36 title-container">
+                    <div className="sticky-left-40 title-container">
                         <div className="arrow-container">
 
                             <img className="down-arrow" src="../../../public/icons/NavigationChevronDown.svg" title="Collapse group" />

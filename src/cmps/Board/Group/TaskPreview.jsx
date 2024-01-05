@@ -84,10 +84,12 @@ export function TaskPreview({ task, groupId, groupColor }) {
 
     function onTitleClick() {
         setIsEditing(true)
+        setIsActive(true)
     }
 
     function onTitleEditExit() {
         setIsEditing(false)
+        setIsActive(false)
     }
 
     const menuOptions = [
@@ -137,7 +139,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
                                 onBlur={onTitleEditExit}
                             />
                         ) : (
-                            <span onClick={onTitleClick}>{taskTitle}</span>
+                            <span className="task-title-span" onClick={onTitleClick}>{taskTitle}</span>
 
                         )}
                     </li>
