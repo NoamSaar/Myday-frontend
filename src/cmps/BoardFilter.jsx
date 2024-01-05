@@ -8,18 +8,27 @@ export function BoardFilter() {
         setIsActive(!isActive)
     }
 
+    const dynActiveClass = isActive ? 'active' : ''
+
     return (
         <div className="board-filter">
             <button title="New task" className="btn new-task">New Task</button>
 
-            <div className={`search-section flex justify-center aligh-center${isActive ? 'active' : ''}`}
+            <div className={dynActiveClass + ' btn search'} onClick={onToggleIsActive}>
+                <img src="../../public/icons/Search.svg" alt="search-icon" />
+                <input className="reset" type="search" placeholder="Search" />
+                {isActive &&
+                    <img src="../../public/icons/SettingsKnobs.svg" alt="filter-icon" />
+                }
+            </div>
+
+            {/* <div className={`search-section flex justify-center aligh-center${isActive ? 'active' : ''}`}
                 onClick={onToggleIsActive}>
                 <div className="btn">
                     <img src="../../public/icons/Search.svg" alt="search-icon" />
-                    <img src="../../public/icons/SettingsKnobs.svg" alt="filter-icon" />
                 </div>
                 <input type="search" placeholder="Search" />
-            </div>
+            </div> */}
 
             <button className="btn person" title="Filter by person">
                 <img src="../../public/icons/Person.svg" alt="Person-icon" />

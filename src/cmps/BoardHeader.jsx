@@ -5,7 +5,7 @@ import { BoardFilter } from "./BoardFilter"
 export function BoardHeader({ board }) {
 
     const [isCollapsed, setIsCollapsed] = useState(false)
-    const sentinelRef = useRef(null)
+    const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
 
     useEffect(() => {
         const observer = new IntersectionObserver(
