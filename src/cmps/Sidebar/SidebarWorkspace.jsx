@@ -2,7 +2,7 @@ import { SidebarFilter } from "./SidebarFilter";
 import { SidebarWorkspaceNav } from "./SidebarWorkspaceNav";
 
 export function SidebarWorkspace(
-    { onToggleDropdown, onToggleIsActive, isDropdownOpen, isActive, onAddNewBoard }
+    { onToggleDropdown, onToggleIsFocus, isDropdownOpen, isFocus, onAddNewBoard }
 ) {
     return (
         <section className="sidebar-workspace">
@@ -11,8 +11,8 @@ export function SidebarWorkspace(
                 isDropdownOpen={isDropdownOpen}
             />
             <SidebarFilter
-                onToggleIsActive={onToggleIsActive}
-                isActive={isActive}
+                onToggleIsFocus={onToggleIsFocus}
+                isFocus={isFocus}
                 onAddNewBoard={onAddNewBoard}
             />
         </section>
