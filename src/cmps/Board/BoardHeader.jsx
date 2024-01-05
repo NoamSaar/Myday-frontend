@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { BoardFilter } from "./BoardFilter"
-
+import { BoardEdit } from "./BoardEdit"
 
 export function BoardHeader({ board }) {
 
@@ -42,16 +42,7 @@ export function BoardHeader({ board }) {
 
             <header className={dynCollapsedClass + ' board-header'}>
 
-                <h3 className="title" title="Click to edit">{board.title}</h3>
-
-                <div className="info-favorite flex align-center">
-                    <button className="btn info" title="Show board description">
-                        <img src="../../public/icons/info.svg" alt="Info-icon" />
-                    </button>
-                    <button className="btn favorite" title="Add to favorites">
-                        <img src="../../public/icons/favorite.svg" alt="Star-icon" />
-                    </button>
-                </div>
+                <BoardEdit board={board} />
 
                 <button className="activities btn">
                     <span>Activity</span>

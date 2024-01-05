@@ -83,20 +83,25 @@ export async function addBoard(board) {
     }
 }
 
-export function updateBoard(board) {
-    return boardService.save(board)
-        .then(savedBoard => {
-            console.log('Updated Board:', savedBoard)
-            store.dispatch(getActionUpdateBoard(savedBoard))
-            return savedBoard
-        })
-        .catch(err => {
-            console.log('Cannot save board', err)
-            throw err
-        })
+export async function updateBoard(board) {
+    try {
+        const savedBoard = await boardService.save(board)
+        console.log('Updated Board:', savedBoard)
+        store.dispatch(getActionUpdateBoard(savedBoard))
+
+        const currBoardId = store.getState().boardModule.currBoard._id
+        if (savedBoard._id === currBoardId) {
+            console.log('this is curr board!')
+            setCurrBoard(savedBoard)
+        }
+
+        return savedBoard
+
+    } catch (err) {
+        console.log('Cannot save board', err)
+        throw err
+    }
 }
-
-
 
 // Demo for Optimistic Mutation 
 // (IOW - Assuming the server call will work, so updating the UI first)
@@ -122,7 +127,7 @@ export function onRemoveBoardOptimistic(boardId) {
 
 
 
-export function setCurBoard(board) {
+export function setCurrBoard(board) {
     store.dispatch({ type: SET_BOARD, board })
 }
 
@@ -131,7 +136,7 @@ export function setCurBoard(board) {
 export async function addGroup(boardId) {
     try {
         const board = await boardService.addGroup(boardId)
-        setCurBoard(board)
+        setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
@@ -142,7 +147,7 @@ export async function addGroup(boardId) {
 export async function removeGroup(boardId, groupId) {
     try {
         const board = await boardService.removeGroup(boardId, groupId)
-        setCurBoard(board)
+        setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
@@ -155,7 +160,7 @@ export async function removeGroup(boardId, groupId) {
 export async function removeTask(boardId, groupId, taskId) {
     try {
         const board = await boardService.removeTask(boardId, groupId, taskId)
-        setCurBoard(board)
+        setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
