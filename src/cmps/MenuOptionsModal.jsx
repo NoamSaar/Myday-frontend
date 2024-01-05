@@ -1,8 +1,8 @@
 
 export function MenuOptionsModal({ pos, options }) {
-    let style = { bottom: '-20px' }
+    let style = { top: '20px' }
 
-    if (pos === 'top') style = { top: '20px' }
+    if (pos === 'top') style = { bottom: '20px' }
 
     return (
         <div style={style} className="menu-option-modal">

@@ -15,13 +15,11 @@
         }
     }
 
-    ul:not(.task-preview-container) {
+    ul:not(.task-preview-container):not(.add-task .task-preview) {
 
         border: $clr-group-border 0.5px solid;
         border-inline-end: unset;
         border-block-end: unset;
-
-        &:not(:last-child) {}
 
 
     }
@@ -30,21 +28,25 @@
 
         display: flex;
         align-items: center;
+        padding: 10px;
+
 
         &:not(.task-preview .task-title) {
             justify-content: center;
 
         }
 
-        border-inline-end: $clr-group-border .5px solid;
-        padding: 10px;
-    }
+        &:not(.add-task .task-title) {
 
-    .task-preview-container:last-of-type {
-        ul {
-            border-block-end: $clr-group-border 0.5px solid;
+            border-inline-end: $clr-group-border .5px solid;
         }
     }
+
+    // .task-preview-container:last-of-type {
+    //     ul {
+    //         border-block-end: $clr-group-border 0.5px solid;
+    //     }
+    // }
 
     .task-title-container {
         display: flex;
@@ -57,7 +59,7 @@
             background-color: white;
 
             &.single-task {
-                margin-inline-start: 26px;
+                padding-inline-start: 36px;
             }
 
             &:hover:not(.task-header-list .task-title) {
@@ -69,32 +71,33 @@
     }
 
 
-    .person-col {
-        min-width: 97px;
-        max-width: 97px;
-    }
+    .add-task {
 
-    .status-col,
-    .priority-col,
-    .file-col {
-        min-width: 139px;
-        max-width: 139px;
-    }
 
-    .date-col {
-        min-width: 174px;
-        max-width: 174px;
-    }
+        .task-preview {
+            margin-inline-start: 36px;
 
-    .link-col {
-        min-width: 138px;
-        max-width: 138px;
-    }
 
-    .line-end {
-        border-inline: none;
-        width: 250px;
-    }
+            .single-task,
+            .line-end,
+            .task-selection {
+                border-block: #d0d4e4 0.5px solid;
+            }
 
+            .task-selection {
+                border-inline-start: #d0d4e4 0.5px solid;
+            }
+
+            .task-title-container {
+                position: sticky;
+                left: 36px;
+            }
+
+            .line-end {
+                width: 1267px;
+            }
+
+        }
+    }
 
 }
