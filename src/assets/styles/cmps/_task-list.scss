@@ -40,6 +40,8 @@
     }
 
     .task-title-container {
+        position: sticky;
+        left: 42px;
         display: flex;
         min-width: 505px;
         max-width: 505px;

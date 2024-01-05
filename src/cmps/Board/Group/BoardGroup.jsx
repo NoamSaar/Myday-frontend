@@ -55,9 +55,9 @@ export function BoardGroup({ group, titlesOrder }) {
                 </div>
 
                 <ul className="clean-list task-header-list">
-                    <div style={{ backgroundColor: group.color }} className="color-display"></div>
+                    <div style={{ backgroundColor: group.color }} className="color-display sticky-left-36"></div>
 
-                    <div className="sticky-left-36 task-title-container">
+                    <div className="task-title-container">
 
                         <li className="task-selection">
                             <input type="checkbox" />

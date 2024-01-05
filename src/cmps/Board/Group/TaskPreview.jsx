@@ -74,9 +74,9 @@ export function TaskPreview({ task, groupId, groupColor }) {
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
                 {isShowMenu && <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />}
             </div>
-            <div style={{ backgroundColor: groupColor }} className="color-display"></div>
+            <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
             <ul className="clean-list task-preview">
-                <div className="sticky-left-36 task-title-container">
+                <div className="task-title-container">
 
 
                     <li className="task-selection">
