@@ -45,17 +45,17 @@
         display: flex;
         min-width: 505px;
         max-width: 505px;
+        background-color: white;
 
         .task-title {
             display: flex;
             width: 100%;
-            background-color: white;
 
             &.single-task {
                 padding-inline-start: 36px;
             }
 
-            &:hover:not(.task-header-list .task-title) {
+            &:hover:not(.task-header-list .task-title):not(.active .task-title) {
                 background-color: $clr-task-hover;
             }
         }

@@ -7,8 +7,8 @@
         &:hover {
             background-color: $clr-task-hover;
 
-            .task-title,
-            .task-selection {
+            .task-title:not(.active .task-title),
+            .task-selection:not(.active .task-selection) {
                 background-color: $clr-task-hover;
             }
         }
@@ -26,6 +26,6 @@
             }
         }
 
-        .task-title input {}
+        &.active {}
     }
 }

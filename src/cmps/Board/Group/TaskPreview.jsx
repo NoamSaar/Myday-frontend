@@ -12,6 +12,8 @@ export function TaskPreview({ task, groupId, groupColor }) {
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenu, setIsShowMenu] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const [isActive, setIsActive] = useState(false)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
 
     useEffect(() => {
@@ -80,6 +82,14 @@ export function TaskPreview({ task, groupId, groupColor }) {
         setIsMenuOpen((prevIsOpen) => !prevIsOpen)
     }
 
+    function onTitleClick() {
+        setIsEditing(true)
+    }
+
+    function onTitleEditExit() {
+        setIsEditing(false)
+    }
+
     const menuOptions = [
         {
             icon: "../../../public/icons/delete.svg",
@@ -88,8 +98,8 @@ export function TaskPreview({ task, groupId, groupColor }) {
         },
     ]
 
-    if (!currTask) return <ul>Loading</ul>
 
+    if (!currTask) return <ul>Loading</ul>
     return (
         <ul
             className="clean-list task-preview-container sticky-left-36"
@@ -110,19 +120,49 @@ export function TaskPreview({ task, groupId, groupColor }) {
                 style={{ backgroundColor: groupColor }}
                 className="color-display sticky-left-36"
             ></div>
-            <ul className="clean-list task-preview">
-                <div className="task-title-container">
+            <ul className={`${isActive && 'active'} clean-list task-preview`}>
+                <div className={`task-title-container ${isActive && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
                     <li className="task-title single-task">
-                        <input
-                            value={taskTitle}
-                            onChange={onChangeTitle}
-                            className="reset"
-                            type="text"
-                        />
+
+                        {isEditing ? (
+                            <input
+                                autoFocus
+                                value={taskTitle}
+                                onChange={onChangeTitle}
+                                className="reset"
+                                type="text"
+                                onBlur={onTitleEditExit}
+                            />
+                        ) : (
+                            <span onClick={onTitleClick}>{taskTitle}</span>
+
+                        )}
                     </li>
+
+
+
+                    {/* {isEditing ? (
+                    <input
+                        type="text"
+                        value={editedTitle}
+                        onChange={(ev) => setEditedTitle(ev.target.value)}
+                        onBlur={onRenameBoard}
+                        autoFocus
+                    />
+                ) : (
+                    <>
+                        <span>{board.title}</span>
+                        <img
+                            className="btn btn-option-menu"
+                            src="../../public/icons/menu.svg"
+                            alt="Board Menu"
+                            onClick={onOpenModal}
+                        />
+                    </>
+                )} */}
                 </div>
 
                 {board.titlesOrder.map((title, idx) => {
