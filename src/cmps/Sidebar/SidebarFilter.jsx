@@ -1,14 +1,18 @@
 
-export function SidebarFilter({ onToggleIsActive, isActive, onAddNewBoard }) {
+export function SidebarFilter({ onToggleIsFocus, isFocus, onAddNewBoard }) {
     return (
         <>
             <div className="sidebar-filter grid column place-center">
-                <div className={`search-section flex aligh-center ${isActive ? 'active' : ''}`}
-                    onClick={onToggleIsActive}>
+                <div className={`search-section flex aligh-center ${isFocus ? 'active' : ''}`}
+                    onClick={onToggleIsFocus}>
                     <div className="btn search-icon">
                         <img src="../../public/icons/Search.svg" alt="search-icon" />
                     </div>
-                    <input type="search" placeholder="Search" />
+                    <input
+                        type="search"
+                        placeholder="Search"
+                        onBlur={onToggleIsFocus}
+                    />
                 </div>
 
             </div>
