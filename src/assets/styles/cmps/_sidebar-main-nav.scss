@@ -1,0 +1,30 @@
+.sidebar-main-nav {
+    position: relative;
+    padding: 12px 40px 12px 12px;
+
+    .btn-menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        margin: 0;
+        padding-block: $sidebar-padding;
+
+        background-color: #f6f7fb;
+        border-bottom-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        &.open {
+            transform: rotate(180deg);
+        }
+    }
+
+    .btn-nav {
+        height: 32px;
+
+        img {
+            height: 20px;
+            width: 20px;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+.sidebar-board-nav {
+    padding-inline: $sidebar-padding;
+
+    a {
+        display: flex;
+        justify-content: stretch;
+        gap: 0;
+        position: relative;
+
+        span {
+            flex-grow: 1;
+        }
+
+        img:first-of-type {
+            width: 20px;
+            height: 20px;
+            margin-inline-end: 6px;
+        }
+
+        img:last-of-type {
+            justify-self: end;
+        }
+
+        input {
+            flex-grow: 1;
+        }
+    }
+
+    img.btn-option-menu {
+        opacity: 0;
+        padding-inline: 0;
+        height: 24px;
+        width: 24px;
+    }
+
+    a:hover .btn-option-menu {
+        opacity: 1;
+        background-color: transparent;
+
+        &:hover {
+            background-color: $clr-btn-hover;
+        }
+
+        align-self: end;
+    }
+
+    .btn.active {
+        background-color: $clr-btn-active;
+    }
+}
