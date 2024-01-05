@@ -1,10 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
 
 export function BoardEdit({ board }) {
 
     const [boardToEdit, setBoardToEdit] = useState(board)
+    const [isEditing, setIsEditing] = useState(false)
 
+    useEffect(() => {
+        setBoardToEdit(board)
+    }, [board])
 
     function handleChange({ target }) {
         const field = target.name
@@ -32,6 +36,8 @@ export function BoardEdit({ board }) {
         } catch (err) {
             console.log('Cannot update board', err)
             // showErrorMsg('Cannot update board')
+        } finally {
+            setIsEditing(false)
         }
     }
 
@@ -45,20 +51,22 @@ export function BoardEdit({ board }) {
     // const { title, favorite, details } = boardToEdit
     const { title } = boardToEdit
 
-
     return (
         <>
-            {/* <h3 className="title" title="Click to edit">{board.title}</h3> */}
-
-            <input className="reset title"
-                title="Click to edit"
-                onChange={handleChange}
-                onBlur={onUpdateBoard}
-                onKeyDown={handleKeyDown}  // Trigger onUpdateBoard on pressing Enter
-                value={title}
-                type="text"
-                name="title"
-            />
+            {!isEditing ?
+                <h3 className="title" title="Click to edit" onClick={() => setIsEditing(true)}>{board.title}</h3>
+                :
+                <input className="reset title"
+                    title="Click to edit"
+                    onChange={handleChange}
+                    onBlur={onUpdateBoard}
+                    onKeyDown={handleKeyDown}  // Trigger onUpdateBoard on pressing Enter
+                    value={title}
+                    type="text"
+                    name="title"
+                    autoFocus
+                />
+            }
 
             <div className="info-favorite flex align-center">
                 <button className="btn info" title="Show board description">

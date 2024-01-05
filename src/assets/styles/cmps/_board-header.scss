@@ -45,11 +45,17 @@
         padding-inline: 4px;
         font-size: rem(24px);
         font-family: poppins-medium;
+        cursor: text;
+        border-radius: $border-radius-small;
 
-        &:hover {
+        &:not(input):hover {
             outline: 1px solid $clr-btn-border;
-            border-radius: $border-radius-small;
         }
+
+        &:focus {
+            outline: 1px solid $clr-btn-add;
+        }
+
     }
 
     .info-favorite {
@@ -147,7 +153,7 @@
                 }
             }
 
-            &.active {
+            &.focused {
                 background-color: $clr0;
                 outline: 1px solid $clr-btn-add;
 
