@@ -11,18 +11,7 @@ import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDA
 //     // commit(ACTION) // dispatch(ACTION)
 // }
 
-// function updateTask(cmpType, data) {
-// Switch by cmpType
-// case MEMBERS:
-//    task.members = data
-//    activity = boardService.getEmptyActivity()
-//    activity.txt = `Members changed for task ${}`
-//    activity.task = '{mini-task}'
-// case STATUS:
-//    task.status = data
 
-// dispatch to store: updateTask(task, activity)
-// }
 
 
 // Action Creators:
@@ -172,4 +161,39 @@ export async function removeTask(boardId, groupId, taskId) {
         throw new Error(error.message || 'An error occurred during removing task')
     }
 
+}
+
+export async function updateTask(boardId, groupId, task) {
+
+
+
+    // switch (cmpType) {
+
+    //     case 'title':
+    //         task.title = data
+    //         break;
+
+    //     case 'members':
+    //         task.person = data
+    //         break;
+
+    //     case 'status':
+    //         task.status = data
+    //         break;
+
+    //     case 'priority':
+    //         task.priority = data
+    //         break;
+
+    //     case 'file':
+    //         task.file = data
+    //         break;
+
+    //     case 'link':
+    //         task.link = data
+    //         break;
+
+    //     default:
+    //         break;
+    // }
 }

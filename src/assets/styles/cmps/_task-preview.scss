@@ -15,7 +15,10 @@
         li {
             white-space: nowrap;
             height: 36px;
-            cursor: pointer;
+
+            &:not(.task-selection) {
+                cursor: pointer;
+            }
 
             &:not(.task-title) {
                 text-align: center;

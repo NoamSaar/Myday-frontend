@@ -48,7 +48,10 @@ export function BoardGroup({ group, titlesOrder }) {
                         <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />
                     </div>
                     <div className="sticky-left-36 title-container">
-                        <img className="down-arrow" src="../../../public/icons/NavigationChevronDown.svg" title="Collapse group" />
+                        <div className="arrow-container">
+
+                            <img className="down-arrow" src="../../../public/icons/NavigationChevronDown.svg" title="Collapse group" />
+                        </div>
                         <h4 style={{ color: group.color }}>{group.title}</h4>
                         <p>{group.tasks.length} Tasks</p>
                     </div>
