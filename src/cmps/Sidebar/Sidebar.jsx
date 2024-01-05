@@ -11,15 +11,16 @@ import { useNavigate } from "react-router";
 
 export function Sidebar() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const [isActive, setIsActive] = useState(false)
+    const [isFocus, setIsFocus] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
         loadBoards()
-    }, [boards])
+    }, [])
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    const [isActive, setIsActive] = useState(false)
 
     async function onAddNewBoard() {
         const newBoard = await boardService.save()
@@ -38,6 +39,10 @@ export function Sidebar() {
         setIsActive(!isActive)
     }
 
+    function onToggleIsFocus() {
+        setIsFocus(!isFocus)
+    }
+
     return (
         <section className="sidebar-container">
             <article className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
@@ -48,10 +53,10 @@ export function Sidebar() {
                     isActive={isActive} />
                 <SidebarWorkspace
                     onAddNewBoard={onAddNewBoard}
-                    onToggleDropdown={onToggleDropdown}
-                    onToggleIsActive={onToggleIsActive}
                     isDropdownOpen={isDropdownOpen}
-                    isActive={isActive} />
+                    isFocus={isFocus}
+                    onToggleDropdown={onToggleDropdown}
+                    onToggleIsFocus={onToggleIsFocus} />
                 <SidebarBoardNav
                     boards={boards}
                     isActive={isActive} />

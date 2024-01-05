@@ -6,8 +6,7 @@ export function SidebarBoardNav({ boards, onToggleIsActive, isActive }) {
             {boards.map(board => (
                 <SidebarBoardLink
                     key={board._id}
-                    id={board._id}
-                    title={board.title}
+                    board={board}
                     isActive={isActive}
                     onToggleIsActive={onToggleIsActive} />
             ))}
