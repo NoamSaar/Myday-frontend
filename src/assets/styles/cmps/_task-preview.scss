@@ -7,7 +7,8 @@
         &:hover {
             background-color: $clr-task-hover;
 
-            .task-title {
+            .task-title,
+            .task-selection {
                 background-color: $clr-task-hover;
             }
         }
@@ -15,11 +16,16 @@
         li {
             white-space: nowrap;
             height: 36px;
-            cursor: pointer;
+
+            &:not(.task-selection) {
+                cursor: pointer;
+            }
 
             &:not(.task-title) {
                 text-align: center;
             }
         }
+
+        .task-title input {}
     }
 }
