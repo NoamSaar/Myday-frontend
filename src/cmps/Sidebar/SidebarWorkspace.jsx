@@ -2,7 +2,7 @@ import { SidebarFilter } from "./SidebarFilter";
 import { SidebarWorkspaceNav } from "./SidebarWorkspaceNav";
 
 export function SidebarWorkspace(
-    { onToggleDropdown, onToggleIsFocus, isDropdownOpen, isFocus, onAddNewBoard }
+    { onToggleDropdown, onToggleIsFocus, isDropdownOpen, isFocus, onAddNewBoard, filterBy, onSetFilter }
 ) {
     return (
         <section className="sidebar-workspace">
@@ -14,6 +14,8 @@ export function SidebarWorkspace(
                 onToggleIsFocus={onToggleIsFocus}
                 isFocus={isFocus}
                 onAddNewBoard={onAddNewBoard}
+                filterBy={filterBy}
+                onSetFilter={onSetFilter}
             />
         </section>
     )

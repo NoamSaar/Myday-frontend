@@ -13,6 +13,7 @@ export const boardService = {
     removeTask,
     addGroup,
     removeGroup,
+    getDefaultFilter,
 }
 
 window.boardService = boardService
@@ -688,10 +689,10 @@ const gBoards = [
 
 _initBoards()
 
-async function query(filterBy = { txt: '' }) {
+async function query(filterBy = { title: '' }) {
     let boards = await storageService.query(STORAGE_KEY)
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
+    if (filterBy.title) {
+        const regex = new RegExp(filterBy.title, 'i')
         boards = boards.filter(board => regex.test(board.title))
     }
     return boards
@@ -725,6 +726,10 @@ async function save(board) {
         throw new Error(error.message || 'An error occurred during saving board')
 
     }
+}
+
+function getDefaultFilter() {
+    return { title: '' }
 }
 
 function _getDefaultBoard() {

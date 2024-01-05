@@ -4,7 +4,7 @@ import { MenuOptionsModal } from "../MenuOptionsModal";
 import { removeBoard, updateBoard } from "../../store/actions/board.actions"
 
 
-export function SidebarBoardLink({ board, isActive, onToggleIsActive }) {
+export function SidebarBoardLink({ board, isActive }) {
     const [isModalOpen, setisModalOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
@@ -55,8 +55,7 @@ export function SidebarBoardLink({ board, isActive, onToggleIsActive }) {
         <section style={style}>
             <NavLink className={`btn ${isActive ? 'active' : ''}`}
                 to={`/board/${board._id}`}
-                title={`${board.title} Board`}
-                onClick={onToggleIsActive}>
+                title={`${board.title} Board`}>
                 <img src="../../public/icons/Board.svg" alt="home-icon" />
                 {isEditing ? (
                     <input

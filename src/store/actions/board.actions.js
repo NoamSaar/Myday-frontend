@@ -2,7 +2,8 @@ import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY } from '../reducers/board.reducer.js'
+
 
 // Store - saveTask (from board.js)
 // function storeSaveTask(boardId, groupId, task, activity) {
@@ -25,36 +26,11 @@ import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDA
 // }
 
 
-// Action Creators:
-export function getActionRemoveBoard(boardId) {
-    return {
-        type: REMOVE_BOARD,
-        boardId
-    }
-}
-
-export function getActionAddBoard() {
-    return {
-        type: ADD_BOARD,
-    }
-}
-
-export function getActionUpdateBoard(board) {
-    return {
-        type: UPDATE_BOARD,
-        board
-    }
-}
-
 export async function loadBoards() {
     try {
-        const boards = await boardService.query()
-        // console.log('Boards from DB:', boards)
-        store.dispatch({
-            type: SET_BOARDS,
-            boards
-        })
-
+        const filterBy = store.getState().boardModule.filterBy
+        const boards = await boardService.query(filterBy)
+        store.dispatch(getActionSetBoards(boards))
     } catch (err) {
         console.log('Cannot load boards', err)
         throw err
@@ -96,7 +72,9 @@ export function updateBoard(board) {
         })
 }
 
-
+export function setFilterBy(filterBy) {
+    store.dispatch({ type: SET_FILTER_BY, filterBy })
+}
 
 // Demo for Optimistic Mutation 
 // (IOW - Assuming the server call will work, so updating the UI first)
@@ -119,8 +97,6 @@ export function onRemoveBoardOptimistic(boardId) {
             })
         })
 }
-
-
 
 export function setCurBoard(board) {
     store.dispatch({ type: SET_BOARD, board })
@@ -161,4 +137,33 @@ export async function removeTask(boardId, groupId, taskId) {
         throw new Error(error.message || 'An error occurred during removing task')
     }
 
+}
+
+
+// Action Creators:
+export function getActionRemoveBoard(boardId) {
+    return {
+        type: REMOVE_BOARD,
+        boardId
+    }
+}
+
+export function getActionAddBoard() {
+    return {
+        type: ADD_BOARD,
+    }
+}
+
+export function getActionUpdateBoard(board) {
+    return {
+        type: UPDATE_BOARD,
+        board
+    }
+}
+
+export function getActionSetBoards(boards) {
+    return {
+        type: SET_BOARDS,
+        boards
+    }
 }
