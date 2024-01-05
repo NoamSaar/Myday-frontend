@@ -164,6 +164,9 @@ export async function removeTask(boardId, groupId, taskId) {
 }
 
 export async function updateTask(boardId, groupId, task) {
+    const board = await boardService.updateTask(boardId, groupId, task)
+    setCurBoard(board)
+    store.dispatch(getActionUpdateBoard(board))
 
 
 
