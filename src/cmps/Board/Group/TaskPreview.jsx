@@ -74,8 +74,11 @@ export function TaskPreview({ task, groupId }) {
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
                 {isShowMenu && <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />}
             </div>
-            <ul className="clean-list task-preview" key={currTask.id}>
+            <ul className="clean-list task-preview">
                 <div className="sticky-left-36 task-title-container">
+
+                    <div className="color-display"></div>
+
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>

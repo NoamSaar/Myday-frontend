@@ -1,11 +1,29 @@
 import { useSelector } from "react-redux"
 import { TaskPreview } from "./TaskPreview"
+import { AddTask } from "./AddTask"
+import { useState } from "react"
+import { addTask } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId }) {
+    const [taskTitle, setTaskTitle] = useState('')
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
-    let group = board.groups[groupIdx]
+    const group = board.groups[groupIdx]
 
+    function onSetTaskTitle({ target }) {
+        const title = target.value
+        setTaskTitle(title)
+    }
+
+    async function onAddTask(ev) {
+        try {
+            ev.preventDefault()
+            await addTask(board._id, groupId, taskTitle)
+            setTaskTitle('')
+        } catch (error) {
+            console.error("Error adding task:", error)
+        }
+    }
 
     return (
         <ul className="clean-list task-list">
@@ -15,40 +33,10 @@ export function TaskList({ groupId }) {
                 return <TaskPreview key={task.id} task={task} groupId={groupId} />
             })}
 
-            <ul className="clean-list task-preview-container add-task">
-
-                <ul className="clean-list task-preview">
-                    <div className="sticky-left-36 task-title-container">
-                        <li className="task-selection">
-                            <input disabled type="checkbox" />
-                        </li>
-                        <li className="task-title single-task">+ Add task</li>
-                    </div>
-
-
-
-                    <div className="line-end"></div>
-                </ul>
-            </ul>
-            {/* 
-            <ul className="clean-list task-preview-container sticky-left">
-                <ul className="clean-list task-preview add-task">
-                    <div className="task-title-container">
-                        <li className="task-selection">
-                            <input disabled type="checkbox" />
-                        </li>
-                        <li className="task-title single-task">+ Add task</li>
-                    </div>
-
-
-                    <div className="line-end"></div>
-                </ul>
-            </ul> */}
-
+            <AddTask title={taskTitle} onSetTitle={onSetTaskTitle} onAddTask={onAddTask} />
 
         </ul>
 
-        // </ul>
 
     )
 }
