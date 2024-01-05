@@ -12,6 +12,7 @@ export const boardService = {
     remove,
     removeTask,
     addGroup,
+    removeGroup,
 }
 
 window.boardService = boardService
@@ -1107,6 +1108,20 @@ async function addGroup(boardId) {
         return await save(board)
     } catch (error) {
         throw new Error(error.message || 'An error occurred during adding group')
+
+    }
+
+}
+
+async function removeGroup(boardId, groupId) {
+    try {
+        const board = await getById(boardId)
+        const idx = board.groups.findIndex(group => group.id === groupId)
+        if (idx < 0) throw new Error(`Remove failed, cannot find group with id: ${groupId} in: ${board.title}`)
+        board.groups.splice(idx, 1)
+        return await save(board)
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing group')
 
     }
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TaskList } from "./TaskList";
-import { MenuOptionsModal } from "./MenuOptionsModal";
+import { MenuOptionsModal } from "../../MenuOptionsModal";
 
 export function BoardGroup({ group, titlesOrder }) {
     const [isShowMenu, setIsShowMenu] = useState(false)

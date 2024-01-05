@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { DynamicPicker } from "./DynamicPicker"
-import { getUser } from "../store/actions/user.actions"
-import { utilService } from "../services/util.service";
-import { MenuOptionsModal } from "./MenuOptionsModal";
-import { removeTask } from "../store/actions/board.actions";
+import { DynamicPicker } from "./Picker/DynamicPicker"
+import { getUser } from "../../../store/actions/user.actions"
+import { utilService } from "../../../services/util.service";
+import { MenuOptionsModal } from "../../MenuOptionsModal";
+import { removeTask } from "../../../store/actions/board.actions";
 import { useSelector } from "react-redux";
 
 export function TaskPreview({ task, groupId }) {

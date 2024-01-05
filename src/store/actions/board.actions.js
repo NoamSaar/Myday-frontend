@@ -139,6 +139,17 @@ export async function addGroup(boardId) {
 
 }
 
+export async function removeGroup(boardId, groupId) {
+    try {
+        const board = await boardService.removeGroup(boardId, groupId)
+        setCurBoard(board)
+        store.dispatch(getActionUpdateBoard(board))
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing task')
+    }
+
+}
+
 //tasks
 
 export async function removeTask(boardId, groupId, taskId) {
