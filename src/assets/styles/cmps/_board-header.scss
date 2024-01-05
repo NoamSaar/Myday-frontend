@@ -43,6 +43,8 @@
     .title {
         grid-area: title;
         padding-inline: 4px;
+        font-size: rem(24px);
+        font-family: poppins-medium;
 
         &:hover {
             outline: 1px solid $clr-btn-border;
