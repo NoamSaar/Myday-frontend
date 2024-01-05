@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { boardService } from "../services/board.service.local";
 import { BoardHeader } from "../cmps/BoardHeader";
-import { setCurBoard } from "../store/actions/board.actions";
+import { addGroup, setCurBoard } from "../store/actions/board.actions";
 
 export function BoardDetails() {
-    const [board, setBoard] = useState(null)
     const { boardId } = useParams()
+    const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const user = useSelector((storeState) => storeState.userModule.loggedinUser)
 
     useEffect(() => {
@@ -25,13 +25,21 @@ export function BoardDetails() {
     async function loadBoard() {
         try {
             const board = await boardService.getById(boardId)
-            setBoard(board)
             setCurBoard(board)
         } catch (error) {
             console.log('Had issues in board details', error)
             // showErrorMsg('Cannot load board')
         }
     }
+
+    async function onAddGrop() {
+        try {
+            addGroup(board._id)
+        } catch (error) {
+            console.error("Error adding group:", error)
+        }
+    }
+
 
 
     if (!board) return <div className="board-details">Loading...</div>
@@ -41,7 +49,7 @@ export function BoardDetails() {
 
             {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
 
-            <div className="btn add-group-btn sticky-left-40">
+            <div className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
                 <img src="../../../public/icons/add.svg" />
                 Add new group
             </div>

@@ -126,6 +126,19 @@ export function setCurBoard(board) {
     store.dispatch({ type: SET_BOARD, board })
 }
 
+//groups
+
+export async function addGroup(boardId) {
+    try {
+        const board = await boardService.addGroup(boardId)
+        setCurBoard(board)
+        store.dispatch(getActionUpdateBoard(board))
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing task')
+    }
+
+}
+
 //tasks
 
 export async function removeTask(boardId, groupId, taskId) {
