@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { updateBoard } from "../../store/actions/board.actions"
 
 export function BoardEdit({ board }) {
 
@@ -23,10 +24,10 @@ export function BoardEdit({ board }) {
         setBoardToEdit(prevBoard => ({ ...prevBoard, [field]: value }))
     }
 
-    async function onSaveBoard(ev) {
-        ev.preventDefault()
+    async function onUpdateBoard(ev) {
+        // ev.preventDefault()
         try {
-            const savedBoard = await saveBoard(boardToEdit)
+            const savedBoard = await updateBoard(boardToEdit)
             // showSuccessMsg(`Board updated successfully ${savedBoard.name}`)
         } catch (err) {
             console.log('Cannot update board', err)
@@ -34,12 +35,30 @@ export function BoardEdit({ board }) {
         }
     }
 
+    function handleKeyDown(ev) {
+        if (ev.key === 'Enter') {
+            onUpdateBoard(ev)
+            ev.target.blur()
+        }
+    }
+
     // const { title, favorite, details } = boardToEdit
+    const { title } = boardToEdit
 
 
     return (
         <>
-            <h3 className="title" title="Click to edit">{board.title}</h3>
+            {/* <h3 className="title" title="Click to edit">{board.title}</h3> */}
+
+            <input className="reset title"
+                title="Click to edit"
+                onChange={handleChange}
+                onBlur={onUpdateBoard}
+                onKeyDown={handleKeyDown}  // Trigger onUpdateBoard on pressing Enter
+                value={title}
+                type="text"
+                name="title"
+            />
 
             <div className="info-favorite flex align-center">
                 <button className="btn info" title="Show board description">
