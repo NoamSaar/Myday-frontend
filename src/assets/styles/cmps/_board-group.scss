@@ -10,30 +10,37 @@
             display: flex;
             align-items: center;
 
-            h4 {
-                font-size: 18px;
-                padding: 0 4px;
-                cursor: pointer;
+            .title-container {
+                display: flex;
+                align-items: center;
+
+                h4 {
+                    font-size: 18px;
+                    margin-block: 9px;
+                    padding: 0 4px;
+                    cursor: pointer;
+                }
+
+                p {
+
+                    margin: 0;
+                    font-size: .875rem;
+                    font-weight: 400;
+                    margin-block-start: 3px;
+                    margin-inline-start: 8px;
+                    opacity: 0;
+                    transition: opacity .2s;
+
+                }
+
+                .down-arrow {
+                    width: 12px;
+                    margin-right: 2px;
+                    margin-left: 9px;
+                    cursor: pointer;
+                }
             }
 
-            p {
-
-                margin: 0;
-                font-size: .875rem;
-                font-weight: 400;
-                margin-block-start: 3px;
-                margin-inline-start: 8px;
-                opacity: 0;
-                transition: opacity .2s;
-
-            }
-
-            .down-arrow {
-                width: 12px;
-                margin-right: 2px;
-                margin-left: 9px;
-                cursor: pointer;
-            }
 
 
             .menu-container {
