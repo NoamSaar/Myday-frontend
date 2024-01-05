@@ -35,7 +35,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
         }
 
         fetchData()
-    }, [])
+    }, [task])
 
     async function onDeleteTask() {
         try {
