@@ -2,7 +2,7 @@ import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from '../reducers/board.reducer.js'
 
 // Store - saveTask (from board.js)
 // function storeSaveTask(boardId, groupId, task, activity) {
@@ -33,6 +33,7 @@ export function getActionRemoveBoard(boardId) {
     }
 }
 
+//has to receive board to add and send it to reducer!!
 export function getActionAddBoard() {
     return {
         type: ADD_BOARD,
@@ -46,6 +47,9 @@ export function getActionUpdateBoard(board) {
     }
 }
 
+/**************** board actions ****************/
+
+//maybe needs getAction as the rest for consistency?
 export async function loadBoards() {
     try {
         const boards = await boardService.query()
@@ -71,6 +75,7 @@ export async function removeBoard(boardId) {
     }
 }
 
+//not working currently on the store!
 export async function addBoard(board) {
     try {
         const savedBoard = await boardService.save(board)
@@ -91,7 +96,7 @@ export async function updateBoard(board) {
 
         const currBoardId = store.getState().boardModule.currBoard._id
         if (savedBoard._id === currBoardId) {
-            console.log('this is curr board!')
+            // console.log('this is curr board!')
             setCurrBoard(savedBoard)
         }
 
@@ -105,33 +110,31 @@ export async function updateBoard(board) {
 
 // Demo for Optimistic Mutation 
 // (IOW - Assuming the server call will work, so updating the UI first)
-export function onRemoveBoardOptimistic(boardId) {
-    store.dispatch({
-        type: REMOVE_BOARD,
-        boardId
-    })
-    showSuccessMsg('Board removed')
+// export function onRemoveBoardOptimistic(boardId) {
+//     store.dispatch({
+//         type: REMOVE_BOARD,
+//         boardId
+//     })
+//     showSuccessMsg('Board removed')
 
-    boardService.remove(boardId)
-        .then(() => {
-            console.log('Server Reported - Deleted Succesfully');
-        })
-        .catch(err => {
-            showErrorMsg('Cannot remove board')
-            console.log('Cannot load boards', err)
-            store.dispatch({
-                type: UNDO_REMOVE_BOARD,
-            })
-        })
-}
-
-
+//     boardService.remove(boardId)
+//         .then(() => {
+//             console.log('Server Reported - Deleted Succesfully');
+//         })
+//         .catch(err => {
+//             showErrorMsg('Cannot remove board')
+//             console.log('Cannot load boards', err)
+//             store.dispatch({
+//                 type: UNDO_REMOVE_BOARD,
+//             })
+//         })
+// }
 
 export function setCurrBoard(board) {
-    store.dispatch({ type: SET_BOARD, board })
+    store.dispatch({ type: SET_CURR_BOARD, board })
 }
 
-//groups
+/**************** group actions ****************/
 
 export async function addGroup(boardId) {
     try {
@@ -155,7 +158,7 @@ export async function removeGroup(boardId, groupId) {
 
 }
 
-//tasks
+/**************** task actions ****************/
 
 export async function removeTask(boardId, groupId, taskId) {
     try {
