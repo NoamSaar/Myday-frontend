@@ -87,6 +87,12 @@
             display: flex;
             margin-inline-start: 36px;
 
+            .color-display {
+                margin-top: -0.5px;
+                height: 36px;
+                border-top-left-radius: 8px;
+            }
+
 
             li {
                 padding-block: 0;
@@ -110,6 +116,12 @@
     .task-selection {
         border-inline-start: $clr-group-border 0.5px solid;
         background-color: white;
+    }
+
+    .color-display {
+        min-width: 10px;
+        height: 37px;
+        background-color: blue;
     }
 
     .menu-container {

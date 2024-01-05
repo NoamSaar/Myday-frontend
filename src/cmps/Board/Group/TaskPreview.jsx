@@ -6,7 +6,7 @@ import { MenuOptionsModal } from "../../MenuOptionsModal";
 import { removeTask } from "../../../store/actions/board.actions";
 import { useSelector } from "react-redux";
 
-export function TaskPreview({ task, groupId }) {
+export function TaskPreview({ task, groupId, groupColor }) {
     const [currTask, setCurrTask] = useState(null)
     const [isShowMenu, setIsShowMenu] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -74,10 +74,10 @@ export function TaskPreview({ task, groupId }) {
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
                 {isShowMenu && <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />}
             </div>
+            <div style={{ backgroundColor: groupColor }} className="color-display"></div>
             <ul className="clean-list task-preview">
                 <div className="sticky-left-36 task-title-container">
 
-                    <div className="color-display"></div>
 
                     <li className="task-selection">
                         <input type="checkbox" />

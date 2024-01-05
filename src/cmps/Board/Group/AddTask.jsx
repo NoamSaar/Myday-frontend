@@ -1,10 +1,13 @@
 
-export function AddTask({ title, onSetTitle, onAddTask }) {
+export function AddTask({ title, onSetTitle, onAddTask, groupColor }) {
     return (
         <ul className="clean-list task-preview-container add-task">
 
             <ul className="clean-list task-preview">
+                <div style={{ backgroundColor: groupColor }} className="color-display"></div>
                 <div className="sticky-left-36 task-title-container">
+
+
                     <li className="task-selection">
                         <input disabled type="checkbox" />
                     </li>

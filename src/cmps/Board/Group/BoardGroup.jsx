@@ -49,12 +49,14 @@ export function BoardGroup({ group, titlesOrder }) {
                     </div>
                     <div className="sticky-left-36 title-container">
                         <img className="down-arrow" src="../../../public/icons/NavigationChevronDown.svg" title="Collapse group" />
-                        <h4 >{group.title}</h4>
+                        <h4 style={{ color: group.color }}>{group.title}</h4>
                         <p>{group.tasks.length} Tasks</p>
                     </div>
                 </div>
 
                 <ul className="clean-list task-header-list">
+                    <div style={{ backgroundColor: group.color }} className="color-display"></div>
+
                     <div className="sticky-left-36 task-title-container">
 
                         <li className="task-selection">
@@ -75,6 +77,6 @@ export function BoardGroup({ group, titlesOrder }) {
             </div>
 
             <TaskList titlesOrder={titlesOrder} groupId={group.id} />
-        </section>
+        </section >
     )
 }

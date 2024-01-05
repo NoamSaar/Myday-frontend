@@ -30,10 +30,10 @@ export function TaskList({ groupId }) {
 
 
             {group.tasks.map(task => {
-                return <TaskPreview key={task.id} task={task} groupId={groupId} />
+                return <TaskPreview key={task.id} task={task} groupId={groupId} groupColor={group.color} />
             })}
 
-            <AddTask title={taskTitle} onSetTitle={onSetTaskTitle} onAddTask={onAddTask} />
+            <AddTask title={taskTitle} onSetTitle={onSetTaskTitle} onAddTask={onAddTask} groupColor={group.color} />
 
         </ul>
 
