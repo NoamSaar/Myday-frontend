@@ -47,15 +47,19 @@ export function BoardDetails() {
         <section className="board-details">
             <BoardHeader board={board} />
 
-            {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
+            <div className="board-content">
 
-            <div className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
-                <img src="../../../public/icons/add.svg" />
-                Add new group
+                {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
+
+                <div className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
+                    <img src="../../../public/icons/add.svg" />
+                    Add new group
+                </div>
+
+                <Outlet />
+                {/* the outlet is to display the nested route- task details */}
             </div>
 
-            <Outlet />
-            {/* the outlet is to display the nested route- task details */}
         </section>
     )
 }
