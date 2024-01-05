@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 
 export function BoardFilter() {
 
-    const [isActive, setIsActive] = useState(false)
+    const [isFocused, setIsFocused] = useState(false)
     const filterSearchRef = useRef(null)
 
 
@@ -13,7 +13,7 @@ export function BoardFilter() {
                 && !filterSearchRef.current.contains(event.target)
                 //missing logic: && !input.value
             ) {
-                setIsActive(false)
+                setIsFocused(false)
             }
         }
         document.addEventListener("mousedown", handleClickOutsideSearch)
@@ -23,20 +23,20 @@ export function BoardFilter() {
         }
     }, [])
 
-    function onToggleIsActive() {
-        setIsActive(!isActive)
+    function onToggleIsFocused() {
+        setIsFocused(!isFocused)
     }
 
-    const dynActiveClass = isActive ? 'active' : ''
+    const dynFocusedClass = isFocused ? 'focused' : ''
 
     return (
         <div className="board-filter">
             <button title="New task" className="btn new-task">New Task</button>
 
-            <div className={dynActiveClass + ' btn search'} onClick={onToggleIsActive} ref={filterSearchRef}>
+            <div className={dynFocusedClass + ' btn search'} onClick={onToggleIsFocused} ref={filterSearchRef}>
                 <img src="../../public/icons/Search.svg" alt="search-icon" />
                 <input className="reset" type="search" placeholder="Search" />
-                {isActive &&
+                {isFocused &&
                     <img src="../../public/icons/SettingsKnobs.svg" alt="filter-icon" />
                 }
             </div>
