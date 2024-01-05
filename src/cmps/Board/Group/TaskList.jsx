@@ -18,7 +18,7 @@ export function TaskList({ groupId }) {
             <ul className="clean-list task-preview-container add-task">
 
                 <ul className="clean-list task-preview">
-                    <div className="sticky-left-37 task-title-container">
+                    <div className="sticky-left-36 task-title-container">
                         <li className="task-selection">
                             <input disabled type="checkbox" />
                         </li>

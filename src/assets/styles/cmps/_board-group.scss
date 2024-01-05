@@ -63,22 +63,30 @@
         }
 
         ul {
-            border: #d0d4e4 0.5px solid;
-            border-inline-end: unset;
+            border: $clr-group-border 0.5px solid;
+            border-inline: unset;
             border-block-end: unset;
+
+
+
         }
 
         li {
             justify-content: center;
             display: flex;
             align-items: center;
-            border-inline-end: #d0d4e4 0.5px solid;
             padding: 10px;
+
+            &:not(.line-end) {
+                border-inline-end: $clr-group-border 0.5px solid;
+            }
+
         }
 
         .task-header-list {
             display: flex;
             margin-inline-start: 36px;
+
 
             li {
                 padding-block: 0;
@@ -99,6 +107,10 @@
         }
     }
 
+    .task-selection {
+        border-inline-start: $clr-group-border 0.5px solid;
+        background-color: white;
+    }
 
     .menu-container {
         min-width: 36px;
