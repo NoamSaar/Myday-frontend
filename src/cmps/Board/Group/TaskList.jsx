@@ -1,14 +1,36 @@
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useSelector } from "react-redux"
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
 import { useState } from "react"
-import { addTask, setActiveTask } from "../../../store/actions/board.actions"
+import { addTask, setActiveTask, updateBoard } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId, groupColor }) {
     const [taskTitle, setTaskTitle] = useState('')
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
     const group = board.groups[groupIdx]
+
+    const handleDragEnd = (result) => {
+        if (!result.destination) return
+
+        const newOrderedBoards = group.tasks
+        const [removed] = newOrderedBoards.splice(result.source.index, 1)
+        newOrderedBoards.splice(result.destination.index, 0, removed)
+        saveNewOrder()
+    }
+
+    async function saveNewOrder() {
+        try {
+            console.log('group', group)
+            const newBoard = [...board]
+            newBoard.groups.splice(groupIdx, 1, group)
+            console.log('newBoard', newBoard)
+            await updateBoard(newBoard)
+        } catch (error) {
+            console.log('Cannot save group:', error);
+        }
+    }
 
     function onSetTaskTitle({ target }) {
         const title = target.value
@@ -32,10 +54,31 @@ export function TaskList({ groupId, groupColor }) {
     return (
         <ul className="clean-list task-list">
 
-
-            {group.tasks.map(task => {
-                return <TaskPreview key={task.id} task={task} groupId={groupId} groupColor={groupColor} onSetActiveTask={onSetActiveTask} />
-            })}
+            <DragDropContext onDragEnd={handleDragEnd}>
+                <Droppable droppableId={group.id}>
+                    {(provided) => (
+                        <div className="tasks-container" {...provided.droppableProps} ref={provided.innerRef}>
+                            {
+                                group.tasks.map((task, idx) => {
+                                    <Draggable key={task.id} draggableId={board._id} index={idx}>
+                                        {(provided) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                            >
+                                                <TaskPreview key={task.id} task={task} groupId={groupId} groupColor={groupColor} onSetActiveTask={onSetActiveTask} />
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                    // return <TaskPreview key={task.id} task={task} groupId={groupId} groupColor={groupColor} onSetActiveTask={onSetActiveTask} />
+                                })
+                            }
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
 
             <AddTask title={taskTitle} onSetTitle={onSetTaskTitle} addTask={onAddTask} groupColor={groupColor} onSetActiveTask={onSetActiveTask} groupId={groupId} />
 
