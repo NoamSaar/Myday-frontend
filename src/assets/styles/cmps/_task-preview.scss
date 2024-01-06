@@ -1,6 +1,10 @@
 .task-preview-container {
     display: flex;
 
+    &.add-task:hover .color-display {
+        opacity: 1;
+    }
+
     .task-preview {
         display: flex;
 

@@ -2,7 +2,7 @@ import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK } from '../reducers/board.reducer.js'
 
 
 // Store - saveTask (from board.js)
@@ -175,6 +175,10 @@ export async function updateTask(boardId, groupId, task) {
     store.dispatch(getActionUpdateBoard(board))
 }
 
+export function setActiveTask(taskId) {
+    store.dispatch(getActionSetActiveTask(taskId))
+}
+
 
 /**************** get actions ****************/
 
@@ -203,5 +207,12 @@ export function getActionSetBoards(boards) {
     return {
         type: SET_BOARDS,
         boards
+    }
+}
+
+export function getActionSetActiveTask(taskId) {
+    return {
+        type: SET_ACTIVE_TASK,
+        taskId
     }
 }

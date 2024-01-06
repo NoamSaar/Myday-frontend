@@ -69,7 +69,7 @@ export function BoardGroup({ group, titlesOrder }) {
         <section className='board-group'>
             <div className="group-sticky-container sticky-left">
 
-                <div className="board-title-container sticky-left">
+                <div className="group-title-container sticky-left">
                     <div className="menu-container sticky-left">
                         {isMenuOpen && <MenuOptionsModal options={menuOptions} pos={'top'} />}
                         <button className="btn" onClick={toggleMenu} style={{ fill: 'black' }}><MenuIcon /></button>
@@ -78,17 +78,24 @@ export function BoardGroup({ group, titlesOrder }) {
                         <button title="Collapse group" style={{ fill: group.color }} className="arrow-container"><AngleDownIcon /></button>
 
                         {isEditing ? (
-                            <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
-                                <input
-                                    autoFocus
-                                    value={groupTitle}
-                                    onChange={onChangeTitle}
-                                    className="reset focused-input"
-                                    type="text"
-                                    onBlur={onTitleEditExit}
-                                    style={{ color: group.color }}
-                                />
-                            </form>
+                            <div
+                                className="focused-input group-title-edit-container"
+                            >
+
+                                <div className="group-color-display" style={{ backgroundColor: group.color }}></div>
+
+                                <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
+                                    <input
+                                        className="reset"
+                                        style={{ color: group.color }}
+                                        type="text"
+                                        autoFocus
+                                        value={groupTitle}
+                                        onChange={onChangeTitle}
+                                        onBlur={onTitleEditExit}
+                                    />
+                                </form>
+                            </div>
                         ) : (
                             <h4 style={{ color: group.color }} className="editable-txt" onClick={() => setIsEditing(true)}>{groupTitle}</h4>
                         )}
