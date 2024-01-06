@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
 import { utilService } from "../../services/util.service"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
+import { SearchIcon } from "../../services/svg.service"
 
 export function SidebarFilter({ filterBy, onSetFilter, onToggleIsFocus, isFocus, onAddNewBoard }) {
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
@@ -22,7 +23,7 @@ export function SidebarFilter({ filterBy, onSetFilter, onToggleIsFocus, isFocus,
                 <div className={`search-section flex aligh-center ${isFocus ? 'focus' : ''}`}
                     onClick={onToggleIsFocus}>
                     <div className="btn search-icon">
-                        <img src="../../public/icons/Search.svg" alt="search-icon" />
+                        <SearchIcon />
                     </div>
                     <input
                         type="search"
