@@ -8,6 +8,7 @@ import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.servi
 export function BoardGroup({ group, titlesOrder }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
+    const [isColorPickerOpen, setIsColorPickerOpen] = useState(false)
     const [groupTitle, setGroupTitle] = useState(group.title)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
 
@@ -50,10 +51,16 @@ export function BoardGroup({ group, titlesOrder }) {
                 setGroupTitle(group.title)
                 onGroupChange("title", group.title)
             }
-            setIsEditing(false)
+
+            if (!isColorPickerOpen) setIsEditing(false)
         } catch (error) {
             console.error("Error changing group title:", error)
         }
+    }
+
+    function onColorDisplayClick(ev) {
+        ev.stopPropagation()
+        setIsColorPickerOpen(prevIsOpen => !prevIsOpen)
     }
 
     const menuOptions = [
@@ -82,7 +89,7 @@ export function BoardGroup({ group, titlesOrder }) {
                                 className="focused-input group-title-edit-container"
                             >
 
-                                <div className="group-color-display" style={{ backgroundColor: group.color }}></div>
+                                <div className="group-color-display" style={{ backgroundColor: group.color }} onMouseDown={onColorDisplayClick}></div>
 
                                 <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                     <input
