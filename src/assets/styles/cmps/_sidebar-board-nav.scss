@@ -1,7 +1,6 @@
 .sidebar-board-nav {
     padding-inline: $sidebar-padding;
 
-    // a {
     .btn {
         display: flex;
         justify-content: stretch;
@@ -12,22 +11,19 @@
             flex-grow: 1;
         }
 
-        img:first-of-type {
-            width: 20px;
-            height: 20px;
-            margin-inline-end: 6px;
-        }
-
-        img:last-of-type {
-            justify-self: end;
-        }
-
         input {
             flex-grow: 1;
         }
     }
 
-    // a:hover .btn-option-menu {
+    .btn.active {
+        background-color: $clr-btn-active;
+    }
+
+    span {
+        margin-inline-start: 6px;
+    }
+
     .btn:hover .btn-option-menu {
         opacity: 1;
         background-color: transparent;
@@ -39,14 +35,16 @@
         align-self: end;
     }
 
-    img.btn-option-menu {
+    button.btn-option-menu {
         opacity: 0;
         padding-inline: 0;
-        height: 24px;
-        width: 24px;
+        height: 20px;
+        width: 20px;
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
     }
 
-    .btn.active {
-        background-color: $clr-btn-active;
-    }
 }
