@@ -30,27 +30,8 @@
 
         .task-title {
 
-            input {
+            .focused-input {
                 width: 100%;
-                padding: 2px;
-                border: 1px solid transparent;
-
-                &:focus {
-                    border-color: #0073ea;
-
-                    border-radius: $border-radius-small;
-                }
-            }
-
-            .task-title-span {
-                border: 1px solid transparent;
-                padding: 2px;
-                border-radius: $border-radius-small;
-                cursor: text;
-
-                &:hover {
-                    border-color: $clr-btn-border;
-                }
             }
 
         }

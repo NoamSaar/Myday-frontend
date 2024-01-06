@@ -36,10 +36,11 @@
 
                 }
 
-                .down-arrow {
+                svg {
                     width: 12px;
                     margin-right: 2px;
                     margin-left: 9px;
+                    fill: inherit;
                     cursor: pointer;
                 }
             }
@@ -57,7 +58,7 @@
 
 
             &:hover {
-                p {
+                .tasks-count {
                     opacity: 1;
                     cursor: grab;
                 }
@@ -116,6 +117,10 @@
 
             }
         }
+    }
+
+    svg:not(.menu-option-modal svg) {
+        fill: inherit;
     }
 
     .task-selection {

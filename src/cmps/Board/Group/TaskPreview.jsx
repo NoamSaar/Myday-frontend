@@ -6,6 +6,7 @@ import { MenuOptionsModal } from "../../MenuOptionsModal"
 import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
+import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 
 export function TaskPreview({ task, groupId, groupColor }) {
     const [currTask, setCurrTask] = useState(null)
@@ -94,7 +95,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
 
     const menuOptions = [
         {
-            icon: "../../../public/icons/delete.svg",
+            icon: <DeleteIcon />,
             title: "Delete",
             onOptionClick: onDeleteTask,
         },
@@ -110,13 +111,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
         >
             <div className="menu-container sticky-left">
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
-                {isShowMenu && (
-                    <img
-                        className="btn"
-                        src="../../../public/icons/menu.svg"
-                        onClick={toggleMenu}
-                    />
-                )}
+                {isShowMenu && (<button className="btn" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
             </div>
             <div
                 style={{ backgroundColor: groupColor }}
@@ -134,37 +129,16 @@ export function TaskPreview({ task, groupId, groupColor }) {
                                 autoFocus
                                 value={taskTitle}
                                 onChange={onChangeTitle}
-                                className="reset"
+                                className="reset focused-input"
                                 type="text"
                                 onBlur={onTitleEditExit}
                             />
                         ) : (
-                            <span className="task-title-span" onClick={onTitleClick}>{taskTitle}</span>
+                            <span className="editable-txt" onClick={onTitleClick}>{taskTitle}</span>
 
                         )}
                     </li>
 
-
-
-                    {/* {isEditing ? (
-                    <input
-                        type="text"
-                        value={editedTitle}
-                        onChange={(ev) => setEditedTitle(ev.target.value)}
-                        onBlur={onRenameBoard}
-                        autoFocus
-                    />
-                ) : (
-                    <>
-                        <span>{board.title}</span>
-                        <img
-                            className="btn btn-option-menu"
-                            src="../../public/icons/menu.svg"
-                            alt="Board Menu"
-                            onClick={onOpenModal}
-                        />
-                    </>
-                )} */}
                 </div>
 
                 {board.titlesOrder.map((title, idx) => {

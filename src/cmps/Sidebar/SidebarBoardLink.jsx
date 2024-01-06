@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MenuOptionsModal } from "../MenuOptionsModal";
 import { removeBoard, updateBoard } from "../../store/actions/board.actions"
+import { DeleteIcon } from "../../services/svg.service";
 
 
 export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
@@ -35,7 +36,7 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
 
     const menuOptions = [
         {
-            icon: '../../../public/icons/delete.svg',
+            icon: <DeleteIcon />,
             title: 'Delete',
             onOptionClick: onDeleteBoard
         },
