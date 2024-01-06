@@ -160,7 +160,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
                     return <DynamicPicker key={idx} title={title} task={currTask} />
                 })}
 
-                <div className="line-end"></div>
+                <li className="line-end"></li>
             </ul>
         </ul>
     )

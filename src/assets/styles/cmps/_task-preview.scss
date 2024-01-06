@@ -9,7 +9,10 @@
         display: flex;
 
         &:hover:not(.active) {
-            background-color: $clr-task-hover;
+            & li {
+
+                background-color: $clr-task-hover;
+            }
 
             .task-title:not(.active),
             .task-selection:not(.active) {

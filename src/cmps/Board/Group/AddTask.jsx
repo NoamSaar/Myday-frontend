@@ -57,7 +57,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                     </li>
                 </div>
 
-                <div className="line-end"></div>
+                <li className="line-end"></li>
             </ul>
         </ul>
     )
