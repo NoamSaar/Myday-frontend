@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
 import { useState } from "react"
-import { addTask } from "../../../store/actions/board.actions"
+import { addTask, setActiveTask } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId }) {
     const [taskTitle, setTaskTitle] = useState('')
@@ -15,9 +15,9 @@ export function TaskList({ groupId }) {
         setTaskTitle(title)
     }
 
-    async function onAddTask(ev) {
+    async function onAddTask() {
         try {
-            ev.preventDefault()
+
             await addTask(board._id, groupId, taskTitle)
             setTaskTitle('')
         } catch (error) {
@@ -25,15 +25,19 @@ export function TaskList({ groupId }) {
         }
     }
 
+    function onSetActiveTask(taskId) {
+        setActiveTask(taskId)
+    }
+
     return (
         <ul className="clean-list task-list">
 
 
             {group.tasks.map(task => {
-                return <TaskPreview key={task.id} task={task} groupId={groupId} groupColor={group.color} />
+                return <TaskPreview key={task.id} task={task} groupId={groupId} groupColor={group.color} onSetActiveTask={onSetActiveTask} />
             })}
 
-            <AddTask title={taskTitle} onSetTitle={onSetTaskTitle} onAddTask={onAddTask} groupColor={group.color} />
+            <AddTask title={taskTitle} onSetTitle={onSetTaskTitle} addTask={onAddTask} groupColor={group.color} onSetActiveTask={onSetActiveTask} groupId={groupId} />
 
         </ul>
 
