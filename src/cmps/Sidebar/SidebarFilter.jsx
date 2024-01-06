@@ -19,7 +19,7 @@ export function SidebarFilter({ filterBy, onSetFilter, onToggleIsFocus, isFocus,
     return (
         <>
             <div className="sidebar-filter grid column place-center">
-                <div className={`search-section flex aligh-center ${isFocus ? 'active' : ''}`}
+                <div className={`search-section flex aligh-center ${isFocus ? 'focus' : ''}`}
                     onClick={onToggleIsFocus}>
                     <div className="btn search-icon">
                         <img src="../../public/icons/Search.svg" alt="search-icon" />

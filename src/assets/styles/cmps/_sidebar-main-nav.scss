@@ -3,12 +3,15 @@
     padding: 12px 40px 12px 12px;
 
     .btn-menu {
+        justify-content: center;
         position: absolute;
         top: 0;
         right: 0;
 
+        width: 30px;
+        height: 38px;
         margin: 0;
-        padding-block: $sidebar-padding;
+        padding: 8px;
 
         background-color: #f6f7fb;
         border-bottom-left-radius: 8px;
