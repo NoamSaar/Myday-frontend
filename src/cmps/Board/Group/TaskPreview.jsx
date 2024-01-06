@@ -124,7 +124,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
         >
             <div className="menu-container sticky-left">
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
-                {isShowMenu && (<button className="btn" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
+                {isShowMenu && (<button className="btn svg-inherit-color" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
             </div>
             <div
                 style={{ backgroundColor: groupColor }}

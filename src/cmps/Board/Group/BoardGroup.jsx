@@ -94,10 +94,10 @@ export function BoardGroup({ group, titlesOrder }) {
                 <div className="group-title-container sticky-left">
                     <div className="menu-container sticky-left">
                         {isMenuOpen && <MenuOptionsModal options={menuOptions} pos={'top'} />}
-                        <button className="btn" onClick={toggleMenu} style={{ fill: 'black' }}><MenuIcon /></button>
+                        <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}><MenuIcon /></button>
                     </div>
                     <div className="sticky-left-40 title-container">
-                        <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container"><AngleDownIcon /></button>
+                        <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container svg-inherit-color"><AngleDownIcon /></button>
 
                         {isEditing ? (
                             <div

@@ -45,8 +45,6 @@
 
                     svg {
                         width: 13px;
-                        fill: inherit;
-                        cursor: pointer;
                     }
                 }
 
@@ -117,7 +115,6 @@
 
             .task-header-list {
                 display: flex;
-                // margin-inline-start: 36px;
 
                 .color-display {
                     margin-top: -0.5px;
@@ -147,10 +144,6 @@
 
             }
         }
-    }
-
-    svg:not(.menu-option-modal svg) {
-        fill: inherit;
     }
 
     .task-selection {
