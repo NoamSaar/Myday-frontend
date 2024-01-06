@@ -115,7 +115,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
     ]
 
 
-    if (!currTask) return <ul>Loading</ul>
+    if (!currTask) return <ul className="task-title">Loading</ul>
     return (
         <ul
             className="clean-list task-preview-container"
