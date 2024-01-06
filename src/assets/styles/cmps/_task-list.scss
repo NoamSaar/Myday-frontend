@@ -86,7 +86,6 @@
     .add-task {
 
         .task-preview {
-            margin-inline-start: 36px;
 
 
             .single-task,
@@ -112,7 +111,9 @@
             opacity: .5;
         }
 
-        &.active {}
+        .task-row-placeholder {
+            height: 37px;
+        }
     }
 
 }

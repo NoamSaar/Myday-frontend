@@ -130,25 +130,28 @@ export function BoardGroup({ group, titlesOrder }) {
                     </div>
                 </div>
 
-                <ul className="clean-list task-header-list">
-                    <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
+                <div className="task-header-list-container sticky-left">
+                    <div className="task-row-placeholder sticky-left"></div>
+                    <ul className="clean-list task-header-list sticky-left-36">
+                        <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
 
-                    <div className="task-title-container">
+                        <div className="task-title-container">
 
-                        <li className="task-selection">
-                            <input type="checkbox" />
-                        </li>
+                            <li className="task-selection">
+                                <input type="checkbox" />
+                            </li>
 
-                        <li className="task-title">Task</li>
-                    </div>
+                            <li className="task-title">Task</li>
+                        </div>
 
-                    {board.titlesOrder.map((title, idx) => {
-                        return <li key={idx} className={`${title.toLowerCase()}-col`}>
-                            {title}
-                        </li>
-                    })}
-                    <li className="line-end"></li>
-                </ul>
+                        {board.titlesOrder.map((title, idx) => {
+                            return <li key={idx} className={`${title.toLowerCase()}-col`}>
+                                {title}
+                            </li>
+                        })}
+                        <li className="line-end"></li>
+                    </ul>
+                </div>
 
             </div>
 
