@@ -24,11 +24,10 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
             console.error("Error changing task title:", error)
         }
     }
-
     return (
-        <ul className={`${activeTask === groupId && 'active'} clean-list task-preview-container add-task`}>
+        <ul className="clean-list task-preview-container add-task">
 
-            <ul className="clean-list task-preview">
+            <ul className={`${activeTask === groupId && 'active'} clean-list task-preview`}>
                 <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
                 <div className="task-title-container">
 

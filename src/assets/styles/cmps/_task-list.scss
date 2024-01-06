@@ -46,7 +46,7 @@
         min-width: 505px;
         max-width: 505px;
 
-        &:not(.active) {
+        &:not(.active):not(.active .task-title-container) {
 
             background-color: white;
         }
@@ -87,6 +87,10 @@
                 width: 1267px;
             }
 
+            .editable-txt {
+                opacity: .8;
+            }
+
         }
 
         .color-display {
@@ -94,6 +98,8 @@
             border-bottom-left-radius: 8px;
             opacity: .5;
         }
+
+        &.active {}
     }
 
 }
