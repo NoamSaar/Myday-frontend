@@ -109,18 +109,24 @@
             rotate: 180deg;
             border-radius: 50%;
             border: 1px solid $clr-btn-border;
-            width: 26px;
-            height: 26px;
+            height: rem(26px);
+            width: rem(26px);
             padding: 0;
             margin-inline-start: 16px;
             transition: 2ms;
+            justify-content: center;
 
             &.collapsed {
                 rotate: 0deg;
             }
 
-            img:hover {
-                animation: bounce 0.5s ease 2;
+            svg {
+                height: rem(16px);
+                width: rem(16px);
+
+                &:hover {
+                    animation: bounce 0.5s ease 2;
+                }
             }
         }
     }

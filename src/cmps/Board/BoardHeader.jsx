@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
-import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon } from "../../services/svg.service"
+import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
 
 export function BoardHeader({ board }) {
 
@@ -75,7 +75,7 @@ export function BoardHeader({ board }) {
                         <span>Automate</span>
                     </button>
                     <button className={dynCollapsedClass + ' btn collapse'} title="Collapse header" onClick={onCollapseHeader}>
-                        <img src="../../public/icons/DropdownChevronDown.svg" alt="Dropdown-icon" />
+                        <AngleDownIcon />
                     </button>
                 </div>
 
