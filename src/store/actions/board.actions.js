@@ -98,6 +98,10 @@ export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })
 }
 
+export function getGcolors() {
+    return boardService.getGcolors()
+}
+
 // Demo for Optimistic Mutation 
 // (IOW - Assuming the server call will work, so updating the UI first)
 // export function onRemoveBoardOptimistic(boardId) {
