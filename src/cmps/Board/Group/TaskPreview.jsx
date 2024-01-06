@@ -118,7 +118,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
     if (!currTask) return <ul>Loading</ul>
     return (
         <ul
-            className="clean-list task-preview-container sticky-left-36"
+            className="clean-list task-preview-container"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
