@@ -49,7 +49,17 @@ export async function loadBoard(boardId) {
         return board
     } catch (error) {
         console.log('Had issues in board details', error)
-        throw err
+        throw error
+    }
+}
+
+export async function getBoard(boardId) {
+    try {
+        const board = await boardService.getById(boardId)
+        return board
+    } catch (error) {
+        console.log('Had issues in board details', error)
+        throw error
     }
 }
 

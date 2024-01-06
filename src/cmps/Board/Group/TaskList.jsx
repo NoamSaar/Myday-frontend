@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
 import { useState } from "react"
-import { addTask, setActiveTask, updateBoard } from "../../../store/actions/board.actions"
+import { addTask, getBoard, setActiveTask, updateBoard } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     const [taskTitle, setTaskTitle] = useState('')
@@ -11,22 +11,36 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
     const group = board.groups[groupIdx]
 
-    const handleDragEnd = (result) => {
-        if (!result.destination) return
+    async function handleDragEnd(result) {
+        try {
 
-        const newOrderedBoards = group.tasks
-        const [removed] = newOrderedBoards.splice(result.source.index, 1)
-        newOrderedBoards.splice(result.destination.index, 0, removed)
-        saveNewOrder()
+            const fullBoard = await getBoard(board._id)
+            console.log('fullBoard', fullBoard)
+            const initGroupIdx = fullBoard.groups.findIndex(group => group.id === groupId)
+            const initGroup = fullBoard.groups[initGroupIdx]
+
+            const newOrderedTasks = initGroup.tasks
+            console.log('newOrderedTasks', newOrderedTasks)
+            const [removed] = newOrderedTasks.splice(result.source.index, 1)
+            newOrderedTasks.splice(result.destination.index, 0, removed)
+            console.log('initGroup.tasks', initGroup.tasks)
+
+            saveNewOrder(fullBoard, initGroupIdx, initGroup)
+            if (!result.destination) return;
+        } catch (error) {
+            console.log('Cannot move task:', error)
+
+        }
+
     }
 
-    async function saveNewOrder() {
+
+    async function saveNewOrder(newBoard, groupIdx, group) {
         try {
-            const newBoard = { ...board }
             newBoard.groups.splice(groupIdx, 1, group)
             await updateBoard(newBoard)
         } catch (error) {
-            console.log('Cannot save group:', error);
+            console.log('Cannot save group:', error)
         }
     }
 
