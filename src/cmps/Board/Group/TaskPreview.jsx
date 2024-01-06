@@ -6,6 +6,7 @@ import { MenuOptionsModal } from "../../MenuOptionsModal"
 import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
+import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 
 export function TaskPreview({ task, groupId, groupColor }) {
     const [currTask, setCurrTask] = useState(null)
@@ -82,7 +83,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
 
     const menuOptions = [
         {
-            icon: "../../../public/icons/delete.svg",
+            icon: <DeleteIcon />,
             title: "Delete",
             onOptionClick: onDeleteTask,
         },
@@ -98,13 +99,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
         >
             <div className="menu-container sticky-left">
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
-                {isShowMenu && (
-                    <img
-                        className="btn"
-                        src="../../../public/icons/menu.svg"
-                        onClick={toggleMenu}
-                    />
-                )}
+                {isShowMenu && (<button className="btn" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
             </div>
             <div
                 style={{ backgroundColor: groupColor }}
@@ -123,6 +118,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
                             type="text"
                         />
                     </li>
+
                 </div>
 
                 {board.titlesOrder.map((title, idx) => {

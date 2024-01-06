@@ -3,19 +3,12 @@ import { TaskList } from "./TaskList";
 import { useSelector } from "react-redux";
 import { MenuOptionsModal } from "../../MenuOptionsModal";
 import { removeGroup } from "../../../store/actions/board.actions";
+import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service";
 
 export function BoardGroup({ group, titlesOrder }) {
-    const [isShowMenu, setIsShowMenu] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
 
-    function handleMouseEnter() {
-        setIsShowMenu(true)
-    }
-
-    function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
-    }
 
     function toggleMenu() {
         setIsMenuOpen(prevIsOpen => !prevIsOpen)
@@ -31,7 +24,7 @@ export function BoardGroup({ group, titlesOrder }) {
 
     const menuOptions = [
         {
-            icon: '../../../public/icons/delete.svg',
+            icon: <DeleteIcon />,
             title: 'Delete',
             onOptionClick: onDeleteGroup
         }
@@ -42,18 +35,15 @@ export function BoardGroup({ group, titlesOrder }) {
         <section className='board-group'>
             <div className="group-sticky-container sticky-left">
 
-                <div className="board-title-container sticky-left" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                <div className="board-title-container sticky-left">
                     <div className="menu-container sticky-left">
                         {isMenuOpen && <MenuOptionsModal options={menuOptions} pos={'top'} />}
-                        <img className="btn" src="../../../public/icons/menu.svg" onClick={toggleMenu} />
+                        <button className="btn" onClick={toggleMenu} style={{ fill: 'black' }}><MenuIcon /></button>
                     </div>
-                    <div className="sticky-left-36 title-container">
-                        <div className="arrow-container">
-
-                            <img className="down-arrow" src="../../../public/icons/NavigationChevronDown.svg" title="Collapse group" />
-                        </div>
+                    <div className="sticky-left-40 title-container">
+                        <button style={{ fill: group.color }} className="arrow-container"><AngleDownIcon /></button>
                         <h4 style={{ color: group.color }}>{group.title}</h4>
-                        <p>{group.tasks.length} Tasks</p>
+                        <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>
                 </div>
 
