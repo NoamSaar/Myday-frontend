@@ -136,10 +136,7 @@
 .focused-input {
     border-radius: $border-radius-small;
     padding-inline: 2px;
-
-    &:focus {
-        outline: 1px solid $clr-btn-add;
-    }
+    outline: 1px solid $clr-btn-add;
 }
 
 .editable-txt {

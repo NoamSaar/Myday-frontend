@@ -8,14 +8,14 @@ import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 
-export function TaskPreview({ task, groupId, groupColor }) {
+export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenu, setIsShowMenu] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
-    const [isActive, setIsActive] = useState(false)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -89,7 +89,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
 
     function onTitleClick() {
         setIsEditing(true)
-        setIsActive(true)
+        onSetActiveTask(currTask.id)
     }
 
     async function onTitleEditExit() {
@@ -100,7 +100,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
                 onTaskChange("title", task.title)
             }
             setIsEditing(false)
-            setIsActive(false)
+            onSetActiveTask(null)
         } catch (error) {
             console.error("Error changing task title:", error)
         }
@@ -118,7 +118,7 @@ export function TaskPreview({ task, groupId, groupColor }) {
     if (!currTask) return <ul>Loading</ul>
     return (
         <ul
-            className="clean-list task-preview-container sticky-left-36"
+            className="clean-list task-preview-container"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
@@ -130,8 +130,8 @@ export function TaskPreview({ task, groupId, groupColor }) {
                 style={{ backgroundColor: groupColor }}
                 className="color-display sticky-left-36"
             ></div>
-            <ul className={`${isActive && 'active'} clean-list task-preview`}>
-                <div className={`task-title-container ${isActive && 'active'}`}>
+            <ul className={`${activeTask === currTask.id && 'active'} clean-list task-preview`}>
+                <div className={`task-title-container ${activeTask === currTask.id && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>

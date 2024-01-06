@@ -2,7 +2,7 @@ import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK } from '../reducers/board.reducer.js'
 
 
 // Store - saveTask (from board.js)
@@ -157,9 +157,10 @@ export async function updateGroup(boardId, group) {
 
 /**************** task actions ****************/
 
-export async function addTask(boardId, groupId, taskTitle) {
+export async function addTask(boardId, groupId, taskTitle, unshiftTask = false) {
     try {
-        const board = await boardService.addTask(boardId, groupId, taskTitle)
+        console.log("Received arguments addTask action:", arguments);
+        const board = await boardService.addTask(boardId, groupId, taskTitle, unshiftTask)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {
@@ -182,6 +183,10 @@ export async function updateTask(boardId, groupId, task) {
     const board = await boardService.updateTask(boardId, groupId, task)
     setCurrBoard(board)
     store.dispatch(getActionUpdateBoard(board))
+}
+
+export function setActiveTask(taskId) {
+    store.dispatch(getActionSetActiveTask(taskId))
 }
 
 
@@ -212,5 +217,12 @@ export function getActionSetBoards(boards) {
     return {
         type: SET_BOARDS,
         boards
+    }
+}
+
+export function getActionSetActiveTask(taskId) {
+    return {
+        type: SET_ACTIVE_TASK,
+        taskId
     }
 }

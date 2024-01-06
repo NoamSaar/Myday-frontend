@@ -1,6 +1,10 @@
 .task-preview-container {
     display: flex;
 
+    &.add-task:hover .color-display {
+        opacity: 1;
+    }
+
     .task-preview {
         display: flex;
 
@@ -12,6 +16,15 @@
                 background-color: $clr-task-hover;
             }
 
+            .status-picker {
+                opacity: .8;
+                box-shadow: -3px 0px 23px 2px rgba(255, 255, 255, 0.32);
+            }
+
+        }
+
+        &.active .color-display {
+            opacity: 1;
         }
 
         li {

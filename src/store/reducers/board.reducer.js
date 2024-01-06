@@ -4,6 +4,7 @@ export const SET_BOARDS = 'SET_BOARDS'
 export const REMOVE_BOARD = 'REMOVE_BOARD'
 export const ADD_BOARD = 'ADD_BOARD'
 export const SET_CURR_BOARD = 'SET_CURR_BOARD'
+export const SET_ACTIVE_TASK = 'SET_ACTIVE_TASK'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
@@ -12,6 +13,7 @@ const initialState = {
     boards: [],
     lastRemovedBoard: null,
     currBoard: null,
+    activeTask: null,
     filterBy: boardService.getDefaultFilter()
 }
 
@@ -48,8 +50,11 @@ export function boardReducer(state = initialState, action) {
             }
             break
 
+        case SET_ACTIVE_TASK:
+            newState = { ...state, activeTask: action.taskId }
+            break
+
         case SET_FILTER_BY:
-            newState = { ...state, filterBy: { ...state.filterBy, ...action.filterBy } }
             break
 
         default:

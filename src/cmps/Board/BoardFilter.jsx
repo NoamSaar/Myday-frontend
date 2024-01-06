@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
+import { addTask } from "../../store/actions/board.actions"
 
 
-export function BoardFilter() {
+export function BoardFilter({ board }) {
 
     const [isFocused, setIsFocused] = useState(false)
     const filterSearchRef = useRef(null)
@@ -28,11 +29,20 @@ export function BoardFilter() {
         setIsFocused(!isFocused)
     }
 
+    async function onAddTask() {
+        try {
+            const taskTitle = 'New Item'
+            await addTask(board._id, board.groups[0].id, taskTitle, true)
+        } catch (error) {
+            console.error("Error adding new task:", error)
+        }
+    }
+
     const dynFocusedClass = isFocused ? 'focused' : ''
 
     return (
         <div className="board-filter">
-            <button title="New task" className="btn new-task">New Task</button>
+            <button title="New task" className="btn new-task" onClick={onAddTask}>New Task</button>
 
             <div className={dynFocusedClass + ' btn search'} onClick={onToggleIsFocused} ref={filterSearchRef}>
                 <SearchIcon />
