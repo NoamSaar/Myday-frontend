@@ -41,6 +41,16 @@ export async function loadBoards() {
     }
 }
 
+export async function saveBoards(boards) {
+    try {
+        await boardService.saveBoards(boards)
+        store.dispatch(getActionSetBoards(boards))
+    } catch (err) {
+        console.log('Cannot save boards', err)
+        throw err
+    }
+}
+
 export async function removeBoard(boardId) {
     try {
         await boardService.remove(boardId)

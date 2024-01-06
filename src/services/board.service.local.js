@@ -9,6 +9,7 @@ export const boardService = {
     query,
     getById,
     save,
+    saveBoards,
     remove,
     addTask,
     removeTask,
@@ -727,6 +728,14 @@ async function save(board) {
     } catch (error) {
         throw new Error(error.message || 'An error occurred during saving board')
 
+    }
+}
+
+async function saveBoards(boards) {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(boards))
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during saving boards')
     }
 }
 

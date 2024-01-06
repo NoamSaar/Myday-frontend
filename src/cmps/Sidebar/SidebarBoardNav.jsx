@@ -1,16 +1,52 @@
-import { SidebarBoardLink } from "./SidebarBoardLink";
+import React from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { SidebarBoardLink } from './SidebarBoardLink';
+import { saveBoards } from '../../store/actions/board.actions';
 
-export function SidebarBoardNav({ boards, isActive, currActiveBoard }) {
+export function SidebarBoardNav({ boards, currActiveBoard }) {
+    const handleDragEnd = (result) => {
+        if (!result.destination) return;
+
+        // TODO: Update the order of boards in your state or dispatch an action
+        // result.source.index and result.destination.index give you the source and destination indices
+        // of the dragged board
+
+        const newOrderedBoards = Array.from(boards)
+        const [removed] = newOrderedBoards.splice(result.source.index, 1);
+        newOrderedBoards.splice(result.destination.index, 0, removed)
+        saveNewOrder(newOrderedBoards)
+    }
+
+    async function saveNewOrder(boards) {
+        try {
+            await saveBoards(boards)
+        } catch (error) {
+            showErrorMsgRedux('Cannot save Boards')
+        }
+    }
+    console.log('boards:', boards)
     return (
-        <nav className="sidebar-board-nav">
-            {boards.map(board => (
-                <SidebarBoardLink
-                    boards={boards}
-                    key={board._id}
-                    board={board}
-                    isActive={isActive}
-                    currActiveBoard={currActiveBoard} />
-            ))}
-        </nav>
-    )
+        <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="boards">
+                {(provided) => (
+                    <nav className="sidebar-board-nav" {...provided.droppableProps} ref={provided.innerRef}>
+                        {boards.map((board, index) => (
+                            <Draggable key={board._id} draggableId={board._id} index={index}>
+                                {(provided) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                    >
+                                        <SidebarBoardLink boards={boards} board={board} currActiveBoard={currActiveBoard} />
+                                    </div>
+                                )}
+                            </Draggable>
+                        ))}
+                        {provided.placeholder}
+                    </nav>
+                )}
+            </Droppable>
+        </DragDropContext>
+    );
 }

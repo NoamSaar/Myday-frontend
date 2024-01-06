@@ -1,11 +1,16 @@
 .sidebar-board-nav {
     padding-inline: $sidebar-padding;
 
+    &>* {
+        height: 32px;
+    }
+
     .btn {
         display: flex;
         justify-content: stretch;
         gap: 0;
         position: relative;
+        padding-block: 6px;
 
         span {
             flex-grow: 1;
