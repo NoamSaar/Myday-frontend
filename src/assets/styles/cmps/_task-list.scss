@@ -47,6 +47,18 @@
         max-width: 505px;
         z-index: 10;
 
+        .single-task {
+
+            form {
+                width: 95%;
+
+                .focused-input {
+                    background-color: white;
+                }
+            }
+        }
+
+
         &:not(.active):not(.active .task-title-container) {
 
             background-color: white;
