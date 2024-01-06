@@ -4,7 +4,7 @@ import { AddTask } from "./AddTask"
 import { useState } from "react"
 import { addTask, setActiveTask } from "../../../store/actions/board.actions"
 
-export function TaskList({ groupId }) {
+export function TaskList({ groupId, highlightText, filterBy }) {
     const [taskTitle, setTaskTitle] = useState('')
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
@@ -34,7 +34,15 @@ export function TaskList({ groupId }) {
 
 
             {group.tasks.map(task => {
-                return <TaskPreview key={task.id} task={task} groupId={groupId} groupColor={group.color} onSetActiveTask={onSetActiveTask} />
+                return <TaskPreview
+                    key={task.id}
+                    task={task}
+                    groupId={groupId}
+                    groupColor={group.color}
+                    onSetActiveTask={onSetActiveTask}
+                    highlightText={highlightText}
+                    filterBy={filterBy}
+                />
             })}
 
             <AddTask title={taskTitle} onSetTitle={onSetTaskTitle} addTask={onAddTask} groupColor={group.color} onSetActiveTask={onSetActiveTask} groupId={groupId} />

@@ -3,11 +3,11 @@ import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIc
 import { addTask } from "../../store/actions/board.actions"
 
 
-export function BoardFilter({ board }) {
+export function BoardFilter({ board, filterBy, onSetFilter }) {
 
     const [isFocused, setIsFocused] = useState(false)
     const filterSearchRef = useRef(null)
-
+    const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
     useEffect(() => {
         function handleClickOutsideSearch(event) {
@@ -25,6 +25,10 @@ export function BoardFilter({ board }) {
         }
     }, [])
 
+    useEffect(() => {
+        onSetFilter(filterByToEdit)
+    }, [filterByToEdit])
+
     function onToggleIsFocused() {
         setIsFocused(!isFocused)
     }
@@ -38,16 +42,51 @@ export function BoardFilter({ board }) {
         }
     }
 
+    function handleChange({ target }) {
+        const field = target.name
+        let value = target.value
+
+        switch (target.type) {
+            case 'number':
+            case 'range':
+                value = +value
+                break
+            case 'checkbox':
+                value = target.checked
+                break
+            default:
+                break
+        }
+
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
+    }
+
     const dynFocusedClass = isFocused ? 'focused' : ''
+    const { txt } = filterByToEdit
+
 
     return (
         <div className="board-filter">
 
-            <button title="New task" className="btn new-task" onClick={onAddTask}>New Task</button>
+            <button title="New task" className="btn new-task" onClick={onAddTask}>
+                <span>New Task</span>
+            </button>
 
             <div className={dynFocusedClass + ' btn search'} onClick={onToggleIsFocused} ref={filterSearchRef}>
                 <SearchIcon />
-                <input className="reset" type="search" placeholder="Search" />
+
+                <form>
+                    <input
+                        className="reset"
+                        type="search"
+                        placeholder="Search"
+                        value={txt}
+                        onChange={handleChange}
+                        name="txt"
+                        autoComplete="off"
+                    />
+                </form>
+
                 {isFocused &&
                     <SettingsKnobsIcon />
                 }

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 
-export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
+export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenu, setIsShowMenu] = useState(false)
@@ -149,7 +149,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
                                 />
                             </form>
                         ) : (
-                            <span className="editable-txt" onClick={onTitleClick}>{taskTitle}</span>
+                            <span className="editable-txt" onClick={onTitleClick}>{highlightText(taskTitle, filterBy.txt)}</span>
+                            // <span className="editable-txt" onClick={onTitleClick}>{taskTitle}</span>
 
                         )}
                     </li>

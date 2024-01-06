@@ -41,6 +41,18 @@ export async function loadBoards() {
     }
 }
 
+export async function loadBoard(boardId) {
+    try {
+        const filterBy = store.getState().boardModule.filterBy
+        const board = await boardService.getById(boardId, filterBy)
+        setCurrBoard(board)
+        return board
+    } catch (error) {
+        console.log('Had issues in board details', error)
+        throw err
+    }
+}
+
 export async function removeBoard(boardId) {
     try {
         await boardService.remove(boardId)
@@ -149,7 +161,6 @@ export async function updateGroup(boardId, group) {
 
 export async function addTask(boardId, groupId, taskTitle, unshiftTask = false) {
     try {
-        console.log("Received arguments addTask action:", arguments);
         const board = await boardService.addTask(boardId, groupId, taskTitle, unshiftTask)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
@@ -223,3 +234,6 @@ export function getActionSetActiveTask(taskId) {
         taskId
     }
 }
+
+
+

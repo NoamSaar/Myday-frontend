@@ -55,6 +55,7 @@ export function boardReducer(state = initialState, action) {
             break
 
         case SET_FILTER_BY:
+            newState = { ...state, filterBy: { ...state.filterBy, ...action.filterBy } }
             break
 
         default:

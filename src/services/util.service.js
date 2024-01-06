@@ -65,10 +65,10 @@ function loadFromStorage(key) {
 }
 
 function getFormatDate(timestamp) {
-    const date = new Date(timestamp);
-    const options = { day: 'numeric', month: 'short' };
-    const formatter = new Intl.DateTimeFormat('en-US', options);
-    return formatter.format(date);
+    const date = new Date(timestamp)
+    const options = { day: 'numeric', month: 'short' }
+    const formatter = new Intl.DateTimeFormat('en-US', options)
+    return formatter.format(date)
 }
 
 function getFormatName(name) {

@@ -15,7 +15,7 @@
     top: 0;
     left: 0;
     background-color: $clr0;
-    z-index: 15;
+    z-index: 25;
 
     &.collapsed {
         grid-template-areas:
@@ -139,6 +139,7 @@
         gap: 6px;
         padding-block: 16px;
         border-top: 1px solid $clr-group-border;
+        min-width: max-content;
 
         .new-task {
             @include btn($type: clrblue);

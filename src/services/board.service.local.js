@@ -693,21 +693,35 @@ const gBoards = [
 _initBoards()
 
 async function query(filterBy = { title: '' }) {
-    let boards = await storageService.query(STORAGE_KEY)
-    if (filterBy.title) {
-        const regex = new RegExp(filterBy.title, 'i')
-        boards = boards.filter(board => regex.test(board.title))
+    try {
+        let boards = await storageService.query(STORAGE_KEY)
+        if (filterBy.title) {
+            const regex = new RegExp(filterBy.title, 'i')
+            boards = boards.filter(board => regex.test(board.title))
+        }
+        return boards
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during getting boards')
     }
-    return boards
+
 }
 
-async function getById(boardId) {
+async function getById(boardId, filterBy = { txt: '' }) {
+    console.log("Received arguments getById:", arguments)
     try {
-        return await storageService.get(STORAGE_KEY, boardId)
+        let board = await storageService.get(STORAGE_KEY, boardId)
+        if (filterBy.txt) {
+            const regex = new RegExp(filterBy.txt, 'i')
+            board.groups = board.groups.filter(group => {
+                // Filter tasks within the group
+                group.tasks = group.tasks.filter(task => regex.test(task.title))
+                // Return groups that have matching title or have at least one matching task title
+                return regex.test(group.title) || group.tasks.length > 0
+            })
+        }
+        return board
     } catch (error) {
-
         throw new Error(error.message || 'An error occurred during getting board')
-
     }
 }
 
@@ -731,7 +745,7 @@ async function save(board) {
 }
 
 function getDefaultFilter() {
-    return { title: '' }
+    return { title: '', txt: '' }
 }
 
 function _getDefaultBoard() {

@@ -10,7 +10,7 @@ export function BoardGroup({ group, titlesOrder }) {
     const [isEditing, setIsEditing] = useState(false)
     const [groupTitle, setGroupTitle] = useState(group.title)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
-
+    const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
 
     function toggleMenu() {
         setIsMenuOpen(prevIsOpen => !prevIsOpen)
@@ -56,6 +56,17 @@ export function BoardGroup({ group, titlesOrder }) {
         }
     }
 
+    function highlightText(text, query) {
+        if (!query) return text
+        const parts = text.split(new RegExp(`(${query})`, 'gi'))
+        return parts.map((part, index) =>
+            part.toLowerCase() === query.toLowerCase()
+                ? <span key={index} className="highlight">{part}</span>
+                : part
+        )
+    }
+
+
     const menuOptions = [
         {
             icon: <DeleteIcon />,
@@ -97,7 +108,8 @@ export function BoardGroup({ group, titlesOrder }) {
                                 </form>
                             </div>
                         ) : (
-                            <h4 style={{ color: group.color }} className="editable-txt" onClick={() => setIsEditing(true)}>{groupTitle}</h4>
+                            <h4 style={{ color: group.color }} className="editable-txt" onClick={() => setIsEditing(true)}>{highlightText(groupTitle, filterBy.txt)}</h4>
+                            // <h4 style={{ color: group.color }} className="editable-txt" onClick={() => setIsEditing(true)}>{groupTitle}</h4>
                         )}
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>
@@ -125,7 +137,11 @@ export function BoardGroup({ group, titlesOrder }) {
 
             </div>
 
-            <TaskList titlesOrder={titlesOrder} groupId={group.id} />
+            <TaskList titlesOrder={titlesOrder}
+                groupId={group.id}
+                highlightText={highlightText}
+                filterBy={filterBy}
+            />
         </section >
     )
 }

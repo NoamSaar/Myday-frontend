@@ -3,7 +3,7 @@ import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
 import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
 
-export function BoardHeader({ board }) {
+export function BoardHeader({ board, filterBy, onSetFilter }) {
 
     const [isCollapsed, setIsCollapsed] = useState(false)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
@@ -79,7 +79,11 @@ export function BoardHeader({ board }) {
                     </button>
                 </div>
 
-                <BoardFilter board={board} />
+                <BoardFilter
+                    board={board}
+                    filterBy={filterBy}
+                    onSetFilter={onSetFilter}
+                />
             </header>
         </>
     )
