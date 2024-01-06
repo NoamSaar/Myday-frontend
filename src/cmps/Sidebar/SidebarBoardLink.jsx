@@ -33,6 +33,13 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
         setisModalOpen(!isModalOpen)
     }
 
+    const handleBlur = (ev) => {
+        // Check if the blur target is not the button before closing the modal
+        if (!ev.currentTarget.contains(ev.relatedTarget)) {
+            setisModalOpen(false);
+        }
+    }
+
     const menuOptions = [
         {
             icon: <DeleteIcon />,
@@ -51,19 +58,19 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
 
     // const posOptions = ['left', 'top', '30px', '145px']
     const posOptions = {
-        left: '145px',
+        left: '0',
         right: 0,
         top: '28px',
         button: 0,
     }
 
     const style = { position: 'relative' }
-    const dynamicClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
-
+    const dynNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
+    const dynModalClass = isModalOpen ? 'active' : ''
     if (!boards && !boards.length) return <div>Loading board...</div>
     return (
         <>
-            <NavLink className={`btn ${dynamicClass}`}
+            <NavLink className={`btn ${dynNavClass}`}
                 to={`/board/${board._id}`}
                 title={`${board.title} Board`}
             >
@@ -80,16 +87,16 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
                     <>
                         <span>{board.title}</span>
                         <button
-                            className="btn btn-option-menu"
+                            className={`btn btn-option-menu relative ${dynModalClass}`}
                             style={style}
                             alt="Board Menu"
                             onClick={onOpenModal}
                             title="Board Menu"
+                            onBlur={handleBlur}
                         >
                             <MenuIcon />
                             {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
                         </button>
-
                     </>
                 )}
             </NavLink>

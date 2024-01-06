@@ -1,18 +1,14 @@
-import React from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { SidebarBoardLink } from './SidebarBoardLink';
-import { saveBoards } from '../../store/actions/board.actions';
+import React from 'react'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { SidebarBoardLink } from './SidebarBoardLink'
+import { saveBoards } from '../../store/actions/board.actions'
 
 export function SidebarBoardNav({ boards, currActiveBoard }) {
     const handleDragEnd = (result) => {
-        if (!result.destination) return;
-
-        // TODO: Update the order of boards in your state or dispatch an action
-        // result.source.index and result.destination.index give you the source and destination indices
-        // of the dragged board
+        if (!result.destination) return
 
         const newOrderedBoards = Array.from(boards)
-        const [removed] = newOrderedBoards.splice(result.source.index, 1);
+        const [removed] = newOrderedBoards.splice(result.source.index, 1)
         newOrderedBoards.splice(result.destination.index, 0, removed)
         saveNewOrder(newOrderedBoards)
     }
@@ -24,7 +20,6 @@ export function SidebarBoardNav({ boards, currActiveBoard }) {
             showErrorMsgRedux('Cannot save Boards')
         }
     }
-    console.log('boards:', boards)
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable droppableId="boards">
@@ -48,5 +43,5 @@ export function SidebarBoardNav({ boards, currActiveBoard }) {
                 )}
             </Droppable>
         </DragDropContext>
-    );
+    )
 }
