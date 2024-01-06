@@ -153,6 +153,13 @@ export async function addTask(boardId, groupId, taskTitle, unshiftTask = false) 
         const board = await boardService.addTask(boardId, groupId, taskTitle, unshiftTask)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
+
+        const groupIdx = unshiftTask ? 0 : board.groups.findIndex(group => group.id === groupId)
+        const newTaskIdx = unshiftTask ? 0 : board.groups[groupIdx].tasks.length - 1
+        const newTaskId = board.groups[groupIdx].tasks[newTaskIdx].id
+        setActiveTask(newTaskId)
+
+        return board
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
     }

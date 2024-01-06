@@ -42,6 +42,7 @@ export function BoardFilter({ board }) {
 
     return (
         <div className="board-filter">
+
             <button title="New task" className="btn new-task" onClick={onAddTask}>New Task</button>
 
             <div className={dynFocusedClass + ' btn search'} onClick={onToggleIsFocused} ref={filterSearchRef}>
