@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/actions/user.actions.js'
 import { LoginSignup } from './LoginSignup.jsx'
-import { LogoIcon } from '../services/svg.service.jsx'
+import { LogoIcon, GridMenuIcon } from '../services/svg.service.jsx'
 
 export function AppHeader() {
-    const user = useSelector(storeState => storeState.userModule.user)
+    var user = useSelector(storeState => storeState.userModule.user)
 
     async function onLogin(credentials) {
         try {
@@ -33,10 +33,21 @@ export function AppHeader() {
         }
     }
 
+    if (!user) user = {
+        fullname: "Guest",
+        imgUrl: "https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg",
+    }
+
     return (
-        <header className="app-header">
-            <LogoIcon />
-            <nav>
+        <header className="app-header flex space-between align-center">
+            <section className="header-logo grid column place-center">
+                <LogoIcon />
+                <span className="app-title">monday</span>
+            </section>
+            <nav className="header-nav">
+                <div className="user">
+                    <img src={`${user.imgUrl}`} alt="user-profile" />
+                </div>
                 {/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
                 {user &&

@@ -45,7 +45,7 @@
         justify-content: center;
     }
 
-    &.justify-space-between {
+    &.space-between {
         justify-content: space-between;
     }
 
@@ -127,4 +127,23 @@
 
 .svg-inherit-color svg {
     fill: inherit;
+}
+
+.focused-input {
+    border-radius: $border-radius-small;
+    padding-inline: 2px;
+
+    &:focus {
+        outline: 1px solid $clr-btn-add;
+    }
+}
+
+.editable-txt {
+    border-radius: $border-radius-small;
+    padding-inline: 2px;
+    cursor: text;
+
+    &:hover {
+        outline: 1px solid $clr-btn-border;
+    }
 }

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 export function Sidebar() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
+    const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -78,7 +79,8 @@ export function Sidebar() {
                     boards={boards}
                     isActive={isActive}
                     // onToggleIsActive={onToggleIsActive}
-                    filterBy={filterBy} />
+                    filterBy={filterBy}
+                    currActiveBoard={currActiveBoard} />
                 {/* <LottieAnimation /> */}
             </article>
         </section>

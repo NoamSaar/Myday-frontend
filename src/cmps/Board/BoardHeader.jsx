@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
-import { HomeIcon, InviteIcon, PlusIcon, RobotIcon } from "../../services/svg.service"
+import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon } from "../../services/svg.service"
 
 export function BoardHeader({ board }) {
 
@@ -55,7 +55,7 @@ export function BoardHeader({ board }) {
                         <span>Invite / 1</span>
                     </button>
                     <button className="btn more" title="Options">
-                        <img src="../../public/icons/menu.svg" alt="More-icon" />
+                        <MenuIcon />
                     </button>
                 </div>
 

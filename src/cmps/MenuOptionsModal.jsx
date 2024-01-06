@@ -14,7 +14,7 @@ export function MenuOptionsModal({ pos, options, relative }) {
         <div style={style} className="menu-option-modal">
             {options.map((option, idx) => {
                 return <div key={idx} className="btn" onClick={option.onOptionClick}>
-                    <img src={option.icon} />
+                    <button>{option.icon}</button>
                     <p>{option.title}</p>
                 </div>
             })}

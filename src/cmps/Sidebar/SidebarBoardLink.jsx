@@ -2,9 +2,10 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MenuOptionsModal } from "../MenuOptionsModal";
 import { removeBoard, updateBoard } from "../../store/actions/board.actions"
+import { DeleteIcon } from "../../services/svg.service";
 
 
-export function SidebarBoardLink({ board, isActive }) {
+export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
     const [isModalOpen, setisModalOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
@@ -35,7 +36,7 @@ export function SidebarBoardLink({ board, isActive }) {
 
     const menuOptions = [
         {
-            icon: '../../../public/icons/delete.svg',
+            icon: <DeleteIcon />,
             title: 'Delete',
             onOptionClick: onDeleteBoard
         },
@@ -58,10 +59,12 @@ export function SidebarBoardLink({ board, isActive }) {
     }
 
     const style = { position: 'relative' }
+    const dynamicClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
 
+    if (!boards && !boards.length) return <div>Loading board...</div>
     return (
         <section>
-            <NavLink className={`btn ${isActive ? 'active' : ''}`}
+            <NavLink className={`btn ${dynamicClass}`}
                 to={`/board/${board._id}`}
                 title={`${board.title} Board`}
             >
