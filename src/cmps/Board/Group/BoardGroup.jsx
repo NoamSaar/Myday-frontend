@@ -11,6 +11,7 @@ export function BoardGroup({ group, titlesOrder }) {
     const [isEditing, setIsEditing] = useState(false)
     const [isColorPickerOpen, setIsColorPickerOpen] = useState(false)
     const [groupTitle, setGroupTitle] = useState(group.title)
+    const [groupColor, setGroupColor] = useState(group.color)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const colors = getGcolors()
 
@@ -43,6 +44,18 @@ export function BoardGroup({ group, titlesOrder }) {
             if (title) onGroupChange("title", title)
         } catch (error) {
             console.error("Error changing group title:", error)
+        }
+    }
+
+    async function onChangeColor(color) {
+        try {
+            setGroupColor(color)
+            onGroupChange("color", color)
+            setIsColorPickerOpen(false)
+            setIsEditing(false)
+        } catch (error) {
+            console.error("Error changing group color:", error)
+            setGroupColor(group.color)
         }
     }
 
@@ -84,7 +97,7 @@ export function BoardGroup({ group, titlesOrder }) {
                         <button className="btn" onClick={toggleMenu} style={{ fill: 'black' }}><MenuIcon /></button>
                     </div>
                     <div className="sticky-left-40 title-container">
-                        <button title="Collapse group" style={{ fill: group.color }} className="arrow-container"><AngleDownIcon /></button>
+                        <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container"><AngleDownIcon /></button>
 
                         {isEditing ? (
                             <div
@@ -94,14 +107,14 @@ export function BoardGroup({ group, titlesOrder }) {
                             >
 
                                 <div className="group-color-display-container" >
-                                    <div className="group-color-display" style={{ backgroundColor: group.color }} onMouseDown={onColorDisplayClick}></div>
-                                    {isColorPickerOpen && <ColorPickerModal colors={colors} />}
+                                    <div className="group-color-display" style={{ backgroundColor: groupColor }} onMouseDown={onColorDisplayClick}></div>
+                                    {isColorPickerOpen && <ColorPickerModal colors={colors} onColorClick={onChangeColor} />}
                                 </div>
 
                                 <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                     <input
                                         className="reset"
-                                        style={{ color: group.color }}
+                                        style={{ color: groupColor }}
                                         type="text"
                                         autoFocus
                                         value={groupTitle}
@@ -111,14 +124,14 @@ export function BoardGroup({ group, titlesOrder }) {
                                 </form>
                             </div>
                         ) : (
-                            <h4 style={{ color: group.color }} className="editable-txt" onClick={() => setIsEditing(true)}>{groupTitle}</h4>
+                            <h4 style={{ color: groupColor }} className="editable-txt" onClick={() => setIsEditing(true)}>{groupTitle}</h4>
                         )}
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>
                 </div>
 
                 <ul className="clean-list task-header-list">
-                    <div style={{ backgroundColor: group.color }} className="color-display sticky-left-36"></div>
+                    <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
 
                     <div className="task-title-container">
 
@@ -139,7 +152,7 @@ export function BoardGroup({ group, titlesOrder }) {
 
             </div>
 
-            <TaskList titlesOrder={titlesOrder} groupId={group.id} />
+            <TaskList titlesOrder={titlesOrder} groupId={group.id} groupColor={groupColor} />
         </section >
     )
 }
