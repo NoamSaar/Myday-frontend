@@ -129,12 +129,12 @@ export function TaskPreview({ task, groupId, groupColor }) {
                                 autoFocus
                                 value={taskTitle}
                                 onChange={onChangeTitle}
-                                className="reset"
+                                className="reset focused-input"
                                 type="text"
                                 onBlur={onTitleEditExit}
                             />
                         ) : (
-                            <span className="task-title-span" onClick={onTitleClick}>{taskTitle}</span>
+                            <span className="editable-txt" onClick={onTitleClick}>{taskTitle}</span>
 
                         )}
                     </li>
