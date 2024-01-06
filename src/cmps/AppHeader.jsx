@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/actions/user.actions.js'
 import { LoginSignup } from './LoginSignup.jsx'
+import { LogoIcon } from '../services/svg.service.jsx'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
@@ -34,6 +35,7 @@ export function AppHeader() {
 
     return (
         <header className="app-header">
+            <LogoIcon />
             <nav>
                 {/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 

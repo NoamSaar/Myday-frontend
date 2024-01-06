@@ -40,9 +40,14 @@
     border-radius: $border-radius-small;
     cursor: pointer;
 
-    img {
-        height: 100%;
-        width: auto;
+    // img,
+    // svg {
+    //     height: 100%;
+    //     width: auto;
+    // }
+    svg {
+        height: rem(20px);
+        width: rem(20px);
     }
 
     @if $type ==regular {
