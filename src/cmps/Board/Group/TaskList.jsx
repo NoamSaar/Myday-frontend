@@ -22,10 +22,8 @@ export function TaskList({ groupId, groupColor }) {
 
     async function saveNewOrder() {
         try {
-            console.log('group', group)
-            const newBoard = [...board]
+            const newBoard = { ...board }
             newBoard.groups.splice(groupIdx, 1, group)
-            console.log('newBoard', newBoard)
             await updateBoard(newBoard)
         } catch (error) {
             console.log('Cannot save group:', error);
@@ -59,8 +57,8 @@ export function TaskList({ groupId, groupColor }) {
                     {(provided) => (
                         <div className="tasks-container" {...provided.droppableProps} ref={provided.innerRef}>
                             {
-                                group.tasks.map((task, idx) => {
-                                    <Draggable key={task.id} draggableId={board._id} index={idx}>
+                                group.tasks.map((task, idx) => (
+                                    <Draggable key={task.id} draggableId={task.id} index={idx}>
                                         {(provided) => (
                                             <div
                                                 ref={provided.innerRef}
@@ -71,9 +69,9 @@ export function TaskList({ groupId, groupColor }) {
                                             </div>
                                         )}
                                     </Draggable>
-                                    // return <TaskPreview key={task.id} task={task} groupId={groupId} groupColor={groupColor} onSetActiveTask={onSetActiveTask} />
-                                })
+                                ))
                             }
+
                             {provided.placeholder}
                         </div>
                     )}

@@ -30,6 +30,7 @@
         li {
             white-space: nowrap;
             height: 36px;
+            background-color: white;
 
             &:not(.task-selection) {
                 cursor: pointer;
