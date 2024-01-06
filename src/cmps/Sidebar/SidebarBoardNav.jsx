@@ -3,7 +3,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { SidebarBoardLink } from './SidebarBoardLink'
 import { saveBoards } from '../../store/actions/board.actions'
 
-export function SidebarBoardNav({ boards, currActiveBoard }) {
+export function SidebarBoardNav({ boards, currActiveBoard, openModalId }) {
     const handleDragEnd = (result) => {
         if (!result.destination) return
 
@@ -33,7 +33,7 @@ export function SidebarBoardNav({ boards, currActiveBoard }) {
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
                                     >
-                                        <SidebarBoardLink boards={boards} board={board} currActiveBoard={currActiveBoard} />
+                                        <SidebarBoardLink boards={boards} board={board} currActiveBoard={currActiveBoard} openModalId={openModalId} />
                                     </div>
                                 )}
                             </Draggable>

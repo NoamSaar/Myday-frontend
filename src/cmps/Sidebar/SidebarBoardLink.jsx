@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { MenuOptionsModal } from "../MenuOptionsModal";
-import { removeBoard, updateBoard } from "../../store/actions/board.actions"
-import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service";
 
-export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
-    const [isModalOpen, setisModalOpen] = useState(false)
+import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service";
+import { removeBoard, updateBoard } from "../../store/actions/board.actions"
+import { setOpenModal } from "../../store/actions/system.actions";
+import { MenuOptionsModal } from "../MenuOptionsModal";
+
+export function SidebarBoardLink({ boards, board, currActiveBoard, openModalId }) {
+    const [isModalOpen, setisModalOpen] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
-    const navigate = useNavigate()
+    console.log('openModalId:', openModalId)
+
+    useEffect(() => {
+        if (openModalId === board._id) setisModalOpen(true)
+        else setisModalOpen(false)
+    }, [isModalOpen])
+
+    const dispatch = useDispatch()
 
     async function onDeleteBoard() {
         try {
@@ -29,15 +39,15 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
         }
     }
 
-    function onOpenModal(ev) {
-        setisModalOpen(!isModalOpen)
-    }
-
-    const handleBlur = (ev) => {
-        // Check if the blur target is not the button before closing the modal
-        if (!ev.currentTarget.contains(ev.relatedTarget)) {
-            setisModalOpen(false);
+    function onToggleModal() {
+        if (openModalId === board._id) {
+            dispatch(setOpenModal(null))
+            setisModalOpen(false)
+        } else {
+            dispatch(setOpenModal(board._id))
+            setisModalOpen(true)
         }
+
     }
 
     const menuOptions = [
@@ -56,17 +66,16 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
         }
     ]
 
-    // const posOptions = ['left', 'top', '30px', '145px']
     const posOptions = {
         left: '0',
         right: 0,
         top: '28px',
         button: 0,
     }
-
     const style = { position: 'relative' }
     const dynNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
     const dynModalClass = isModalOpen ? 'active' : ''
+    console.log('isModalOpen:', isModalOpen)
     if (!boards && !boards.length) return <div>Loading board...</div>
     return (
         <>
@@ -90,12 +99,11 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
                             className={`btn btn-option-menu relative ${dynModalClass}`}
                             style={style}
                             alt="Board Menu"
-                            onClick={onOpenModal}
+                            onClick={onToggleModal}
                             title="Board Menu"
-                            onBlur={handleBlur}
                         >
                             <MenuIcon />
-                            {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
+                            {isModalOpen && <MenuOptionsModal id={board._id} options={menuOptions} relative={posOptions} />}
                         </button>
                     </>
                 )}

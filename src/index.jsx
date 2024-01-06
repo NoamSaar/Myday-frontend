@@ -6,14 +6,17 @@ import { Provider } from 'react-redux'
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { store } from './store/store'
 import { RootCmp } from './RootCmp'
+import { ModalProvider } from './services/modalConext'
 import './assets/styles/main.scss'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Provider store={store}>
-    <Router>
-      <RootCmp />
-    </Router>
+    <ModalProvider>
+      <Router>
+        <RootCmp />
+      </Router>
+    </ModalProvider>
   </Provider>
 )
 
