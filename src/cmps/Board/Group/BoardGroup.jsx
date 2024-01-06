@@ -2,8 +2,9 @@ import { useState } from "react";
 import { TaskList } from "./TaskList";
 import { useSelector } from "react-redux";
 import { MenuOptionsModal } from "../../MenuOptionsModal";
-import { removeGroup, updateGroup } from "../../../store/actions/board.actions";
+import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions";
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service";
+import { ColorPickerModal } from "./Picker/PickerModals/ColorPickerModal";
 
 export function BoardGroup({ group, titlesOrder }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -11,6 +12,7 @@ export function BoardGroup({ group, titlesOrder }) {
     const [isColorPickerOpen, setIsColorPickerOpen] = useState(false)
     const [groupTitle, setGroupTitle] = useState(group.title)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const colors = getGcolors()
 
 
     function toggleMenu() {
@@ -86,10 +88,14 @@ export function BoardGroup({ group, titlesOrder }) {
 
                         {isEditing ? (
                             <div
+                                tabIndex={0}
+                                onBlur={onTitleEditExit}
                                 className="focused-input group-title-edit-container"
                             >
 
-                                <div className="group-color-display" style={{ backgroundColor: group.color }} onMouseDown={onColorDisplayClick}></div>
+                                <div className="group-color-display" style={{ backgroundColor: group.color }} onMouseDown={onColorDisplayClick}>
+                                    {isColorPickerOpen && <ColorPickerModal colors={colors} />}
+                                </div>
 
                                 <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                     <input
