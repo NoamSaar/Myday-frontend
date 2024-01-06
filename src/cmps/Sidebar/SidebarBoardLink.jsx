@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MenuOptionsModal } from "../MenuOptionsModal";
 import { removeBoard, updateBoard } from "../../store/actions/board.actions"
-import { DeleteIcon, Board, MenuIcon } from "../../services/svg.service";
+import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service";
 
 export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
     const [isModalOpen, setisModalOpen] = useState(false)
@@ -40,7 +40,7 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
             onOptionClick: onDeleteBoard
         },
         {
-            icon: '../../../public/icons/Pencil.svg',
+            icon: <PencilIcon />,
             title: 'Rename Board',
             onOptionClick: () => {
                 setIsEditing(!isEditing)
@@ -62,12 +62,12 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
 
     if (!boards && !boards.length) return <div>Loading board...</div>
     return (
-        <section>
+        <>
             <NavLink className={`btn ${dynamicClass}`}
                 to={`/board/${board._id}`}
                 title={`${board.title} Board`}
             >
-                <Board />
+                <BoardIcon />
                 {isEditing ? (
                     <input
                         type="text"
@@ -87,12 +87,12 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
                             title="Board Menu"
                         >
                             <MenuIcon />
+                            {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
                         </button>
 
-                        {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
                     </>
                 )}
             </NavLink>
-        </section>
+        </>
     )
 }

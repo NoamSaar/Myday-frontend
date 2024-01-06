@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { setCurrBoard } from "../../store/actions/board.actions";
-import { HomeIcon, Calendar, AngleRightIcon } from "../../services/svg.service"
+import { HomeIcon, AngleRightIcon, CalendarIcon } from "../../services/svg.service"
 
 export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {
     return (
@@ -19,7 +19,7 @@ export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {
                 title="My Work Button"
                 onClick={() => setCurrBoard(null)}>
 
-                <Calendar />
+                <CalendarIcon />
                 <span>My work</span>
             </NavLink>
 
