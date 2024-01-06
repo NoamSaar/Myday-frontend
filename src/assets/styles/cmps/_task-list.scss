@@ -43,8 +43,8 @@
         position: sticky;
         left: 42px;
         display: flex;
-        min-width: 505px;
-        max-width: 505px;
+        min-width: 342px;
+        max-width: 342px;
         z-index: 10;
 
         .single-task {
@@ -86,7 +86,6 @@
     .add-task {
 
         .task-preview {
-            margin-inline-start: 36px;
 
 
             .single-task,
@@ -112,7 +111,9 @@
             opacity: .5;
         }
 
-        &.active {}
+        .task-row-placeholder {
+            height: 37px;
+        }
     }
 
 }
