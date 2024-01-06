@@ -23,6 +23,10 @@
 
         }
 
+        &.active .color-display {
+            opacity: 1;
+        }
+
         li {
             white-space: nowrap;
             height: 36px;
