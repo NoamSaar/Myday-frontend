@@ -147,9 +147,10 @@ export async function updateGroup(boardId, group) {
 
 /**************** task actions ****************/
 
-export async function addTask(boardId, groupId, taskTitle) {
+export async function addTask(boardId, groupId, taskTitle, unshiftTask = false) {
     try {
-        const board = await boardService.addTask(boardId, groupId, taskTitle)
+        console.log("Received arguments addTask action:", arguments);
+        const board = await boardService.addTask(boardId, groupId, taskTitle, unshiftTask)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
     } catch (error) {

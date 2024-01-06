@@ -79,7 +79,7 @@ export function BoardHeader({ board }) {
                     </button>
                 </div>
 
-                <BoardFilter />
+                <BoardFilter board={board} />
             </header>
         </>
     )
