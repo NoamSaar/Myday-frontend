@@ -65,10 +65,14 @@ export function TaskPreview({ task, groupId, groupColor }) {
         }
     }
 
-    function onChangeTitle({ target }) {
-        const title = target.value
-        setTaskTitle(title)
-        if (title) onTaskChange("title", title)
+    async function onChangeTitle({ target }) {
+        try {
+            const title = target.value
+            setTaskTitle(title)
+            if (title) onTaskChange("title", title)
+        } catch (error) {
+            console.error("Error changing task title:", error)
+        }
     }
 
     function handleMouseEnter() {
@@ -88,9 +92,18 @@ export function TaskPreview({ task, groupId, groupColor }) {
         setIsActive(true)
     }
 
-    function onTitleEditExit() {
-        setIsEditing(false)
-        setIsActive(false)
+    async function onTitleEditExit() {
+        try {
+
+            if (!taskTitle) {
+                setTaskTitle(task.title)
+                onTaskChange("title", task.title)
+            }
+            setIsEditing(false)
+            setIsActive(false)
+        } catch (error) {
+            console.error("Error changing task title:", error)
+        }
     }
 
     const menuOptions = [
@@ -125,14 +138,16 @@ export function TaskPreview({ task, groupId, groupColor }) {
                     <li className="task-title single-task">
 
                         {isEditing ? (
-                            <input
-                                autoFocus
-                                value={taskTitle}
-                                onChange={onChangeTitle}
-                                className="reset focused-input"
-                                type="text"
-                                onBlur={onTitleEditExit}
-                            />
+                            <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
+                                <input
+                                    autoFocus
+                                    value={taskTitle}
+                                    onChange={onChangeTitle}
+                                    className="reset focused-input"
+                                    type="text"
+                                    onBlur={onTitleEditExit}
+                                />
+                            </form>
                         ) : (
                             <span className="editable-txt" onClick={onTitleClick}>{taskTitle}</span>
 
