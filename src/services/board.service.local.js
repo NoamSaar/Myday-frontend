@@ -15,6 +15,7 @@ export const boardService = {
     updateTask,
     addGroup,
     removeGroup,
+    updateGroup,
     getDefaultFilter,
 }
 
@@ -1134,6 +1135,20 @@ async function removeGroup(boardId, groupId) {
         const idx = board.groups.findIndex(group => group.id === groupId)
         if (idx < 0) throw new Error(`Remove failed, cannot find group with id: ${groupId} in: ${board.title}`)
         board.groups.splice(idx, 1)
+        return await save(board)
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing group')
+
+    }
+
+}
+
+async function updateGroup(boardId, group) {
+    try {
+        const board = await getById(boardId)
+        const groupIdx = board.groups.findIndex(currgroup => currgroup.id === group.id)
+
+        board.groups.splice(groupIdx, 1, group)
         return await save(board)
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing group')

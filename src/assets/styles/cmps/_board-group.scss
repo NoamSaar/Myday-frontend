@@ -16,13 +16,15 @@
                 align-items: center;
                 margin-inline-start: 4px;
 
-                h4 {
-                    font-size: 18px;
+                h4,
+                .focused-input {
+                    font-size: rem(18px);
                     margin-block: 9px;
-                    padding: 0 8px;
-                    border: 1px solid transparent;
-                    cursor: pointer;
+                    padding-inline: 4px;
+                    font-family: poppins-medium;
+                    cursor: text;
                 }
+
 
                 p {
 
@@ -36,13 +38,18 @@
 
                 }
 
-                svg {
-                    width: 12px;
+                .arrow-container {
+                    width: 22px;
                     margin-right: 2px;
                     margin-left: 9px;
-                    fill: inherit;
-                    cursor: pointer;
+
+                    svg {
+                        width: 13px;
+                        fill: inherit;
+                        cursor: pointer;
+                    }
                 }
+
             }
 
             .arrow-container {

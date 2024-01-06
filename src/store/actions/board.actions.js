@@ -138,6 +138,13 @@ export async function removeGroup(boardId, groupId) {
 
 }
 
+export async function updateGroup(boardId, group) {
+    const board = await boardService.updateGroup(boardId, group)
+    setCurrBoard(board)
+    store.dispatch(getActionUpdateBoard(board))
+}
+
+
 /**************** task actions ****************/
 
 export async function addTask(boardId, groupId, taskTitle) {
@@ -159,45 +166,12 @@ export async function removeTask(boardId, groupId, taskId) {
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing task')
     }
-
 }
 
 export async function updateTask(boardId, groupId, task) {
     const board = await boardService.updateTask(boardId, groupId, task)
     setCurrBoard(board)
     store.dispatch(getActionUpdateBoard(board))
-
-
-
-    // switch (cmpType) {
-
-    //     case 'title':
-    //         task.title = data
-    //         break;
-
-    //     case 'members':
-    //         task.person = data
-    //         break;
-
-    //     case 'status':
-    //         task.status = data
-    //         break;
-
-    //     case 'priority':
-    //         task.priority = data
-    //         break;
-
-    //     case 'file':
-    //         task.file = data
-    //         break;
-
-    //     case 'link':
-    //         task.link = data
-    //         break;
-
-    //     default:
-    //         break;
-    // }
 }
 
 
