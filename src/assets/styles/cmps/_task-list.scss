@@ -45,6 +45,7 @@
         display: flex;
         min-width: 505px;
         max-width: 505px;
+        z-index: 10;
 
         &:not(.active) {
 
