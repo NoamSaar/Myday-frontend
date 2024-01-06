@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
-import { MenuIcon } from "../../services/svg.service"
+import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon } from "../../services/svg.service"
 
 export function BoardHeader({ board }) {
 
@@ -51,7 +51,7 @@ export function BoardHeader({ board }) {
 
                 <div className="invite-more-bts flex align-center">
                     <button className="btn invite">
-                        <img src="../../public/icons/invite.svg" alt="Add-person-icon" />
+                        <InviteIcon />
                         <span>Invite / 1</span>
                     </button>
                     <button className="btn more" title="Options">
@@ -61,17 +61,17 @@ export function BoardHeader({ board }) {
 
                 <div className="display-opts flex align-center">
                     <button className="btn main-table" title="Main Table">
-                        <img src="../../public/icons/Home.svg" alt="Home-icon" />
+                        <HomeIcon />
                         <span>Main Table</span>
                     </button>
-                    <button className="btn add-view" title="Add view">
-                        <img src="../../public/icons/AddSmallNormalClr.svg" alt="Add-icon" />
+                    <button className="btn add-view svg-inherit-color" title="Add view">
+                        <PlusIcon />
                     </button>
                 </div>
 
                 <div className="actions flex align-center">
                     <button className="btn automate">
-                        <img src="../../public/icons/Robot.svg" alt="Robot-icon" />
+                        <RobotIcon />
                         <span>Automate</span>
                     </button>
                     <button className={dynCollapsedClass + ' btn collapse'} title="Collapse header" onClick={onCollapseHeader}>

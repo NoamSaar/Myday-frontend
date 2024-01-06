@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SortIcon } from "../../services/svg.service"
+import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 
 
 export function BoardFilter() {
@@ -38,7 +38,7 @@ export function BoardFilter() {
                 <SearchIcon />
                 <input className="reset" type="search" placeholder="Search" />
                 {isFocused &&
-                    <img src="../../public/icons/SettingsKnobs.svg" alt="filter-icon" />
+                    <SettingsKnobsIcon />
                 }
             </div>
 
