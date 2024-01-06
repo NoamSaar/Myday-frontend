@@ -707,7 +707,7 @@ async function query(filterBy = { title: '' }) {
 }
 
 async function getById(boardId, filterBy = { txt: '' }) {
-    console.log("Received arguments getById:", arguments)
+    // console.log("Received arguments getById:", arguments)
     try {
         let board = await storageService.get(STORAGE_KEY, boardId)
         if (filterBy.txt) {
