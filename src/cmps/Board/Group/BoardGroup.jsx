@@ -93,7 +93,8 @@ export function BoardGroup({ group, titlesOrder }) {
                                 className="focused-input group-title-edit-container"
                             >
 
-                                <div className="group-color-display" style={{ backgroundColor: group.color }} onMouseDown={onColorDisplayClick}>
+                                <div className="group-color-display-container" >
+                                    <div className="group-color-display" style={{ backgroundColor: group.color }} onMouseDown={onColorDisplayClick}></div>
                                     {isColorPickerOpen && <ColorPickerModal colors={colors} />}
                                 </div>
 

@@ -63,7 +63,7 @@
                         cursor: pointer;
                         z-index: 40;
 
-                        &:hover {
+                        &:hover:not(.color-picker-modal) {
                             filter: brightness(110%);
                         }
                     }
