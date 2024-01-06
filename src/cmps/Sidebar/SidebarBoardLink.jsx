@@ -2,8 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MenuOptionsModal } from "../MenuOptionsModal";
 import { removeBoard, updateBoard } from "../../store/actions/board.actions"
-import { DeleteIcon } from "../../services/svg.service";
-
+import { DeleteIcon, Board, MenuIcon } from "../../services/svg.service";
 
 export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
     const [isModalOpen, setisModalOpen] = useState(false)
@@ -68,9 +67,7 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
                 to={`/board/${board._id}`}
                 title={`${board.title} Board`}
             >
-
-                <img src="../../public/icons/Board.svg" alt="home-icon" />
-
+                <Board />
                 {isEditing ? (
                     <input
                         type="text"
@@ -82,14 +79,16 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
                 ) : (
                     <>
                         <span>{board.title}</span>
-                        <img
-                            style={style}
+                        <button
                             className="btn btn-option-menu"
-                            src="../../public/icons/menu.svg"
+                            style={style}
                             alt="Board Menu"
                             onClick={onOpenModal}
                             title="Board Menu"
-                        />
+                        >
+                            <MenuIcon />
+                        </button>
+
                         {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
                     </>
                 )}

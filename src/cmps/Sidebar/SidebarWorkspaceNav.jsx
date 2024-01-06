@@ -1,3 +1,4 @@
+import { AngleDownIcon, MenuIcon } from "../../services/svg.service";
 
 export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
     return (
@@ -13,11 +14,11 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
 
                     <span>Main workspace</span>
 
-                    <img src="../../public/icons/DropdownChevronDown.svg" alt="dropdown-icon" />
+                    <AngleDownIcon />
                 </div>
             </section>
 
-            <img className="btn btn-option-menu" src="../../public/icons/menu.svg" alt="Board Menu" />
+            <MenuIcon />
         </>
     )
 }
