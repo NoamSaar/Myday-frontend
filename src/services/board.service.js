@@ -14,6 +14,7 @@ export const boardService = {
     remove,
     getDefaultBoard,
     saveTask,
+    getGcolors
 }
 window.cs = boardService
 
@@ -404,6 +405,10 @@ function getDefaultBoard() {
         titlesOrder: ['Person', 'Status', 'Date'],
 
     }
+}
+
+function getGcolors() {
+    return gColors
 }
 
 const gColors = [
