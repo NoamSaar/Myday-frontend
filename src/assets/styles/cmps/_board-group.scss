@@ -45,8 +45,6 @@
 
                     svg {
                         width: 13px;
-                        fill: inherit;
-                        cursor: pointer;
                     }
                 }
 
@@ -55,13 +53,15 @@
                     align-items: center;
 
                     .group-color-display {
+                        position: relative;
                         width: 22px;
                         height: 22px;
                         border-radius: 50%;
                         margin-inline: 1px 9px;
                         cursor: pointer;
+                        z-index: 40;
 
-                        &:hover {
+                        &:hover:not(.color-picker-modal) {
                             filter: brightness(110%);
                         }
                     }
@@ -78,7 +78,6 @@
 
             .menu-container {
                 opacity: 0;
-
             }
 
 
@@ -111,20 +110,23 @@
 
         }
 
-        .task-header-list {
+        .task-header-list-container {
             display: flex;
-            margin-inline-start: 36px;
 
-            .color-display {
-                margin-top: -0.5px;
-                height: 36px;
-                border-top-left-radius: 8px;
-            }
+            .task-header-list {
+                display: flex;
+
+                .color-display {
+                    margin-top: -0.5px;
+                    height: 36px;
+                    border-top-left-radius: 8px;
+                }
 
 
-            li {
-                padding-block: 0;
-                height: 35px;
+                li {
+                    padding-block: 0;
+                    height: 35px;
+                }
             }
         }
 
@@ -132,8 +134,8 @@
             position: sticky;
             left: 42px;
             display: flex;
-            min-width: 505px;
-            max-width: 505px;
+            min-width: 342px;
+            max-width: 342px;
 
             .task-title {
                 display: flex;
@@ -142,10 +144,6 @@
 
             }
         }
-    }
-
-    svg:not(.menu-option-modal svg) {
-        fill: inherit;
     }
 
     .task-selection {
@@ -170,6 +168,9 @@
 
     .menu-container {
         min-width: 36px;
+        z-index: 20;
+        background-color: #fff;
+
 
         .btn {
             width: 100%;
@@ -201,8 +202,20 @@
 
     .line-end {
         border-inline: none;
-        width: 440px;
+        width: 770px;
     }
 
+    .task-row-placeholder {
+        min-width: 36px;
+        height: 36px;
+        background-color: white;
+        z-index: 5;
+
+        margin-block-start: -1px;
+    }
+
+    .task-title {
+        min-height: 36px;
+    }
 
 }

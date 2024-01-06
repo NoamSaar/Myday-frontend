@@ -53,6 +53,16 @@ export async function loadBoard(boardId) {
     }
 }
 
+export async function saveBoards(boards) {
+    try {
+        await boardService.saveBoards(boards)
+        store.dispatch(getActionSetBoards(boards))
+    } catch (err) {
+        console.log('Cannot save boards', err)
+        throw err
+    }
+}
+
 export async function removeBoard(boardId) {
     try {
         await boardService.remove(boardId)
@@ -98,6 +108,10 @@ export async function updateBoard(board) {
 
 export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })
+}
+
+export function getGcolors() {
+    return boardService.getGcolors()
 }
 
 // Demo for Optimistic Mutation 

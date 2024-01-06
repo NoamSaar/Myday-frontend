@@ -25,7 +25,8 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
         }
     }
     return (
-        <ul className="clean-list task-preview-container add-task">
+        <ul className="clean-list task-preview-container add-task sticky-left">
+            <div className="task-row-placeholder sticky-left"></div>
 
             <ul className={`${activeTask === groupId && 'active'} clean-list task-preview`}>
                 <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
@@ -56,7 +57,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                     </li>
                 </div>
 
-                <div className="line-end"></div>
+                <li className="line-end"></li>
             </ul>
         </ul>
     )

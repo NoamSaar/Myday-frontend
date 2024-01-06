@@ -115,16 +115,16 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     ]
 
 
-    if (!currTask) return <ul>Loading</ul>
+    if (!currTask) return <ul className="task-title">Loading</ul>
     return (
         <ul
-            className="clean-list task-preview-container sticky-left-36"
+            className="clean-list task-preview-container"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
             <div className="menu-container sticky-left">
                 {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
-                {isShowMenu && (<button className="btn" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
+                {isShowMenu && (<button className="btn svg-inherit-color" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
             </div>
             <div
                 style={{ backgroundColor: groupColor }}
@@ -161,7 +161,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     return <DynamicPicker key={idx} title={title} task={currTask} />
                 })}
 
-                <div className="line-end"></div>
+                <li className="line-end"></li>
             </ul>
         </ul>
     )

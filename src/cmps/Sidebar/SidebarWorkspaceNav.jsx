@@ -17,8 +17,9 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
                     <AngleDownIcon />
                 </div>
             </section>
-
-            <MenuIcon />
+            <button className="btn btn-option-menu">
+                <MenuIcon />
+            </button>
         </>
     )
 }

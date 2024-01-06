@@ -9,11 +9,19 @@
         display: flex;
 
         &:hover:not(.active) {
-            background-color: $clr-task-hover;
+            & li {
+
+                background-color: $clr-task-hover;
+            }
 
             .task-title:not(.active),
             .task-selection:not(.active) {
                 background-color: $clr-task-hover;
+            }
+
+            .status-picker {
+                opacity: .8;
+                box-shadow: -3px 0px 23px 2px rgba(255, 255, 255, 0.32);
             }
 
         }
@@ -25,6 +33,7 @@
         li {
             white-space: nowrap;
             height: 36px;
+            background-color: white;
 
             &:not(.task-selection) {
                 cursor: pointer;

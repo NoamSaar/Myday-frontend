@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { BoardHeader } from "../cmps/Board/BoardHeader";
 import { addGroup, loadBoard, setFilterBy } from "../store/actions/board.actions";
+import { BigPlusIcon, PlusIcon } from "../services/svg.service";
 
 export function BoardDetails() {
     const { boardId } = useParams()
@@ -59,10 +60,10 @@ export function BoardDetails() {
 
                 {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
 
-                <div className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
-                    <img src="../../../public/icons/add.svg" />
+                <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
+                    <BigPlusIcon />
                     Add new group
-                </div>
+                </button>
 
                 <Outlet />
                 {/* the outlet is to display the nested route- task details */}

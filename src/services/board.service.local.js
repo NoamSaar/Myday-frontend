@@ -9,6 +9,7 @@ export const boardService = {
     query,
     getById,
     save,
+    saveBoards,
     remove,
     addTask,
     removeTask,
@@ -17,6 +18,8 @@ export const boardService = {
     removeGroup,
     updateGroup,
     getDefaultFilter,
+    getGcolors
+
 }
 
 window.boardService = boardService
@@ -744,9 +747,35 @@ async function save(board) {
     }
 }
 
+async function saveBoards(boards) {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(boards))
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during saving boards')
+    }
+}
+
 function getDefaultFilter() {
     return { title: '', txt: '' }
 }
+
+function getGcolors() {
+    return gColors
+}
+
+const gColors = [
+    '#ffcb00',
+    '#007038',
+    '#469e9b',
+    '#579bfc',
+    '#9aadbd',
+    '#bba5e8',
+    '#8050ab',
+    '#4f3a65',
+    '#92334c',
+    '#bb3354',
+    '#ff7575',
+]
 
 function _getDefaultBoard() {
     // const user = userService.getLoggedinUser()

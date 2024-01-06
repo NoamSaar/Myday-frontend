@@ -407,9 +407,3 @@ function getDefaultBoard() {
 }
 
 
-
-
-
-
-
-

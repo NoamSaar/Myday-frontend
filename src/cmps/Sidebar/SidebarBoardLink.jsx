@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { MenuOptionsModal } from "../MenuOptionsModal";
-import { removeBoard, updateBoard } from "../../store/actions/board.actions"
-import { DeleteIcon, Board, MenuIcon } from "../../services/svg.service";
 
-export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
-    const [isModalOpen, setisModalOpen] = useState(false)
+import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service";
+import { removeBoard, updateBoard } from "../../store/actions/board.actions"
+import { setOpenModal } from "../../store/actions/system.actions";
+import { MenuOptionsModal } from "../MenuOptionsModal";
+
+export function SidebarBoardLink({ boards, board, currActiveBoard, openModalId }) {
+    const [isModalOpen, setisModalOpen] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
-    const navigate = useNavigate()
+    console.log('openModalId:', openModalId)
+
+    useEffect(() => {
+        if (openModalId === board._id) setisModalOpen(true)
+        else setisModalOpen(false)
+    }, [isModalOpen])
+
+    const dispatch = useDispatch()
 
     async function onDeleteBoard() {
         try {
@@ -29,8 +39,15 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
         }
     }
 
-    function onOpenModal(ev) {
-        setisModalOpen(!isModalOpen)
+    function onToggleModal() {
+        if (openModalId === board._id) {
+            dispatch(setOpenModal(null))
+            setisModalOpen(false)
+        } else {
+            dispatch(setOpenModal(board._id))
+            setisModalOpen(true)
+        }
+
     }
 
     const menuOptions = [
@@ -40,7 +57,7 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
             onOptionClick: onDeleteBoard
         },
         {
-            icon: '../../../public/icons/Pencil.svg',
+            icon: <PencilIcon />,
             title: 'Rename Board',
             onOptionClick: () => {
                 setIsEditing(!isEditing)
@@ -49,25 +66,24 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
         }
     ]
 
-    // const posOptions = ['left', 'top', '30px', '145px']
     const posOptions = {
-        left: '145px',
+        left: '0',
         right: 0,
         top: '28px',
         button: 0,
     }
-
     const style = { position: 'relative' }
-    const dynamicClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
-
+    const dynNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
+    const dynModalClass = isModalOpen ? 'active' : ''
+    console.log('isModalOpen:', isModalOpen)
     if (!boards && !boards.length) return <div>Loading board...</div>
     return (
-        <section>
-            <NavLink className={`btn ${dynamicClass}`}
+        <>
+            <NavLink className={`btn ${dynNavClass}`}
                 to={`/board/${board._id}`}
                 title={`${board.title} Board`}
             >
-                <Board />
+                <BoardIcon />
                 {isEditing ? (
                     <input
                         type="text"
@@ -80,19 +96,18 @@ export function SidebarBoardLink({ boards, board, isActive, currActiveBoard }) {
                     <>
                         <span>{board.title}</span>
                         <button
-                            className="btn btn-option-menu"
+                            className={`btn btn-option-menu relative ${dynModalClass}`}
                             style={style}
                             alt="Board Menu"
-                            onClick={onOpenModal}
+                            onClick={onToggleModal}
                             title="Board Menu"
                         >
                             <MenuIcon />
+                            {isModalOpen && <MenuOptionsModal id={board._id} options={menuOptions} relative={posOptions} />}
                         </button>
-
-                        {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
                     </>
                 )}
             </NavLink>
-        </section>
+        </>
     )
 }

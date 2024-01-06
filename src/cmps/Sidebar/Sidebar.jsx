@@ -12,6 +12,7 @@ export function Sidebar() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
+    const openModalId = useSelector((storeState) => storeState.systemModule.openModalId)
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -77,10 +78,8 @@ export function Sidebar() {
                     onSetFilter={onSetFilter} />
                 <SidebarBoardNav
                     boards={boards}
-                    isActive={isActive}
-                    // onToggleIsActive={onToggleIsActive}
-                    filterBy={filterBy}
-                    currActiveBoard={currActiveBoard} />
+                    currActiveBoard={currActiveBoard}
+                    openModalId={openModalId} />
                 {/* <LottieAnimation /> */}
             </article>
         </section>

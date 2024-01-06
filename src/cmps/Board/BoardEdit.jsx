@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
 
 export function BoardEdit({ board }) {
-
     const [boardToEdit, setBoardToEdit] = useState(board)
     const [isEditing, setIsEditing] = useState(false)
 

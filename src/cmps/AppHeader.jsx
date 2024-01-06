@@ -3,10 +3,13 @@ import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/actions/user.actions.js'
 import { LoginSignup } from './LoginSignup.jsx'
-import { LogoIcon, GridMenuIcon } from '../services/svg.service.jsx'
+import { LogoIcon, LoginIcon } from '../services/svg.service.jsx'
+import { MenuOptionsModal } from "./MenuOptionsModal";
+import { useState } from 'react'
 
 export function AppHeader() {
     var user = useSelector(storeState => storeState.userModule.user)
+    const [isModalOpen, setisModalOpen] = useState(false)
 
     async function onLogin(credentials) {
         try {
@@ -33,9 +36,41 @@ export function AppHeader() {
         }
     }
 
-    if (!user) user = {
-        fullname: "Guest",
-        imgUrl: "https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg",
+    function onOpenModal() {
+        setisModalOpen(!isModalOpen)
+    }
+
+    const menuOptions = user ? [
+        {
+            icon: <LoginIcon />,
+            title: 'Logout',
+            onOptionClick: onLogout
+        },
+    ] : [
+        {
+            icon: <LoginIcon />,
+            title: 'Login',
+            onOptionClick: onLogin
+        },
+        {
+            icon: <LoginIcon />,
+            title: 'Signup',
+            onOptionClick: onSignup
+        },
+    ];
+
+    const posOptions = {
+        left: '-80px',
+        right: 0,
+        top: '38px',
+        button: 0,
+    }
+
+    if (!user) {
+        user = {
+            fullname: "Guest",
+            imgUrl: "https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg",
+        }
     }
 
     return (
@@ -45,10 +80,24 @@ export function AppHeader() {
                 <span className="app-title">monday</span>
             </section>
             <nav className="header-nav">
-                <div className="user">
-                    <img src={`${user.imgUrl}`} alt="user-profile" />
+                <div className="user-info">
+                    <button
+                        className="flex align-center justify-center relative"
+                        title="User Profile"
+                        onClick={onOpenModal}
+                    >
+                        <img src={`${user.imgUrl}`} alt="user-profile" />
+                        {/* {isModalOpen && <MenuOptionsModal options={menuOptions} />} */}
+                        {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
+                    </button>
                 </div>
-                {/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
+
+            </nav>
+        </header>
+    )
+}
+
+{/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
                 {user &&
                     <span className="user-info">
@@ -65,7 +114,3 @@ export function AppHeader() {
                         <LoginSignup onLogin={onLogin} onSignup={onSignup} />
                     </section>
                 } */}
-            </nav>
-        </header>
-    )
-}
