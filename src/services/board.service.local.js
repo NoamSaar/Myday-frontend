@@ -1159,19 +1159,37 @@ async function updateGroup(boardId, group) {
 
 //tasks
 
-async function addTask(boardId, groupId, taskTitle) {
+// async function addTask(boardId, groupId, taskTitle, unshiftTask = false) {
+//     try {
+//         const board = await getById(boardId)
+//         const groupIdx = board.groups.findIndex(group => group.id === groupId)
+//         const group = board.groups[groupIdx]
+//         if (!unshiftTask) {
+//             group.tasks.push(_getDefaultTask(taskTitle))
+//         } else {
+//             group.tasks.unshift(_getDefaultTask(taskTitle))
+//         }
+
+//         return await save(board)
+//     } catch (error) {
+//         throw new Error(error.message || 'An error occurred during removing task')
+
+//     }
+
+// }
+async function addTask(boardId, groupId, taskTitle, unshiftTask = false) {
     try {
         const board = await getById(boardId)
         const groupIdx = board.groups.findIndex(group => group.id === groupId)
         const group = board.groups[groupIdx]
-        group.tasks.push(_getDefaultTask(taskTitle))
+
+        const taskMethod = unshiftTask ? 'unshift' : 'push'
+        group.tasks[taskMethod](_getDefaultTask(taskTitle))
 
         return await save(board)
     } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
-
+        throw new Error(error.message || 'An error occurred during adding task')
     }
-
 }
 
 async function removeTask(boardId, groupId, taskId) {
