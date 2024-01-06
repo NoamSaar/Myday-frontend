@@ -4,11 +4,11 @@
     .task-preview {
         display: flex;
 
-        &:hover {
+        &:hover:not(.active) {
             background-color: $clr-task-hover;
 
-            .task-title:not(.active .task-title),
-            .task-selection:not(.active .task-selection) {
+            .task-title:not(.active),
+            .task-selection:not(.active) {
                 background-color: $clr-task-hover;
             }
 

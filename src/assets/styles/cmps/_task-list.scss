@@ -45,7 +45,11 @@
         display: flex;
         min-width: 505px;
         max-width: 505px;
-        background-color: white;
+
+        &:not(.active) {
+
+            background-color: white;
+        }
 
         .task-title {
             display: flex;
