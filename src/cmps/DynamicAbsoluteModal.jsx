@@ -31,7 +31,7 @@ function DynamicModal(props) {
             return <DatePickerModal selectedDate={props.data.selectedDate} onChangeDate={props.data.onChangeDate} />
 
         case 'link picker':
-            return <LinkPickerModal url={props.data.url} displayTxt={props.data.displayTxt} onChangeLink={props.data.onChangeLink} />
+            return <LinkPickerModal url={props.data.url} displayTxt={props.data.displayTxt} changeLink={props.data.onChangeLink} />
 
         case 'menu options':
             return <MenuOptionsModal options={props.data.options} />

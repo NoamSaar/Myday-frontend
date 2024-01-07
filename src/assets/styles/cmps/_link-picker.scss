@@ -2,6 +2,7 @@
     padding: 2px;
 
 
+
     button {
         display: flex;
         align-items: center;
@@ -20,10 +21,17 @@
 
         a {
             color: $clr-link;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: rem(13px);
+            padding-inline: 4px;
 
             &:hover {
                 text-decoration: underline;
             }
+
+
         }
 
 
