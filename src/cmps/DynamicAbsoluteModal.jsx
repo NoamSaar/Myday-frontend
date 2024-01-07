@@ -3,6 +3,7 @@ import { ColorPickerModal } from "./Board/Group/Picker/PickerModals/ColorPickerM
 import { MenuOptionsModal } from "./MenuOptionsModal";
 import { DatePickerModal } from "./Board/Group/Picker/PickerModals/DatePickerModal";
 import { StatusPickerModal } from "./Board/Group/Picker/PickerModals/StatusPickerModal";
+import { LinkPickerModal } from "./Board/Group/Picker/PickerModals/LinkPickerModal";
 
 export function DynamicAbsoluteModal() {
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -32,6 +33,9 @@ function DynamicModal(props) {
 
         case 'status picker':
             return <StatusPickerModal selectedStatus={props.data.selectedStatus} onChangeStatus={props.data.onUpdate} />
+
+        case 'link picker':
+            return <LinkPickerModal url={props.data.url} displayTxt={props.data.displayTxt} changeLink={props.data.onChangeLink} />
 
         case 'menu options':
             return <MenuOptionsModal options={props.data.options} />

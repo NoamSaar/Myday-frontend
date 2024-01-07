@@ -11,7 +11,7 @@ export function DatePickerModal({ selectedDate, onChangeDate }) {
     }
 
     return (
-        <div className="date-picker-modal">
+        <div className="general-modal date-picker-modal">
             <DayPicker mode="single" required selected={date} onSelect={onDateSelect} month={date} />
         </div>
     )
