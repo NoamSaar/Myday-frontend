@@ -109,18 +109,19 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     function onTitleClick() {
         setIsEditing(true)
-        onSetActiveTask(currTask.id)
+        console.log('task.id', task.id)
+        onSetActiveTask(task.id)
     }
 
     async function onTitleEditExit() {
         try {
+            if (activeTask === task.id) onSetActiveTask(null)
 
             if (!taskTitle) {
                 setTaskTitle(task.title)
                 onTaskChange("title", task.title)
             }
             setIsEditing(false)
-            onSetActiveTask(null)
         } catch (error) {
             console.error("Error changing task title:", error)
         }
