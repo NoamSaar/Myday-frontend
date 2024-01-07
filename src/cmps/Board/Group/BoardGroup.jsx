@@ -7,23 +7,22 @@ import { ColorPickerModal } from "./Picker/PickerModals/ColorPickerModal";
 import { setDynamicModal } from "../../../store/actions/system.actions";
 
 export function BoardGroup({ group, titlesOrder }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
-    const [isColorPickerOpen, setIsColorPickerOpen] = useState(false)
     const [groupTitle, setGroupTitle] = useState(group.title)
     const [groupColor, setGroupColor] = useState(group.color)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
+    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isMenuOpen = fatherId === `${group.id}-menu`
+    const isColorPickerOpen = fatherId === `${group.id}-colorPicker`
     const colors = getGcolors()
 
 
     function toggleMenu(ev) {
         if (isMenuOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
-            setIsMenuOpen(false)
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions } })
-            setIsMenuOpen(true)
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${group.id}-menu` })
         }
     }
 
@@ -58,7 +57,7 @@ export function BoardGroup({ group, titlesOrder }) {
         try {
             setGroupColor(color)
             onGroupChange("color", color)
-            setIsColorPickerOpen(false)
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
             setIsEditing(false)
         } catch (error) {
             console.error("Error changing group color:", error)
@@ -92,14 +91,11 @@ export function BoardGroup({ group, titlesOrder }) {
 
     function onColorDisplayClick(ev) {
         ev.stopPropagation()
-        setIsColorPickerOpen(prevIsOpen => !prevIsOpen)
 
         if (isColorPickerOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
-            setIsColorPickerOpen(false)
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'color picker', data: { colors: colors, onColorClick: onChangeColor } })
-            setIsColorPickerOpen(true)
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'color picker', data: { colors: colors, onColorClick: onChangeColor }, fatherId: `${group.id}-colorPicker` })
         }
     }
 
@@ -117,7 +113,7 @@ export function BoardGroup({ group, titlesOrder }) {
             <div className="group-sticky-container sticky-left">
 
                 <div className="group-title-container sticky-left">
-                    <div className="menu-container sticky-left">
+                    <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`}>
                         <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}><MenuIcon /></button>
                     </div>
                     <div className="sticky-left-40 title-container">

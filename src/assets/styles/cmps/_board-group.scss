@@ -76,7 +76,7 @@
 
 
 
-            .menu-container {
+            .menu-container:not(.full-opacity) {
                 opacity: 0;
             }
 
