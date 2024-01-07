@@ -26,7 +26,11 @@
 
         display: flex;
         align-items: center;
-        padding: 8px;
+
+        &:not(.link-picker) {
+
+            padding: 8px;
+        }
 
 
         &:not(.task-preview .task-title) {
@@ -97,7 +101,7 @@
 
 
             .line-end {
-                width: 1267px;
+                width: 1597px;
             }
 
             .editable-txt {

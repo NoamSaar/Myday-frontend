@@ -1,14 +1,31 @@
 .link-picker {
+    padding: 2px;
 
 
-    a {
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: $clr-link;
         white-space: nowrap;
         overflow-x: hidden;
         text-overflow: ellipsis;
+        width: 95%;
+        height: 90%;
+        cursor: text;
 
         &:hover {
-            text-decoration: underline;
+            outline: 1px solid $clr-btn-border;
         }
+
+        a {
+            color: $clr-link;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+
     }
 }

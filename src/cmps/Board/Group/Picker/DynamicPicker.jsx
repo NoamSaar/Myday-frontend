@@ -17,7 +17,7 @@ export function DynamicPicker({ title, task, onUpdate }) {
         case "file":
             return <FilePicker file={task.file} onUpdate={onUpdate} />
         case "link":
-            return <LinkPicker info={task.link} onUpdate={onUpdate} />
+            return <LinkPicker info={task.link} onUpdate={onUpdate} taskId={task.id} />
         default:
             return <li>UNKNOWN {title}</li>;
     }

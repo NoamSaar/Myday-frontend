@@ -8,7 +8,6 @@ export function DatePicker({ selectedDate, onChangeDate, taskId }) {
     const isPickerOpen = fatherId === `${taskId}-datePicker`
 
     function onDatePreviewClick(ev) {
-        console.log('ev.target.getBoundingClientRect()', ev.target.getBoundingClientRect())
         if (isPickerOpen) {
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
