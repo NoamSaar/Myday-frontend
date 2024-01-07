@@ -13,9 +13,11 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenu, setIsShowMenu] = useState(false)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    // const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isMenuOpen = fatherId === `${task.id}-menu`
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
 
     useEffect(() => {
@@ -83,25 +85,23 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }
 
     function handleMouseLeave() {
-        setIsShowMenu(false)
+        if (!isMenuOpen) setIsShowMenu(false)
         // if (!isMenuOpen) setIsShowMenu(false)
     }
 
     function toggleMenu(ev) {
         if (isMenuOpen) {
-            console.log('close')
 
             //updating modal in store
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
 
-            setIsMenuOpen(false)
+            // setIsMenuOpen(false)
         } else {
-            console.log('open')
 
             //updating modal in store
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions } })
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
 
-            setIsMenuOpen(true)
+            // setIsMenuOpen(true)
 
         }
         // console.log('ev.getBoundingClientRect()', ev.target.getBoundingClientRect())

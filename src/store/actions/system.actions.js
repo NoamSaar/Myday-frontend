@@ -1,4 +1,4 @@
-import { SET_DYNAMIC_MODAL, SET_DYNAMIC_MODAL_OPEN, SET_DYNAMIC_MODAL_BOUNDING_RECT, SET_DYNAMIC_MODAL_TYPE, SET_DYNAMIC_MODAL_DATA } from '../reducers/system.reducer'
+import { SET_DYNAMIC_MODAL, SET_DYNAMIC_MODAL_OPEN, SET_DYNAMIC_MODAL_BOUNDING_RECT, SET_DYNAMIC_MODAL_TYPE, SET_DYNAMIC_MODAL_DATA, SET_DYNAMIC_MODAL_FATHER } from '../reducers/system.reducer'
 import { store } from '../store';
 
 export function setDynamicModalOpen(isOpen) {
@@ -15,6 +15,10 @@ export function setDynamicModalType(dynamicModalType) {
 
 export function setDynamicModalData(dynamicModalData) {
     store.dispatch({ type: SET_DYNAMIC_MODAL_DATA, dynamicModalData })
+}
+
+export function setDynamicModalFather(fatherId) {
+    store.dispatch({ type: SET_DYNAMIC_MODAL_FATHER, fatherId })
 }
 
 export function setDynamicModal(dynamicModal) {
