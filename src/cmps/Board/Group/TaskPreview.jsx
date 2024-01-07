@@ -94,7 +94,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             setIsMenuOpen(true)
 
         }
-        console.log('ev.getBoundingClientRect()', ev.target.getBoundingClientRect())
+        // console.log('ev.getBoundingClientRect()', ev.target.getBoundingClientRect())
     }
 
     function onTitleClick() {
