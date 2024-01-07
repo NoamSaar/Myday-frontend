@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import { setDynamicModal } from "../../../../store/actions/system.actions"
 
 export function LinkPicker({ info, onUpdate, taskId }) {
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -12,14 +13,14 @@ export function LinkPicker({ info, onUpdate, taskId }) {
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'link picker',
-                data: { selectedDate, onChangeDate },
+                data: { url: info.url || '', displayTxt: info.displayTxt || '', onChangeLink: onUpdate },
                 fatherId: `${taskId}-linkPicker`
             })
         }
     }
 
     return (
-        <li className="link-picker link-col">
+        <li onClick={onLinkPreviewClick} className="link-picker link-col">
             <button>
                 {info && info.displayTxt ? <a target="_blank" href={info && info.url}>{info.displayTxt}</a> : info && <a target="_blank" href={info && info.url}>{info.url}</a>}
             </button>
