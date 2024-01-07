@@ -65,6 +65,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     async function onDeleteTask() {
         try {
             removeTask(board._id, groupId, task.id)
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } catch (error) {
             console.error("Error removing task:", error)
         }
@@ -74,7 +75,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             const title = target.value
             setTaskTitle(title)
-            // if (title) onTaskChange("title", title)
         } catch (error) {
             console.error("Error changing task title:", error)
         }
@@ -86,25 +86,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     function handleMouseLeave() {
         if (!isMenuOpen) setIsShowMenu(false)
-        // if (!isMenuOpen) setIsShowMenu(false)
     }
 
     function toggleMenu(ev) {
         if (isMenuOpen) {
-
-            //updating modal in store
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
-
-            // setIsMenuOpen(false)
         } else {
-
-            //updating modal in store
             setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
-
-            // setIsMenuOpen(true)
-
         }
-        // console.log('ev.getBoundingClientRect()', ev.target.getBoundingClientRect())
     }
 
     function onTitleClick() {

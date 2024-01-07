@@ -39,6 +39,7 @@ export function BoardGroup({ group, titlesOrder }) {
     async function onDeleteGroup() {
         try {
             removeGroup(board._id, group.id)
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } catch (error) {
             console.error("Error removing task:", error)
         }
