@@ -15,11 +15,8 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
             ev.preventDefault()
             setIsEditing(false)
             onSetActiveTask(null)
-            if (!title) {
-                onSetTitle('')
-                return
-            }
-            addTask()
+            if (title) addTask()
+
         } catch (error) {
             console.error("Error changing task title:", error)
         }

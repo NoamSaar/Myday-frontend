@@ -109,7 +109,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     function onTitleClick() {
         setIsEditing(true)
-        console.log('task.id', task.id)
         onSetActiveTask(task.id)
     }
 
