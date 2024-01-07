@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { TaskList } from "./TaskList";
 import { useSelector } from "react-redux";
-import { MenuOptionsModal } from "../../MenuOptionsModal";
 import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions";
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service";
 import { ColorPickerModal } from "./Picker/PickerModals/ColorPickerModal";
+import { setDynamicModal } from "../../../store/actions/system.actions";
 
 export function BoardGroup({ group, titlesOrder }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -17,8 +17,14 @@ export function BoardGroup({ group, titlesOrder }) {
     const colors = getGcolors()
 
 
-    function toggleMenu() {
-        setIsMenuOpen(prevIsOpen => !prevIsOpen)
+    function toggleMenu(ev) {
+        if (isMenuOpen) {
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            setIsMenuOpen(false)
+        } else {
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions } })
+            setIsMenuOpen(true)
+        }
     }
 
     async function onGroupChange(field, date) {
@@ -105,7 +111,6 @@ export function BoardGroup({ group, titlesOrder }) {
 
                 <div className="group-title-container sticky-left">
                     <div className="menu-container sticky-left">
-                        {isMenuOpen && <MenuOptionsModal options={menuOptions} pos={'top'} />}
                         <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}><MenuIcon /></button>
                     </div>
                     <div className="sticky-left-40 title-container">
