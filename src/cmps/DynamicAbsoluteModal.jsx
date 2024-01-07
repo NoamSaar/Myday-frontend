@@ -25,6 +25,9 @@ function DynamicModal(props) {
         case 'color picker':
             return <ColorPickerModal colors={props.data.colors} onColorClick={props.data.onColorClick} />
 
+        case 'date picker':
+            return <ColorPickerModal colors={props.data.colors} onColorClick={props.data.onColorClick} />
+
         case 'menu options':
             return <MenuOptionsModal options={props.data.options} />
 
