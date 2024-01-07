@@ -7,7 +7,7 @@ import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { setDynamicModal, setDynamicModalBoundingRect, setDynamicModalData, setDynamicModalOpen, setDynamicModalType } from "../../../store/actions/system.actions"
+import { setDynamicModal } from "../../../store/actions/system.actions"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const [currTask, setCurrTask] = useState(null)
@@ -22,7 +22,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     useEffect(() => {
         const fetchData = async () => {
-            let date = task.date
 
             try {
                 const newPersons = task.person.length
@@ -34,9 +33,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     )
                     : []
 
-                // if (task.date) {
-                //     date = utilService.getFormatDate(task.date)
-                // }
 
                 setCurrTask({ ...task, person: newPersons })
                 setTaskTitle(task.title)
@@ -89,7 +85,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }
 
     function toggleMenu(ev) {
-        console.log('ev', ev)
         if (isMenuOpen) {
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
@@ -162,8 +157,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             </form>
                         ) : (
                             <span className="editable-txt" onClick={onTitleClick}>{highlightText(taskTitle, filterBy.txt)}</span>
-                            // <span className="editable-txt" onClick={onTitleClick}>{taskTitle}</span>
-
                         )}
                     </li>
 
