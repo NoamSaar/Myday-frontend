@@ -59,10 +59,10 @@
         }
 
 
-        &:not(.active):not(.active .task-title-container) {
+        // &:not(.active):not(.active .task-title-container) {
 
-            background-color: white;
-        }
+        //     background-color: white;
+        // }
 
         .task-title {
             display: flex;
@@ -73,9 +73,9 @@
                 padding-inline-start: 36px;
             }
 
-            &:hover:not(.task-header-list .task-title):not(.active .task-title) {
-                background-color: $clr-task-hover;
-            }
+            // &:hover:not(.task-header-list .task-title):not(.active .task-title) {
+            //     background-color: $clr-task-hover;
+            // }
         }
 
 

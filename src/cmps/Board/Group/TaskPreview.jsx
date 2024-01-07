@@ -13,9 +13,11 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenu, setIsShowMenu] = useState(false)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    // const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isMenuOpen = fatherId === `${task.id}-menu`
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
 
     useEffect(() => {
@@ -63,6 +65,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     async function onDeleteTask() {
         try {
             removeTask(board._id, groupId, task.id)
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } catch (error) {
             console.error("Error removing task:", error)
         }
@@ -72,7 +75,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             const title = target.value
             setTaskTitle(title)
-            if (title) onTaskChange("title", title)
         } catch (error) {
             console.error("Error changing task title:", error)
         }
@@ -83,44 +85,34 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }
 
     function handleMouseLeave() {
-        setIsShowMenu(false)
-        // if (!isMenuOpen) setIsShowMenu(false)
+        if (!isMenuOpen) setIsShowMenu(false)
     }
 
     function toggleMenu(ev) {
         if (isMenuOpen) {
-            console.log('close')
-
-            //updating modal in store
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
-
-            setIsMenuOpen(false)
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
-            console.log('open')
-
-            //updating modal in store
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions } })
-
-            setIsMenuOpen(true)
-
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
         }
-        // console.log('ev.getBoundingClientRect()', ev.target.getBoundingClientRect())
     }
 
     function onTitleClick() {
         setIsEditing(true)
-        onSetActiveTask(currTask.id)
+        onSetActiveTask(task.id)
     }
 
     async function onTitleEditExit() {
         try {
+            if (activeTask === task.id) onSetActiveTask(null)
 
             if (!taskTitle) {
                 setTaskTitle(task.title)
                 onTaskChange("title", task.title)
+            } else {
+                onTaskChange("title", taskTitle)
             }
+
             setIsEditing(false)
-            onSetActiveTask(null)
         } catch (error) {
             console.error("Error changing task title:", error)
         }

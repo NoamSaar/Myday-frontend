@@ -4,11 +4,12 @@ export const SET_DYNAMIC_MODAL_OPEN = 'SET_DYNAMIC_MODAL_OPEN'
 export const SET_DYNAMIC_MODAL_BOUNDING_RECT = 'SET_DYNAMIC_MODAL_BOUNDING_RECT'
 export const SET_DYNAMIC_MODAL_TYPE = 'SET_DYNAMIC_MODAL_TYPE'
 export const SET_DYNAMIC_MODAL_DATA = 'SET_DYNAMIC_MODAL_DATA'
+export const SET_DYNAMIC_MODAL_FATHER = 'SET_DYNAMIC_MODAL_FATHER'
 export const SET_DYNAMIC_MODAL = 'SET_DYNAMIC_MODAL'
 
 const initialState = {
   isLoading: false,
-  dynamicModal: { isOpen: false, boundingRect: null, type: '', data: {} }
+  dynamicModal: { isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' }
   // DynamicModalIsOpen: false,
   // dynamicModalBoundingRect: null,
   // dynamicModalType: '',
@@ -31,6 +32,9 @@ export function systemReducer(state = initialState, action = {}) {
 
     case SET_DYNAMIC_MODAL_TYPE:
       return { ...state, dynamicModal: { ...state.dynamicModal, type: action.dynamicModalType } }
+
+    case SET_DYNAMIC_MODAL_FATHER:
+      return { ...state, dynamicModal: { ...state.dynamicModal, fatherId: action.fatherId } }
 
     case SET_DYNAMIC_MODAL_DATA:
       return { ...state, dynamicModal: { ...state.dynamicModal, data: action.dynamicModalData } }
