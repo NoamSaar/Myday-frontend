@@ -68,7 +68,6 @@ export function BoardGroup({ group, titlesOrder }) {
 
     async function onTitleEditExit() {
         try {
-
             if (!groupTitle) {
                 setGroupTitle(group.title)
                 onGroupChange("title", group.title)
@@ -94,6 +93,14 @@ export function BoardGroup({ group, titlesOrder }) {
     function onColorDisplayClick(ev) {
         ev.stopPropagation()
         setIsColorPickerOpen(prevIsOpen => !prevIsOpen)
+
+        if (isColorPickerOpen) {
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            setIsColorPickerOpen(false)
+        } else {
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'color picker', data: { colors: colors, onColorClick: onChangeColor } })
+            setIsColorPickerOpen(true)
+        }
     }
 
     const menuOptions = [
