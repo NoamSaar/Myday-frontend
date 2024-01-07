@@ -1,11 +1,15 @@
 import { ColorPickerModal } from "./Board/Group/Picker/PickerModals/ColorPickerModal";
 import { MenuOptionsModal } from "./MenuOptionsModal";
 
-export function DynamicAbsoluteModal({ type, data }) {
+export function DynamicAbsoluteModal() {
+    const isOpen = useSelector((storeState) => storeState.systemModule.DynamicModalIsOpen)
+    const boundingRect = useSelector((storeState) => storeState.systemModule.dynamicModalBoundingRect)
+    const type = useSelector((storeState) => storeState.systemModule.dynamicModalType)
+    const data = useSelector((storeState) => storeState.systemModule.dynamicModalData)
 
     return (
         <div className="dynamic-absolute-modal">
-            <dynamicModal type={type} data={data} />
+            {isOpen && <dynamicModal type={type} data={data} />}
         </div>
     )
 }

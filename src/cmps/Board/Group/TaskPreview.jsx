@@ -82,12 +82,19 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }
 
     function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
+        setIsShowMenu(false)
+        // if (!isMenuOpen) setIsShowMenu(false)
     }
 
     function toggleMenu(ev) {
+        if (isMenuOpen) {
+
+            setIsMenuOpen(false)
+        } else {
+            setIsMenuOpen(true)
+
+        }
         console.log('ev.getBoundingClientRect()', ev.target.getBoundingClientRect())
-        setIsMenuOpen((prevIsOpen) => !prevIsOpen)
     }
 
     function onTitleClick() {
@@ -126,7 +133,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseLeave={handleMouseLeave}
         >
             <div className="menu-container sticky-left">
-                {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
                 {isShowMenu && (<button className="btn svg-inherit-color" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
             </div>
             <div
