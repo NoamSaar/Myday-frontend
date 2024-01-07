@@ -89,10 +89,11 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }
 
     function toggleMenu(ev) {
+        console.log('ev', ev)
         if (isMenuOpen) {
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
         }
     }
 

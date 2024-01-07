@@ -9,8 +9,8 @@ export function DynamicAbsoluteModal() {
 
     if (modalData.isOpen) {
         style = {
-            top: `${modalData.boundingRect.bottom + 5}px`,
-            left: `${modalData.boundingRect.right + 10}px`
+            top: `${modalData.boundingRect.bottom}px`,
+            left: `${modalData.boundingRect.right}px`
         }
     }
 
