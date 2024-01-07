@@ -13,7 +13,7 @@ export function LinkPicker({ info, onUpdate, taskId }) {
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'link picker',
-                data: { url: info.url || '', displayTxt: info.displayTxt || '', onChangeLink: onUpdate },
+                data: { url: info && info.url || '', displayTxt: info && info.displayTxt || '', onChangeLink: onUpdate },
                 fatherId: `${taskId}-linkPicker`
             })
         }
