@@ -11,7 +11,7 @@ export function SidebarBoardLink({ boards, board, currActiveBoard, openModalId }
     const [isModalOpen, setisModalOpen] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
-    console.log('openModalId:', openModalId)
+    // console.log('openModalId:', openModalId)
 
     useEffect(() => {
         if (openModalId === board._id) setisModalOpen(true)
@@ -75,7 +75,7 @@ export function SidebarBoardLink({ boards, board, currActiveBoard, openModalId }
     const style = { position: 'relative' }
     const dynNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
     const dynModalClass = isModalOpen ? 'active' : ''
-    console.log('isModalOpen:', isModalOpen)
+    // console.log('isModalOpen:', isModalOpen)
     if (!boards && !boards.length) return <div>Loading board...</div>
     return (
         <>

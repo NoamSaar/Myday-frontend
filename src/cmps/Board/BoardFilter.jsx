@@ -75,17 +75,17 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             <div className={dynFocusedClass + ' btn search'} onClick={onToggleIsFocused} ref={filterSearchRef}>
                 <SearchIcon />
 
-                <form>
-                    <input
-                        className="reset"
-                        type="search"
-                        placeholder="Search"
-                        value={txt}
-                        onChange={handleChange}
-                        name="txt"
-                        autoComplete="off"
-                    />
-                </form>
+                {/* <form> */}
+                <input
+                    className="reset"
+                    type="search"
+                    placeholder="Search"
+                    value={txt}
+                    onChange={handleChange}
+                    name="txt"
+                    autoComplete="off"
+                />
+                {/* </form> */}
 
                 {isFocused &&
                     <SettingsKnobsIcon />
@@ -111,6 +111,18 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 <HideIcon />
                 <span>Hide</span>
             </button>
+
+            <select value={filterByToEdit.member} name="member" onChange={handleChange}>
+                <option value="">All</option>
+                <>
+                    {board.members.map(member => (
+                        <option key={member._id} value={member._id}>
+                            {member.fullname}
+                            {/* <img src={member.imgUrl}></img> */}
+                        </option>
+                    ))}
+                </>
+            </select>
 
         </div>
     )

@@ -709,17 +709,24 @@ async function query(filterBy = { title: '' }) {
 
 }
 
-async function getById(boardId, filterBy = { txt: '' }) {
+async function getById(boardId, filterBy = { txt: '', includedCols: [], member: '' }) {
     // console.log("Received arguments getById:", arguments)
     try {
         let board = await storageService.get(STORAGE_KEY, boardId)
         if (filterBy.txt) {
             const regex = new RegExp(filterBy.txt, 'i')
             board.groups = board.groups.filter(group => {
-                // Filter tasks within the group
                 group.tasks = group.tasks.filter(task => regex.test(task.title))
                 // Return groups that have matching title or have at least one matching task title
                 return regex.test(group.title) || group.tasks.length > 0
+            })
+        }
+        if (filterBy.member) {
+            board.groups = board.groups.map(group => {
+                group.tasks = group.tasks.filter(task => {
+                    return task.person.some(currPerson => filterBy.member === currPerson) //person is array! its items are ids
+                })
+                return group
             })
         }
         return board
@@ -756,7 +763,7 @@ async function saveBoards(boards) {
 }
 
 function getDefaultFilter() {
-    return { title: '', txt: '' }
+    return { title: '', txt: '', includedCols: [], member: '' }
 }
 
 function getGcolors() {
