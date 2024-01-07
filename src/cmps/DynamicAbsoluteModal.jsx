@@ -1,7 +1,7 @@
 import { ColorPickerModal } from "./Board/Group/Picker/PickerModals/ColorPickerModal";
 import { MenuOptionsModal } from "./MenuOptionsModal";
 
-export function DynamicAbsoluteModal({ type, data, ev }) {
+export function DynamicAbsoluteModal({ type, data }) {
 
     return (
         <div className="dynamic-absolute-modal">

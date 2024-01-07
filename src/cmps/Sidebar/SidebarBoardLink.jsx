@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service";
 import { removeBoard, updateBoard } from "../../store/actions/board.actions"
-import { setOpenModal } from "../../store/actions/system.actions";
+import { setDynamicModalOpen } from "../../store/actions/system.actions";
 import { MenuOptionsModal } from "../MenuOptionsModal";
 
 export function SidebarBoardLink({ boards, board, currActiveBoard, openModalId }) {
@@ -40,10 +40,10 @@ export function SidebarBoardLink({ boards, board, currActiveBoard, openModalId }
 
     function onToggleModal() {
         if (openModalId === board._id) {
-            dispatch(setOpenModal(null))
+            // dispatch(setDynamicModalOpen(null))
             setisModalOpen(false)
         } else {
-            dispatch(setOpenModal(board._id))
+            // dispatch(setDynamicModalOpen(board._id))
             setisModalOpen(true)
         }
 

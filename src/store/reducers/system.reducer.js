@@ -1,23 +1,34 @@
-export const LOADING_START = 'LOADING_START'
-export const LOADING_DONE = 'LOADING_DONE'
-export const SET_DYNAMIC_OPEN_MODAL = 'SET_DYNAMIC_OPEN_MODAL'
+
+export const SET_IS_LOADING = 'SET_IS_LOADING'
+export const SET_DYNAMIC_MODAL_OPEN = 'SET_DYNAMIC_MODAL_OPEN'
+export const SET_DYNAMIC_MODAL_BOUNDING_RECT = 'SET_DYNAMIC_MODAL_BOUNDING_RECT'
+export const SET_DYNAMIC_MODAL_TYPE = 'SET_DYNAMIC_MODAL_TYPE'
+export const SET_DYNAMIC_MODAL_DATA = 'SET_DYNAMIC_MODAL_DATA'
 
 const initialState = {
   isLoading: false,
-  isDynamicModalOpen: false,
-  boundingRect: null
+  DynamicModalIsOpen: false,
+  dynamicModalBoundingRect: null,
+  dynamicModalType: '',
+  dynamicModalData: {},
 }
 
 export function systemReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case LOADING_START:
-      return { ...state, isLoading: true }
+    case SET_IS_LOADING:
+      return { ...state, isLoading: action.isLoading }
 
-    case LOADING_DONE:
-      return { ...state, isLoading: false }
-
-    case SET_DYNAMIC_OPEN_MODAL:
+    case SET_DYNAMIC_MODAL_OPEN:
       return { ...state, isDynamicModalOpen: action.isOpen }
+
+    case SET_DYNAMIC_MODAL_BOUNDING_RECT:
+      return { ...state, dynamicModalBoundingRect: action.dynamicModalBoundingRect }
+
+    case SET_DYNAMIC_MODAL_TYPE:
+      return { ...state, dynamicModalType: action.dynamicModalType }
+
+    case SET_DYNAMIC_MODAL_DATA:
+      return { ...state, dynamicModalData: action.dynamicModalData }
 
     default: return state
   }

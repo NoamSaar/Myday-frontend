@@ -24,6 +24,7 @@ export function RootCmp() {
                     </Route>
                 </Routes>
             </main>
+
         </div>
     )
 }

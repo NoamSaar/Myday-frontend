@@ -3,18 +3,18 @@ import { userService } from '../../services/user.service.js'
 import { store } from '../store.js'
 
 import { showErrorMsg } from '../../services/event-bus.service.js'
-import { LOADING_DONE, LOADING_START } from '../reducers/system.reducer.js'
+import { SET_IS_LOADING } from '../reducers/system.reducer.js'
 import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from '../reducers/user.reducer.js';
 
 export async function loadUsers() {
     try {
-        store.dispatch({ type: LOADING_START })
+        store.dispatch({ type: SET_IS_LOADING, isLoading: true })
         const users = await userService.getUsers()
         store.dispatch({ type: SET_USERS, users })
     } catch (err) {
         console.log('UserActions: err in loadUsers', err)
     } finally {
-        store.dispatch({ type: LOADING_DONE })
+        store.dispatch({ type: SET_IS_LOADING, isLoading: false })
     }
 }
 
