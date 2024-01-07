@@ -1,8 +1,8 @@
-import { SET_OPEN_MODAL } from '../reducers/system.reducer'
+import { SET_DYNAMIC_OPEN_MODAL } from '../reducers/system.reducer'
 
-export function setOpenModal(modalId) {
+export function setOpenModal(isDynamicModalOpen) {
     return {
-        type: SET_OPEN_MODAL,
-        modalId,
+        type: SET_DYNAMIC_OPEN_MODAL,
+        isDynamicModalOpen,
     };
 }

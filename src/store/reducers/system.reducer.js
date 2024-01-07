@@ -1,10 +1,11 @@
 export const LOADING_START = 'LOADING_START'
 export const LOADING_DONE = 'LOADING_DONE'
-export const SET_OPEN_MODAL = 'SET_OPEN_MODAL'
+export const SET_DYNAMIC_OPEN_MODAL = 'SET_DYNAMIC_OPEN_MODAL'
 
 const initialState = {
   isLoading: false,
-  openModalId: null,
+  isDynamicModalOpen: false,
+  boundingRect: null
 }
 
 export function systemReducer(state = initialState, action = {}) {
@@ -15,8 +16,8 @@ export function systemReducer(state = initialState, action = {}) {
     case LOADING_DONE:
       return { ...state, isLoading: false }
 
-    case SET_OPEN_MODAL:
-      return { ...state, openModalId: action.modalId }
+    case SET_DYNAMIC_OPEN_MODAL:
+      return { ...state, isDynamicModalOpen: action.isOpen }
 
     default: return state
   }

@@ -85,7 +85,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         if (!isMenuOpen) setIsShowMenu(false)
     }
 
-    function toggleMenu() {
+    function toggleMenu(ev) {
+        console.log('ev.getBoundingClientRect()', ev.target.getBoundingClientRect())
         setIsMenuOpen((prevIsOpen) => !prevIsOpen)
     }
 
