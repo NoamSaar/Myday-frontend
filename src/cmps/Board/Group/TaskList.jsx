@@ -18,36 +18,65 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     //     console.log('tasks', tasks)
     // }, [board])
 
-    async function handleDragEnd(result) {
-        try {
+    const handleDragEnd = (result) => {
+        if (!result.destination) return
 
-            const fullBoard = await getBoard(board._id)
-            console.log('fullBoard', fullBoard)
-            const initGroupIdx = fullBoard.groups.findIndex(group => group.id === groupId)
-            const initGroup = fullBoard.groups[initGroupIdx]
-            const newOrderedTasks = initGroup.tasks
-            console.log('newOrderedTasks', newOrderedTasks)
-
-            const [removed] = newOrderedTasks.splice(result.source.index, 1)
-            newOrderedTasks.splice(result.destination.index, 0, removed)
-            console.log('initGroup.tasks', initGroup.tasks)
-
-            saveNewOrder(fullBoard, initGroupIdx, initGroup)
-            if (!result.destination) return
-        } catch (error) {
-            console.log('Cannot move task:', error)
-
-        }
-
+        const newOrderedTasks = group.tasks
+        const [removed] = newOrderedTasks.splice(result.source.index, 1)
+        newOrderedTasks.splice(result.destination.index, 0, removed)
+        saveNewOrder()
     }
 
-
-    async function saveNewOrder(newBoard, groupIdx, group) {
+    async function saveNewOrder() {
         try {
+            const newBoard = { ...board }
             newBoard.groups.splice(groupIdx, 1, group)
             await updateBoard(newBoard)
         } catch (error) {
-            console.log('Cannot save group:', error)
+            console.log('Cannot save group:', error);
+        }
+    }
+
+    // async function handleDragEnd(result) {
+    //     try {
+
+    //         const fullBoard = await getBoard(board._id)
+    //         console.log('fullBoard', fullBoard)
+    //         const initGroupIdx = fullBoard.groups.findIndex(group => group.id === groupId)
+    //         const initGroup = fullBoard.groups[initGroupIdx]
+    //         const newOrderedTasks = initGroup.tasks
+    //         console.log('newOrderedTasks', newOrderedTasks)
+
+    //         const [removed] = newOrderedTasks.splice(result.source.index, 1)
+    //         newOrderedTasks.splice(result.destination.index, 0, removed)
+    //         console.log('initGroup.tasks', initGroup.tasks)
+
+    //         saveNewOrder(fullBoard, initGroupIdx, initGroup)
+    //         if (!result.destination) return
+    //     } catch (error) {
+    //         console.log('Cannot move task:', error)
+
+    //     }
+
+    // }
+
+
+    // async function saveNewOrder(newBoard, groupIdx, group) {
+    //     try {
+    //         newBoard.groups.splice(groupIdx, 1, group)
+    //         await updateBoard(newBoard)
+    //     } catch (error) {
+    //         console.log('Cannot save group:', error)
+    //     }
+    // }
+
+    async function saveNewOrder() {
+        try {
+            const newBoard = { ...board }
+            newBoard.groups.splice(groupIdx, 1, group)
+            await updateBoard(newBoard)
+        } catch (error) {
+            console.log('Cannot save group:', error);
         }
     }
 
