@@ -11,7 +11,7 @@ export function DatePicker({ selectedDate, onChangeDate, taskId }) {
         if (isPickerOpen) {
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'date picker', data: { selectedDate, onChangeDate }, fatherId: `${taskId}-datePicker` })
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'date picker', data: { selectedDate: selectedDate || Date.now(), onChangeDate }, fatherId: `${taskId}-datePicker` })
         }
     }
 
