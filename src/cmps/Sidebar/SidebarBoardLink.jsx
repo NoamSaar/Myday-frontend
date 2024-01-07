@@ -1,84 +1,101 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service";
-import { removeBoard, updateBoard } from "../../store/actions/board.actions"
-import { setDynamicModalOpen } from "../../store/actions/system.actions";
-import { MenuOptionsModal } from "../MenuOptionsModal";
+import { setDynamicModal } from "../../store/actions/system.actions";
+import { useSelector } from "react-redux";
 
-export function SidebarBoardLink({ boards, board, currActiveBoard, openModalId }) {
-    const [isModalOpen, setisModalOpen] = useState(null)
+export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBoard }) {
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
+    const [lastClickedBoardId, setLastClickedBoardId] = useState(null)
 
-    useEffect(() => {
-        if (openModalId === board._id) setisModalOpen(true)
-        else setisModalOpen(false)
-    }, [isModalOpen])
-
-    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     async function onDeleteBoard() {
-        try {
-            await removeBoard(board._id)
-            // navigate('board/b101')
-        } catch (error) {
-            console.error("Error removing task:", error)
-        }
+        deleteBoard(board._id)
     }
 
     async function onRenameBoard() {
-        try {
-            await updateBoard({ ...board, title: editedTitle })
-        } catch (error) {
-            console.error("Error removing task:", error)
-        } finally {
-            setIsEditing(false)
+        renameBoard(board, editedTitle)
+        setIsEditing(false)
+    }
+
+    function toggleMenu(ev) {
+        ev.stopPropagation()
+        const newBoardId = ev.currentTarget.getAttribute('data-boardid')
+        setLastClickedBoardId(newBoardId)
+
+        if (isMenuOpen) {
+            //updating modal in store
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            setIsMenuOpen(false)
+        } else {
+            //updating modal in store
+            setDynamicModal({
+                isOpen: true,
+                boundingRect: ev.target.getBoundingClientRect(),
+                type: 'menu options',
+                data: { options: menuOptions }
+            })
+            setIsMenuOpen(true)
         }
     }
 
-    function onToggleModal() {
-        if (openModalId === board._id) {
-            // dispatch(setDynamicModalOpen(null))
-            setisModalOpen(false)
-        } else {
-            // dispatch(setDynamicModalOpen(board._id))
-            setisModalOpen(true)
+    const handleInputKeyDown = (ev) => {
+        // Check if the pressed key is Enter (key code 13)
+        if (ev.key === 'Enter') {
+            onRenameBoard()
         }
+    }
 
+    function highlightText(text, query) {
+        if (!query) return text
+        const parts = text.split(new RegExp(`(${query})`, 'gi'))
+        return parts.map((part, index) =>
+            part.toLowerCase() === query.toLowerCase()
+                ? <span key={index} className="highlight">{part}</span>
+                : part
+        )
     }
 
     const menuOptions = [
         {
             icon: <DeleteIcon />,
             title: 'Delete',
-            onOptionClick: onDeleteBoard
+            onOptionClick: () => {
+                onDeleteBoard()
+                setIsMenuOpen(false)
+                setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            }
         },
         {
             icon: <PencilIcon />,
             title: 'Rename Board',
             onOptionClick: () => {
+                onRenameBoard()
                 setIsEditing(!isEditing)
-                setisModalOpen(false)
+                setIsMenuOpen(false)
+                setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
             }
         }
     ]
 
-    const posOptions = {
-        left: '0',
-        right: 0,
-        top: '28px',
-        button: 0,
-    }
     const style = { position: 'relative' }
-    const dynNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
-    const dynModalClass = isModalOpen ? 'active' : ''
+
+    const dynActiveNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
+    const dynHoverNavClass = lastClickedBoardId === board._id && isMenuOpen ? 'hovered' : '';
+    const dynModalClass = isMenuOpen ? 'active' : ''
+
     if (!boards && !boards.length) return <div>Loading board...</div>
     return (
         <>
-            <NavLink className={`btn ${dynNavClass}`}
-                to={`/board/${board._id}`}
+            <div className={`grid btn btn-board-nav ${dynActiveNavClass} ${dynHoverNavClass}`}
+                onClick={() => navigate(`/board/${board._id}`)}
                 title={`${board.title} Board`}
             >
                 <BoardIcon />
@@ -88,24 +105,26 @@ export function SidebarBoardLink({ boards, board, currActiveBoard, openModalId }
                         value={editedTitle}
                         onChange={(ev) => setEditedTitle(ev.target.value)}
                         onBlur={onRenameBoard}
+                        onKeyDown={handleInputKeyDown}
                         autoFocus
                     />
                 ) : (
                     <>
-                        <span>{board.title}</span>
+                        <span>{highlightText(board.title, filterBy.title)}</span>
+
                         <button
-                            className={`btn btn-option-menu relative ${dynModalClass}`}
+                            className={`btn btn-option-menu ${dynModalClass}`}
                             style={style}
                             alt="Board Menu"
-                            onClick={onToggleModal}
+                            onClick={toggleMenu}
                             title="Board Menu"
+                            data-boardid={board._id}
                         >
                             <MenuIcon />
-                            {isModalOpen && <MenuOptionsModal id={board._id} options={menuOptions} relative={posOptions} />}
                         </button>
                     </>
                 )}
-            </NavLink>
+            </div>
         </>
     )
 }

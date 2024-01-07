@@ -3,7 +3,7 @@ import { SidebarMainNav } from "./SidebarMainNav";
 import { SidebarWorkspace } from "./SidebarWorkspace";
 import { SidebarBoardNav } from "./SidebarBoardNav";
 import { useSelector } from "react-redux";
-import { addBoard, loadBoards, setFilterBy } from "../../store/actions/board.actions";
+import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions";
 import { useNavigate } from "react-router";
 // import { boardService } from "../services/board.service";
 // import { LottieAnimation } from "./LottieAnimation";
@@ -12,7 +12,6 @@ export function Sidebar() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
-    const openModalId = useSelector((storeState) => storeState.systemModule.openModalId)
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -39,6 +38,31 @@ export function Sidebar() {
         } catch (error) {
             console.error("Error adding new Board:", error)
         }
+    }
+
+    async function onDeleteBoard(boardId) {
+        try {
+            await removeBoard(boardId)
+            // navigate('board/b101')
+        } catch (error) {
+            console.error("Error removing task:", error)
+        }
+    }
+
+    function deleteBoard(boardId) {
+        onDeleteBoard(boardId)
+    }
+
+    async function onRenameBoard(board, title) {
+        try {
+            await updateBoard({ ...board, title })
+        } catch (error) {
+            console.error("Error removing task:", error)
+        }
+    }
+
+    function renameBoard(board, title) {
+        onRenameBoard(board, title)
     }
 
     function onSetFilter(filterBy) {
@@ -79,7 +103,9 @@ export function Sidebar() {
                 <SidebarBoardNav
                     boards={boards}
                     currActiveBoard={currActiveBoard}
-                    openModalId={openModalId} />
+                    deleteBoard={deleteBoard}
+                    renameBoard={renameBoard}
+                />
                 {/* <LottieAnimation /> */}
             </article>
         </section>

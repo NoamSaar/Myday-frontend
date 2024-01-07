@@ -16,8 +16,6 @@ body {
     margin: 0;
 }
 
-
-
 h1,
 h2,
 h3,
@@ -72,6 +70,11 @@ svg {
     fill: $clr-light-font;
 }
 
+input {
+    width: 100%;
+    max-width: 100%;
+}
+
 /* Firefox */
 * {
     scrollbar-width: thin;
@@ -115,4 +118,5 @@ svg {
     color: $clr-font;
     font-style: italic;
     border-radius: 2px;
+    // padding-inline: 2px;
 }
