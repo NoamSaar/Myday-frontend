@@ -14,7 +14,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
         try {
             ev.preventDefault()
             setIsEditing(false)
-            onSetActiveTask(null)
+            if (activeTask === groupId) onSetActiveTask(null)
             if (title) addTask()
 
         } catch (error) {

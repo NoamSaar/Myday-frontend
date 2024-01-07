@@ -13,7 +13,7 @@ export function DynamicPicker({ title, task, onUpdate }) {
         case "person":
             return <MemberPicker members={task.person} onUpdate={onUpdate} />
         case "date":
-            return <DatePicker date={task.date} onUpdate={onUpdate} />
+            return <DatePicker selectedDate={task.date} onChangeDate={onUpdate} taskId={task.id} />
         case "file":
             return <FilePicker file={task.file} onUpdate={onUpdate} />
         case "link":

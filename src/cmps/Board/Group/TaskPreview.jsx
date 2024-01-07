@@ -7,7 +7,7 @@ import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { setDynamicModal, setDynamicModalBoundingRect, setDynamicModalData, setDynamicModalOpen, setDynamicModalType } from "../../../store/actions/system.actions"
+import { setDynamicModal } from "../../../store/actions/system.actions"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const [currTask, setCurrTask] = useState(null)
@@ -22,7 +22,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     useEffect(() => {
         const fetchData = async () => {
-            let date = task.date
 
             try {
                 const newPersons = task.person.length
@@ -34,11 +33,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     )
                     : []
 
-                if (task.date) {
-                    date = utilService.getFormatDate(task.date)
-                }
 
-                setCurrTask({ ...task, person: newPersons, date })
+                setCurrTask({ ...task, person: newPersons })
                 setTaskTitle(task.title)
             } catch (error) {
                 console.error("Error fetching data:", error)
@@ -53,9 +49,9 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }, [taskTitle])
 
 
-    async function onTaskChange(field, date) {
+    async function onTaskChange(field, data) {
         try {
-            const updatedTask = { ...task, person: task.person, [field]: date }
+            const updatedTask = { ...task, person: task.person, [field]: data }
             updateTask(board._id, groupId, updatedTask)
         } catch (error) {
             console.error("Error changing task:", error)
@@ -92,7 +88,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         if (isMenuOpen) {
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
         }
     }
 
@@ -161,15 +157,13 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             </form>
                         ) : (
                             <span className="editable-txt" onClick={onTitleClick}>{highlightText(taskTitle, filterBy.txt)}</span>
-                            // <span className="editable-txt" onClick={onTitleClick}>{taskTitle}</span>
-
                         )}
                     </li>
 
                 </div>
 
                 {board.titlesOrder.map((title, idx) => {
-                    return <DynamicPicker key={idx} title={title} task={currTask} />
+                    return <DynamicPicker key={idx} title={title} task={currTask} onUpdate={onTaskChange} />
                 })}
 
                 <li className="line-end"></li>
