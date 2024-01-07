@@ -7,7 +7,7 @@ import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { setDynamicModalBoundingRect, setDynamicModalData, setDynamicModalOpen, setDynamicModalType } from "../../../store/actions/system.actions"
+import { setDynamicModal, setDynamicModalBoundingRect, setDynamicModalData, setDynamicModalOpen, setDynamicModalType } from "../../../store/actions/system.actions"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const [currTask, setCurrTask] = useState(null)
@@ -92,20 +92,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             console.log('close')
 
             //updating modal in store
-            setDynamicModalOpen(false)
-            setDynamicModalType(null)
-            setDynamicModalData({})
-            setDynamicModalBoundingRect(null)
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
 
             setIsMenuOpen(false)
         } else {
             console.log('open')
 
             //updating modal in store
-            setDynamicModalType('menu options')
-            setDynamicModalData({ options: menuOptions })
-            setDynamicModalBoundingRect(ev.target.getBoundingClientRect())
-            setDynamicModalOpen(true)
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions } })
 
             setIsMenuOpen(true)
 

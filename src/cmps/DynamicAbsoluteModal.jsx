@@ -5,7 +5,7 @@ import { MenuOptionsModal } from "./MenuOptionsModal";
 export function DynamicAbsoluteModal() {
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
     let style
-    console.log('modalData.boundingRect', modalData.boundingRect)
+    console.log('modalData', modalData)
 
     if (modalData.isOpen) {
         style = {
