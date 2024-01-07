@@ -4,9 +4,13 @@
     color: $clr-font;
     border-top-left-radius: 8px;
     user-select: none;
-    overflow: scroll;
+    overflow: auto;
     height: calc(100dvh - 48px);
     padding-block-end: 40px;
+
+    &.overflow-hidden {
+        overflow: hidden;
+    }
 
     .board-content {
 

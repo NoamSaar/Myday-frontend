@@ -49,7 +49,17 @@ export async function loadBoard(boardId) {
         return board
     } catch (error) {
         console.log('Had issues in board details', error)
-        throw err
+        throw error
+    }
+}
+
+export async function getBoard(boardId) {
+    try {
+        const board = await boardService.getById(boardId)
+        return board
+    } catch (error) {
+        console.log('Had issues in board details', error)
+        throw error
     }
 }
 
@@ -105,6 +115,27 @@ export async function updateBoard(board) {
         throw err
     }
 }
+
+// export async function updateBoard(board) {
+//     try {
+//         loadBoard(board._id)
+//         // setCurrBoard(savedBoard)
+//         const savedBoard = await boardService.save(board)
+//         // console.log('Updated Board:', savedBoard)
+//         store.dispatch(getActionUpdateBoard(savedBoard))
+
+//         // const currBoardId = store.getState().boardModule.currBoard._id
+//         // if (savedBoard._id === currBoardId) {
+//         //     // console.log('this is curr board!')
+//         // }
+
+//         return savedBoard
+
+//     } catch (err) {
+//         console.log('Cannot save board', err)
+//         throw err
+//     }
+// }
 
 export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })

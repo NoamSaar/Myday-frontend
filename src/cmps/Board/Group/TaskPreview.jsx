@@ -7,6 +7,7 @@ import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { setDynamicModal, setDynamicModalBoundingRect, setDynamicModalData, setDynamicModalOpen, setDynamicModalType } from "../../../store/actions/system.actions"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const [currTask, setCurrTask] = useState(null)
@@ -36,6 +37,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 }
 
                 setCurrTask({ ...task, person: newPersons, date })
+                setTaskTitle(task.title)
             } catch (error) {
                 console.error("Error fetching data:", error)
             }
@@ -47,6 +49,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     useEffectUpdate(() => {
         setCurrTask((prevTask) => ({ ...prevTask, title: taskTitle }))
     }, [taskTitle])
+
 
     async function onTaskChange(field, date) {
         try {
@@ -80,11 +83,28 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }
 
     function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
+        setIsShowMenu(false)
+        // if (!isMenuOpen) setIsShowMenu(false)
     }
 
-    function toggleMenu() {
-        setIsMenuOpen((prevIsOpen) => !prevIsOpen)
+    function toggleMenu(ev) {
+        if (isMenuOpen) {
+            console.log('close')
+
+            //updating modal in store
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+
+            setIsMenuOpen(false)
+        } else {
+            console.log('open')
+
+            //updating modal in store
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions } })
+
+            setIsMenuOpen(true)
+
+        }
+        // console.log('ev.getBoundingClientRect()', ev.target.getBoundingClientRect())
     }
 
     function onTitleClick() {
@@ -123,7 +143,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseLeave={handleMouseLeave}
         >
             <div className="menu-container sticky-left">
-                {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
                 {isShowMenu && (<button className="btn svg-inherit-color" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
             </div>
             <div
