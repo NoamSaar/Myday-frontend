@@ -67,6 +67,7 @@
         .task-title {
             display: flex;
             width: 100%;
+            max-width: 304px;
 
             &.single-task {
                 padding-inline-start: 36px;
