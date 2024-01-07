@@ -5,7 +5,7 @@ import { HomeIcon, AngleRightIcon, CalendarIcon } from "../../services/svg.servi
 export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {
     return (
         <nav className="sidebar-main-nav">
-            <NavLink className={`btn btn-nav ${isActive ? 'active' : ''}`}
+            <NavLink className={`btn btn-nav svg-inherit-color ${isActive ? 'active' : ''}`}
                 to="/"
                 title="Home Button"
                 onClick={() => setCurrBoard(null)}>
@@ -14,7 +14,7 @@ export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {
                 <span>Home</span>
             </NavLink>
 
-            <NavLink className={`btn btn-nav ${isActive ? 'active' : ''}`}
+            <NavLink className={`btn btn-nav svg-inherit-color ${isActive ? 'active' : ''}`}
                 to="/workspace"
                 title="My Work Button"
                 onClick={() => setCurrBoard(null)}>

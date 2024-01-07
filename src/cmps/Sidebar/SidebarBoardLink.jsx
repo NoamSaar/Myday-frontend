@@ -26,7 +26,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
 
     function toggleMenu(ev) {
         ev.stopPropagation()
-        const newBoardId = ev.currentTarget.getAttribute('data-boardId')
+        const newBoardId = ev.currentTarget.getAttribute('data-boardid')
         setLastClickedBoardId(newBoardId)
 
         if (isMenuOpen) {
@@ -107,7 +107,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
                             alt="Board Menu"
                             onClick={toggleMenu}
                             title="Board Menu"
-                            data-boardId={board._id}
+                            data-boardid={board._id}
                         >
                             <MenuIcon />
                         </button>
