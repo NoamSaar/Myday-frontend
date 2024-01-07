@@ -6,6 +6,7 @@ import { Sidebar } from './cmps/Sidebar/Sidebar'
 import { TaskDetails } from './pages/TaskDetails'
 import { BoardDetails } from './pages/BoardDetails'
 import { HomePage } from './pages/HomePage'
+import { DynamicAbsoluteModal } from './cmps/DynamicAbsoluteModal'
 
 export function RootCmp() {
 
@@ -24,7 +25,7 @@ export function RootCmp() {
                     </Route>
                 </Routes>
             </main>
-
+            <DynamicAbsoluteModal />
         </div>
     )
 }

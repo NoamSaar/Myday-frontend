@@ -11,6 +11,7 @@ export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const user = useSelector((storeState) => storeState.userModule.loggedinUser)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
+    const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     useEffect(() => {
         _loadBoard()
@@ -49,7 +50,7 @@ export function BoardDetails() {
 
     if (!board) return <div className="board-details">Loading...</div>
     return (
-        <section className="board-details">
+        <section className={`${modalData.isOpen && 'overflow-hidden'} board-details`}>
             <BoardHeader
                 board={board}
                 filterBy={{ txt }}

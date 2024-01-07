@@ -7,6 +7,7 @@ import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { setDynamicModalBoundingRect, setDynamicModalData, setDynamicModalOpen, setDynamicModalType } from "../../../store/actions/system.actions"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const [currTask, setCurrTask] = useState(null)
@@ -88,9 +89,24 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     function toggleMenu(ev) {
         if (isMenuOpen) {
+            console.log('close')
+
+            //updating modal in store
+            setDynamicModalOpen(false)
+            setDynamicModalType(null)
+            setDynamicModalData({})
+            setDynamicModalBoundingRect(null)
 
             setIsMenuOpen(false)
         } else {
+            console.log('open')
+
+            //updating modal in store
+            setDynamicModalType('menu options')
+            setDynamicModalData({ options: menuOptions })
+            setDynamicModalBoundingRect(ev.target.getBoundingClientRect())
+            setDynamicModalOpen(true)
+
             setIsMenuOpen(true)
 
         }
