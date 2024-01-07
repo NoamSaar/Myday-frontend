@@ -8,7 +8,8 @@ export const utilService = {
     loadFromStorage,
     getFormatDate,
     getFormatName,
-    capitalizeFirstLetter
+    capitalizeFirstLetter,
+    getFullFormatDate
 }
 
 function makeId(length = 6) {
@@ -70,6 +71,25 @@ function getFormatDate(timestamp) {
     const options = { day: 'numeric', month: 'short' }
     const formatter = new Intl.DateTimeFormat('en-US', options)
     return formatter.format(date)
+}
+
+function getFullFormatDate(timestamp) {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+    const options = {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short',
+        timeZone
+    }
+
+    const formattedDate = new Date(timestamp).toLocaleString('en-US', options)
+    return formattedDate;
 }
 
 function getFormatName(name) {

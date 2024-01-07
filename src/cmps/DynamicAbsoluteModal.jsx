@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { ColorPickerModal } from "./Board/Group/Picker/PickerModals/ColorPickerModal";
 import { MenuOptionsModal } from "./MenuOptionsModal";
+import { DatePickerModal } from "./Board/Group/Picker/PickerModals/DatePickerModal";
 
 export function DynamicAbsoluteModal() {
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -26,7 +27,7 @@ function DynamicModal(props) {
             return <ColorPickerModal colors={props.data.colors} onColorClick={props.data.onColorClick} />
 
         case 'date picker':
-            return <ColorPickerModal colors={props.data.colors} onColorClick={props.data.onColorClick} />
+            return <DatePickerModal selectedDate={props.data.selectedDate} onChangeDate={props.data.onChangeDate} />
 
         case 'menu options':
             return <MenuOptionsModal options={props.data.options} />

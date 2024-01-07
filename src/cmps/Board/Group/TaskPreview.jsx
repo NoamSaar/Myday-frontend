@@ -34,11 +34,11 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     )
                     : []
 
-                if (task.date) {
-                    date = utilService.getFormatDate(task.date)
-                }
+                // if (task.date) {
+                //     date = utilService.getFormatDate(task.date)
+                // }
 
-                setCurrTask({ ...task, person: newPersons, date })
+                setCurrTask({ ...task, person: newPersons })
                 setTaskTitle(task.title)
             } catch (error) {
                 console.error("Error fetching data:", error)
@@ -53,9 +53,9 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }, [taskTitle])
 
 
-    async function onTaskChange(field, date) {
+    async function onTaskChange(field, data) {
         try {
-            const updatedTask = { ...task, person: task.person, [field]: date }
+            const updatedTask = { ...task, person: task.person, [field]: data }
             updateTask(board._id, groupId, updatedTask)
         } catch (error) {
             console.error("Error changing task:", error)
@@ -169,7 +169,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 </div>
 
                 {board.titlesOrder.map((title, idx) => {
-                    return <DynamicPicker key={idx} title={title} task={currTask} />
+                    return <DynamicPicker key={idx} title={title} task={currTask} onUpdate={onTaskChange} />
                 })}
 
                 <li className="line-end"></li>
