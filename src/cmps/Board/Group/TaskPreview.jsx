@@ -74,7 +74,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             const title = target.value
             setTaskTitle(title)
-            if (title) onTaskChange("title", title)
+            // if (title) onTaskChange("title", title)
         } catch (error) {
             console.error("Error changing task title:", error)
         }
@@ -119,7 +119,10 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             if (!taskTitle) {
                 setTaskTitle(task.title)
                 onTaskChange("title", task.title)
+            } else {
+                onTaskChange("title", taskTitle)
             }
+
             setIsEditing(false)
         } catch (error) {
             console.error("Error changing task title:", error)
