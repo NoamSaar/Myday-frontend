@@ -36,6 +36,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 }
 
                 setCurrTask({ ...task, person: newPersons, date })
+                setTaskTitle(task.title)
             } catch (error) {
                 console.error("Error fetching data:", error)
             }
@@ -47,6 +48,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     useEffectUpdate(() => {
         setCurrTask((prevTask) => ({ ...prevTask, title: taskTitle }))
     }, [taskTitle])
+
 
     async function onTaskChange(field, date) {
         try {

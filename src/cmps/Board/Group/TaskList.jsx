@@ -2,7 +2,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useSelector } from "react-redux"
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { addTask, getBoard, setActiveTask, updateBoard } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
@@ -10,6 +10,13 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
     const group = board.groups[groupIdx]
+    // let tasks = board.groups[groupIdx].tasks
+
+    // useEffect(() => {
+    //     console.log('here');
+    //     tasks = board.groups[groupIdx].tasks
+    //     console.log('tasks', tasks)
+    // }, [board])
 
     async function handleDragEnd(result) {
         try {
@@ -18,15 +25,15 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
             console.log('fullBoard', fullBoard)
             const initGroupIdx = fullBoard.groups.findIndex(group => group.id === groupId)
             const initGroup = fullBoard.groups[initGroupIdx]
-
             const newOrderedTasks = initGroup.tasks
             console.log('newOrderedTasks', newOrderedTasks)
+
             const [removed] = newOrderedTasks.splice(result.source.index, 1)
             newOrderedTasks.splice(result.destination.index, 0, removed)
             console.log('initGroup.tasks', initGroup.tasks)
 
             saveNewOrder(fullBoard, initGroupIdx, initGroup)
-            if (!result.destination) return;
+            if (!result.destination) return
         } catch (error) {
             console.log('Cannot move task:', error)
 

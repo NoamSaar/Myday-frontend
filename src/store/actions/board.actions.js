@@ -98,15 +98,16 @@ export async function addBoard(board) {
 
 export async function updateBoard(board) {
     try {
+        loadBoard(board._id)
+        // setCurrBoard(savedBoard)
         const savedBoard = await boardService.save(board)
         // console.log('Updated Board:', savedBoard)
         store.dispatch(getActionUpdateBoard(savedBoard))
 
-        const currBoardId = store.getState().boardModule.currBoard._id
-        if (savedBoard._id === currBoardId) {
-            // console.log('this is curr board!')
-            setCurrBoard(savedBoard)
-        }
+        // const currBoardId = store.getState().boardModule.currBoard._id
+        // if (savedBoard._id === currBoardId) {
+        //     // console.log('this is curr board!')
+        // }
 
         return savedBoard
 
