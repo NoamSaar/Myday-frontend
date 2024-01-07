@@ -45,6 +45,13 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
         }
     }
 
+    const handleInputKeyDown = (ev) => {
+        // Check if the pressed key is Enter (key code 13)
+        if (ev.key === 'Enter') {
+            onRenameBoard()
+        }
+    }
+
     const menuOptions = [
         {
             icon: <DeleteIcon />,
@@ -87,6 +94,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
                         value={editedTitle}
                         onChange={(ev) => setEditedTitle(ev.target.value)}
                         onBlur={onRenameBoard}
+                        onKeyDown={handleInputKeyDown}
                         autoFocus
                     />
                 ) : (
