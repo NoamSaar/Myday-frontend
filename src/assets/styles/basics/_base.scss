@@ -16,8 +16,6 @@ body {
     margin: 0;
 }
 
-
-
 h1,
 h2,
 h3,
@@ -70,6 +68,11 @@ a {
 svg {
     // fill: red;
     fill: $clr-light-font;
+}
+
+input {
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Firefox */

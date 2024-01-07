@@ -5,19 +5,23 @@
         height: 32px;
     }
 
-    .btn {
-        display: flex;
-        justify-content: stretch;
-        gap: 0;
+    .btn-board-nav {
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 6px;
         position: relative;
         padding-block: 6px;
 
-        span {
-            flex-grow: 1;
+        &.hovered {
+            background-color: $clr-btn-hover
         }
 
         input {
-            flex-grow: 1;
+            outline: none;
+
+            &:active {
+                border: 1px solid $clr-btn-active;
+            }
         }
     }
 
@@ -25,11 +29,8 @@
         background-color: $clr-btn-active;
     }
 
-    span {
-        margin-inline-start: 6px;
-    }
-
     .btn-option-menu {
+        display: flex;
         opacity: 0;
         padding-inline: 0;
         height: 20px;
@@ -54,10 +55,6 @@
             background-color: $clr-btn-hover;
         }
 
-
-
         align-self: end;
     }
-
-
 }

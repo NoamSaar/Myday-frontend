@@ -11,6 +11,8 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
+    const [lastClickedBoardId, setLastClickedBoardId] = useState(null)
+
     const navigate = useNavigate()
 
     async function onDeleteBoard() {
@@ -24,6 +26,9 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
 
     function toggleMenu(ev) {
         ev.stopPropagation()
+        const newBoardId = ev.currentTarget.getAttribute('data-boardId')
+        setLastClickedBoardId(newBoardId)
+
         if (isMenuOpen) {
             //updating modal in store
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
@@ -37,7 +42,6 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
                 data: { options: menuOptions }
             })
             setIsMenuOpen(true)
-
         }
     }
 
@@ -55,6 +59,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
             icon: <PencilIcon />,
             title: 'Rename Board',
             onOptionClick: () => {
+                onRenameBoard()
                 setIsEditing(!isEditing)
                 setIsMenuOpen(false)
                 setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
@@ -64,13 +69,14 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
 
     const style = { position: 'relative' }
 
-    const dynNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
+    const dynActiveNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
+    const dynHoverNavClass = lastClickedBoardId === board._id && isMenuOpen ? 'hovered' : '';
     const dynModalClass = isMenuOpen ? 'active' : ''
 
     if (!boards && !boards.length) return <div>Loading board...</div>
     return (
         <>
-            <div className={`btn ${dynNavClass}`}
+            <div className={`grid btn btn-board-nav ${dynActiveNavClass} ${dynHoverNavClass}`}
                 onClick={() => navigate(`/board/${board._id}`)}
                 title={`${board.title} Board`}
             >
@@ -88,11 +94,12 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
                         <span>{board.title}</span>
 
                         <button
-                            className={`btn btn-option-menu relative ${dynModalClass}`}
+                            className={`btn btn-option-menu ${dynModalClass}`}
                             style={style}
                             alt="Board Menu"
                             onClick={toggleMenu}
                             title="Board Menu"
+                            data-boardId={board._id}
                         >
                             <MenuIcon />
                         </button>
