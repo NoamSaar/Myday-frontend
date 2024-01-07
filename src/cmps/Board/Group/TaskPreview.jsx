@@ -50,6 +50,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
 
     async function onTaskChange(field, data) {
+        // console.log("Received arguments onTaskChange:", arguments)
         try {
             const updatedTask = { ...task, person: task.person, [field]: data }
             updateTask(board._id, groupId, updatedTask)
