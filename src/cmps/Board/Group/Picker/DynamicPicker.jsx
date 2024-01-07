@@ -6,17 +6,17 @@ import { StatusPicker } from "./StatusPicker";
 
 export function DynamicPicker({ title, task, onUpdate }) {
     switch (title) {
-        case "Status":
-            return <StatusPicker title={title} info={{ chosenOption: task[title.toLowerCase()] }} onUpdate={onUpdate} />
-        case "Priority":
-            return <StatusPicker title={title} info={{ chosenOption: task[title.toLowerCase()] }} onUpdate={onUpdate} />
-        case "Person":
+        case "status":
+            return <StatusPicker title={title} info={{ chosenOption: task[title] }} onUpdate={onUpdate} />
+        case "priority":
+            return <StatusPicker title={title} info={{ chosenOption: task[title] }} onUpdate={onUpdate} />
+        case "person":
             return <MemberPicker members={task.person} onUpdate={onUpdate} />
-        case "Date":
+        case "date":
             return <DatePicker date={task.date} onUpdate={onUpdate} />
-        case "File":
+        case "file":
             return <FilePicker file={task.file} onUpdate={onUpdate} />
-        case "Link":
+        case "link":
             return <LinkPicker info={task.link} onUpdate={onUpdate} />
         default:
             return <li>UNKNOWN {title}</li>;

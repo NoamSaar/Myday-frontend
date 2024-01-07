@@ -689,7 +689,7 @@ const gBoards = [
                 },
             },
         ],
-        titlesOrder: ['Person', 'Status', 'Priority', 'Date', 'File', 'Link'],
+        titlesOrder: ['person', 'status', 'priority', 'date', 'file', 'link'],
     },
 ]
 
@@ -1113,7 +1113,7 @@ function _getDefaultBoard() {
         //         },
         //     },
         // ],
-        titlesOrder: ['Person', 'Status', 'Date'],
+        titlesOrder: ['person', 'status', 'date'],
 
     }
 }

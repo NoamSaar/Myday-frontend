@@ -5,6 +5,7 @@ import { MenuOptionsModal } from "../../MenuOptionsModal";
 import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions";
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service";
 import { ColorPickerModal } from "./Picker/PickerModals/ColorPickerModal";
+import { utilService } from "../../../services/util.service";
 
 export function BoardGroup({ group, titlesOrder }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -159,8 +160,8 @@ export function BoardGroup({ group, titlesOrder }) {
                         </div>
 
                         {board.titlesOrder.map((title, idx) => {
-                            return <li key={idx} className={`${title.toLowerCase()}-col`}>
-                                {title}
+                            return <li key={idx} className={`${title}-col`}>
+                                {utilService.capitalizeFirstLetter(title)}
                             </li>
                         })}
                         <li className="line-end"></li>

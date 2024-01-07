@@ -7,7 +7,8 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getFormatDate,
-    getFormatName
+    getFormatName,
+    capitalizeFirstLetter
 }
 
 function makeId(length = 6) {
@@ -73,4 +74,8 @@ function getFormatDate(timestamp) {
 
 function getFormatName(name) {
     return name.split(' ')[0][0] + name.split(' ')[1][0]
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }
