@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBoard }) {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
@@ -50,6 +51,16 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
         if (ev.key === 'Enter') {
             onRenameBoard()
         }
+    }
+
+    function highlightText(text, query) {
+        if (!query) return text
+        const parts = text.split(new RegExp(`(${query})`, 'gi'))
+        return parts.map((part, index) =>
+            part.toLowerCase() === query.toLowerCase()
+                ? <span key={index} className="highlight">{part}</span>
+                : part
+        )
     }
 
     const menuOptions = [
@@ -99,7 +110,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
                     />
                 ) : (
                     <>
-                        <span>{board.title}</span>
+                        <span>{highlightText(board.title, filterBy.title)}</span>
 
                         <button
                             className={`btn btn-option-menu ${dynModalClass}`}
