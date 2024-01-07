@@ -83,20 +83,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }
 
     function handleMouseLeave() {
-        setIsShowMenu(false)
+        if (!isMenuOpen) setIsShowMenu(false)
         // if (!isMenuOpen) setIsShowMenu(false)
     }
 
     function toggleMenu(ev) {
         if (isMenuOpen) {
-            console.log('close')
 
             //updating modal in store
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
 
             setIsMenuOpen(false)
         } else {
-            console.log('open')
 
             //updating modal in store
             setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions } })
