@@ -1,6 +1,7 @@
 .task-preview-container {
     display: flex;
 
+
     &.add-task:hover .color-display {
         opacity: 1;
     }
@@ -9,8 +10,10 @@
         display: flex;
 
         &:hover:not(.active) {
-            & li {
+            box-shadow: 4px 3px 6px -3px $clr-btn-border;
+            z-index: 10;
 
+            & li {
                 background-color: $clr-task-hover;
             }
 
@@ -30,13 +33,14 @@
             opacity: 1;
         }
 
+
         li {
             white-space: nowrap;
             height: 36px;
 
             &:not(.active li) {
-
                 background-color: white;
+
             }
 
             &:not(.task-selection) {
@@ -50,6 +54,7 @@
 
 
         .task-title {
+
 
             .focused-input {
                 width: 100%;

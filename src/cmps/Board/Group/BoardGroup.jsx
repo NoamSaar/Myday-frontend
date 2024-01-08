@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TaskList } from "./TaskList";
 import { useSelector } from "react-redux";
 import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions";
@@ -17,6 +17,10 @@ export function BoardGroup({ group, titlesOrder }) {
     const isMenuOpen = fatherId === `${group.id}-menu`
     const isColorPickerOpen = fatherId === `${group.id}-colorPicker`
     const colors = getGcolors()
+
+    useEffect(() => {
+        setGroupTitle(group.title)
+    }, [group])
 
 
     function toggleMenu(ev) {
@@ -49,7 +53,6 @@ export function BoardGroup({ group, titlesOrder }) {
         try {
             const title = target.value
             setGroupTitle(title)
-            if (title) onGroupChange("title", title)
         } catch (error) {
             console.error("Error changing group title:", error)
         }
@@ -72,6 +75,9 @@ export function BoardGroup({ group, titlesOrder }) {
             if (!groupTitle) {
                 setGroupTitle(group.title)
                 onGroupChange("title", group.title)
+            } else {
+                onGroupChange("title", groupTitle)
+
             }
 
             if (!isColorPickerOpen) setIsEditing(false)

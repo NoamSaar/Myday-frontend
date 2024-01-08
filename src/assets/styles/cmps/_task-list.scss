@@ -63,10 +63,6 @@
         }
 
 
-        // &:not(.active):not(.active .task-title-container) {
-
-        //     background-color: white;
-        // }
 
         .task-title {
             display: flex;
@@ -75,13 +71,14 @@
 
             &.single-task {
                 padding-inline-start: 36px;
+
+                .focused-input,
+                .editable-txt {
+                    padding-block: 3px 2px;
+                    padding-inline-start: 3px;
+                }
             }
-
-            // &:hover:not(.task-header-list .task-title):not(.active .task-title) {
-            //     background-color: $clr-task-hover;
-            // }
         }
-
 
     }
 
@@ -92,6 +89,19 @@
 
         .task-preview {
 
+            .task-title {
+                padding-inline-start: 16px;
+
+                .editable-txt,
+                .focused-input {
+                    padding-inline-start: 9.5px;
+                }
+
+                .editable-txt {
+                    width: 99%;
+                }
+
+            }
 
             .single-task,
             .line-end,
