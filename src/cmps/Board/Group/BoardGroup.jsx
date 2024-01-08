@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 import { TaskList } from "./TaskList"
 import { useSelector } from "react-redux"
 import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
-import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { AngleDownBoldIcon, AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { ColorPickerModal } from "./Picker/PickerModals/ColorPickerModal"
 import { utilService } from "../../../services/util.service"
 import { setDynamicModal } from "../../../store/actions/system.actions"
 
-export function BoardGroup({ group, titlesOrder }) {
-    const [isEditing, setIsEditing] = useState(false)
+export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
+    const [isEditing, setIsEditing] = useState(isEditingTitle)
     const [groupTitle, setGroupTitle] = useState(group.title)
     const [groupColor, setGroupColor] = useState(group.color)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
@@ -21,6 +21,10 @@ export function BoardGroup({ group, titlesOrder }) {
     useEffect(() => {
         setGroupTitle(group.title)
     }, [group])
+
+    useEffect(() => {
+        setIsEditing(isEditingTitle)
+    }, [isEditingTitle])
 
 
     function toggleMenu(ev) {
@@ -80,7 +84,10 @@ export function BoardGroup({ group, titlesOrder }) {
 
             }
 
-            if (!isColorPickerOpen) setIsEditing(false)
+            if (!isColorPickerOpen) {
+                setIsEditing(false)
+                onTitleEditLeave()
+            }
         } catch (error) {
             console.error("Error changing group title:", error)
         }
@@ -133,9 +140,7 @@ export function BoardGroup({ group, titlesOrder }) {
                                 onBlur={onTitleEditExit}
                                 className="focused-input group-title-edit-container"
                             >
-
                                 <div className="group-color-display" style={{ backgroundColor: groupColor }} onMouseDown={onColorDisplayClick}></div>
-                                {/* {isColorPickerOpen && <ColorPickerModal colors={colors} onColorClick={onChangeColor} />} */}
 
                                 <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                     <input
@@ -150,8 +155,6 @@ export function BoardGroup({ group, titlesOrder }) {
                                 </form>
                             </div>
                         ) : (
-                            // <h4 style={{ color: group.color }} className="editable-txt" onClick={() => setIsEditing(true)}>{highlightText(groupTitle, filterBy.txt)}</h4>
-                            // <h4 style={{ color: groupColor }} className="editable-txt" onClick={() => setIsEditing(true)}>{groupTitle}</h4>
                             <h4 style={{ color: groupColor }} className="editable-txt" onClick={() => setIsEditing(true)}>{highlightText(groupTitle, filterBy.txt)}</h4>
                         )}
                         <p className="tasks-count">{group.tasks.length} Tasks</p>

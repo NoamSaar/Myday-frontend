@@ -1,6 +1,7 @@
-import React from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
 import { SidebarBoardLink } from './SidebarBoardLink'
+
 import { saveBoards } from '../../store/actions/board.actions'
 
 export function SidebarBoardNav({ boards, currActiveBoard, deleteBoard, renameBoard }) {
@@ -10,6 +11,7 @@ export function SidebarBoardNav({ boards, currActiveBoard, deleteBoard, renameBo
         const newOrderedBoards = Array.from(boards)
         const [removed] = newOrderedBoards.splice(result.source.index, 1)
         newOrderedBoards.splice(result.destination.index, 0, removed)
+
         saveNewOrder(newOrderedBoards)
     }
 
@@ -20,6 +22,7 @@ export function SidebarBoardNav({ boards, currActiveBoard, deleteBoard, renameBo
             showErrorMsgRedux('Cannot save Boards')
         }
     }
+
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable droppableId="boards">

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
-import { setCurrBoard } from "../../store/actions/board.actions"
 import { HomeIcon, AngleRightIcon, CalendarIcon } from "../../services/svg.service"
+import { setCurrBoard } from "../../store/actions/board.actions"
 
 export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {
     return (
@@ -8,8 +8,8 @@ export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {
             <NavLink className={`btn btn-nav svg-inherit-color ${isActive ? 'active' : ''}`}
                 to="/"
                 title="Home Button"
-                onClick={() => setCurrBoard(null)}>
-
+                onClick={() => setCurrBoard(null)}
+            >
                 <HomeIcon />
                 <span>Home</span>
             </NavLink>
@@ -17,15 +17,16 @@ export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {
             <NavLink className={`btn btn-nav svg-inherit-color ${isActive ? 'active' : ''}`}
                 to="/workspace"
                 title="My Work Button"
-                onClick={() => setCurrBoard(null)}>
-
+                onClick={() => setCurrBoard(null)}
+            >
                 <CalendarIcon />
                 <span>My work</span>
             </NavLink>
 
             <button className={`btn btn-menu ${isSidebarOpen ? 'open' : ''}`}
                 title="Menu Button"
-                onClick={onOpenSidebar}>
+                onClick={onOpenSidebar}
+            >
                 <AngleRightIcon />
             </button>
         </nav>
