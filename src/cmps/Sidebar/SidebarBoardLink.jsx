@@ -62,6 +62,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
 
     function onLinkClick() {
         navigate(`/board/${board._id}`)
+        resetDynamicModal()
     }
 
     const menuOptions = [
