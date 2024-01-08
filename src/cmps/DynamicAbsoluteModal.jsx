@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
-import { ColorPickerModal } from "./Board/Group/Picker/PickerModals/ColorPickerModal";
-import { MenuOptionsModal } from "./MenuOptionsModal";
-import { DatePickerModal } from "./Board/Group/Picker/PickerModals/DatePickerModal";
-import { StatusPickerModal } from "./Board/Group/Picker/PickerModals/StatusPickerModal";
-import { LinkPickerModal } from "./Board/Group/Picker/PickerModals/LinkPickerModal";
-import { MemberPickerModal } from "./Board/Group/Picker/PickerModals/MemberPickerModal";
+import { useSelector } from "react-redux"
+import { ColorPickerModal } from "./Board/Group/Picker/PickerModals/ColorPickerModal"
+import { MenuOptionsModal } from "./MenuOptionsModal"
+import { DatePickerModal } from "./Board/Group/Picker/PickerModals/DatePickerModal"
+import { StatusPickerModal } from "./Board/Group/Picker/PickerModals/StatusPickerModal"
+import { LinkPickerModal } from "./Board/Group/Picker/PickerModals/LinkPickerModal"
+import { MemberPickerModal } from "./Board/Group/Picker/PickerModals/MemberPickerModal"
 
 export function DynamicAbsoluteModal() {
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)

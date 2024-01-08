@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { setCurrBoard } from "../../store/actions/board.actions";
+import { NavLink } from "react-router-dom"
+import { setCurrBoard } from "../../store/actions/board.actions"
 import { HomeIcon, AngleRightIcon, CalendarIcon } from "../../services/svg.service"
 
 export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {

@@ -1,8 +1,8 @@
-import { DatePicker } from "./DatePicker";
-import { FilePicker } from "./FilePicker";
-import { LinkPicker } from "./LinkPicker";
-import { MemberPicker } from "./MemberPicker";
-import { StatusPicker } from "./StatusPicker";
+import { DatePicker } from "./DatePicker"
+import { FilePicker } from "./FilePicker"
+import { LinkPicker } from "./LinkPicker"
+import { MemberPicker } from "./MemberPicker"
+import { StatusPicker } from "./StatusPicker"
 
 export function DynamicPicker({ title, task, onUpdate, chosenMembers, memberOptions }) {
     // console.log('chosenMembers', chosenMembers)
@@ -20,6 +20,6 @@ export function DynamicPicker({ title, task, onUpdate, chosenMembers, memberOpti
         case "link":
             return <LinkPicker info={task.link} onUpdate={onUpdate} taskId={task.id} />
         default:
-            return <li>UNKNOWN {title}</li>;
+            return <li>UNKNOWN {title}</li>
     }
 }

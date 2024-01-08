@@ -1,4 +1,4 @@
-import { AngleDownIcon, MenuIcon } from "../../services/svg.service";
+import { AngleDownIcon, MenuIcon } from "../../services/svg.service"
 
 export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
     return (

@@ -13,7 +13,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     // let tasks = board.groups[groupIdx].tasks
 
     // useEffect(() => {
-    //     console.log('here');
+    //     console.log('here')
     //     tasks = board.groups[groupIdx].tasks
     //     console.log('tasks', tasks)
     // }, [board])
@@ -33,7 +33,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
             newBoard.groups.splice(groupIdx, 1, group)
             await updateBoard(newBoard)
         } catch (error) {
-            console.log('Cannot save group:', error);
+            console.log('Cannot save group:', error)
         }
     }
 
@@ -76,7 +76,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
             newBoard.groups.splice(groupIdx, 1, group)
             await updateBoard(newBoard)
         } catch (error) {
-            console.log('Cannot save group:', error);
+            console.log('Cannot save group:', error)
         }
     }
 

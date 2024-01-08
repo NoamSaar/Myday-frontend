@@ -89,7 +89,7 @@ function getFullFormatDate(timestamp) {
     }
 
     const formattedDate = new Date(timestamp).toLocaleString('en-US', options)
-    return formattedDate;
+    return formattedDate
 }
 
 function getFormatName(name) {

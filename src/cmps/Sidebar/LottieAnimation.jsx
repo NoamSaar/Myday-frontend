@@ -1,4 +1,4 @@
-import Lottie from 'lottie-react';
+import Lottie from 'lottie-react'
 import animationData from '/icons/snowman.json'
 
 export function LottieAnimation() {

@@ -4,7 +4,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/actions/user.actions.js'
 import { LoginSignup } from './LoginSignup.jsx'
 import { LogoIcon, LoginIcon } from '../services/svg.service.jsx'
-import { MenuOptionsModal } from "./MenuOptionsModal";
+import { MenuOptionsModal } from "./MenuOptionsModal"
 import { useState } from 'react'
 
 export function AppHeader() {
@@ -57,7 +57,7 @@ export function AppHeader() {
             title: 'Signup',
             onOptionClick: onSignup
         },
-    ];
+    ]
 
     const posOptions = {
         left: '-80px',

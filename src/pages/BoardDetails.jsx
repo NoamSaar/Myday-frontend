@@ -1,10 +1,10 @@
-import { Outlet, useParams } from "react-router";
-import { BoardGroup } from "../cmps/Board/Group/BoardGroup";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { BoardHeader } from "../cmps/Board/BoardHeader";
-import { addGroup, loadBoard, setFilterBy } from "../store/actions/board.actions";
-import { BigPlusIcon, PlusIcon } from "../services/svg.service";
+import { Outlet, useParams } from "react-router"
+import { BoardGroup } from "../cmps/Board/Group/BoardGroup"
+import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { BoardHeader } from "../cmps/Board/BoardHeader"
+import { addGroup, loadBoard, setFilterBy } from "../store/actions/board.actions"
+import { BigPlusIcon, PlusIcon } from "../services/svg.service"
 
 export function BoardDetails() {
     const { boardId } = useParams()

@@ -1,4 +1,4 @@
-import { HomeHero } from "../cmps/HomeHero";
+import { HomeHero } from "../cmps/HomeHero"
 
 
 export function Workspace() {
