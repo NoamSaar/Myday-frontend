@@ -11,7 +11,6 @@
 @import "basics/links";
 @import "basics/forms";
 
-
 // Views
 @import "views/about-us";
 @import "views/home-page";
@@ -19,22 +18,29 @@
 @import "views/user-details";
 
 // Components
-@import "cmps/app-header";
-@import "cmps/sidebar";
 @import "cmps/user-msg";
-@import "cmps/board-header";
-@import "cmps/task-list";
-@import "cmps/task-preview";
-@import "cmps/member-picker";
-@import "cmps/link-picker";
-@import "cmps/file-picker";
-@import "cmps/status-picker";
-@import "cmps/board-group";
-@import "cmps/menu-option-modal";
-@import "cmps/color-picker-modal";
-@import "cmps/dynamic-absolute-modal";
-@import "cmps/date-picker-modal";
-@import "cmps/link-picker-modal";
-@import "cmps/status-picker-modal";
-@import "cmps/member-picker-modal";
+@import "cmps/app-header";
+@import "cmps/sidebar/sidebar";
+
+// board
+@import "cmps/board/board-header";
+@import "cmps/board/board-group";
+
+// tasks
+@import "cmps/board/task/task-list";
+@import "cmps/board/task/task-preview";
+@import "cmps/board/task/member-preview";
+@import "cmps/board/task/link-preview";
+@import "cmps/board/task/file-preview";
+@import "cmps/board/task/status-preview";
+
+// modals
+@import "cmps/modals/menu-option-modal";
+@import "cmps/modals/dynamic-absolute-modal";
+@import "cmps/modals/color-picker-modal";
+@import "cmps/modals/date-picker-modal";
+@import "cmps/modals/link-picker-modal";
+@import "cmps/modals/status-picker-modal";
+@import "cmps/modals/member-picker-modal";
+
 @import "cmps/dynamic-input";

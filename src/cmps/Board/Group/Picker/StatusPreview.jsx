@@ -25,7 +25,7 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
     }
 
     return (
-        <li onClick={onStatusPreviewClick} style={style} className="status-picker status-col priority-col" >
+        <li onClick={onStatusPreviewClick} style={style} className="status-preview status-col priority-col" >
             {info.chosenOption}
         </li >
     )

@@ -25,7 +25,7 @@ export function LinkPreview({ info, onUpdate, taskId }) {
     }
 
     return (
-        <li onClick={onLinkPreviewClick} className="link-picker link-col">
+        <li onClick={onLinkPreviewClick} className="link-preview link-col">
             <button>
                 {(info && info.displayTxt)
                     ?

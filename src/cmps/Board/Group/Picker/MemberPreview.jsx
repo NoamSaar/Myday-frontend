@@ -23,7 +23,7 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
     }
 
     return (
-        <li onClick={onMemberPreviewClick} className="member-picker person-col">
+        <li onClick={onMemberPreviewClick} className="member-preview person-col">
             {!chosenMembers.length &&
                 <img className="user-img"
                     src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg"
