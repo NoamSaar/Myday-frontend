@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { UserImg } from "../../../../UserImg"
+import { DynamicInput } from "../../../../DynamicInput"
 
 export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) {
     const [membersFilter, setMembersFilter] = useState('')
@@ -18,7 +19,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
         }
 
         const regex = new RegExp(membersFilter, 'i')
-        const filteredMemberOptions = getFilterMembers(currMemberOptions, currChosenMembers)
+        const filteredMemberOptions = getFilterMembers(memberOptions, currChosenMembers)
             .filter(member => regex.test(member.fullname))
 
         setCurrMemberOptions(filteredMemberOptions)
@@ -38,6 +39,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
             prevMembers.filter(currMember => currMember._id !== member._id)
         ))
         onChangeMembers('person', newChosenMembers)
+        setMembersFilter('')
     }
 
     function onRemoveMember(member) {
@@ -47,11 +49,29 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
         setCurrChosenMembers(newChosenMembers)
         setCurrMemberOptions(getFilterMembers(newMemberOptions, newChosenMembers))
         onChangeMembers('person', newChosenMembers)
+        setMembersFilter('')
     }
 
     function onFilterMembers({ target }) {
         const searchVal = target.value
         setMembersFilter(searchVal)
+    }
+
+    const inputProps = {
+
+        name: 'fullname',
+        inputValue: membersFilter,
+        placeholder: 'Search a name',
+        type: 'search',
+        handleChange: onFilterMembers,
+        isSearchInput: true,
+        // additionalBtns: [
+        //     {
+        //         name: 'filter',
+        //         icon: < SearchIcon />,
+        //         func: console.log('hi'),
+        //     }
+        // ]
     }
 
     return (
@@ -74,14 +94,16 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
             </ul>
 
             <div className="new-person-picker-container">
-                <div className="search-input-container black-blue-input">
-                    <input
+                <div className="search-input-container">
+                    <DynamicInput inputProps={inputProps} />
+
+                    {/* <input
                         className="reset"
                         type="text"
                         placeholder="Search a name"
                         value={membersFilter}
                         onChange={onFilterMembers}
-                    />
+                    /> */}
                 </div>
 
                 {!membersFilter && <p className="suggested-people-title">Suggested people</p>}

@@ -17,7 +17,6 @@ export function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [isActive, setIsActive] = useState(false)
-    const [isFocus, setIsFocus] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -70,10 +69,6 @@ export function Sidebar() {
         setIsDropdownOpen(!isDropdownOpen)
     }
 
-    function onToggleIsFocus(isFocus) {
-        setIsFocus(isFocus)
-    }
-
     function renameBoard(board, title) {
         onRenameBoard(board, title)
     }
@@ -93,11 +88,9 @@ export function Sidebar() {
                 />
                 <SidebarWorkspace
                     filterBy={filterBy}
-                    isFocus={isFocus}
                     isDropdownOpen={isDropdownOpen}
                     onAddNewBoard={onAddNewBoard}
                     onToggleDropdown={onToggleDropdown}
-                    onToggleIsFocus={onToggleIsFocus}
                     onSetFilter={onSetFilter} />
                 <SidebarBoardNav
                     boards={boards}

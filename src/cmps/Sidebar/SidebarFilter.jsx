@@ -6,7 +6,7 @@ import { DynamicInput } from "../DynamicInput"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { PlusIcon, SearchIcon } from "../../services/svg.service"
 
-export function SidebarFilter({ filterBy, onSetFilter, onToggleIsFocus, isFocus, onAddNewBoard }) {
+export function SidebarFilter({ filterBy, onSetFilter, onAddNewBoard }) {
     onSetFilter = useRef(utilService.debounce(onSetFilter))
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
@@ -25,8 +25,6 @@ export function SidebarFilter({ filterBy, onSetFilter, onToggleIsFocus, isFocus,
         inputValue: filterByToEdit.title,
         placeholder: 'Search',
         type: 'search',
-        isFocused: isFocus,
-        onSetIsFocused: onToggleIsFocus,
         handleChange: handleChange,
         isSearchInput: true,
         // additionalBtns: [
