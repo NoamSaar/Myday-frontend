@@ -53,7 +53,6 @@ export function BoardGroup({ group, titlesOrder }) {
         try {
             const title = target.value
             setGroupTitle(title)
-            // if (title) onGroupChange("title", title)
         } catch (error) {
             console.error("Error changing group title:", error)
         }

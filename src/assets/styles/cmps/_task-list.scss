@@ -71,13 +71,12 @@
 
             &.single-task {
                 padding-inline-start: 36px;
+
+                .focused-input {
+                    padding-block: 3px 2px;
+                }
             }
-
-            // &:hover:not(.task-header-list .task-title):not(.active .task-title) {
-            //     background-color: $clr-task-hover;
-            // }
         }
-
 
     }
 
