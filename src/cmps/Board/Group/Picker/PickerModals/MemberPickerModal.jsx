@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { utilService } from "../../../../../services/util.service"
+import { UserImg } from "../../../../UserImg"
 
 export function MemberPickerModal({ chosenMembers, memberOptions, onChangeMembers }) {
     const [currChosenMembers, setCurrChosenMembers] = useState(chosenMembers)
@@ -21,7 +23,10 @@ export function MemberPickerModal({ chosenMembers, memberOptions, onChangeMember
 
             <ul className="clean-list chosen-members-list">
                 {currChosenMembers.map((member, idx) => {
-                    return <li key={idx}>{member.fullname} <button onClick={() => onRemoveMember(member)}>X</button></li>
+                    return <li key={idx} className="chosen-member">
+                        <UserImg user={member} />
+                        <p className="username">{member.fullname}</p>
+                        <button className="remove-btn" onClick={() => onRemoveMember(member)}>X</button></li>
                 })}
             </ul>
 
