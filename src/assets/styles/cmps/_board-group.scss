@@ -101,7 +101,10 @@
             justify-content: center;
             display: flex;
             align-items: center;
-            padding: 8px;
+
+            &:not(.task-selection) {
+                padding: 8px;
+            }
 
             &:not(.line-end) {
                 border-inline-end: $clr-group-border 0.5px solid;
@@ -124,7 +127,12 @@
 
                 li {
                     padding-block: 0;
-                    padding-inline: 9px;
+
+                    &:not(.task-selection) {
+
+                        padding-inline: 9px;
+                    }
+
                     height: 35px;
                 }
             }
@@ -148,14 +156,22 @@
 
     .task-selection {
         border-inline-start: $clr-group-border 0.5px solid;
+        padding: 11px 11px 12px;
+        opacity: .5;
 
         &:not(.task-preview .task-selection) {
-
             background-color: white;
         }
 
-        input:not(.add-task input) {
-            cursor: pointer;
+        input {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+            border-color: red !important;
+
+            &:not(.add-task input) {
+                cursor: pointer;
+            }
         }
     }
 
@@ -163,7 +179,7 @@
         min-width: 6px;
         height: 37px;
         background-color: blue;
-        z-index: 10;
+        z-index: 20;
     }
 
     .menu-container {
