@@ -3,7 +3,7 @@ import { utilService } from "../../../../services/util.service"
 import { setDynamicModal } from "../../../../store/actions/system.actions"
 import { UserImg } from "../../../UserImg"
 
-export function MemberPicker({ chosenMembers, memberOptions, onUpdate, taskId }) {
+export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }) {
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isPickerOpen = fatherId === `${taskId}-memberPicker`
     const extraMembers = chosenMembers.length - 2

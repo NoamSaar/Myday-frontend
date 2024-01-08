@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export function LinkPickerModal({ url, displayTxt, changeLink }) {
+export function LinkPicker({ url, displayTxt, changeLink }) {
     const [newUrl, setNewUrl] = useState(url)
     const [newDisplayTxt, setNewDisplayTxt] = useState(displayTxt)
 
