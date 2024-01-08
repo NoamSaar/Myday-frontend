@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
+import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
 import { getUser } from "../../../store/actions/user.actions"
 import { removeTask, updateTask } from "../../../store/actions/board.actions"
