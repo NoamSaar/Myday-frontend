@@ -6,19 +6,37 @@ export function StatusPickerModal({ selectedStatus, onChangeStatus }) {
     const { status: statuses } = useSelector((storeState) => storeState.boardModule.currBoard)
     const [statusToEdit, setStatusToEdit] = useState(selectedStatus)
 
-    function handleChange({ target }) {
-        let { value } = target
-        setStatusToEdit(value)
-        onChangeStatus('status', value) //important to pass the value becuse the statusToEdit will update only on nxt render
+    function handleChange(newStatus) {
+        setStatusToEdit(newStatus)
+        onChangeStatus('status', newStatus)
     }
+    // function handleChange({ target }) {
+    //     let { value } = target
+    //     setStatusToEdit(value)
+    //     onChangeStatus('status', value) 
+    // }
 
     return (
-        <div className="status-picker-modal">
-            <select value={statusToEdit} name="status" onChange={handleChange}>
+        <div className="general-modal status-picker-modal">
+            {/* <select value={statusToEdit} name="status" onChange={handleChange}>
                 {statuses.map(status => (
                     <option key={status.id} value={status.title}>{status.title}</option>
                 ))}
-            </select>
+            </select> */}
+
+            <ul className='clean-list manual-select'>
+                {statuses.map(status => (
+                    <li className='manual-option btn'
+                        onClick={() => handleChange(status.title)}
+                        style={{ backgroundColor: status.color }}
+                        key={status.id} value={status.title || ''}
+                    >
+                        <span>
+                            {status.title || ''}
+                        </span>
+                    </li>
+                ))}
+            </ul>
 
         </div>
     )

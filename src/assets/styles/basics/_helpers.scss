@@ -154,7 +154,9 @@
 }
 
 .general-modal {
-    background-color: white;
-    box-shadow: 0 4px 17px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    background-color: $clr0;
+    // box-shadow: 0 4px 17px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .32);
+    // border-radius: 8px;
+    border-radius: calc($border-radius-small * 2);
 }
