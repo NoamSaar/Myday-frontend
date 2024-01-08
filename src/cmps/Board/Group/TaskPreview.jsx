@@ -157,7 +157,13 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                                 />
                             </form>
                         ) : (
-                            <span className="editable-txt" onClick={onTitleClick}>{highlightText(taskTitle, filterBy.txt)}</span>
+                            <span
+                                className="editable-txt"
+                                onClick={onTitleClick}
+                                title={taskTitle}
+                            >
+                                {highlightText(taskTitle, filterBy.txt)}
+                            </span>
                         )}
                     </li>
 
