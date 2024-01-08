@@ -13,7 +13,7 @@ export function Sidebar() {
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [isActive, setIsActive] = useState(false)
     const [isFocus, setIsFocus] = useState(false)
