@@ -1,9 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { UserImg } from "../../../../UserImg"
 
 export function MemberPickerModal({ chosenMembers, memberOptions, onChangeMembers }) {
     const [currChosenMembers, setCurrChosenMembers] = useState(chosenMembers)
     const [currMemberOptions, setCurrMemberOptions] = useState(getFilterMembers(memberOptions, chosenMembers))
+
+    useEffect(() => {
+        setCurrChosenMembers(chosenMembers)
+        setCurrMemberOptions(getFilterMembers(memberOptions, chosenMembers))
+    }, [chosenMembers, memberOptions])
 
     function getFilterMembers(memberOptions, chosenMembers) {
         return memberOptions.filter(member => !chosenMembers.some(chosenMember => chosenMember._id === member._id));
