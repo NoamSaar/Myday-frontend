@@ -1,5 +1,5 @@
-import { SidebarFilter } from "./SidebarFilter";
-import { SidebarWorkspaceNav } from "./SidebarWorkspaceNav";
+import { SidebarFilter } from "./SidebarFilter"
+import { SidebarWorkspaceNav } from "./SidebarWorkspaceNav"
 
 export function SidebarWorkspace(
     { onToggleDropdown, onToggleIsFocus, isDropdownOpen, isFocus, onAddNewBoard, filterBy, onSetFilter }

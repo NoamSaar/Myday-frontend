@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { TaskList } from "./TaskList";
-import { useSelector } from "react-redux";
-import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions";
-import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service";
-import { ColorPickerModal } from "./Picker/PickerModals/ColorPickerModal";
-import { utilService } from "../../../services/util.service";
-import { setDynamicModal } from "../../../store/actions/system.actions";
+import { useEffect, useState } from "react"
+import { TaskList } from "./TaskList"
+import { useSelector } from "react-redux"
+import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
+import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { ColorPickerModal } from "./Picker/PickerModals/ColorPickerModal"
+import { utilService } from "../../../services/util.service"
+import { setDynamicModal } from "../../../store/actions/system.actions"
 
 export function BoardGroup({ group, titlesOrder }) {
     const [isEditing, setIsEditing] = useState(false)

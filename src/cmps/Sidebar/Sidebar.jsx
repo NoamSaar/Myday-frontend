@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { SidebarMainNav } from "./SidebarMainNav";
-import { SidebarWorkspace } from "./SidebarWorkspace";
-import { SidebarBoardNav } from "./SidebarBoardNav";
-import { useSelector } from "react-redux";
-import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions";
-import { useNavigate } from "react-router";
-// import { boardService } from "../services/board.service";
-// import { LottieAnimation } from "./LottieAnimation";
+import { useEffect, useState } from "react"
+import { SidebarMainNav } from "./SidebarMainNav"
+import { SidebarWorkspace } from "./SidebarWorkspace"
+import { SidebarBoardNav } from "./SidebarBoardNav"
+import { useSelector } from "react-redux"
+import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions"
+import { useNavigate } from "react-router"
+// import { boardService } from "../services/board.service"
+// import { LottieAnimation } from "./LottieAnimation"
 
 export function Sidebar() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
