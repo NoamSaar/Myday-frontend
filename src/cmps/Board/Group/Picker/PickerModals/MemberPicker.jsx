@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { UserImg } from "../../../../UserImg"
 
-export function MemberPickerModal({ chosenMembers, memberOptions, onChangeMembers }) {
+export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) {
     const [membersFilter, setMembersFilter] = useState('')
     const [currChosenMembers, setCurrChosenMembers] = useState(chosenMembers)
     const [currMemberOptions, setCurrMemberOptions] = useState(getFilterMembers(memberOptions, chosenMembers))

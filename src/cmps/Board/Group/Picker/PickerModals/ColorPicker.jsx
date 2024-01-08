@@ -1,5 +1,5 @@
 
-export function ColorPickerModal({ colors, onColorClick }) {
+export function ColorPicker({ colors, onColorClick }) {
     return (
         <div className="color-picker-modal">
             {colors.map((color, idx) => {

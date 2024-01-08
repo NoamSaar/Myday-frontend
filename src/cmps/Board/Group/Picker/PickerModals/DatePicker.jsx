@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 
-export function DatePickerModal({ selectedDate, onChangeDate }) {
+export function DatePicker({ selectedDate, onChangeDate }) {
     const [date, setDate] = useState(new Date(selectedDate))
 
     function onDateSelect(newDate) {
