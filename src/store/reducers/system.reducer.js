@@ -16,7 +16,9 @@ const initialState = {
     type: '',
     data: {},
     fatherId: '',
-    pos: ''
+    isInline: true,
+    isCenter: false,
+    isTooltip: false,
   }
   // DynamicModalIsOpen: false,
   // dynamicModalBoundingRect: null,
