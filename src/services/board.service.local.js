@@ -866,10 +866,14 @@ function _getDefaultBoard() {
                 tasks: [
                     {
                         id: 'c101',
-                        title: 'Item 1',
+                        title: 'Write the Task you want to get done, as you can see it can be very long',
                         person: [],
                         status: 'Working on it',
-                        date: 1703706909537,
+                        priority: 'High',
+                        date: 1703705909537,
+                        link: {
+                            url: 'https://redux.js.org/',
+                        },
                         updates: [],
                     },
                     {
@@ -877,14 +881,15 @@ function _getDefaultBoard() {
                         title: 'Item 2',
                         person: [],
                         status: 'Done',
+                        priority: 'Critical',
                         date: 1703708909537,
+                        file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704304383/large-Screenshot_2024-01-03_at_11.35.48_qclnrt.png',
                         updates: [],
                     },
                     {
                         id: 'c103',
                         title: 'Item 3',
                         person: [],
-                        date: 1703706909537,
                         updates: [],
                     },
                 ],
@@ -899,14 +904,12 @@ function _getDefaultBoard() {
                         id: 'c201',
                         title: 'Item 4',
                         person: [],
-                        date: 1703706909537,
                         updates: [],
                     },
                     {
                         id: 'c202',
                         title: 'Item 5',
                         person: [],
-                        date: 1703708909537,
                         updates: [],
                     },
 
@@ -1113,7 +1116,7 @@ function _getDefaultBoard() {
         //         },
         //     },
         // ],
-        titlesOrder: ['person', 'status', 'date'],
+        titlesOrder: ['person', 'status', 'priority', 'date', 'file', 'link'],
 
     }
 }
