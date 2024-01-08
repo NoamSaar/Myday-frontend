@@ -63,7 +63,6 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
         name: 'fullname',
         inputValue: membersFilter,
         placeholder: 'Search a name',
-        type: 'search',
         handleChange: onFilterMembers,
         isSearchInput: false,
         additionalBtns: [
@@ -95,17 +94,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
             </ul>
 
             <div className="new-person-picker-container">
-                {/* <div className="search-input-container"> */}
                 <DynamicInput inputProps={inputProps} />
-
-                {/* <input
-                        className="reset"
-                        type="text"
-                        placeholder="Search a name"
-                        value={membersFilter}
-                        onChange={onFilterMembers}
-                    /> */}
-                {/* </div> */}
 
                 {!membersFilter && <p className="suggested-people-title">Suggested people</p>}
 

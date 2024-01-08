@@ -5,6 +5,10 @@ export function DynamicInput({ inputProps }) {
     const inputRef = useRef(null)
     const [isFocused, setIsFocused] = useState(false)
 
+    function onInputBlur() {
+        setIsFocused(false)
+        if (onBlur) onBlur()
+    }
 
     const {
         name,
@@ -13,7 +17,8 @@ export function DynamicInput({ inputProps }) {
         type,
         isSearchInput,
         additionalBtns,
-        handleChange
+        handleChange,
+        onBlur
     } = inputProps
 
     return (
@@ -34,7 +39,7 @@ export function DynamicInput({ inputProps }) {
                 type={type}
                 placeholder={placeholder}
                 onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
+                onBlur={onInputBlur}
                 onChange={handleChange}
             />
 
