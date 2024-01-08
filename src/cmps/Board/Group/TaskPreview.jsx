@@ -148,7 +148,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     if (!currTask) return <ul className="task-title">Loading</ul>
     return (
         <ul
-            className="clean-list task-preview-container"
+            className="clean-list task-preview-container flex"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
@@ -165,13 +165,13 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 className="color-display sticky-left-36">
             </div>
 
-            <ul className={` clean-list task-preview ${activeTask === currTask.id && 'active'}`}>
-                <div className={`task-title-container ${activeTask === currTask.id && 'active'}`}>
+            <ul className={` clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
+                <div className={`task-title-container flex ${activeTask === currTask.id && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
 
-                    <li className="task-title single-task">
+                    <li className="task-title single-task flex">
                         {isEditing ? (
                             <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                 <input

@@ -1,18 +1,15 @@
-.link-picker {
+.link-preview {
     padding: 2px;
 
-
-
     button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 95%;
+        height: 90%;
+
         color: $clr-link;
         white-space: nowrap;
         overflow-x: hidden;
         text-overflow: ellipsis;
-        width: 95%;
-        height: 90%;
+
         cursor: text;
 
         &:hover {
@@ -20,20 +17,19 @@
         }
 
         a {
-            color: $clr-link;
+            padding-inline: 4px;
+
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+
             font-size: rem(13px);
-            padding-inline: 4px;
+            color: $clr-link;
 
             &:hover {
                 text-decoration: underline;
             }
-
-
         }
-
 
     }
 }

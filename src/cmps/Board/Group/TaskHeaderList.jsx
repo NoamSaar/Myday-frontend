@@ -2,7 +2,7 @@ import { GroupTitlesList } from "./GroupTitlesList";
 
 export function TaskHeaderList({ groupColor, titlesOrder }) {
     return (
-        <div className="task-header-list-container sticky-left">
+        <div className="task-header-list-container sticky-left flex">
 
             <div className="task-row-placeholder sticky-left"></div>
 

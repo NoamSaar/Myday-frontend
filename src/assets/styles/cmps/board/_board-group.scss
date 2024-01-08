@@ -121,7 +121,6 @@
         }
 
         .task-header-list-container {
-            display: flex;
 
             .task-header-list {
                 display: flex;
@@ -143,10 +142,6 @@
 
                     height: 35px;
                 }
-            }
-
-            .group-titles-list {
-                display: flex;
             }
         }
 

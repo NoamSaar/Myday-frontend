@@ -23,14 +23,14 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
     }
 
     return (
-        <li onClick={onMemberPreviewClick} className="member-picker person-col">
+        <li onClick={onMemberPreviewClick} className="member-preview person-col flex justify-center align-center">
             {!chosenMembers.length &&
                 <img className="user-img"
                     src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg"
                 />
             }
 
-            {!!chosenMembers.length && <div className="member-img-container">
+            {!!chosenMembers.length && <div className="member-img-container flex justify-center align-center">
                 {chosenMembers.map((member, idx) => {
                     return idx < 2 ? <UserImg key={idx} user={member} /> : ''
                 })}

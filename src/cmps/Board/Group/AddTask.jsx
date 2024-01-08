@@ -23,18 +23,18 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
     }
 
     return (
-        <ul className="clean-list task-preview-container add-task sticky-left">
+        <ul className="clean-list task-preview-container flex add-task sticky-left">
             <div className="task-row-placeholder sticky-left"></div>
 
-            <ul className={`clean-list task-preview ${activeTask === groupId && 'active'}`}>
+            <ul className={`clean-list task-preview flex ${activeTask === groupId && 'active'}`}>
                 <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
 
-                <div className="task-title-container">
+                <div className="task-title-container flex">
                     <li className="task-selection">
                         <input disabled type="checkbox" />
                     </li>
 
-                    <li className="task-title single-task">
+                    <li className="task-title single-task flex">
                         {isEditing ? (
                             <form onSubmit={onAddTask}>
                                 <input

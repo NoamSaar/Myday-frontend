@@ -139,24 +139,23 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     ]
 
     return (
-        <section className="board-group">
+        <section className="board-group flex column">
             <div className={`${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
 
-                <div className="group-title-container sticky-left">
+                <div className="group-title-container flex align-center sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`}>
                         <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
                             <MenuIcon />
                         </button>
                     </div>
-
-                    <div className="sticky-left-40 title-container">
-                        <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container svg-inherit-color"><AngleDownIcon /></button>
+                    <div className="sticky-left-40 title-container flex align-center">
+                        <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color"><AngleDownIcon /></button>
 
                         {isEditing ? (
                             <div
                                 tabIndex={0}
                                 onBlur={onTitleEditExit}
-                                className="focused-input group-title-edit-container"
+                                className="focused-input group-title-edit-container flex align-center"
                             >
                                 <div
                                     className="group-color-display"

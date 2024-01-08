@@ -5,8 +5,9 @@
     .content-container {
         grid-template-columns: minmax(30px, auto) 1fr;
         gap: 10px;
-        padding: 0;
         position: relative;
+
+        padding: 0;
         background-color: $clr-bg-header;
 
         .sidebar-container {
