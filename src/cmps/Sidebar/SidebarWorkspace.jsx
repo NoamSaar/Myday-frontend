@@ -1,8 +1,8 @@
 import { SidebarFilter } from "./SidebarFilter"
 import { SidebarWorkspaceNav } from "./SidebarWorkspaceNav"
 
-export function SidebarWorkspace(props) {
-    const {
+export function SidebarWorkspace(
+    {
         filterBy,
         isFocus,
         isDropdownOpen,
@@ -10,7 +10,7 @@ export function SidebarWorkspace(props) {
         onToggleIsFocus,
         onToggleDropdown,
         onAddNewBoard,
-    } = props
+    }) {
 
     return (
         <section className="sidebar-workspace">

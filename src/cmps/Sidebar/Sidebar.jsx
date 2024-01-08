@@ -70,8 +70,8 @@ export function Sidebar() {
         setIsDropdownOpen(!isDropdownOpen)
     }
 
-    function onToggleIsFocus() {
-        setIsFocus(!isFocus)
+    function onToggleIsFocus(isFocus) {
+        setIsFocus(isFocus)
     }
 
     function renameBoard(board, title) {
