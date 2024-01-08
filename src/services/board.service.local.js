@@ -190,7 +190,7 @@ const gBoards = [
                     },
                     {
                         id: 'c202',
-                        title: 'Refactor Filter.jsx into Components',
+                        title: 'Refactor Filter.jsx into Components and change imports',
                         person: [],
                         status: 'Needs QA',
                         priority: 'Medium',
@@ -866,7 +866,7 @@ function _getDefaultBoard() {
                 tasks: [
                     {
                         id: 'c101',
-                        title: 'Write the Task you want to get done, as you can see it can be very long',
+                        title: 'item 1',
                         person: [],
                         status: 'Working on it',
                         priority: 'High',
