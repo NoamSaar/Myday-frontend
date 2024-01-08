@@ -2,8 +2,6 @@
 // import { storageService } from './async-storage.service.js'
 import { httpService } from './http.service.js'
 import { userService } from './user.service.js'
-import { utilService } from './util.service.js'
-
 
 const BASE_URL = 'board/'
 
@@ -17,13 +15,11 @@ export const boardService = {
 }
 window.cs = boardService
 
-
 async function query(filterBy = { title: '' }) {
     try {
         return await httpService.get(BASE_URL, filterBy)
     } catch (error) {
         throw new Error(error.message || 'An error occurred during getting boards')
-
     }
 }
 
@@ -32,17 +28,14 @@ async function getById(boardId) {
         return await httpService.get(BASE_URL + boardId)
     } catch (error) {
         throw new Error(error.message || 'An error occurred during getting board')
-
     }
 }
 
 async function remove(boardId) {
     try {
         return await httpService.delete(BASE_URL + boardId)
-
     } catch (error) {
         throw new Error(error.message || 'An error occurred during removing board')
-
     }
 }
 
