@@ -10,8 +10,11 @@ export function DynamicAbsoluteModal() {
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
     let style
 
+    console.log('modalData.boundingRect', modalData.boundingRect)
     if (modalData.isOpen) {
         style = {
+            // top: `${modalData.boundingRect.bottom}px`,
+            // left: `${modalData.boundingRect.left + (modalData.boundingRect.width / 2) - (200 / 2)}px`
             top: `${modalData.boundingRect.bottom}px`,
             left: `${modalData.boundingRect.right - modalData.boundingRect.width}px`
         }
