@@ -26,7 +26,7 @@ export function LinkPreview({ info, onUpdate, taskId }) {
 
     return (
         <li onClick={onLinkPreviewClick} className="link-preview link-col">
-            <button>
+            <button className="flex justify-center align-center">
                 {(info && info.displayTxt)
                     ?
                     <a target="_blank" href={info && info.url}>{info.displayTxt}</a>

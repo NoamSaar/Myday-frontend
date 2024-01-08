@@ -50,7 +50,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     }
 
     return (
-        <ul className="clean-list task-list">
+        <ul className="clean-list task-list flex column relative">
             <DragDropContext onDragEnd={handleDragEnd}>
                 <Droppable droppableId={group.id}>
                     {(provided) => (

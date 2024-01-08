@@ -4,14 +4,11 @@
     box-sizing: border-box;
 }
 
-
 html {
     font-family: figtree;
-    // font-size: rem(14px);
     font-size: 14px;
     line-height: lh(23px);
 }
-
 
 body {
     margin: 0;
@@ -23,11 +20,10 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: poppins-medium;
     margin: 0;
+    font-family: poppins-medium;
     font-size: rem(24px);
     font-weight: unset;
-
 }
 
 p,
@@ -59,16 +55,7 @@ a {
     font-family: figtree;
 }
 
-.btn {
-    @include btn;
-}
-
-// a:hover {
-//     text-decoration: underline;
-// }
-
 svg {
-    // fill: red;
     fill: $clr-light-font;
 }
 
@@ -77,26 +64,8 @@ input {
     max-width: 100%;
 }
 
-.user-img {
-    border: 2px solid white;
-    border-radius: 50%;
-    max-height: 30px;
-    max-width: 30px;
-    min-height: 30px;
-    min-width: 30px;
-}
-
-.extra-members-box {
-    align-items: center;
-    background-color: #333;
-    border-radius: 50%;
-    color: #fff;
-    display: flex;
-    font-size: .75rem;
-    height: 25px;
-    justify-content: center;
-    min-width: 25px;
-    max-width: 25px;
+.btn {
+    @include btn;
 }
 
 /* Firefox */
@@ -135,12 +104,4 @@ input {
 
 *::-webkit-scrollbar-thumb:active {
     background-color: #C4C4C4;
-}
-
-.highlight {
-    background-color: $clr-btn-active;
-    color: $clr-font;
-    font-style: italic;
-    border-radius: 2px;
-    // padding-inline: 2px;
 }
