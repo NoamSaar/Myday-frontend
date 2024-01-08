@@ -23,34 +23,47 @@ async function get(entityType, entityId) {
     }
 }
 
-function post(entityType, newEntity) {
-    newEntity = JSON.parse(JSON.stringify(newEntity))
-    newEntity._id = _makeId()
-    return query(entityType).then(entities => {
+async function post(entityType, newEntity) {
+    try {
+        newEntity = JSON.parse(JSON.stringify(newEntity))
+        newEntity._id = _makeId()
+
+        const entities = await query(entityType)
         entities.push(newEntity)
         _save(entityType, entities)
+
         return newEntity
-    })
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during posting entity')
+    }
 }
 
-function put(entityType, updatedEntity) {
-    updatedEntity = JSON.parse(JSON.stringify(updatedEntity))
-    return query(entityType).then(entities => {
+async function put(entityType, updatedEntity) {
+    try {
+        updatedEntity = JSON.parse(JSON.stringify(updatedEntity))
+
+        const entities = await query(entityType)
         const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
         if (idx < 0) throw new Error(`Update failed, cannot find entity with id: ${updatedEntity._id} in: ${entityType}`)
         entities.splice(idx, 1, updatedEntity)
         _save(entityType, entities)
+
         return updatedEntity
-    })
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during putting entity')
+    }
 }
 
-function remove(entityType, entityId) {
-    return query(entityType).then(entities => {
+async function remove(entityType, entityId) {
+    try {
+        const entities = await query(entityType)
         const idx = entities.findIndex(entity => entity._id === entityId)
         if (idx < 0) throw new Error(`Remove failed, cannot find entity with id: ${entityId} in: ${entityType}`)
         entities.splice(idx, 1)
         _save(entityType, entities)
-    })
+    } catch (error) {
+        throw new Error(error.message || 'An error occurred during removing entity')
+    }
 }
 
 // Private functions
