@@ -157,7 +157,7 @@
     .task-selection {
         border-inline-start: $clr-group-border 0.5px solid;
         padding: 11px 11px 12px;
-        opacity: .5;
+        // opacity: .5;
 
         &:not(.task-preview .task-selection) {
             background-color: white;
