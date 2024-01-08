@@ -24,3 +24,21 @@ export function setDynamicModalFather(fatherId) {
 export function setDynamicModal(dynamicModal) {
     store.dispatch({ type: SET_DYNAMIC_MODAL, dynamicModal })
 }
+export function resetDynamicModal() {
+    store.dispatch({
+        type: SET_DYNAMIC_MODAL, dynamicModal: getEmptyDynamicModal()
+    })
+}
+
+export function getEmptyDynamicModal() {
+    return {
+        isOpen: false,
+        boundingRect: null,
+        type: '',
+        data: {},
+        fatherId: '',
+        isPosBlock: true,
+        isCenter: false,
+        isTooltip: false,
+    }
+}

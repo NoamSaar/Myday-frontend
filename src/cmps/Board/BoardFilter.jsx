@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react"
-import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
-import { addTask } from "../../store/actions/board.actions"
-import { setDynamicModal } from "../../store/actions/system.actions"
 
+import { addTask } from "../../store/actions/board.actions"
+import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
+
+import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
+    const filterSearchRef = useRef(null)
+    const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
-    const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-    const filterSearchRef = useRef(null)
 
     useEffect(() => {
         function handleClickOutsideSearch(event) {
@@ -47,7 +48,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         ev.stopPropagation()
         if (isMenuOpen) {
             //updating modal in store
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            resetDynamicModal()
             setIsMenuOpen(false)
         } else {
             //updating modal in store
@@ -55,7 +56,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'menu options',
-                data: { options: menuOptions }
+                data: { options: menuOptions },
+                isPosBlock: true
             })
             setIsMenuOpen(true)
         }
@@ -96,7 +98,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             default:
                 break
         }
-
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
@@ -111,10 +112,9 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 <span>New Task</span>
             </button>
 
-            <div className={dynFocusedClass + ' btn search'} onClick={onToggleIsFocused} ref={filterSearchRef}>
+            <div className={"btn search " + dynFocusedClass} onClick={onToggleIsFocused} ref={filterSearchRef}>
                 <SearchIcon />
 
-                {/* <form> */}
                 <input
                     className="reset"
                     type="search"
@@ -124,7 +124,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                     name="txt"
                     autoComplete="off"
                 />
-                {/* </form> */}
 
                 {isFocused &&
                     <SettingsKnobsIcon />

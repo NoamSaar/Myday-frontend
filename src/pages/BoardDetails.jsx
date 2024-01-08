@@ -1,18 +1,21 @@
-import { Outlet, useParams } from "react-router"
-import { BoardGroup } from "../cmps/Board/Group/BoardGroup"
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { BoardHeader } from "../cmps/Board/BoardHeader"
+import { Outlet, useParams } from "react-router"
+
 import { addGroup, loadBoard, setFilterBy } from "../store/actions/board.actions"
-import { BigPlusIcon, PlusIcon } from "../services/svg.service"
+
+import { BigPlusIcon } from "../services/svg.service"
+import { BoardGroup } from "../cmps/Board/Group/BoardGroup"
+import { BoardHeader } from "../cmps/Board/BoardHeader"
 
 export function BoardDetails() {
-    const { boardId } = useParams()
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
-    const user = useSelector((storeState) => storeState.userModule.loggedinUser)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    // const user = useSelector((storeState) => storeState.userModule.loggedinUser)
+
     const [isFocusLastGroup, setIsFocusLastGroup] = useState(false)
+    const { boardId } = useParams()
 
     useEffect(() => {
         _loadBoard()
@@ -27,10 +30,9 @@ export function BoardDetails() {
 
     async function _loadBoard() {
         try {
-            const loadedBoard = await loadBoard(boardId)
+            await loadBoard(boardId)
         } catch (err) {
             console.error('Error loading board:', err)
-            // showErrorMsg('Cannot load board')
         }
     }
 
@@ -47,21 +49,25 @@ export function BoardDetails() {
         setFilterBy(filterBy)
     }
 
-    // console.log('filterBy from BoardDetails', filterBy)
     const { txt } = filterBy
 
     if (!board) return <div className="board-details">Loading...</div>
     return (
-        <section className={`${modalData.isOpen && 'overflow-hidden'} board-details`}>
+        <section className={`board-details ${modalData.isOpen && 'overflow-hidden'}`}>
             <BoardHeader
                 board={board}
                 filterBy={{ txt }}
                 onSetFilter={onSetFilter}
             />
 
-            {/* <div className="board-content"> */}
-
-            {board.groups.map((group, idx) => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1} onTitleEditLeave={() => setIsFocusLastGroup(false)} />)}
+            {board.groups.map((group, idx) =>
+                <BoardGroup
+                    key={group.id}
+                    group={group}
+                    titlesOrder={board.titlesOrder}
+                    isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
+                    onTitleEditLeave={() => setIsFocusLastGroup(false)}
+                />)}
 
             <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
                 <BigPlusIcon />
@@ -70,8 +76,6 @@ export function BoardDetails() {
 
             <Outlet />
             {/* the outlet is to display the nested route- task details */}
-            {/* </div> */}
-
         </section>
     )
 }
