@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react"
 import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 import { addTask } from "../../store/actions/board.actions"
+import { setDynamicModal } from "../../store/actions/system.actions"
 
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
-
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
-    const filterSearchRef = useRef(null)
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+    const filterSearchRef = useRef(null)
 
     useEffect(() => {
         function handleClickOutsideSearch(event) {
@@ -41,6 +42,44 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             console.error("Error adding new task:", error)
         }
     }
+
+    function toggleMenu(ev) {
+        ev.stopPropagation()
+        if (isMenuOpen) {
+            //updating modal in store
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            setIsMenuOpen(false)
+        } else {
+            //updating modal in store
+            setDynamicModal({
+                isOpen: true,
+                boundingRect: ev.target.getBoundingClientRect(),
+                type: 'menu options',
+                data: { options: menuOptions }
+            })
+            setIsMenuOpen(true)
+        }
+    }
+
+    const menuOptions = [
+        {
+            icon: <PersonIcon />,
+            title: <select value={filterByToEdit.member} name="member" onChange={handleChange}>
+                <option value="">All</option>
+                <>
+                    {board.members.map(member => (
+                        <option key={member._id} value={member._id}>
+                            {member.fullname}
+                            {/* <img src={member.imgUrl}></img> */}
+                        </option>
+                    ))}
+                </>
+            </select>,
+            onOptionClick: () => {
+                console.log('hi')
+            }
+        },
+    ]
 
     function handleChange({ target }) {
         const field = target.name
@@ -92,7 +131,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 }
             </div>
 
-            <button className="btn person" title="Filter by person">
+            <button className="btn person" title="Filter by person" onClick={toggleMenu}>
                 <PersonIcon />
                 <span>Person</span>
             </button>
@@ -111,18 +150,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 <HideIcon />
                 <span>Hide</span>
             </button>
-
-            <select value={filterByToEdit.member} name="member" onChange={handleChange}>
-                <option value="">All</option>
-                <>
-                    {board.members.map(member => (
-                        <option key={member._id} value={member._id}>
-                            {member.fullname}
-                            {/* <img src={member.imgUrl}></img> */}
-                        </option>
-                    ))}
-                </>
-            </select>
 
         </div>
     )

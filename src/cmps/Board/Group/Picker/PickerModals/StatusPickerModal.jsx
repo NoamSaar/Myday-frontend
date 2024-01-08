@@ -1,24 +1,29 @@
-import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
+export function StatusPickerModal({ selectedStatus, onChangeStatus, title }) {
 
-export function StatusPickerModal({ selectedStatus, onChangeStatus }) {
-    const { status: statuses } = useSelector((storeState) => storeState.boardModule.currBoard)
-    const [statusToEdit, setStatusToEdit] = useState(selectedStatus)
+    const { [title]: statuses } = useSelector((storeState) => storeState.boardModule.currBoard)
 
-    function handleChange({ target }) {
-        let { value } = target
-        setStatusToEdit(value)
-        onChangeStatus('status', value) //important to pass the value becuse the statusToEdit will update only on nxt render
+    function handleChange(newStatus) {
+        onChangeStatus([title], newStatus)
     }
 
     return (
-        <div className="status-picker-modal">
-            <select value={statusToEdit} name="status" onChange={handleChange}>
+        <div className="general-modal status-picker-modal">
+
+            <ul className='clean-list manual-select'>
                 {statuses.map(status => (
-                    <option key={status.id} value={status.title}>{status.title}</option>
+                    <li className='manual-option btn'
+                        onClick={() => handleChange(status.title)}
+                        style={{ backgroundColor: status.color }}
+                        key={status.id} value={status.title || ''}
+                    >
+                        <span>
+                            {status.title || ''}
+                        </span>
+                    </li>
                 ))}
-            </select>
+            </ul>
 
         </div>
     )
