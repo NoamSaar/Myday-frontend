@@ -53,7 +53,7 @@ export function BoardGroup({ group, titlesOrder }) {
         try {
             const title = target.value
             setGroupTitle(title)
-            if (title) onGroupChange("title", title)
+            // if (title) onGroupChange("title", title)
         } catch (error) {
             console.error("Error changing group title:", error)
         }
@@ -76,6 +76,9 @@ export function BoardGroup({ group, titlesOrder }) {
             if (!groupTitle) {
                 setGroupTitle(group.title)
                 onGroupChange("title", group.title)
+            } else {
+                onGroupChange("title", groupTitle)
+
             }
 
             if (!isColorPickerOpen) setIsEditing(false)
