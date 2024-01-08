@@ -87,16 +87,17 @@ export function Sidebar() {
         <section className="sidebar-container">
             <article className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <SidebarMainNav
-                    onOpenSidebar={onOpenSidebar}
+                    isActive={isActive}
                     isSidebarOpen={isSidebarOpen}
-                    isActive={isActive} />
+                    onOpenSidebar={onOpenSidebar}
+                />
                 <SidebarWorkspace
-                    onAddNewBoard={onAddNewBoard}
-                    isDropdownOpen={isDropdownOpen}
+                    filterBy={filterBy}
                     isFocus={isFocus}
+                    isDropdownOpen={isDropdownOpen}
+                    onAddNewBoard={onAddNewBoard}
                     onToggleDropdown={onToggleDropdown}
                     onToggleIsFocus={onToggleIsFocus}
-                    filterBy={filterBy}
                     onSetFilter={onSetFilter} />
                 <SidebarBoardNav
                     boards={boards}
