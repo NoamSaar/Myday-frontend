@@ -111,7 +111,7 @@ function getDefaultBoard() {
             },
             {
                 id: 'l201',
-                title: 'critical ⚠',
+                title: 'Critical ⚠',
                 color: '#333333',
             },
             {
