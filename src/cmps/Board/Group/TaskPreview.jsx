@@ -20,6 +20,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const isMenuOpen = fatherId === `${task.id}-menu`
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
 
+
     useEffect(() => {
         const fetchData = async () => {
 
@@ -28,7 +29,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     ? await Promise.all(
                         task.person.map(async (person) => {
                             const loadedUser = await getUser(person)
-                            return loadedUser.imgUrl || loadedUser.fullname
+                            return loadedUser
+                            // return loadedUser.imgUrl || loadedUser.fullname
                         })
                     )
                     : []
@@ -51,6 +53,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     async function onTaskChange(field, data) {
         // console.log("Received arguments onTaskChange:", arguments)
+        console.log('field', field)
+        console.log('data', data)
         try {
             const updatedTask = { ...task, person: task.person, [field]: data }
             updateTask(board._id, groupId, updatedTask)
@@ -170,7 +174,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 </div>
 
                 {board.titlesOrder.map((title, idx) => {
-                    return <DynamicPicker key={idx} title={title} task={currTask} onUpdate={onTaskChange} />
+                    return <DynamicPicker key={idx} title={title} task={currTask} onUpdate={onTaskChange} memberOptions={board.members} />
                 })}
 
                 <li className="line-end"></li>
