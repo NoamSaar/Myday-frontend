@@ -53,7 +53,7 @@ export async function loadBoard(boardId) {
     }
 }
 
-export async function getBoard(boardId) {
+export async function getBoardById(boardId) {
     try {
         const board = await boardService.getById(boardId)
         return board

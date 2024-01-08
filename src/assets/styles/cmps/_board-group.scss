@@ -100,7 +100,7 @@
             }
         }
 
-        ul {
+        ul:not(.group-titles-list) {
             border-block-start: $clr-group-border 0.5px solid;
             border-radius: 8px;
         }
@@ -143,6 +143,10 @@
 
                     height: 35px;
                 }
+            }
+
+            .group-titles-list {
+                display: flex;
             }
         }
 

@@ -7,7 +7,7 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getFormatDate,
-    getFormatName,
+    getAcronym,
     capitalizeFirstLetter,
     getFullFormatDate
 }
@@ -92,7 +92,7 @@ function getFullFormatDate(timestamp) {
     return formattedDate
 }
 
-function getFormatName(name) {
+function getAcronym(name) {
     return name.split(' ')[0][0] + name.split(' ')[1][0]
 }
 

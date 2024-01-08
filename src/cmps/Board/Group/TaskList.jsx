@@ -100,7 +100,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
 // async function handleDragEnd(result) {
 //     try {
 
-//         const fullBoard = await getBoard(board._id)
+//         const fullBoard = await getBoardById(board._id)
 //         console.log('fullBoard', fullBoard)
 //         const initGroupIdx = fullBoard.groups.findIndex(group => group.id === groupId)
 //         const initGroup = fullBoard.groups[initGroupIdx]
