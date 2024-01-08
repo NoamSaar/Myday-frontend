@@ -126,7 +126,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     return (
         <section className='board-group'>
-            <div className={`${isHeaderCollapsed ? 'sticky-top-119.5' : 'sticky-top-167'} group-sticky-container sticky-left`}>
+            <div className={`${isHeaderCollapsed && 'board-header-collapsed'} group-sticky-container sticky-left`}>
 
                 <div className="group-title-container sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`}>
