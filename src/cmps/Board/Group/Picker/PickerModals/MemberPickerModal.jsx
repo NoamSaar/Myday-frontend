@@ -67,7 +67,7 @@ export function MemberPickerModal({ chosenMembers, memberOptions, onChangeMember
                     <input value={membersFilter} onChange={onFilterMembers} type="text" className="reset" placeholder="Search a name" />
                 </div>
 
-                <p className="suggested-people-title">Suggested people</p>
+                {!membersFilter && <p className="suggested-people-title">Suggested people</p>}
 
                 <ul className="clean-list member-options-list">
                     {currMemberOptions.map((member, idx) => {
