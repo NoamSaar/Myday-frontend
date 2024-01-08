@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { utilService } from "../../../../services/util.service"
-import { setDynamicModal } from "../../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
 import { UserImg } from "../../../UserImg"
 
 export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }) {
@@ -11,7 +11,7 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
 
     function onMemberPreviewClick(ev) {
         if (isPickerOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,

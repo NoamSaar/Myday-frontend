@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 import { addTask } from "../../store/actions/board.actions"
-import { setDynamicModal } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
 
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
@@ -47,7 +47,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         ev.stopPropagation()
         if (isMenuOpen) {
             //updating modal in store
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            resetDynamicModal()
             setIsMenuOpen(false)
         } else {
             //updating modal in store

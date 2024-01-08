@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { utilService } from "../../../services/util.service"
-import { setDynamicModal } from "../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal } from "../../../store/actions/system.actions"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
     const [isEditing, setIsEditing] = useState(isEditingTitle)
@@ -29,7 +29,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     function toggleMenu(ev) {
         if (isMenuOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } else {
             setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${group.id}-menu` })
         }
@@ -47,7 +47,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     async function onDeleteGroup() {
         try {
             removeGroup(board._id, group.id)
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } catch (error) {
             console.error("Error removing task:", error)
         }
@@ -66,7 +66,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             setGroupColor(color)
             onGroupChange("color", color)
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
             setIsEditing(false)
         } catch (error) {
             console.error("Error changing group color:", error)
@@ -108,7 +108,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         ev.stopPropagation()
 
         if (isColorPickerOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } else {
             setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'color picker', data: { colors: colors, onColorClick: onChangeColor }, fatherId: `${group.id}-colorPicker` })
         }
