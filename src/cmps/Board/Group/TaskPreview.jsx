@@ -30,7 +30,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         task.person.map(async (person) => {
                             const loadedUser = await getUser(person)
                             return loadedUser
-                            // return loadedUser.imgUrl || loadedUser.fullname
                         })
                     )
                     : []
@@ -52,9 +51,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
 
     async function onTaskChange(field, data) {
-        // console.log("Received arguments onTaskChange:", arguments)
-        console.log('field', field)
-        console.log('data', data)
         try {
             const updatedTask = { ...task, person: task.person, [field]: data }
             updateTask(board._id, groupId, updatedTask)
