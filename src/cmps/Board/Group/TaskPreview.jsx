@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { DynamicPicker } from "./Picker/DynamicPicker"
-import { getUser } from "../../../store/actions/user.actions"
+import { fetchUsers, getUser } from "../../../store/actions/user.actions"
 import { utilService } from "../../../services/util.service"
 import { MenuOptionsModal } from "../../MenuOptionsModal"
 import { removeTask, updateTask } from "../../../store/actions/board.actions"
@@ -26,14 +26,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
             try {
                 const newPersons = task.person.length
-                    ? await Promise.all(
-                        task.person.map(async (person) => {
-                            const loadedUser = await getUser(person)
-                            return loadedUser
-                        })
-                    )
+                    ? await fetchUsers(task.person)
                     : []
-
 
                 setCurrTask({ ...task, person: newPersons })
                 setTaskTitle(task.title)

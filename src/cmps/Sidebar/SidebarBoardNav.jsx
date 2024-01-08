@@ -37,7 +37,6 @@ export function SidebarBoardNav({ boards, currActiveBoard, deleteBoard, renameBo
                                         {...provided.dragHandleProps}
                                     >
                                         <SidebarBoardLink
-                                            boards={boards}
                                             board={board}
                                             currActiveBoard={currActiveBoard}
                                             deleteBoard={deleteBoard}
