@@ -27,14 +27,11 @@ export function BoardEdit({ board }) {
         setBoardToEdit(prevBoard => ({ ...prevBoard, [field]: value }))
     }
 
-    async function onUpdateBoard(ev) {
-        // ev.preventDefault()
+    async function onUpdateBoard() {
         try {
-            const savedBoard = await updateBoard(boardToEdit)
-            // showSuccessMsg(`Board updated successfully ${savedBoard.name}`)
+            await updateBoard(boardToEdit)
         } catch (err) {
             console.log('Cannot update board', err)
-            // showErrorMsg('Cannot update board')
         } finally {
             setIsEditing(false)
         }
@@ -47,19 +44,20 @@ export function BoardEdit({ board }) {
         }
     }
 
-    // const { title, favorite, details } = boardToEdit
     const { title } = boardToEdit
 
     return (
         <>
             {!isEditing ?
-                <h3 className="title" title="Click to edit" onClick={() => setIsEditing(true)}>{board.title}</h3>
+                <h3 className="title" title="Click to edit" onClick={() => setIsEditing(true)}>
+                    {board.title}
+                </h3>
                 :
                 <input className="reset title"
                     title="Click to edit"
                     onChange={handleChange}
                     onBlur={onUpdateBoard}
-                    onKeyDown={handleKeyDown}  // Trigger onUpdateBoard on pressing Enter
+                    onKeyDown={handleKeyDown}
                     value={title}
                     type="text"
                     name="title"
@@ -71,6 +69,7 @@ export function BoardEdit({ board }) {
                 <button className="btn info" title="Show board description">
                     <img src="../../public/icons/info.svg" alt="Info-icon" />
                 </button>
+
                 <button className="btn favorite" title="Add to favorites">
                     <img src="../../public/icons/favorite.svg" alt="Star-icon" />
                 </button>
