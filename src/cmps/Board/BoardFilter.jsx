@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 
 import { addTask } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData } from "../../store/actions/system.actions"
 
 import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 
@@ -55,8 +55,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'menu options',
-                data: { options: menuOptions },
+                type: 'board member select',
+                data: { chosenMember: filterByToEdit.member, onChangeMember: setMemberFilter, members: board.members },
                 isPosBlock: true
             })
             setIsMenuOpen(true)
@@ -83,9 +83,16 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         },
     ]
 
+    function setMemberFilter(memberId) {
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, member: memberId }))
+
+        setDynamicModalData({ chosenMember: memberId, onChangeMember: setMemberFilter, members: board.members })
+    }
+
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
+        console.log('field', field)
 
         switch (target.type) {
             case 'number':
@@ -100,6 +107,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         }
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
+
 
     const dynFocusedClass = isFocused ? 'focused' : ''
     const { txt } = filterByToEdit
