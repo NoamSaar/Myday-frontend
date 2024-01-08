@@ -12,6 +12,7 @@ export function BoardDetails() {
     const user = useSelector((storeState) => storeState.userModule.loggedinUser)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const [isFocusLastGroup, setIsFocusLastGroup] = useState(false)
 
     useEffect(() => {
         _loadBoard()
@@ -35,7 +36,8 @@ export function BoardDetails() {
 
     async function onAddGrop() {
         try {
-            addGroup(board._id)
+            await addGroup(board._id)
+            setIsFocusLastGroup(true)
         } catch (error) {
             console.error("Error adding group:", error)
         }
@@ -59,7 +61,7 @@ export function BoardDetails() {
 
             <div className="board-content">
 
-                {board.groups.map(group => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} />)}
+                {board.groups.map((group, idx) => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1} onTitleEditLeave={() => setIsFocusLastGroup(false)} />)}
 
                 <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
                     <BigPlusIcon />

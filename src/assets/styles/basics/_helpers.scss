@@ -131,6 +131,7 @@
 
 .svg-inherit-color svg {
     fill: inherit;
+    height: auto;
 }
 
 .focused-input {
@@ -157,4 +158,23 @@
     background-color: $clr0;
     box-shadow: 0 4px 17px 6px rgba(0, 0, 0, .1);
     border-radius: calc($border-radius-small * 2);
+}
+
+
+.black-blue-input {
+    border-radius: $border-radius-small;
+    padding: 8px 16px;
+    margin-block-end: 15px;
+    outline: 1px solid $clr-btn-border;
+    transition: .2s outline-color;
+
+    &:focus {
+        outline-color: $clr-btn-add;
+    }
+
+    &:hover {
+
+        outline-color: black;
+    }
+
 }

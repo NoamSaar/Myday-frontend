@@ -63,7 +63,7 @@ const gBoards = [
         priority: [
             {
                 id: 'l201',
-                title: 'Critical',
+                title: 'Critical ⚠',
                 color: '#333333',
             },
             {
@@ -201,7 +201,7 @@ const gBoards = [
                         title: 'Refactor to use Store Redux',
                         person: ['u101', 'u102', 'u103'],
                         status: 'Stuck',
-                        priority: 'Critical',
+                        priority: 'Critical ⚠',
                         date: 1703703756181,
                         link: {
                             url: 'https://redux.js.org/',
@@ -246,7 +246,7 @@ const gBoards = [
                         title: 'Unresponsive Button on Click',
                         person: ['u102'],
                         status: 'Done',
-                        priority: 'Critical',
+                        priority: 'Critical ⚠',
                         date: 1703785617881,
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704305129/large-Screenshot_2024-01-03_at_11.39.56_dx6zkv.png',
                         link: {
@@ -307,7 +307,7 @@ const gBoards = [
                         title: 'Slow Page Load Times',
                         person: ['u101'],
                         status: 'Needs QA',
-                        priority: 'Critical',
+                        priority: 'Critical ⚠',
                         date: 1704299392298,
                         updates: [],
                     },
@@ -814,7 +814,7 @@ function _getDefaultBoard() {
         priority: [
             {
                 id: 'l201',
-                title: 'Critical',
+                title: 'Critical ⚠',
                 color: '#333333',
             },
             {
@@ -876,7 +876,7 @@ function _getDefaultBoard() {
                         title: 'Item 2',
                         person: [],
                         status: 'Done',
-                        priority: 'Critical',
+                        priority: 'Critical ⚠',
                         date: 1703708909537,
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704304383/large-Screenshot_2024-01-03_at_11.35.48_qclnrt.png',
                         updates: [],
