@@ -18,7 +18,8 @@ export function LinkPreview({ info, onUpdate, taskId }) {
                     displayTxt: info && info.displayTxt || '',
                     onChangeLink: onUpdate
                 },
-                fatherId: `${taskId}-linkPicker`
+                fatherId: `${taskId}-linkPicker`,
+                isPosBlock: true
             })
         }
     }
