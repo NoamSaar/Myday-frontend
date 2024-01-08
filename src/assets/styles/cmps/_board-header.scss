@@ -38,12 +38,16 @@
         .info-favorite {
             display: none;
         }
+
+        .title {
+            font-size: rem(24px);
+        }
     }
 
     .title {
         grid-area: title;
         padding-inline: 4px;
-        font-size: rem(24px);
+        font-size: rem(32px);
         font-family: poppins-medium;
         cursor: text;
         border-radius: $border-radius-small;

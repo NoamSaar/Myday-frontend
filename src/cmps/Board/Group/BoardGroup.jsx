@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TaskList } from "./TaskList";
 import { useSelector } from "react-redux";
 import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions";
@@ -17,6 +17,10 @@ export function BoardGroup({ group, titlesOrder }) {
     const isMenuOpen = fatherId === `${group.id}-menu`
     const isColorPickerOpen = fatherId === `${group.id}-colorPicker`
     const colors = getGcolors()
+
+    useEffect(() => {
+        setGroupTitle(group.title)
+    }, [group])
 
 
     function toggleMenu(ev) {
