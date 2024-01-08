@@ -36,15 +36,6 @@ const gBoards = [
         },
         status: [
             {
-                id: 'l100',
-                color: '#c4c4c4',
-            },
-            {
-                id: 'l101',
-                title: 'Done',
-                color: '#00c875',
-            },
-            {
                 id: 'l102',
                 title: 'Working on it',
                 color: '#fdab3d',
@@ -55,16 +46,21 @@ const gBoards = [
                 color: '#e2445c',
             },
             {
+                id: 'l101',
+                title: 'Done',
+                color: '#00c875',
+            },
+            {
+                id: 'l100',
+                color: '#c4c4c4',
+            },
+            {
                 id: 'l104',
                 title: 'Needs QA',
                 color: '#faa1f1',
             },
         ],
         priority: [
-            {
-                id: 'l200',
-                color: '#c4c4c4',
-            },
             {
                 id: 'l201',
                 title: 'Critical',
@@ -84,6 +80,10 @@ const gBoards = [
                 id: 'l204',
                 title: 'Low',
                 color: '#579bfc',
+            },
+            {
+                id: 'l200',
+                color: '#c4c4c4',
             },
         ],
         members: [
@@ -792,15 +792,6 @@ function _getDefaultBoard() {
         archivedAt: null,
         status: [
             {
-                id: 'l100',
-                color: '#c4c4c4',
-            },
-            {
-                id: 'l101',
-                title: 'Done',
-                color: '#00c875',
-            },
-            {
                 id: 'l102',
                 title: 'Working on it',
                 color: '#fdab3d',
@@ -811,16 +802,16 @@ function _getDefaultBoard() {
                 color: '#e2445c',
             },
             {
-                id: 'l104',
-                title: 'Needs QA',
-                color: '#faa1f1',
+                id: 'l101',
+                title: 'Done',
+                color: '#00c875',
+            },
+            {
+                id: 'l100',
+                color: '#c4c4c4',
             },
         ],
         priority: [
-            {
-                id: 'l200',
-                color: '#c4c4c4',
-            },
             {
                 id: 'l201',
                 title: 'Critical',
@@ -840,6 +831,10 @@ function _getDefaultBoard() {
                 id: 'l204',
                 title: 'Low',
                 color: '#579bfc',
+            },
+            {
+                id: 'l200',
+                color: '#c4c4c4',
             },
         ],
         members: [

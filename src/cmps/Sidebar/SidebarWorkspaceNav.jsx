@@ -6,7 +6,8 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
             <section className="sidebar-workspace-nav">
                 <div className={`btn workspace-section grid column ${isDropdownOpen ? 'open' : ''}`}
                     onClick={onToggleDropdown}
-                    title="Main Workspace">
+                    title="Main Workspace"
+                >
                     <div className="workspace-logo flex justify-center align-center">
                         M
                         <img src="../../public/icons/HomeBlackFill.svg" alt="home-icon" />

@@ -1,9 +1,9 @@
 import { useState } from "react"
+import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
 import { setDynamicModal } from "../../store/actions/system.actions"
-import { useSelector } from "react-redux"
 
 export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBoard }) {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -13,7 +13,6 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
     const [lastClickedBoardId, setLastClickedBoardId] = useState(null)
-
     const navigate = useNavigate()
 
     async function onDeleteBoard() {
@@ -47,7 +46,6 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
     }
 
     const handleInputKeyDown = (ev) => {
-        // Check if the pressed key is Enter (key code 13)
         if (ev.key === 'Enter') {
             onRenameBoard()
         }

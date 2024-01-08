@@ -1,12 +1,13 @@
+import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
+
 import { SidebarMainNav } from "./SidebarMainNav"
 import { SidebarWorkspace } from "./SidebarWorkspace"
 import { SidebarBoardNav } from "./SidebarBoardNav"
-import { useSelector } from "react-redux"
-import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions"
-import { useNavigate } from "react-router"
-// import { boardService } from "../services/board.service"
 // import { LottieAnimation } from "./LottieAnimation"
+
+import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions"
 
 export function Sidebar() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -49,20 +50,12 @@ export function Sidebar() {
         }
     }
 
-    function deleteBoard(boardId) {
-        onDeleteBoard(boardId)
-    }
-
     async function onRenameBoard(board, title) {
         try {
             await updateBoard({ ...board, title })
         } catch (error) {
             console.error("Error removing task:", error)
         }
-    }
-
-    function renameBoard(board, title) {
-        onRenameBoard(board, title)
     }
 
     function onSetFilter(filterBy) {
@@ -77,28 +70,34 @@ export function Sidebar() {
         setIsDropdownOpen(!isDropdownOpen)
     }
 
-    function onToggleIsActive() {
-        setIsActive(!isActive)
-    }
-
     function onToggleIsFocus() {
         setIsFocus(!isFocus)
     }
+
+    function renameBoard(board, title) {
+        onRenameBoard(board, title)
+    }
+
+    function deleteBoard(boardId) {
+        onDeleteBoard(boardId)
+    }
+
 
     return (
         <section className="sidebar-container">
             <article className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <SidebarMainNav
-                    onOpenSidebar={onOpenSidebar}
+                    isActive={isActive}
                     isSidebarOpen={isSidebarOpen}
-                    isActive={isActive} />
+                    onOpenSidebar={onOpenSidebar}
+                />
                 <SidebarWorkspace
-                    onAddNewBoard={onAddNewBoard}
-                    isDropdownOpen={isDropdownOpen}
+                    filterBy={filterBy}
                     isFocus={isFocus}
+                    isDropdownOpen={isDropdownOpen}
+                    onAddNewBoard={onAddNewBoard}
                     onToggleDropdown={onToggleDropdown}
                     onToggleIsFocus={onToggleIsFocus}
-                    filterBy={filterBy}
                     onSetFilter={onSetFilter} />
                 <SidebarBoardNav
                     boards={boards}
