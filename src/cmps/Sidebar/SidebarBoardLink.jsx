@@ -39,7 +39,8 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'menu options',
-                data: { options: menuOptions }
+                data: { options: menuOptions },
+                isPosBlock: true
             })
             setIsMenuOpen(true)
         }

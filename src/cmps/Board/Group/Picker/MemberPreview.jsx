@@ -18,7 +18,8 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'member picker',
                 data: { chosenMembers, memberOptions, onChangeMembers: onUpdate },
-                fatherId: `${taskId}-memberPicker`
+                fatherId: `${taskId}-memberPicker`,
+                isPosBlock: true
             })
         }
     }

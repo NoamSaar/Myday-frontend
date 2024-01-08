@@ -55,7 +55,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'menu options',
-                data: { options: menuOptions }
+                data: { options: menuOptions },
+                isPosBlock: true
             })
             setIsMenuOpen(true)
         }

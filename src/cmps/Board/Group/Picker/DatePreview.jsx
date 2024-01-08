@@ -15,7 +15,8 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'date picker',
                 data: { selectedDate: selectedDate || Date.now(), onChangeDate },
-                fatherId: `${taskId}-datePicker`
+                fatherId: `${taskId}-datePicker`,
+                isPosBlock: true
             })
         }
     }
