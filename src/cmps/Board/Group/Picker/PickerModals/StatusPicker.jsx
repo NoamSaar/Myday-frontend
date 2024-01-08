@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 
-export function StatusPickerModal({ selectedStatus, onChangeStatus, title }) {
-
+export function StatusPicker({ onChangeStatus, title }) {
     const { [title]: statuses } = useSelector((storeState) => storeState.boardModule.currBoard)
 
     function handleChange(newStatus) {
