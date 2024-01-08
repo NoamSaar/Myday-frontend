@@ -1,0 +1,14 @@
+.member-picker-modal {
+    padding: 10px;
+
+    .chosen-members-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+
+        li {
+            padding-inline: 5px;
+            text-align: center;
+        }
+    }
+}
