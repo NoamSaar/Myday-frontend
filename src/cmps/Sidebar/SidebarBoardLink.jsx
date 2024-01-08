@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useState } from "react"
+import { useNavigate } from "react-router"
 
-import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service";
-import { setDynamicModal } from "../../store/actions/system.actions";
-import { useSelector } from "react-redux";
+import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
+import { setDynamicModal } from "../../store/actions/system.actions"
+import { useSelector } from "react-redux"
 
 export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBoard }) {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -88,7 +88,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
     const style = { position: 'relative' }
 
     const dynActiveNavClass = currActiveBoard && currActiveBoard._id === board._id ? 'active' : ''
-    const dynHoverNavClass = lastClickedBoardId === board._id && isMenuOpen ? 'hovered' : '';
+    const dynHoverNavClass = lastClickedBoardId === board._id && isMenuOpen ? 'hovered' : ''
     const dynModalClass = isMenuOpen ? 'active' : ''
 
     if (!boards && !boards.length) return <div>Loading board...</div>

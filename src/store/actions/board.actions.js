@@ -156,7 +156,7 @@ export function getGcolors() {
 
 //     boardService.remove(boardId)
 //         .then(() => {
-//             console.log('Server Reported - Deleted Succesfully');
+//             console.log('Server Reported - Deleted Succesfully')
 //         })
 //         .catch(err => {
 //             showErrorMsg('Cannot remove board')
