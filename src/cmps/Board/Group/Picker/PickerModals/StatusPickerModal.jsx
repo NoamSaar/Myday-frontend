@@ -7,14 +7,13 @@ export function StatusPickerModal({ selectedStatus, onChangeStatus }) {
     const [statusToEdit, setStatusToEdit] = useState(selectedStatus)
 
     function handleChange(newStatus) {
-        // let { value } = target
         setStatusToEdit(newStatus)
-        onChangeStatus('status', newStatus) //important to pass the value becuse the statusToEdit will update only on nxt render
+        onChangeStatus('status', newStatus)
     }
     // function handleChange({ target }) {
     //     let { value } = target
     //     setStatusToEdit(value)
-    //     onChangeStatus('status', value) //important to pass the value becuse the statusToEdit will update only on nxt render
+    //     onChangeStatus('status', value) 
     // }
 
     return (
