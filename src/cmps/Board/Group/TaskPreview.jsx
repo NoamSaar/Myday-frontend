@@ -7,7 +7,7 @@ import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { setDynamicModal } from "../../../store/actions/system.actions"
+import { setDynamicModal, setDynamicModalData } from "../../../store/actions/system.actions"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const [currTask, setCurrTask] = useState(null)
@@ -52,8 +52,20 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     async function onTaskChange(field, data) {
         try {
-            const updatedTask = { ...task, person: task.person, [field]: data }
+            let recivedData = data
+            if (field === 'person') recivedData = data.map(person => person._id)
+
+            const updatedTask = { ...task, person: task.person, [field]: recivedData }
             updateTask(board._id, groupId, updatedTask)
+
+            switch (field) {
+                case 'person':
+                    setDynamicModalData({ chosenMembers: data, memberOptions: board.members, onChangeMembers: onTaskChange })
+                    break;
+
+                default:
+                    break;
+            }
         } catch (error) {
             console.error("Error changing task:", error)
         }

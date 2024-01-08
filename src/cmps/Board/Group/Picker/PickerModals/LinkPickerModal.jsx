@@ -14,10 +14,10 @@ export function LinkPickerModal({ url, displayTxt, changeLink }) {
             <h4>Link</h4>
 
             <label>Write or paste a link</label>
-            <input value={newUrl} onChange={ev => setNewUrl(ev.target.value)} onBlur={onChangeLink} className="reset" type="text" placeholder="www.example.com" />
+            <input value={newUrl} onChange={ev => setNewUrl(ev.target.value)} onBlur={onChangeLink} className="reset black-blue-input" type="text" placeholder="www.example.com" />
 
             <label>Text to display</label>
-            <input value={newDisplayTxt} onChange={ev => setNewDisplayTxt(ev.target.value)} onBlur={onChangeLink} className="reset" type="text" placeholder="Example text" />
+            <input value={newDisplayTxt} onChange={ev => setNewDisplayTxt(ev.target.value)} onBlur={onChangeLink} className="reset black-blue-input" type="text" placeholder="Example text" />
 
         </form>
     )
