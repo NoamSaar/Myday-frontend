@@ -11,31 +11,25 @@ export function DynamicAbsoluteModal() {
 
     if (!modalData.isOpen) return
 
-    // console.log('modalData.boundingRect', modalData.boundingRect)
-    // console.log('modalData.isInline', modalData.isInline)
-    console.log('modalData', modalData)
-
     const isPosBlock = modalData.isPosBlock ? true : false
 
-    console.log('isPosBlock', isPosBlock)
     let style = {
         //centered below father:
         // top: `${modalData.boundingRect.bottom}px`,
         // left: `${modalData.boundingRect.left + (modalData.boundingRect.width / 2) - (modalWidth / 2)}px` 
     }
 
-    if (isPosBlock) { //modal will render top/bottom relative to the clicked father
+    if (isPosBlock) { // top/bottom relative to the clicked father
         style = {
             top: `${modalData.boundingRect.bottom}px`, // directly below father
             left: `${modalData.boundingRect.right - modalData.boundingRect.width}px` // the left of the modal will be the left of the father
         }
-    } else { //modal will render left/right relative to the clicked father
+    } else { // left/right relative to the clicked father
         style = {
             top: `${modalData.boundingRect.top}px`, // Aligns the top of the modal with the top of the father
             left: `${modalData.boundingRect.right}px`,
         }
     }
-
 
     return (
         <div style={style || {}} className="dynamic-absolute-modal">
