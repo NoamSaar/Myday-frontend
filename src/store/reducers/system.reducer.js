@@ -16,7 +16,7 @@ const initialState = {
     type: '',
     data: {},
     fatherId: '',
-    isInline: true,
+    isPosBlock: true,
     isCenter: false,
     isTooltip: false,
   }
