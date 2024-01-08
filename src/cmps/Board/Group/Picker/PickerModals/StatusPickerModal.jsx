@@ -1,28 +1,15 @@
-import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
+export function StatusPickerModal({ selectedStatus, onChangeStatus, title }) {
 
-export function StatusPickerModal({ selectedStatus, onChangeStatus }) {
-    const { status: statuses } = useSelector((storeState) => storeState.boardModule.currBoard)
-    const [statusToEdit, setStatusToEdit] = useState(selectedStatus)
+    const { [title]: statuses } = useSelector((storeState) => storeState.boardModule.currBoard)
 
     function handleChange(newStatus) {
-        setStatusToEdit(newStatus)
-        onChangeStatus('status', newStatus)
+        onChangeStatus([title], newStatus)
     }
-    // function handleChange({ target }) {
-    //     let { value } = target
-    //     setStatusToEdit(value)
-    //     onChangeStatus('status', value) 
-    // }
 
     return (
         <div className="general-modal status-picker-modal">
-            {/* <select value={statusToEdit} name="status" onChange={handleChange}>
-                {statuses.map(status => (
-                    <option key={status.id} value={status.title}>{status.title}</option>
-                ))}
-            </select> */}
 
             <ul className='clean-list manual-select'>
                 {statuses.map(status => (

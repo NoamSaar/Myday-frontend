@@ -12,7 +12,7 @@ export function StatusPicker({ title, info, onUpdate, taskId }) {
         if (isPickerOpen) {
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'status picker', data: { selectedStatus: info.chosenOption, onUpdate }, fatherId: `${taskId}-statusPicker` })
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'status picker', data: { selectedStatus: info.chosenOption, title, onUpdate }, fatherId: `${taskId}-statusPicker` })
         }
     }
 

@@ -32,7 +32,7 @@ function DynamicModal(props) {
             return <DatePickerModal selectedDate={props.data.selectedDate} onChangeDate={props.data.onChangeDate} />
 
         case 'status picker':
-            return <StatusPickerModal selectedStatus={props.data.selectedStatus} onChangeStatus={props.data.onUpdate} />
+            return <StatusPickerModal selectedStatus={props.data.selectedStatus} title={props.data.title} onChangeStatus={props.data.onUpdate} />
 
         case 'link picker':
             return <LinkPickerModal url={props.data.url} displayTxt={props.data.displayTxt} changeLink={props.data.onChangeLink} />
