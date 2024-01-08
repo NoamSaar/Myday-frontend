@@ -8,13 +8,15 @@ export const SET_ACTIVE_TASK = 'SET_ACTIVE_TASK'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
+export const SET_IS_HEADER_COLLAPSED = 'SET_IS_HEADER_COLLAPSED'
 
 const initialState = {
     boards: [],
     lastRemovedBoard: null,
     currBoard: null,
     activeTask: null,
-    filterBy: boardService.getDefaultFilter()
+    filterBy: boardService.getDefaultFilter(),
+    isHeaderCollapsed: false
 }
 
 export function boardReducer(state = initialState, action) {
@@ -56,6 +58,10 @@ export function boardReducer(state = initialState, action) {
 
         case SET_FILTER_BY:
             newState = { ...state, filterBy: { ...state.filterBy, ...action.filterBy } }
+            break
+
+        case SET_IS_HEADER_COLLAPSED:
+            newState = { ...state, isHeaderCollapsed: action.isCollapsed }
             break
 
         default:

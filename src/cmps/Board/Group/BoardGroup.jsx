@@ -11,6 +11,7 @@ import { setDynamicModal } from "../../../store/actions/system.actions"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
@@ -137,7 +138,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     return (
         <section className="board-group">
-            <div className="group-sticky-container sticky-left">
+            <div className={`${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
 
                 <div className="group-title-container sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`}>

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
 import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
+import { setIsHeaderCollapsed } from "../../store/actions/board.actions"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
     const [isCollapsed, setIsCollapsed] = useState(false)
@@ -11,7 +12,9 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                setIsCollapsed(!entry.isIntersecting)
+                const currIsCollapsed = !entry.isIntersecting
+                setIsCollapsed(currIsCollapsed)
+                setIsHeaderCollapsed(currIsCollapsed)
             },
             {
                 root: null, // null means the viewport
@@ -32,7 +35,9 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
     }, [])
 
     function onCollapseHeader() {
-        setIsCollapsed(!isCollapsed)
+        const currIsCollapsed = !isCollapsed
+        setIsCollapsed(currIsCollapsed)
+        setIsHeaderCollapsed(currIsCollapsed)
     }
 
     const dynCollapsedClass = isCollapsed ? 'collapsed' : ''

@@ -59,18 +59,18 @@ export function BoardDetails() {
                 onSetFilter={onSetFilter}
             />
 
-            <div className="board-content">
+            {/* <div className="board-content"> */}
 
-                {board.groups.map((group, idx) => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1} onTitleEditLeave={() => setIsFocusLastGroup(false)} />)}
+            {board.groups.map((group, idx) => <BoardGroup key={group.id} group={group} titlesOrder={board.titlesOrder} isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1} onTitleEditLeave={() => setIsFocusLastGroup(false)} />)}
 
-                <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
-                    <BigPlusIcon />
-                    Add new group
-                </button>
+            <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
+                <BigPlusIcon />
+                Add new group
+            </button>
 
-                <Outlet />
-                {/* the outlet is to display the nested route- task details */}
-            </div>
+            <Outlet />
+            {/* the outlet is to display the nested route- task details */}
+            {/* </div> */}
 
         </section>
     )

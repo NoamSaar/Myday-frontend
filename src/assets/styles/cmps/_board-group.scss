@@ -5,7 +5,14 @@
     margin-block-end: 55px;
 
     .group-sticky-container {
-        top: 0;
+        top: 167px;
+        z-index: 25;
+        background-color: white;
+
+        &.board-header-collapsed {
+            top: 119.5px;
+
+        }
 
         .group-title-container {
             display: flex;
@@ -14,7 +21,8 @@
             .title-container {
                 display: flex;
                 align-items: center;
-                margin-inline-start: 4px;
+                padding-inline-start: 8px;
+                background-color: white;
 
                 h4,
                 .focused-input {
