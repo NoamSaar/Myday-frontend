@@ -12,6 +12,7 @@ html {
     line-height: lh(23px);
 }
 
+
 body {
     margin: 0;
 }
@@ -42,7 +43,6 @@ li {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    line-height: normal; //maybe we need to specify better
 }
 
 img {
