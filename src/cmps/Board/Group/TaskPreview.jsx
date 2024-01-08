@@ -4,7 +4,7 @@ import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
 import { getUser } from "../../../store/actions/user.actions"
 import { removeTask, updateTask } from "../../../store/actions/board.actions"
-import { setDynamicModal, setDynamicModalData } from "../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData } from "../../../store/actions/system.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { DynamicPicker } from "./Picker/DynamicPicker"
@@ -73,7 +73,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     async function onDeleteTask() {
         try {
             removeTask(board._id, groupId, task.id)
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } catch (error) {
             console.error("Error removing task:", error)
         }
@@ -85,6 +85,22 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             setTaskTitle(title)
         } catch (error) {
             console.error("Error changing task title:", error)
+        }
+    }
+
+    function handleMouseEnter() {
+        setIsShowMenu(true)
+    }
+
+    function handleMouseLeave() {
+        if (!isMenuOpen) setIsShowMenu(false)
+    }
+
+    function toggleMenu(ev) {
+        if (isMenuOpen) {
+            resetDynamicModal()
+        } else {
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
         }
     }
 

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { setDynamicModal } from "../../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
 
 export function LinkPreview({ info, onUpdate, taskId }) {
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -7,7 +7,7 @@ export function LinkPreview({ info, onUpdate, taskId }) {
 
     function onLinkPreviewClick(ev) {
         if (isPickerOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,
@@ -18,7 +18,8 @@ export function LinkPreview({ info, onUpdate, taskId }) {
                     displayTxt: info && info.displayTxt || '',
                     onChangeLink: onUpdate
                 },
-                fatherId: `${taskId}-linkPicker`
+                fatherId: `${taskId}-linkPicker`,
+                isPosBlock: true
             })
         }
     }

@@ -9,21 +9,32 @@ import { MenuOptionsModal } from "./MenuOptionsModal"
 
 export function DynamicAbsoluteModal() {
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    let style
 
-    console.log('modalData.boundingRect', modalData.boundingRect)
-    if (modalData.isOpen) {
+    if (!modalData.isOpen) return
+
+    const isPosBlock = modalData.isPosBlock ? true : false
+
+    let style = {
+        //centered below father:
+        // top: `${modalData.boundingRect.bottom}px`,
+        // left: `${modalData.boundingRect.left + (modalData.boundingRect.width / 2) - (modalWidth / 2)}px` 
+    }
+
+    if (isPosBlock) { // top/bottom relative to the clicked father
         style = {
-            // top: `${modalData.boundingRect.bottom}px`,
-            // left: `${modalData.boundingRect.left + (modalData.boundingRect.width / 2) - (200 / 2)}px`
-            top: `${modalData.boundingRect.bottom}px`,
-            left: `${modalData.boundingRect.right - modalData.boundingRect.width}px`
+            top: `${modalData.boundingRect.bottom}px`, // directly below father
+            left: `${modalData.boundingRect.right - modalData.boundingRect.width}px` // the left of the modal will be the left of the father
+        }
+    } else { // left/right relative to the clicked father
+        style = {
+            top: `${modalData.boundingRect.top}px`, // Aligns the top of the modal with the top of the father
+            left: `${modalData.boundingRect.right}px`,
         }
     }
 
     return (
-        <div style={style || {}} className={`${modalData.isOpen && 'open-dynamic-modal'} dynamic-absolute-modal`}>
-            {modalData.isOpen && <DynamicModal type={modalData.type} data={modalData.data} />}
+        <div style={style || {}} className="dynamic-absolute-modal">
+            <DynamicModal type={modalData.type} data={modalData.data} />
         </div>
     )
 }

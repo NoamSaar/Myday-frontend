@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
-import { setDynamicModal } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
 
 export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBoard }) {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -30,16 +30,15 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
         setLastClickedBoardId(newBoardId)
 
         if (isMenuOpen) {
-            //updating modal in store
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+            resetDynamicModal()
             setIsMenuOpen(false)
         } else {
-            //updating modal in store
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'menu options',
-                data: { options: menuOptions }
+                data: { options: menuOptions },
+                isPosBlock: true
             })
             setIsMenuOpen(true)
         }
@@ -68,7 +67,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
             onOptionClick: () => {
                 onDeleteBoard()
                 setIsMenuOpen(false)
-                setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+                resetDynamicModal()
             }
         },
         {
@@ -78,7 +77,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
                 onRenameBoard()
                 setIsEditing(!isEditing)
                 setIsMenuOpen(false)
-                setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {} })
+                resetDynamicModal()
             }
         }
     ]

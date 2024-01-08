@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { UserImg } from "../../../UserImg"
-import { setDynamicModal } from "../../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
 
 export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }) {
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -9,14 +9,15 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
 
     function onMemberPreviewClick(ev) {
         if (isPickerOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'member picker',
                 data: { chosenMembers, memberOptions, onChangeMembers: onUpdate },
-                fatherId: `${taskId}-memberPicker`
+                fatherId: `${taskId}-memberPicker`,
+                isPosBlock: true
             })
         }
     }

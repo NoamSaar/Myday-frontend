@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { setDynamicModal } from "../../../../store/actions/system.actions"
+import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/system.actions"
 
 export function StatusPreview({ title, info, onUpdate, taskId }) {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
@@ -11,14 +11,15 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
 
     function onStatusPreviewClick(ev) {
         if (isPickerOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'status picker',
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
-                fatherId: `${taskId}-${title}Picker`
+                fatherId: `${taskId}-${title}Picker`,
+                isPosBlock: true
             })
         }
     }

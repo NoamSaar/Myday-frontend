@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { utilService } from "../../../../services/util.service"
-import { setDynamicModal } from "../../../../store/actions/system.actions"
+import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/system.actions"
 
 export function DatePreview({ selectedDate, onChangeDate, taskId }) {
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -8,14 +8,15 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
 
     function onDatePreviewClick(ev) {
         if (isPickerOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+            resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'date picker',
                 data: { selectedDate: selectedDate || Date.now(), onChangeDate },
-                fatherId: `${taskId}-datePicker`
+                fatherId: `${taskId}-datePicker`,
+                isPosBlock: true
             })
         }
     }
