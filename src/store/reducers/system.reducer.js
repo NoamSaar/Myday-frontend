@@ -1,3 +1,4 @@
+import { getEmptyDynamicModal } from "../actions/system.actions"
 
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 export const SET_DYNAMIC_MODAL_OPEN = 'SET_DYNAMIC_MODAL_OPEN'
@@ -9,21 +10,7 @@ export const SET_DYNAMIC_MODAL = 'SET_DYNAMIC_MODAL'
 
 const initialState = {
   isLoading: false,
-  dynamicModal:
-  {
-    isOpen: false,
-    boundingRect: null,
-    type: '',
-    data: {},
-    fatherId: '',
-    isPosBlock: true,
-    isCenter: false,
-    isTooltip: false,
-  }
-  // DynamicModalIsOpen: false,
-  // dynamicModalBoundingRect: null,
-  // dynamicModalType: '',
-  // dynamicModalData: {},
+  dynamicModal: getEmptyDynamicModal()
 }
 
 export function systemReducer(state = initialState, action = {}) {

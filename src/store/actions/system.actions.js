@@ -30,7 +30,7 @@ export function resetDynamicModal() {
     })
 }
 
-function getEmptyDynamicModal() {
+export function getEmptyDynamicModal() {
     return {
         isOpen: false,
         boundingRect: null,
