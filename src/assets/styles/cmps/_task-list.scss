@@ -72,8 +72,10 @@
             &.single-task {
                 padding-inline-start: 36px;
 
-                .focused-input {
+                .focused-input,
+                .editable-txt {
                     padding-block: 3px 2px;
+                    padding-inline-start: 3px;
                 }
             }
         }
@@ -88,7 +90,16 @@
         .task-preview {
 
             .task-title {
-                padding-inline-start: 23.5px;
+                padding-inline-start: 16px;
+
+                .editable-txt,
+                .focused-input {
+                    padding-inline-start: 9.5px;
+                }
+
+                .editable-txt {
+                    width: 99%;
+                }
 
             }
 
