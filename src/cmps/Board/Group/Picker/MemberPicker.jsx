@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { utilService } from "../../../../services/util.service"
 import { setDynamicModal } from "../../../../store/actions/system.actions"
+import { UserImg } from "../../../UserImg"
 
 export function MemberPicker({ chosenMembers, memberOptions, onUpdate, taskId }) {
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -25,15 +26,11 @@ export function MemberPicker({ chosenMembers, memberOptions, onUpdate, taskId })
     return (
         <li onClick={onMemberPreviewClick} className="member-picker person-col">
 
-            {!chosenMembers.length && <img src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg" />}
+            {!chosenMembers.length && <img className="user-img" src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg" />}
 
             {!!chosenMembers.length && <div className="member-img-container">
                 {chosenMembers.map((member, idx) => {
-                    return idx < 2 ? member.imgUrl ?
-                        <img key={idx} src={member.imgUrl} /> :
-                        <span key={idx} className="extra-members-box">{utilService.getFormatName(member.fullname)}</span>
-                        :
-                        ''
+                    return idx < 2 ? <UserImg key={idx} user={member} /> : ''
                 })}
                 {extraMembers > 0 && <span className="extra-members-box">+{extraMembers}</span>}
             </div>
