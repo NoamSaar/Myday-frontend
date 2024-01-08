@@ -8,21 +8,21 @@ import { MemberPickerModal } from "./Board/Group/Picker/PickerModals/MemberPicke
 
 export function DynamicAbsoluteModal() {
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    let style
+
+    if (!modalData.isOpen) return
 
     console.log('modalData.boundingRect', modalData.boundingRect)
-    if (modalData.isOpen) {
-        style = {
-            // top: `${modalData.boundingRect.bottom}px`,
-            // left: `${modalData.boundingRect.left + (modalData.boundingRect.width / 2) - (200 / 2)}px`
-            top: `${modalData.boundingRect.bottom}px`,
-            left: `${modalData.boundingRect.right - modalData.boundingRect.width}px`
-        }
+
+    let style = {
+        // top: `${modalData.boundingRect.bottom}px`,
+        // left: `${modalData.boundingRect.left + (modalData.boundingRect.width / 2) - (200 / 2)}px`
+        top: `${modalData.boundingRect.bottom}px`,
+        left: `${modalData.boundingRect.right - modalData.boundingRect.width}px`
     }
 
     return (
-        <div style={style || {}} className={`${modalData.isOpen && 'open-dynamic-modal'} dynamic-absolute-modal`}>
-            {modalData.isOpen && <DynamicModal type={modalData.type} data={modalData.data} />}
+        <div style={style || {}} className="dynamic-absolute-modal">
+            <DynamicModal type={modalData.type} data={modalData.data} />
         </div>
     )
 }

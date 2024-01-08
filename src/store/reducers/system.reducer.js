@@ -9,7 +9,15 @@ export const SET_DYNAMIC_MODAL = 'SET_DYNAMIC_MODAL'
 
 const initialState = {
   isLoading: false,
-  dynamicModal: { isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' }
+  dynamicModal:
+  {
+    isOpen: false,
+    boundingRect: null,
+    type: '',
+    data: {},
+    fatherId: '',
+    pos: ''
+  }
   // DynamicModalIsOpen: false,
   // dynamicModalBoundingRect: null,
   // dynamicModalType: '',
