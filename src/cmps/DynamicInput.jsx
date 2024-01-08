@@ -43,7 +43,7 @@ export function DynamicInput({ inputProps }) {
                     <div
                         key={index}
                         className={`btn input-${additionalBtn.name}-icon`}
-                        onClick={() => additionalBtn.func}
+                        onClick={() => additionalBtn.func()}
                     >
                         {additionalBtn.icon}
                     </div>
