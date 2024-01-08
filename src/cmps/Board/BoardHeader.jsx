@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react"
+
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
 import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
-
     const [isCollapsed, setIsCollapsed] = useState(false)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
 
@@ -41,7 +41,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
         <>
             <div ref={sentinelRef} className="header-sentinel"></div>
 
-            <header className={dynCollapsedClass + ' board-header'}>
+            <header className={"board-header " + dynCollapsedClass}>
 
                 <BoardEdit board={board} />
 
@@ -54,6 +54,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                         <InviteIcon />
                         <span>Invite / 1</span>
                     </button>
+
                     <button className="btn more" title="Options">
                         <MenuIcon />
                     </button>
@@ -64,6 +65,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                         <HomeIcon />
                         <span>Main Table</span>
                     </button>
+
                     <button className="btn add-view svg-inherit-color" title="Add view">
                         <PlusIcon />
                     </button>
@@ -74,7 +76,11 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                         <RobotIcon />
                         <span>Automate</span>
                     </button>
-                    <button className={dynCollapsedClass + ' btn collapse'} title="Collapse header" onClick={onCollapseHeader}>
+
+                    <button className={dynCollapsedClass + ' btn collapse'}
+                        title="Collapse header"
+                        onClick={onCollapseHeader}
+                    >
                         <AngleDownIcon />
                     </button>
                 </div>

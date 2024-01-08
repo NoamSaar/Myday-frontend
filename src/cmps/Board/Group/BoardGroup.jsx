@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react"
-import { TaskList } from "./TaskList"
 import { useSelector } from "react-redux"
-import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
+import { useEffect, useState } from "react"
+
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { utilService } from "../../../services/util.service"
+
+import { TaskList } from "./TaskList"
+
+import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
 import { setDynamicModal } from "../../../store/actions/system.actions"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
-    const [isEditing, setIsEditing] = useState(isEditingTitle)
-    const [groupTitle, setGroupTitle] = useState(group.title)
-    const [groupColor, setGroupColor] = useState(group.color)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+
+    const [isEditing, setIsEditing] = useState(isEditingTitle)
+    const [groupTitle, setGroupTitle] = useState(group.title)
+    const [groupColor, setGroupColor] = useState(group.color)
+
     const isMenuOpen = fatherId === `${group.id}-menu`
     const isColorPickerOpen = fatherId === `${group.id}-colorPicker`
     const colors = getGcolors()
@@ -24,15 +29,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     useEffect(() => {
         setIsEditing(isEditingTitle)
     }, [isEditingTitle])
-
-
-    function toggleMenu(ev) {
-        if (isMenuOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
-        } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${group.id}-menu` })
-        }
-    }
 
     async function onGroupChange(field, date) {
         try {
@@ -102,6 +98,18 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         )
     }
 
+    function toggleMenu(ev) {
+        if (isMenuOpen) {
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+        } else {
+            setDynamicModal({
+                isOpen: true,
+                boundingRect: ev.target.getBoundingClientRect(),
+                type: 'menu options', data: { options: menuOptions },
+                fatherId: `${group.id}-menu`
+            })
+        }
+    }
 
     function onColorDisplayClick(ev) {
         ev.stopPropagation()
@@ -109,7 +117,13 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         if (isColorPickerOpen) {
             setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.getBoundingClientRect(), type: 'color picker', data: { colors: colors, onColorClick: onChangeColor }, fatherId: `${group.id}-colorPicker` })
+            setDynamicModal({
+                isOpen: true,
+                boundingRect: ev.target.getBoundingClientRect(),
+                type: 'color picker',
+                data: { colors: colors, onColorClick: onChangeColor },
+                fatherId: `${group.id}-colorPicker`
+            })
         }
     }
 
@@ -121,14 +135,15 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
     ]
 
-
     return (
-        <section className='board-group'>
+        <section className="board-group">
             <div className="group-sticky-container sticky-left">
 
                 <div className="group-title-container sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`}>
-                        <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}><MenuIcon /></button>
+                        <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
+                            <MenuIcon />
+                        </button>
                     </div>
                     <div className="sticky-left-40 title-container">
                         <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container svg-inherit-color"><AngleDownIcon /></button>
@@ -139,14 +154,18 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                 onBlur={onTitleEditExit}
                                 className="focused-input group-title-edit-container"
                             >
-                                <div className="group-color-display" style={{ backgroundColor: groupColor }} onMouseDown={onColorDisplayClick}></div>
+                                <div
+                                    className="group-color-display"
+                                    style={{ backgroundColor: groupColor }}
+                                    onMouseDown={onColorDisplayClick}>
+                                </div>
 
                                 <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                     <input
                                         className="reset"
-                                        style={{ color: groupColor }}
                                         type="text"
                                         autoFocus
+                                        style={{ color: groupColor }}
                                         value={groupTitle}
                                         onChange={onChangeTitle}
                                         onBlur={onTitleEditExit}
@@ -154,7 +173,11 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                 </form>
                             </div>
                         ) : (
-                            <h4 style={{ color: groupColor }} className="editable-txt" onClick={() => setIsEditing(true)}>{highlightText(groupTitle, filterBy.txt)}</h4>
+                            <h4 style={{ color: groupColor }} className="editable-txt"
+                                onClick={() => setIsEditing(true)}
+                            >
+                                {highlightText(groupTitle, filterBy.txt)}
+                            </h4>
                         )}
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>
@@ -166,7 +189,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
 
                         <div className="task-title-container">
-
                             <li className="task-selection">
                                 <input type="checkbox" />
                             </li>

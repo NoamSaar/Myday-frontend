@@ -1,13 +1,11 @@
 import { useSelector } from "react-redux"
-import { utilService } from "../../../../services/util.service"
-import { setDynamicModal } from "../../../../store/actions/system.actions"
 import { UserImg } from "../../../UserImg"
+import { setDynamicModal } from "../../../../store/actions/system.actions"
 
 export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }) {
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isPickerOpen = fatherId === `${taskId}-memberPicker`
     const extraMembers = chosenMembers.length - 2
-
 
     function onMemberPreviewClick(ev) {
         if (isPickerOpen) {
@@ -25,8 +23,11 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
 
     return (
         <li onClick={onMemberPreviewClick} className="member-picker person-col">
-
-            {!chosenMembers.length && <img className="user-img" src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg" />}
+            {!chosenMembers.length &&
+                <img className="user-img"
+                    src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg"
+                />
+            }
 
             {!!chosenMembers.length && <div className="member-img-container">
                 {chosenMembers.map((member, idx) => {

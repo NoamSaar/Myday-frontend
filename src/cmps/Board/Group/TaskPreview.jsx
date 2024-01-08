@@ -1,29 +1,28 @@
-import { useEffect, useRef, useState } from "react"
-import { DynamicPicker } from "./Picker/DynamicPicker"
-import { getUser } from "../../../store/actions/user.actions"
-import { utilService } from "../../../services/util.service"
-import { MenuOptionsModal } from "../../MenuOptionsModal"
-import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
-import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
+
+import { getUser } from "../../../store/actions/user.actions"
+import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { setDynamicModal, setDynamicModalData } from "../../../store/actions/system.actions"
 
+import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { DynamicPicker } from "./Picker/DynamicPicker"
+
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
+    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
+    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenu, setIsShowMenu] = useState(false)
-    // const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isMenuOpen = fatherId === `${task.id}-menu`
-    const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
 
+    const isMenuOpen = fatherId === `${task.id}-menu`
 
     useEffect(() => {
         const fetchData = async () => {
-
             try {
                 const newPersons = task.person.length
                     ? await Promise.all(
@@ -34,21 +33,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     )
                     : []
 
-
                 setCurrTask({ ...task, person: newPersons })
                 setTaskTitle(task.title)
             } catch (error) {
                 console.error("Error fetching data:", error)
             }
         }
-
         fetchData()
     }, [task])
 
     useEffectUpdate(() => {
         setCurrTask((prevTask) => ({ ...prevTask, title: taskTitle }))
     }, [taskTitle])
-
 
     async function onTaskChange(field, data) {
         try {
@@ -60,11 +56,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
             switch (field) {
                 case 'person':
-                    setDynamicModalData({ chosenMembers: data, memberOptions: board.members, onChangeMembers: onTaskChange })
-                    break;
-
+                    setDynamicModalData({
+                        chosenMembers: data,
+                        memberOptions: board.members,
+                        onChangeMembers: onTaskChange
+                    })
+                    break
                 default:
-                    break;
+                    break
             }
         } catch (error) {
             console.error("Error changing task:", error)
@@ -86,22 +85,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             setTaskTitle(title)
         } catch (error) {
             console.error("Error changing task title:", error)
-        }
-    }
-
-    function handleMouseEnter() {
-        setIsShowMenu(true)
-    }
-
-    function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
-    }
-
-    function toggleMenu(ev) {
-        if (isMenuOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
-        } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
         }
     }
 
@@ -127,6 +110,22 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         }
     }
 
+    function handleMouseEnter() {
+        setIsShowMenu(true)
+    }
+
+    function handleMouseLeave() {
+        if (!isMenuOpen) setIsShowMenu(false)
+    }
+
+    function toggleMenu(ev) {
+        if (isMenuOpen) {
+            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
+        } else {
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
+        }
+    }
+
     const menuOptions = [
         {
             icon: <DeleteIcon />,
@@ -134,7 +133,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onOptionClick: onDeleteTask,
         },
     ]
-
 
     if (!currTask) return <ul className="task-title">Loading</ul>
     return (
@@ -144,19 +142,25 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseLeave={handleMouseLeave}
         >
             <div className="menu-container sticky-left">
-                {isShowMenu && (<button className="btn svg-inherit-color" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
+                {isShowMenu && (
+                    <button className="btn svg-inherit-color"
+                        onClick={toggleMenu}><MenuIcon className="btn" />
+                    </button>
+                )}
             </div>
+
             <div
                 style={{ backgroundColor: groupColor }}
-                className="color-display sticky-left-36"
-            ></div>
-            <ul className={`${activeTask === currTask.id && 'active'} clean-list task-preview`}>
+                className="color-display sticky-left-36">
+            </div>
+
+            <ul className={` clean-list task-preview ${activeTask === currTask.id && 'active'}`}>
                 <div className={`task-title-container ${activeTask === currTask.id && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
-                    <li className="task-title single-task">
 
+                    <li className="task-title single-task">
                         {isEditing ? (
                             <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                 <input
@@ -182,7 +186,15 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 </div>
 
                 {board.titlesOrder.map((title, idx) => {
-                    return <DynamicPicker key={idx} title={title} task={currTask} onUpdate={onTaskChange} memberOptions={board.members} />
+                    return (
+                        <DynamicPicker
+                            key={idx}
+                            title={title}
+                            task={currTask}
+                            onUpdate={onTaskChange}
+                            memberOptions={board.members}
+                        />
+                    )
                 })}
 
                 <li className="line-end"></li>
