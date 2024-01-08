@@ -144,10 +144,11 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
                 <div className="group-title-container sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`}>
-                        <button className={`${isMenuOpen && 'full-opacity'} btn svg-inherit-color`} onClick={toggleMenu} style={{ fill: 'black' }}>
+                        <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
                             <MenuIcon />
                         </button>
                     </div>
+
                     <div className="sticky-left-40 title-container">
                         <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container svg-inherit-color"><AngleDownIcon /></button>
 
