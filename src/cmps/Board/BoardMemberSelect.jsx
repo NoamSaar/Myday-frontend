@@ -8,8 +8,14 @@ export default function BoardMemberSelect({ chosenMember, members, onChangeMembe
 
             <ul className="clean-list members-options-list">
                 {members.map(member => {
-                    return <li className={`${chosenMember === member._id ? 'chosen-member' : ''}`} title={member.fullname} key={member._id} onClick={() => onChangeMember(member._id)}><UserImg user={member} /></li>
+                    return <li className={`${chosenMember === member._id ? 'chosen-member' : ''}`}
+                        title={member.fullname}
+                        key={member._id}
+                        onClick={() => onChangeMember(member._id)}>
+                        <UserImg user={member} />
+                    </li>
                 })}
+
             </ul>
         </div>
     )

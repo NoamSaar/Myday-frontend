@@ -185,6 +185,18 @@
             }
         }
 
+        .person {
+
+            .close-btn {
+                max-height: 13px;
+
+                svg {
+                    width: 13px;
+                    height: 13px;
+                }
+            }
+        }
+
     }
 }
 

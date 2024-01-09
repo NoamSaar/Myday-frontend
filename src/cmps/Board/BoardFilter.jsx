@@ -3,13 +3,15 @@ import { useEffect, useRef, useState } from "react"
 import { addTask } from "../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData } from "../../store/actions/system.actions"
 
-import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
+import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [isMemberFilterOpen, setIsMemberFilterOpen] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
+
+    console.log('filterByToEdit', filterByToEdit)
 
     useEffect(() => {
         function handleClickOutsideSearch(event) {
@@ -65,25 +67,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         }
     }
 
-    // const menuOptions = [
-    //     {
-    //         icon: <PersonIcon />,
-    //         title: <select value={filterByToEdit.member} name="member" onChange={handleChange}>
-    //             <option value="">All</option>
-    //             <>
-    //                 {board.members.map(member => (
-    //                     <option key={member._id} value={member._id}>
-    //                         {member.fullname}
-    //                         {/* <img src={member.imgUrl}></img> */}
-    //                     </option>
-    //                 ))}
-    //             </>
-    //         </select>,
-    //         onOptionClick: () => {
-    //             console.log('hi')
-    //         }
-    //     },
-    // ]
 
     function setMemberFilter(memberId) {
         console.log('memberId', memberId)
@@ -142,8 +125,14 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             </div>
 
             <button className="btn person" title="Filter by person" onClick={toggleMemberFilter}>
-                <PersonIcon />
+                {filterByToEdit.member ? filterByToEdit.member : <PersonIcon />}
                 <span>Person</span>
+                {filterByToEdit.member && <div className="close-btn svg-inherit-color"
+                    style={{ fill: '#323338' }}
+                    onClick={() => setMemberFilter(null)}
+                >
+                    <CloseFilledIcon />
+                </div>}
             </button>
 
             <button className="btn filter" title="Filter by anything">
