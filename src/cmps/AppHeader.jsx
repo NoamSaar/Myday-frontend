@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
+import { showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
 import { login, logout, signup } from "../store/actions/user.actions.js"
 import { LogoIcon, LoginIcon } from "../services/svg.service.jsx"
 import { MenuOptionsModal } from "./MenuOptionsModal"
