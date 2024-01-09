@@ -39,12 +39,14 @@
             display: none;
         }
 
-        .title {
+        .editable-span span,
+        .editable-span input {
             font-size: rem(24px);
         }
     }
 
-    .title {
+    .editable-span .focused-input,
+    .editable-span span {
         grid-area: title;
         padding-inline: 4px;
         font-size: rem(32px);
@@ -52,13 +54,10 @@
         cursor: text;
         border-radius: $border-radius-small;
 
-        &:not(input):hover {
+        &:not(.editable-span .focused-input):hover {
             outline: 1px solid $clr-btn-border;
         }
 
-        // &:focus {
-        //     outline: 1px solid $clr-btn-add;
-        // }
 
     }
 

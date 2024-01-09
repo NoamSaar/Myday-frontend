@@ -14,7 +14,7 @@ export function EditableSpan({ isEditing, spanValue, onSpanClick, inputValue, in
                     <form onSubmit={ev => (ev.preventDefault(), onEditClose())}>
                         <input
                             name={inputName}
-                            className="reset title"
+                            className="reset"
                             type="text"
                             autoFocus
                             style={style}
@@ -27,7 +27,6 @@ export function EditableSpan({ isEditing, spanValue, onSpanClick, inputValue, in
                 </div>
             ) : (
                 <span
-                    className="title"
                     onClick={onSpanClick}
                     style={style}>
                     {spanValue}

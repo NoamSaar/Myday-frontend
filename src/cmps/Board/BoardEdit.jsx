@@ -40,12 +40,6 @@ export function BoardEdit({ board }) {
         }
     }
 
-    function handleKeyDown(ev) {
-        if (ev.key === 'Enter') {
-            onUpdateBoard(ev)
-            ev.target.blur()
-        }
-    }
 
     const { title } = boardToEdit
 
