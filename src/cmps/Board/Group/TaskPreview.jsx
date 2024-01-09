@@ -83,6 +83,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         }
     }
 
+    function handleMouseEnter() {
+        setIsShowMenu(true)
+    }
+
+    function handleMouseLeave() {
+        if (!isMenuOpen) setIsShowMenu(false)
+    }
+
     function toggleMenu(ev) {
         if (isMenuOpen) {
             resetDynamicModal()
@@ -112,6 +120,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             console.error("Error changing task title:", error)
         }
     }
+
 
     const menuOptions = [
         {
