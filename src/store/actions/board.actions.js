@@ -148,8 +148,8 @@ export function setIsHeaderCollapsed(isCollapsed) {
     store.dispatch({ type: SET_IS_HEADER_COLLAPSED, isCollapsed })
 }
 
-export function getGcolors() {
-    return boardService.getGcolors()
+export function getBoardColors() {
+    return boardService.getBoardColors()
 }
 
 // Demo for Optimistic Mutation 

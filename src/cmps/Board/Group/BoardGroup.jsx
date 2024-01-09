@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { utilService } from "../../../services/util.service"
 
-import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
+import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal } from "../../../store/actions/system.actions"
 
 import { TaskList } from "./TaskList"
@@ -23,7 +23,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     const isMenuOpen = fatherId === `${group.id}-menu`
     const isColorPickerOpen = fatherId === `${group.id}-colorPicker`
-    const colors = getGcolors()
+    const colors = getBoardColors()
 
     useEffect(() => {
         setGroupTitle(group.title)

@@ -17,7 +17,7 @@ export const boardService = {
     removeGroup,
     updateGroup,
     getDefaultFilter,
-    getGcolors
+    getBoardColors
 }
 
 window.boardService = boardService
@@ -106,7 +106,7 @@ function getDefaultFilter() {
     return { title: '', txt: '', includedCols: [], member: '' }
 }
 
-function getGcolors() {
+function getBoardColors() {
     return gColors
 }
 
