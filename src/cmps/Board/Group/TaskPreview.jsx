@@ -24,11 +24,11 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const newPersons = task.person.length
-                    ? await fetchUsers(task.person)
+                const newmembers = task.member.length
+                    ? await fetchUsers(task.member)
                     : []
 
-                setCurrTask({ ...task, person: newPersons })
+                setCurrTask({ ...task, member: newmembers })
                 setTaskTitle(task.title)
             } catch (error) {
                 console.error("Error fetching data:", error)
@@ -44,13 +44,13 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     async function onTaskChange(field, data) {
         try {
             let recivedData = data
-            if (field === 'person') recivedData = data.map(person => person._id)
+            if (field === 'member') recivedData = data.map(member => member._id)
 
-            const updatedTask = { ...task, person: task.person, [field]: recivedData }
+            const updatedTask = { ...task, member: task.member, [field]: recivedData }
             updateTask(board._id, groupId, updatedTask)
 
             switch (field) {
-                case 'person':
+                case 'member':
                     setDynamicModalData({
                         chosenMembers: data,
                         memberOptions: board.members,

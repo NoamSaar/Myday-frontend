@@ -66,7 +66,7 @@ async function getById(boardId, filterBy = { txt: '', includedCols: [], member: 
         if (filterBy.member) {
             board.groups = board.groups.map(group => {
                 group.tasks = group.tasks.filter(task => {
-                    return task.person.some(currPerson => filterBy.member === currPerson) //person is array! its items are ids
+                    return task.member.some(currmember => filterBy.member === currmember) //member is array! its items are ids
                 })
                 return group
             })
@@ -119,7 +119,7 @@ function _getDefaultGroup() {
             {
                 id: 'c101',
                 title: 'Item 1',
-                person: [],
+                member: [],
                 status: 'Working on it',
                 date: 1703706909537,
                 updates: [],
@@ -127,7 +127,7 @@ function _getDefaultGroup() {
             {
                 id: 'c102',
                 title: 'Item 2',
-                person: [],
+                member: [],
                 status: 'Done',
                 date: 1703708909537,
                 updates: [],
@@ -135,7 +135,7 @@ function _getDefaultGroup() {
             {
                 id: 'c103',
                 title: 'Item 3',
-                person: [],
+                member: [],
                 date: 1703706909537,
                 updates: [],
             },
@@ -148,7 +148,7 @@ function _getDefaultTask(title) {
     return {
         id: utilService.makeId(),
         title,
-        person: [],
+        member: [],
         updates: [],
     }
 }

@@ -46,7 +46,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
         setCurrMemberOptions(prevMembers => (
             prevMembers.filter(currMember => currMember._id !== member._id)
         ))
-        onChangeMembers('person', newChosenMembers)
+        onChangeMembers('member', newChosenMembers)
         setMembersFilter('')
     }
 
@@ -56,7 +56,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
 
         setCurrChosenMembers(newChosenMembers)
         setCurrMemberOptions(getFilterMembers(newMemberOptions, newChosenMembers))
-        onChangeMembers('person', newChosenMembers)
+        onChangeMembers('member', newChosenMembers)
         setMembersFilter('')
     }
 
@@ -100,7 +100,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
                 })}
             </ul>
 
-            <div className="new-person-picker-container">
+            <div className="new-member-picker-container">
                 <DynamicInput inputProps={inputProps} />
 
                 {!membersFilter && <p className="suggested-people-title">Suggested people</p>}

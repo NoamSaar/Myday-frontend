@@ -88,7 +88,7 @@ export function getBoardsData() {
                             {
                                 id: 'c101',
                                 title: 'Add chat',
-                                person: ['u103'],
+                                member: ['u103'],
                                 status: 'Stuck',
                                 priority: 'Low',
                                 date: 1703706909537,
@@ -110,7 +110,7 @@ export function getBoardsData() {
                             {
                                 id: 'c102',
                                 title: 'Add paging',
-                                person: ['u102', 'u103'],
+                                member: ['u102', 'u103'],
                                 status: 'Needs QA',
                                 priority: 'Medium',
                                 date: 1704241608991,
@@ -124,7 +124,7 @@ export function getBoardsData() {
                             {
                                 id: 'c103',
                                 title: 'Add about puki page',
-                                person: ['u101'],
+                                member: ['u101'],
                                 status: 'Working on it',
                                 priority: 'High',
                                 updates: [
@@ -148,7 +148,7 @@ export function getBoardsData() {
                             {
                                 id: 'c201',
                                 title: 'Reactor css files to scss',
-                                person: ['u101', 'u103'],
+                                member: ['u101', 'u103'],
                                 status: 'Working on it',
                                 priority: 'High',
                                 date: 1704074068766,
@@ -168,7 +168,7 @@ export function getBoardsData() {
                             {
                                 id: 'c202',
                                 title: 'Refactor Filter.jsx into Components and change imports',
-                                person: [],
+                                member: [],
                                 status: 'Needs QA',
                                 priority: 'Medium',
                                 updates: [],
@@ -176,7 +176,7 @@ export function getBoardsData() {
                             {
                                 id: 'c203',
                                 title: 'Refactor to use Store Redux',
-                                person: ['u101', 'u102', 'u103'],
+                                member: ['u101', 'u102', 'u103'],
                                 status: 'Stuck',
                                 priority: 'Critical ⚠',
                                 date: 1703703756181,
@@ -196,7 +196,7 @@ export function getBoardsData() {
                             {
                                 id: 'c204',
                                 title: 'Refactor vars/lets to const',
-                                person: ['u102'],
+                                member: ['u102'],
                                 status: 'Done',
                                 date: 1703720101090,
                                 file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704304383/large-Screenshot_2024-01-03_at_11.35.48_qclnrt.png',
@@ -205,7 +205,7 @@ export function getBoardsData() {
                             {
                                 id: 'c205',
                                 title: 'Refactor service to use http',
-                                person: ['u103'],
+                                member: ['u103'],
                                 priority: 'Low',
                                 date: 1703728412860,
                                 updates: [],
@@ -221,7 +221,7 @@ export function getBoardsData() {
                             {
                                 id: 'c301',
                                 title: 'Unresponsive Button on Click',
-                                person: ['u102'],
+                                member: ['u102'],
                                 status: 'Done',
                                 priority: 'Critical ⚠',
                                 date: 1703785617881,
@@ -251,7 +251,7 @@ export function getBoardsData() {
                             {
                                 id: 'c302',
                                 title: 'Misaligned Layout on Mobile Devices',
-                                person: ['u101', 'u102'],
+                                member: ['u101', 'u102'],
                                 status: 'Working on it',
                                 priority: 'Low',
                                 date: 1703894345657,
@@ -265,7 +265,7 @@ export function getBoardsData() {
                             {
                                 id: 'c303',
                                 title: 'Broken Image Links',
-                                person: ['u103'],
+                                member: ['u103'],
                                 status: 'Working on it',
                                 priority: 'Low',
                                 updates: [],
@@ -273,7 +273,7 @@ export function getBoardsData() {
                             {
                                 id: 'c304',
                                 title: 'Inconsistent Styling Across Browsers',
-                                person: ['u102'],
+                                member: ['u102'],
                                 status: 'Done',
                                 priority: 'High',
                                 date: 1703995874889,
@@ -282,7 +282,7 @@ export function getBoardsData() {
                             {
                                 id: 'c305',
                                 title: 'Slow Page Load Times',
-                                person: ['u101'],
+                                member: ['u101'],
                                 status: 'Needs QA',
                                 priority: 'Critical ⚠',
                                 date: 1704299392298,
@@ -666,7 +666,7 @@ export function getBoardsData() {
                         },
                     },
                 ],
-                titlesOrder: ['person', 'status', 'priority', 'date', 'file', 'link'],
+                titlesOrder: ['member', 'status', 'priority', 'date', 'file', 'link'],
             },
         ]
     )
@@ -754,7 +754,7 @@ export function getDefaultBoard() {
                     {
                         id: 'c101',
                         title: 'item 1',
-                        person: [],
+                        member: [],
                         status: 'Working on it',
                         priority: 'High',
                         date: 1703705909537,
@@ -766,7 +766,7 @@ export function getDefaultBoard() {
                     {
                         id: 'c102',
                         title: 'Item 2',
-                        person: [],
+                        member: [],
                         status: 'Done',
                         priority: 'Critical ⚠',
                         date: 1703708909537,
@@ -776,7 +776,7 @@ export function getDefaultBoard() {
                     {
                         id: 'c103',
                         title: 'Item 3',
-                        person: [],
+                        member: [],
                         updates: [],
                     },
                 ],
@@ -790,13 +790,13 @@ export function getDefaultBoard() {
                     {
                         id: 'c201',
                         title: 'Item 4',
-                        person: [],
+                        member: [],
                         updates: [],
                     },
                     {
                         id: 'c202',
                         title: 'Item 5',
-                        person: [],
+                        member: [],
                         updates: [],
                     },
 
@@ -1003,6 +1003,6 @@ export function getDefaultBoard() {
         //         },
         //     },
         // ],
-        titlesOrder: ['person', 'status', 'priority', 'date', 'file', 'link'],
+        titlesOrder: ['member', 'status', 'priority', 'date', 'file', 'link'],
     }
 }
