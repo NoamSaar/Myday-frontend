@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
-import { removeTask, updateTask } from "../../../store/actions/board.actions"
+import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
-import { fetchUsers } from "../../../store/actions/user.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { DynamicPicker } from "./Picker/DynamicPicker"
+import { EditableTxt } from "../../EditableTxt"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
@@ -24,20 +24,12 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const isMenuOpen = fatherId === `${task.id}-menu`
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const newmembers = task.members.length
-                    ? await fetchUsers(task.members)
-                    : []
+        const newmembers = task.members.length
+            ? getMembersFromBoard(board, task.members)
+            : []
 
-                setCurrTask({ ...task, members: newmembers })
-                setTaskTitle(task.title)
-            } catch (err) {
-                console.error('Error fetching data:', err)
-                showErrorMsg('Cannot get task data')
-            }
-        }
-        fetchData()
+        setCurrTask({ ...task, members: newmembers })
+        setTaskTitle(task.title)
     }, [task])
 
     useEffectUpdate(() => {
@@ -176,7 +168,15 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     </li>
 
                     <li className="task-title single-task flex">
-                        {isEditing ? (
+                        <EditableTxt
+                            isEditing={isEditing}
+                            txtValue={highlightText(taskTitle, filterBy.txt)}
+                            onTxtClick={onTitleClick}
+                            inputValue={taskTitle}
+                            onInputChange={onChangeTitle}
+                            onEditClose={onTitleEditExit}
+                        />
+                        {/* {isEditing ? (
                             <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                 <input
                                     autoFocus
@@ -195,7 +195,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             >
                                 {highlightText(taskTitle, filterBy.txt)}
                             </span>
-                        )}
+                        )} */}
                     </li>
 
                 </ul>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
 import { showErrorMsg } from "../../store/actions/system.actions"
+import { EditableTxt } from "../EditableTxt"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -31,7 +32,6 @@ export function BoardEdit({ board }) {
     async function onUpdateBoard() {
         try {
             await updateBoard(boardToEdit)
-            showSuccessMsg('Board updated successfully')
         } catch (err) {
             console.log('Cannot update board', err)
             showErrorMsg('Cannot update Board')
@@ -40,33 +40,21 @@ export function BoardEdit({ board }) {
         }
     }
 
-    function handleKeyDown(ev) {
-        if (ev.key === 'Enter') {
-            onUpdateBoard(ev)
-            ev.target.blur()
-        }
-    }
 
     const { title } = boardToEdit
 
     return (
         <>
-            {!isEditing ?
-                <h3 className="title" title="Click to edit" onClick={() => setIsEditing(true)}>
-                    {board.title}
-                </h3>
-                :
-                <input className="reset title"
-                    title="Click to edit"
-                    onChange={handleChange}
-                    onBlur={onUpdateBoard}
-                    onKeyDown={handleKeyDown}
-                    value={title}
-                    type="text"
-                    name="title"
-                    autoFocus
-                />
-            }
+
+            <EditableTxt
+                isEditing={isEditing}
+                txtValue={board.title}
+                onTxtClick={() => setIsEditing(true)}
+                inputValue={title}
+                inputName={'title'}
+                onInputChange={handleChange}
+                onEditClose={onUpdateBoard}
+            />
 
             <div className="info-favorite flex align-center">
                 <button className="btn info" title="Show board description">

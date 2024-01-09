@@ -39,12 +39,14 @@
             display: none;
         }
 
-        .title {
+        .editable-txt-container .editable-txt,
+        .editable-txt-container .focused-input {
             font-size: rem(24px);
         }
     }
 
-    .title {
+    .editable-txt-container .focused-input,
+    .editable-txt-container .editable-txt {
         grid-area: title;
         padding-inline: 4px;
         font-size: rem(32px);
@@ -52,13 +54,10 @@
         cursor: text;
         border-radius: $border-radius-small;
 
-        &:not(input):hover {
+        &:not(.editable-txt-container .focused-input):hover {
             outline: 1px solid $clr-btn-border;
         }
 
-        &:focus {
-            outline: 1px solid $clr-btn-add;
-        }
 
     }
 
@@ -186,6 +185,14 @@
         }
 
         .person {
+
+            .user-img,
+            .extra-members-box {
+                border: unset;
+                min-width: 20px;
+                min-height: 20px;
+                max-height: 20px;
+            }
 
             .close-btn {
                 max-height: 13px;

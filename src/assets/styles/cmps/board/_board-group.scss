@@ -24,17 +24,20 @@
                 padding-inline-start: 8px;
                 background-color: white;
 
-                h4,
-                .focused-input {
-                    font-size: rem(18px);
-                    margin-block: 9px;
-                    padding-inline: 4px;
-                    font-family: poppins-medium;
-                    cursor: text;
+                .editable-txt-container {
+
+                    .editable-txt,
+                    .focused-input {
+                        font-size: rem(18px);
+                        margin-block: 9px;
+                        padding-inline: 4px;
+                        font-family: poppins-medium;
+                        cursor: text;
+                    }
                 }
 
 
-                p {
+                p:not(.editable-txt) {
 
                     font-size: .875rem;
                     font-weight: 400;
@@ -55,7 +58,7 @@
                     }
                 }
 
-                .group-title-edit-container {
+                .editable-txt-container {
                     display: flex;
                     align-items: center;
 

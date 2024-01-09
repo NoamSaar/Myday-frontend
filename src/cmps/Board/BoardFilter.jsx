@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 
-import { addTask } from "../../store/actions/board.actions"
+import { addTask, getMemberFromBoard } from "../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
 
 import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
+import { UserImg } from "../UserImg"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
@@ -136,7 +137,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             </div>
 
             <button className={` btn ${filterByToEdit.member || isMemberFilterOpen ? 'active' : ''} person`} title="Filter by person" onClick={toggleMemberFilter} ref={personBtnRef}>
-                {filterByToEdit.member ? filterByToEdit.member : <PersonIcon />}
+                {filterByToEdit.member ? <UserImg user={getMemberFromBoard(board, filterByToEdit.member)} /> : <PersonIcon />}
                 <span>Person</span>
                 {filterByToEdit.member && <div className="close-btn svg-inherit-color"
                     style={{ fill: '#323338' }}

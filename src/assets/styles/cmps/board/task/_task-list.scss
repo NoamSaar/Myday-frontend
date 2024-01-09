@@ -5,7 +5,6 @@
         margin-inline-start: 36px;
 
         li {
-
             padding-block: 0;
             height: 35px;
         }
@@ -20,7 +19,7 @@
         display: flex;
         align-items: center;
 
-        &:not(.link-picker):not(.task-selection) {
+        &:not(.link-preview):not(.task-selection) {
             padding: 8px;
         }
 
@@ -41,11 +40,21 @@
         max-width: 342px;
         z-index: 10;
 
-        .single-task form {
-            width: 95%;
+        .task-title {
 
-            .focused-input {
-                background-color: white;
+            .editable-txt-container {
+                width: 95%;
+
+                form {
+                    width: 100%;
+                    border-radius: 4px;
+                    background-color: white;
+                }
+
+                input {
+                    width: 100%;
+                }
+
             }
         }
 
@@ -56,7 +65,7 @@
             &.single-task {
                 padding-inline-start: 36px;
 
-                .focused-input,
+                .focused-input form,
                 .editable-txt {
                     padding-block: 3px 2px;
                     padding-inline-start: 3px;
@@ -77,8 +86,8 @@
                 padding-inline-start: 16px;
 
                 .editable-txt,
-                .focused-input {
-                    padding-inline-start: 9.5px;
+                .focused-input form {
+                    padding-inline-start: 11.5px;
                 }
 
                 .editable-txt {
