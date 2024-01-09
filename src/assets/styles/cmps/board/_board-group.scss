@@ -12,6 +12,9 @@
         &.board-header-collapsed {
             top: 119.5px;
 
+            .task-header-list {
+                box-shadow: 4px 6px 15px -8px $clr-btn-border;
+            }
         }
 
         .group-title-container {

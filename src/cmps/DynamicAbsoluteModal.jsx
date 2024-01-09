@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { useEffect, useRef, useState } from "react"
 
+import { resetDynamicModal } from "../store/actions/system.actions"
 import { ColorPicker } from "./Board/Group/Picker/PickerModals/ColorPicker"
 import { MemberPicker } from "./Board/Group/Picker/PickerModals/MemberPicker"
 import { LabelPicker } from "./Board/Group/Picker/PickerModals/LabelPicker"
@@ -16,41 +17,81 @@ export function DynamicAbsoluteModal() {
 
     useEffect(() => {
         if (modalRef.current) {
+            const modalWidth = modalRef.current.offsetWidth
+            const modalHeight = modalRef.current.offsetHeight
+            const viewportWidth = window.innerWidth
+            const viewportHeight = window.innerHeight
+
+            let newLeft = 0
+            let newTop = 0
+
+            if (modalData.isPosBlock) {
+                // Position below the father element
+                newTop = modalData.boundingRect.bottom
+
+                if (modalData.isCenter) {
+                    // Center horizontally relative to the father element
+                    newLeft = modalData.boundingRect.left + (modalData.boundingRect.width - modalWidth) / 2
+                } else {
+                    newLeft = modalData.boundingRect.left
+                }
+
+                // Check if modal goes out of the bottom boundary of the viewport and adjust
+                if (newTop + modalHeight > viewportHeight) {
+                    newTop = modalData.boundingRect.top - modalHeight
+                }
+
+                // Check and adjust for left/right viewport boundaries
+                if (newLeft + modalWidth > viewportWidth) {
+                    newLeft = viewportWidth - modalWidth
+                }
+                newLeft = Math.max(0, newLeft)
+            } else {
+                // Position to the right of the father element
+                newLeft = modalData.boundingRect.right
+                newTop = modalData.boundingRect.top
+
+                // Check and adjust for right viewport boundary
+                if (newLeft + modalWidth > viewportWidth) {
+                    newLeft = modalData.boundingRect.left - modalWidth
+                }
+
+                // Check and adjust for top/bottom viewport boundaries
+                if (newTop + modalHeight > viewportHeight) {
+                    newTop = viewportHeight - modalHeight
+                }
+                newTop = Math.max(0, newTop)
+            }
+
             setModalDimensions({
-                width: modalRef.current.offsetWidth,
-                height: modalRef.current.offsetHeight
+                width: modalWidth,
+                height: modalHeight,
+                left: newLeft,
+                top: newTop
             })
         }
     }, [modalData])
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                resetDynamicModal()
+                // console.log('closinc by dynamic modal')
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [modalRef])
+
+
     if (!modalData.isOpen) return
 
-    // console.log('ModalDimensions', ModalDimensions)
-    const isPosBlock = modalData.isPosBlock || false //if is undefined, put false
-    const isCenter = modalData.isCenter || false
-
-    let style = {}
-
-    // console.log('isCenter', isCenter)
-    // console.log('isPosBlock', isPosBlock)
-    if (isPosBlock && isCenter) { // top/bottom and centered horizontaly relative to the clicked father
-        // console.log('bot center')
-        style = {
-            top: `${modalData.boundingRect.bottom}px`, // directly below father
-            left: `${modalData.boundingRect.left + (modalData.boundingRect.width - ModalDimensions.width) / 2}px` // center modal 
-        }
-    } else if (isPosBlock) { // top/bottom and horizontaly strats the same relative to the clicked father
-        // console.log('bot not centered')
-        style = {
-            top: `${modalData.boundingRect.bottom}px`, // directly below father
-            left: `${modalData.boundingRect.right - modalData.boundingRect.width}px` // the left of the modal will be the left of the father
-        }
-    } else { // left/right relative to the clicked father
-        // console.log('right')
-        style = {
-            top: `${modalData.boundingRect.top}px`, // Aligns the top of the modal with the top of the father
-            left: `${modalData.boundingRect.right}px`,
-        }
+    const style = {
+        left: `${ModalDimensions.left}px`,
+        top: `${ModalDimensions.top}px`
     }
 
     return (
