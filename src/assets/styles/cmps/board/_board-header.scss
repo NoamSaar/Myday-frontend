@@ -39,8 +39,8 @@
             display: none;
         }
 
-        .editable-txt-container span,
-        .editable-txt-container input {
+        .editable-txt-container .editable-txt,
+        .editable-txt-container .focused-input {
             font-size: rem(24px);
         }
     }
