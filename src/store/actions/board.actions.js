@@ -86,6 +86,10 @@ export async function removeBoard(boardId) {
     }
 }
 
+export function getMembersFromBoard(board, members) {
+    return members.map(member => getMemberFromBoard(board, member))
+}
+
 export function getMemberFromBoard(board, memberId) {
     return board.members.find(member => member._id === memberId)
 }

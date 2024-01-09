@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
-import { removeTask, updateTask } from "../../../store/actions/board.actions"
+import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 import { fetchUsers } from "../../../store/actions/user.actions"
 
@@ -22,20 +22,12 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const isMenuOpen = fatherId === `${task.id}-menu`
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const newmembers = task.members.length
-                    ? await fetchUsers(task.members)
-                    : []
+        const newmembers = task.members.length
+            ? getMembersFromBoard(board, task.members)
+            : []
 
-                setCurrTask({ ...task, members: newmembers })
-                setTaskTitle(task.title)
-            } catch (err) {
-                console.error('Error fetching data:', err)
-                showErrorMsg('Cannot get task data')
-            }
-        }
-        fetchData()
+        setCurrTask({ ...task, members: newmembers })
+        setTaskTitle(task.title)
     }, [task])
 
     useEffectUpdate(() => {
