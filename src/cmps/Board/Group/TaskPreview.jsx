@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
 import { removeTask, updateTask } from "../../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData } from "../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 import { fetchUsers } from "../../../store/actions/user.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
@@ -30,8 +30,9 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
                 setCurrTask({ ...task, members: newmembers })
                 setTaskTitle(task.title)
-            } catch (error) {
-                console.error("Error fetching data:", error)
+            } catch (err) {
+                console.error('Error fetching data:', err)
+                showErrorMsg('Cannot get task data')
             }
         }
         fetchData()
@@ -60,8 +61,9 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 default:
                     break
             }
-        } catch (error) {
-            console.error("Error changing task:", error)
+        } catch (err) {
+            console.error('Error changing task:', err)
+            showErrorMsg('Cannot change Task')
         }
     }
 
@@ -69,8 +71,10 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             removeTask(board._id, groupId, task.id)
             resetDynamicModal()
-        } catch (error) {
-            console.error("Error removing task:", error)
+            showSuccessMsg('We successfully deleted the Task')
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg('Cannot remove Task')
         }
     }
 
@@ -78,8 +82,9 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             const title = target.value
             setTaskTitle(title)
-        } catch (error) {
-            console.error("Error changing task title:", error)
+        } catch (err) {
+            console.error('Error changing task title:', err)
+            showErrorMsg('Cannot changing Task Title')
         }
     }
 
@@ -110,14 +115,15 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
             if (!taskTitle) {
                 setTaskTitle(task.title)
-                onTaskChange("title", task.title)
+                onTaskChange('title', task.title)
             } else {
-                onTaskChange("title", taskTitle)
+                onTaskChange('title', taskTitle)
             }
 
             setIsEditing(false)
-        } catch (error) {
-            console.error("Error changing task title:", error)
+        } catch (err) {
+            console.error('Error changing task title:', err)
+            showErrorMsg('Cannot changing Task Title')
         }
     }
 
@@ -125,7 +131,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const menuOptions = [
         {
             icon: <DeleteIcon />,
-            title: "Delete",
+            title: 'Delete',
             onOptionClick: onDeleteTask,
         },
     ]

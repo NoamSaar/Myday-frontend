@@ -1,4 +1,4 @@
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useSelector } from "react-redux"
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
@@ -26,8 +26,9 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
             const newBoard = { ...board }
             newBoard.groups.splice(groupIdx, 1, group)
             await updateBoard(newBoard)
-        } catch (error) {
-            console.log('Cannot save group:', error)
+        } catch (err) {
+            console.log('Cannot save group:', err)
+            showErrorMsg('Cannot save group')
         }
     }
 
@@ -40,8 +41,9 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
         try {
             await addTask(board._id, groupId, taskTitle)
             setTaskTitle('')
-        } catch (error) {
-            console.error("Error adding task:", error)
+        } catch (err) {
+            console.error('Error adding task:', err)
+            showErrorMsg('Cannot add Task')
         }
     }
 

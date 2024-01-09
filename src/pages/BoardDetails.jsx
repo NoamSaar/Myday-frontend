@@ -20,7 +20,6 @@ export function BoardDetails() {
 
     useEffect(() => {
         _loadBoard()
-
         // TODO : Emit watch on the user + add a listener for when user changes
         // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId)
         // socketService.on(SOCKET_EVENT_BOARD_UPDATED, (board) => {
