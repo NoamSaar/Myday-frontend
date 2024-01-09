@@ -108,12 +108,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             if (activeTask === task.id) onSetActiveTask(null)
 
+            let titleToSave = taskTitle
+
             if (!taskTitle) {
                 setTaskTitle(task.title)
-                onTaskChange("title", task.title)
-            } else {
-                onTaskChange("title", taskTitle)
+                titleToSave = task.title
             }
+
+            onTaskChange("title", titleToSave)
 
             setIsEditing(false)
         } catch (error) {
