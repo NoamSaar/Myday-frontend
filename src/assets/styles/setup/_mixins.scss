@@ -51,10 +51,14 @@
     }
 
     @if $type ==regular {
-        background-color: $clr0;
+
+        &:not(.person.active) {
+            background-color: $clr0;
+        }
+
         color: $clr-font;
 
-        &:hover {
+        &:hover:not(.person.active) {
             background-color: $clr-btn-hover;
         }
     }

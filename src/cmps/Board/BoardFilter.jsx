@@ -11,8 +11,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
     const [isMemberFilterOpen, setIsMemberFilterOpen] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
 
-    console.log('filterByToEdit', filterByToEdit)
-
     useEffect(() => {
         function handleClickOutsideSearch(event) {
             if (filterSearchRef.current
@@ -67,12 +65,19 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         }
     }
 
-
     function setMemberFilter(memberId) {
         console.log('memberId', memberId)
         setFilterByToEdit(prevFilter => ({ ...prevFilter, member: memberId }))
 
         setDynamicModalData({ chosenMember: memberId, onChangeMember: setMemberFilter, members: board.members })
+    }
+
+    function onResetMemberFilter(ev) {
+        ev.stopPropagation()
+        setMemberFilter(null)
+        resetDynamicModal()
+        resetDynamicModal()
+        setIsMemberFilterOpen(false)
     }
 
     function handleChange({ target }) {
@@ -124,12 +129,12 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 }
             </div>
 
-            <button className="btn person" title="Filter by person" onClick={toggleMemberFilter}>
+            <button className={` btn ${filterByToEdit.member || isMemberFilterOpen ? 'active' : ''} person`} title="Filter by person" onClick={toggleMemberFilter}>
                 {filterByToEdit.member ? filterByToEdit.member : <PersonIcon />}
                 <span>Person</span>
                 {filterByToEdit.member && <div className="close-btn svg-inherit-color"
                     style={{ fill: '#323338' }}
-                    onClick={() => setMemberFilter(null)}
+                    onClick={onResetMemberFilter}
                 >
                     <CloseFilledIcon />
                 </div>}
