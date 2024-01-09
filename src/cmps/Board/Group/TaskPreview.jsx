@@ -153,7 +153,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             </div>
 
             <ul className={` clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
-                <div className={`task-title-container flex ${activeTask === currTask.id && 'active'}`}>
+                <ul className={`clean-list task-title-container flex ${activeTask === currTask.id && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
@@ -181,7 +181,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         )}
                     </li>
 
-                </div>
+                </ul>
 
                 {board.titlesOrder.map((title, idx) => {
                     return (
