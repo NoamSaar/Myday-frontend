@@ -47,8 +47,8 @@ async function query(filterBy = { title: '' }) {
             boards = boards.filter(board => regex.test(board.title))
         }
         return boards
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during getting boards')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during getting boards')
     }
 }
 
@@ -72,8 +72,8 @@ async function getById(boardId, filterBy = { txt: '', includedCols: [], member: 
             })
         }
         return board
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during getting board')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during getting board')
     }
 }
 
@@ -89,16 +89,16 @@ async function save(board) {
             const defaultBoard = getDefaultBoard()
             return await storageService.post(STORAGE_KEY, defaultBoard)
         }
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during saving board')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during saving board')
     }
 }
 
 async function saveBoards(boards) {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(boards))
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during saving boards')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during saving boards')
     }
 }
 
@@ -160,8 +160,8 @@ async function addGroup(boardId) {
         const board = await getById(boardId)
         board.groups.push(_getDefaultGroup())
         return await save(board)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during adding group')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during adding group')
     }
 }
 
@@ -172,8 +172,8 @@ async function removeGroup(boardId, groupId) {
         if (idx < 0) throw new Error(`Remove failed, cannot find group with id: ${groupId} in: ${board.title}`)
         board.groups.splice(idx, 1)
         return await save(board)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing group')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing group')
     }
 }
 
@@ -184,8 +184,8 @@ async function updateGroup(boardId, group) {
 
         board.groups.splice(groupIdx, 1, group)
         return await save(board)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing group')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing group')
     }
 }
 
@@ -201,8 +201,8 @@ async function addTask(boardId, groupId, taskTitle, unshiftTask = false) {
         group.tasks[taskMethod](_getDefaultTask(taskTitle))
 
         return await save(board)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during adding task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during adding task')
     }
 }
 
@@ -217,8 +217,8 @@ async function removeTask(boardId, groupId, taskId) {
         board.groups.splice(groupIdx, 1, group)
 
         return await save(board)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 }
 
@@ -233,8 +233,8 @@ async function updateTask(boardId, groupId, task) {
         board.groups.splice(groupIdx, 1, group)
 
         return await save(board)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 }
 

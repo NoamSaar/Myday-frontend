@@ -33,7 +33,7 @@ export function BoardDetails() {
         try {
             await loadBoard(boardId)
         } catch (err) {
-            console.error('Error loading board:', err)
+            console.err('Error loading board:', err)
         }
     }
 
@@ -41,8 +41,8 @@ export function BoardDetails() {
         try {
             await addGroup(board._id)
             setIsFocusLastGroup(true)
-        } catch (error) {
-            console.error("Error adding group:", error)
+        } catch (err) {
+            console.err("Error adding group:", err)
         }
     }
 

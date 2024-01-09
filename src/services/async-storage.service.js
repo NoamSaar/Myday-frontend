@@ -17,8 +17,8 @@ async function get(entityType, entityId) {
         const entity = entities.find(entity => entity._id === entityId)
         if (!entity) throw new Error(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
         return entity
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during getting entity')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during getting entity')
 
     }
 }
@@ -33,8 +33,8 @@ async function post(entityType, newEntity) {
         _save(entityType, entities)
 
         return newEntity
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during posting entity')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during posting entity')
     }
 }
 
@@ -49,8 +49,8 @@ async function put(entityType, updatedEntity) {
         _save(entityType, entities)
 
         return updatedEntity
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during putting entity')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during putting entity')
     }
 }
 
@@ -61,8 +61,8 @@ async function remove(entityType, entityId) {
         if (idx < 0) throw new Error(`Remove failed, cannot find entity with id: ${entityId} in: ${entityType}`)
         entities.splice(idx, 1)
         _save(entityType, entities)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing entity')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing entity')
     }
 }
 

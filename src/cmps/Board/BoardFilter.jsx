@@ -8,6 +8,7 @@ import { UserImg } from "../UserImg"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
+    const personBtnRef = useRef(null)
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [isMemberFilterOpen, setIsMemberFilterOpen] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
@@ -30,6 +31,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
+        // console.log('filterSearchRef', filterSearchRef.current.getBoundingClientRect())
+
     }, [filterByToEdit])
 
     function onToggleIsFocused() {
@@ -56,10 +59,11 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             //updating modal in store
             setDynamicModal({
                 isOpen: true,
-                boundingRect: ev.target.getBoundingClientRect(),
+                boundingRect: personBtnRef.current.getBoundingClientRect(),
                 type: 'boardMemberSelect',
                 data: { chosenMember: filterByToEdit.member, onChangeMember: setMemberFilter, members: board.members },
-                isPosBlock: true
+                isPosBlock: true,
+                isCenter: true
             })
             setIsMemberFilterOpen(true)
         }
@@ -69,7 +73,11 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         console.log('memberId', memberId)
         setFilterByToEdit(prevFilter => ({ ...prevFilter, member: memberId }))
 
-        setDynamicModalData({ chosenMember: memberId, onChangeMember: setMemberFilter, members: board.members })
+        setDynamicModalData({
+            chosenMember: memberId,
+            onChangeMember: setMemberFilter,
+            members: board.members,
+        })
     }
 
     function onResetMemberFilter(ev) {
@@ -103,7 +111,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
     const dynFocusedClass = isFocused ? 'focused' : ''
     const { txt } = filterByToEdit
 
-
     return (
         <div className="board-filter">
 
@@ -129,7 +136,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 }
             </div>
 
-            <button className={` btn ${filterByToEdit.member || isMemberFilterOpen ? 'active' : ''} person`} title="Filter by person" onClick={toggleMemberFilter}>
+            <button className={` btn ${filterByToEdit.member || isMemberFilterOpen ? 'active' : ''} person`} title="Filter by person" onClick={toggleMemberFilter} ref={personBtnRef}>
                 {filterByToEdit.member ? <UserImg user={getMemberFromBoard(board, filterByToEdit.member)} /> : <PersonIcon />}
                 <span>Person</span>
                 {filterByToEdit.member && <div className="close-btn svg-inherit-color"

@@ -16,7 +16,8 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
                 type: 'datePicker',
                 data: { selectedDate: selectedDate || Date.now(), onChangeDate },
                 fatherId: `${taskId}-datePicker`,
-                isPosBlock: true
+                isPosBlock: true,
+                isCenter: true
             })
         }
     }

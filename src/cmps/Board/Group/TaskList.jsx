@@ -42,7 +42,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
             await addTask(board._id, groupId, taskTitle)
             setTaskTitle('')
         } catch (err) {
-            console.error('Error adding task:', err)
+            console.err('Error adding task:', err)
             showErrorMsg('Cannot add Task')
         }
     }
@@ -115,8 +115,8 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
 
 //         saveNewOrder(fullBoard, initGroupIdx, initGroup)
 //         if (!result.destination) return
-//     } catch (error) {
-//         console.log('Cannot move task:', error)
+//     } catch (err) {
+//         console.log('Cannot move task:', err)
 
 //     }
 
@@ -127,7 +127,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
 //     try {
 //         newBoard.groups.splice(groupIdx, 1, group)
 //         await updateBoard(newBoard)
-//     } catch (error) {
-//         console.log('Cannot save group:', error)
+//     } catch (err) {
+//         console.log('Cannot save group:', err)
 //     }
 // }

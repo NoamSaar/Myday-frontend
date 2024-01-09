@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { utilService } from "../../../services/util.service"
@@ -13,10 +13,13 @@ import { TaskHeaderList } from "./TaskHeaderList"
 import { EditableTxt } from "../../EditableTxt"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
+    const menuBtnRef = useRef(null)
+    const colorBtnRef = useRef(null)
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+
 
     const [isEditing, setIsEditing] = useState(isEditingTitle)
     const [groupTitle, setGroupTitle] = useState(group.title)
@@ -115,7 +118,8 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: ev.target.getBoundingClientRect(),
+                boundingRect: menuBtnRef.current.getBoundingClientRect(),
+                // boundingRect: ev.target.getBoundingClientRect(),
                 type: 'menuOptions', data: { options: menuOptions },
                 fatherId: `${group.id}-menu`
             })
@@ -133,7 +137,8 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'colorPicker',
                 data: { colors: colors, onColorClick: onChangeColor },
-                fatherId: `${group.id}-colorPicker`
+                fatherId: `${group.id}-colorPicker`,
+                isPosBlock: true,
             })
         }
     }
@@ -160,7 +165,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
             <div className={`${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
 
                 <div className="group-title-container flex align-center sticky-left">
-                    <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`}>
+                    <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
                         <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
                             <MenuIcon />
                         </button>
