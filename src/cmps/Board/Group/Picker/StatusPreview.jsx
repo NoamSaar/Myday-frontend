@@ -7,13 +7,15 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { fatherId, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const color = board[title].find(option => option.title === info.chosenOption).color
     const style = { backgroundColor: color }
     const isPickerOpen = fatherId === `${taskId}-${title}Picker`
 
     function onStatusPreviewClick(ev) {
+        // console.log('isPickerOpen', isPickerOpen)
+        // console.log('fatherId', fatherId)
         if (isPickerOpen) {
             resetDynamicModal()
         } else {
