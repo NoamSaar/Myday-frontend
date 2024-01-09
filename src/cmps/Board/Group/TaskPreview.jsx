@@ -95,7 +95,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         if (isMenuOpen) {
             resetDynamicModal()
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
+            setDynamicModal(
+                {
+                    isOpen: true,
+                    boundingRect: ev.target.parentNode.getBoundingClientRect(),
+                    type: 'menu options',
+                    data: { options: menuOptions },
+                    fatherId: `${currTask.id}-menu`
+                })
         }
     }
 

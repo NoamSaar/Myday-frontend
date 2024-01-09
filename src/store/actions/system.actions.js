@@ -42,7 +42,7 @@ export function getEmptyDynamicModal() {
         data: {},
         fatherId: '',
         isPosBlock: true,
-        isCenter: false,
+        isCenter: true,
         isTooltip: false,
     }
 }

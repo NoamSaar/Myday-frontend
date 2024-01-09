@@ -125,7 +125,8 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'color picker',
                 data: { colors: colors, onColorClick: onChangeColor },
-                fatherId: `${group.id}-colorPicker`
+                fatherId: `${group.id}-colorPicker`,
+                isPosBlock: true,
             })
         }
     }

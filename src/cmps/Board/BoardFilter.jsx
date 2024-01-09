@@ -29,6 +29,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
+        // console.log('filterSearchRef', filterSearchRef.current.getBoundingClientRect())
+
     }, [filterByToEdit])
 
     function onToggleIsFocused() {
@@ -57,7 +59,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 boundingRect: ev.target.getBoundingClientRect(),
                 type: 'board member select',
                 data: { chosenMember: filterByToEdit.member, onChangeMember: setMemberFilter, members: board.members },
-                isPosBlock: true
+                isPosBlock: true,
+                isCenter: true
             })
             setIsMenuOpen(true)
         }
@@ -86,7 +89,11 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
     function setMemberFilter(memberId) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, member: memberId }))
 
-        setDynamicModalData({ chosenMember: memberId, onChangeMember: setMemberFilter, members: board.members })
+        setDynamicModalData({
+            chosenMember: memberId,
+            onChangeMember: setMemberFilter,
+            members: board.members,
+        })
     }
 
     function handleChange({ target }) {
@@ -111,7 +118,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
 
     const dynFocusedClass = isFocused ? 'focused' : ''
     const { txt } = filterByToEdit
-
 
     return (
         <div className="board-filter">
