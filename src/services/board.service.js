@@ -18,24 +18,24 @@ window.cs = boardService
 async function query(filterBy = { title: '' }) {
     try {
         return await httpService.get(BASE_URL, filterBy)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during getting boards')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during getting boards')
     }
 }
 
 async function getById(boardId) {
     try {
         return await httpService.get(BASE_URL + boardId)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during getting board')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during getting board')
     }
 }
 
 async function remove(boardId) {
     try {
         return await httpService.delete(BASE_URL + boardId)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing board')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing board')
     }
 }
 
@@ -48,9 +48,9 @@ async function save(board) {
             defaultBoard.createdBy = userService.getLoggedinUser()
             return await httpService.post(BASE_URL, board)
         }
-    } catch (error) {
+    } catch (err) {
 
-        throw new Error(error.message || 'An error occurred during saving board')
+        throw new Error(err.message || 'An err occurred during saving board')
     }
 }
 

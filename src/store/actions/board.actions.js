@@ -48,9 +48,9 @@ export async function loadBoard(boardId) {
         const board = await boardService.getById(boardId, filterBy)
         setCurrBoard(board)
         return board
-    } catch (error) {
-        console.log('Had issues in board details', error)
-        throw error
+    } catch (err) {
+        console.log('Had issues in board details', err)
+        throw err
     } finally {
         setIsLoading(false)
     }
@@ -60,9 +60,9 @@ export async function getBoardById(boardId) {
     try {
         const board = await boardService.getById(boardId)
         return board
-    } catch (error) {
-        console.log('Had issues in board details', error)
-        throw error
+    } catch (err) {
+        console.log('Had issues in board details', err)
+        throw err
     }
 }
 
@@ -185,8 +185,8 @@ export async function addGroup(boardId) {
         const board = await boardService.addGroup(boardId)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 
 }
@@ -196,8 +196,8 @@ export async function removeGroup(boardId, groupId) {
         const board = await boardService.removeGroup(boardId, groupId)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 
 }
@@ -223,8 +223,8 @@ export async function addTask(boardId, groupId, taskTitle, unshiftTask = false) 
         setActiveTask(newTaskId)
 
         return board
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 
 }
@@ -234,8 +234,8 @@ export async function removeTask(boardId, groupId, taskId) {
         const board = await boardService.removeTask(boardId, groupId, taskId)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 }
 

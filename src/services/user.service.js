@@ -50,8 +50,8 @@ _initUsers()
 async function getUsers() {
     try {
         return await storageService.query(STORAGE_KEY)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during getting boards')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during getting boards')
     }
     // return httpService.get(`user`)
 }
@@ -63,8 +63,8 @@ async function getById(userId) {
         const user = await storageService.get(STORAGE_KEY, userId)
         // const user = await httpService.get(`user/${userId}`)
         return user
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during getting user')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during getting user')
     }
 }
 
@@ -72,8 +72,8 @@ function remove(userId) {
     try {
         return storageService.remove(STORAGE_KEY, userId)
         // return httpService.delete(`user/${userId}`)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing user')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing user')
     }
 }
 
@@ -85,8 +85,8 @@ async function save(user) {
         } else {
             return await storageService.post(STORAGE_KEY, user)
         }
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during saving user')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during saving user')
     }
 
 
@@ -98,8 +98,8 @@ async function login(userCred) {
     try {
         const user = await httpService.post('auth/login', userCred)
         if (user) return saveLocalUser(user)
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during login')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during login')
     }
     // const users = await storageService.query('user')
     // const user = users.find(user => user.username === userCred.username)
