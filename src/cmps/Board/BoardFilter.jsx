@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 
 import { addTask } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
 
 import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 
@@ -39,7 +39,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         try {
             const taskTitle = 'New Item'
             await addTask(board._id, board.groups[0].id, taskTitle, true)
-            showSuccessMsg('Board updated successfully')
         } catch (err) {
             console.error('Error adding new task:', err)
             showErrorMsg('Cannot update Board')

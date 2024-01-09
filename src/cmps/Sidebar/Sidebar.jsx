@@ -27,7 +27,6 @@ export function Sidebar() {
     async function _loadBoards() {
         try {
             await loadBoards(filterBy)
-            // showSuccessMsg('Boards loaded successfully')
         } catch (err) {
             console.error('Error loading Boards:', err)
             showErrorMsg('Cannot load Boards')
@@ -38,7 +37,6 @@ export function Sidebar() {
         try {
             const newBoard = await addBoard()
             navigate('board/' + newBoard._id)
-            showSuccessMsg('Board Added successfully')
         } catch (err) {
             console.error('Error adding new Board:', err)
             showErrorMsg('Cannot add new Board')
@@ -48,7 +46,7 @@ export function Sidebar() {
     async function _onRemoveBoard(boardId) {
         try {
             await removeBoard(boardId)
-            showSuccessMsg('Board deleted successfully')
+            showSuccessMsg('We successfully deleted the board')
             // navigate('board/b101')
         } catch (err) {
             console.error('Error removing task:', err)
@@ -59,7 +57,6 @@ export function Sidebar() {
     async function _onUpdateBoard(board, title) {
         try {
             await updateBoard({ ...board, title })
-            showSuccessMsg('Board updated successfully')
         } catch (err) {
             console.error('Error removing task:', err)
             showErrorMsg('Cannot update Board')

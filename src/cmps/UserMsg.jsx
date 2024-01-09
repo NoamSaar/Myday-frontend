@@ -15,7 +15,7 @@ export function UserMsg() {
       clearTimeout(timeoutIdRef.current)
       timeoutIdRef.current = null
     }
-    timeoutIdRef.current = setTimeout(closeMsg, 3000)
+    // timeoutIdRef.current = setTimeout(closeMsg, 3000)
   }, [msg])
   // useEffect(() => {
   //   const unsubscribe = eventBus.on('show-msg', (msg) => {
@@ -45,9 +45,9 @@ export function UserMsg() {
 
   if (!msg) return <span></span>
   return (
-    <section className={`user-msg ${msg.type}`}>
-      <button onClick={closeMsg}>x</button>
+    <section className={`user-msg flex justify-center align-center ${msg.type}`}>
       <p>{msg.txt}</p>
+      <button onClick={closeMsg}>x</button>
     </section>
   )
 }
