@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-export function StatusPicker({ onChangeStatus, title }) {
+export function LabelPicker({ onChangeStatus, title }) {
     const { [title]: statuses } = useSelector((storeState) => storeState.boardModule.currBoard)
 
     function handleChange(newStatus) {

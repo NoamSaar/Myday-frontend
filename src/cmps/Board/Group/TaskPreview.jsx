@@ -6,7 +6,7 @@ import { getMembersFromBoard, removeTask, updateTask } from "../../../store/acti
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { DynamicPicker } from "./Picker/DynamicPicker"
+import { DynamicPreview } from "./Picker/DynamicPreview"
 import { EditableTxt } from "../../EditableTxt"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
@@ -202,7 +202,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
                 {board.titlesOrder.map((title, idx) => {
                     return (
-                        <DynamicPicker
+                        <DynamicPreview
                             key={idx}
                             title={title}
                             task={currTask}

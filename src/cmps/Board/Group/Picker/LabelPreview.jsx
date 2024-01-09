@@ -3,7 +3,7 @@ import { useRef } from "react"
 
 import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/system.actions"
 
-export function StatusPreview({ title, info, onUpdate, taskId }) {
+export function LabelPreview({ title, info, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
@@ -13,14 +13,14 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
     const style = { backgroundColor: color }
     const isPickerOpen = fatherId === `${taskId}-${title}Picker`
 
-    function onStatusPreviewClick(ev) {
+    function onLabelPreviewClick(ev) {
         if (isPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: previewBtnRef.current.getBoundingClientRect(),
-                type: 'statusPicker',
+                type: 'labelPicker',
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
                 fatherId: `${taskId}-${title}Picker`,
                 isPosBlock: true,
@@ -31,7 +31,7 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
 
     return (
         <li
-            onClick={onStatusPreviewClick}
+            onClick={onLabelPreviewClick}
             style={style}
             className="status-preview status-col priority-col"
             ref={previewBtnRef}

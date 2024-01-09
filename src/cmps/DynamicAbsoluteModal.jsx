@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 
 import { ColorPicker } from "./Board/Group/Picker/PickerModals/ColorPicker"
 import { MemberPicker } from "./Board/Group/Picker/PickerModals/MemberPicker"
-import { StatusPicker } from "./Board/Group/Picker/PickerModals/StatusPicker"
+import { LabelPicker } from "./Board/Group/Picker/PickerModals/LabelPicker"
 import { DatePicker } from "./Board/Group/Picker/PickerModals/DatePicker"
 import { LinkPicker } from "./Board/Group/Picker/PickerModals/LinkPicker"
 import { MenuOptionsModal } from "./MenuOptionsModal"
@@ -76,9 +76,9 @@ function DynamicModal(props) {
                     onChangeDate={props.data.onChangeDate}
                 />)
 
-        case 'statusPicker':
+        case 'labelPicker':
             return (
-                <StatusPicker
+                <LabelPicker
                     selectedStatus={props.data.selectedStatus}
                     title={props.data.title}
                     onChangeStatus={props.data.onUpdate}
