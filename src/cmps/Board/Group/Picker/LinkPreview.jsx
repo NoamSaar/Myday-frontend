@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux"
+import { useRef } from "react"
+
 import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
 
 export function LinkPreview({ info, onUpdate, taskId }) {
+    const previewBtnRef = useRef(null)
+
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isPickerOpen = fatherId === `${taskId}-linkPicker`
 
@@ -11,7 +15,7 @@ export function LinkPreview({ info, onUpdate, taskId }) {
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: ev.target.getBoundingClientRect(),
+                boundingRect: previewBtnRef.current.getBoundingClientRect(),
                 type: 'linkPicker',
                 data: {
                     url: info && info.url || '',
@@ -26,7 +30,7 @@ export function LinkPreview({ info, onUpdate, taskId }) {
     }
 
     return (
-        <li onClick={onLinkPreviewClick} className="link-preview link-col">
+        <li onClick={onLinkPreviewClick} className="link-preview link-col" ref={previewBtnRef}>
             <button className="flex justify-center align-center">
                 {(info && info.displayTxt)
                     ?

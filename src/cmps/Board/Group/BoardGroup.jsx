@@ -13,7 +13,8 @@ import { TaskHeaderList } from "./TaskHeaderList"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
     const menuBtnRef = useRef(null)
-    const colorBtnRef = useRef(null)
+    const colorBtnParentRef = useRef(null)
+
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
@@ -133,7 +134,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: ev.target.getBoundingClientRect(),
+                boundingRect: colorBtnParentRef.current.getBoundingClientRect(),
                 type: 'colorPicker',
                 data: { colors: colors, onColorClick: onChangeColor },
                 fatherId: `${group.id}-colorPicker`,
@@ -168,6 +169,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                 tabIndex={0}
                                 onBlur={onGroupEditExit}
                                 className="focused-input group-title-edit-container flex align-center"
+                                ref={colorBtnParentRef}
                             >
                                 <div
                                     className="group-color-display"

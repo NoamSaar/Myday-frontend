@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux"
+import { useRef } from "react"
+
 import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/system.actions"
 
 export function StatusPreview({ title, info, onUpdate, taskId }) {
+    const previewBtnRef = useRef(null)
+
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
@@ -15,7 +19,7 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: ev.target.getBoundingClientRect(),
+                boundingRect: previewBtnRef.current.getBoundingClientRect(),
                 type: 'statusPicker',
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
                 fatherId: `${taskId}-${title}Picker`,
@@ -26,7 +30,12 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
     }
 
     return (
-        <li onClick={onStatusPreviewClick} style={style} className="status-preview status-col priority-col" >
+        <li
+            onClick={onStatusPreviewClick}
+            style={style}
+            className="status-preview status-col priority-col"
+            ref={previewBtnRef}
+        >
             {info.chosenOption}
         </li >
     )

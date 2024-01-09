@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
@@ -10,6 +10,8 @@ import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { DynamicPicker } from "./Picker/DynamicPicker"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
+    const menuBtnRef = useRef(null)
+
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -103,7 +105,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             setDynamicModal(
                 {
                     isOpen: true,
-                    boundingRect: ev.target.parentNode.getBoundingClientRect(),
+                    boundingRect: menuBtnRef.current.getBoundingClientRect(),
                     type: 'menuOptions',
                     data: { options: menuOptions },
                     fatherId: `${currTask.id}-menu`
@@ -154,7 +156,9 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         >
             <div className="menu-container sticky-left">
                 {isShowMenuBtn && (
-                    <button className="btn svg-inherit-color"
+                    <button
+                        ref={menuBtnRef}
+                        className="btn svg-inherit-color"
                         onClick={toggleMenu}><MenuIcon className="btn" />
                     </button>
                 )}

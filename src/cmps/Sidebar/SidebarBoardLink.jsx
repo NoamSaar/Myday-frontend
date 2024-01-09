@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
 
@@ -7,6 +7,8 @@ import { resetDynamicModal, setDynamicModal, setIsLoading } from "../../store/ac
 import { setCurrBoard } from "../../store/actions/board.actions"
 
 export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBoard }) {
+    const menuBtnRef = useRef(null)
+
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
 
@@ -36,7 +38,7 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: ev.target.getBoundingClientRect(),
+                boundingRect: menuBtnRef.current.getBoundingClientRect(),
                 type: 'menuOptions',
                 data: { options: menuOptions },
                 isPosBlock: true
@@ -124,6 +126,7 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
                             onClick={toggleMenu}
                             title="Board Menu"
                             data-boardid={board._id}
+                            ref={menuBtnRef}
                         >
                             <MenuIcon />
                         </button>
