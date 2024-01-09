@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import { useEffect, useRef, useState } from "react"
 
 import { ColorPicker } from "./Board/Group/Picker/PickerModals/ColorPicker"
 import { MemberPicker } from "./Board/Group/Picker/PickerModals/MemberPicker"
@@ -9,11 +10,23 @@ import { MenuOptionsModal } from "./MenuOptionsModal"
 import BoardMemberSelect from "./Board/BoardMemberSelect"
 
 export function DynamicAbsoluteModal() {
+    const modalRef = useRef()
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const [ModalDimensions, setModalDimensions] = useState({ width: 0, height: 0 })
+
+    useEffect(() => {
+        if (modalRef.current) {
+            setModalDimensions({
+                width: modalRef.current.offsetWidth,
+                height: modalRef.current.offsetHeight
+            })
+        }
+    }, [modalData])
 
     if (!modalData.isOpen) return
 
-    const isPosBlock = modalData.isPosBlock ? true : false
+    console.log('ModalDimensions', ModalDimensions)
+    const isPosBlock = modalData.isPosBlock || false //if isPosBlock is undefined, put false
 
     let style = {
         //centered below father:
@@ -24,7 +37,8 @@ export function DynamicAbsoluteModal() {
     if (isPosBlock) { // top/bottom relative to the clicked father
         style = {
             top: `${modalData.boundingRect.bottom}px`, // directly below father
-            left: `${modalData.boundingRect.right - modalData.boundingRect.width}px` // the left of the modal will be the left of the father
+            left: `${modalData.boundingRect.left + (modalData.boundingRect.width - ModalDimensions.width) / 2}px` // center modal 
+            // left: `${modalData.boundingRect.right - modalData.boundingRect.width}px` // the left of the modal will be the left of the father
         }
     } else { // left/right relative to the clicked father
         style = {
@@ -34,7 +48,7 @@ export function DynamicAbsoluteModal() {
     }
 
     return (
-        <div style={style || {}} className="dynamic-absolute-modal">
+        <div style={style} ref={modalRef} className="dynamic-absolute-modal">
             <DynamicModal type={modalData.type} data={modalData.data} />
         </div>
     )
