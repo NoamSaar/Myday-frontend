@@ -2,6 +2,8 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 
+import { showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
+
 import { SidebarMainNav } from "./SidebarMainNav"
 import { SidebarWorkspace } from "./SidebarWorkspace"
 import { SidebarBoardNav } from "./SidebarBoardNav"
@@ -16,18 +18,19 @@ export function Sidebar() {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    const [isFocus, setIsFocus] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
-        loadData()
+        _loadBoards()
     }, [filterBy])
 
-    async function loadData() {
+    async function _loadBoards() {
         try {
             await loadBoards(filterBy)
-        } catch (error) {
-            showErrorMsgRedux('Cannot show Boards')
+            // showSuccessMsg('Boards loaded successfully')
+        } catch (err) {
+            console.error('Error loading Boards:', err)
+            showErrorMsg('Cannot load Boards')
         }
     }
 
@@ -35,25 +38,31 @@ export function Sidebar() {
         try {
             const newBoard = await addBoard()
             navigate('board/' + newBoard._id)
-        } catch (error) {
-            console.error("Error adding new Board:", error)
+            showSuccessMsg('Board Added successfully')
+        } catch (err) {
+            console.error('Error adding new Board:', err)
+            showErrorMsg('Cannot add new Board')
         }
     }
 
-    async function onDeleteBoard(boardId) {
+    async function _onRemoveBoard(boardId) {
         try {
             await removeBoard(boardId)
+            showSuccessMsg('Board deleted successfully')
             // navigate('board/b101')
-        } catch (error) {
-            console.error("Error removing task:", error)
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg('Cannot delete Board')
         }
     }
 
-    async function onRenameBoard(board, title) {
+    async function _onUpdateBoard(board, title) {
         try {
             await updateBoard({ ...board, title })
-        } catch (error) {
-            console.error("Error removing task:", error)
+            showSuccessMsg('Board updated successfully')
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg('Cannot update Board')
         }
     }
 
@@ -69,12 +78,12 @@ export function Sidebar() {
         setIsDropdownOpen(!isDropdownOpen)
     }
 
-    function renameBoard(board, title) {
-        onRenameBoard(board, title)
+    function onUpdateBoard(board, title) {
+        _onUpdateBoard(board, title)
     }
 
-    function deleteBoard(boardId) {
-        onDeleteBoard(boardId)
+    function onRemoveBoard(boardId) {
+        _onRemoveBoard(boardId)
     }
 
 
@@ -94,8 +103,8 @@ export function Sidebar() {
                 <SidebarBoardNav
                     boards={boards}
                     currActiveBoard={currActiveBoard}
-                    deleteBoard={deleteBoard}
-                    renameBoard={renameBoard}
+                    removeBoard={onRemoveBoard}
+                    updateBoard={onUpdateBoard}
                 />
                 {/* <LottieAnimation /> */}
             </article>

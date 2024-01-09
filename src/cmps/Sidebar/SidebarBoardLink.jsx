@@ -3,10 +3,10 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router"
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
-import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setIsLoading } from "../../store/actions/system.actions"
 import { setCurrBoard } from "../../store/actions/board.actions"
 
-export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBoard }) {
+export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBoard }) {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
 
@@ -17,11 +17,11 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
     const navigate = useNavigate()
 
     async function onDeleteBoard() {
-        deleteBoard(board._id)
+        removeBoard(board._id)
     }
 
-    async function onRenameBoard() {
-        renameBoard(board, editedTitle)
+    async function onUpdateBoard() {
+        updateBoard(board, editedTitle)
         setIsEditing(false)
     }
 
@@ -47,7 +47,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
 
     const handleInputKeyDown = (ev) => {
         if (ev.key === 'Enter') {
-            onRenameBoard()
+            onUpdateBoard()
         }
     }
 
@@ -62,6 +62,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
     }
 
     function onLinkClick() {
+        setIsLoading(true)
         setCurrBoard(null)
         navigate(`/board/${board._id}`)
         resetDynamicModal()
@@ -81,7 +82,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
             icon: <PencilIcon />,
             title: 'Rename Board',
             onOptionClick: () => {
-                onRenameBoard()
+                onUpdateBoard()
                 setIsEditing(!isEditing)
                 setIsMenuOpen(false)
                 resetDynamicModal()
@@ -108,7 +109,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
                         type="text"
                         value={editedTitle}
                         onChange={(ev) => setEditedTitle(ev.target.value)}
-                        onBlur={onRenameBoard}
+                        onBlur={onUpdateBoard}
                         onKeyDown={handleInputKeyDown}
                         autoFocus
                     />

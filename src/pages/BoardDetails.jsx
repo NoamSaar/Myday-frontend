@@ -19,7 +19,9 @@ export function BoardDetails() {
     const { boardId } = useParams()
 
     useEffect(() => {
-        if (!board) _loadBoard()
+        console.log('hi')
+        // if (!board) _loadBoard()
+        _loadBoard()
         // TODO : Emit watch on the user + add a listener for when user changes
         // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId)
         // socketService.on(SOCKET_EVENT_BOARD_UPDATED, (board) => {
@@ -54,7 +56,7 @@ export function BoardDetails() {
 
     // console.log('isLoading:', isLoading)
     if (isLoading) return <div className="board-details">Loading...</div>
-    if (!board || isLoading) return <div className="board-details">Sorry, We had a Problem...</div>
+    if (!board) return <div className="board-details">Sorry, We had a Problem...</div>
     return (
         <section className={`board-details ${modalData.isOpen && 'overflow-hidden'}`}>
             <BoardHeader

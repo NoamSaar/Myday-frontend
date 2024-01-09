@@ -30,8 +30,10 @@ export function BoardEdit({ board }) {
     async function onUpdateBoard() {
         try {
             await updateBoard(boardToEdit)
+            showSuccessMsg('Board updated successfully')
         } catch (err) {
             console.log('Cannot update board', err)
+            showErrorMsg('Cannot update Board')
         } finally {
             setIsEditing(false)
         }

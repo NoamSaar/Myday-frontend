@@ -1,6 +1,8 @@
 import { getEmptyDynamicModal } from "../actions/system.actions"
 
 export const SET_IS_LOADING = 'SET_IS_LOADING'
+export const SET_MSG = 'SET_MSG'
+
 export const SET_DYNAMIC_MODAL_OPEN = 'SET_DYNAMIC_MODAL_OPEN'
 export const SET_DYNAMIC_MODAL_BOUNDING_RECT = 'SET_DYNAMIC_MODAL_BOUNDING_RECT'
 export const SET_DYNAMIC_MODAL_TYPE = 'SET_DYNAMIC_MODAL_TYPE'
@@ -10,6 +12,7 @@ export const SET_DYNAMIC_MODAL = 'SET_DYNAMIC_MODAL'
 
 const initialState = {
   isLoading: false,
+  msg: null,
   dynamicModal: getEmptyDynamicModal()
 }
 
@@ -17,6 +20,9 @@ export function systemReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_IS_LOADING:
       return { ...state, isLoading: action.isLoading }
+
+    case SET_MSG:
+      return { ...state, msg: action.msg }
 
     case SET_DYNAMIC_MODAL:
       return { ...state, dynamicModal: action.dynamicModal }

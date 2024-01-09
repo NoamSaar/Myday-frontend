@@ -43,7 +43,6 @@ export async function loadBoards() {
 }
 
 export async function loadBoard(boardId) {
-    setIsLoading(true)
     try {
         const filterBy = store.getState().boardModule.filterBy
         const board = await boardService.getById(boardId, filterBy)
