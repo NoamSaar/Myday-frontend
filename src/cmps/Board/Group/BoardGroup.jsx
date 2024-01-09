@@ -79,7 +79,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                 onGroupChange("title", group.title)
             } else {
                 onGroupChange("title", groupTitle)
-
             }
 
             if (!isColorPickerOpen) {

@@ -83,14 +83,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         }
     }
 
-    function handleMouseEnter() {
-        setIsShowMenu(true)
-    }
-
-    function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
-    }
-
     function toggleMenu(ev) {
         if (isMenuOpen) {
             resetDynamicModal()
@@ -118,22 +110,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             setIsEditing(false)
         } catch (error) {
             console.error("Error changing task title:", error)
-        }
-    }
-
-    function handleMouseEnter() {
-        setIsShowMenu(true)
-    }
-
-    function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
-    }
-
-    function toggleMenu(ev) {
-        if (isMenuOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
-        } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
         }
     }
 
