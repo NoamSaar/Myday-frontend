@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
-import { fetchUsers, getUser } from "../../../store/actions/user.actions"
 import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData } from "../../../store/actions/system.actions"
+import { fetchUsers } from "../../../store/actions/user.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { DynamicPicker } from "./Picker/DynamicPicker"

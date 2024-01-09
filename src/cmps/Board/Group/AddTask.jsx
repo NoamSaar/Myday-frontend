@@ -3,17 +3,17 @@ import { useSelector } from "react-redux"
 
 export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTask, groupId }) {
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
-    const [isEditing, setIsEditing] = useState(false)
+    const [isInputFocus, setIsInputFocus] = useState(false)
 
     function onTitleClick() {
-        setIsEditing(true)
+        setIsInputFocus(true)
         onSetActiveTask(groupId)
     }
 
     async function onAddTask(ev) {
         ev.preventDefault()
         try {
-            setIsEditing(false)
+            setIsInputFocus(false)
             if (activeTask === groupId) onSetActiveTask(null)
             if (title) addTask()
 
@@ -35,7 +35,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                     </li>
 
                     <li className="task-title single-task flex">
-                        {isEditing ? (
+                        {isInputFocus ? (
                             <form onSubmit={onAddTask}>
                                 <input
                                     autoFocus

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { UserImg } from "../../../../UserImg"
+import { CloseIcon, SearchIcon } from "../../../../../services/svg.service"
 import { DynamicInput } from "../../../../DynamicInput"
-import { CloseIcon, PlusIcon, SearchIcon } from "../../../../../services/svg.service"
+import { UserImg } from "../../../../UserImg"
 
 export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) {
     const [membersFilter, setMembersFilter] = useState('')
@@ -10,26 +10,33 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
 
     useEffect(() => {
         setCurrChosenMembers(chosenMembers)
-        setCurrMemberOptions(getFilterMembers(memberOptions, chosenMembers))
+        const filterMembers = getFilterMembers(memberOptions, chosenMembers)
+        setCurrMemberOptions(filterMembers)
     }, [chosenMembers, memberOptions])
 
     useEffect(() => {
         if (!membersFilter) {
-            setCurrMemberOptions(getFilterMembers(memberOptions, chosenMembers))
+            const filterMembers = getFilterMembers(memberOptions, chosenMembers)
+            setCurrMemberOptions(filterMembers)
             return
         }
+        filterMembers()
 
-        const regex = new RegExp(membersFilter, 'i')
-        const filteredMemberOptions = getFilterMembers(memberOptions, currChosenMembers)
-            .filter(member => regex.test(member.fullname))
-
-        setCurrMemberOptions(filteredMemberOptions)
     }, [membersFilter])
 
     function getFilterMembers(memberOptions, chosenMembers) {
         return memberOptions.filter(member => (
             !chosenMembers.some(chosenMember => chosenMember._id === member._id)
         ))
+    }
+
+    function filterMembers() {
+        const regex = new RegExp(membersFilter, 'i')
+        const filteredMemberOptions = getFilterMembers(memberOptions, currChosenMembers)
+            .filter(member => regex.test(member.fullname))
+
+        setCurrMemberOptions(filteredMemberOptions)
+
     }
 
     function onAddMember(member) {
