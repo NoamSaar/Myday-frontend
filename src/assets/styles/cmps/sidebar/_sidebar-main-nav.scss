@@ -2,6 +2,10 @@
     position: relative;
     padding: 12px 40px 12px 12px;
 
+    .active {
+        background-color: $clr-btn-active;
+    }
+
     .btn-menu {
         justify-content: center;
         position: absolute;

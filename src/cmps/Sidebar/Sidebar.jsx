@@ -16,7 +16,6 @@ export function Sidebar() {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    const [isActive, setIsActive] = useState(false)
     const [isFocus, setIsFocus] = useState(false)
     const navigate = useNavigate()
 
@@ -87,7 +86,6 @@ export function Sidebar() {
         <section className="sidebar-container">
             <article className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <SidebarMainNav
-                    isActive={isActive}
                     isSidebarOpen={isSidebarOpen}
                     onOpenSidebar={onOpenSidebar}
                 />
