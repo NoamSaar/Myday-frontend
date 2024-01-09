@@ -1,0 +1,49 @@
+.board-member-select {
+    width: 300px;
+    padding: 16px;
+
+    .title {
+        margin-block: 5px;
+        font-size: rem(15px);
+    }
+
+    .sub-title {
+        margin-block-end: 16px;
+        font-size: rem(14px);
+    }
+
+    .members-options-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-block: 16px 8px;
+
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            margin-inline-end: 5px;
+            border: 5px solid transparent;
+
+            .user-img,
+            .extra-members-box {
+                min-width: 34px;
+                min-height: 34px;
+                border: unset;
+
+                cursor: pointer;
+            }
+
+            .extra-members-box {
+                min-width: 32px;
+                min-height: 32px;
+            }
+
+            &.chosen-member {
+                border-color: $clr-board-chosen-member;
+            }
+        }
+    }
+}

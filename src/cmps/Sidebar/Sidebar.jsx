@@ -69,10 +69,6 @@ export function Sidebar() {
         setIsDropdownOpen(!isDropdownOpen)
     }
 
-    function onToggleIsFocus(isFocus) {
-        setIsFocus(isFocus)
-    }
-
     function renameBoard(board, title) {
         onRenameBoard(board, title)
     }
@@ -91,11 +87,9 @@ export function Sidebar() {
                 />
                 <SidebarWorkspace
                     filterBy={filterBy}
-                    isFocus={isFocus}
                     isDropdownOpen={isDropdownOpen}
                     onAddNewBoard={onAddNewBoard}
                     onToggleDropdown={onToggleDropdown}
-                    onToggleIsFocus={onToggleIsFocus}
                     onSetFilter={onSetFilter} />
                 <SidebarBoardNav
                     boards={boards}

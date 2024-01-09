@@ -8,6 +8,8 @@ import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/boa
 import { resetDynamicModal, setDynamicModal } from "../../../store/actions/system.actions"
 
 import { TaskList } from "./TaskList"
+import { GroupTitlesList } from "./GroupTitlesList"
+import { TaskHeaderList } from "./TaskHeaderList"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
@@ -184,28 +186,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                     </div>
                 </div>
 
-                <div className="task-header-list-container flex sticky-left">
-                    <div className="task-row-placeholder sticky-left"></div>
-                    <ul className="clean-list task-header-list flex sticky-left-36">
-                        <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
-
-                        <div className="task-title-container flex">
-                            <li className="task-selection">
-                                <input type="checkbox" />
-                            </li>
-
-                            <li className="task-title flex">Task</li>
-                        </div>
-
-                        {board.titlesOrder.map((title, idx) => {
-                            return <li key={idx} className={`${title}-col`}>
-                                {utilService.capitalizeFirstLetter(title)}
-                            </li>
-                        })}
-                        <li className="line-end"></li>
-                    </ul>
-                </div>
-
+                <TaskHeaderList groupColor={groupColor} titlesOrder={board.titlesOrder} />
             </div>
 
             <TaskList titlesOrder={titlesOrder}

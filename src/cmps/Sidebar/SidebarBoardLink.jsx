@@ -61,6 +61,12 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
         )
     }
 
+    function onLinkClick() {
+        setCurrBoard(null)
+        navigate(`/board/${board._id}`)
+        resetDynamicModal()
+    }
+
     const menuOptions = [
         {
             icon: <DeleteIcon />,
@@ -93,10 +99,7 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
     return (
         <>
             <div className={`grid btn btn-board-nav ${dynActiveNavClass} ${dynHoverNavClass}`}
-                onClick={() => {
-                    setCurrBoard(null)
-                    navigate(`/board/${board._id}`)
-                }}
+                onClick={onLinkClick}
                 title={`${board.title} Board`}
             >
                 <BoardIcon />

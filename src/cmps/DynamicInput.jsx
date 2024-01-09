@@ -1,15 +1,13 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { SearchIcon } from "../services/svg.service"
 
-export function DynamicInput(props) {
+export function DynamicInput({ inputProps }) {
     const inputRef = useRef(null)
+    const [isFocused, setIsFocused] = useState(false)
 
-    const handleFocus = () => {
-        props.inputProps.onSetIsFocused(true)
-    }
-
-    const handleBlur = () => {
-        props.inputProps.onSetIsFocused(false)
+    function onInputBlur() {
+        setIsFocused(false)
+        if (onBlur) onBlur()
     }
 
     const {
@@ -17,10 +15,11 @@ export function DynamicInput(props) {
         inputValue,
         placeholder,
         type,
-        isFocused,
         isSearchInput,
-        additionalBtns
-    } = props.inputProps
+        additionalBtns,
+        handleChange,
+        onBlur
+    } = inputProps
 
     return (
         <div
@@ -39,9 +38,9 @@ export function DynamicInput(props) {
                 value={inputValue}
                 type={type}
                 placeholder={placeholder}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                onChange={props.inputProps.handleChange}
+                onFocus={() => setIsFocused(true)}
+                onBlur={onInputBlur}
+                onChange={handleChange}
             />
 
             {additionalBtns && additionalBtns.length &&
@@ -49,7 +48,7 @@ export function DynamicInput(props) {
                     <div
                         key={index}
                         className={`btn input-${additionalBtn.name}-icon`}
-                        onClick={() => additionalBtn.func}
+                        onClick={() => additionalBtn.func()}
                     >
                         {additionalBtn.icon}
                     </div>
@@ -60,7 +59,8 @@ export function DynamicInput(props) {
 
 // props example:
 
-// const props = {
+// const inputProps = {
+
 //     name: 'title',
 //     inputValue: filterByToEdit.title,
 //     placeholder: 'Search',

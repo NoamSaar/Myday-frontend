@@ -5,7 +5,7 @@ export function UserImg({ user }) {
         <>
             {user.imgUrl ?
                 <img className="user-img" src={user.imgUrl} /> :
-                <span className="extra-members-box">{utilService.getFormatName(user.fullname)}</span>}
+                <span className="extra-members-box">{utilService.getAcronym(user.fullname)}</span>}
         </>
     )
 }

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { CloseIcon, SearchIcon } from "../../../../../services/svg.service"
+import { DynamicInput } from "../../../../DynamicInput"
 import { UserImg } from "../../../../UserImg"
 
 export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) {
@@ -8,26 +10,33 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
 
     useEffect(() => {
         setCurrChosenMembers(chosenMembers)
-        setCurrMemberOptions(getFilterMembers(memberOptions, chosenMembers))
+        const filterMembers = getFilterMembers(memberOptions, chosenMembers)
+        setCurrMemberOptions(filterMembers)
     }, [chosenMembers, memberOptions])
 
     useEffect(() => {
         if (!membersFilter) {
-            setCurrMemberOptions(getFilterMembers(memberOptions, chosenMembers))
+            const filterMembers = getFilterMembers(memberOptions, chosenMembers)
+            setCurrMemberOptions(filterMembers)
             return
         }
+        filterMembers()
 
-        const regex = new RegExp(membersFilter, 'i')
-        const filteredMemberOptions = getFilterMembers(currMemberOptions, currChosenMembers)
-            .filter(member => regex.test(member.fullname))
-
-        setCurrMemberOptions(filteredMemberOptions)
     }, [membersFilter])
 
     function getFilterMembers(memberOptions, chosenMembers) {
         return memberOptions.filter(member => (
             !chosenMembers.some(chosenMember => chosenMember._id === member._id)
         ))
+    }
+
+    function filterMembers() {
+        const regex = new RegExp(membersFilter, 'i')
+        const filteredMemberOptions = getFilterMembers(memberOptions, currChosenMembers)
+            .filter(member => regex.test(member.fullname))
+
+        setCurrMemberOptions(filteredMemberOptions)
+
     }
 
     function onAddMember(member) {
@@ -38,6 +47,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
             prevMembers.filter(currMember => currMember._id !== member._id)
         ))
         onChangeMembers('person', newChosenMembers)
+        setMembersFilter('')
     }
 
     function onRemoveMember(member) {
@@ -47,11 +57,28 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
         setCurrChosenMembers(newChosenMembers)
         setCurrMemberOptions(getFilterMembers(newMemberOptions, newChosenMembers))
         onChangeMembers('person', newChosenMembers)
+        setMembersFilter('')
     }
 
     function onFilterMembers({ target }) {
         const searchVal = target.value
         setMembersFilter(searchVal)
+    }
+
+    const inputProps = {
+
+        name: 'fullname',
+        inputValue: membersFilter,
+        placeholder: 'Search a name',
+        handleChange: onFilterMembers,
+        isSearchInput: false,
+        additionalBtns: [
+            {
+                name: 'filter',
+                icon: membersFilter ? <CloseIcon /> : < SearchIcon />,
+                func: membersFilter ? () => setMembersFilter('') : () => { }
+            }
+        ]
     }
 
     return (
@@ -74,15 +101,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
             </ul>
 
             <div className="new-person-picker-container">
-                <div className="search-input-container black-blue-input">
-                    <input
-                        className="reset"
-                        type="text"
-                        placeholder="Search a name"
-                        value={membersFilter}
-                        onChange={onFilterMembers}
-                    />
-                </div>
+                <DynamicInput inputProps={inputProps} />
 
                 {!membersFilter && <p className="suggested-people-title">Suggested people</p>}
 

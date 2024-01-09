@@ -90,3 +90,17 @@ export async function getUser(userId) {
         console.log('Cannot load user', err)
     }
 }
+
+export async function fetchUsers(userIds) {
+    try {
+        return await Promise.all(
+            userIds.map(async (person) => {
+                const loadedUser = await getUser(person)
+                return loadedUser
+            })
+        )
+    } catch (err) {
+        showErrorMsg('Cannot load user')
+        console.log('Cannot fetch users', err)
+    }
+}
