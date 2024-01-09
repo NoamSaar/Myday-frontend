@@ -9,7 +9,15 @@ export function EditableSpan({ isEditing, spanValue, onSpanClick, inputValue, in
                     className="focused-input flex align-center"
                 >
 
-                    {extraBtns && extraBtns.map((Btn, index) => <Btn key={index} />)}
+                    {(extraBtns && extraBtns.length) && extraBtns.map((btn, idx) => {
+                        return <div
+                            key={idx}
+                            className={btn.className}
+                            style={btn.style || {}}
+                            onMouseDown={btn.onMouseDown}
+                        >
+                        </div>
+                    })}
 
                     <form onSubmit={ev => (ev.preventDefault(), onEditClose())}>
                         <input
@@ -27,6 +35,7 @@ export function EditableSpan({ isEditing, spanValue, onSpanClick, inputValue, in
                 </div>
             ) : (
                 <span
+                    className="editable-txt"
                     onClick={onSpanClick}
                     style={style}>
                     {spanValue}

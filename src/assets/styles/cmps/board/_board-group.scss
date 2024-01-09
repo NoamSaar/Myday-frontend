@@ -24,13 +24,16 @@
                 padding-inline-start: 8px;
                 background-color: white;
 
-                h4,
-                .focused-input {
-                    font-size: rem(18px);
-                    margin-block: 9px;
-                    padding-inline: 4px;
-                    font-family: poppins-medium;
-                    cursor: text;
+                .editable-span {
+
+                    span,
+                    .focused-input {
+                        font-size: rem(18px);
+                        margin-block: 9px;
+                        padding-inline: 4px;
+                        font-family: poppins-medium;
+                        cursor: text;
+                    }
                 }
 
 
@@ -55,7 +58,7 @@
                     }
                 }
 
-                .group-title-edit-container {
+                .editable-span {
                     display: flex;
                     align-items: center;
 

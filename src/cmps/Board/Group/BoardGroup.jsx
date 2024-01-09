@@ -10,6 +10,7 @@ import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from
 import { TaskList } from "./TaskList"
 import { GroupTitlesList } from "./GroupTitlesList"
 import { TaskHeaderList } from "./TaskHeaderList"
+import { EditableSpan } from "../../EditableSpan"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
@@ -145,6 +146,15 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
     ]
 
+    const extraTitleInputBtn = [
+        {
+            className: "group-color-display",
+            style: { backgroundColor: groupColor },
+            onMouseDown: onColorDisplayClick
+        }
+
+    ]
+
     return (
         <section className="board-group flex column">
             <div className={`${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
@@ -158,7 +168,19 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                     <div className="sticky-left-40 title-container flex align-center">
                         <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color"><AngleDownIcon /></button>
 
-                        {isEditing ? (
+                        <EditableSpan
+                            isEditing={isEditing}
+                            spanValue={highlightText(groupTitle, filterBy.txt)}
+                            onSpanClick={() => setIsEditing(true)}
+                            inputValue={groupTitle}
+                            onInputChange={onChangeTitle}
+                            inputName={'title'}
+                            onEditClose={onGroupEditExit}
+                            style={{ color: groupColor }}
+                            extraBtns={extraTitleInputBtn}
+                        />
+
+                        {/* {isEditing ? (
                             <div
                                 tabIndex={0}
                                 onBlur={onGroupEditExit}
@@ -188,7 +210,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                             >
                                 {highlightText(groupTitle, filterBy.txt)}
                             </h4>
-                        )}
+                        )} */}
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>
                 </div>

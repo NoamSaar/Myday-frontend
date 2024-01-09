@@ -55,22 +55,6 @@ export function BoardEdit({ board }) {
                 onInputChange={handleChange}
                 onEditClose={onUpdateBoard}
             />
-            {/* {!isEditing ?
-                <h3 className="title" title="Click to edit" onClick={() => setIsEditing(true)}>
-                    {board.title}
-                </h3>
-                :
-                <input className="reset title"
-                    title="Click to edit"
-                    onChange={handleChange}
-                    onBlur={onUpdateBoard}
-                    onKeyDown={handleKeyDown}
-                    value={title}
-                    type="text"
-                    name="title"
-                    autoFocus
-                />
-            } */}
 
             <div className="info-favorite flex align-center">
                 <button className="btn info" title="Show board description">
