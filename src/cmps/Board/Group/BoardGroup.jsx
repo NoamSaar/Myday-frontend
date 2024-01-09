@@ -33,9 +33,9 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         setIsEditing(isEditingTitle)
     }, [isEditingTitle])
 
-    async function onGroupChange(field, date) {
+    async function onGroupChange(field, data) {
         try {
-            const updatedGroup = { ...group, [field]: date }
+            const updatedGroup = { ...group, [field]: data }
             updateGroup(board._id, updatedGroup)
         } catch (err) {
             console.error('Error changing group:', err)
@@ -72,14 +72,16 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
     }
 
-    async function onTitleEditExit() {
+    async function onGroupEditExit() {
         try {
+            let titleToSave = groupTitle
+
             if (!groupTitle) {
                 setGroupTitle(group.title)
-                onGroupChange('title', group.title)
-            } else {
-                onGroupChange('title', groupTitle)
+                titleToSave = group.title
             }
+
+            onGroupChange('title', titleToSave)
 
             if (!isColorPickerOpen) {
                 setIsEditing(false)
@@ -153,7 +155,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         {isEditing ? (
                             <div
                                 tabIndex={0}
-                                onBlur={onTitleEditExit}
+                                onBlur={onGroupEditExit}
                                 className="focused-input group-title-edit-container flex align-center"
                             >
                                 <div
@@ -162,7 +164,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                     onMouseDown={onColorDisplayClick}>
                                 </div>
 
-                                <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
+                                <form onSubmit={ev => (ev.preventDefault(), onGroupEditExit())}>
                                     <input
                                         className="reset"
                                         type="text"
@@ -170,7 +172,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                         style={{ color: groupColor }}
                                         value={groupTitle}
                                         onChange={onChangeTitle}
-                                        onBlur={onTitleEditExit}
+                                    // onBlur={onGroupEditExit}
                                     />
                                 </form>
                             </div>
