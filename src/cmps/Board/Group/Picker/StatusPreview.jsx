@@ -19,7 +19,8 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
                 type: 'statusPicker',
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
                 fatherId: `${taskId}-${title}Picker`,
-                isPosBlock: true
+                isPosBlock: true,
+                isCenter: true
             })
         }
     }

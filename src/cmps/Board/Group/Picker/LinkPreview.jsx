@@ -19,7 +19,8 @@ export function LinkPreview({ info, onUpdate, taskId }) {
                     onChangeLink: onUpdate
                 },
                 fatherId: `${taskId}-linkPicker`,
-                isPosBlock: true
+                isPosBlock: true,
+                isCenter: true
             })
         }
     }
