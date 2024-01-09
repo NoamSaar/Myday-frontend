@@ -4,7 +4,6 @@ import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
 import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
-import { fetchUsers } from "../../../store/actions/user.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { DynamicPicker } from "./Picker/DynamicPicker"
