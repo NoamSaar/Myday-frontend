@@ -65,7 +65,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         }
     }
 
-    async function onDeleteTask() {
+    async function onRemoveTask() {
         try {
             removeTask(board._id, groupId, task.id)
             resetDynamicModal()
@@ -128,7 +128,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         {
             icon: <DeleteIcon />,
             title: "Delete",
-            onOptionClick: onDeleteTask,
+            onOptionClick: onRemoveTask,
         },
     ]
 

@@ -16,7 +16,7 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
     const [lastClickedBoardId, setLastClickedBoardId] = useState(null)
     const navigate = useNavigate()
 
-    async function onDeleteBoard() {
+    async function onRemoveBoard() {
         removeBoard(board._id)
     }
 
@@ -73,7 +73,7 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
             icon: <DeleteIcon />,
             title: 'Delete',
             onOptionClick: () => {
-                onDeleteBoard()
+                onRemoveBoard()
                 setIsMenuOpen(false)
                 resetDynamicModal()
             }

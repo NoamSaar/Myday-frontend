@@ -42,7 +42,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
     }
 
-    async function onDeleteGroup() {
+    async function onRemoveGroup() {
         try {
             removeGroup(board._id, group.id)
             resetDynamicModal()
@@ -135,7 +135,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         {
             icon: <DeleteIcon />,
             title: 'Delete',
-            onOptionClick: onDeleteGroup
+            onOptionClick: onRemoveGroup
         }
     ]
 
