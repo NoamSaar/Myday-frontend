@@ -27,7 +27,7 @@ export function DynamicPicker({ title, task, onUpdate, memberOptions }) {
         case "member":
             return (
                 <MemberPreview
-                    chosenMembers={task.member}
+                    chosenMembers={task.members}
                     memberOptions={memberOptions}
                     onUpdate={onUpdate}
                     taskId={task.id}

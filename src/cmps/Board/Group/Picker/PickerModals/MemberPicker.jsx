@@ -46,7 +46,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
         setCurrMemberOptions(prevMembers => (
             prevMembers.filter(currMember => currMember._id !== member._id)
         ))
-        onChangeMembers('member', newChosenMembers)
+        onChangeMembers('members', newChosenMembers)
         setMembersFilter('')
     }
 
@@ -56,7 +56,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
 
         setCurrChosenMembers(newChosenMembers)
         setCurrMemberOptions(getFilterMembers(newMemberOptions, newChosenMembers))
-        onChangeMembers('member', newChosenMembers)
+        onChangeMembers('members', newChosenMembers)
         setMembersFilter('')
     }
 

@@ -19,7 +19,6 @@ export function BoardDetails() {
     const { boardId } = useParams()
 
     useEffect(() => {
-        console.log('hi')
         // if (!board) _loadBoard()
         _loadBoard()
         // TODO : Emit watch on the user + add a listener for when user changes
