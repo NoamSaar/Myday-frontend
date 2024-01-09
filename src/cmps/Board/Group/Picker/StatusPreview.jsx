@@ -36,7 +36,9 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
             className="status-preview status-col priority-col"
             ref={previewBtnRef}
         >
-            {info.chosenOption}
+            <p>{info.chosenOption}</p>
+
+            <div className="corner-fold"></div>
         </li >
     )
 }
