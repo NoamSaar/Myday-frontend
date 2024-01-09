@@ -34,19 +34,19 @@ export function DynamicAbsoluteModal() {
     // console.log('isCenter', isCenter)
     // console.log('isPosBlock', isPosBlock)
     if (isPosBlock && isCenter) { // top/bottom and centered horizontaly relative to the clicked father
-        console.log('bot center')
+        // console.log('bot center')
         style = {
             top: `${modalData.boundingRect.bottom}px`, // directly below father
             left: `${modalData.boundingRect.left + (modalData.boundingRect.width - ModalDimensions.width) / 2}px` // center modal 
         }
     } else if (isPosBlock) { // top/bottom and horizontaly strats the same relative to the clicked father
-        console.log('bot not centered')
+        // console.log('bot not centered')
         style = {
             top: `${modalData.boundingRect.bottom}px`, // directly below father
             left: `${modalData.boundingRect.right - modalData.boundingRect.width}px` // the left of the modal will be the left of the father
         }
     } else { // left/right relative to the clicked father
-        console.log('right')
+        // console.log('right')
         style = {
             top: `${modalData.boundingRect.top}px`, // Aligns the top of the modal with the top of the father
             left: `${modalData.boundingRect.right}px`,
