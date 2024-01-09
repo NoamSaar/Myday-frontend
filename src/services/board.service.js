@@ -148,7 +148,7 @@ function getDefaultBoard() {
                     {
                         id: 'c101',
                         title: 'Item 1',
-                        member: [user._id],
+                        members: [user._id],
                         status: 'Working on it',
                         date: 1703706909537,
                         updates: [],
@@ -156,7 +156,7 @@ function getDefaultBoard() {
                     {
                         id: 'c102',
                         title: 'Item 2',
-                        member: [],
+                        members: [],
                         status: 'Done',
                         date: 1703708909537,
                         updates: [],
@@ -164,7 +164,7 @@ function getDefaultBoard() {
                     {
                         id: 'c103',
                         title: 'Item 3',
-                        member: [],
+                        members: [],
                         date: 1703706909537,
                         updates: [],
                     },
@@ -179,14 +179,14 @@ function getDefaultBoard() {
                     {
                         id: 'c201',
                         title: 'Item 4',
-                        member: [user._id],
+                        members: [user._id],
                         date: 1703706909537,
                         updates: [],
                     },
                     {
                         id: 'c202',
                         title: 'Item 5',
-                        member: [],
+                        members: [],
                         date: 1703708909537,
                         updates: [],
                     },

@@ -8,7 +8,7 @@ import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIc
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isMemberFilterOpen, setIsMemberFilterOpen] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
 
     useEffect(() => {
@@ -44,12 +44,12 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         }
     }
 
-    function toggleMenu(ev) {
+    function toggleMemberFilter(ev) {
         ev.stopPropagation()
-        if (isMenuOpen) {
+        if (isMemberFilterOpen) {
             //updating modal in store
             resetDynamicModal()
-            setIsMenuOpen(false)
+            setIsMemberFilterOpen(false)
         } else {
             //updating modal in store
             setDynamicModal({
@@ -59,31 +59,32 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 data: { chosenMember: filterByToEdit.member, onChangeMember: setMemberFilter, members: board.members },
                 isPosBlock: true
             })
-            setIsMenuOpen(true)
+            setIsMemberFilterOpen(true)
         }
     }
 
-    const menuOptions = [
-        {
-            icon: <PersonIcon />,
-            title: <select value={filterByToEdit.member} name="member" onChange={handleChange}>
-                <option value="">All</option>
-                <>
-                    {board.members.map(member => (
-                        <option key={member._id} value={member._id}>
-                            {member.fullname}
-                            {/* <img src={member.imgUrl}></img> */}
-                        </option>
-                    ))}
-                </>
-            </select>,
-            onOptionClick: () => {
-                console.log('hi')
-            }
-        },
-    ]
+    // const menuOptions = [
+    //     {
+    //         icon: <PersonIcon />,
+    //         title: <select value={filterByToEdit.member} name="member" onChange={handleChange}>
+    //             <option value="">All</option>
+    //             <>
+    //                 {board.members.map(member => (
+    //                     <option key={member._id} value={member._id}>
+    //                         {member.fullname}
+    //                         {/* <img src={member.imgUrl}></img> */}
+    //                     </option>
+    //                 ))}
+    //             </>
+    //         </select>,
+    //         onOptionClick: () => {
+    //             console.log('hi')
+    //         }
+    //     },
+    // ]
 
     function setMemberFilter(memberId) {
+        console.log('memberId', memberId)
         setFilterByToEdit(prevFilter => ({ ...prevFilter, member: memberId }))
 
         setDynamicModalData({ chosenMember: memberId, onChangeMember: setMemberFilter, members: board.members })
@@ -138,7 +139,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 }
             </div>
 
-            <button className="btn person" title="Filter by person" onClick={toggleMenu}>
+            <button className="btn person" title="Filter by person" onClick={toggleMemberFilter}>
                 <PersonIcon />
                 <span>Person</span>
             </button>

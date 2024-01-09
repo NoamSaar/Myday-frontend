@@ -30,7 +30,6 @@ export function BoardDetails() {
     }, [boardId, filterBy])
 
     async function _loadBoard() {
-        console.log('boardId:', boardId)
         try {
             await loadBoard(boardId)
         } catch (err) {
