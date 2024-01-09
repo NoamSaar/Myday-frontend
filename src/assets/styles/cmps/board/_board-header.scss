@@ -39,14 +39,14 @@
             display: none;
         }
 
-        .editable-span span,
-        .editable-span input {
+        .editable-txt-container span,
+        .editable-txt-container input {
             font-size: rem(24px);
         }
     }
 
-    .editable-span .focused-input,
-    .editable-span span {
+    .editable-txt-container .focused-input,
+    .editable-txt-container .editable-txt {
         grid-area: title;
         padding-inline: 4px;
         font-size: rem(32px);
@@ -54,7 +54,7 @@
         cursor: text;
         border-radius: $border-radius-small;
 
-        &:not(.editable-span .focused-input):hover {
+        &:not(.editable-txt-container .focused-input):hover {
             outline: 1px solid $clr-btn-border;
         }
 

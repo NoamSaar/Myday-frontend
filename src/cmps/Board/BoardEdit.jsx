@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
 import { showErrorMsg } from "../../store/actions/system.actions"
-import { EditableSpan } from "../EditableSpan"
+import { EditableTxt } from "../EditableTxt"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -46,10 +46,10 @@ export function BoardEdit({ board }) {
     return (
         <>
 
-            <EditableSpan
+            <EditableTxt
                 isEditing={isEditing}
-                spanValue={board.title}
-                onSpanClick={() => setIsEditing(true)}
+                txtValue={board.title}
+                onTxtClick={() => setIsEditing(true)}
                 inputValue={title}
                 inputName={'title'}
                 onInputChange={handleChange}

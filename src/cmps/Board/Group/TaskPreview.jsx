@@ -7,6 +7,7 @@ import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, 
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { DynamicPicker } from "./Picker/DynamicPicker"
+import { EditableTxt } from "../../EditableTxt"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
@@ -156,7 +157,15 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     </li>
 
                     <li className="task-title single-task flex">
-                        {isEditing ? (
+                        <EditableTxt
+                            isEditing={isEditing}
+                            txtValue={highlightText(taskTitle, filterBy.txt)}
+                            onTxtClick={onTitleClick}
+                            inputValue={taskTitle}
+                            onInputChange={onChangeTitle}
+                            onEditClose={onTitleEditExit}
+                        />
+                        {/* {isEditing ? (
                             <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
                                 <input
                                     autoFocus
@@ -175,7 +184,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             >
                                 {highlightText(taskTitle, filterBy.txt)}
                             </span>
-                        )}
+                        )} */}
                     </li>
 
                 </ul>

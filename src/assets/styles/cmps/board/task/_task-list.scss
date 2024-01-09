@@ -41,11 +41,25 @@
         max-width: 342px;
         z-index: 10;
 
-        .single-task form {
-            width: 95%;
+        .task-title {
 
-            .focused-input {
-                background-color: white;
+            .editable-txt-container {
+                width: 95%;
+
+
+                // span {
+                //     max-width: 100%;
+                // }
+
+                form {
+                    width: 100%;
+                }
+
+                input {
+                    width: 100%;
+                    background-color: white;
+                }
+
             }
         }
 

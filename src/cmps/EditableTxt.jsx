@@ -1,7 +1,7 @@
 
-export function EditableSpan({ isEditing, spanValue, onSpanClick, inputValue, inputName, onInputChange, onEditClose, extraBtns, style = {} }) {
+export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, inputName = '', onInputChange, onEditClose, extraBtns, style = {} }) {
     return (
-        <div className="editable-span">
+        <div className="editable-txt-container">
             {isEditing ? (
                 <div
                     tabIndex={0}
@@ -34,47 +34,13 @@ export function EditableSpan({ isEditing, spanValue, onSpanClick, inputValue, in
 
                 </div>
             ) : (
-                <span
+                <p
                     className="editable-txt"
-                    onClick={onSpanClick}
+                    onClick={onTxtClick}
                     style={style}>
-                    {spanValue}
-                </span>
+                    {txtValue}
+                </p>
             )}
         </div>
     )
 }
-
-
-
-// {isEditing ? (
-//     <div
-//         tabIndex={0}
-//         onBlur={onGroupEditExit}
-//         className="focused-input group-title-edit-container flex align-center"
-//     >
-//         <div
-//             className="group-color-display"
-//             style={{ backgroundColor: groupColor }}
-//             onMouseDown={onColorDisplayClick}>
-//         </div>
-
-//         <form onSubmit={ev => (ev.preventDefault(), onGroupEditExit())}>
-//             <input
-//                 className="reset"
-//                 type="text"
-//                 autoFocus
-//                 style={{ color: groupColor }}
-//                 value={groupTitle}
-//                 onChange={onChangeTitle}
-//             // onBlur={onGroupEditExit}
-//             />
-//         </form>
-//     </div>
-// ) : (
-//     <h4 style={{ color: groupColor }} className="editable-txt"
-//         onClick={() => setIsEditing(true)}
-//     >
-//         {highlightText(groupTitle, filterBy.txt)}
-//     </h4>
-// )}

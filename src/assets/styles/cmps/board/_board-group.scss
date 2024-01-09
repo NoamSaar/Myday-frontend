@@ -24,9 +24,9 @@
                 padding-inline-start: 8px;
                 background-color: white;
 
-                .editable-span {
+                .editable-txt-container {
 
-                    span,
+                    .editable-txt,
                     .focused-input {
                         font-size: rem(18px);
                         margin-block: 9px;
@@ -37,7 +37,7 @@
                 }
 
 
-                p {
+                p:not(.editable-txt) {
 
                     font-size: .875rem;
                     font-weight: 400;
@@ -58,7 +58,7 @@
                     }
                 }
 
-                .editable-span {
+                .editable-txt-container {
                     display: flex;
                     align-items: center;
 
