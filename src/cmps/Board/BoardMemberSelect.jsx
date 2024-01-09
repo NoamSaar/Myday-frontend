@@ -1,8 +1,6 @@
 import { UserImg } from "../UserImg"
 
 export default function BoardMemberSelect({ chosenMember, members, onChangeMember }) {
-    console.log('chosenMember', chosenMember)
-    console.log('members', members)
     return (
         <div className="general-modal board-member-select">
             <p className="title">Quick person filter</p>
