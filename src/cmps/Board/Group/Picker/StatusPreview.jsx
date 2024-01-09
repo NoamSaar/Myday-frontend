@@ -16,7 +16,7 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'status picker',
+                type: 'statusPicker',
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
                 fatherId: `${taskId}-${title}Picker`,
                 isPosBlock: true

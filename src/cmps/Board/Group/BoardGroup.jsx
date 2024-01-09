@@ -107,7 +107,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'menu options', data: { options: menuOptions },
+                type: 'menuOptions', data: { options: menuOptions },
                 fatherId: `${group.id}-menu`
             })
         }
@@ -122,7 +122,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'color picker',
+                type: 'colorPicker',
                 data: { colors: colors, onColorClick: onChangeColor },
                 fatherId: `${group.id}-colorPicker`
             })

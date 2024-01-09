@@ -16,7 +16,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
-    const [isShowMenu, setIsShowMenu] = useState(false)
+    const [isShowMenuBtn, setIsShowMenuBtn] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
     const isMenuOpen = fatherId === `${task.id}-menu`
@@ -41,18 +41,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         setCurrTask((prevTask) => ({ ...prevTask, title: taskTitle }))
     }, [taskTitle])
 
-    async function onTaskChange(field, data) {
+    async function onTaskChange(field, recivedData) {
         try {
-            let recivedData = data
-            if (field === 'member') recivedData = data.map(member => member._id)
+            let data = recivedData
+            if (field === 'member') data = data.map(member => member._id)
 
-            const updatedTask = { ...task, member: task.member, [field]: recivedData }
+            const updatedTask = { ...task, member: task.member, [field]: data }
             updateTask(board._id, groupId, updatedTask)
 
             switch (field) {
                 case 'member':
                     setDynamicModalData({
-                        chosenMembers: data,
+                        chosenMembers: recivedData,
                         memberOptions: board.members,
                         onChangeMembers: onTaskChange
                     })
@@ -84,18 +84,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     }
 
     function handleMouseEnter() {
-        setIsShowMenu(true)
+        setIsShowMenuBtn(true)
     }
 
     function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
+        if (!isMenuOpen) setIsShowMenuBtn(false)
     }
 
     function toggleMenu(ev) {
         if (isMenuOpen) {
             resetDynamicModal()
         } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
+            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menuOptions', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
         }
     }
 
@@ -138,7 +138,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseLeave={handleMouseLeave}
         >
             <div className="menu-container sticky-left">
-                {isShowMenu && (
+                {isShowMenuBtn && (
                     <button className="btn svg-inherit-color"
                         onClick={toggleMenu}><MenuIcon className="btn" />
                     </button>

@@ -55,7 +55,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'board member select',
+                type: 'boardMemberSelect',
                 data: { chosenMember: filterByToEdit.member, onChangeMember: setMemberFilter, members: board.members },
                 isPosBlock: true
             })

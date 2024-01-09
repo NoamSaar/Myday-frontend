@@ -14,7 +14,7 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'member picker',
+                type: 'memberPicker',
                 data: { chosenMembers, memberOptions, onChangeMembers: onUpdate },
                 fatherId: `${taskId}-memberPicker`,
                 isPosBlock: true
