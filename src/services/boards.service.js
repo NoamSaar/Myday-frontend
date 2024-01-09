@@ -697,11 +697,11 @@ export function getDefaultBoard() {
                 id: 'l100',
                 color: '#c4c4c4',
             },
-            {
-                id: 'l104',
-                title: 'Needs QA',
-                color: '#faa1f1',
-            },
+            // {
+            //     id: 'l104',
+            //     title: 'Needs QA',
+            //     color: '#faa1f1',
+            // },
         ],
         priority: [
             {

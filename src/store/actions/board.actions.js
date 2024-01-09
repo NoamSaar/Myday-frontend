@@ -3,6 +3,7 @@ import { boardService } from '../../services/board.service.local.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK } from '../reducers/board.reducer.js'
+import { setIsLoading } from './system.actions.js'
 
 
 // Store - saveTask (from board.js)
@@ -42,6 +43,7 @@ export async function loadBoards() {
 }
 
 export async function loadBoard(boardId) {
+    setIsLoading(true)
     try {
         const filterBy = store.getState().boardModule.filterBy
         const board = await boardService.getById(boardId, filterBy)
@@ -50,6 +52,8 @@ export async function loadBoard(boardId) {
     } catch (error) {
         console.log('Had issues in board details', error)
         throw error
+    } finally {
+        setIsLoading(false)
     }
 }
 

@@ -10,7 +10,8 @@ import { BoardHeader } from "../cmps/Board/BoardHeader"
 
 export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
-    const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
+    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
+    const isLoading = useSelector((storeState) => storeState.systemModule.isLoading)
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
     // const user = useSelector((storeState) => storeState.userModule.loggedinUser)
 
@@ -18,7 +19,7 @@ export function BoardDetails() {
     const { boardId } = useParams()
 
     useEffect(() => {
-        _loadBoard()
+        if (!board) _loadBoard()
         // TODO : Emit watch on the user + add a listener for when user changes
         // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId)
         // socketService.on(SOCKET_EVENT_BOARD_UPDATED, (board) => {
@@ -29,6 +30,7 @@ export function BoardDetails() {
     }, [boardId, filterBy])
 
     async function _loadBoard() {
+        console.log('boardId:', boardId)
         try {
             await loadBoard(boardId)
         } catch (err) {
@@ -51,7 +53,9 @@ export function BoardDetails() {
 
     const { txt } = filterBy
 
-    if (!board) return <div className="board-details">Loading...</div>
+    // console.log('isLoading:', isLoading)
+    if (isLoading) return <div className="board-details">Loading...</div>
+    if (!board || isLoading) return <div className="board-details">Sorry, We had a Problem...</div>
     return (
         <section className={`board-details ${modalData.isOpen && 'overflow-hidden'}`}>
             <BoardHeader

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router"
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
 import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
+import { setCurrBoard } from "../../store/actions/board.actions"
 
 export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBoard }) {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -92,7 +93,10 @@ export function SidebarBoardLink({ board, currActiveBoard, deleteBoard, renameBo
     return (
         <>
             <div className={`grid btn btn-board-nav ${dynActiveNavClass} ${dynHoverNavClass}`}
-                onClick={() => navigate(`/board/${board._id}`)}
+                onClick={() => {
+                    setCurrBoard(null)
+                    navigate(`/board/${board._id}`)
+                }}
                 title={`${board.title} Board`}
             >
                 <BoardIcon />
