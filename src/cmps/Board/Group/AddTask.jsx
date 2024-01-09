@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import { showErrorMsg } from "../../../store/actions/system.actions"
 
 export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTask, groupId }) {
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
@@ -16,9 +17,9 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
             setIsInputFocus(false)
             if (activeTask === groupId) onSetActiveTask(null)
             if (title) addTask()
-
-        } catch (error) {
-            console.error("Error changing task title:", error)
+        } catch (err) {
+            console.error('Error changing task title:', err)
+            showErrorMsg('Cannot add Task')
         }
     }
 

@@ -5,7 +5,7 @@ import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.servi
 import { utilService } from "../../../services/util.service"
 
 import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal } from "../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { TaskList } from "./TaskList"
 import { GroupTitlesList } from "./GroupTitlesList"
@@ -37,8 +37,9 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             const updatedGroup = { ...group, [field]: date }
             updateGroup(board._id, updatedGroup)
-        } catch (error) {
-            console.error("Error changing group:", error)
+        } catch (err) {
+            console.error('Error updating group:', err)
+            showErrorMsg(`Cannot update Group ${groupTitle} ${field}`)
         }
     }
 
@@ -46,8 +47,10 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             removeGroup(board._id, group.id)
             resetDynamicModal()
-        } catch (error) {
-            console.error("Error removing task:", error)
+            showSuccessMsg(`Group ${groupTitle} was successfully deleted.`)
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg(`Cannot delete Group ${groupTitle}`)
         }
     }
 
@@ -55,8 +58,9 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             const title = target.value
             setGroupTitle(title)
-        } catch (error) {
-            console.error("Error changing group title:", error)
+        } catch (err) {
+            console.error('Error changing group title:', err)
+            showErrorMsg(`Cannot change Group ${groupTitle} Tile`)
         }
     }
 
@@ -69,6 +73,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         } catch (error) {
             console.error("Error changing group color:", error)
             setGroupColor(group.color)
+            showErrorMsg(`Cannot change Group ${groupTitle} Color`)
         }
     }
 
@@ -86,8 +91,9 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                 setIsEditing(false)
                 onTitleEditLeave()
             }
-        } catch (error) {
-            console.error("Error changing group title:", error)
+        } catch (err) {
+            console.error('Error changing group title:', err)
+            showErrorMsg(`Cannot change Group Tile`)
         }
     }
 
