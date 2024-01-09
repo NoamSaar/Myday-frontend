@@ -5,7 +5,6 @@
         margin-inline-start: 36px;
 
         li {
-
             padding-block: 0;
             height: 35px;
         }
@@ -20,7 +19,7 @@
         display: flex;
         align-items: center;
 
-        &:not(.link-picker):not(.task-selection) {
+        &:not(.link-preview):not(.task-selection) {
             padding: 8px;
         }
 
@@ -87,8 +86,8 @@
                 padding-inline-start: 16px;
 
                 .editable-txt,
-                .focused-input {
-                    padding-inline-start: 9.5px;
+                .focused-input form {
+                    padding-inline-start: 11.5px;
                 }
 
                 .editable-txt {

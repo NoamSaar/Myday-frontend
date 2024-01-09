@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import { showErrorMsg } from "../../../store/actions/system.actions"
+import { EditableTxt } from "../../EditableTxt"
 
 export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTask, groupId }) {
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
@@ -12,7 +13,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
     }
 
     async function onAddTask(ev) {
-        ev.preventDefault()
+        // ev.preventDefault()
         try {
             setIsInputFocus(false)
             if (activeTask === groupId) onSetActiveTask(null)
@@ -36,7 +37,16 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                     </li>
 
                     <li className="task-title single-task flex">
-                        {isInputFocus ? (
+                        <EditableTxt
+                            isEditing={isInputFocus}
+                            txtValue={'+ Add task'}
+                            onTxtClick={onTitleClick}
+                            inputValue={title}
+                            onInputChange={onSetTitle}
+                            onEditClose={onAddTask}
+                            placeholder={'+ Add task'}
+                        />
+                        {/* {isInputFocus ? (
                             <form onSubmit={onAddTask}>
                                 <input
                                     autoFocus
@@ -51,7 +61,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                         ) : (
                             <span className="editable-txt" onClick={onTitleClick}>+ Add task</span>
 
-                        )}
+                        )} */}
                     </li>
                 </div>
 

@@ -1,5 +1,5 @@
 
-export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, inputName = '', onInputChange, onEditClose, extraBtns, style = {} }) {
+export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, inputName = '', placeholder = '', onInputChange, onEditClose, extraBtns, style = {} }) {
     return (
         <div className="editable-txt-container">
             {isEditing ? (
@@ -28,7 +28,7 @@ export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, input
                             style={style}
                             value={inputValue}
                             onChange={onInputChange}
-                        //   onBlur={onEditClose}
+                            placeholder={placeholder}
                         />
                     </form>
 
