@@ -21,13 +21,13 @@ export function Sidebar() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        _loadDataBoards()
+        _loadBoards()
     }, [filterBy])
 
-    async function _loadDataBoards() {
+    async function _loadBoards() {
         try {
             await loadBoards(filterBy)
-            showSuccessMsg('Boards loaded successfully')
+            // showSuccessMsg('Boards loaded successfully')
         } catch (err) {
             console.error('Error loading Boards:', err)
             showErrorMsg('Cannot load Boards')

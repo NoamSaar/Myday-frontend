@@ -17,8 +17,8 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
             if (activeTask === groupId) onSetActiveTask(null)
             if (title) addTask()
 
-        } catch (error) {
-            console.error("Error changing task title:", error)
+        } catch (err) {
+            console.error('Error changing task title:', err)
         }
     }
 

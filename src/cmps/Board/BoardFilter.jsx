@@ -20,10 +20,10 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 setIsFocused(false)
             }
         }
-        document.addEventListener("mousedown", handleClickOutsideSearch)
+        document.addEventListener('mousedown', handleClickOutsideSearch)
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutsideSearch)
+            document.removeEventListener('mousedown', handleClickOutsideSearch)
         }
     }, [])
 
@@ -39,8 +39,10 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         try {
             const taskTitle = 'New Item'
             await addTask(board._id, board.groups[0].id, taskTitle, true)
-        } catch (error) {
-            console.error("Error adding new task:", error)
+            showSuccessMsg('Board updated successfully')
+        } catch (err) {
+            console.error('Error adding new task:', err)
+            showErrorMsg('Cannot update Board')
         }
     }
 

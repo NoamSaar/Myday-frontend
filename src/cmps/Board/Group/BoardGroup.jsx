@@ -37,8 +37,8 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             const updatedGroup = { ...group, [field]: date }
             updateGroup(board._id, updatedGroup)
-        } catch (error) {
-            console.error("Error changing group:", error)
+        } catch (err) {
+            console.error('Error changing group:', err)
         }
     }
 
@@ -46,8 +46,8 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             removeGroup(board._id, group.id)
             resetDynamicModal()
-        } catch (error) {
-            console.error("Error removing task:", error)
+        } catch (err) {
+            console.error('Error removing task:', err)
         }
     }
 
@@ -55,19 +55,19 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             const title = target.value
             setGroupTitle(title)
-        } catch (error) {
-            console.error("Error changing group title:", error)
+        } catch (err) {
+            console.error('Error changing group title:', err)
         }
     }
 
     async function onChangeColor(color) {
         try {
             setGroupColor(color)
-            onGroupChange("color", color)
+            onGroupChange('color', color)
             resetDynamicModal()
             setIsEditing(false)
-        } catch (error) {
-            console.error("Error changing group color:", error)
+        } catch (err) {
+            console.error('Error changing group color:', err)
             setGroupColor(group.color)
         }
     }
@@ -76,18 +76,17 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             if (!groupTitle) {
                 setGroupTitle(group.title)
-                onGroupChange("title", group.title)
+                onGroupChange('title', group.title)
             } else {
-                onGroupChange("title", groupTitle)
-
+                onGroupChange('title', groupTitle)
             }
 
             if (!isColorPickerOpen) {
                 setIsEditing(false)
                 onTitleEditLeave()
             }
-        } catch (error) {
-            console.error("Error changing group title:", error)
+        } catch (err) {
+            console.error('Error changing group title:', err)
         }
     }
 
