@@ -96,7 +96,7 @@ function DynamicModal(props) {
             return (
                 <MemberPicker
                     chosenMembers={props.data.chosenMembers}
-                    memberOptions={props.data.memberOptions}
+                    allMembers={props.data.allMembers}
                     onChangeMembers={props.data.onChangeMembers}
                 />)
 

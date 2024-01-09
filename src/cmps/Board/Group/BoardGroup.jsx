@@ -2,13 +2,11 @@ import { useSelector } from "react-redux"
 import { useEffect, useRef, useState } from "react"
 
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { utilService } from "../../../services/util.service"
 
 import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { TaskList } from "./TaskList"
-import { GroupTitlesList } from "./GroupTitlesList"
 import { TaskHeaderList } from "./TaskHeaderList"
 import { EditableTxt } from "../../EditableTxt"
 
@@ -85,7 +83,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     async function onGroupEditExit() {
         try {
             let titleToSave = groupTitle
-
             if (!groupTitle) {
                 setGroupTitle(group.title)
                 titleToSave = group.title
@@ -120,7 +117,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
             setDynamicModal({
                 isOpen: true,
                 boundingRect: menuBtnRef.current.getBoundingClientRect(),
-                // boundingRect: ev.target.getBoundingClientRect(),
                 type: 'menuOptions', data: { options: menuOptions },
                 fatherId: `${group.id}-menu`
             })
@@ -188,39 +184,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                             />
                         </div>
 
-
-                        {/* {isEditing ? (
-                            <div
-                                tabIndex={0}
-                                onBlur={onGroupEditExit}
-                                className="focused-input group-title-edit-container flex align-center"
-                                ref={colorBtnParentRef}
-                            >
-                                <div
-                                    className="group-color-display"
-                                    style={{ backgroundColor: groupColor }}
-                                    onMouseDown={onColorDisplayClick}>
-                                </div>
-
-                                <form onSubmit={ev => (ev.preventDefault(), onGroupEditExit())}>
-                                    <input
-                                        className="reset"
-                                        type="text"
-                                        autoFocus
-                                        style={{ color: groupColor }}
-                                        value={groupTitle}
-                                        onChange={onChangeTitle}
-                                    // onBlur={onGroupEditExit}
-                                    />
-                                </form>
-                            </div>
-                        ) : (
-                            <h4 style={{ color: groupColor }} className="editable-txt"
-                                onClick={() => setIsEditing(true)}
-                            >
-                                {highlightText(groupTitle, filterBy.txt)}
-                            </h4>
-                        )} */}
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>
                 </div>
