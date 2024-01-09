@@ -4,8 +4,8 @@ import { useEffect, useState } from "react"
 import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { utilService } from "../../../services/util.service"
 
-import { getGcolors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal } from "../../../store/actions/system.actions"
+import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
+import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { TaskList } from "./TaskList"
 import { GroupTitlesList } from "./GroupTitlesList"
@@ -23,7 +23,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     const isMenuOpen = fatherId === `${group.id}-menu`
     const isColorPickerOpen = fatherId === `${group.id}-colorPicker`
-    const colors = getGcolors()
+    const colors = getBoardColors()
 
     useEffect(() => {
         setGroupTitle(group.title)
@@ -33,21 +33,24 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         setIsEditing(isEditingTitle)
     }, [isEditingTitle])
 
-    async function onGroupChange(field, date) {
+    async function onGroupChange(field, data) {
         try {
-            const updatedGroup = { ...group, [field]: date }
+            const updatedGroup = { ...group, [field]: data }
             updateGroup(board._id, updatedGroup)
-        } catch (error) {
-            console.error("Error changing group:", error)
+        } catch (err) {
+            console.error('Error updating group:', err)
+            showErrorMsg(`Cannot update Group ${groupTitle} ${field}`)
         }
     }
 
-    async function onDeleteGroup() {
+    async function onRemoveGroup() {
         try {
             removeGroup(board._id, group.id)
             resetDynamicModal()
-        } catch (error) {
-            console.error("Error removing task:", error)
+            showSuccessMsg(`Group ${groupTitle} was successfully deleted.`)
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg(`Cannot delete Group ${groupTitle}`)
         }
     }
 
@@ -55,39 +58,43 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         try {
             const title = target.value
             setGroupTitle(title)
-        } catch (error) {
-            console.error("Error changing group title:", error)
+        } catch (err) {
+            console.error('Error changing group title:', err)
+            showErrorMsg(`Cannot change Group ${groupTitle} Tile`)
         }
     }
 
     async function onChangeColor(color) {
         try {
             setGroupColor(color)
-            onGroupChange("color", color)
+            onGroupChange('color', color)
             resetDynamicModal()
             setIsEditing(false)
-        } catch (error) {
-            console.error("Error changing group color:", error)
+        } catch (err) {
+            console.error('Error changing group color:', err)
             setGroupColor(group.color)
+            showErrorMsg(`Cannot change Group ${groupTitle} Color`)
         }
     }
 
-    async function onTitleEditExit() {
+    async function onGroupEditExit() {
         try {
+            let titleToSave = groupTitle
+
             if (!groupTitle) {
                 setGroupTitle(group.title)
-                onGroupChange("title", group.title)
-            } else {
-                onGroupChange("title", groupTitle)
-
+                titleToSave = group.title
             }
+
+            onGroupChange('title', titleToSave)
 
             if (!isColorPickerOpen) {
                 setIsEditing(false)
                 onTitleEditLeave()
             }
-        } catch (error) {
-            console.error("Error changing group title:", error)
+        } catch (err) {
+            console.error('Error changing group title:', err)
+            showErrorMsg(`Cannot change Group Tile`)
         }
     }
 
@@ -108,7 +115,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'menu options', data: { options: menuOptions },
+                type: 'menuOptions', data: { options: menuOptions },
                 fatherId: `${group.id}-menu`
             })
         }
@@ -123,7 +130,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'color picker',
+                type: 'colorPicker',
                 data: { colors: colors, onColorClick: onChangeColor },
                 fatherId: `${group.id}-colorPicker`,
                 isPosBlock: true,
@@ -135,7 +142,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         {
             icon: <DeleteIcon />,
             title: 'Delete',
-            onOptionClick: onDeleteGroup
+            onOptionClick: onRemoveGroup
         }
     ]
 
@@ -155,7 +162,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         {isEditing ? (
                             <div
                                 tabIndex={0}
-                                onBlur={onTitleEditExit}
+                                onBlur={onGroupEditExit}
                                 className="focused-input group-title-edit-container flex align-center"
                             >
                                 <div
@@ -164,7 +171,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                     onMouseDown={onColorDisplayClick}>
                                 </div>
 
-                                <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
+                                <form onSubmit={ev => (ev.preventDefault(), onGroupEditExit())}>
                                     <input
                                         className="reset"
                                         type="text"
@@ -172,7 +179,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                         style={{ color: groupColor }}
                                         value={groupTitle}
                                         onChange={onChangeTitle}
-                                        onBlur={onTitleEditExit}
+                                    // onBlur={onGroupEditExit}
                                     />
                                 </form>
                             </div>

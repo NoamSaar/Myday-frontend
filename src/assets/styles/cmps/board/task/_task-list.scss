@@ -11,7 +11,7 @@
         }
     }
 
-    ul:not(.task-preview-container):not(.add-task .task-preview) {
+    ul.task-preview:not(.add-task .task-preview) {
         border-block-start: $clr-group-border 0.5px solid;
         border-inline: unset;
     }

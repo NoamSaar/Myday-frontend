@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
 import { removeTask, updateTask } from "../../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData } from "../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 import { fetchUsers } from "../../../store/actions/user.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
@@ -16,7 +16,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
-    const [isShowMenu, setIsShowMenu] = useState(false)
+    const [isShowMenuBtn, setIsShowMenuBtn] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
     const isMenuOpen = fatherId === `${task.id}-menu`
@@ -24,14 +24,15 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const newPersons = task.person.length
-                    ? await fetchUsers(task.person)
+                const newmembers = task.members.length
+                    ? await fetchUsers(task.members)
                     : []
 
-                setCurrTask({ ...task, person: newPersons })
+                setCurrTask({ ...task, members: newmembers })
                 setTaskTitle(task.title)
-            } catch (error) {
-                console.error("Error fetching data:", error)
+            } catch (err) {
+                console.error('Error fetching data:', err)
+                showErrorMsg('Cannot get task data')
             }
         }
         fetchData()
@@ -41,18 +42,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         setCurrTask((prevTask) => ({ ...prevTask, title: taskTitle }))
     }, [taskTitle])
 
-    async function onTaskChange(field, data) {
+    async function onTaskChange(field, recivedData) {
         try {
-            let recivedData = data
-            if (field === 'person') recivedData = data.map(person => person._id)
+            let data = recivedData
+            if (field === 'members') data = data.map(member => member._id)
 
-            const updatedTask = { ...task, person: task.person, [field]: recivedData }
+            const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask)
 
             switch (field) {
-                case 'person':
+                case 'members':
                     setDynamicModalData({
-                        chosenMembers: data,
+                        chosenMembers: recivedData,
                         memberOptions: board.members,
                         onChangeMembers: onTaskChange
                     })
@@ -60,17 +61,20 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 default:
                     break
             }
-        } catch (error) {
-            console.error("Error changing task:", error)
+        } catch (err) {
+            console.error('Error changing task:', err)
+            showErrorMsg('Cannot change Task')
         }
     }
 
-    async function onDeleteTask() {
+    async function onRemoveTask() {
         try {
             removeTask(board._id, groupId, task.id)
             resetDynamicModal()
-        } catch (error) {
-            console.error("Error removing task:", error)
+            showSuccessMsg('We successfully deleted the Task')
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg('Cannot remove Task')
         }
     }
 
@@ -78,17 +82,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             const title = target.value
             setTaskTitle(title)
-        } catch (error) {
-            console.error("Error changing task title:", error)
+        } catch (err) {
+            console.error('Error changing task title:', err)
+            showErrorMsg('Cannot changing Task Title')
         }
     }
 
     function handleMouseEnter() {
-        setIsShowMenu(true)
+        setIsShowMenuBtn(true)
     }
 
     function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
+        if (!isMenuOpen) setIsShowMenuBtn(false)
     }
 
     function toggleMenu(ev) {
@@ -99,7 +104,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 {
                     isOpen: true,
                     boundingRect: ev.target.parentNode.getBoundingClientRect(),
-                    type: 'menu options',
+                    type: 'menuOptions',
                     data: { options: menuOptions },
                     fatherId: `${currTask.id}-menu`
                 })
@@ -115,40 +120,28 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             if (activeTask === task.id) onSetActiveTask(null)
 
+            let titleToSave = taskTitle
+
             if (!taskTitle) {
                 setTaskTitle(task.title)
-                onTaskChange("title", task.title)
-            } else {
-                onTaskChange("title", taskTitle)
+                titleToSave = task.title
             }
 
+            onTaskChange('title', titleToSave)
+
             setIsEditing(false)
-        } catch (error) {
-            console.error("Error changing task title:", error)
+        } catch (err) {
+            console.error('Error changing task title:', err)
+            showErrorMsg('Cannot changing Task Title')
         }
     }
 
-    function handleMouseEnter() {
-        setIsShowMenu(true)
-    }
-
-    function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
-    }
-
-    function toggleMenu(ev) {
-        if (isMenuOpen) {
-            setDynamicModal({ isOpen: false, boundingRect: null, type: '', data: {}, fatherId: '' })
-        } else {
-            setDynamicModal({ isOpen: true, boundingRect: ev.target.parentNode.getBoundingClientRect(), type: 'menu options', data: { options: menuOptions }, fatherId: `${currTask.id}-menu` })
-        }
-    }
 
     const menuOptions = [
         {
             icon: <DeleteIcon />,
-            title: "Delete",
-            onOptionClick: onDeleteTask,
+            title: 'Delete',
+            onOptionClick: onRemoveTask,
         },
     ]
 
@@ -160,7 +153,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseLeave={handleMouseLeave}
         >
             <div className="menu-container sticky-left">
-                {isShowMenu && (
+                {isShowMenuBtn && (
                     <button className="btn svg-inherit-color"
                         onClick={toggleMenu}><MenuIcon className="btn" />
                     </button>
@@ -173,7 +166,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             </div>
 
             <ul className={` clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
-                <div className={`task-title-container flex ${activeTask === currTask.id && 'active'}`}>
+                <ul className={`clean-list task-title-container flex ${activeTask === currTask.id && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
@@ -201,7 +194,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         )}
                     </li>
 
-                </div>
+                </ul>
 
                 {board.titlesOrder.map((title, idx) => {
                     return (

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react"
 
 import { addTask } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
 
-import { FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
+import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isMemberFilterOpen, setIsMemberFilterOpen] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
 
     useEffect(() => {
@@ -20,10 +20,10 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 setIsFocused(false)
             }
         }
-        document.addEventListener("mousedown", handleClickOutsideSearch)
+        document.addEventListener('mousedown', handleClickOutsideSearch)
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutsideSearch)
+            document.removeEventListener('mousedown', handleClickOutsideSearch)
         }
     }, [])
 
@@ -41,52 +41,34 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         try {
             const taskTitle = 'New Item'
             await addTask(board._id, board.groups[0].id, taskTitle, true)
-        } catch (error) {
-            console.error("Error adding new task:", error)
+        } catch (err) {
+            console.error('Error adding new task:', err)
+            showErrorMsg('Cannot update Board')
         }
     }
 
-    function toggleMenu(ev) {
+    function toggleMemberFilter(ev) {
         ev.stopPropagation()
-        if (isMenuOpen) {
+        if (isMemberFilterOpen) {
             //updating modal in store
             resetDynamicModal()
-            setIsMenuOpen(false)
+            setIsMemberFilterOpen(false)
         } else {
             //updating modal in store
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'board member select',
+                type: 'boardMemberSelect',
                 data: { chosenMember: filterByToEdit.member, onChangeMember: setMemberFilter, members: board.members },
                 isPosBlock: true,
                 isCenter: true
             })
-            setIsMenuOpen(true)
+            setIsMemberFilterOpen(true)
         }
     }
 
-    const menuOptions = [
-        {
-            icon: <PersonIcon />,
-            title: <select value={filterByToEdit.member} name="member" onChange={handleChange}>
-                <option value="">All</option>
-                <>
-                    {board.members.map(member => (
-                        <option key={member._id} value={member._id}>
-                            {member.fullname}
-                            {/* <img src={member.imgUrl}></img> */}
-                        </option>
-                    ))}
-                </>
-            </select>,
-            onOptionClick: () => {
-                console.log('hi')
-            }
-        },
-    ]
-
     function setMemberFilter(memberId) {
+        console.log('memberId', memberId)
         setFilterByToEdit(prevFilter => ({ ...prevFilter, member: memberId }))
 
         setDynamicModalData({
@@ -94,6 +76,14 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             onChangeMember: setMemberFilter,
             members: board.members,
         })
+    }
+
+    function onResetMemberFilter(ev) {
+        ev.stopPropagation()
+        setMemberFilter(null)
+        resetDynamicModal()
+        resetDynamicModal()
+        setIsMemberFilterOpen(false)
     }
 
     function handleChange({ target }) {
@@ -144,9 +134,15 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 }
             </div>
 
-            <button className="btn person" title="Filter by person" onClick={toggleMenu}>
-                <PersonIcon />
+            <button className={` btn ${filterByToEdit.member || isMemberFilterOpen ? 'active' : ''} person`} title="Filter by person" onClick={toggleMemberFilter}>
+                {filterByToEdit.member ? filterByToEdit.member : <PersonIcon />}
                 <span>Person</span>
+                {filterByToEdit.member && <div className="close-btn svg-inherit-color"
+                    style={{ fill: '#323338' }}
+                    onClick={onResetMemberFilter}
+                >
+                    <CloseFilledIcon />
+                </div>}
             </button>
 
             <button className="btn filter" title="Filter by anything">

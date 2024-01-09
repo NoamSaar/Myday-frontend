@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
+
+import { showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
 import { login, logout, signup } from "../store/actions/user.actions.js"
+
 import { LogoIcon, LoginIcon } from "../services/svg.service.jsx"
 import { MenuOptionsModal } from "./MenuOptionsModal"
 
@@ -14,6 +16,7 @@ export function AppHeader() {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
         } catch (err) {
+            console.error('Error logging in:', err)
             showErrorMsg('Cannot login')
         }
     }
@@ -22,6 +25,7 @@ export function AppHeader() {
             const user = await signup(credentials)
             showSuccessMsg(`Welcome new user: ${user.fullname}`)
         } catch (err) {
+            console.error('Error signing up:', err)
             showErrorMsg('Cannot signup')
         }
     }
@@ -30,6 +34,7 @@ export function AppHeader() {
             await logout()
             showSuccessMsg(`Bye now`)
         } catch (err) {
+            console.error('Error logging out:', err)
             showErrorMsg('Cannot logout')
         }
     }

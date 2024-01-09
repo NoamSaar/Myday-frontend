@@ -12,7 +12,7 @@ export function LinkPreview({ info, onUpdate, taskId }) {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'link picker',
+                type: 'linkPicker',
                 data: {
                     url: info && info.url || '',
                     displayTxt: info && info.displayTxt || '',

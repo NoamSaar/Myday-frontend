@@ -43,7 +43,6 @@ export async function loadBoards() {
 }
 
 export async function loadBoard(boardId) {
-    setIsLoading(true)
     try {
         const filterBy = store.getState().boardModule.filterBy
         const board = await boardService.getById(boardId, filterBy)
@@ -149,8 +148,8 @@ export function setIsHeaderCollapsed(isCollapsed) {
     store.dispatch({ type: SET_IS_HEADER_COLLAPSED, isCollapsed })
 }
 
-export function getGcolors() {
-    return boardService.getGcolors()
+export function getBoardColors() {
+    return boardService.getBoardColors()
 }
 
 // Demo for Optimistic Mutation 

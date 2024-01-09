@@ -14,7 +14,7 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'member picker',
+                type: 'memberPicker',
                 data: { chosenMembers, memberOptions, onChangeMembers: onUpdate },
                 fatherId: `${taskId}-memberPicker`,
                 isPosBlock: true
@@ -23,7 +23,7 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
     }
 
     return (
-        <li onClick={onMemberPreviewClick} className="member-preview person-col flex justify-center align-center">
+        <li onClick={onMemberPreviewClick} className="member-preview member-col flex justify-center align-center">
             {!chosenMembers.length &&
                 <img className="user-img"
                     src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg"

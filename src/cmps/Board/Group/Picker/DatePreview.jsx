@@ -13,7 +13,7 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
             setDynamicModal({
                 isOpen: true,
                 boundingRect: ev.target.getBoundingClientRect(),
-                type: 'date picker',
+                type: 'datePicker',
                 data: { selectedDate: selectedDate || Date.now(), onChangeDate },
                 fatherId: `${taskId}-datePicker`,
                 isPosBlock: true

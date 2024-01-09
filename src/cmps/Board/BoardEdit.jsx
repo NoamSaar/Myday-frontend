@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
+import { showErrorMsg } from "../../store/actions/system.actions"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -30,8 +31,10 @@ export function BoardEdit({ board }) {
     async function onUpdateBoard() {
         try {
             await updateBoard(boardToEdit)
+            showSuccessMsg('Board updated successfully')
         } catch (err) {
             console.log('Cannot update board', err)
+            showErrorMsg('Cannot update Board')
         } finally {
             setIsEditing(false)
         }

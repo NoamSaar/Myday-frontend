@@ -2,9 +2,9 @@ import { userService } from '../../services/user.service.js'
 // import { socketService } from '../../services/socket.service.js'
 import { store } from '../store.js'
 
-import { showErrorMsg } from '../../services/event-bus.service.js'
 import { SET_IS_LOADING } from '../reducers/system.reducer.js'
 import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from '../reducers/user.reducer.js'
+import { showErrorMsg } from './system.actions.js'
 
 export async function loadUsers() {
     try {
@@ -94,8 +94,8 @@ export async function getUser(userId) {
 export async function fetchUsers(userIds) {
     try {
         return await Promise.all(
-            userIds.map(async (person) => {
-                const loadedUser = await getUser(person)
+            userIds.map(async (member) => {
+                const loadedUser = await getUser(member)
                 return loadedUser
             })
         )

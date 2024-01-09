@@ -62,21 +62,21 @@ export function DynamicAbsoluteModal() {
 
 function DynamicModal(props) {
     switch (props.type) {
-        case 'color picker':
+        case 'colorPicker':
             return (
                 <ColorPicker
                     colors={props.data.colors}
                     onColorClick={props.data.onColorClick}
                 />)
 
-        case 'date picker':
+        case 'datePicker':
             return (
                 <DatePicker
                     selectedDate={props.data.selectedDate}
                     onChangeDate={props.data.onChangeDate}
                 />)
 
-        case 'status picker':
+        case 'statusPicker':
             return (
                 <StatusPicker
                     selectedStatus={props.data.selectedStatus}
@@ -84,7 +84,7 @@ function DynamicModal(props) {
                     onChangeStatus={props.data.onUpdate}
                 />)
 
-        case 'link picker':
+        case 'linkPicker':
             return (
                 <LinkPicker
                     url={props.data.url}
@@ -92,7 +92,7 @@ function DynamicModal(props) {
                     changeLink={props.data.onChangeLink}
                 />)
 
-        case 'member picker':
+        case 'memberPicker':
             return (
                 <MemberPicker
                     chosenMembers={props.data.chosenMembers}
@@ -100,10 +100,10 @@ function DynamicModal(props) {
                     onChangeMembers={props.data.onChangeMembers}
                 />)
 
-        case 'menu options':
+        case 'menuOptions':
             return <MenuOptionsModal options={props.data.options} />
 
-        case 'board member select':
+        case 'boardMemberSelect':
             return <BoardMemberSelect chosenMember={props.data.chosenMember} members={props.data.members} onChangeMember={props.data.onChangeMember} />
     }
 }
