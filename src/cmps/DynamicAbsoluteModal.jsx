@@ -9,6 +9,7 @@ import { DatePicker } from "./Board/Group/Picker/PickerModals/DatePicker"
 import { LinkPicker } from "./Board/Group/Picker/PickerModals/LinkPicker"
 import { MenuOptionsModal } from "./MenuOptionsModal"
 import BoardMemberSelect from "./Board/BoardMemberSelect"
+import { FilePicker } from "./Board/Group/Picker/PickerModals/FilePicker"
 
 export function DynamicAbsoluteModal() {
     const modalRef = useRef()
@@ -142,6 +143,13 @@ function DynamicModal(props) {
                     url={props.data.url}
                     displayTxt={props.data.displayTxt}
                     changeLink={props.data.onChangeLink}
+                />)
+
+        case 'filePicker':
+            return (
+                <FilePicker
+                    chosenFile={props.data.chosenFile}
+                    changeFile={props.data.onChangeFile}
                 />)
 
         case 'memberPicker':
