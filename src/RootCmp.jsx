@@ -7,7 +7,7 @@ import { TaskDetails } from './pages/TaskDetails'
 import { BoardDetails } from './pages/BoardDetails'
 import { HomePage } from './pages/HomePage'
 import { Workspace } from './pages/Workspace'
-import { DynamicAbsoluteModal } from './cmps/DynamicAbsoluteModal'
+import { DynamicModal } from './cmps/DynamicModal'
 
 export function RootCmp() {
 
@@ -27,7 +27,7 @@ export function RootCmp() {
                     </Route>
                 </Routes>
             </main>
-            <DynamicAbsoluteModal />
+            <DynamicModal />
         </div>
     )
 }
