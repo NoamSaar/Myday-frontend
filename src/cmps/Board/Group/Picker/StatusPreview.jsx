@@ -26,7 +26,9 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
                 fatherId: `${taskId}-${title}Picker`,
                 isPosBlock: true,
-                isCenter: true
+                isCenter: true,
+                isTooltip: true,
+
             })
         }
     }
