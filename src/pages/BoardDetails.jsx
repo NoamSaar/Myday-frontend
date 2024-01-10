@@ -2,11 +2,14 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { Outlet, useParams } from "react-router"
 
-import { addGroup, loadBoard, setFilterBy } from "../store/actions/board.actions"
+import { boardService } from "../services/board.service.local"
+
+import { addGroup, loadBoard, setFilterBy, getTask } from "../store/actions/board.actions"
 
 import { BigPlusIcon } from "../services/svg.service"
 import { BoardGroup } from "../cmps/Board/Group/BoardGroup"
 import { BoardHeader } from "../cmps/Board/BoardHeader"
+import { TaskDetails } from "./TaskDetails"
 
 export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
@@ -76,8 +79,15 @@ export function BoardDetails() {
                 Add new group
             </button>
 
-            <Outlet />
+            <Outlet
+                routes={{
+                    'task/:taskId': { element: <TaskDetails boardId={boardId} /> },
+                    // 'activity_log': { element: <ActivityLog boardId={boardId} /> },
+                }}
+            />
             {/* the outlet is to display the nested route- task details */}
+            {/* Pass different props to each component using the routes object */}
+
         </section>
     )
 }

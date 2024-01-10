@@ -11,7 +11,7 @@ import { MenuOptionsModal } from "./MenuOptionsModal"
 import BoardMemberSelect from "./Board/BoardMemberSelect"
 import { FilePicker } from "./Board/Group/Picker/PickerModals/FilePicker"
 
-export function DynamicAbsoluteModal() {
+export function DynamicModal() {
     const modalRef = useRef()
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const [ModalDimensions, setModalDimensions] = useState({ width: 0, height: 0 })
@@ -112,12 +112,12 @@ export function DynamicAbsoluteModal() {
             {modalData.hasTooltip && (
                 <div className={`tooltip tooltip-${tooltipDirection}`}></div>
             )}
-            <DynamicModal type={modalData.type} data={modalData.data} />
+            <DynamicModalRouter type={modalData.type} data={modalData.data} />
         </div>
     )
 }
 
-function DynamicModal(props) {
+function DynamicModalRouter(props) {
     switch (props.type) {
         case 'colorPicker':
             return (

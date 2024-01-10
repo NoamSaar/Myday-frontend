@@ -3,14 +3,16 @@ import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
 import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
 import { DynamicPreview } from "./Picker/DynamicPreview"
 import { EditableTxt } from "../../EditableTxt"
+import { useNavigate } from "react-router"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
+    const navigate = useNavigate()
 
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
@@ -166,7 +168,12 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         <input type="checkbox" />
                     </li>
 
-                    <li className="task-title single-task flex">
+                    <li className="task-title single-task flex"
+                        onClick={() => {
+                            setSidePanelOpen(true)
+                            navigate('task/' + currTask.id)
+                        }}
+                    >
                         <EditableTxt
                             isEditing={isEditing}
                             txtValue={highlightText(taskTitle, filterBy.txt)}

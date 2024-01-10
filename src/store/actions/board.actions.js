@@ -257,6 +257,14 @@ export function setActiveTask(taskId) {
     store.dispatch(getActionSetActiveTask(taskId))
 }
 
+export async function getTask(boardId, taskId) {
+    try {
+        return await boardService.getTaskById(boardId, taskId)
+    } catch (error) {
+        console.error('Error fetching task:', error)
+        throw new Error('Failed to fetch task')
+    }
+}
 
 /**************** get actions ****************/
 
