@@ -142,7 +142,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     if (!currTask) return <ul className="task-preview-container task-title">Loading</ul>
     return (
         <ul
-            className="clean-list task-preview-container flex"
+            className="clean-list flex subgrid full-grid-column task-preview-container"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
@@ -180,7 +180,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 </ul>
             </div>
 
-            <ul className={`clean-list task-preview flex ${isActive && 'active'}`}>
+            <ul className={`clean-list subgrid grid-column-table-content flex ${isActive && 'active'} task-preview`}>
 
                 {board.titlesOrder.map((title, idx) => {
                     return (

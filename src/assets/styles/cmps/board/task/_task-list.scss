@@ -1,14 +1,4 @@
 .task-list {
-    // display: grid;
-    // grid-template-columns: 384px 97px 139px 139px 174px 139px 138px 1fr;
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
-    width: 100%;
-
-    li:not(.task-title-container li) {
-        // grid-column: span 1;
-    }
 
     .task-header-list {
         margin-inline-start: 36px;
@@ -83,47 +73,13 @@
         }
     }
 
-    .task-preview-container {
-        display: grid;
-        grid-template-columns: subgrid;
-        grid-column: 1 / -1;
-
-        .task-preview {
-            display: grid;
-            grid-template-columns: subgrid;
-            grid-column: 2 / -1;
-
-        }
-    }
-
-    .tasks-container {
-        display: grid;
-        grid-template-columns: subgrid;
-        grid-column: 1 / -1;
-        width: 200vh;
-    }
-
     .add-task {
-        display: grid;
-        grid-template-columns: subgrid;
-        grid-column: 1 / -1;
-        width: 200vh;
 
         .task-preview {
-            grid-column: 1 / -1;
 
             .task-title-container {
-                display: grid;
-                grid-template-columns: subgrid;
-                grid-column: 1 / -1;
-                // position: sticky;
-                // left: 0;
 
                 .add-task-content {
-                    width: 100%;
-                    display: grid;
-                    grid-template-columns: subgrid;
-                    grid-column: 1 / 2;
 
                     .add-task-content-layout {
                         width: 100%;
@@ -154,19 +110,9 @@
                 border-block: $clr-group-border 0.5px solid;
             }
 
-            .line-end {
-                width: 1597px;
-            }
-
             .editable-txt {
                 opacity: .8;
             }
-        }
-
-        .line-end {
-            display: grid;
-            grid-template-columns: subgrid;
-            grid-column: 2 / -1;
         }
 
         .color-display {

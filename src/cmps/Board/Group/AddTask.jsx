@@ -25,12 +25,12 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
     }
 
     return (
-        <ul className="clean-list task-preview-container add-task sticky-left">
+        <ul className="clean-list subgrid full-grid-column task-preview-container add-task">
 
-            <ul className={`clean-list task-preview sticky-left ${activeTask === groupId && 'active'}`}>
+            <ul className={`clean-list subgrid full-grid-column ${activeTask === groupId && 'active'} task-preview`}>
 
-                <div className="task-title-container">
-                    <div className="add-task-content sticky-left flex">
+                <div className="subgrid full-grid-column task-title-container">
+                    <div className="sticky-left flex subgrid full-width add-task-content">
                         <div className="add-task-content-layout flex">
 
 
@@ -56,7 +56,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                             </div>
                         </div>
                     </div>
-                    <li className="line-end"></li>
+                    <li className="subgrid grid-column-table-content line-end"></li>
                 </div>
 
             </ul>
