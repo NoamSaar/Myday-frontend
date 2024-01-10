@@ -8,11 +8,11 @@ export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isPickerOpen = parentId === `${taskId}-memberPicker`
+    const isCurrPickerOpen = parentId === `${taskId}-memberPicker`
     const extraMembers = chosenMembers.length - 2
 
     function onMemberPreviewClick(ev) {
-        if (isPickerOpen) {
+        if (isCurrPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({

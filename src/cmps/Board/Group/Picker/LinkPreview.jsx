@@ -7,10 +7,10 @@ export function LinkPreview({ info, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isPickerOpen = parentId === `${taskId}-linkPicker`
+    const isCurrPickerOpen = parentId === `${taskId}-linkPicker`
 
     function onLinkPreviewClick(ev) {
-        if (isPickerOpen) {
+        if (isCurrPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({
