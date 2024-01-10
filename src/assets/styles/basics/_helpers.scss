@@ -180,22 +180,41 @@
 }
 
 
-.tooltip {
+// .tooltip {
 
-    position: absolute;
+//     position: absolute;
+//     border-style: solid;
+//     left: 50%;
+//     transform: translateX(-50%);
+
+//     &.tooltip-top {
+//         border-width: 0 10px 10px 10px;
+//         border-color: transparent transparent $clr0 transparent;
+//         top: -10px;
+//     }
+
+//     &.tooltip-bottom {
+//         border-width: 10px 10px 0 10px;
+//         border-color: $clr0 transparent transparent transparent;
+//         bottom: -10px;
+//     }
+// }
+
+.tooltip {
     border-style: solid;
-    left: 50%;
-    transform: translateX(-50%);
+    width: fit-content;
+    margin: auto;
+    z-index: 10; //for it to overlap its brother shadow
 
     &.tooltip-top {
         border-width: 0 10px 10px 10px;
         border-color: transparent transparent $clr0 transparent;
-        top: -10px;
     }
 
     &.tooltip-bottom {
         border-width: 10px 10px 0 10px;
         border-color: $clr0 transparent transparent transparent;
-        bottom: -10px;
+        order: 1;
     }
+
 }

@@ -30,6 +30,10 @@ export function DynamicAbsoluteModal() {
                 // Position below the father element
                 newTop = modalData.boundingRect.bottom
 
+                if (modalData.hasTooltip) {
+                    setTooltipDirection('top')
+                }
+
                 if (modalData.isCenter) {
                     // Center horizontally relative to the father element
                     newLeft = modalData.boundingRect.left + (modalData.boundingRect.width - modalWidth) / 2
@@ -103,7 +107,7 @@ export function DynamicAbsoluteModal() {
     // console.log('modalData.tooltip', modalData.hasTooltip)
 
     return (
-        <div style={style} ref={modalRef} className='dynamic-absolute-modal'>
+        <div style={style} ref={modalRef} className='dynamic-absolute-modal flex column'>
             {modalData.hasTooltip && (
                 <div className={`tooltip tooltip-${tooltipDirection}`}></div>
             )}
