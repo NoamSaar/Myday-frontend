@@ -59,6 +59,6 @@ export function getEmptyDynamicModal() {
         fatherId: '',
         isPosBlock: true,
         isCenter: true,
-        isTooltip: false,
+        hasTooltip: false,
     }
 }

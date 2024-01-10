@@ -27,7 +27,7 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
                 fatherId: `${taskId}-${title}Picker`,
                 isPosBlock: true,
                 isCenter: true,
-                isTooltip: true,
+                hasTooltip: true,
 
             })
         }
