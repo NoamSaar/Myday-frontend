@@ -7,7 +7,6 @@ export function LinkPicker({ url, displayTxt, changeLink }) {
 
     function onChangeLink(ev) {
         if (ev) ev.preventDefault()
-        console.log('{ url: newUrl, displayTxt: newDisplayTxt }', { url: newUrl, displayTxt: newDisplayTxt })
         changeLink('link', { url: newUrl, displayTxt: newDisplayTxt })
     }
 
@@ -43,26 +42,9 @@ export function LinkPicker({ url, displayTxt, changeLink }) {
 
             <label>Write or paste a link</label>
             <DynamicInput inputProps={urlInputProps} />
-            {/* <input
-                className="reset black-blue-input"
-                type="text"
-                value={newUrl}
-                placeholder="www.example.com"
-                onBlur={onChangeLink}
-                onChange={ev => setNewUrl(ev.target.value)}
-            /> */}
 
             <label>Text to display</label>
             <DynamicInput inputProps={displayInputProps} />
-
-            {/* <input
-                className="reset black-blue-input"
-                type="text"
-                value={newDisplayTxt}
-                placeholder="Example text"
-                onBlur={onChangeLink}
-                onChange={ev => setNewDisplayTxt(ev.target.value)}
-            /> */}
 
         </form>
     )

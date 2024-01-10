@@ -4,7 +4,7 @@ import { useRef } from "react"
 import { UserImg } from "../../../UserImg"
 import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
 
-export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }) {
+export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -19,7 +19,7 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
                 isOpen: true,
                 parentRefCurrent: previewBtnRef.current,
                 type: 'memberPicker',
-                data: { chosenMembers, memberOptions, onChangeMembers: onUpdate },
+                data: { chosenMembers, allMembers, onChangeMembers: onUpdate },
                 fatherId: `${taskId}-memberPicker`,
                 isPosBlock: true,
                 isCenter: true,

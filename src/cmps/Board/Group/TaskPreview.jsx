@@ -6,7 +6,7 @@ import { getMembersFromBoard, removeTask, updateTask } from "../../../store/acti
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { DynamicPicker } from "./Picker/DynamicPicker"
+import { DynamicPreview } from "./Picker/DynamicPreview"
 import { EditableTxt } from "../../EditableTxt"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
@@ -48,7 +48,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 case 'members':
                     setDynamicModalData({
                         chosenMembers: recivedData,
-                        memberOptions: board.members,
+                        allMembers: board.members,
                         onChangeMembers: onTaskChange
                     })
                     break
@@ -115,7 +115,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             if (activeTask === task.id) onSetActiveTask(null)
 
             let titleToSave = taskTitle
-
             if (!taskTitle) {
                 setTaskTitle(task.title)
                 titleToSave = task.title
@@ -139,7 +138,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         },
     ]
 
-    if (!currTask) return <ul className="task-title">Loading</ul>
+    if (!currTask) return <ul className="task-preview-container task-title">Loading</ul>
     return (
         <ul
             className="clean-list task-preview-container flex"
@@ -161,7 +160,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 className="color-display sticky-left-36">
             </div>
 
-            <ul className={` clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
+            <ul className={`clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
                 <ul className={`clean-list task-title-container flex ${activeTask === currTask.id && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
@@ -176,38 +175,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             onInputChange={onChangeTitle}
                             onEditClose={onTitleEditExit}
                         />
-                        {/* {isEditing ? (
-                            <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
-                                <input
-                                    autoFocus
-                                    value={taskTitle}
-                                    onChange={onChangeTitle}
-                                    className="reset focused-input"
-                                    type="text"
-                                    onBlur={onTitleEditExit}
-                                />
-                            </form>
-                        ) : (
-                            <span
-                                className="editable-txt"
-                                onClick={onTitleClick}
-                                title={taskTitle}
-                            >
-                                {highlightText(taskTitle, filterBy.txt)}
-                            </span>
-                        )} */}
                     </li>
 
                 </ul>
 
                 {board.titlesOrder.map((title, idx) => {
                     return (
-                        <DynamicPicker
+                        <DynamicPreview
                             key={idx}
                             title={title}
                             task={currTask}
                             onUpdate={onTaskChange}
-                            memberOptions={board.members}
+                            allMembers={board.members}
                         />
                     )
                 })}
