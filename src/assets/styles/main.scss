@@ -24,7 +24,10 @@
 // board
 @import "cmps/board/board-header";
 @import "cmps/board/board-group";
-@import "cmps/board/group-summary";
+
+//summary
+@import "cmps/board/summary/group-summary";
+@import "cmps/board/summary/label-summary";
 
 // tasks
 @import "cmps/board/task/task-list";
