@@ -24,7 +24,9 @@ export function LabelPreview({ title, info, onUpdate, taskId }) {
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
                 fatherId: `${taskId}-${title}Picker`,
                 isPosBlock: true,
-                isCenter: true
+                isCenter: true,
+                hasTooltip: true,
+
             })
         }
     }

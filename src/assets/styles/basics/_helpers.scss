@@ -178,3 +178,15 @@
     min-width: 25px;
     max-width: 25px;
 }
+
+//refernce to after tooltip from top
+// &::after {
+//     content: "";
+//     position: absolute;
+//     border-style: solid;
+//     border-width: 0 10px 10px 10px;
+//     border-color: transparent transparent white transparent;
+//     top: -10px;
+//     left: 50%;
+//     transform: translateX(-50%);
+// }

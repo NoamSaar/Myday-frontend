@@ -14,6 +14,7 @@ export function DynamicAbsoluteModal() {
     const modalRef = useRef()
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const [ModalDimensions, setModalDimensions] = useState({ width: 0, height: 0 })
+    const [tooltipDirection, setTooltipDirection] = useState('top') // Default direction
 
     useEffect(() => {
         if (modalRef.current) {
@@ -29,6 +30,10 @@ export function DynamicAbsoluteModal() {
                 // Position below the father element
                 newTop = modalData.boundingRect.bottom
 
+                if (modalData.hasTooltip) {
+                    setTooltipDirection('top')
+                }
+
                 if (modalData.isCenter) {
                     // Center horizontally relative to the father element
                     newLeft = modalData.boundingRect.left + (modalData.boundingRect.width - modalWidth) / 2
@@ -39,6 +44,10 @@ export function DynamicAbsoluteModal() {
                 // Check if modal goes out of the bottom boundary of the viewport and adjust
                 if (newTop + modalHeight > viewportHeight) {
                     newTop = modalData.boundingRect.top - modalHeight
+
+                    if (modalData.hasTooltip) {
+                        setTooltipDirection('bottom')
+                    }
                 }
 
                 // Check and adjust for left/right viewport boundaries
@@ -86,7 +95,6 @@ export function DynamicAbsoluteModal() {
         }
     }, [modalRef])
 
-
     if (!modalData.isOpen) return
 
     const style = {
@@ -95,7 +103,10 @@ export function DynamicAbsoluteModal() {
     }
 
     return (
-        <div style={style} ref={modalRef} className="dynamic-absolute-modal">
+        <div style={style} ref={modalRef} className='dynamic-absolute-modal flex column'>
+            {modalData.hasTooltip && (
+                <div className={`tooltip tooltip-${tooltipDirection}`}></div>
+            )}
             <DynamicModal type={modalData.type} data={modalData.data} />
         </div>
     )
