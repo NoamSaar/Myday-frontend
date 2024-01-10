@@ -7,7 +7,7 @@ export const SET_DYNAMIC_MODAL_OPEN = 'SET_DYNAMIC_MODAL_OPEN'
 export const SET_DYNAMIC_MODAL_PARENT_REF = 'SET_DYNAMIC_MODAL_PARENT_REF'
 export const SET_DYNAMIC_MODAL_TYPE = 'SET_DYNAMIC_MODAL_TYPE'
 export const SET_DYNAMIC_MODAL_DATA = 'SET_DYNAMIC_MODAL_DATA'
-export const SET_DYNAMIC_MODAL_FATHER = 'SET_DYNAMIC_MODAL_FATHER'
+export const SET_DYNAMIC_MODAL_PARENT = 'SET_DYNAMIC_MODAL_PARENT'
 export const SET_DYNAMIC_MODAL = 'SET_DYNAMIC_MODAL'
 
 const initialState = {
@@ -36,8 +36,8 @@ export function systemReducer(state = initialState, action = {}) {
     case SET_DYNAMIC_MODAL_TYPE:
       return { ...state, dynamicModal: { ...state.dynamicModal, type: action.dynamicModalType } }
 
-    case SET_DYNAMIC_MODAL_FATHER:
-      return { ...state, dynamicModal: { ...state.dynamicModal, fatherId: action.fatherId } }
+    case SET_DYNAMIC_MODAL_PARENT:
+      return { ...state, dynamicModal: { ...state.dynamicModal, parentId: action.parentId } }
 
     case SET_DYNAMIC_MODAL_DATA:
       return { ...state, dynamicModal: { ...state.dynamicModal, data: action.dynamicModalData } }

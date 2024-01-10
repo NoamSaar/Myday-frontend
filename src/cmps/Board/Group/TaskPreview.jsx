@@ -14,14 +14,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenuBtn, setIsShowMenuBtn] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
-    const isMenuOpen = fatherId === `${task.id}-menu`
+    const isMenuOpen = parentId === `${task.id}-menu`
 
     useEffect(() => {
         const newmembers = task.members.length
@@ -100,7 +100,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     parentRefCurrent: menuBtnRef.current,
                     type: 'menuOptions',
                     data: { options: menuOptions },
-                    fatherId: `${currTask.id}-menu`
+                    parentId: `${currTask.id}-menu`
                 })
         }
     }
