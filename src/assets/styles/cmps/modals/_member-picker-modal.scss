@@ -6,7 +6,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         align-items: center;
-        padding-inline-start: 16px;
+        padding-inline: 16px 5px;
         padding-block-start: 16px;
 
         .chosen-member {
@@ -41,6 +41,7 @@
             }
 
         }
+
     }
 
     .new-member-picker-container {
@@ -54,6 +55,7 @@
         .dynamic-input {
             justify-content: space-between;
             padding: 2px 2px 2px 16px;
+            margin-inline: 0;
         }
 
         .member-options-list {
