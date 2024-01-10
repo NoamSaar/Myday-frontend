@@ -8,7 +8,8 @@
     transition: left 150ms;
 
     &>.sidebar-workspace,
-    .sidebar-board-nav {
+    .sidebar-board-nav,
+    .app-sidebar-resizer {
         opacity: 0;
     }
 
@@ -18,7 +19,8 @@
         box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
 
         &>.sidebar-workspace,
-        .sidebar-board-nav {
+        .sidebar-board-nav,
+        .app-sidebar-resizer {
             opacity: 1;
         }
 
@@ -37,7 +39,8 @@
         }
 
         &>.sidebar-workspace,
-        .sidebar-board-nav {
+        .sidebar-board-nav,
+        .app-sidebar-resizer {
             opacity: 1;
         }
 
@@ -45,6 +48,22 @@
             box-shadow: none;
         }
 
+    }
+
+    /* ResizableSidebar.css */
+
+    .app-sidebar-resizer {
+        width: 5px;
+        height: 100%;
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: col-resize;
+    }
+
+    .app-sidebar-resizer.resizing {
+        user-select: none;
     }
 
     @import './sidebar-main-nav.scss';

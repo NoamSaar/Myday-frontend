@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 
 import { showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
@@ -12,6 +12,10 @@ import { SidebarBoardNav } from "./SidebarBoardNav"
 import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions"
 
 export function Sidebar() {
+    const sidebarRef = useRef(null);
+    const [isResizing, setIsResizing] = useState(false);
+    const [sidebarWidth, setSidebarWidth] = useState(250);
+
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
@@ -21,10 +25,10 @@ export function Sidebar() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        _loadBoards()
+        _loadDataBoards()
     }, [filterBy])
 
-    async function _loadBoards() {
+    async function _loadDataBoards() {
         try {
             await loadBoards(filterBy)
         } catch (err) {
@@ -67,6 +71,10 @@ export function Sidebar() {
         setFilterBy(filterBy)
     }
 
+    const onResize = (newWidth) => {
+        setSidebarWidth(newWidth)
+    }
+
     function onOpenSidebar() {
         setIsSidebarOpen(!isSidebarOpen)
     }
@@ -83,10 +91,45 @@ export function Sidebar() {
         _onRemoveBoard(boardId)
     }
 
+    const startResizing = useCallback((e) => {
+        setIsResizing(true)
+    }, [])
+
+    const stopResizing = useCallback(() => {
+        setIsResizing(false)
+    }, [])
+
+    const resize = useCallback(
+        (e) => {
+            if (isResizing) {
+                const newWidth = e.clientX - sidebarRef.current.getBoundingClientRect().left
+                onResize(newWidth)
+            }
+        },
+        [isResizing]
+    )
+
+    useEffect(() => {
+        window.addEventListener("mousemove", resize)
+        window.addEventListener("mouseup", stopResizing)
+        return () => {
+            window.removeEventListener("mousemove", resize)
+            window.removeEventListener("mouseup", stopResizing)
+        }
+    }, [resize, stopResizing])
 
     return (
-        <section className="sidebar-container">
-            <article className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <section className="sidebar-container relative">
+            <article
+                ref={sidebarRef}
+                style={{
+                    width: sidebarWidth,
+                    left: -(sidebarWidth - 30)
+                }}
+                onMouseDown={(e) => e.preventDefault()}
+                className={`sidebar ${isSidebarOpen ? 'open' : ''}`}
+            >
+
                 <SidebarMainNav
                     isSidebarOpen={isSidebarOpen}
                     onOpenSidebar={onOpenSidebar}
@@ -103,6 +146,7 @@ export function Sidebar() {
                     removeBoard={onRemoveBoard}
                     updateBoard={onUpdateBoard}
                 />
+                <div className="app-sidebar-resizer" onMouseDown={startResizing} />
                 {/* <LottieAnimation /> */}
             </article>
         </section>
