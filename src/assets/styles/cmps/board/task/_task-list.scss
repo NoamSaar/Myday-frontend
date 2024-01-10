@@ -110,19 +110,43 @@
         width: 200vh;
 
         .task-preview {
-            .task-title {
-                padding-inline-start: 16px;
+            grid-column: 1 / -1;
 
-                .editable-txt,
-                .focused-input form {
-                    padding-inline-start: 11.5px;
-                }
+            .task-title-container {
+                display: grid;
+                grid-template-columns: subgrid;
+                grid-column: 1 / -1;
+                // position: sticky;
+                // left: 0;
 
-                .editable-txt {
-                    width: 99%;
+                .add-task-content {
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: subgrid;
+                    grid-column: 1 / 2;
+
+                    .add-task-content-layout {
+                        width: 100%;
+
+                        .task-title {
+                            padding-inline-start: 16px;
+
+                            .editable-txt,
+                            .focused-input form {
+                                padding-inline-start: 11.5px;
+                            }
+
+                            .editable-txt {
+                                width: 99%;
+                            }
+
+                        }
+                    }
+
                 }
 
             }
+
 
             .single-task,
             .line-end,
@@ -137,6 +161,12 @@
             .editable-txt {
                 opacity: .8;
             }
+        }
+
+        .line-end {
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-column: 2 / -1;
         }
 
         .color-display {
