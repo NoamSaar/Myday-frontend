@@ -13,6 +13,7 @@ export const boardService = {
     addTask,
     removeTask,
     updateTask,
+    getTaskById,
     addGroup,
     removeGroup,
     updateGroup,
@@ -104,7 +105,8 @@ function _getDefaultGroup() {
                 id: 'c101',
                 title: 'Item 1',
                 members: [],
-                status: 'Working on it',
+                status: 'l102',
+                priority: 'l200',
                 date: 1703706909537,
                 updates: [],
             },
@@ -112,7 +114,8 @@ function _getDefaultGroup() {
                 id: 'c102',
                 title: 'Item 2',
                 members: [],
-                status: 'Done',
+                status: 'l101',
+                priority: 'l200',
                 date: 1703708909537,
                 updates: [],
             },
@@ -120,6 +123,8 @@ function _getDefaultGroup() {
                 id: 'c103',
                 title: 'Item 3',
                 members: [],
+                status: 'l100',
+                priority: 'l200',
                 date: 1703706909537,
                 updates: [],
             },
@@ -132,6 +137,8 @@ function _getDefaultTask(title) {
     return {
         id: utilService.makeId(),
         title,
+        status: 'l100',
+        priority: 'l200',
         members: [],
         updates: [],
     }
@@ -221,6 +228,24 @@ async function updateTask(boardId, groupId, task) {
         throw new Error(err.message || 'An err occurred during removing task')
     }
 }
+
+async function getTaskById(boardId, taskId) {
+    try {
+        const board = await getById(boardId)
+        for (const group of board.groups) {
+            const taskIdx = group.tasks.findIndex(currTask => currTask.id === taskId)
+            if (taskIdx !== -1) {
+                return { ...group.tasks[taskIdx] }
+            }
+        }
+
+        return null
+    } catch (error) {
+        console.error('Error fetching task:', error)
+        throw new Error('Failed to fetch task')
+    }
+}
+
 
 //private
 

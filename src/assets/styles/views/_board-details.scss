@@ -13,16 +13,14 @@
         // padding-right: 10px;
     }
 
-    .board-content {
 
-        .add-group-btn {
-            width: fit-content;
-            border: 1px solid $clr-btn-border;
-            margin-inline-start: 40px;
+    .add-group-btn {
+        width: fit-content;
+        border: 1px solid $clr-btn-border;
+        margin-inline-start: 40px;
 
-            img {
-                margin-inline-end: 8px;
-            }
+        img {
+            margin-inline-end: 8px;
         }
     }
 }
