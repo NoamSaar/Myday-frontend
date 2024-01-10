@@ -116,21 +116,6 @@
             border-radius: 8px;
         }
 
-        // li {
-        //     justify-content: center;
-        //     display: flex;
-        //     align-items: center;
-
-        //     &:not(.task-selection) {
-        //         padding: 8px;
-        //     }
-
-        //     &:not(.line-end) {
-        //         border-inline-end: $clr-group-border 0.5px solid;
-        //     }
-
-        // }
-
         .task-header-list-container {
 
             .task-header-list {
@@ -157,6 +142,13 @@
         }
 
 
+    }
+
+    &.collapsed {
+
+        .arrow-container svg {
+            rotate: -90deg;
+        }
     }
 
     .task-selection {
