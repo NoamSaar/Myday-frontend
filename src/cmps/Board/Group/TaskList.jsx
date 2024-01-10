@@ -59,12 +59,13 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
                         <div className="subgrid full-grid-column tasks-container" {...provided.droppableProps} ref={provided.innerRef}>
                             {
                                 group.tasks.map((task, idx) => (
-                                    <Draggable key={task.id} draggableId={task.id} index={idx}>
-                                        {(provided) => (
+                                    <Draggable key={task.id} draggableId={task.id} index={idx} >
+                                        {(provided, snapshot) => (
                                             <div
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
+                                                className={`${snapshot.isDragging && 'dragged-task'}`}
                                             >
                                                 <TaskPreview
                                                     key={task.id}
@@ -95,6 +96,6 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
                 onSetActiveTask={onSetActiveTask}
                 addTask={onAddTask}
             />
-        </ul>
+        </ul >
     )
 }
