@@ -15,7 +15,7 @@ export function LinkPreview({ info, onUpdate, taskId }) {
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: previewBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: previewBtnRef.current,
                 type: 'linkPicker',
                 data: {
                     url: info && info.url || '',

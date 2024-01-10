@@ -17,7 +17,7 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: previewBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: previewBtnRef.current,
                 type: 'memberPicker',
                 data: { chosenMembers, memberOptions, onChangeMembers: onUpdate },
                 fatherId: `${taskId}-memberPicker`,

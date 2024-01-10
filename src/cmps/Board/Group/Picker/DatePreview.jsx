@@ -16,7 +16,7 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: previewBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: previewBtnRef.current,
                 type: 'datePicker',
                 data: { selectedDate: selectedDate || Date.now(), onChangeDate },
                 fatherId: `${taskId}-datePicker`,

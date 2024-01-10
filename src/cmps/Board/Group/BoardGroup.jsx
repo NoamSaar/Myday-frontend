@@ -119,8 +119,8 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: menuBtnRef.current.getBoundingClientRect(),
-                // boundingRect: ev.target.getBoundingClientRect(),
+                parentRefCurrent: menuBtnRef.current,
+                // parentRefCurrent: ev.target,
                 type: 'menuOptions', data: { options: menuOptions },
                 fatherId: `${group.id}-menu`
             })
@@ -135,7 +135,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: colorBtnParentRef.current.getBoundingClientRect(),
+                parentRefCurrent: colorBtnParentRef.current,
                 type: 'colorPicker',
                 data: { colors: colors, onColorClick: onChangeColor },
                 fatherId: `${group.id}-colorPicker`,

@@ -16,6 +16,8 @@ export function DynamicAbsoluteModal() {
     const [ModalDimensions, setModalDimensions] = useState({ width: 0, height: 0 })
     const [tooltipDirection, setTooltipDirection] = useState('top') // Default direction
 
+    const parentBoundingRect = modalData.parentRefCurrent?.getBoundingClientRect()
+
     useEffect(() => {
         if (modalRef.current) {
             const modalWidth = modalRef.current.offsetWidth
@@ -28,7 +30,7 @@ export function DynamicAbsoluteModal() {
 
             if (modalData.isPosBlock) {
                 // Position below the father element
-                newTop = modalData.boundingRect.bottom
+                newTop = parentBoundingRect.bottom
 
                 if (modalData.hasTooltip) {
                     setTooltipDirection('top')
@@ -36,14 +38,14 @@ export function DynamicAbsoluteModal() {
 
                 if (modalData.isCenter) {
                     // Center horizontally relative to the father element
-                    newLeft = modalData.boundingRect.left + (modalData.boundingRect.width - modalWidth) / 2
+                    newLeft = parentBoundingRect.left + (parentBoundingRect.width - modalWidth) / 2
                 } else {
-                    newLeft = modalData.boundingRect.left
+                    newLeft = parentBoundingRect.left
                 }
 
                 // Check if modal goes out of the bottom boundary of the viewport and adjust
                 if (newTop + modalHeight > viewportHeight) {
-                    newTop = modalData.boundingRect.top - modalHeight
+                    newTop = parentBoundingRect.top - modalHeight
 
                     if (modalData.hasTooltip) {
                         setTooltipDirection('bottom')
@@ -57,12 +59,12 @@ export function DynamicAbsoluteModal() {
                 newLeft = Math.max(0, newLeft)
             } else {
                 // Position to the right of the father element
-                newLeft = modalData.boundingRect.right
-                newTop = modalData.boundingRect.top
+                newLeft = parentBoundingRect.right
+                newTop = parentBoundingRect.top
 
                 // Check and adjust for right viewport boundary
                 if (newLeft + modalWidth > viewportWidth) {
-                    newLeft = modalData.boundingRect.left - modalWidth
+                    newLeft = parentBoundingRect.left - modalWidth
                 }
 
                 // Check and adjust for top/bottom viewport boundaries
@@ -83,9 +85,11 @@ export function DynamicAbsoluteModal() {
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
+            if (modalRef.current && !modalRef.current.contains(event.target)
+                && modalData.parentRefCurrent && !modalData.parentRefCurrent.contains(event.target)
+            ) {
                 resetDynamicModal()
-                console.log('closing by dynamic modal')
+                // console.log('closing by dynamic modal')
             }
         }
 
@@ -93,7 +97,7 @@ export function DynamicAbsoluteModal() {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside)
         }
-    }, [modalRef])
+    }, [modalRef, modalData])
 
     if (!modalData.isOpen) return
 

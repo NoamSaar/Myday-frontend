@@ -97,7 +97,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             setDynamicModal(
                 {
                     isOpen: true,
-                    boundingRect: menuBtnRef.current.getBoundingClientRect(),
+                    parentRefCurrent: menuBtnRef.current,
                     type: 'menuOptions',
                     data: { options: menuOptions },
                     fatherId: `${currTask.id}-menu`

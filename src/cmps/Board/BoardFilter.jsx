@@ -31,7 +31,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
-        // console.log('filterSearchRef', filterSearchRef.current.getBoundingClientRect())
+        // console.log('filterSearchRef', filterSearchRef.current)
 
     }, [filterByToEdit])
 
@@ -59,7 +59,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             //updating modal in store
             setDynamicModal({
                 isOpen: true,
-                boundingRect: personBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: personBtnRef.current,
                 type: 'boardMemberSelect',
                 data: { chosenMember: filterByToEdit.member, onChangeMember: setMemberFilter, members: board.members },
                 isPosBlock: true,

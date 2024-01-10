@@ -38,7 +38,7 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: menuBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: menuBtnRef.current,
                 type: 'menuOptions',
                 data: { options: menuOptions },
                 isPosBlock: true
