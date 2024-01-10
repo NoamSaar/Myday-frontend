@@ -666,7 +666,8 @@ export function getBoardsData() {
                         },
                     },
                 ],
-                titlesOrder: ['member', 'status', 'priority', 'date', 'file', 'link'],
+                titlesOrder: ['member', 'status', 'priority', 'date', 'link', 'file'],
+
             },
         ]
     )
@@ -1003,6 +1004,6 @@ export function getDefaultBoard() {
         //         },
         //     },
         // ],
-        titlesOrder: ['member', 'status', 'priority', 'date', 'file', 'link'],
+        titlesOrder: ['member', 'status', 'priority', 'date', 'link', 'file'],
     }
 }

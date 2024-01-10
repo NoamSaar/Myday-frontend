@@ -1,9 +1,9 @@
 .sidebar {
     background-color: $clr0;
     height: 100%;
-    width: 200px;
+    width: 250px;
     position: absolute;
-    left: -170px;
+    left: -220px;
     border-top-right-radius: 8px;
     transition: left 150ms;
 
@@ -29,6 +29,12 @@
 
     &.open {
         position: static;
+
+        &:not(:hover) {
+            .btn-menu {
+                opacity: 0;
+            }
+        }
 
         &>.sidebar-workspace,
         .sidebar-board-nav {
