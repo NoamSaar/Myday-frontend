@@ -11,12 +11,15 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
 
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(board.title)
     const [lastClickedBoardId, setLastClickedBoardId] = useState(null)
+
     const navigate = useNavigate()
+
+    const isMenuOpen = parentId === `${board.id}-sidebar-menu`
 
     async function onRemoveBoard() {
         removeBoard(board._id)
@@ -34,16 +37,15 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
 
         if (isMenuOpen) {
             resetDynamicModal()
-            setIsMenuOpen(false)
         } else {
             setDynamicModal({
                 isOpen: true,
                 parentRefCurrent: menuBtnRef.current,
+                parentId: `${board.id}-sidebar-menu`,
                 type: 'menuOptions',
                 data: { options: menuOptions },
                 isPosBlock: true
             })
-            setIsMenuOpen(true)
         }
     }
 
@@ -76,7 +78,6 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
             title: 'Delete',
             onOptionClick: () => {
                 onRemoveBoard()
-                setIsMenuOpen(false)
                 resetDynamicModal()
             }
         },
@@ -86,7 +87,6 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
             onOptionClick: () => {
                 onUpdateBoard()
                 setIsEditing(!isEditing)
-                setIsMenuOpen(false)
                 resetDynamicModal()
             }
         }
