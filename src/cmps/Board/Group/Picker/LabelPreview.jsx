@@ -6,7 +6,7 @@ import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/sy
 export function LabelPreview({ title, info, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const color = board[title].find(option => option.title === info.chosenOption).color

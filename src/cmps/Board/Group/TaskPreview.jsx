@@ -12,7 +12,7 @@ import { EditableTxt } from "../../EditableTxt"
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
 
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 

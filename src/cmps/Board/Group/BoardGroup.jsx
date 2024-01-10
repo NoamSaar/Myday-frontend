@@ -15,7 +15,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     const menuBtnRef = useRef(null)
     const colorBtnParentRef = useRef(null)
 
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)

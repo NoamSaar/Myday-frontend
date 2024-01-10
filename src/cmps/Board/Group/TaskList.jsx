@@ -6,7 +6,7 @@ import { useState } from "react"
 import { addTask, setActiveTask, updateBoard } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const [taskTitle, setTaskTitle] = useState('')
 
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
