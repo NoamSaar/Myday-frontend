@@ -7,7 +7,6 @@ export function LinkPicker({ url, displayTxt, changeLink }) {
 
     function onChangeLink(ev) {
         if (ev) ev.preventDefault()
-        console.log('{ url: newUrl, displayTxt: newDisplayTxt }', { url: newUrl, displayTxt: newDisplayTxt })
         changeLink('link', { url: newUrl, displayTxt: newDisplayTxt })
     }
 

@@ -1,14 +1,13 @@
-import React from "react"
-import { Routes, Route } from "react-router"
+import React from 'react'
+import { Routes, Route } from 'react-router'
 
-import { UserMsg } from "../src/cmps/UserMsg"
-import { AppHeader } from "./cmps/AppHeader"
-import { Sidebar } from "./cmps/Sidebar/Sidebar"
-import { TaskDetails } from "./pages/TaskDetails"
-import { BoardDetails } from "./pages/BoardDetails"
-import { HomePage } from "./pages/HomePage"
-import { Workspace } from "./pages/Workspace"
-import { DynamicAbsoluteModal } from "./cmps/DynamicAbsoluteModal"
+import { AppHeader } from './cmps/AppHeader'
+import { Sidebar } from './cmps/Sidebar/Sidebar'
+import { TaskDetails } from './pages/TaskDetails'
+import { BoardDetails } from './pages/BoardDetails'
+import { HomePage } from './pages/HomePage'
+import { Workspace } from './pages/Workspace'
+import { DynamicAbsoluteModal } from './cmps/DynamicAbsoluteModal'
 
 export function RootCmp() {
 
@@ -29,7 +28,6 @@ export function RootCmp() {
                 </Routes>
             </main>
             <DynamicAbsoluteModal />
-            <UserMsg />
         </div>
     )
 }

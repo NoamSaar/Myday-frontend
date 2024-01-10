@@ -9,12 +9,15 @@ import { DatePicker } from "./Board/Group/Picker/PickerModals/DatePicker"
 import { LinkPicker } from "./Board/Group/Picker/PickerModals/LinkPicker"
 import { MenuOptionsModal } from "./MenuOptionsModal"
 import BoardMemberSelect from "./Board/BoardMemberSelect"
+import { FilePicker } from "./Board/Group/Picker/PickerModals/FilePicker"
 
 export function DynamicAbsoluteModal() {
     const modalRef = useRef()
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const [ModalDimensions, setModalDimensions] = useState({ width: 0, height: 0 })
     const [tooltipDirection, setTooltipDirection] = useState('top') // Default direction
+
+    const parentBoundingRect = modalData.parentRefCurrent?.getBoundingClientRect()
 
     useEffect(() => {
         if (modalRef.current) {
@@ -27,23 +30,23 @@ export function DynamicAbsoluteModal() {
             let newTop = 0
 
             if (modalData.isPosBlock) {
-                // Position below the father element
-                newTop = modalData.boundingRect.bottom
+                // Position below the parent element
+                newTop = parentBoundingRect.bottom
 
                 if (modalData.hasTooltip) {
                     setTooltipDirection('top')
                 }
 
                 if (modalData.isCenter) {
-                    // Center horizontally relative to the father element
-                    newLeft = modalData.boundingRect.left + (modalData.boundingRect.width - modalWidth) / 2
+                    // Center horizontally relative to the parent element
+                    newLeft = parentBoundingRect.left + (parentBoundingRect.width - modalWidth) / 2
                 } else {
-                    newLeft = modalData.boundingRect.left
+                    newLeft = parentBoundingRect.left
                 }
 
                 // Check if modal goes out of the bottom boundary of the viewport and adjust
                 if (newTop + modalHeight > viewportHeight) {
-                    newTop = modalData.boundingRect.top - modalHeight
+                    newTop = parentBoundingRect.top - modalHeight
 
                     if (modalData.hasTooltip) {
                         setTooltipDirection('bottom')
@@ -56,13 +59,13 @@ export function DynamicAbsoluteModal() {
                 }
                 newLeft = Math.max(0, newLeft)
             } else {
-                // Position to the right of the father element
-                newLeft = modalData.boundingRect.right
-                newTop = modalData.boundingRect.top
+                // Position to the right of the parent element
+                newLeft = parentBoundingRect.right
+                newTop = parentBoundingRect.top
 
                 // Check and adjust for right viewport boundary
                 if (newLeft + modalWidth > viewportWidth) {
-                    newLeft = modalData.boundingRect.left - modalWidth
+                    newLeft = parentBoundingRect.left - modalWidth
                 }
 
                 // Check and adjust for top/bottom viewport boundaries
@@ -83,9 +86,11 @@ export function DynamicAbsoluteModal() {
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
+            if (modalRef.current && !modalRef.current.contains(event.target)
+                && modalData.parentRefCurrent && !modalData.parentRefCurrent.contains(event.target)
+            ) {
                 resetDynamicModal()
-                // console.log('closinc by dynamic modal')
+                // console.log('closing by dynamic modal')
             }
         }
 
@@ -93,7 +98,7 @@ export function DynamicAbsoluteModal() {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside)
         }
-    }, [modalRef])
+    }, [modalRef, modalData])
 
     if (!modalData.isOpen) return
 
@@ -142,6 +147,13 @@ function DynamicModal(props) {
                     url={props.data.url}
                     displayTxt={props.data.displayTxt}
                     changeLink={props.data.onChangeLink}
+                />)
+
+        case 'filePicker':
+            return (
+                <FilePicker
+                    chosenFile={props.data.chosenFile}
+                    changeFile={props.data.onChangeFile}
                 />)
 
         case 'memberPicker':

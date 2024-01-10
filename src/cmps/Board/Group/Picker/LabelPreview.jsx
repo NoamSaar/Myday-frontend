@@ -7,22 +7,22 @@ export function LabelPreview({ title, info, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const color = board[title].find(option => option.title === info.chosenOption).color
     const style = { backgroundColor: color }
-    const isPickerOpen = fatherId === `${taskId}-${title}Picker`
+    const isCurrPickerOpen = parentId === `${taskId}-${title}Picker`
 
     function onLabelPreviewClick(ev) {
-        if (isPickerOpen) {
+        if (isCurrPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: previewBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: previewBtnRef.current,
                 type: 'labelPicker',
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
-                fatherId: `${taskId}-${title}Picker`,
+                parentId: `${taskId}-${title}Picker`,
                 isPosBlock: true,
                 isCenter: true,
                 hasTooltip: true,

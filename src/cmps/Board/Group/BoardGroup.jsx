@@ -18,15 +18,15 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
 
     const [isEditing, setIsEditing] = useState(isEditingTitle)
     const [groupTitle, setGroupTitle] = useState(group.title)
     const [groupColor, setGroupColor] = useState(group.color)
 
-    const isMenuOpen = fatherId === `${group.id}-menu`
-    const isColorPickerOpen = fatherId === `${group.id}-colorPicker`
+    const isMenuOpen = parentId === `${group.id}-menu`
+    const isColorPickerOpen = parentId === `${group.id}-colorPicker`
     const colors = getBoardColors()
 
     useEffect(() => {
@@ -117,9 +117,9 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: menuBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: menuBtnRef.current,
                 type: 'menuOptions', data: { options: menuOptions },
-                fatherId: `${group.id}-menu`
+                parentId: `${group.id}-menu`
             })
         }
     }
@@ -132,10 +132,10 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: colorBtnParentRef.current.getBoundingClientRect(),
+                parentRefCurrent: colorBtnParentRef.current,
                 type: 'colorPicker',
                 data: { colors: colors, onColorClick: onChangeColor },
-                fatherId: `${group.id}-colorPicker`,
+                parentId: `${group.id}-colorPicker`,
                 isPosBlock: true,
             })
         }

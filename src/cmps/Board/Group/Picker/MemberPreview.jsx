@@ -7,20 +7,20 @@ import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/sy
 export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isPickerOpen = fatherId === `${taskId}-memberPicker`
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isCurrPickerOpen = parentId === `${taskId}-memberPicker`
     const extraMembers = chosenMembers.length - 2
 
     function onMemberPreviewClick(ev) {
-        if (isPickerOpen) {
+        if (isCurrPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: previewBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: previewBtnRef.current,
                 type: 'memberPicker',
                 data: { chosenMembers, allMembers, onChangeMembers: onUpdate },
-                fatherId: `${taskId}-memberPicker`,
+                parentId: `${taskId}-memberPicker`,
                 isPosBlock: true,
                 isCenter: true,
                 hasTooltip: true,
@@ -37,10 +37,20 @@ export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
             }
 
             {!!chosenMembers.length && <div className="member-img-container flex justify-center align-center">
-                {chosenMembers.map((member, idx) => {
-                    return idx < 2 ? <UserImg key={idx} user={member} /> : ''
-                })}
-                {extraMembers > 0 && <span className="extra-members-box">+{extraMembers}</span>}
+                {extraMembers > 0 ?
+                    <>
+                        <UserImg user={chosenMembers[0]} />
+                        <span className="extra-members-box">+{extraMembers + 1}</span>
+                    </>
+                    :
+                    <>
+                        {
+                            chosenMembers.map((member, idx) => {
+                                return idx < 2 ? <UserImg key={idx} user={member} /> : ''
+                            })
+                        }
+                    </>
+                }
             </div>
             }
         </li >
