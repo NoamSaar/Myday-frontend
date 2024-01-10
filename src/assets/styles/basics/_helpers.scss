@@ -179,7 +179,24 @@
     max-width: 25px;
 }
 
-//refernce to after tooltip from top in absolute pos
+.full-width {
+    width: 100%;
+}
+
+.subgrid {
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+.full-grid-column {
+    grid-column: 1 / -1;
+}
+
+.grid-column-table-content {
+    grid-column: 2 / -1;
+}
+
+//refernce to after tooltip from top
 // &::after {
 //     content: "";
 //     position: absolute;

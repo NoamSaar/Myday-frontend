@@ -52,19 +52,20 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     }
 
     return (
-        <ul className="clean-list task-list flex column relative">
+        <ul className="clean-list flex column relative subgrid full-grid-column full-width task-list">
             <DragDropContext onDragEnd={handleDragEnd}>
                 <Droppable droppableId={group.id}>
                     {(provided) => (
-                        <div className="tasks-container" {...provided.droppableProps} ref={provided.innerRef}>
+                        <div className="subgrid full-grid-column tasks-container" {...provided.droppableProps} ref={provided.innerRef}>
                             {
                                 group.tasks.map((task, idx) => (
-                                    <Draggable key={task.id} draggableId={task.id} index={idx}>
-                                        {(provided) => (
+                                    <Draggable key={task.id} draggableId={task.id} index={idx} >
+                                        {(provided, snapshot) => (
                                             <div
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
+                                                className={`${snapshot.isDragging && 'dragged-task'}`}
                                             >
                                                 <TaskPreview
                                                     key={task.id}
@@ -95,39 +96,6 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
                 onSetActiveTask={onSetActiveTask}
                 addTask={onAddTask}
             />
-        </ul>
+        </ul >
     )
 }
-
-// async function handleDragEnd(result) {
-//     try {
-
-//         const fullBoard = await getBoardById(board._id)
-//         console.log('fullBoard', fullBoard)
-//         const initGroupIdx = fullBoard.groups.findIndex(group => group.id === groupId)
-//         const initGroup = fullBoard.groups[initGroupIdx]
-//         const newOrderedTasks = initGroup.tasks
-//         console.log('newOrderedTasks', newOrderedTasks)
-
-//         const [removed] = newOrderedTasks.splice(result.source.index, 1)
-//         newOrderedTasks.splice(result.destination.index, 0, removed)
-//         console.log('initGroup.tasks', initGroup.tasks)
-
-//         saveNewOrder(fullBoard, initGroupIdx, initGroup)
-//         if (!result.destination) return
-//     } catch (err) {
-//         console.log('Cannot move task:', err)
-
-//     }
-
-// }
-
-
-// async function saveNewOrder(newBoard, groupIdx, group) {
-//     try {
-//         newBoard.groups.splice(groupIdx, 1, group)
-//         await updateBoard(newBoard)
-//     } catch (err) {
-//         console.log('Cannot save group:', err)
-//     }
-// }

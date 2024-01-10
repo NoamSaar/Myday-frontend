@@ -37,10 +37,20 @@ export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
             }
 
             {!!chosenMembers.length && <div className="member-img-container flex justify-center align-center">
-                {chosenMembers.map((member, idx) => {
-                    return idx < 2 ? <UserImg key={idx} user={member} /> : ''
-                })}
-                {extraMembers > 0 && <span className="extra-members-box">+{extraMembers}</span>}
+                {extraMembers > 0 ?
+                    <>
+                        <UserImg user={chosenMembers[0]} />
+                        <span className="extra-members-box">+{extraMembers + 1}</span>
+                    </>
+                    :
+                    <>
+                        {
+                            chosenMembers.map((member, idx) => {
+                                return idx < 2 ? <UserImg key={idx} user={member} /> : ''
+                            })
+                        }
+                    </>
+                }
             </div>
             }
         </li >

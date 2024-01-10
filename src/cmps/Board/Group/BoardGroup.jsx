@@ -9,6 +9,7 @@ import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from
 import { TaskList } from "./TaskList"
 import { TaskHeaderList } from "./TaskHeaderList"
 import { EditableTxt } from "../../EditableTxt"
+import { TaskTable } from "./TaskTable"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
     const menuBtnRef = useRef(null)
@@ -160,7 +161,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     return (
         <section className="board-group flex column">
             <div className={`${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
-
                 <div className="group-title-container flex align-center sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
                         <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
@@ -187,15 +187,10 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>
                 </div>
-
-                <TaskHeaderList groupColor={groupColor} titlesOrder={board.titlesOrder} />
             </div>
 
-            <TaskList titlesOrder={titlesOrder}
-                groupId={group.id}
-                highlightText={highlightText}
-                filterBy={filterBy}
-                groupColor={groupColor} />
+            <TaskTable titlesOrder={titlesOrder} groupColor={groupColor} highlightText={highlightText} filterBy={filterBy} groupId={group.id} />
+
         </section >
     )
 }

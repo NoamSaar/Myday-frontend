@@ -22,6 +22,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const [isEditing, setIsEditing] = useState(false)
 
     const isMenuOpen = parentId === `${task.id}-menu`
+    const isActive = currTask ? activeTask === currTask.id : false
 
     useEffect(() => {
         const newmembers = task.members.length
@@ -141,27 +142,26 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     if (!currTask) return <ul className="task-preview-container task-title">Loading</ul>
     return (
         <ul
-            className="clean-list task-preview-container flex"
+            className="clean-list flex subgrid full-grid-column task-preview-container"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="menu-container sticky-left">
-                {isShowMenuBtn && (
-                    <button
-                        ref={menuBtnRef}
-                        className="btn svg-inherit-color"
-                        onClick={toggleMenu}><MenuIcon className="btn" />
-                    </button>
-                )}
-            </div>
+            <div className={`${isActive && 'active'} task-sticky-container sticky-left`}>
+                <div className="menu-container">
+                    {isShowMenuBtn && (
+                        <button
+                            ref={menuBtnRef}
+                            className="btn svg-inherit-color"
+                            onClick={toggleMenu}><MenuIcon className="btn" />
+                        </button>
+                    )}
+                </div>
 
-            <div
-                style={{ backgroundColor: groupColor }}
-                className="color-display sticky-left-36">
-            </div>
-
-            <ul className={`clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
-                <ul className={`clean-list task-title-container flex ${activeTask === currTask.id && 'active'}`}>
+                <div
+                    style={{ backgroundColor: groupColor }}
+                    className="color-display sticky-left-36">
+                </div>
+                <ul className={`clean-list task-title-container flex ${isActive && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
@@ -178,6 +178,9 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     </li>
 
                 </ul>
+            </div>
+
+            <ul className={`clean-list subgrid grid-column-table-content flex ${isActive && 'active'} task-preview`}>
 
                 {board.titlesOrder.map((title, idx) => {
                     return (
