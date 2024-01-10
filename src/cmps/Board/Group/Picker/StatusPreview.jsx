@@ -11,14 +11,11 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
 
     const color = board[title].find(option => option.title === info.chosenOption).color
     const style = { backgroundColor: color }
-    const isPickerOpen = fatherId === `${taskId}-${title}Picker`
+    const isCurrPickerOpen = fatherId === `${taskId}-${title}Picker`
 
     function onStatusPreviewClick(ev) {
-        // console.log('isPickerOpen', isPickerOpen)
-        // console.log('fatherId', fatherId)
-        if (isPickerOpen) {
-            resetDynamicModal()
-        } else {
+        if (!isCurrPickerOpen) { //another modal is open
+            console.log('opening modal from cmp')
             setDynamicModal({
                 isOpen: true,
                 boundingRect: previewBtnRef.current.getBoundingClientRect(),
@@ -28,10 +25,28 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
                 isPosBlock: true,
                 isCenter: true,
                 hasTooltip: true,
-
             })
         }
     }
+    // function onStatusPreviewClick(ev) {
+    //     // console.log('isCurrPickerOpen', isCurrPickerOpen)
+    //     // console.log('fatherId', fatherId)
+    //     if (isCurrPickerOpen) {
+    //         resetDynamicModal()
+    //     } else {
+    //         setDynamicModal({
+    //             isOpen: true,
+    //             boundingRect: previewBtnRef.current.getBoundingClientRect(),
+    //             type: 'statusPicker',
+    //             data: { selectedStatus: info.chosenOption, title, onUpdate },
+    //             fatherId: `${taskId}-${title}Picker`,
+    //             isPosBlock: true,
+    //             isCenter: true,
+    //             hasTooltip: true,
+
+    //         })
+    //     }
+    // }
 
     return (
         <li

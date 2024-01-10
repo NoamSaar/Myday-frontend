@@ -85,7 +85,7 @@ export function DynamicAbsoluteModal() {
         function handleClickOutside(event) {
             if (modalRef.current && !modalRef.current.contains(event.target)) {
                 resetDynamicModal()
-                // console.log('closinc by dynamic modal')
+                console.log('closing by dynamic modal')
             }
         }
 
