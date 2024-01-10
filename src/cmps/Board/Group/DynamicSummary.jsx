@@ -1,20 +1,18 @@
+import { GroupSummary } from "./Summary/GroupSummary"
+import { LabelSummary } from "./Summary/LabelSummary"
 
-export default function DynamicSummary({ title, group }) {
+export default function DynamicSummary({ title, group, board }) {
     switch (title) {
-
-        // case "status":
-        // case "priority":
-        //     return (
-        //         <LabelPreview
-        //             title={title}
-        //             info={{ chosenOption: task[title] }}
-        //             onUpdate={onUpdate}
-        //             taskId={task.id}
-        //         />)
 
         case "member":
             return (
                 <li></li>)
+
+        case "status":
+        case "priority":
+            return (
+                <LabelSummary title={title} group={group} board={board} />)
+
 
         // case "date":
         //     return (

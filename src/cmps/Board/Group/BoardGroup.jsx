@@ -189,7 +189,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                 </div>
             </div>
 
-            <TaskTable titlesOrder={titlesOrder} groupColor={groupColor} highlightText={highlightText} filterBy={filterBy} group={group} />
+            <TaskTable titlesOrder={titlesOrder} groupColor={groupColor} highlightText={highlightText} filterBy={filterBy} group={group} board={board} />
 
         </section >
     )
