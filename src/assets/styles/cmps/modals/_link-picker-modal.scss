@@ -17,5 +17,16 @@
     .dynamic-input {
         padding: 8px 16px;
         margin-block-end: 24px;
+        transition: outline-color .2s;
+
+        &:hover {
+            outline-color: black;
+        }
+
+        input {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 }
