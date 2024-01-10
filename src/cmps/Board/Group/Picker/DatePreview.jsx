@@ -7,8 +7,8 @@ import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/sy
 export function DatePreview({ selectedDate, onChangeDate, taskId }) {
     const previewBtnRef = useRef(null)
 
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isPickerOpen = fatherId === `${taskId}-datePicker`
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isPickerOpen = parentId === `${taskId}-datePicker`
 
     function onDatePreviewClick(ev) {
         if (isPickerOpen) {
@@ -19,7 +19,7 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
                 parentRefCurrent: previewBtnRef.current,
                 type: 'datePicker',
                 data: { selectedDate: selectedDate || Date.now(), onChangeDate },
-                fatherId: `${taskId}-datePicker`,
+                parentId: `${taskId}-datePicker`,
                 isPosBlock: true,
                 isCenter: true
             })

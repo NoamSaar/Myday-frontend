@@ -1,4 +1,4 @@
-import { SET_DYNAMIC_MODAL, SET_DYNAMIC_MODAL_OPEN, SET_DYNAMIC_MODAL_PARENT_REF, SET_DYNAMIC_MODAL_TYPE, SET_DYNAMIC_MODAL_DATA, SET_DYNAMIC_MODAL_FATHER, SET_IS_LOADING } from '../reducers/system.reducer'
+import { SET_DYNAMIC_MODAL, SET_DYNAMIC_MODAL_OPEN, SET_DYNAMIC_MODAL_PARENT_REF, SET_DYNAMIC_MODAL_TYPE, SET_DYNAMIC_MODAL_DATA, SET_DYNAMIC_MODAL_PARENT, SET_IS_LOADING } from '../reducers/system.reducer'
 import { SET_MSG } from '../reducers/system.reducer.js'
 import { store } from '../store'
 
@@ -37,8 +37,8 @@ export function setDynamicModalData(dynamicModalData) {
     store.dispatch({ type: SET_DYNAMIC_MODAL_DATA, dynamicModalData })
 }
 
-export function setDynamicModalFather(fatherId) {
-    store.dispatch({ type: SET_DYNAMIC_MODAL_FATHER, fatherId })
+export function setDynamicModalParent(parentId) {
+    store.dispatch({ type: SET_DYNAMIC_MODAL_PARENT, parentId })
 }
 
 export function setDynamicModal(dynamicModal) {
@@ -56,7 +56,7 @@ export function getEmptyDynamicModal() {
         parentRefCurrent: null,
         type: '',
         data: {},
-        fatherId: '',
+        parentId: '',
         isPosBlock: true,
         isCenter: true,
         hasTooltip: false,

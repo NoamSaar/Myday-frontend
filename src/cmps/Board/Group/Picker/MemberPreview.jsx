@@ -7,8 +7,8 @@ import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/sy
 export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isPickerOpen = fatherId === `${taskId}-memberPicker`
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isPickerOpen = parentId === `${taskId}-memberPicker`
     const extraMembers = chosenMembers.length - 2
 
     function onMemberPreviewClick(ev) {
@@ -20,7 +20,7 @@ export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
                 parentRefCurrent: previewBtnRef.current,
                 type: 'memberPicker',
                 data: { chosenMembers, allMembers, onChangeMembers: onUpdate },
-                fatherId: `${taskId}-memberPicker`,
+                parentId: `${taskId}-memberPicker`,
                 isPosBlock: true,
                 isCenter: true,
                 hasTooltip: true,

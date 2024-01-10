@@ -30,7 +30,7 @@ export function DynamicAbsoluteModal() {
             let newTop = 0
 
             if (modalData.isPosBlock) {
-                // Position below the father element
+                // Position below the parent element
                 newTop = parentBoundingRect.bottom
 
                 if (modalData.hasTooltip) {
@@ -38,7 +38,7 @@ export function DynamicAbsoluteModal() {
                 }
 
                 if (modalData.isCenter) {
-                    // Center horizontally relative to the father element
+                    // Center horizontally relative to the parent element
                     newLeft = parentBoundingRect.left + (parentBoundingRect.width - modalWidth) / 2
                 } else {
                     newLeft = parentBoundingRect.left
@@ -59,7 +59,7 @@ export function DynamicAbsoluteModal() {
                 }
                 newLeft = Math.max(0, newLeft)
             } else {
-                // Position to the right of the father element
+                // Position to the right of the parent element
                 newLeft = parentBoundingRect.right
                 newTop = parentBoundingRect.top
 
