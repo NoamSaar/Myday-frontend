@@ -13,27 +13,9 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
     const style = { backgroundColor: color }
     const isCurrPickerOpen = fatherId === `${taskId}-${title}Picker`
 
-    function onStatusPreviewClick(ev) {
-        if (!isCurrPickerOpen) { //another modal is open
-            console.log('opening modal from cmp')
-            setDynamicModal({
-                isOpen: true,
-                boundingRect: previewBtnRef.current.getBoundingClientRect(),
-                type: 'statusPicker',
-                data: { selectedStatus: info.chosenOption, title, onUpdate },
-                fatherId: `${taskId}-${title}Picker`,
-                isPosBlock: true,
-                isCenter: true,
-                hasTooltip: true,
-            })
-        }
-    }
     // function onStatusPreviewClick(ev) {
-    //     // console.log('isCurrPickerOpen', isCurrPickerOpen)
-    //     // console.log('fatherId', fatherId)
-    //     if (isCurrPickerOpen) {
-    //         resetDynamicModal()
-    //     } else {
+    //     if (!isCurrPickerOpen) { //another modal is open
+    //         console.log('opening modal from cmp')
     //         setDynamicModal({
     //             isOpen: true,
     //             boundingRect: previewBtnRef.current.getBoundingClientRect(),
@@ -43,10 +25,28 @@ export function StatusPreview({ title, info, onUpdate, taskId }) {
     //             isPosBlock: true,
     //             isCenter: true,
     //             hasTooltip: true,
-
     //         })
     //     }
     // }
+
+    function onStatusPreviewClick(ev) {
+        // console.log('opening modal from cmp')
+        if (isCurrPickerOpen) { //curr modal is open
+            resetDynamicModal()
+        } else { //another modal is open
+            setDynamicModal({
+                isOpen: true,
+                boundingRect: previewBtnRef.current.getBoundingClientRect(),
+                type: 'statusPicker',
+                data: { selectedStatus: info.chosenOption, title, onUpdate },
+                fatherId: `${taskId}-${title}Picker`,
+                isPosBlock: true,
+                isCenter: true,
+                hasTooltip: true,
+
+            })
+        }
+    }
 
     return (
         <li

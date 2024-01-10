@@ -3,6 +3,7 @@
     z-index: 30;
 
     .tooltip {
+        // position: absolute;
         border-style: solid;
         width: fit-content;
         margin: auto;
@@ -21,3 +22,15 @@
 
     }
 }
+
+//refernce to after tooltip from top in absolute pos
+// &::after {
+//     content: "";
+//     position: absolute;
+//     border-style: solid;
+//     border-width: 0 10px 10px 10px;
+//     border-color: transparent transparent white transparent;
+//     top: -10px;
+//     left: 50%;
+//     transform: translateX(-50%);
+// }
