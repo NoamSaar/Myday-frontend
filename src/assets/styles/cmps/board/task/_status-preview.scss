@@ -1,0 +1,18 @@
+.status-preview {
+    color: white;
+    position: relative;
+
+    .corner-fold {
+        border-color: rgba(0, 0, 0, .2) #fff;
+        border-style: solid;
+        border-width: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: border-width .3s ease .2s;
+    }
+
+    &:hover .corner-fold {
+        border-width: 0 10px 10px 0;
+    }
+}

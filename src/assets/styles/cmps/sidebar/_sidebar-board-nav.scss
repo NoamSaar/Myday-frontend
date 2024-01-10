@@ -1,0 +1,60 @@
+.sidebar-board-nav {
+    padding-inline: $sidebar-padding;
+
+    &>* {
+        height: 32px;
+    }
+
+    .btn-board-nav {
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 6px;
+        position: relative;
+        padding-block: 6px;
+
+        &.hovered {
+            background-color: $clr-btn-hover
+        }
+
+        input {
+            outline: none;
+
+            &:active {
+                border: 1px solid $clr-btn-active;
+            }
+        }
+    }
+
+    .btn.active {
+        background-color: $clr-btn-active;
+    }
+
+    .btn-option-menu {
+        display: flex;
+        opacity: 0;
+        padding-inline: 0;
+        height: 20px;
+        width: 20px;
+
+        &.active {
+            background-color: $clr-btn-active;
+            opacity: 1;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    .btn:hover .btn-option-menu {
+        opacity: 1;
+        background-color: transparent;
+
+        &:hover {
+            background-color: $clr-btn-hover;
+        }
+
+        align-self: end;
+    }
+}

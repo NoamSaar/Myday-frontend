@@ -1,11 +1,11 @@
-import { Link, NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { login, logout, signup } from '../store/actions/user.actions.js'
-import { LoginSignup } from './LoginSignup.jsx'
-import { LogoIcon, LoginIcon } from '../services/svg.service.jsx'
-import { MenuOptionsModal } from "./MenuOptionsModal";
-import { useState } from 'react'
+import { useState } from "react"
+import { useSelector } from "react-redux"
+
+import { showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
+import { login, logout, signup } from "../store/actions/user.actions.js"
+
+import { LogoIcon, LoginIcon } from "../services/svg.service.jsx"
+import { MenuOptionsModal } from "./MenuOptionsModal"
 
 export function AppHeader() {
     var user = useSelector(storeState => storeState.userModule.user)
@@ -16,6 +16,7 @@ export function AppHeader() {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
         } catch (err) {
+            console.error('Error logging in:', err)
             showErrorMsg('Cannot login')
         }
     }
@@ -24,6 +25,7 @@ export function AppHeader() {
             const user = await signup(credentials)
             showSuccessMsg(`Welcome new user: ${user.fullname}`)
         } catch (err) {
+            console.error('Error signing up:', err)
             showErrorMsg('Cannot signup')
         }
     }
@@ -32,6 +34,7 @@ export function AppHeader() {
             await logout()
             showSuccessMsg(`Bye now`)
         } catch (err) {
+            console.error('Error logging out:', err)
             showErrorMsg('Cannot logout')
         }
     }
@@ -57,7 +60,7 @@ export function AppHeader() {
             title: 'Signup',
             onOptionClick: onSignup
         },
-    ];
+    ]
 
     const posOptions = {
         left: '-80px',
@@ -77,7 +80,7 @@ export function AppHeader() {
         <header className="app-header flex space-between align-center">
             <section className="header-logo grid column place-center">
                 <LogoIcon />
-                <span className="app-title">monday</span>
+                <span className="app-title">MyDay</span>
             </section>
             <nav className="header-nav">
                 <div className="user-info">

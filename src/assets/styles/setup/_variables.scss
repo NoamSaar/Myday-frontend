@@ -1,13 +1,6 @@
 // Colors
 $clr0: #fff;
-$clr1: #ce2e6c;
-$clr1: #ce2e6c;
-$clr2: #4f3a65;
-$clr3: #574f7d;
-$clr4: #95adbe;
-$clr5: #dff0ea;
-$clr6: #fff;
-$clr7: #222;
+$clr1: #000;
 
 // root main colors
 :root {
@@ -17,13 +10,12 @@ $clr7: #222;
     // --dark-mode-bg: #181b34;
 }
 
-// $clr1: #fff;
-// $clr2: #000;
-
 // group clrs
 $clr-group-border: #d0d4e4;
 $clr-task-hover: #f5f6f8;
 $clr-link: #0086c0;
+$clr-chosen-member: #e5f4ff;
+$clr-board-chosen-member: #d9f0ff;
 
 // fonts colors
 $clr-font: #323338;
@@ -70,6 +62,13 @@ $clr-priority-high: #401694;
 $clr-priority-medium: #5559df;
 $clr-priority-low: #579bfc;
 $clr-priority-neutral: #c4c4c4;
+
+// user msg
+$clr-success: #00854d;
+$clr-success-hover: #007038;
+$clr-err: #d83a52;
+$clr-err-hover: #b63546;
+
 
 // layout
 $layout-padding: 18px;

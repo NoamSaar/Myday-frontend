@@ -1,22 +1,15 @@
 
-export function MenuOptionsModal({ pos, options, relative }) {
-    let style = { top: '30px' }
-
-    if (pos === 'top') style = { bottom: '30px' }
-
-    if (relative) {
-        const { left, right, top, bottom } = relative
-        style = left ? { ...style, left: left } : { ...style, right: right }
-        style = top ? { ...style, top: top } : { ...style, bottom: bottom }
-    }
+export function MenuOptionsModal({ options }) {
 
     return (
-        <div style={style} className="menu-option-modal">
+        <div className="general-modal menu-option-modal">
             {options.map((option, idx) => {
-                return <div key={idx} className="btn" onClick={option.onOptionClick}>
-                    <button>{option.icon}</button>
-                    <p>{option.title}</p>
-                </div>
+                return (
+                    <div key={idx} className="btn" onClick={option.onOptionClick}>
+                        {option.icon}
+                        <p>{option.title}</p>
+                    </div>
+                )
             })}
         </div>
     )

@@ -4,10 +4,8 @@
     box-sizing: border-box;
 }
 
-
 html {
     font-family: figtree;
-    // font-size: rem(14px);
     font-size: 14px;
     line-height: lh(23px);
 }
@@ -22,10 +20,25 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: poppins-medium;
     margin: 0;
+    font-family: poppins-medium;
     font-size: rem(24px);
     font-weight: unset;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+li {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 img {
@@ -33,7 +46,7 @@ img {
 }
 
 p {
-    margin: 0 0 1em;
+    margin: 0;
 }
 
 a {
@@ -42,17 +55,17 @@ a {
     font-family: figtree;
 }
 
-.btn {
-    @include btn;
+svg {
+    fill: $clr-light-font;
 }
 
-// a:hover {
-//     text-decoration: underline;
-// }
+input {
+    width: 100%;
+    max-width: 100%;
+}
 
-svg {
-    // fill: red;
-    fill: $clr-light-font;
+.btn {
+    @include btn;
 }
 
 /* Firefox */

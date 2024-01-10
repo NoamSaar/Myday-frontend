@@ -1,32 +1,3 @@
-// Font Sizes
-.fs12 {
-    font-size: rem(12px);
-}
-
-.fs14 {
-    font-size: rem(14px);
-}
-
-.fs18 {
-    font-size: rem(18px);
-}
-
-.fs20 {
-    font-size: rem(20px);
-}
-
-.fs24 {
-    font-size: rem(24px);
-}
-
-.fs28 {
-    font-size: rem(28px);
-}
-
-.fs30 {
-    font-size: rem(30px);
-}
-
 // flex helpers
 
 .flex {
@@ -85,6 +56,14 @@
     position: relative;
 }
 
+.reset {
+    all: unset;
+}
+
+.active {
+    background-color: $clr-btn-active;
+}
+
 // Media helpers
 
 .square-ratio {
@@ -105,6 +84,8 @@
     padding: 0;
 }
 
+// sticky
+
 .sticky-left {
     position: sticky;
     left: 0;
@@ -120,22 +101,13 @@
     left: 40PX;
 }
 
-
-.reset {
-    all: unset;
-}
-
-.active {
-    background-color: #cce5ff;
-}
-
 .svg-inherit-color svg {
     fill: inherit;
+    height: auto;
 }
 
 .focused-input {
     border-radius: $border-radius-small;
-    padding-inline: 2px;
     outline: 1px solid $clr-btn-add;
 }
 
@@ -148,3 +120,73 @@
         outline: 1px solid $clr-btn-border;
     }
 }
+
+.full-opacity {
+    opacity: 1;
+}
+
+.general-modal {
+    background-color: $clr0;
+    box-shadow: 0 4px 17px 6px rgba(0, 0, 0, .1);
+    border-radius: calc($border-radius-small * 2);
+}
+
+.black-blue-input {
+    border-radius: $border-radius-small;
+    padding: 8px 16px;
+    margin-block-end: 15px;
+    outline: 1px solid $clr-btn-border;
+    transition: .2s outline-color;
+
+    &:focus {
+        outline-color: $clr-btn-add;
+    }
+
+    &:hover {
+
+        outline-color: black;
+    }
+
+}
+
+.highlight {
+    background-color: $clr-btn-active;
+    color: $clr-font;
+    font-style: italic;
+    border-radius: 2px;
+    // padding-inline: 2px;
+}
+
+.user-img {
+    border: 2px solid white;
+    border-radius: 50%;
+    max-height: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    min-width: 30px;
+}
+
+.extra-members-box {
+    align-items: center;
+    background-color: #333;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    font-size: .75rem;
+    height: 25px;
+    justify-content: center;
+    min-width: 25px;
+    max-width: 25px;
+}
+
+//refernce to after tooltip from top
+// &::after {
+//     content: "";
+//     position: absolute;
+//     border-style: solid;
+//     border-width: 0 10px 10px 10px;
+//     border-color: transparent transparent white transparent;
+//     top: -10px;
+//     left: 50%;
+//     transform: translateX(-50%);
+// }

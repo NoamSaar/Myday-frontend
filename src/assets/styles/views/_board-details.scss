@@ -1,12 +1,17 @@
 .board-details {
     position: relative;
-    background-color: $clr6;
+    background-color: $clr0;
     color: $clr-font;
     border-top-left-radius: 8px;
     user-select: none;
-    overflow: scroll;
+    overflow: auto;
     height: calc(100dvh - 48px);
     padding-block-end: 40px;
+
+    &.overflow-hidden {
+        overflow: hidden;
+        padding-right: 10px;
+    }
 
     .board-content {
 

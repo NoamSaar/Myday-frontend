@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
+import { showErrorMsg } from "../../store/actions/system.actions"
+import { EditableTxt } from "../EditableTxt"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -27,50 +29,38 @@ export function BoardEdit({ board }) {
         setBoardToEdit(prevBoard => ({ ...prevBoard, [field]: value }))
     }
 
-    async function onUpdateBoard(ev) {
-        // ev.preventDefault()
+    async function onUpdateBoard() {
         try {
-            const savedBoard = await updateBoard(boardToEdit)
-            // showSuccessMsg(`Board updated successfully ${savedBoard.name}`)
+            await updateBoard(boardToEdit)
         } catch (err) {
             console.log('Cannot update board', err)
-            // showErrorMsg('Cannot update board')
+            showErrorMsg('Cannot update Board')
         } finally {
             setIsEditing(false)
         }
     }
 
-    function handleKeyDown(ev) {
-        if (ev.key === 'Enter') {
-            onUpdateBoard(ev)
-            ev.target.blur()
-        }
-    }
 
-    // const { title, favorite, details } = boardToEdit
     const { title } = boardToEdit
 
     return (
         <>
-            {!isEditing ?
-                <h3 className="title" title="Click to edit" onClick={() => setIsEditing(true)}>{board.title}</h3>
-                :
-                <input className="reset title"
-                    title="Click to edit"
-                    onChange={handleChange}
-                    onBlur={onUpdateBoard}
-                    onKeyDown={handleKeyDown}  // Trigger onUpdateBoard on pressing Enter
-                    value={title}
-                    type="text"
-                    name="title"
-                    autoFocus
-                />
-            }
+
+            <EditableTxt
+                isEditing={isEditing}
+                txtValue={board.title}
+                onTxtClick={() => setIsEditing(true)}
+                inputValue={title}
+                inputName={'title'}
+                onInputChange={handleChange}
+                onEditClose={onUpdateBoard}
+            />
 
             <div className="info-favorite flex align-center">
                 <button className="btn info" title="Show board description">
                     <img src="../../public/icons/info.svg" alt="Info-icon" />
                 </button>
+
                 <button className="btn favorite" title="Add to favorites">
                     <img src="../../public/icons/favorite.svg" alt="Star-icon" />
                 </button>

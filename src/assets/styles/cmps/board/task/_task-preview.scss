@@ -1,0 +1,52 @@
+.task-preview-container {
+    &.add-task:hover .color-display {
+        opacity: 1;
+    }
+
+    .task-preview {
+        &:hover:not(.active) {
+            box-shadow: 4px 3px 6px -3px $clr-btn-border;
+            z-index: 10;
+
+            & li {
+                background-color: $clr-task-hover;
+            }
+
+            .task-title:not(.active),
+            .task-selection:not(.active) {
+                background-color: $clr-task-hover;
+            }
+
+            .status-picker {
+                opacity: .8;
+                box-shadow: -3px 0px 23px 2px rgb(255 255 255 / 7%);
+            }
+
+        }
+
+        &.active .color-display {
+            opacity: 1;
+        }
+
+        li {
+            white-space: nowrap;
+            height: 36px;
+
+            &:not(.active li) {
+                background-color: white;
+            }
+
+            &:not(.task-selection) {
+                cursor: pointer;
+            }
+
+            &:not(.task-title) {
+                text-align: center;
+            }
+        }
+
+        .focused-input {
+            width: 100%;
+        }
+    }
+}

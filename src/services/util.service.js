@@ -1,4 +1,5 @@
 export const utilService = {
+    readJsonFile,
     makeId,
     makeLorem,
     getRandomIntInclusive,
@@ -7,7 +8,15 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getFormatDate,
-    getFormatName
+    getAcronym,
+    capitalizeFirstLetter,
+    getFullFormatDate
+}
+
+function readJsonFile(path) {
+    const str = fs.readFileSync(path, 'utf8')
+    const json = JSON.parse(str)
+    return json
 }
 
 function makeId(length = 6) {
@@ -65,12 +74,35 @@ function loadFromStorage(key) {
 }
 
 function getFormatDate(timestamp) {
-    const date = new Date(timestamp);
-    const options = { day: 'numeric', month: 'short' };
-    const formatter = new Intl.DateTimeFormat('en-US', options);
-    return formatter.format(date);
+    const date = new Date(timestamp)
+    const options = { day: 'numeric', month: 'short' }
+    const formatter = new Intl.DateTimeFormat('en-US', options)
+    return formatter.format(date)
 }
 
-function getFormatName(name) {
+function getFullFormatDate(timestamp) {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+    const options = {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short',
+        timeZone
+    }
+
+    const formattedDate = new Date(timestamp).toLocaleString('en-US', options)
+    return formattedDate
+}
+
+function getAcronym(name) {
     return name.split(' ')[0][0] + name.split(' ')[1][0]
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }

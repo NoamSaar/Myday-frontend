@@ -1,43 +1,53 @@
-import { eventBus, showSuccessMsg } from "../services/event-bus.service.js"
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from "react"
+
+import { setMsg } from "../store/actions/system.actions.js"
+import { useSelector } from "react-redux"
+import { CheckIcon, CloseIcon } from "../services/svg.service.jsx"
+
 // import { socketService, SOCKET_EVENT_REVIEW_ABOUT_YOU } from "../services/socket.service.js"
 
 export function UserMsg() {
-
-  const [msg, setMsg] = useState(null)
+  const msg = useSelector((storeState) => storeState.systemModule.msg)
+  const [isShown, setIsShown] = useState(false)
   const timeoutIdRef = useRef()
 
   useEffect(() => {
-    // const unsubscribe = eventBus.on('show-msg', (msg) => {
-    //   setMsg(msg)
-    //   window.scrollTo({ top: 0, behavior: 'smooth' });
-    //   if (timeoutIdRef.current) {
-    //     timeoutIdRef.current = null
-    //     clearTimeout(timeoutIdRef.current)
-    //   }
-    //   timeoutIdRef.current = setTimeout(closeMsg, 3000)
-    // })
+    if (!msg) return
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current)
+      timeoutIdRef.current = null
+    }
 
-    // Todo : Add listener for a review added about me
-    // socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, (msg) => {
-    //   showSuccessMsg(msg)
-    // })
+    setIsShown(true)
 
-    // return () => {
-    //   unsubscribe()
-    //   socketService.off(SOCKET_EVENT_REVIEW_ABOUT_YOU)
-    // }
-  }, [])
+    timeoutIdRef.current = setTimeout(() => {
+      closeMsg()
+      setIsShown(false)
+    }, 3000)
+
+    return () => {
+      clearTimeout(timeoutIdRef.current)
+    }
+  }, [msg])
 
   function closeMsg() {
-    setMsg(null)
+    setIsShown(false)
+    setTimeout(() => {
+      setMsg(null)
+    }, 600)
   }
 
   if (!msg) return <span></span>
   return (
-    <section className={`user-msg ${msg.type}`}>
-      <button onClick={closeMsg}>x</button>
-      {msg.txt}
+    <section className={`user-msg flex justify-center align-center ${msg.type} ${isShown ? 'shown' : ''}`}>
+      {msg.type === 'success' &&
+        <div className="svg-white-fill flex justify-center align-center"><CheckIcon /></div>
+      }
+      <p>{msg.txt}</p>
+      {msg.type === 'success' &&
+        <button className="btn-undo flex align-center justify-center">Undo</button>
+      }
+      <button className="flex align-center justify-center" onClick={closeMsg}><CloseIcon /></button>
     </section>
   )
 }

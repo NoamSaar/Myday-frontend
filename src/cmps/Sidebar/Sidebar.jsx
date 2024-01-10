@@ -1,33 +1,35 @@
-import { useEffect, useState } from "react";
-import { SidebarMainNav } from "./SidebarMainNav";
-import { SidebarWorkspace } from "./SidebarWorkspace";
-import { SidebarBoardNav } from "./SidebarBoardNav";
-import { useSelector } from "react-redux";
-import { addBoard, loadBoards, setFilterBy } from "../../store/actions/board.actions";
-import { useNavigate } from "react-router";
-// import { boardService } from "../services/board.service";
-// import { LottieAnimation } from "./LottieAnimation";
+import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
+
+import { showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
+
+import { SidebarMainNav } from "./SidebarMainNav"
+import { SidebarWorkspace } from "./SidebarWorkspace"
+import { SidebarBoardNav } from "./SidebarBoardNav"
+// import { LottieAnimation } from "./LottieAnimation"
+
+import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions"
 
 export function Sidebar() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    const [isActive, setIsActive] = useState(false)
-    const [isFocus, setIsFocus] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
-        loadData()
+        _loadBoards()
     }, [filterBy])
 
-    async function loadData() {
+    async function _loadBoards() {
         try {
             await loadBoards(filterBy)
-        } catch (error) {
-            showErrorMsgRedux('Cannot show Boards')
+        } catch (err) {
+            console.error('Error loading Boards:', err)
+            showErrorMsg('Cannot load Boards')
         }
     }
 
@@ -35,8 +37,29 @@ export function Sidebar() {
         try {
             const newBoard = await addBoard()
             navigate('board/' + newBoard._id)
-        } catch (error) {
-            console.error("Error adding new Board:", error)
+        } catch (err) {
+            console.error('Error adding new Board:', err)
+            showErrorMsg('Cannot add new Board')
+        }
+    }
+
+    async function _onRemoveBoard(boardId) {
+        try {
+            await removeBoard(boardId)
+            showSuccessMsg('We successfully deleted the board')
+            // navigate('board/b101')
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg('Cannot delete Board')
+        }
+    }
+
+    async function _onUpdateBoard(board, title) {
+        try {
+            await updateBoard({ ...board, title })
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg('Cannot update Board')
         }
     }
 
@@ -52,35 +75,34 @@ export function Sidebar() {
         setIsDropdownOpen(!isDropdownOpen)
     }
 
-    function onToggleIsActive() {
-        setIsActive(!isActive)
+    function onUpdateBoard(board, title) {
+        _onUpdateBoard(board, title)
     }
 
-    function onToggleIsFocus() {
-        setIsFocus(!isFocus)
+    function onRemoveBoard(boardId) {
+        _onRemoveBoard(boardId)
     }
+
 
     return (
         <section className="sidebar-container">
             <article className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <SidebarMainNav
-                    onOpenSidebar={onOpenSidebar}
                     isSidebarOpen={isSidebarOpen}
-                    isActive={isActive} />
+                    onOpenSidebar={onOpenSidebar}
+                />
                 <SidebarWorkspace
-                    onAddNewBoard={onAddNewBoard}
-                    isDropdownOpen={isDropdownOpen}
-                    isFocus={isFocus}
-                    onToggleDropdown={onToggleDropdown}
-                    onToggleIsFocus={onToggleIsFocus}
                     filterBy={filterBy}
+                    isDropdownOpen={isDropdownOpen}
+                    onAddNewBoard={onAddNewBoard}
+                    onToggleDropdown={onToggleDropdown}
                     onSetFilter={onSetFilter} />
                 <SidebarBoardNav
                     boards={boards}
-                    isActive={isActive}
-                    // onToggleIsActive={onToggleIsActive}
-                    filterBy={filterBy}
-                    currActiveBoard={currActiveBoard} />
+                    currActiveBoard={currActiveBoard}
+                    removeBoard={onRemoveBoard}
+                    updateBoard={onUpdateBoard}
+                />
                 {/* <LottieAnimation /> */}
             </article>
         </section>

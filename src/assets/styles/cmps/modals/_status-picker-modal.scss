@@ -1,0 +1,22 @@
+.status-picker-modal {
+    padding: 16px 24px;
+    width: 200px;
+
+    .manual-select {
+        display: grid;
+        gap: 8px;
+
+        .manual-option {
+            border-radius: calc($border-radius-small / 2);
+            color: $clr0;
+            height: 32px;
+            justify-content: center;
+            width: 100%;
+
+            &:hover {
+                opacity: .85;
+            }
+        }
+    }
+
+}

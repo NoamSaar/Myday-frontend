@@ -1,67 +1,74 @@
 import { useEffect, useRef, useState } from "react"
-import { DynamicPicker } from "./Picker/DynamicPicker"
-import { getUser } from "../../../store/actions/user.actions"
-import { utilService } from "../../../services/util.service"
-import { MenuOptionsModal } from "../../MenuOptionsModal"
-import { removeTask, updateTask } from "../../../store/actions/board.actions"
 import { useSelector } from "react-redux"
-import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
-import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
-export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
-    const [currTask, setCurrTask] = useState(null)
-    const [taskTitle, setTaskTitle] = useState(task.title)
-    const [isShowMenu, setIsShowMenu] = useState(false)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [isEditing, setIsEditing] = useState(false)
+import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
+
+import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { DynamicPreview } from "./Picker/DynamicPreview"
+import { EditableTxt } from "../../EditableTxt"
+
+export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
+    const menuBtnRef = useRef(null)
+
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
+    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+
+    const [currTask, setCurrTask] = useState(null)
+    const [taskTitle, setTaskTitle] = useState(task.title)
+    const [isShowMenuBtn, setIsShowMenuBtn] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+
+    const isMenuOpen = fatherId === `${task.id}-menu`
 
     useEffect(() => {
-        const fetchData = async () => {
-            let date = task.date
+        const newmembers = task.members.length
+            ? getMembersFromBoard(board, task.members)
+            : []
 
-            try {
-                const newPersons = task.person.length
-                    ? await Promise.all(
-                        task.person.map(async (person) => {
-                            const loadedUser = await getUser(person)
-                            return loadedUser.imgUrl || loadedUser.fullname
-                        })
-                    )
-                    : []
-
-                if (task.date) {
-                    date = utilService.getFormatDate(task.date)
-                }
-
-                setCurrTask({ ...task, person: newPersons, date })
-            } catch (error) {
-                console.error("Error fetching data:", error)
-            }
-        }
-
-        fetchData()
+        setCurrTask({ ...task, members: newmembers })
+        setTaskTitle(task.title)
     }, [task])
 
     useEffectUpdate(() => {
         setCurrTask((prevTask) => ({ ...prevTask, title: taskTitle }))
     }, [taskTitle])
 
-    async function onTaskChange(field, date) {
+    async function onTaskChange(field, recivedData) {
         try {
-            const updatedTask = { ...task, person: task.person, [field]: date }
+            let data = recivedData
+            if (field === 'members') data = data.map(member => member._id)
+
+            const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask)
-        } catch (error) {
-            console.error("Error changing task:", error)
+
+            switch (field) {
+                case 'members':
+                    setDynamicModalData({
+                        chosenMembers: recivedData,
+                        allMembers: board.members,
+                        onChangeMembers: onTaskChange
+                    })
+                    break
+                default:
+                    break
+            }
+        } catch (err) {
+            console.error('Error changing task:', err)
+            showErrorMsg('Cannot change Task')
         }
     }
 
-    async function onDeleteTask() {
+    async function onRemoveTask() {
         try {
             removeTask(board._id, groupId, task.id)
-        } catch (error) {
-            console.error("Error removing task:", error)
+            resetDynamicModal()
+            showSuccessMsg('We successfully deleted the Task')
+        } catch (err) {
+            console.error('Error removing task:', err)
+            showErrorMsg('Cannot remove Task')
         }
     }
 
@@ -69,98 +76,122 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask }) {
         try {
             const title = target.value
             setTaskTitle(title)
-            if (title) onTaskChange("title", title)
-        } catch (error) {
-            console.error("Error changing task title:", error)
+        } catch (err) {
+            console.error('Error changing task title:', err)
+            showErrorMsg('Cannot changing Task Title')
         }
     }
 
     function handleMouseEnter() {
-        setIsShowMenu(true)
+        setIsShowMenuBtn(true)
     }
 
     function handleMouseLeave() {
-        if (!isMenuOpen) setIsShowMenu(false)
+        if (!isMenuOpen) setIsShowMenuBtn(false)
     }
 
-    function toggleMenu() {
-        setIsMenuOpen((prevIsOpen) => !prevIsOpen)
+    function toggleMenu(ev) {
+        if (isMenuOpen) {
+            resetDynamicModal()
+        } else {
+            setDynamicModal(
+                {
+                    isOpen: true,
+                    boundingRect: menuBtnRef.current.getBoundingClientRect(),
+                    type: 'menuOptions',
+                    data: { options: menuOptions },
+                    fatherId: `${currTask.id}-menu`
+                })
+        }
     }
 
     function onTitleClick() {
         setIsEditing(true)
-        onSetActiveTask(currTask.id)
+        onSetActiveTask(task.id)
     }
 
     async function onTitleEditExit() {
         try {
+            if (activeTask === task.id) onSetActiveTask(null)
 
+            let titleToSave = taskTitle
             if (!taskTitle) {
                 setTaskTitle(task.title)
-                onTaskChange("title", task.title)
+                titleToSave = task.title
             }
+
+            onTaskChange('title', titleToSave)
+
             setIsEditing(false)
-            onSetActiveTask(null)
-        } catch (error) {
-            console.error("Error changing task title:", error)
+        } catch (err) {
+            console.error('Error changing task title:', err)
+            showErrorMsg('Cannot changing Task Title')
         }
     }
+
 
     const menuOptions = [
         {
             icon: <DeleteIcon />,
-            title: "Delete",
-            onOptionClick: onDeleteTask,
+            title: 'Delete',
+            onOptionClick: onRemoveTask,
         },
     ]
 
-
-    if (!currTask) return <ul>Loading</ul>
+    if (!currTask) return <ul className="task-preview-container task-title">Loading</ul>
     return (
         <ul
-            className="clean-list task-preview-container"
+            className="clean-list task-preview-container flex"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
             <div className="menu-container sticky-left">
-                {isMenuOpen && <MenuOptionsModal options={menuOptions} />}
-                {isShowMenu && (<button className="btn" onClick={toggleMenu}><MenuIcon className="btn" /></button>)}
+                {isShowMenuBtn && (
+                    <button
+                        ref={menuBtnRef}
+                        className="btn svg-inherit-color"
+                        onClick={toggleMenu}><MenuIcon className="btn" />
+                    </button>
+                )}
             </div>
+
             <div
                 style={{ backgroundColor: groupColor }}
-                className="color-display sticky-left-36"
-            ></div>
-            <ul className={`${activeTask === currTask.id && 'active'} clean-list task-preview`}>
-                <div className={`task-title-container ${activeTask === currTask.id && 'active'}`}>
+                className="color-display sticky-left-36">
+            </div>
+
+            <ul className={`clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
+                <ul className={`clean-list task-title-container flex ${activeTask === currTask.id && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
-                    <li className="task-title single-task">
 
-                        {isEditing ? (
-                            <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
-                                <input
-                                    autoFocus
-                                    value={taskTitle}
-                                    onChange={onChangeTitle}
-                                    className="reset focused-input"
-                                    type="text"
-                                    onBlur={onTitleEditExit}
-                                />
-                            </form>
-                        ) : (
-                            <span className="editable-txt" onClick={onTitleClick}>{taskTitle}</span>
-
-                        )}
+                    <li className="task-title single-task flex">
+                        <EditableTxt
+                            isEditing={isEditing}
+                            txtValue={highlightText(taskTitle, filterBy.txt)}
+                            onTxtClick={onTitleClick}
+                            inputValue={taskTitle}
+                            onInputChange={onChangeTitle}
+                            onEditClose={onTitleEditExit}
+                        />
                     </li>
 
-                </div>
+                </ul>
 
                 {board.titlesOrder.map((title, idx) => {
-                    return <DynamicPicker key={idx} title={title} task={currTask} />
+                    return (
+                        <DynamicPreview
+                            key={idx}
+                            title={title}
+                            task={currTask}
+                            onUpdate={onTaskChange}
+                            allMembers={board.members}
+                        />
+                    )
                 })}
 
-                <div className="line-end"></div>
+                <li className="line-end"></li>
             </ul>
         </ul>
     )

@@ -1,0 +1,23 @@
+.dynamic-absolute-modal {
+    position: absolute;
+    z-index: 30;
+
+    .tooltip {
+        border-style: solid;
+        width: fit-content;
+        margin: auto;
+        z-index: 10; //for it to overlap its brother shadow
+
+        &.tooltip-top {
+            border-width: 0 10px 10px 10px;
+            border-color: transparent transparent $clr0 transparent;
+        }
+
+        &.tooltip-bottom {
+            border-width: 10px 10px 0 10px;
+            border-color: $clr0 transparent transparent transparent;
+            order: 1;
+        }
+
+    }
+}

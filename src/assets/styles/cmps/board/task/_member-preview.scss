@@ -1,0 +1,18 @@
+.member-preview {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    .member-img-container {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        padding-inline-end: 6px;
+
+    }
+
+    img,
+    span {
+        margin-inline-end: -6px;
+    }
+}

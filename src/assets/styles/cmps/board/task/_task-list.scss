@@ -1,0 +1,125 @@
+.task-list {
+    width: 100%;
+
+    .task-header-list {
+        margin-inline-start: 36px;
+
+        li {
+            padding-block: 0;
+            height: 35px;
+        }
+    }
+
+    ul.task-preview:not(.add-task .task-preview) {
+        border-block-start: $clr-group-border 0.5px solid;
+        border-inline: unset;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+
+        &:not(.link-preview):not(.task-selection) {
+            padding: 8px;
+        }
+
+        &:not(.task-preview .task-title) {
+            justify-content: center;
+        }
+
+        &:not(.add-task .task-title) {
+            border-inline-end: $clr-group-border .5px solid;
+        }
+    }
+
+    .task-title-container {
+        position: sticky;
+        left: 42px;
+
+        min-width: 342px;
+        max-width: 342px;
+        z-index: 10;
+
+        .task-title {
+
+            .editable-txt-container {
+                width: 95%;
+
+                form {
+                    width: 100%;
+                    border-radius: 4px;
+                    background-color: white;
+                }
+
+                input {
+                    width: 100%;
+                }
+
+            }
+        }
+
+        .task-title {
+            width: 100%;
+            max-width: 304px;
+
+            &.single-task {
+                padding-inline-start: 36px;
+
+                .focused-input form,
+                .editable-txt {
+                    padding-block: 3px 2px;
+                    padding-inline-start: 3px;
+                }
+            }
+        }
+    }
+
+    .tasks-container {
+        width: 200vh;
+    }
+
+    .add-task {
+        width: 200vh;
+
+        .task-preview {
+            .task-title {
+                padding-inline-start: 16px;
+
+                .editable-txt,
+                .focused-input form {
+                    padding-inline-start: 11.5px;
+                }
+
+                .editable-txt {
+                    width: 99%;
+                }
+
+            }
+
+            .single-task,
+            .line-end,
+            .task-selection {
+                border-block: $clr-group-border 0.5px solid;
+            }
+
+            .line-end {
+                width: 1597px;
+            }
+
+            .editable-txt {
+                opacity: .8;
+            }
+        }
+
+        .color-display {
+            height: 36px;
+            border-bottom-left-radius: 8px;
+            opacity: .5;
+        }
+
+        .task-row-placeholder {
+            height: 37px;
+        }
+    }
+
+}

@@ -2,7 +2,8 @@ import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK } from '../reducers/board.reducer.js'
+import { setIsLoading } from './system.actions.js'
 
 
 // Store - saveTask (from board.js)
@@ -41,6 +42,30 @@ export async function loadBoards() {
     }
 }
 
+export async function loadBoard(boardId) {
+    try {
+        const filterBy = store.getState().boardModule.filterBy
+        const board = await boardService.getById(boardId, filterBy)
+        setCurrBoard(board)
+        return board
+    } catch (err) {
+        console.log('Had issues in board details', err)
+        throw err
+    } finally {
+        setIsLoading(false)
+    }
+}
+
+export async function getBoardById(boardId) {
+    try {
+        const board = await boardService.getById(boardId)
+        return board
+    } catch (err) {
+        console.log('Had issues in board details', err)
+        throw err
+    }
+}
+
 export async function saveBoards(boards) {
     try {
         await boardService.saveBoards(boards)
@@ -59,6 +84,14 @@ export async function removeBoard(boardId) {
         console.log('Cannot remove board', err)
         throw err
     }
+}
+
+export function getMembersFromBoard(board, members) {
+    return members.map(member => getMemberFromBoard(board, member))
+}
+
+export function getMemberFromBoard(board, memberId) {
+    return board.members.find(member => member._id === memberId)
 }
 
 //not working currently on the store!
@@ -94,12 +127,37 @@ export async function updateBoard(board) {
     }
 }
 
+// export async function updateBoard(board) {
+//     try {
+//         loadBoard(board._id)
+//         // setCurrBoard(savedBoard)
+//         const savedBoard = await boardService.save(board)
+//         // console.log('Updated Board:', savedBoard)
+//         store.dispatch(getActionUpdateBoard(savedBoard))
+
+//         // const currBoardId = store.getState().boardModule.currBoard._id
+//         // if (savedBoard._id === currBoardId) {
+//         //     // console.log('this is curr board!')
+//         // }
+
+//         return savedBoard
+
+//     } catch (err) {
+//         console.log('Cannot save board', err)
+//         throw err
+//     }
+// }
+
 export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })
 }
 
-export function getGcolors() {
-    return boardService.getGcolors()
+export function setIsHeaderCollapsed(isCollapsed) {
+    store.dispatch({ type: SET_IS_HEADER_COLLAPSED, isCollapsed })
+}
+
+export function getBoardColors() {
+    return boardService.getBoardColors()
 }
 
 // Demo for Optimistic Mutation 
@@ -113,7 +171,7 @@ export function getGcolors() {
 
 //     boardService.remove(boardId)
 //         .then(() => {
-//             console.log('Server Reported - Deleted Succesfully');
+//             console.log('Server Reported - Deleted Succesfully')
 //         })
 //         .catch(err => {
 //             showErrorMsg('Cannot remove board')
@@ -135,8 +193,8 @@ export async function addGroup(boardId) {
         const board = await boardService.addGroup(boardId)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 
 }
@@ -146,8 +204,8 @@ export async function removeGroup(boardId, groupId) {
         const board = await boardService.removeGroup(boardId, groupId)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 
 }
@@ -163,12 +221,18 @@ export async function updateGroup(boardId, group) {
 
 export async function addTask(boardId, groupId, taskTitle, unshiftTask = false) {
     try {
-        console.log("Received arguments addTask action:", arguments);
         const board = await boardService.addTask(boardId, groupId, taskTitle, unshiftTask)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+
+        const groupIdx = unshiftTask ? 0 : board.groups.findIndex(group => group.id === groupId)
+        const newTaskIdx = unshiftTask ? 0 : board.groups[groupIdx].tasks.length - 1
+        const newTaskId = board.groups[groupIdx].tasks[newTaskIdx].id
+        setActiveTask(newTaskId)
+
+        return board
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 
 }
@@ -178,8 +242,8 @@ export async function removeTask(boardId, groupId, taskId) {
         const board = await boardService.removeTask(boardId, groupId, taskId)
         setCurrBoard(board)
         store.dispatch(getActionUpdateBoard(board))
-    } catch (error) {
-        throw new Error(error.message || 'An error occurred during removing task')
+    } catch (err) {
+        throw new Error(err.message || 'An err occurred during removing task')
     }
 }
 
@@ -230,3 +294,6 @@ export function getActionSetActiveTask(taskId) {
         taskId
     }
 }
+
+
+

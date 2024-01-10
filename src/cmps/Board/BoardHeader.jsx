@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from "react"
+
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
 import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
+import { setIsHeaderCollapsed } from "../../store/actions/board.actions"
 
-export function BoardHeader({ board }) {
-
+export function BoardHeader({ board, filterBy, onSetFilter }) {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                setIsCollapsed(!entry.isIntersecting)
+                const currIsCollapsed = !entry.isIntersecting
+                setIsCollapsed(currIsCollapsed)
+                setIsHeaderCollapsed(currIsCollapsed)
             },
             {
                 root: null, // null means the viewport
@@ -32,7 +35,9 @@ export function BoardHeader({ board }) {
     }, [])
 
     function onCollapseHeader() {
-        setIsCollapsed(!isCollapsed)
+        const currIsCollapsed = !isCollapsed
+        setIsCollapsed(currIsCollapsed)
+        setIsHeaderCollapsed(currIsCollapsed)
     }
 
     const dynCollapsedClass = isCollapsed ? 'collapsed' : ''
@@ -41,7 +46,7 @@ export function BoardHeader({ board }) {
         <>
             <div ref={sentinelRef} className="header-sentinel"></div>
 
-            <header className={dynCollapsedClass + ' board-header'}>
+            <header className={"board-header " + dynCollapsedClass}>
 
                 <BoardEdit board={board} />
 
@@ -54,6 +59,7 @@ export function BoardHeader({ board }) {
                         <InviteIcon />
                         <span>Invite / 1</span>
                     </button>
+
                     <button className="btn more" title="Options">
                         <MenuIcon />
                     </button>
@@ -64,6 +70,7 @@ export function BoardHeader({ board }) {
                         <HomeIcon />
                         <span>Main Table</span>
                     </button>
+
                     <button className="btn add-view svg-inherit-color" title="Add view">
                         <PlusIcon />
                     </button>
@@ -74,12 +81,20 @@ export function BoardHeader({ board }) {
                         <RobotIcon />
                         <span>Automate</span>
                     </button>
-                    <button className={dynCollapsedClass + ' btn collapse'} title="Collapse header" onClick={onCollapseHeader}>
+
+                    <button className={dynCollapsedClass + ' btn collapse'}
+                        title="Collapse header"
+                        onClick={onCollapseHeader}
+                    >
                         <AngleDownIcon />
                     </button>
                 </div>
 
-                <BoardFilter board={board} />
+                <BoardFilter
+                    board={board}
+                    filterBy={filterBy}
+                    onSetFilter={onSetFilter}
+                />
             </header>
         </>
     )

@@ -1,25 +1,30 @@
-import React from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
 import { SidebarBoardLink } from './SidebarBoardLink'
+
+import { showErrorMsg } from '../../store/actions/system.actions'
 import { saveBoards } from '../../store/actions/board.actions'
 
-export function SidebarBoardNav({ boards, currActiveBoard }) {
+export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBoard }) {
     const handleDragEnd = (result) => {
         if (!result.destination) return
 
         const newOrderedBoards = Array.from(boards)
         const [removed] = newOrderedBoards.splice(result.source.index, 1)
         newOrderedBoards.splice(result.destination.index, 0, removed)
+
         saveNewOrder(newOrderedBoards)
     }
 
     async function saveNewOrder(boards) {
         try {
             await saveBoards(boards)
-        } catch (error) {
-            showErrorMsgRedux('Cannot save Boards')
+        } catch (err) {
+            console.error('Error loading Boards:', err)
+            showErrorMsg('Cannot save new Boards order')
         }
     }
+
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable droppableId="boards">
@@ -33,7 +38,12 @@ export function SidebarBoardNav({ boards, currActiveBoard }) {
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
                                     >
-                                        <SidebarBoardLink boards={boards} board={board} currActiveBoard={currActiveBoard} />
+                                        <SidebarBoardLink
+                                            board={board}
+                                            currActiveBoard={currActiveBoard}
+                                            removeBoard={removeBoard}
+                                            updateBoard={updateBoard}
+                                        />
                                     </div>
                                 )}
                             </Draggable>

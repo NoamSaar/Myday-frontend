@@ -1,43 +1,52 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import { showErrorMsg } from "../../../store/actions/system.actions"
+import { EditableTxt } from "../../EditableTxt"
 
 export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTask, groupId }) {
-    const [isEditing, setIsEditing] = useState(false)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
+    const [isInputFocus, setIsInputFocus] = useState(false)
 
     function onTitleClick() {
-        setIsEditing(true)
+        setIsInputFocus(true)
         onSetActiveTask(groupId)
     }
 
     async function onAddTask(ev) {
+        // ev.preventDefault()
         try {
-            ev.preventDefault()
-            setIsEditing(false)
-            onSetActiveTask(null)
-            if (!title) {
-                onSetTitle('')
-                return
-            }
-            addTask()
-        } catch (error) {
-            console.error("Error changing task title:", error)
+            setIsInputFocus(false)
+            if (activeTask === groupId) onSetActiveTask(null)
+            if (title) addTask()
+        } catch (err) {
+            console.error('Error changing task title:', err)
+            showErrorMsg('Cannot add Task')
         }
     }
+
     return (
-        <ul className="clean-list task-preview-container add-task">
+        <ul className="clean-list task-preview-container flex add-task sticky-left">
+            <div className="task-row-placeholder sticky-left"></div>
 
-            <ul className={`${activeTask === groupId && 'active'} clean-list task-preview`}>
+            <ul className={`clean-list task-preview flex ${activeTask === groupId && 'active'}`}>
                 <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
-                <div className="task-title-container">
 
-
+                <div className="task-title-container flex">
                     <li className="task-selection">
                         <input disabled type="checkbox" />
                     </li>
-                    <li className="task-title single-task">
 
-                        {isEditing ? (
+                    <li className="task-title single-task flex">
+                        <EditableTxt
+                            isEditing={isInputFocus}
+                            txtValue={'+ Add task'}
+                            onTxtClick={onTitleClick}
+                            inputValue={title}
+                            onInputChange={onSetTitle}
+                            onEditClose={onAddTask}
+                            placeholder={'+ Add task'}
+                        />
+                        {/* {isInputFocus ? (
                             <form onSubmit={onAddTask}>
                                 <input
                                     autoFocus
@@ -52,11 +61,11 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                         ) : (
                             <span className="editable-txt" onClick={onTitleClick}>+ Add task</span>
 
-                        )}
+                        )} */}
                     </li>
                 </div>
 
-                <div className="line-end"></div>
+                <li className="line-end"></li>
             </ul>
         </ul>
     )

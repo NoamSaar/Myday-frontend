@@ -1,0 +1,40 @@
+.dynamic-input {
+    justify-self: stretch;
+    outline: 1px solid $clr-group-border;
+    border-radius: $border-radius-small;
+    margin-inline: 3px 12px;
+
+    &.focused {
+        outline-color: $clr-btn-add;
+    }
+
+    &.search-input {
+        .search-icon {
+            padding: 6px;
+            padding-inline-end: 3px;
+        }
+
+        &:hover {
+            background-color: transparent;
+            cursor: default;
+        }
+    }
+
+    input {
+        border: none;
+        outline: none;
+        padding-block: 0;
+        background-color: transparent;
+    }
+
+    input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 0px;
+        // height: 16px;
+        width: 0px;
+        // width: 16px;
+        // background: url('path_to_custom_clear_button_image') no-repeat center center;
+        background-size: contain;
+        cursor: pointer;
+    }
+}

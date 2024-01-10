@@ -1,0 +1,21 @@
+.link-picker-modal {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 24px 24px;
+    width: 266px;
+
+    h4 {
+        font-size: rem(18px);
+        color: $clr-font;
+        margin-block-end: 8px;
+    }
+
+    label {
+        padding-block: 2px 6px;
+    }
+
+    .dynamic-input {
+        padding: 8px 16px;
+        margin-block-end: 24px;
+    }
+}

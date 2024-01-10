@@ -1,23 +1,54 @@
 .user-msg {
-    color:white;
-    padding: 10px;
-    font-size: 1.4em;
     position: fixed;
-    top:0;
-    right:0;
-    background-color: grey;
-}
-.user-msg button {
-    float:right;
-    border:0;
-    border-radius: 50%;
-    margin: 5px;
-    background-color: #222;
+    left: 50%;
+    top: -100px;
+    transform: translate(-50%, 50%);
+    z-index: 40;
+    transition: top 0.5s ease;
+
+    padding: 6px 12px;
+
+    font-size: rem(14px);
+    font-family: figtree;
+    color: $clr0;
+
+    &.shown {
+        top: 10px;
+    }
+
+    &.success {
+        background-color: $clr-success;
+    }
+
+    &.error {
+        background-color: $clr-err;
+    }
+
+    button {
+        background-color: transparent;
+        padding-inline: 6px;
+        padding-block: 6px;
+        margin-inline-start: 4px;
+        border-radius: $border-radius-small;
+
+        &:hover {
+            background-color: $clr-success-hover;
+        }
+    }
+
+    .btn-undo {
+        outline: 1px solid $clr0;
+        margin-inline: 24px 8px;
+    }
+
+    svg {
+        fill: $clr0;
+        height: 25px;
+        width: 25px;
+    }
 }
 
-.user-msg.success {
-    background-color: rgb(41, 189, 73);
-}
-.user-msg.error {
-    background-color: rgb(216, 59, 59);
+.svg-white-fill {
+    padding: 6px;
+    padding-block-start: 8px;
 }

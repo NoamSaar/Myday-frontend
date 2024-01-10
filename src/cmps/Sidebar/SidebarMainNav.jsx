@@ -1,31 +1,32 @@
-import { NavLink } from "react-router-dom";
-import { setCurrBoard } from "../../store/actions/board.actions";
+import { NavLink } from "react-router-dom"
 import { HomeIcon, AngleRightIcon, CalendarIcon } from "../../services/svg.service"
+import { setCurrBoard } from "../../store/actions/board.actions"
 
-export function SidebarMainNav({ isActive, isSidebarOpen, onOpenSidebar }) {
+export function SidebarMainNav({ isSidebarOpen, onOpenSidebar }) {
     return (
         <nav className="sidebar-main-nav">
-            <NavLink className={`btn btn-nav ${isActive ? 'active' : ''}`}
+            <NavLink className={`btn btn-nav svg-inherit-color`}
                 to="/"
                 title="Home Button"
-                onClick={() => setCurrBoard(null)}>
-
+                onClick={() => setCurrBoard(null)}
+            >
                 <HomeIcon />
                 <span>Home</span>
             </NavLink>
 
-            <NavLink className={`btn btn-nav ${isActive ? 'active' : ''}`}
+            <NavLink className={`btn btn-nav svg-inherit-color`}
                 to="/workspace"
                 title="My Work Button"
-                onClick={() => setCurrBoard(null)}>
-
+                onClick={() => setCurrBoard(null)}
+            >
                 <CalendarIcon />
                 <span>My work</span>
             </NavLink>
 
             <button className={`btn btn-menu ${isSidebarOpen ? 'open' : ''}`}
                 title="Menu Button"
-                onClick={onOpenSidebar}>
+                onClick={onOpenSidebar}
+            >
                 <AngleRightIcon />
             </button>
         </nav>
