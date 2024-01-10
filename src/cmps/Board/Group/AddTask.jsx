@@ -26,9 +26,9 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
 
     return (
         <ul className="clean-list task-preview-container flex add-task sticky-left">
-            <div className="task-row-placeholder sticky-left"></div>
 
-            <ul className={`clean-list task-preview flex ${activeTask === groupId && 'active'}`}>
+            <ul className={`clean-list task-preview sticky-left flex ${activeTask === groupId && 'active'}`}>
+                <div className="task-row-placeholder"></div>
                 <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
 
                 <div className="task-title-container flex">

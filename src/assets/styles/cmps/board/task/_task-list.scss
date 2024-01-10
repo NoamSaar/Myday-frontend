@@ -1,5 +1,15 @@
 .task-list {
+    // display: grid;
+    // grid-template-columns: 384px 97px 139px 139px 174px 139px 138px 1fr;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
     width: 100%;
+
+    li:not(.task-title-container li) {
+        grid-column: span 1;
+        background-color: rgb(241, 153, 153) !important;
+    }
 
     .task-header-list {
         margin-inline-start: 36px;
@@ -74,11 +84,30 @@
         }
     }
 
+    .task-preview-container {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: 1 / -1;
+
+        .task-preview {
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-column: 2 / -1;
+
+        }
+    }
+
     .tasks-container {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: 1 / -1;
         width: 200vh;
     }
 
     .add-task {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: 1 / -1;
         width: 200vh;
 
         .task-preview {
@@ -119,6 +148,7 @@
 
         .task-row-placeholder {
             height: 37px;
+            max-width: 36px;
         }
     }
 
