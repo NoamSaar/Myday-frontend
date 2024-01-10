@@ -102,10 +102,6 @@ export function DynamicAbsoluteModal() {
         top: `${ModalDimensions.top}px`
     }
 
-    // const dynTooltipClass = showTooltip ? 'tooltip tooltip-' + tooltipDirection : ''
-
-    // console.log('modalData.tooltip', modalData.hasTooltip)
-
     return (
         <div style={style} ref={modalRef} className='dynamic-absolute-modal flex column'>
             {modalData.hasTooltip && (
