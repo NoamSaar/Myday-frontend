@@ -1,7 +1,6 @@
 .board-group {
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
+    display: grid;
+    grid-template-columns: 384px 97px 139px 139px 174px 139px 138px minmax(90px, 1fr);
     margin-block-end: 55px;
 
     .group-sticky-container {
@@ -148,6 +147,32 @@
 
         .arrow-container svg {
             rotate: -90deg;
+        }
+
+        .group-sticky-container {
+            grid-column: 1 / 2;
+        }
+
+        .task-table {
+            grid-column: 2 / -1;
+
+            .task-header-list-container,
+            .task-list {
+                display: none;
+            }
+
+            .group-summary {
+                grid-column: 1 / -1;
+
+                .summary-content {
+                    grid-column: 1 / -1;
+                    min-height: 60px;
+                }
+
+                .place-holder {
+                    display: none;
+                }
+            }
         }
     }
 
