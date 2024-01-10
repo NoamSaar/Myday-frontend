@@ -67,14 +67,19 @@ export async function loadFilteredBoard() {
         })
     }
     if (filterBy.member) {
+        // console.log('filterBy.member', filterBy.member)
         board.groups = board.groups.map(group => {
             group.tasks = group.tasks.filter(task => {
-                return task.members.some(currmember => filterBy.member === currmember) //member is array! its items are ids
+                return task.members.some(member => {
+                    // console.log('filterBy.member === member', filterBy.member === member)
+                    return filterBy.member === member
+                }) //works here with the memeber's id
             })
+            console.log('group', group)
             return group
         })
     }
-
+    // console.log('board filtered', board)
     setFilteredBoard(board)
     return board
 
