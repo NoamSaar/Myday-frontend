@@ -12,14 +12,22 @@ export const SET_DYNAMIC_MODAL = 'SET_DYNAMIC_MODAL'
 export const SET_DYNAMIC_PANEL_OPEN = 'SET_DYNAMIC_PANEL_OPEN'
 export const SET_DYNAMIC_PANEL_TYPE = 'SET_DYNAMIC_PANEL_TYPE'
 export const SET_DYNAMIC_PANEL_DATA = 'SET_DYNAMIC_PANEL_DATA'
+export const SET_SIDE_PANEL_OPEN = 'SET_SIDE_PANEL_OPEN'
 
 const initialState = {
   isLoading: false,
   msg: null,
-  dynamicModal: getEmptyDynamicModal()
+  dynamicModal: getEmptyDynamicModal(),
+  isSidePanelOpen: false,
+  slidePanelData: {
+    isPanelOpen: false,
+    type: '',
+    data: {}
+  }
 }
 
 export function systemReducer(state = initialState, action = {}) {
+  // console.log('action:', action)
   switch (action.type) {
     case SET_IS_LOADING:
       return { ...state, isLoading: action.isLoading }
@@ -47,6 +55,9 @@ export function systemReducer(state = initialState, action = {}) {
 
 
     // PANEL
+    case SET_SIDE_PANEL_OPEN:
+      return { ...state, isSidePanelOpen: action.isSidePanelOpen }
+
     case SET_DYNAMIC_PANEL_OPEN:
       return {
         ...state, slidePanelData: {

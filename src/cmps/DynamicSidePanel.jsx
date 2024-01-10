@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { MenuIcon } from "../services/svg.service";
 
-function DynamicSidePanel(data) {
+export function DynamicSidePanel() {
     const { isPanelOpen, type, data } = useSelector((storeState) => storeState.systemModule.sidePanelData)
 
     return (
@@ -12,10 +12,9 @@ function DynamicSidePanel(data) {
         </>
     )
 
-} onUpdate
+}
 
 function DynamicSidePanelCmp({ type, data }) {
-
     <section className="side-panel">
         <PanelHeader data={data} type={type} />
         <PanelBody data={data} type={type} />
@@ -24,7 +23,7 @@ function DynamicSidePanelCmp({ type, data }) {
 
 function PanelHeader({ data, type }) {
     function onSwitchToSubject() {
-        console.log('hi')
+        setDynamicPanelType()
     }
 
     return (

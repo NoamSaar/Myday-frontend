@@ -13,6 +13,7 @@ export const boardService = {
     addTask,
     removeTask,
     updateTask,
+    getTaskById,
     addGroup,
     removeGroup,
     updateGroup,
@@ -237,6 +238,24 @@ async function updateTask(boardId, groupId, task) {
         throw new Error(err.message || 'An err occurred during removing task')
     }
 }
+
+async function getTaskById(boardId, taskId) {
+    try {
+        const board = await getById(boardId)
+        for (const group of board.groups) {
+            const taskIdx = group.tasks.findIndex(currTask => currTask.id === taskId)
+            if (taskIdx !== -1) {
+                return { ...group.tasks[taskIdx] }
+            }
+        }
+
+        return null
+    } catch (error) {
+        console.error('Error fetching task:', error)
+        throw new Error('Failed to fetch task')
+    }
+}
+
 
 //private
 
