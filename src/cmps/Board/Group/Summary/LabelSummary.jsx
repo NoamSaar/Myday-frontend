@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 export function LabelSummary({ title, group, board }) {
     const [titleStats, setTitleStats] = useState(calculateTitleStatsAndPercentage(group, title, board))
-    console.log('titleStats', titleStats)
 
     useEffect(() => {
         setTitleStats(calculateTitleStatsAndPercentage(group, title, board))
@@ -29,7 +28,7 @@ export function LabelSummary({ title, group, board }) {
             const label = board[title].find((option) => option.id === labelId).title;
 
             return {
-                title: label, // Change here to use the title instead of the id
+                title: label,
                 color: getTitleColor(title, board, labelId),
                 percentageMap: {
                     percent: formattedPercentage,
@@ -47,7 +46,6 @@ export function LabelSummary({ title, group, board }) {
         <li className="label-summary">
             <div className="label-summary-battery">
                 {titleStats.map((titleStat, idx) => {
-                    console.log('titleStat.title', titleStat.title)
                     return <div
                         key={idx}
                         className="label-data"
