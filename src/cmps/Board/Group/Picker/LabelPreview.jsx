@@ -9,8 +9,8 @@ export function LabelPreview({ title, info, onUpdate, taskId }) {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
-    const color = board[title].find(option => option.title === info.chosenOption).color
-    const style = { backgroundColor: color }
+    const label = board[title].find(option => option.id === info.chosenOption)
+    const style = { backgroundColor: label.color }
     const isCurrPickerOpen = parentId === `${taskId}-${title}Picker`
 
     function onLabelPreviewClick(ev) {
@@ -38,7 +38,7 @@ export function LabelPreview({ title, info, onUpdate, taskId }) {
             className="status-preview status-col priority-col"
             ref={previewBtnRef}
         >
-            <p>{info.chosenOption}</p>
+            <p>{label.title}</p>
 
             <div className="corner-fold"></div>
         </li >

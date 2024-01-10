@@ -2,7 +2,6 @@
 export function LabelSummary({ title, group, board }) {
 
     function getTitleColor(title, board, label) {
-        console.log('title', title)
         const titleInfo = board[title].find((item) => item.title === label);
         return titleInfo ? titleInfo.color : null;
     }
@@ -11,8 +10,9 @@ export function LabelSummary({ title, group, board }) {
         const totalTasks = group.tasks.length;
 
         const titleStats = group.tasks.reduce((acc, task) => {
-            const taskTitle = task[title];
-            acc[taskTitle] = (acc[taskTitle] || 0) + 1;
+            const labelId = task[title];
+            const label = board[title].find(option => option.id === labelId).title
+            acc[label] = (acc[label] || 0) + 1;
             return acc;
         }, {});
 
@@ -35,7 +35,6 @@ export function LabelSummary({ title, group, board }) {
 
 
     const titleStats = calculateTitleStatsAndPercentage(group, title, board)
-    console.log('titleStats', titleStats)
 
 
     return (
