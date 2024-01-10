@@ -22,6 +22,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const [isEditing, setIsEditing] = useState(false)
 
     const isMenuOpen = fatherId === `${task.id}-menu`
+    const isActive = currTask ? activeTask === currTask.id : false
 
     useEffect(() => {
         const newmembers = task.members.length
@@ -145,8 +146,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="task-sticky-container sticky-left">
-                <div className="menu-container sticky-left">
+            <div className={`${isActive && 'active'} task-sticky-container sticky-left`}>
+                <div className="menu-container">
                     {isShowMenuBtn && (
                         <button
                             ref={menuBtnRef}
@@ -160,10 +161,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     style={{ backgroundColor: groupColor }}
                     className="color-display sticky-left-36">
                 </div>
-            </div>
-
-            <ul className={`clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
-                <ul className={`clean-list task-title-container flex ${activeTask === currTask.id && 'active'}`}>
+                <ul className={`clean-list task-title-container flex ${isActive && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
@@ -180,6 +178,9 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     </li>
 
                 </ul>
+            </div>
+
+            <ul className={`clean-list task-preview flex ${isActive && 'active'}`}>
 
                 {board.titlesOrder.map((title, idx) => {
                     return (
