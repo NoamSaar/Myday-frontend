@@ -19,7 +19,7 @@ export function LabelPreview({ title, info, onUpdate, taskId }) {
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: previewBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: previewBtnRef.current,
                 type: 'labelPicker',
                 data: { selectedStatus: info.chosenOption, title, onUpdate },
                 fatherId: `${taskId}-${title}Picker`,
