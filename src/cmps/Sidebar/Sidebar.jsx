@@ -12,21 +12,33 @@ import { SidebarBoardNav } from "./SidebarBoardNav"
 import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions"
 
 export function Sidebar() {
-    const sidebarRef = useRef(null);
-    const [isResizing, setIsResizing] = useState(false);
-    const [sidebarWidth, setSidebarWidth] = useState(250);
+    const sidebarRef = useRef(null)
+
+    const [isResizing, setIsResizing] = useState(false)
+    const [sidebarWidth, setSidebarWidth] = useState(250)
 
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+    const [isHovered, setIsHovered] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
         _loadDataBoards()
     }, [filterBy])
+
+
+    useEffect(() => {
+        window.addEventListener("mousemove", resize)
+        window.addEventListener("mouseup", stopResizing)
+        return () => {
+            window.removeEventListener("mousemove", resize)
+            window.removeEventListener("mouseup", stopResizing)
+        }
+    }, [resize, stopResizing])
 
     async function _loadDataBoards() {
         try {
@@ -71,10 +83,6 @@ export function Sidebar() {
         setFilterBy(filterBy)
     }
 
-    const onResize = (newWidth) => {
-        setSidebarWidth(newWidth)
-    }
-
     function onOpenSidebar() {
         setIsSidebarOpen(!isSidebarOpen)
     }
@@ -91,6 +99,12 @@ export function Sidebar() {
         _onRemoveBoard(boardId)
     }
 
+    // resizing functionality
+
+    const onResize = (newWidth) => {
+        setSidebarWidth(newWidth)
+    }
+
     const startResizing = useCallback((e) => {
         setIsResizing(true)
     }, [])
@@ -100,34 +114,40 @@ export function Sidebar() {
     }, [])
 
     const resize = useCallback(
-        (e) => {
+        (ev) => {
             if (isResizing) {
-                const newWidth = e.clientX - sidebarRef.current.getBoundingClientRect().left
+                const newWidth = ev.clientX - sidebarRef.current.getBoundingClientRect().left
                 onResize(newWidth)
             }
         },
         [isResizing]
     )
 
-    useEffect(() => {
-        window.addEventListener("mousemove", resize)
-        window.addEventListener("mouseup", stopResizing)
-        return () => {
-            window.removeEventListener("mousemove", resize)
-            window.removeEventListener("mouseup", stopResizing)
+    var style = isSidebarOpen ?
+        {
+            width: sidebarWidth,
+            left: 0
+        } : {
+            width: sidebarWidth,
+            left: -(sidebarWidth - 30)
         }
-    }, [resize, stopResizing])
+
+    style = !isHovered ? style : {
+        width: sidebarWidth,
+        left: 0
+    }
+
+    const sidebarClass = `sidebar ${isSidebarOpen ? 'open' : ''}`
 
     return (
         <section className="sidebar-container relative">
             <article
                 ref={sidebarRef}
-                style={{
-                    width: sidebarWidth,
-                    left: -(sidebarWidth - 30)
-                }}
+                style={style}
                 onMouseDown={(e) => e.preventDefault()}
-                className={`sidebar ${isSidebarOpen ? 'open' : ''}`}
+                className={`${sidebarClass} ${isHovered ? 'hovered' : ''}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
             >
 
                 <SidebarMainNav
