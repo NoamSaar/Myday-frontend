@@ -1,0 +1,9 @@
+.task-sticky-container {
+    display: flex;
+    background-color: white;
+    z-index: 20;
+
+    .color-display {
+        max-width: 6px;
+    }
+}

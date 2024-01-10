@@ -145,19 +145,21 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="menu-container sticky-left">
-                {isShowMenuBtn && (
-                    <button
-                        ref={menuBtnRef}
-                        className="btn svg-inherit-color"
-                        onClick={toggleMenu}><MenuIcon className="btn" />
-                    </button>
-                )}
-            </div>
+            <div className="task-sticky-container sticky-left">
+                <div className="menu-container sticky-left">
+                    {isShowMenuBtn && (
+                        <button
+                            ref={menuBtnRef}
+                            className="btn svg-inherit-color"
+                            onClick={toggleMenu}><MenuIcon className="btn" />
+                        </button>
+                    )}
+                </div>
 
-            <div
-                style={{ backgroundColor: groupColor }}
-                className="color-display sticky-left-36">
+                <div
+                    style={{ backgroundColor: groupColor }}
+                    className="color-display sticky-left-36">
+                </div>
             </div>
 
             <ul className={`clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
