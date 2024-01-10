@@ -30,16 +30,6 @@ export function Sidebar() {
         _loadDataBoards()
     }, [filterBy])
 
-
-    useEffect(() => {
-        window.addEventListener("mousemove", resize)
-        window.addEventListener("mouseup", stopResizing)
-        return () => {
-            window.removeEventListener("mousemove", resize)
-            window.removeEventListener("mouseup", stopResizing)
-        }
-    }, [resize, stopResizing])
-
     async function _loadDataBoards() {
         try {
             await loadBoards(filterBy)
@@ -122,6 +112,15 @@ export function Sidebar() {
         },
         [isResizing]
     )
+
+    useEffect(() => {
+        window.addEventListener("mousemove", resize)
+        window.addEventListener("mouseup", stopResizing)
+        return () => {
+            window.removeEventListener("mousemove", resize)
+            window.removeEventListener("mouseup", stopResizing)
+        }
+    }, [resize, stopResizing])
 
     var style = isSidebarOpen ?
         {
