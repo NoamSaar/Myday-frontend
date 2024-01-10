@@ -8,10 +8,10 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isPickerOpen = parentId === `${taskId}-datePicker`
+    const isCurrPickerOpen = parentId === `${taskId}-datePicker`
 
     function onDatePreviewClick(ev) {
-        if (isPickerOpen) {
+        if (isCurrPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({

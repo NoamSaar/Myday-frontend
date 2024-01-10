@@ -11,10 +11,10 @@ export function LabelPreview({ title, info, onUpdate, taskId }) {
 
     const color = board[title].find(option => option.title === info.chosenOption).color
     const style = { backgroundColor: color }
-    const isPickerOpen = parentId === `${taskId}-${title}Picker`
+    const isCurrPickerOpen = parentId === `${taskId}-${title}Picker`
 
     function onLabelPreviewClick(ev) {
-        if (isPickerOpen) {
+        if (isCurrPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({

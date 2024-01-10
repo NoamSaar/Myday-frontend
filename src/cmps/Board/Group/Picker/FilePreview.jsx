@@ -3,10 +3,10 @@ import { useSelector } from "react-redux"
 
 export function FilePreview({ file, onUpdate, taskId }) {
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isPickerOpen = parentId === `${taskId}-filePicker`
+    const isCurrPickerOpen = parentId === `${taskId}-filePicker`
 
     function onFilePreviewClick(ev) {
-        if (isPickerOpen) {
+        if (isCurrPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({
