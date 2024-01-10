@@ -22,7 +22,8 @@ export function MemberPreview({ chosenMembers, memberOptions, onUpdate, taskId }
                 data: { chosenMembers, memberOptions, onChangeMembers: onUpdate },
                 fatherId: `${taskId}-memberPicker`,
                 isPosBlock: true,
-                isCenter: true
+                isCenter: true,
+                hasTooltip: true,
             })
         }
     }
