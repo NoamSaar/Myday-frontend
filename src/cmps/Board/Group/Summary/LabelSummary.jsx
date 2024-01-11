@@ -44,6 +44,7 @@ export function LabelSummary({ title, group, board }) {
 
     return (
         <li className="label-summary">
+            <p>{title}</p>
             <div className="label-summary-battery">
                 {titleStats.map((titleStat, idx) => {
                     return <div

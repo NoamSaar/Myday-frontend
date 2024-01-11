@@ -191,6 +191,15 @@
         .summary-content {
             border: $clr-group-border 0.5px solid;
             border-inline-end: unset;
+            color: $clr-light-font;
+
+            .label-summary {
+                flex-direction: column;
+
+                p {
+                    width: 100%;
+                }
+            }
         }
 
         .title-container {
