@@ -193,6 +193,14 @@
             border-inline: unset;
             color: $clr-light-font;
 
+            &>* {
+                justify-content: space-between;
+
+                &:not(.label-summary) {
+                    padding-block-end: 4px;
+                }
+            }
+
             .label-summary {
                 flex-direction: column;
 
