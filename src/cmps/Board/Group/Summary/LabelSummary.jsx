@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { utilService } from "../../../../services/util.service";
 
 export function LabelSummary({ title, group, board }) {
     const [titleStats, setTitleStats] = useState(calculateTitleStatsAndPercentage(group, title, board))
@@ -44,7 +45,7 @@ export function LabelSummary({ title, group, board }) {
 
     return (
         <li className="label-summary">
-            <p>{title}</p>
+            <p>{utilService.capitalizeFirstLetter(title)}</p>
             <div className="label-summary-battery">
                 {titleStats.map((titleStat, idx) => {
                     return <div
