@@ -6,8 +6,6 @@ import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.servi
 import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
-import { TaskList } from "./TaskList"
-import { TaskHeaderList } from "./TaskHeaderList"
 import { EditableTxt } from "../../EditableTxt"
 import { TaskTable } from "./TaskTable"
 

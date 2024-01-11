@@ -1,5 +1,6 @@
 import { GroupSummary } from "./Summary/GroupSummary"
 import { LabelSummary } from "./Summary/LabelSummary"
+import { Timeline } from "./Summary/Timeline"
 
 export default function DynamicSummary({ title, group, board }) {
     switch (title) {
@@ -13,14 +14,9 @@ export default function DynamicSummary({ title, group, board }) {
             return (
                 <LabelSummary title={title} group={group} board={board} />)
 
-
-        // case "date":
-        //     return (
-        //         <DatePreview
-        //             selectedDate={task.date}
-        //             onChangeDate={onUpdate}
-        //             taskId={task.id}
-        //         />)
+        case "date":
+            return (
+                <Timeline group={group} board={board} defaultWidth={'174px'} />)
 
         // case "file":
         //     return (
