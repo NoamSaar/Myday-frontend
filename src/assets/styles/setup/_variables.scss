@@ -8,6 +8,18 @@ $clr1: #000;
     --bgc: $clr0;
     // --dark-mode-bg-header: #292f4c;
     // --dark-mode-bg: #181b34;
+
+    //board group
+    --first-col: 384px;
+    --person-col: 97px;
+    --status-col: 139px;
+    --priority-col: 139px;
+    --date-col: 174px;
+    --link-col: 139px;
+    --file-col: 138px;
+    --line-end: minmax(90px, 1fr);
+
+    --board-grid: var(--first-col) var(--person-col) var(--status-col) var(--priority-col) var(--date-col) var(--link-col) var(--file-col) var(--line-end);
 }
 
 // group clrs

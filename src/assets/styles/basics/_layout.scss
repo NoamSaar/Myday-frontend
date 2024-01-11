@@ -3,16 +3,13 @@
     height: 100dvh;
 
     .content-container {
-        grid-template-columns: minmax(30px, auto) 1fr;
-        gap: 10px;
-        position: relative;
-
         padding: 0;
         background-color: $clr-bg-header;
 
         .sidebar-container {
             padding: 0;
         }
+
     }
 }
 
@@ -56,6 +53,21 @@
     grid-column: 1 / -1;
 
     &.dragged-task {
-        grid-template-columns: 384px 97px 139px 139px 174px 139px 138px 1fr;
+        grid-template-columns: var(--board-grid);
+    }
+}
+
+@media (min-width: $mobile-breakpoint) {
+    .main-layout {
+
+
+        .content-container {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-columns: minmax(30px, auto) 1fr;
+            gap: 10px;
+            position: relative;
+
+        }
     }
 }
