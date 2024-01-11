@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 import { SidebarBoardLink } from './SidebarBoardLink'
@@ -6,6 +7,10 @@ import { showErrorMsg } from '../../store/actions/system.actions'
 import { saveBoards } from '../../store/actions/board.actions'
 
 export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBoard }) {
+
+    const fullBoards = useSelector((storeState) => storeState.boardModule.boards)
+
+
     const handleDragEnd = (result) => {
         if (!result.destination) return
 
@@ -18,12 +23,37 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
 
     async function saveNewOrder(boards) {
         try {
-            await saveBoards(boards)
+            const orderedNewBoard = sortFullBoards(fullBoards, boards)
+            await saveBoards(orderedNewBoard)
         } catch (err) {
             console.error('Error loading Boards:', err)
             showErrorMsg('Cannot save new Boards order')
         }
     }
+
+    function sortFullBoards(fullBoards, filteredBoards) {
+        // Create a new copy of fullBoards to avoid mutating the original
+        const fullBoardsCopy = [...fullBoards]
+
+        // Create a map for quick access to board order in filteredBoards
+        const boardsOrder = new Map()
+        filteredBoards.forEach((board, idx) => {
+            boardsOrder.set(board._id, { idx })
+        })
+
+        // Create a copy of fullBoards for reference to original order
+        const originalBoardsOrder = fullBoardsCopy.map(board => board._id)
+
+        // Sort boards in fullBoardsCopy based on filteredBoards order
+        fullBoardsCopy.sort((a, b) => {
+            const indexA = boardsOrder.has(a._id) ? boardsOrder.get(a._id).idx : originalBoardsOrder.indexOf(a._id)
+            const indexB = boardsOrder.has(b._id) ? boardsOrder.get(b._id).idx : originalBoardsOrder.indexOf(b._id)
+            return indexA - indexB
+        })
+
+        return fullBoardsCopy
+    }
+
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
