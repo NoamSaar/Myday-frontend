@@ -23,6 +23,7 @@
 @import "cmps/sidebar/sidebar";
 
 // board
+@import "cmps/board/board-app";
 @import "cmps/board/board-header";
 @import "cmps/board/board-group";
 
@@ -40,6 +41,7 @@
 @import "cmps/board/task/task-header-list";
 @import "cmps/board/task/task-sticky-container";
 @import "cmps/board/task/task-table";
+@import "cmps/board/task/timeline";
 
 // modals
 @import "cmps/modals/menu-option-modal";

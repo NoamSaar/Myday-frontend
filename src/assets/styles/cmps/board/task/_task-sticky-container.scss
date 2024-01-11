@@ -8,7 +8,7 @@
     }
 
     ul:not(.add-task .task-preview) {
-        border-block-start: #d0d4e4 0.5px solid;
+        border-block-start: $clr-group-border 0.5px solid;
     }
 
     li {

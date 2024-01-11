@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { resetDynamicModal } from "../../../../../store/actions/system.actions"
 import { AttachIcon } from "../../../../../services/svg.service"
 
-export function FilePicker({ chosenFile, changeFile }) {
+export function FilePicker({ chosenFile, changeFile, taskId }) {
     const [newFile, setNewFile] = useState(chosenFile)
     const fileInputRef = useRef(null);
 
@@ -13,7 +13,7 @@ export function FilePicker({ chosenFile, changeFile }) {
             const reader = new FileReader()
             reader.onloadend = () => {
                 setNewFile(reader.result)
-                changeFile('file', reader.result)
+                changeFile('file', reader.result, taskId)
                 resetDynamicModal()
             }
             reader.readAsDataURL(file)

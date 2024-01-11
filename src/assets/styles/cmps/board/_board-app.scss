@@ -1,0 +1,15 @@
+.board-app {
+
+    .sidebar-container {
+        display: none;
+    }
+}
+
+@media (min-width: $mobile-breakpoint) {
+    .board-app {
+
+        .sidebar-container {
+            display: block;
+        }
+    }
+}

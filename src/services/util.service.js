@@ -10,7 +10,10 @@ export const utilService = {
     getFormatDate,
     getAcronym,
     capitalizeFirstLetter,
-    getFullFormatDate
+    getFullFormatDate,
+    timeStampToDate,
+    millisecondsToDays,
+    isValidTimestamp
 }
 
 function readJsonFile(path) {
@@ -79,6 +82,23 @@ function getFormatDate(timestamp) {
     const formatter = new Intl.DateTimeFormat('en-US', options)
     return formatter.format(date)
 }
+
+function timeStampToDate(timeStamp) {
+    const timelineToSave = new Date(timeStamp).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+    })
+    return timelineToSave
+}
+
+function millisecondsToDays(ms) {
+    return Math.floor(ms / 86400000)
+}
+
+function isValidTimestamp(timestamp) {
+    return !isNaN(new Date(timestamp).getTime())
+}
+
 
 function getFullFormatDate(timestamp) {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone

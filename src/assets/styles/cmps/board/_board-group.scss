@@ -1,7 +1,8 @@
 .board-group {
     display: grid;
     grid-template-columns: 384px 97px 139px 139px 174px 139px 138px minmax(90px, 1fr);
-    margin-block-end: 55px;
+    margin-block-end: 28px;
+    min-width: max-content;
 
     .group-sticky-container {
         top: 167px;

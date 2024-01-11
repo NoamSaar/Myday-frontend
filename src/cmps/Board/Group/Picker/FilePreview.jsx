@@ -2,11 +2,11 @@ import { useRef } from "react"
 import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
 import { useSelector } from "react-redux"
 
-export function FilePreview({ file, onUpdate, taskId }) {
+export function FilePreview({ file, onUpdate, parentElementId, taskId }) {
     const previewBtnRef = useRef(null)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isCurrPickerOpen = parentId === `${taskId}-filePicker`
+    const isCurrPickerOpen = parentId === `${parentElementId}-filePicker`
 
     function onFilePreviewClick() {
         if (isCurrPickerOpen) {
@@ -18,9 +18,10 @@ export function FilePreview({ file, onUpdate, taskId }) {
                 type: 'filePicker',
                 data: {
                     file,
-                    onChangeFile: onUpdate
+                    onChangeFile: onUpdate,
+                    taskId
                 },
-                parentId: `${taskId}-filePicker`,
+                parentId: `${parentElementId}-filePicker`,
                 isPosBlock: true,
             })
         }

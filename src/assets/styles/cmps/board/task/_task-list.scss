@@ -26,7 +26,7 @@
             justify-content: center;
         }
 
-        &:not(.add-task .task-title) {
+        &:not(.add-task .task-title):not(.line-end) {
             border-inline-end: $clr-group-border .5px solid;
         }
     }
