@@ -148,57 +148,65 @@ export async function updateBoard(board) {
     }
 }
 
-export async function updateGroupOrder(filteredBoard) {
+export async function updateBoardOrder(filteredBoard) {
     setFilteredBoard(filteredBoard) //save order in filtered board store
     const fullBoard = store.getState().boardModule.currBoard
+
     //order full according to filtered
-
-    fullBoard.groups = fullBoard.groups.filter(group => {
-        group.tasks = group.tasks.filter(task => regex.test(task.title))
-        // Return groups that have matching title or have at least one matching task title
-        return regex.test(group.title) || group.tasks.length > 0
-    })
-
-
-
+    sortFullBoard(fullBoard, filteredBoard)
     try {
         //save full and ordered on db
-        const savedBoard = await boardService.save(fullBoard)
-        store.dispatch(getActionUpdateBoard(savedBoard))
+        const savedFullBoard = await boardService.save(fullBoard)
+
+        store.dispatch(getActionUpdateBoard(savedFullBoard)) //update all boards in store
 
         const currBoardId = store.getState().boardModule.currBoard._id
-        if (savedBoard._id === currBoardId) {
-            //update the full board in store
-            store.dispatch({ type: SET_CURR_BOARD, board }) //update curr board only
+        if (savedFullBoard._id === currBoardId) { //redundant?
+            //update the full curr board only in store
+            store.dispatch({ type: SET_CURR_BOARD, board: savedFullBoard })
         }
 
-        return savedBoard
+        return savedFullBoard
     } catch (err) {
         console.log('Cannot save board', err)
         throw err
     }
 }
 
-// export async function updateBoard(board) {
-//     try {
-//         loadBoard(board._id)
-//         // setCurrBoard(savedBoard)
-//         const savedBoard = await boardService.save(board)
-//         // console.log('Updated Board:', savedBoard)
-//         store.dispatch(getActionUpdateBoard(savedBoard))
+function sortFullBoard(fullBoard, filteredBoard) {
+    // Create a map for quick access to group order in filteredBoard
+    const groupOrder = new Map()
+    filteredBoard.groups.forEach((group, idx) => {
+        groupOrder.set(group.id, { idx, tasks: group.tasks.map(task => task.id) })
+    })
 
-//         // const currBoardId = store.getState().boardModule.currBoard._id
-//         // if (savedBoard._id === currBoardId) {
-//         //     // console.log('this is curr board!')
-//         // }
+    // Create a copy of fullBoard.groups for reference to original order
+    const originalGroupOrder = fullBoard.groups.map(group => group.id)
 
-//         return savedBoard
+    // Sort groups in fullBoard based on filteredBoard order
+    fullBoard.groups.sort((a, b) => {
+        const indexA = groupOrder.has(a.id) ? groupOrder.get(a.id).idx : originalGroupOrder.indexOf(a.id)
+        const indexB = groupOrder.has(b.id) ? groupOrder.get(b.id).idx : originalGroupOrder.indexOf(b.id)
+        return indexA - indexB
+    })
 
-//     } catch (err) {
-//         console.log('Cannot save board', err)
-//         throw err
-//     }
-// }
+    // Sort tasks within each group based on filteredBoard order
+    fullBoard.groups.forEach(group => {
+        if (groupOrder.has(group.id)) {
+            const taskOrder = groupOrder.get(group.id).tasks
+            // Create a copy of group's task for reference to original order
+            const originalTaskOrder = group.tasks.map(task => task.id)
+
+            group.tasks.sort((a, b) => {
+                const indexA = taskOrder.includes(a.id) ? taskOrder.indexOf(a.id) : originalTaskOrder.indexOf(a.id)
+                const indexB = taskOrder.includes(b.id) ? taskOrder.indexOf(b.id) : originalTaskOrder.indexOf(b.id)
+                return indexA - indexB
+            })
+        }
+    })
+
+    return fullBoard
+}
 
 export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })

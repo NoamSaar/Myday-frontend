@@ -34,7 +34,6 @@ export function TaskDetails() {
 
     const { title, members, file, updates } = currTask
 
-    console.log('members:', members)
     const headerProps = {
         type: 'taskDetails',
         title,

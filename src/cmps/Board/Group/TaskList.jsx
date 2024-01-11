@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
 import { useState } from "react"
-import { addTask, setActiveTask, updateBoard } from "../../../store/actions/board.actions"
+import { addTask, setActiveTask, updateBoard, updateBoardOrder } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -23,12 +23,10 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
 
     async function saveNewOrder() {
         try {
-            const newBoard = { ...board }
-            newBoard.groups.splice(groupIdx, 1, group)
-            await updateBoard(newBoard)
+            await updateBoardOrder(board)
         } catch (err) {
             console.log('Cannot save group:', err)
-            showErrorMsg('Cannot save group')
+            // showErrorMsg('Cannot save group')
         }
     }
 
