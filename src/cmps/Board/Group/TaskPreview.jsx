@@ -3,25 +3,28 @@ import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 
 import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { DynamicPicker } from "./Picker/DynamicPicker"
+import { DynamicPreview } from "./Picker/DynamicPreview"
 import { EditableTxt } from "../../EditableTxt"
+import { useNavigate } from "react-router"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
+    const navigate = useNavigate()
 
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenuBtn, setIsShowMenuBtn] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
-    const isMenuOpen = fatherId === `${task.id}-menu`
+    const isMenuOpen = parentId === `${task.id}-menu`
+    const isActive = currTask ? activeTask === currTask.id : false
 
     useEffect(() => {
         const newmembers = task.members.length
@@ -48,7 +51,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 case 'members':
                     setDynamicModalData({
                         chosenMembers: recivedData,
-                        memberOptions: board.members,
+                        allMembers: board.members,
                         onChangeMembers: onTaskChange
                     })
                     break
@@ -97,15 +100,16 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             setDynamicModal(
                 {
                     isOpen: true,
-                    boundingRect: menuBtnRef.current.getBoundingClientRect(),
+                    parentRefCurrent: menuBtnRef.current,
                     type: 'menuOptions',
                     data: { options: menuOptions },
-                    fatherId: `${currTask.id}-menu`
+                    parentId: `${currTask.id}-menu`
                 })
         }
     }
 
-    function onTitleClick() {
+    function onTitleClick(ev) {
+        ev.stopPropagation()
         setIsEditing(true)
         onSetActiveTask(task.id)
     }
@@ -115,7 +119,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             if (activeTask === task.id) onSetActiveTask(null)
 
             let titleToSave = taskTitle
-
             if (!taskTitle) {
                 setTaskTitle(task.title)
                 titleToSave = task.title
@@ -139,35 +142,39 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         },
     ]
 
-    if (!currTask) return <ul className="task-title">Loading</ul>
+    if (!currTask) return <ul className="task-preview-container task-title">Loading</ul>
     return (
         <ul
-            className="clean-list task-preview-container flex"
+            className="clean-list flex subgrid full-grid-column task-preview-container"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="menu-container sticky-left">
-                {isShowMenuBtn && (
-                    <button
-                        ref={menuBtnRef}
-                        className="btn svg-inherit-color"
-                        onClick={toggleMenu}><MenuIcon className="btn" />
-                    </button>
-                )}
-            </div>
+            <div className={`${isActive && 'active'} task-sticky-container sticky-left`}>
+                <div className="menu-container">
+                    {isShowMenuBtn && (
+                        <button
+                            ref={menuBtnRef}
+                            className="btn svg-inherit-color"
+                            onClick={toggleMenu}><MenuIcon className="btn" />
+                        </button>
+                    )}
+                </div>
 
-            <div
-                style={{ backgroundColor: groupColor }}
-                className="color-display sticky-left-36">
-            </div>
-
-            <ul className={` clean-list task-preview flex ${activeTask === currTask.id && 'active'}`}>
-                <ul className={`clean-list task-title-container flex ${activeTask === currTask.id && 'active'}`}>
+                <div
+                    style={{ backgroundColor: groupColor }}
+                    className="color-display sticky-left-36">
+                </div>
+                <ul className={`clean-list task-title-container flex ${isActive && 'active'}`}>
                     <li className="task-selection">
                         <input type="checkbox" />
                     </li>
 
-                    <li className="task-title single-task flex">
+                    <li className="task-title single-task flex"
+                        onClick={() => {
+                            setSidePanelOpen(true)
+                            navigate('task/' + currTask.id)
+                        }}
+                    >
                         <EditableTxt
                             isEditing={isEditing}
                             txtValue={highlightText(taskTitle, filterBy.txt)}
@@ -176,38 +183,21 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             onInputChange={onChangeTitle}
                             onEditClose={onTitleEditExit}
                         />
-                        {/* {isEditing ? (
-                            <form onSubmit={ev => (ev.preventDefault(), onTitleEditExit())}>
-                                <input
-                                    autoFocus
-                                    value={taskTitle}
-                                    onChange={onChangeTitle}
-                                    className="reset focused-input"
-                                    type="text"
-                                    onBlur={onTitleEditExit}
-                                />
-                            </form>
-                        ) : (
-                            <span
-                                className="editable-txt"
-                                onClick={onTitleClick}
-                                title={taskTitle}
-                            >
-                                {highlightText(taskTitle, filterBy.txt)}
-                            </span>
-                        )} */}
                     </li>
 
                 </ul>
+            </div>
+
+            <ul className={`clean-list subgrid grid-column-table-content flex ${isActive && 'active'} task-preview`}>
 
                 {board.titlesOrder.map((title, idx) => {
                     return (
-                        <DynamicPicker
+                        <DynamicPreview
                             key={idx}
                             title={title}
                             task={currTask}
                             onUpdate={onTaskChange}
-                            memberOptions={board.members}
+                            allMembers={board.members}
                         />
                     )
                 })}

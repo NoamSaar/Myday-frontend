@@ -6,25 +6,24 @@ import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/sy
 export function LinkPreview({ info, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
-    const { fatherId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isPickerOpen = fatherId === `${taskId}-linkPicker`
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isCurrPickerOpen = parentId === `${taskId}-linkPicker`
 
     function onLinkPreviewClick(ev) {
-        if (isPickerOpen) {
+        if (isCurrPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({
                 isOpen: true,
-                boundingRect: previewBtnRef.current.getBoundingClientRect(),
+                parentRefCurrent: previewBtnRef.current,
                 type: 'linkPicker',
                 data: {
                     url: info && info.url || '',
                     displayTxt: info && info.displayTxt || '',
                     onChangeLink: onUpdate
                 },
-                fatherId: `${taskId}-linkPicker`,
+                parentId: `${taskId}-linkPicker`,
                 isPosBlock: true,
-                isCenter: true
             })
         }
     }

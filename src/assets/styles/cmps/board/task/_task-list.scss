@@ -1,5 +1,4 @@
 .task-list {
-    width: 100%;
 
     .task-header-list {
         margin-inline-start: 36px;
@@ -23,7 +22,7 @@
             padding: 8px;
         }
 
-        &:not(.task-preview .task-title) {
+        &:not(.task-title) {
             justify-content: center;
         }
 
@@ -74,36 +73,41 @@
         }
     }
 
-    .tasks-container {
-        width: 200vh;
-    }
-
     .add-task {
-        width: 200vh;
 
         .task-preview {
-            .task-title {
-                padding-inline-start: 16px;
 
-                .editable-txt,
-                .focused-input form {
-                    padding-inline-start: 11.5px;
-                }
+            .task-title-container {
 
-                .editable-txt {
-                    width: 99%;
+                .add-task-content {
+
+                    .add-task-content-layout {
+                        width: 100%;
+
+                        .task-title {
+                            padding-inline-start: 16px;
+
+                            .editable-txt,
+                            .focused-input form {
+                                padding-inline-start: 11.5px;
+                            }
+
+                            .editable-txt {
+                                width: 99%;
+                            }
+
+                        }
+                    }
+
                 }
 
             }
+
 
             .single-task,
             .line-end,
             .task-selection {
                 border-block: $clr-group-border 0.5px solid;
-            }
-
-            .line-end {
-                width: 1597px;
             }
 
             .editable-txt {
@@ -119,6 +123,7 @@
 
         .task-row-placeholder {
             height: 37px;
+            max-width: 36px;
         }
     }
 

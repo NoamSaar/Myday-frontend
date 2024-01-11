@@ -1,4 +1,4 @@
-import { SET_DYNAMIC_MODAL, SET_DYNAMIC_MODAL_OPEN, SET_DYNAMIC_MODAL_BOUNDING_RECT, SET_DYNAMIC_MODAL_TYPE, SET_DYNAMIC_MODAL_DATA, SET_DYNAMIC_MODAL_FATHER, SET_IS_LOADING } from '../reducers/system.reducer'
+import { SET_DYNAMIC_MODAL, SET_DYNAMIC_MODAL_OPEN, SET_DYNAMIC_MODAL_PARENT_REF, SET_DYNAMIC_MODAL_TYPE, SET_DYNAMIC_MODAL_DATA, SET_DYNAMIC_MODAL_PARENT, SET_IS_LOADING, SET_DYNAMIC_PANEL_OPEN, SET_DYNAMIC_PANEL_TYPE, SET_DYNAMIC_PANEL_DATA, SET_SIDE_PANEL_OPEN } from '../reducers/system.reducer'
 import { SET_MSG } from '../reducers/system.reducer.js'
 import { store } from '../store'
 
@@ -25,8 +25,8 @@ export function setDynamicModalOpen(isOpen) {
     store.dispatch({ type: SET_DYNAMIC_MODAL_OPEN, isOpen })
 }
 
-export function setDynamicModalBoundingRect(dynamicModalBoundingRect) {
-    store.dispatch({ type: SET_DYNAMIC_MODAL_BOUNDING_RECT, dynamicModalBoundingRect })
+export function setDynamicModalParentRefCurrent(dynamicModalParentRefCurrent) {
+    store.dispatch({ type: SET_DYNAMIC_MODAL_PARENT_REF, dynamicModalParentRefCurrent })
 }
 
 export function setDynamicModalType(dynamicModalType) {
@@ -37,8 +37,8 @@ export function setDynamicModalData(dynamicModalData) {
     store.dispatch({ type: SET_DYNAMIC_MODAL_DATA, dynamicModalData })
 }
 
-export function setDynamicModalFather(fatherId) {
-    store.dispatch({ type: SET_DYNAMIC_MODAL_FATHER, fatherId })
+export function setDynamicModalParent(parentId) {
+    store.dispatch({ type: SET_DYNAMIC_MODAL_PARENT, parentId })
 }
 
 export function setDynamicModal(dynamicModal) {
@@ -53,12 +53,40 @@ export function resetDynamicModal() {
 export function getEmptyDynamicModal() {
     return {
         isOpen: false,
-        boundingRect: null,
+        parentRefCurrent: null,
         type: '',
         data: {},
-        fatherId: '',
+        parentId: '',
         isPosBlock: true,
         isCenter: true,
-        isTooltip: false,
+        hasTooltip: false,
+    }
+}
+
+// PANEL
+
+export function setSidePanelOpen(isSidePanelOpen) {
+    // console.log('sidePanelIsOpen:', sidePanelIsOpen)
+    store.dispatch({ type: SET_SIDE_PANEL_OPEN, isSidePanelOpen })
+}
+
+export function setDynamicPanelOpen(dynamicPanelIsOpen) {
+    return {
+        type: SET_DYNAMIC_PANEL_OPEN,
+        dynamicPanelIsOpen,
+    }
+}
+
+export function setDynamicPanelType(dynamicPanelType) {
+    return {
+        type: SET_DYNAMIC_PANEL_TYPE,
+        dynamicPanelType,
+    }
+}
+
+export function setDynamicPanelData(dynamicPanelData) {
+    return {
+        type: SET_DYNAMIC_PANEL_DATA,
+        dynamicPanelData,
     }
 }

@@ -49,3 +49,13 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
 }
+
+[role="button"] {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+
+    &.dragged-task {
+        grid-template-columns: 384px 97px 139px 139px 174px 139px 138px 1fr;
+    }
+}

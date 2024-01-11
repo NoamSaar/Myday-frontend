@@ -1,0 +1,20 @@
+.label-summary {
+
+    .label-summary-battery {
+        display: flex;
+        align-items: center;
+        min-width: 123px;
+        height: 28px;
+
+        .label-data {
+            height: 85%;
+            transition: .2s ease-out;
+            color: white;
+
+            &:hover {
+                height: 100%;
+                border-radius: 2px;
+            }
+        }
+    }
+}

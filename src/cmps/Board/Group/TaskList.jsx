@@ -6,7 +6,7 @@ import { useState } from "react"
 import { addTask, getBoardById, setActiveTask, updateBoard } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const [taskTitle, setTaskTitle] = useState('')
 
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
@@ -86,19 +86,20 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     }
 
     return (
-        <ul className="clean-list task-list flex column relative">
+        <ul className="clean-list flex column relative subgrid full-grid-column full-width task-list">
             <DragDropContext onDragEnd={handleDragEnd}>
                 <Droppable droppableId={group.id}>
                     {(provided) => (
-                        <div className="tasks-container" {...provided.droppableProps} ref={provided.innerRef}>
+                        <div className="subgrid full-grid-column tasks-container" {...provided.droppableProps} ref={provided.innerRef}>
                             {
                                 group.tasks.map((task, idx) => (
-                                    <Draggable key={task.id} draggableId={task.id} index={idx}>
-                                        {(provided) => (
+                                    <Draggable key={task.id} draggableId={task.id} index={idx} >
+                                        {(provided, snapshot) => (
                                             <div
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
+                                                className={`${snapshot.isDragging && 'dragged-task'}`}
                                             >
                                                 <TaskPreview
                                                     key={task.id}
@@ -129,6 +130,6 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
                 onSetActiveTask={onSetActiveTask}
                 addTask={onAddTask}
             />
-        </ul>
+        </ul >
     )
 }

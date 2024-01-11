@@ -13,6 +13,7 @@ export const boardService = {
     addTask,
     removeTask,
     updateTask,
+    getTaskById,
     addGroup,
     removeGroup,
     updateGroup,
@@ -52,25 +53,9 @@ async function query(filterBy = { title: '' }) {
     }
 }
 
-async function getById(boardId, filterBy = { txt: '', includedCols: [], member: '' }) {
+async function getById(boardId) {
     try {
         let board = await storageService.get(STORAGE_KEY, boardId)
-        if (filterBy.txt) {
-            const regex = new RegExp(filterBy.txt, 'i')
-            board.groups = board.groups.filter(group => {
-                group.tasks = group.tasks.filter(task => regex.test(task.title))
-                // Return groups that have matching title or have at least one matching task title
-                return regex.test(group.title) || group.tasks.length > 0
-            })
-        }
-        if (filterBy.member) {
-            board.groups = board.groups.map(group => {
-                group.tasks = group.tasks.filter(task => {
-                    return task.members.some(currmember => filterBy.member === currmember) //member is array! its items are ids
-                })
-                return group
-            })
-        }
         return board
     } catch (err) {
         throw new Error(err.message || 'An err occurred during getting board')
@@ -120,7 +105,8 @@ function _getDefaultGroup() {
                 id: 'c101',
                 title: 'Item 1',
                 members: [],
-                status: 'Working on it',
+                status: 'l102',
+                priority: 'l200',
                 date: 1703706909537,
                 updates: [],
             },
@@ -128,7 +114,8 @@ function _getDefaultGroup() {
                 id: 'c102',
                 title: 'Item 2',
                 members: [],
-                status: 'Done',
+                status: 'l101',
+                priority: 'l200',
                 date: 1703708909537,
                 updates: [],
             },
@@ -136,6 +123,8 @@ function _getDefaultGroup() {
                 id: 'c103',
                 title: 'Item 3',
                 members: [],
+                status: 'l100',
+                priority: 'l200',
                 date: 1703706909537,
                 updates: [],
             },
@@ -148,6 +137,8 @@ function _getDefaultTask(title) {
     return {
         id: utilService.makeId(),
         title,
+        status: 'l100',
+        priority: 'l200',
         members: [],
         updates: [],
     }
@@ -237,6 +228,24 @@ async function updateTask(boardId, groupId, task) {
         throw new Error(err.message || 'An err occurred during removing task')
     }
 }
+
+async function getTaskById(boardId, taskId) {
+    try {
+        const board = await getById(boardId)
+        for (const group of board.groups) {
+            const taskIdx = group.tasks.findIndex(currTask => currTask.id === taskId)
+            if (taskIdx !== -1) {
+                return { ...group.tasks[taskIdx] }
+            }
+        }
+
+        return null
+    } catch (error) {
+        console.error('Error fetching task:', error)
+        throw new Error('Failed to fetch task')
+    }
+}
+
 
 //private
 

@@ -1,0 +1,36 @@
+.task-sticky-container {
+    display: flex;
+    background-color: white;
+    z-index: 20;
+
+    .color-display {
+        max-width: 6px;
+    }
+
+    ul:not(.add-task .task-preview) {
+        border-block-start: #d0d4e4 0.5px solid;
+    }
+
+    li {
+        white-space: nowrap;
+        height: 36px;
+
+        // &:not(.active li) {
+        //     background-color: white;
+        // }
+
+        // &:not(.task-selection) {
+        //     cursor: pointer;
+        // }
+
+        &:not(.task-title) {
+            text-align: center;
+        }
+
+
+    }
+
+    .focused-input {
+        width: 100%;
+    }
+}

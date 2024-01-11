@@ -1,0 +1,105 @@
+.task-details {
+    // padding: 20px;
+    background-color: $clr0;
+    position: fixed;
+    top: 48px;
+    bottom: 0;
+    right: -760px;
+    width: 760px;
+    z-index: 100;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: right 150ms cubic-bezier(0, 0, 0.35, 1);
+
+    &.open {
+        right: 0;
+    }
+
+    .panel-header>button {
+        margin: 20px 20px 0 20px;
+        justify-self: start;
+    }
+
+    .panel-title-section {
+        margin-inline: 20px;
+
+        span {
+            font-size: rem(18px);
+        }
+
+        .panel-members {
+            position: relative;
+            padding-inline: 10px 16px;
+            margin-inline-end: 12px;
+
+            &::after {
+                content: "";
+                height: 16px;
+                border-right: 1px solid;
+                border-color: #d0d4e4;
+                position: absolute;
+                top: 8px;
+                right: 0;
+            }
+        }
+    }
+
+    .panel-subjects {
+        padding-inline: 24px;
+        margin-block-start: 20px;
+        border-bottom: 1px solid #d0d4e4;
+
+        button {
+            font-size: rem(14px);
+            position: relative;
+            margin-block-end: 4px;
+            padding: 8px 12px;
+
+            &::after {
+                content: "";
+                height: 16px;
+                border-right: 1px solid;
+                border-color: #d0d4e4;
+                position: absolute;
+                top: 8px;
+                right: 0;
+            }
+        }
+
+        .btn.active {
+            &::before {
+                content: "";
+                height: 2px;
+                width: 98%;
+                position: absolute;
+                bottom: -4px;
+                background-color: #0073ea;
+            }
+
+            // background-color: gray;
+        }
+    }
+
+    .panel-update {
+        .post_not_found {
+            margin-block-start: 80px;
+        }
+
+        .post-not-found-txt {
+            text-align: center;
+
+            h2 {
+                margin-block-start: 40px;
+            }
+
+            p {
+                margin-block-start: 16px;
+                font-size: rem(16px);
+            }
+        }
+
+        img {
+            width: 290px;
+            height: 150px;
+        }
+    }
+}

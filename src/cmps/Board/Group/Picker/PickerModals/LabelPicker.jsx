@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 
-export function StatusPicker({ onChangeStatus, title }) {
-    const { [title]: statuses } = useSelector((storeState) => storeState.boardModule.currBoard)
+export function LabelPicker({ onChangeStatus, title }) {
+    const { [title]: statuses } = useSelector((storeState) => storeState.boardModule.filteredBoard)
 
     function handleChange(newStatus) {
         onChangeStatus([title], newStatus)
@@ -13,7 +13,7 @@ export function StatusPicker({ onChangeStatus, title }) {
             <ul className='clean-list manual-select'>
                 {statuses.map(status => (
                     <li className='manual-option btn'
-                        onClick={() => handleChange(status.title)}
+                        onClick={() => handleChange(status.id)}
                         style={{ backgroundColor: status.color }}
                         key={status.id} value={status.title || ''}
                     >

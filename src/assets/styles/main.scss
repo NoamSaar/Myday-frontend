@@ -15,6 +15,7 @@
 @import "views/home-page";
 @import "views/board-details";
 @import "views/user-details";
+@import "views/task-details";
 
 // Components
 @import "cmps/user-msg";
@@ -25,6 +26,10 @@
 @import "cmps/board/board-header";
 @import "cmps/board/board-group";
 
+//summary
+@import "cmps/board/summary/group-summary";
+@import "cmps/board/summary/label-summary";
+
 // tasks
 @import "cmps/board/task/task-list";
 @import "cmps/board/task/task-preview";
@@ -32,6 +37,9 @@
 @import "cmps/board/task/link-preview";
 @import "cmps/board/task/file-preview";
 @import "cmps/board/task/status-preview";
+@import "cmps/board/task/task-header-list";
+@import "cmps/board/task/task-sticky-container";
+@import "cmps/board/task/task-table";
 
 // modals
 @import "cmps/modals/menu-option-modal";

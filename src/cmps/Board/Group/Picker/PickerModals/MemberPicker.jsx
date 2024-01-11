@@ -3,39 +3,39 @@ import { CloseIcon, SearchIcon } from "../../../../../services/svg.service"
 import { DynamicInput } from "../../../../DynamicInput"
 import { UserImg } from "../../../../UserImg"
 
-export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) {
+export function MemberPicker({ chosenMembers, allMembers, onChangeMembers }) {
     const [membersFilter, setMembersFilter] = useState('')
     const [currChosenMembers, setCurrChosenMembers] = useState(chosenMembers)
-    const [currMemberOptions, setCurrMemberOptions] = useState(getFilterMembers(memberOptions, chosenMembers))
+    const [currAllMembers, setCurrAllMembers] = useState(getFilterMembers(allMembers, chosenMembers))
 
     useEffect(() => {
         setCurrChosenMembers(chosenMembers)
-        const filterMembers = getFilterMembers(memberOptions, chosenMembers)
-        setCurrMemberOptions(filterMembers)
-    }, [chosenMembers, memberOptions])
+        const filterMembers = getFilterMembers(allMembers, chosenMembers)
+        setCurrAllMembers(filterMembers)
+    }, [chosenMembers, allMembers])
 
     useEffect(() => {
         if (!membersFilter) {
-            const filterMembers = getFilterMembers(memberOptions, chosenMembers)
-            setCurrMemberOptions(filterMembers)
+            const filterMembers = getFilterMembers(allMembers, chosenMembers)
+            setCurrAllMembers(filterMembers)
             return
         }
         filterMembers()
 
     }, [membersFilter])
 
-    function getFilterMembers(memberOptions, chosenMembers) {
-        return memberOptions.filter(member => (
+    function getFilterMembers(allMembers, chosenMembers) {
+        return allMembers.filter(member => (
             !chosenMembers.some(chosenMember => chosenMember._id === member._id)
         ))
     }
 
     function filterMembers() {
         const regex = new RegExp(membersFilter, 'i')
-        const filteredMemberOptions = getFilterMembers(memberOptions, currChosenMembers)
+        const filteredAllMembers = getFilterMembers(allMembers, currChosenMembers)
             .filter(member => regex.test(member.fullname))
 
-        setCurrMemberOptions(filteredMemberOptions)
+        setCurrAllMembers(filteredAllMembers)
 
     }
 
@@ -43,7 +43,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
         const newChosenMembers = [member, ...currChosenMembers]
 
         setCurrChosenMembers(newChosenMembers)
-        setCurrMemberOptions(prevMembers => (
+        setCurrAllMembers(prevMembers => (
             prevMembers.filter(currMember => currMember._id !== member._id)
         ))
         onChangeMembers('members', newChosenMembers)
@@ -52,10 +52,10 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
 
     function onRemoveMember(member) {
         const newChosenMembers = currChosenMembers.filter(currMember => currMember._id !== member._id)
-        const newMemberOptions = [member, ...currMemberOptions]
+        const newAllMembers = [member, ...currAllMembers]
 
         setCurrChosenMembers(newChosenMembers)
-        setCurrMemberOptions(getFilterMembers(newMemberOptions, newChosenMembers))
+        setCurrAllMembers(getFilterMembers(newAllMembers, newChosenMembers))
         onChangeMembers('members', newChosenMembers)
         setMembersFilter('')
     }
@@ -106,7 +106,7 @@ export function MemberPicker({ chosenMembers, memberOptions, onChangeMembers }) 
                 {!membersFilter && <p className="suggested-people-title">Suggested people</p>}
 
                 <ul className="clean-list member-options-list">
-                    {currMemberOptions.map((member, idx) => {
+                    {currAllMembers.map((member, idx) => {
                         return (
                             <li key={idx}>
                                 <button

@@ -3,19 +3,20 @@
         opacity: 1;
     }
 
+    &:hover {
+        li:not(.status-preview):not(.active li) {
+            background-color: $clr-task-hover;
+        }
+
+        &:not(.active li) {
+            background-color: white;
+        }
+    }
+
     .task-preview {
         &:hover:not(.active) {
             box-shadow: 4px 3px 6px -3px $clr-btn-border;
             z-index: 10;
-
-            & li {
-                background-color: $clr-task-hover;
-            }
-
-            .task-title:not(.active),
-            .task-selection:not(.active) {
-                background-color: $clr-task-hover;
-            }
 
             .status-picker {
                 opacity: .8;
@@ -43,6 +44,7 @@
             &:not(.task-title) {
                 text-align: center;
             }
+
         }
 
         .focused-input {
