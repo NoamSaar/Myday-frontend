@@ -88,6 +88,7 @@ export function Timeline({ defaultWidth, group, board }) {
 			onMouseLeave={() => setIsHovered(false)}
 			style={{ width: defaultWidth }}
 		>
+			<p>Date</p>
 			<div className="timeline-container">
 				<div className="span-container flex align-center justify-center">
 					<div

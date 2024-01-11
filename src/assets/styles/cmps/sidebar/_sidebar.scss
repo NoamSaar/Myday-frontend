@@ -72,7 +72,7 @@
     @import './sidebar-board-nav.scss';
 }
 
-@media (min-width: $mobile-breakpoint) {
+@media (min-width: $narrow-breakpoint) {
     .sidebar {
         min-width: 190px;
         max-width: 250px;

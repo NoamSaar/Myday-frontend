@@ -171,24 +171,34 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                             <MenuIcon />
                         </button>
                     </div>
+
+                    {isGroupCollapsed && <div
+                        style={{ backgroundColor: groupColor }}
+                        className="color-display sticky-left-36">
+                    </div>}
+
                     <div className="sticky-left-40 title-container flex align-center">
-                        <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">
-                            <AngleDownIcon />
-                        </button>
+                        <div className="flex align-center">
 
-                        <div ref={colorBtnParentRef}>
-                            <EditableTxt
-                                isEditing={isEditing}
-                                txtValue={highlightText(groupTitle, filterBy.txt)}
-                                onTxtClick={() => setIsEditing(true)}
-                                inputValue={groupTitle}
-                                onInputChange={onChangeTitle}
-                                onEditClose={onGroupEditExit}
-                                style={{ color: groupColor }}
-                                extraBtns={extraTitleInputBtn}
+                            <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">
+                                <AngleDownIcon />
+                            </button>
 
-                            />
+                            <div ref={colorBtnParentRef}>
+                                <EditableTxt
+                                    isEditing={isEditing}
+                                    txtValue={highlightText(groupTitle, filterBy.txt)}
+                                    onTxtClick={() => setIsEditing(true)}
+                                    inputValue={groupTitle}
+                                    onInputChange={onChangeTitle}
+                                    onEditClose={onGroupEditExit}
+                                    style={{ color: groupColor }}
+                                    extraBtns={extraTitleInputBtn}
+
+                                />
+                            </div>
                         </div>
+
 
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>

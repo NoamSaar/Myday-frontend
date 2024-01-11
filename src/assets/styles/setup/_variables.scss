@@ -8,7 +8,22 @@ $clr1: #000;
     --bgc: $clr0;
     // --dark-mode-bg-header: #292f4c;
     // --dark-mode-bg: #181b34;
+
+    //board group
+    --task-col: 200px;
+    --first-col: calc(var(--task-col) + 42px);
+    --person-col: 97px;
+    --status-col: 139px;
+    --priority-col: 139px;
+    --date-col: 174px;
+    --link-col: 139px;
+    --file-col: 138px;
+    --line-end: minmax(90px, 1fr);
+
+    --board-grid: var(--first-col) var(--person-col) var(--status-col) var(--priority-col) var(--date-col) var(--link-col) var(--file-col) var(--line-end);
+
 }
+
 
 // group clrs
 $clr-group-border: #d0d4e4;
@@ -76,6 +91,13 @@ $sidebar-padding: 12px;
 $border-radius-small: 4px;
 
 // Breakpoints
-$mobile-breakpoint: 905px;
-$narrow-breakpoint: 1055px;
+$mobile-breakpoint: 600px;
+$narrow-breakpoint: 905px;
 $normal-breakpoint: 1055px;
+
+
+@media (min-width: $mobile-breakpoint) {
+    :root {
+        --task-col: 304px;
+    }
+}

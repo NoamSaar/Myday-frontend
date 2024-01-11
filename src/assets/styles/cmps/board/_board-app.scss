@@ -1,15 +1,15 @@
 .board-app {
 
-    .sidebar-container {
-        display: none;
-    }
+    // .sidebar-container {
+    //     display: none;
+    // }
 }
 
-@media (min-width: $mobile-breakpoint) {
+@media (min-width: $narrow-breakpoint) {
     .board-app {
 
-        .sidebar-container {
-            display: block;
-        }
+        // .sidebar-container {
+        //     display: block;
+        // }
     }
 }

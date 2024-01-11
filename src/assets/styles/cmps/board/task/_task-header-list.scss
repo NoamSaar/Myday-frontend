@@ -43,8 +43,8 @@
             position: sticky;
             left: 42px;
             display: flex;
-            min-width: 342px;
-            max-width: 342px;
+            min-width: var(--task-col);
+            max-width: var(--task-col);
 
             .task-title {
                 display: flex;
@@ -52,6 +52,16 @@
                 background-color: white;
 
             }
+
+        }
+    }
+}
+
+@media (max-width: $mobile-breakpoint) {
+    .task-header-list-container {
+
+        .task-selection {
+            max-width: 36.25px;
         }
     }
 }

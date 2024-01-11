@@ -8,7 +8,7 @@ export function BoardApp() {
     return (
         <section className="main-layout grid board-app">
             <AppHeader />
-            <main className="content-container grid column">
+            <main className="content-container">
                 <Sidebar />
                 <Outlet />
             </main>
