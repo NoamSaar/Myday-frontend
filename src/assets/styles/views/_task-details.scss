@@ -1,8 +1,8 @@
 .task-details {
     // padding: 20px;
     background-color: $clr0;
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 48px;
     bottom: 0;
     right: -760px;
     width: 760px;
