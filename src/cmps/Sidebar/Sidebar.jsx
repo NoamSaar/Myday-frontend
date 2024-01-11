@@ -42,7 +42,7 @@ export function Sidebar() {
     async function onAddNewBoard() {
         try {
             const newBoard = await addBoard()
-            navigate('board/' + newBoard._id)
+            navigate(newBoard._id)
         } catch (err) {
             console.error('Error adding new Board:', err)
             showErrorMsg('Cannot add new Board')
