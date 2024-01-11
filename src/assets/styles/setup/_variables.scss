@@ -10,7 +10,8 @@ $clr1: #000;
     // --dark-mode-bg: #181b34;
 
     //board group
-    --first-col: 384px;
+    --task-col: 200px;
+    --first-col: calc(var(--task-col) + 42px);
     --person-col: 97px;
     --status-col: 139px;
     --priority-col: 139px;
@@ -20,7 +21,9 @@ $clr1: #000;
     --line-end: minmax(90px, 1fr);
 
     --board-grid: var(--first-col) var(--person-col) var(--status-col) var(--priority-col) var(--date-col) var(--link-col) var(--file-col) var(--line-end);
+
 }
+
 
 // group clrs
 $clr-group-border: #d0d4e4;
@@ -91,3 +94,10 @@ $border-radius-small: 4px;
 $mobile-breakpoint: 905px;
 $narrow-breakpoint: 1055px;
 $normal-breakpoint: 1055px;
+
+
+@media (min-width: $mobile-breakpoint) {
+    :root {
+        --task-col: 304px;
+    }
+}

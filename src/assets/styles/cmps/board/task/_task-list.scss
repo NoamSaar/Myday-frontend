@@ -35,8 +35,8 @@
         position: sticky;
         left: 42px;
 
-        min-width: 342px;
-        max-width: 342px;
+        min-width: var(--task-col);
+        max-width: var(--task-col);
         z-index: 10;
 
         .task-title {
@@ -96,6 +96,10 @@
                                 width: 99%;
                             }
 
+                        }
+
+                        .task-selection {
+                            max-width: 36.25px;
                         }
                     }
 
