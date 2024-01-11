@@ -1,6 +1,5 @@
 
 export function PanelUpdate({ updates }) {
-    console.log('updates:', updates)
     return (
         <section className="panel-update flex justify-center">
             {updates.length > 0 ?
