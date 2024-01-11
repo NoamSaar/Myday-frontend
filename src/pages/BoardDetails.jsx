@@ -41,7 +41,7 @@ export function BoardDetails() {
     async function _loadBoard() {
         try {
             await loadBoard(boardId)
-            loadFilteredBoard()
+            // loadFilteredBoard()
         } catch (err) {
             console.err('Error loading board:', err)
         }
