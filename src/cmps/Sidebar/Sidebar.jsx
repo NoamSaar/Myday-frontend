@@ -33,12 +33,12 @@ export function Sidebar() {
 
     useEffect(() => {
         filterBoards()
-    }, [filterBy])
+    }, [filterBy, boards])
 
     async function _loadDataBoards() {
         try {
             const boards = await loadBoards()
-            setFilteredBoards(boards)
+            // setFilteredBoards(boards)
         } catch (err) {
             console.error('Error loading Boards:', err)
             showErrorMsg('Cannot load Boards')
@@ -70,6 +70,7 @@ export function Sidebar() {
     async function _onRemoveBoard(boardId) {
         try {
             await removeBoard(boardId)
+            // setFilteredBoards(boards)
             showSuccessMsg('We successfully deleted the board')
             // navigate('board/b101')
         } catch (err) {
