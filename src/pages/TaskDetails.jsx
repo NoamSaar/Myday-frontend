@@ -10,12 +10,12 @@ import { useSelector } from "react-redux";
 export function TaskDetails() {
     const { boardId, taskId } = useParams()
     const [currTask, setCurrTask] = useState(null)
-    const [currSubject, setCurrSubject] = useState('update')
+    const [currSubject, setCurrSubject] = useState('Updates')
     const isSidePanelOpen = useSelector((storeState) => storeState.systemModule.isSidePanelOpen)
 
     useEffect(() => {
         _getTaskById()
-    }, [boardId, taskId])
+    }, [boardId, taskId, currSubject])
 
     async function _getTaskById() {
         try {
@@ -34,6 +34,7 @@ export function TaskDetails() {
 
     const { title, members, file, updates } = currTask
 
+    console.log('members:', members)
     const headerProps = {
         type: 'taskDetails',
         title,
@@ -52,7 +53,7 @@ export function TaskDetails() {
 
     return (
         <section className={`task-details ${isSidePanelOpen ? 'open' : ''}`}>
-            <DynamicSidePanelHeader headerProps={{ ...headerProps }} currSubject={currSubject} />
+            <DynamicSidePanelHeader boardId={boardId} headerProps={{ ...headerProps }} currSubject={currSubject} />
             <DynamicSidePanelRouter type={currSubject} bodyProps={bodyProps} />
         </section>
     )
@@ -60,19 +61,18 @@ export function TaskDetails() {
 
 function DynamicSidePanelRouter(props) {
     const { type, bodyProps } = props
-    console.log('type:', type)
     switch (type) {
-        case 'update':
+        case 'Updates':
             return (
                 <PanelUpdate
                     updates={bodyProps.updates}
                 />)
-        case 'file':
+        case 'Files':
             return (
                 <PanelFile
                     file={bodyProps.file}
                 />)
-        case 'activity':
+        case 'Activity Log':
             return (
                 <PanelActivity
                     activity={bodyProps.activity}

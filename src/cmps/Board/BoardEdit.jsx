@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
 import { showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
+import { InfoIcon, StarIcon } from "../../services/svg.service"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -58,11 +59,11 @@ export function BoardEdit({ board }) {
 
             <div className="info-favorite flex align-center">
                 <button className="btn info" title="Show board description">
-                    <img src="../../public/icons/info.svg" alt="Info-icon" />
+                    <InfoIcon />
                 </button>
 
                 <button className="btn favorite" title="Add to favorites">
-                    <img src="../../public/icons/favorite.svg" alt="Star-icon" />
+                    <StarIcon />
                 </button>
             </div>
         </>

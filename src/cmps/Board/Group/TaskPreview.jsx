@@ -108,7 +108,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         }
     }
 
-    function onTitleClick() {
+    function onTitleClick(ev) {
+        ev.stopPropagation()
         setIsEditing(true)
         onSetActiveTask(task.id)
     }
