@@ -14,7 +14,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const menuBtnRef = useRef(null)
     const navigate = useNavigate()
 
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 

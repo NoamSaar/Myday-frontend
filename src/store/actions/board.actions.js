@@ -2,7 +2,7 @@ import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD } from '../reducers/board.reducer.js'
 import { setIsLoading } from './system.actions.js'
 
 
@@ -44,8 +44,7 @@ export async function loadBoards() {
 
 export async function loadBoard(boardId) {
     try {
-        const filterBy = store.getState().boardModule.filterBy
-        const board = await boardService.getById(boardId, filterBy)
+        const board = await boardService.getById(boardId)
         setCurrBoard(board)
         return board
     } catch (err) {
@@ -56,15 +55,39 @@ export async function loadBoard(boardId) {
     }
 }
 
-export async function getBoardById(boardId) {
-    try {
-        const board = await boardService.getById(boardId)
-        return board
-    } catch (err) {
-        console.log('Had issues in board details', err)
-        throw err
+export async function loadFilteredBoard() {
+    const filterBy = store.getState().boardModule.filterBy
+    const board = JSON.parse(JSON.stringify(store.getState().boardModule.currBoard))
+    if (filterBy.txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
+        board.groups = board.groups.filter(group => {
+            group.tasks = group.tasks.filter(task => regex.test(task.title))
+            // Return groups that have matching title or have at least one matching task title
+            return regex.test(group.title) || group.tasks.length > 0
+        })
     }
+    if (filterBy.member) {
+        board.groups = board.groups.map(group => {
+            group.tasks = group.tasks.filter(task => {
+                return task.members.some(member => filterBy.member === member) //works here with the memeber's id
+            })
+            return group
+        })
+    }
+    setFilteredBoard(board)
+    return board
+
 }
+
+// export async function getBoardById(boardId) {
+//     try {
+//         const board = await boardService.getById(boardId)
+//         return board
+//     } catch (err) {
+//         console.log('Had issues in board details', err)
+//         throw err
+//     }
+// }
 
 export async function saveBoards(boards) {
     try {
@@ -110,17 +133,46 @@ export async function addBoard(board) {
 export async function updateBoard(board) {
     try {
         const savedBoard = await boardService.save(board)
-        // console.log('Updated Board:', savedBoard)
         store.dispatch(getActionUpdateBoard(savedBoard))
 
         const currBoardId = store.getState().boardModule.currBoard._id
         if (savedBoard._id === currBoardId) {
-            // console.log('this is curr board!')
             setCurrBoard(savedBoard)
         }
 
         return savedBoard
 
+    } catch (err) {
+        console.log('Cannot save board', err)
+        throw err
+    }
+}
+
+export async function updateGroupOrder(filteredBoard) {
+    setFilteredBoard(filteredBoard) //save order in filtered board store
+    const fullBoard = store.getState().boardModule.currBoard
+    //order full according to filtered
+
+    fullBoard.groups = fullBoard.groups.filter(group => {
+        group.tasks = group.tasks.filter(task => regex.test(task.title))
+        // Return groups that have matching title or have at least one matching task title
+        return regex.test(group.title) || group.tasks.length > 0
+    })
+
+
+
+    try {
+        //save full and ordered on db
+        const savedBoard = await boardService.save(fullBoard)
+        store.dispatch(getActionUpdateBoard(savedBoard))
+
+        const currBoardId = store.getState().boardModule.currBoard._id
+        if (savedBoard._id === currBoardId) {
+            //update the full board in store
+            store.dispatch({ type: SET_CURR_BOARD, board }) //update curr board only
+        }
+
+        return savedBoard
     } catch (err) {
         console.log('Cannot save board', err)
         throw err
@@ -184,6 +236,11 @@ export function getBoardColors() {
 
 export function setCurrBoard(board) {
     store.dispatch({ type: SET_CURR_BOARD, board })
+    setFilteredBoard(board)
+}
+
+export function setFilteredBoard(board) {
+    store.dispatch({ type: SET_FILTERED_BOARD, board })
 }
 
 /**************** group actions ****************/

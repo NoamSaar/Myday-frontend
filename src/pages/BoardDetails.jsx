@@ -4,7 +4,7 @@ import { Outlet, useParams } from "react-router"
 
 import { boardService } from "../services/board.service.local"
 
-import { addGroup, loadBoard, setFilterBy, getTask } from "../store/actions/board.actions"
+import { addGroup, loadBoard, loadFilteredBoard, setFilterBy, getTask } from "../store/actions/board.actions"
 
 import { BigPlusIcon } from "../services/svg.service"
 import { BoardGroup } from "../cmps/Board/Group/BoardGroup"
@@ -12,7 +12,8 @@ import { BoardHeader } from "../cmps/Board/BoardHeader"
 import { TaskDetails } from "./TaskDetails"
 
 export function BoardDetails() {
-    const board = useSelector((storeState) => storeState.boardModule.currBoard)
+    const fullBoard = useSelector((storeState) => storeState.boardModule.currBoard)
+    const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const isLoading = useSelector((storeState) => storeState.systemModule.isLoading)
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -30,11 +31,17 @@ export function BoardDetails() {
         // })
 
         // return () => socketService.off(SOCKET_EVENT_BOARD_UPDATED)
-    }, [boardId, filterBy])
+    }, [boardId])
+
+    useEffect(() => {
+        loadFilteredBoard()
+
+    }, [filterBy])
 
     async function _loadBoard() {
         try {
             await loadBoard(boardId)
+            // loadFilteredBoard()
         } catch (err) {
             console.err('Error loading board:', err)
         }
@@ -55,7 +62,6 @@ export function BoardDetails() {
 
     const { txt } = filterBy
 
-    // console.log('isLoading:', isLoading)
     if (isLoading || !board) return <div className="board-details">Loading...</div>
     return (
         <section className={`board-details ${modalData.isOpen && 'overflow-hidden'}`}>
