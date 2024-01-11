@@ -53,9 +53,15 @@
 
             }
 
-            .task-selection {
-                max-width: 36.25px;
-            }
+        }
+    }
+}
+
+@media (max-width: $mobile-breakpoint) {
+    .task-header-list-container {
+
+        .task-selection {
+            max-width: 36.25px;
         }
     }
 }
