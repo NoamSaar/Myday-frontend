@@ -97,10 +97,6 @@
                             }
 
                         }
-
-                        .task-selection {
-                            max-width: 36.25px;
-                        }
                     }
 
                 }
@@ -131,4 +127,13 @@
         }
     }
 
+}
+
+@media (max-width: $mobile-breakpoint) {
+    .add-task {
+
+        .task-selection {
+            max-width: 36.25px;
+        }
+    }
 }

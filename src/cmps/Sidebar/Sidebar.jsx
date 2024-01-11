@@ -24,25 +24,43 @@ export function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const [filteredBoards, setFilteredBoards] = useState(boards)
     const navigate = useNavigate()
 
     useEffect(() => {
         _loadDataBoards()
-    }, [filterBy])
+    }, [])
+
+    useEffect(() => {
+        filterBoards()
+    }, [filterBy, boards])
 
     async function _loadDataBoards() {
         try {
-            await loadBoards(filterBy)
+            const boards = await loadBoards()
+            // setFilteredBoards(boards)
         } catch (err) {
             console.error('Error loading Boards:', err)
             showErrorMsg('Cannot load Boards')
         }
     }
 
+    function filterBoards() {
+
+        if (filterBy.title) {
+            const regex = new RegExp(filterBy.title, 'i')
+            const newBoards = boards.filter(board => regex.test(board.title))
+            setFilteredBoards(newBoards)
+        } else {
+            setFilteredBoards(boards)
+
+        }
+    }
+
     async function onAddNewBoard() {
         try {
             const newBoard = await addBoard()
-            navigate('board/' + newBoard._id)
+            navigate(newBoard._id)
         } catch (err) {
             console.error('Error adding new Board:', err)
             showErrorMsg('Cannot add new Board')
@@ -52,6 +70,7 @@ export function Sidebar() {
     async function _onRemoveBoard(boardId) {
         try {
             await removeBoard(boardId)
+            // setFilteredBoards(boards)
             showSuccessMsg('We successfully deleted the board')
             // navigate('board/b101')
         } catch (err) {
@@ -160,7 +179,7 @@ export function Sidebar() {
                     onToggleDropdown={onToggleDropdown}
                     onSetFilter={onSetFilter} />
                 <SidebarBoardNav
-                    boards={boards}
+                    boards={filteredBoards}
                     currActiveBoard={currActiveBoard}
                     removeBoard={onRemoveBoard}
                     updateBoard={onUpdateBoard}
