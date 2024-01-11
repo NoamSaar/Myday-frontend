@@ -154,6 +154,7 @@ function DynamicModalRouter(props) {
                 <FilePicker
                     chosenFile={props.data.chosenFile}
                     changeFile={props.data.onChangeFile}
+                    taskId={props.data.taskId}
                 />)
 
         case 'memberPicker':

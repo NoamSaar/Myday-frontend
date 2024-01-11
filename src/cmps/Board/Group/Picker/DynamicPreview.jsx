@@ -39,7 +39,7 @@ export function DynamicPreview({ title, task, onUpdate, allMembers }) {
                 <FilePreview
                     file={task.file}
                     onUpdate={onUpdate}
-                    taskId={task.id}
+                    parentElementId={task.id}
                 />)
 
         case "link":

@@ -1,3 +1,4 @@
+import { FileSummary } from "./Summary/FileSummary"
 import { GroupSummary } from "./Summary/GroupSummary"
 import { LabelSummary } from "./Summary/LabelSummary"
 import { Timeline } from "./Summary/Timeline"
@@ -6,6 +7,7 @@ export default function DynamicSummary({ title, group, board }) {
     switch (title) {
 
         case "member":
+        case "link":
             return (
                 <li></li>)
 
@@ -18,21 +20,9 @@ export default function DynamicSummary({ title, group, board }) {
             return (
                 <Timeline group={group} board={board} defaultWidth={'174px'} />)
 
-        // case "file":
-        //     return (
-        //         <FilePreview
-        //             file={task.file}
-        //             onUpdate={onUpdate}
-        //             taskId={task.id}
-        //         />)
-
-        // case "link":
-        //     return (
-        //         <LinkPreview
-        //             info={task.link}
-        //             onUpdate={onUpdate}
-        //             taskId={task.id}
-        //         />)
+        case "file":
+            return (
+                <FileSummary group={group} board={board} />)
 
         default:
             return <li>UNKNOWN {title}</li>
