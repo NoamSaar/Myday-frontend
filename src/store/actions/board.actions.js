@@ -1,4 +1,5 @@
-import { boardService } from '../../services/board.service.local.js'
+import { boardService } from '../../services/board.service.js'
+// import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
@@ -26,12 +27,11 @@ import { setIsLoading } from './system.actions.js'
 // dispatch to store: updateTask(task, activity)
 // }
 
-
-
 /**************** board actions ****************/
 
 export async function loadBoards() {
     try {
+        // const filterBy = store.getState().boardModule.filterBy
         const boards = await boardService.query()
         store.dispatch(getActionSetBoards(boards))
         return boards
@@ -78,7 +78,17 @@ export function loadFilteredBoard() {
 
 }
 
-export async function saveBoards(boards) {
+// export async function getBoardById(boardId) {
+//     try {
+//         const board = await boardService.getById(boardId)
+//         return board
+//     } catch (err) {
+//         console.log('Had issues in board details', err)
+//         throw err
+//     }
+// }
+
+export async function saveNewBoards(boards) {
     try {
         await boardService.saveBoards(boards)
         store.dispatch(getActionSetBoards(boards))
@@ -253,6 +263,8 @@ export async function addGroup(boardId) {
 }
 
 export async function removeGroup(boardId, groupId) {
+    console.log('removeGroup ~ groupId:', groupId)
+    console.log('removeGroup ~ boardId:', boardId)
     try {
         const board = await boardService.removeGroup(boardId, groupId)
         setCurrBoard(board)

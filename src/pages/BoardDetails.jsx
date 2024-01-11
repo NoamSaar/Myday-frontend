@@ -2,8 +2,6 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { Outlet, useParams } from "react-router"
 
-import { boardService } from "../services/board.service.local"
-
 import { addGroup, loadBoard, loadFilteredBoard, setFilterBy, getTask } from "../store/actions/board.actions"
 
 import { BigPlusIcon } from "../services/svg.service"
@@ -43,7 +41,7 @@ export function BoardDetails() {
             await loadBoard(boardId)
             // loadFilteredBoard()
         } catch (err) {
-            console.err('Error loading board:', err)
+            console.error('Error loading board:', err)
         }
     }
 
@@ -52,7 +50,7 @@ export function BoardDetails() {
             await addGroup(board._id)
             setIsFocusLastGroup(true)
         } catch (err) {
-            console.err("Error adding group:", err)
+            console.error("Error adding group:", err)
         }
     }
 

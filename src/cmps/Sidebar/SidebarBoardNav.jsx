@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { SidebarBoardLink } from './SidebarBoardLink'
 
 import { showErrorMsg } from '../../store/actions/system.actions'
-import { saveBoards } from '../../store/actions/board.actions'
+import { saveNewBoards } from '../../store/actions/board.actions'
 
 export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBoard }) {
 
@@ -24,7 +24,7 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
     async function saveNewOrder(boards) {
         try {
             const orderedNewBoard = sortFullBoards(fullBoards, boards)
-            await saveBoards(orderedNewBoard)
+            await saveNewBoards(orderedNewBoard)
         } catch (err) {
             console.error('Error loading Boards:', err)
             showErrorMsg('Cannot save new Boards order')

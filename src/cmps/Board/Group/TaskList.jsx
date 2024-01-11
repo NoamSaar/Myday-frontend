@@ -40,7 +40,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
             await addTask(board._id, groupId, taskTitle)
             setTaskTitle('')
         } catch (err) {
-            console.err('Error adding task:', err)
+            console.error('Error adding task:', err)
             showErrorMsg('Cannot add Task')
         }
     }
