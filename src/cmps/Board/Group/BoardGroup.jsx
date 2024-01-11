@@ -24,10 +24,12 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     const [isEditing, setIsEditing] = useState(isEditingTitle)
     const [groupTitle, setGroupTitle] = useState(group.title)
     const [groupColor, setGroupColor] = useState(group.color)
+    const [isGroupCollapsed, setIsGroupCollapsed] = useState(false)
 
     const isMenuOpen = parentId === `${group.id}-menu`
     const isColorPickerOpen = parentId === `${group.id}-colorPicker`
     const colors = getBoardColors()
+
 
     useEffect(() => {
         setGroupTitle(group.title)
@@ -124,6 +126,10 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
     }
 
+    function toggleCollapsed() {
+        setIsGroupCollapsed(prevCollapsed => !prevCollapsed)
+    }
+
     function onColorDisplayClick(ev) {
         ev.stopPropagation()
 
@@ -159,8 +165,8 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     ]
 
     return (
-        <section className="board-group flex column">
-            <div className={`${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
+        <section className={`${isGroupCollapsed && 'collapsed'} board-group flex column`}>
+            <div className={`full-width subgrid full-grid-column ${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
                 <div className="group-title-container flex align-center sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
                         <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
@@ -168,7 +174,9 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         </button>
                     </div>
                     <div className="sticky-left-40 title-container flex align-center">
-                        <button title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color"><AngleDownIcon /></button>
+                        <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">
+                            <AngleDownIcon />
+                        </button>
 
                         <div ref={colorBtnParentRef}>
                             <EditableTxt

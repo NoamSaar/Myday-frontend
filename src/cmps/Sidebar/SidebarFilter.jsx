@@ -43,8 +43,7 @@ export function SidebarFilter({ filterBy, onSetFilter, onAddNewBoard }) {
             </div>
             <button className="btn clrblue" title="Add Item to Workspace"
                 onClick={onAddNewBoard}>
-                {/* <PlusIcon /> */}
-                <img src="../../public/icons/AddSmall.svg" alt="add-icon" />
+                <PlusIcon />
             </button>
         </>
     )

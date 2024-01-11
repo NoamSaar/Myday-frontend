@@ -4,7 +4,7 @@ import { TaskList } from "./TaskList";
 
 export function TaskTable({ groupColor, titlesOrder, group, highlightText, filterBy, board }) {
     return (
-        <div className="task-table">
+        <div className="full-width subgrid full-grid-column task-table">
             <TaskHeaderList groupColor={groupColor} titlesOrder={titlesOrder} />
 
             <TaskList titlesOrder={titlesOrder}

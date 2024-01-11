@@ -1,7 +1,6 @@
 .board-group {
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
+    display: grid;
+    grid-template-columns: 384px 97px 139px 139px 174px 139px 138px minmax(90px, 1fr);
     margin-block-end: 55px;
 
     .group-sticky-container {
@@ -116,21 +115,6 @@
             border-radius: 8px;
         }
 
-        // li {
-        //     justify-content: center;
-        //     display: flex;
-        //     align-items: center;
-
-        //     &:not(.task-selection) {
-        //         padding: 8px;
-        //     }
-
-        //     &:not(.line-end) {
-        //         border-inline-end: $clr-group-border 0.5px solid;
-        //     }
-
-        // }
-
         .task-header-list-container {
 
             .task-header-list {
@@ -157,6 +141,39 @@
         }
 
 
+    }
+
+    &.collapsed {
+
+        .arrow-container svg {
+            rotate: -90deg;
+        }
+
+        .group-sticky-container {
+            grid-column: 1 / 2;
+        }
+
+        .task-table {
+            grid-column: 2 / -1;
+
+            .task-header-list-container,
+            .task-list {
+                display: none;
+            }
+
+            .group-summary {
+                grid-column: 1 / -1;
+
+                .summary-content {
+                    grid-column: 1 / -1;
+                    min-height: 60px;
+                }
+
+                .place-holder {
+                    display: none;
+                }
+            }
+        }
     }
 
     .task-selection {

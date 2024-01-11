@@ -74,8 +74,12 @@
         padding: 6px;
         height: 32px;
 
-        img {
-            height: 20px
+        // img {
+        //     height: 20px
+        // }
+
+        svg {
+            fill: $clr0;
         }
     }
 
