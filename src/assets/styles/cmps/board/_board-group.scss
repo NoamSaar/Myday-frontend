@@ -190,7 +190,7 @@
 
         .summary-content {
             border: $clr-group-border 0.5px solid;
-            border-inline-end: unset;
+            border-inline: unset;
             color: $clr-light-font;
 
             .label-summary {
@@ -204,6 +204,12 @@
             .timeline {
                 flex-direction: column;
             }
+
+            .file-summary {
+                p {
+                    display: block;
+                }
+            }
         }
 
         .title-container {
@@ -211,7 +217,7 @@
             align-items: flex-start;
             width: 100%;
             height: 100%;
-            border-block: $clr-group-border 0.5px solid;
+            border: $clr-group-border 0.5px solid;
 
             .arrow-container {
                 margin-block-start: 7px;
