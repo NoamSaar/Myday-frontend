@@ -83,7 +83,7 @@ export function Timeline({ defaultWidth, group, board }) {
 
 	return (
 		<li
-			className="timeline-picker flex align-center justify-center pointer"
+			className="flex align-center justify-center timeline"
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 			style={{ width: defaultWidth }}
