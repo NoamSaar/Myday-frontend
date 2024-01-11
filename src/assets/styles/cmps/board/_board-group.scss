@@ -25,19 +25,26 @@
 
             .title-container {
                 display: flex;
-                align-items: center;
                 padding-inline-start: 8px;
                 background-color: white;
+
+                &:not(.collapsed .title-container) {
+                    align-items: center;
+                }
 
                 .editable-txt-container {
 
                     .editable-txt,
                     .focused-input {
                         font-size: rem(18px);
-                        margin-block: 9px;
                         padding-inline: 4px;
                         font-family: poppins-medium;
                         cursor: text;
+
+                        &:not(.collapsed .editable-txt, .collapsed .focused-input) {
+
+                            margin-block: 9px;
+                        }
                     }
                 }
 
@@ -47,11 +54,15 @@
                     font-size: .875rem;
                     font-weight: 400;
                     margin-block-start: 3px;
-                    margin-inline-start: 8px;
                     transition: opacity .2s;
 
-                    &:not(.group-title-container:hover .tasks-count) {
+                    &:not(.group-title-container:hover .tasks-count):not(.collapsed .tasks-count) {
                         opacity: 0;
+                    }
+
+                    &:not(.collapsed .tasks-count) {
+                        margin-inline-start: 8px;
+
                     }
 
                 }
@@ -152,6 +163,7 @@
 
         .group-sticky-container {
             grid-column: 1 / 2;
+            box-shadow: 0 5px white;
         }
 
         .task-table {
@@ -174,6 +186,39 @@
                     display: none;
                 }
             }
+        }
+
+        .summary-content {
+            border: $clr-group-border 0.5px solid;
+            border-inline-end: unset;
+        }
+
+        .title-container {
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            height: 100%;
+            border-block: $clr-group-border 0.5px solid;
+
+            .arrow-container {
+                margin-block-start: 7px;
+            }
+
+            .editable-txt,
+            .focused-input {
+                margin-block-start: 7px;
+            }
+
+        }
+
+        .tasks-count {
+            margin-inline-start: 37px;
+        }
+
+        .color-display {
+            height: 100%;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
         }
     }
 
