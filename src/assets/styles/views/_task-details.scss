@@ -35,7 +35,7 @@
                 content: "";
                 height: 16px;
                 border-right: 1px solid;
-                border-color: #d0d4e4;
+                border-color: $clr-group-border;
                 position: absolute;
                 top: 8px;
                 right: 0;
@@ -46,7 +46,7 @@
     .panel-subjects {
         padding-inline: 24px;
         margin-block-start: 20px;
-        border-bottom: 1px solid #d0d4e4;
+        border-bottom: 1px solid $clr-group-border;
 
         button {
             font-size: rem(14px);
@@ -58,7 +58,7 @@
                 content: "";
                 height: 16px;
                 border-right: 1px solid;
-                border-color: #d0d4e4;
+                border-color: $clr-group-border;
                 position: absolute;
                 top: 8px;
                 right: 0;
