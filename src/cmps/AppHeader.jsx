@@ -79,8 +79,9 @@ export function AppHeader() {
     return (
         <header className="app-header flex space-between align-center">
             <section className="header-logo grid column place-center">
-                <LogoIcon />
-                <span className="app-title">MyDay</span>
+                <img className="logo" src="../public/img/myday-temp-logo.png" />
+                {/* <LogoIcon /> */}
+                <span className="app-title">myday</span>
             </section>
             <nav className="header-nav">
                 <div className="user-info">
