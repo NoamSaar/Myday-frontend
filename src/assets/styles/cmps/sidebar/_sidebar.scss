@@ -6,8 +6,7 @@
     left: -220px;
     border-top-right-radius: 8px;
     transition: left 150ms;
-    max-width: 400px;
-    min-width: 190px;
+
 
     &>.sidebar-workspace,
     .sidebar-board-nav,
@@ -71,4 +70,17 @@
     @import './sidebar-main-nav.scss';
     @import './sidebar-workspace.scss';
     @import './sidebar-board-nav.scss';
+}
+
+@media (min-width: $mobile-breakpoint) {
+    .sidebar {
+        min-width: 190px;
+        max-width: 250px;
+    }
+}
+
+@media (min-width: $normal-breakpoint) {
+    .sidebar {
+        max-width: 400px;
+    }
 }
