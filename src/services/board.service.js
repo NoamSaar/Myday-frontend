@@ -1,8 +1,7 @@
 
-// import { storageService } from './async-storage.service.js'
 import { getDefaultBoard } from './boards.service.js'
 import { httpService } from './http.service.js'
-import { userService } from './user.service.js'
+import { utilService } from './util.service.js'
 
 const BASE_URL = 'board/'
 const BOARDS_URL = 'boards/'
@@ -12,8 +11,7 @@ export const boardService = {
     getById,
     save,
     remove,
-    saveBoardsOrder,
-    saveTask,
+    saveBoards,
     getBoardColors,
     getDefaultFilter,
     addGroup,
@@ -50,7 +48,8 @@ async function query() {
 
 async function getById(boardId) {
     try {
-        return await httpService.get(BASE_URL + boardId)
+        const returnedBoard = await httpService.get(BASE_URL + boardId)
+        return returnedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during getting board')
     }
@@ -77,7 +76,7 @@ async function save(board) {
     }
 }
 
-async function saveBoardsOrder(boards) {
+async function saveBoards(boards) {
     try {
         return await httpService.post(BOARDS_URL + 'reorder', boards)
     } catch (err) {
@@ -93,73 +92,13 @@ function getDefaultFilter() {
     return { title: '', txt: '', includedCols: [], member: '' }
 }
 
-function saveTask(boardId, groupId, task, activity) {
-    const board = getById(boardId)
-    // PUT /api/board/b123/task/t678
-
-    // TODO: find the task, and update
-    board.activities.unshift(activity)
-    saveBoard(board)
-    // return board
-    // return task
-}
-
-
-function _getDefaultGroup() {
-    return {
-        id: utilService.makeId(),
-        title: 'New Group',
-        archivedAt: null,
-        tasks: [
-            {
-                id: 'c101',
-                title: 'Item 1',
-                members: [],
-                status: 'l102',
-                priority: 'l200',
-                date: 1703706909537,
-                updates: [],
-            },
-            {
-                id: 'c102',
-                title: 'Item 2',
-                members: [],
-                status: 'l101',
-                priority: 'l200',
-                date: 1703708909537,
-                updates: [],
-            },
-            {
-                id: 'c103',
-                title: 'Item 3',
-                members: [],
-                status: 'l100',
-                priority: 'l200',
-                date: 1703706909537,
-                updates: [],
-            },
-        ],
-        color: '#579bfc',
-    }
-}
-
-function _getDefaultTask(title) {
-    return {
-        id: utilService.makeId(),
-        title,
-        status: 'l100',
-        priority: 'l200',
-        members: [],
-        updates: [],
-    }
-}
-
 //group
 
 async function addGroup(boardId) {
     try {
         const board = await getById(boardId)
         board.groups.push(_getDefaultGroup())
+
         return await save(board)
     } catch (err) {
         throw new Error(err.message || 'An err occurred during adding group')
@@ -257,4 +196,53 @@ async function getTaskById(boardId, taskId) {
 }
 
 
+// private methods
 
+function _getDefaultGroup() {
+    return {
+        id: utilService.makeId(),
+        title: 'New Group',
+        archivedAt: null,
+        tasks: [
+            {
+                id: 'c101',
+                title: 'Item 1',
+                members: [],
+                status: 'l102',
+                priority: 'l200',
+                date: 1703706909537,
+                updates: [],
+            },
+            {
+                id: 'c102',
+                title: 'Item 2',
+                members: [],
+                status: 'l101',
+                priority: 'l200',
+                date: 1703708909537,
+                updates: [],
+            },
+            {
+                id: 'c103',
+                title: 'Item 3',
+                members: [],
+                status: 'l100',
+                priority: 'l200',
+                date: 1703706909537,
+                updates: [],
+            },
+        ],
+        color: '#579bfc',
+    }
+}
+
+function _getDefaultTask(title) {
+    return {
+        id: utilService.makeId(),
+        title,
+        status: 'l100',
+        priority: 'l200',
+        members: [],
+        updates: [],
+    }
+}
