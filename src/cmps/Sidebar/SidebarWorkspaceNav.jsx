@@ -1,4 +1,4 @@
-import { AngleDownIcon, MenuIcon } from "../../services/svg.service"
+import { AngleDownIcon, HomeBlackFillIcon, MenuIcon } from "../../services/svg.service"
 
 export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
     return (
@@ -10,7 +10,8 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
                 >
                     <div className="workspace-logo flex justify-center align-center">
                         M
-                        <img src="../../public/icons/HomeBlackFill.svg" alt="home-icon" />
+                        <div><HomeBlackFillIcon /></div>
+                        {/* <img src="../../public/icons/HomeBlackFill.svg" alt="home-icon" /> */}
                     </div>
 
                     <span>Main workspace</span>
