@@ -3,6 +3,9 @@
     height: 100dvh;
 
     .content-container {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 0 1fr;
         padding: 0;
         background-color: $clr-bg-header;
 
@@ -61,7 +64,6 @@
     .main-layout {
         .content-container {
             overflow: auto;
-
         }
     }
 }
@@ -71,8 +73,6 @@
 
 
         .content-container {
-            display: grid;
-            grid-auto-flow: column;
             grid-template-columns: minmax(30px, auto) 1fr;
             gap: 10px;
             position: relative;
