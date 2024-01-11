@@ -30,12 +30,11 @@ import { setIsLoading } from './system.actions.js'
 
 /**************** board actions ****************/
 
-//maybe needs getAction as the rest for consistency?
 export async function loadBoards() {
     try {
-        const filterBy = store.getState().boardModule.filterBy
-        const boards = await boardService.query(filterBy)
+        const boards = await boardService.query()
         store.dispatch(getActionSetBoards(boards))
+        return boards
     } catch (err) {
         console.log('Cannot load boards', err)
         throw err
@@ -55,7 +54,7 @@ export async function loadBoard(boardId) {
     }
 }
 
-export async function loadFilteredBoard() {
+export function loadFilteredBoard() {
     const filterBy = store.getState().boardModule.filterBy
     const board = JSON.parse(JSON.stringify(store.getState().boardModule.currBoard))
     if (filterBy.txt) {
@@ -78,16 +77,6 @@ export async function loadFilteredBoard() {
     return board
 
 }
-
-// export async function getBoardById(boardId) {
-//     try {
-//         const board = await boardService.getById(boardId)
-//         return board
-//     } catch (err) {
-//         console.log('Had issues in board details', err)
-//         throw err
-//     }
-// }
 
 export async function saveBoards(boards) {
     try {
@@ -117,7 +106,6 @@ export function getMemberFromBoard(board, memberId) {
     return board.members.find(member => member._id === memberId)
 }
 
-//not working currently on the store!
 export async function addBoard(board) {
     try {
         const savedBoard = await boardService.save(board)
@@ -360,6 +348,13 @@ export function getActionSetBoards(boards) {
         boards
     }
 }
+
+// export function getActionSetFilteredBoards(boards) {
+//     return {
+//         type: SET_FILTERED_BOARDS,
+//         boards
+//     }
+// }
 
 export function getActionSetActiveTask(taskId) {
     return {

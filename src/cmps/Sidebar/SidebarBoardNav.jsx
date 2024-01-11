@@ -40,6 +40,7 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
                                     >
                                         <SidebarBoardLink
                                             board={board}
+                                            boards={boards}
                                             currActiveBoard={currActiveBoard}
                                             removeBoard={removeBoard}
                                             updateBoard={updateBoard}

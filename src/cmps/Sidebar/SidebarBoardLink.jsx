@@ -6,10 +6,9 @@ import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.
 import { resetDynamicModal, setDynamicModal, setIsLoading } from "../../store/actions/system.actions"
 import { setCurrBoard } from "../../store/actions/board.actions"
 
-export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBoard }) {
+export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, updateBoard }) {
     const menuBtnRef = useRef(null)
 
-    const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
