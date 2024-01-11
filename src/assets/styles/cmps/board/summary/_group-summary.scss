@@ -2,20 +2,19 @@
     height: 35px;
 
     .place-holder {
-        z-index: 200;
-        // position: relative;
-        height: 40px;
+        z-index: 20;
         background-color: white;
-        // border-inline-end: $clr-group-border 0.5px solid;
+        box-shadow: 0 5px white;
 
         &:before {
             content: "";
             pointer-events: none;
             position: absolute;
-            width: 0.5px;
+            width: 5px;
             height: 30px;
             left: 100%;
-            background-color: $clr-group-border;
+            bottom: 0;
+            background-color: white;
             box-shadow: 0 6px 2px -2px white;
         }
 
