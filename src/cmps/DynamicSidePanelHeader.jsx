@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
-import { HomeIcon, MenuIcon } from "../services/svg.service";
-import { userService } from "../services/user.service";
-// import { MemberPicker } from "./Board/Group/Picker/PickerModals/MemberPicker";
-import { UserImg } from "./UserImg";
-import { utilService } from "../services/util.service";
-import { setSidePanelOpen } from "../store/actions/system.actions";
+import { useEffect, useState } from "react"
+import { HomeIcon, MenuIcon, PersonIcon } from "../services/svg.service"
+import { userService } from "../services/user.service"
+// import { MemberPicker } from "./Board/Group/Picker/PickerModals/MemberPicker"
+import { UserImg } from "./UserImg"
+import { utilService } from "../services/util.service"
+import { setSidePanelOpen } from "../store/actions/system.actions"
+import { useNavigate } from "react-router"
 
 export function DynamicSidePanelHeader(props) {
     const { type, title, subjects, onSwitchToSubject, members } = props.headerProps
-    const { currSubject } = props
+    const { currSubject, boardId } = props
     const [user, setUser] = useState(null)
-    const [activeSubject, setActiveSubject] = useState('Updates');
+    const [activeSubject, setActiveSubject] = useState('Updates')
+    const navigate = useNavigate()
 
     useEffect(() => {
         getUser(members[0])
@@ -18,6 +20,7 @@ export function DynamicSidePanelHeader(props) {
 
     async function getUser(userId) {
         try {
+            if (userId === undefined) return setUser('guest')
             const user = await userService.getById(userId)
             setUser(user)
         } catch (err) {
@@ -25,10 +28,19 @@ export function DynamicSidePanelHeader(props) {
         }
     }
 
+    // function onClosePanel() {
+    //     setSidePanelOpen(false)
+    //     // navigate('borad/' + boardId)
+    // }
+
+    // console.log('user:', user)
     if (!user) return <div>Loading...</div>
     return (
         <section className="panel-header grid">
-            <button className="btn" onClick={() => setSidePanelOpen(false)}>
+            <button className="btn" onClick={() => {
+                setSidePanelOpen(false)
+                navigate('/board/' + boardId)
+            }}>
                 X
             </button>
 
@@ -37,7 +49,7 @@ export function DynamicSidePanelHeader(props) {
                 {type === 'taskDetails' && (
                     <div className="title-section-actions flex justify-center align-center">
                         <span className="panel-members flex justify-center align-center">
-                            <UserImg user={user} />
+                            {user !== 'guest' ? <UserImg user={user} /> : <PersonIcon />}
                         </span>
                         <button className="btn">
                             <MenuIcon />
@@ -51,8 +63,8 @@ export function DynamicSidePanelHeader(props) {
                         key={sub}
                         className={`btn ${sub === activeSubject ? 'active' : ''}`}
                         onClick={() => {
-                            onSwitchToSubject(sub);
-                            setActiveSubject(sub);
+                            onSwitchToSubject(sub)
+                            setActiveSubject(sub)
                         }}
                     >
                         {sub === 'Updates' && <HomeIcon />}
@@ -61,6 +73,6 @@ export function DynamicSidePanelHeader(props) {
                 ))}
             </section>
         </section>
-    );
+    )
 
 }
