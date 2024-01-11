@@ -57,7 +57,7 @@
     }
 }
 
-@media (max-width: $mobile-breakpoint) {
+@media (max-width: $narrow-breakpoint) {
     .main-layout {
         .content-container {
             overflow: auto;
@@ -66,7 +66,7 @@
     }
 }
 
-@media (min-width: $mobile-breakpoint) {
+@media (min-width: $narrow-breakpoint) {
     .main-layout {
 
 
