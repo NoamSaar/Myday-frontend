@@ -18,7 +18,7 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
 
     const navigate = useNavigate()
 
-    const isMenuOpen = parentId === `${board.id}-sidebar-menu`
+    const isMenuOpen = parentId === `${board._id}-sidebar-menu`
 
     async function onRemoveBoard() {
         removeBoard(board._id)
@@ -40,7 +40,7 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
             setDynamicModal({
                 isOpen: true,
                 parentRefCurrent: menuBtnRef.current,
-                parentId: `${board.id}-sidebar-menu`,
+                parentId: `${board._id}-sidebar-menu`,
                 type: 'menuOptions',
                 data: { options: menuOptions },
                 isPosBlock: true

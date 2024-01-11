@@ -119,11 +119,13 @@
             height: 36px;
             border-bottom-left-radius: 8px;
             opacity: .5;
+            box-shadow: 0 5px white;
         }
 
         .task-row-placeholder {
             height: 37px;
             max-width: 36px;
+            box-shadow: 0 5px white;
         }
     }
 
