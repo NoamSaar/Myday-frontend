@@ -6,6 +6,8 @@
     left: -220px;
     border-top-right-radius: 8px;
     transition: left 150ms;
+    max-width: 400px;
+    min-width: 190px;
 
     &>.sidebar-workspace,
     .sidebar-board-nav,
