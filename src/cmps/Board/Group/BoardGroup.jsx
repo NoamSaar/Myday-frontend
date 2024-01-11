@@ -165,7 +165,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     ]
 
     return (
-        <section className={`${isGroupCollapsed && 'collapsed'} board-group flex column`}>
+        <section className={`${isGroupCollapsed && 'collapsed'} board-group`}>
             <div className={`full-width subgrid full-grid-column ${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
                 <div className="group-title-container flex align-center sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
