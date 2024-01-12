@@ -47,7 +47,6 @@ export function Sidebar() {
     }
 
     function filterBoards() {
-
         if (filterBy.title) {
             const regex = new RegExp(filterBy.title, 'i')
             const newBoards = boards.filter(board => regex.test(board.title))
@@ -115,7 +114,7 @@ export function Sidebar() {
         setSidebarWidth(newWidth)
     }
 
-    const startResizing = useCallback((e) => {
+    const startResizing = useCallback(() => {
         setIsResizing(true)
     }, [])
 
@@ -157,18 +156,16 @@ export function Sidebar() {
     }
 
     const sidebarClass = `sidebar ${isSidebarOpen ? 'open' : ''}`
-
     return (
-        <section className="sidebar-container relative">
+        <section className="sidebar-container relative" >
             <article
                 ref={sidebarRef}
                 style={style}
-                onMouseDown={(e) => e.preventDefault()}
+                onMouseDown={(ev) => ev.preventDefault()}
                 className={`${sidebarClass} ${isHovered ? 'hovered' : ''}`}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                onMouseEnter={() => !isResizing && setIsHovered(true)}
+                onMouseLeave={() => !isResizing && setIsHovered(false)}
             >
-
                 <SidebarMainNav
                     isSidebarOpen={isSidebarOpen}
                     onOpenSidebar={onOpenSidebar}
@@ -189,7 +186,7 @@ export function Sidebar() {
                 <div className="app-sidebar-resizer" onMouseDown={startResizing} />
                 {/* <LottieAnimation /> */}
             </article>
-        </section>
+        </section >
 
     )
 }
