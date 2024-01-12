@@ -14,7 +14,8 @@ export const utilService = {
     timeStampToDate,
     millisecondsToDays,
     isValidTimestamp,
-    areObjsIdentical
+    areObjsIdentical,
+    hasTimePassed
 }
 
 function readJsonFile(path) {
@@ -118,6 +119,11 @@ function getFullFormatDate(timestamp) {
 
     const formattedDate = new Date(timestamp).toLocaleString('en-US', options)
     return formattedDate
+}
+
+function hasTimePassed(timestamp) {
+    const currentTimestamp = Date.now();
+    return timestamp < currentTimestamp;
 }
 
 function getAcronym(name) {
