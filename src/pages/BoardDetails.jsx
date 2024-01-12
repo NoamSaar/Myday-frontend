@@ -70,14 +70,7 @@ export function BoardDetails() {
             />
 
             <GroupList board={board} isFocusLastGroup={isFocusLastGroup} onSetIsFocusLastGroup={() => setIsFocusLastGroup(false)} />
-            {/* {board.groups.map((group, idx) =>
-                <BoardGroup
-                    key={group.id}
-                    group={group}
-                    titlesOrder={board.titlesOrder}
-                    isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
-                    onTitleEditLeave={() => setIsFocusLastGroup(false)}
-                />)} */}
+
 
             <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
                 <BigPlusIcon />

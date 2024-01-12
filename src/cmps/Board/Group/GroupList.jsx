@@ -34,7 +34,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup }) {
         <DragDropContext onBeforeDragStart={onBeforeDragStart} onDragEnd={handleDragEnd}>
             <Droppable droppableId={board._id}>
                 {(provided) => (
-                    <ul className="group-list"  {...provided.droppableProps} ref={provided.innerRef}>
+                    <ul className="clean-list group-list"  {...provided.droppableProps} ref={provided.innerRef}>
                         {
                             board.groups.map((group, idx) => (
                                 <Draggable key={group.id} draggableId={group.id} index={idx} >

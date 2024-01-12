@@ -216,7 +216,7 @@ function _getDefaultGroup() {
                 status: 'l102',
                 priority: 'l200',
                 date: 1703706909537,
-                updates: [],
+                msgs: [],
             },
             {
                 id: 'c102',
@@ -225,7 +225,7 @@ function _getDefaultGroup() {
                 status: 'l101',
                 priority: 'l200',
                 date: 1703708909537,
-                updates: [],
+                msgs: [],
             },
             {
                 id: 'c103',
@@ -234,7 +234,7 @@ function _getDefaultGroup() {
                 status: 'l100',
                 priority: 'l200',
                 date: 1703706909537,
-                updates: [],
+                msgs: [],
             },
         ],
         color: '#579bfc',
