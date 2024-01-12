@@ -9,7 +9,7 @@ import { SidebarWorkspace } from "./SidebarWorkspace"
 import { SidebarBoardNav } from "./SidebarBoardNav"
 // import { LottieAnimation } from "./LottieAnimation"
 
-import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions"
+import { addBoard, loadBoards, removeBoard, updateBoard } from "../../store/actions/board.actions"
 
 export function Sidebar() {
     const sidebarRef = useRef(null)
@@ -18,13 +18,13 @@ export function Sidebar() {
     const [sidebarWidth, setSidebarWidth] = useState(250)
 
     const boards = useSelector((storeState) => storeState.boardModule.boards)
-    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [filteredBoards, setFilteredBoards] = useState(boards)
+    const [filterBy, setFilterBy] = useState({ title: '' })
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -89,7 +89,7 @@ export function Sidebar() {
     }
 
     function onSetFilter(filterBy) {
-        setFilterBy(filterBy)
+        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
 
     function onOpenSidebar() {
