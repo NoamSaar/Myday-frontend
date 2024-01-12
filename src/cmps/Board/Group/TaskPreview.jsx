@@ -5,7 +5,7 @@ import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
-import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { DeleteIcon, MenuIcon, OpenIcon } from "../../../services/svg.service"
 import { DynamicPreview } from "./Picker/DynamicPreview"
 import { EditableTxt } from "../../EditableTxt"
 import { useNavigate } from "react-router"
@@ -21,6 +21,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenuBtn, setIsShowMenuBtn] = useState(false)
+    const [isShowTaskDetailsBtn, setIsShowTaskDetailsBtn] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
     const isMenuOpen = parentId === `${task.id}-menu`
@@ -174,7 +175,11 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             setSidePanelOpen(true)
                             navigate('task/' + currTask.id)
                         }}
+
+                        onMouseEnter={() => setIsShowTaskDetailsBtn(true)}
+                        onMouseLeave={() => setIsShowTaskDetailsBtn(false)}
                     >
+
                         <EditableTxt
                             isEditing={isEditing}
                             txtValue={highlightText(taskTitle, filterBy.txt)}
@@ -183,7 +188,16 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             onInputChange={onChangeTitle}
                             onEditClose={onTitleEditExit}
                         />
+
+                        <div className="open-details-container">
+                            {(isShowTaskDetailsBtn && !isEditing) && <div className="task-details-btn flex justify-center">
+                                <OpenIcon />
+                                <p>Open</p>
+                            </div>}
+                        </div>
+
                     </li>
+
 
                 </ul>
             </div>

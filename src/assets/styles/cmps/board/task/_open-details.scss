@@ -1,0 +1,17 @@
+.open-details-container {
+
+    .task-details-btn {
+        margin-inline-end: 15px;
+
+        svg {
+            width: 17px;
+            margin-inline-end: 5px;
+        }
+    }
+}
+
+@media (max-width: $narrow-breakpoint) {
+    .task-details-btn {
+        display: none;
+    }
+}

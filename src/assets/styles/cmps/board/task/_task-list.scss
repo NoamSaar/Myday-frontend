@@ -25,6 +25,13 @@
         &:not(.add-task .task-title):not(.line-end) {
             border-inline-end: $clr-group-border .5px solid;
         }
+
+        &.task-title {
+            display: grid;
+            grid-template-columns: minmax(30px, 1fr) auto;
+
+
+        }
     }
 
     .task-title-container {
