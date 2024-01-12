@@ -1,11 +1,12 @@
 import { useParams } from "react-router";
-import { DynamicSidePanelHeader } from "../cmps/DynamicSidePanelHeader";
-import { getTask } from "../store/actions/board.actions";
-import { useEffect, useState } from "react";
-import { PanelUpdate } from "../cmps/Panel/PanelUpdate";
-import { PanelFile } from "../cmps/Panel/PanelFile";
-import { PanelActivity } from "../cmps/Panel/PanelActivity";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
+import { boardService } from "../services/board.service";
+import { getTask, updateTask } from "../store/actions/board.actions";
+
+import { DynamicSidePanelHeader } from "../cmps/DynamicSidePanelHeader";
+import { DynamicSidePanelRouter } from "../cmps/DynamicSidePanelRouter";
 
 export function TaskDetails() {
     const { boardId, taskId } = useParams()
@@ -30,51 +31,36 @@ export function TaskDetails() {
         setCurrSubject(subject)
     }
 
+    function onAddUpdate(update) {
+        const updatedTask = { ...currTask, msgs: [...currTask.msgs, update] }
+        setCurrTask(updatedTask)
+        const groupId = boardService.findGroupIdByTaskId(taskId)
+        updateTask(boardId, groupId, updatedTask)
+    }
+
     if (!currTask) return
 
-    const { title, members, file, updates } = currTask
+    const { title, members, file, msgs } = currTask
 
     const headerProps = {
         type: 'taskDetails',
         title,
         members,
         file,
-        updates,
         subjects: ['Updates', 'Files', 'Activity Log'],
         onSwitchToSubject,
     }
 
     const bodyProps = {
-        updates,
-        file,
-        activity: []
+        msgs,
+        files: [file],
+        activity: [],
     }
 
     return (
         <section className={`task-details ${isSidePanelOpen ? 'open' : ''}`}>
             <DynamicSidePanelHeader boardId={boardId} headerProps={{ ...headerProps }} currSubject={currSubject} />
-            <DynamicSidePanelRouter type={currSubject} bodyProps={bodyProps} />
+            <DynamicSidePanelRouter type={currSubject} bodyProps={bodyProps} onAddUpdate={onAddUpdate} />
         </section>
     )
-}
-
-function DynamicSidePanelRouter(props) {
-    const { type, bodyProps } = props
-    switch (type) {
-        case 'Updates':
-            return (
-                <PanelUpdate
-                    updates={bodyProps.updates}
-                />)
-        case 'Files':
-            return (
-                <PanelFile
-                    file={bodyProps.file}
-                />)
-        case 'Activity Log':
-            return (
-                <PanelActivity
-                    activity={bodyProps.activity}
-                />)
-    }
 }

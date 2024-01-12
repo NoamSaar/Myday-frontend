@@ -4,10 +4,13 @@ import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
 import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
 import { setIsHeaderCollapsed } from "../../store/actions/board.actions"
+import { useNavigate } from "react-router"
+import { setSidePanelOpen } from "../../store/actions/system.actions"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
+    const navigate = useNavigate()
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -50,7 +53,12 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
 
                 <BoardEdit board={board} />
 
-                <button className="activities btn">
+                <button className="activities btn"
+                    onClick={() => {
+                        setSidePanelOpen(true)
+                        navigate('activity_log')
+                    }}
+                >
                     <span>Activity</span>
                 </button>
 

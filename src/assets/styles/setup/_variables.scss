@@ -101,3 +101,10 @@ $normal-breakpoint: 1055px;
         --task-col: 393px;
     }
 }
+
+//wider than 600px
+@media (min-width: $narrow-breakpoint) {
+    :root {
+        --task-col: 538px;
+    }
+}

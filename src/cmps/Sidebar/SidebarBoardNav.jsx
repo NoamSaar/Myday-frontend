@@ -9,9 +9,7 @@ import { boardService } from "../../services/board.service"
 import { utilService } from '../../services/util.service'
 
 export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBoard, filterBy }) {
-
     const fullBoards = useSelector((storeState) => storeState.boardModule.boards)
-
 
     const handleDragEnd = (result) => {
         if (!result.destination) return
@@ -22,6 +20,26 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
 
         saveNewOrder(newOrderedBoards)
     }
+
+    // async function saveNewOrder(boards) {
+    //     try {
+    //         const orderedNewBoard = sortFullBoards(boards);
+    //         await saveNewBoards(orderedNewBoard);
+    //     } catch (err) {
+    //         console.error('Error loading Boards:', err);
+    //         showErrorMsg('Cannot save new Boards order');
+    //     }
+    // }
+
+    // function sortFullBoards(boards) {
+    //     // Create a copy of boards to avoid mutating the original
+    //     const boardsCopy = [...boards];
+
+    //     // Sort boards based on the order field
+    //     boardsCopy.sort((a, b) => a.order - b.order);
+
+    //     return boardsCopy;
+    // }
 
     async function saveNewOrder(boards) {
         try {
@@ -57,17 +75,15 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
             const indexB = boardsOrder.has(b._id) ? boardsOrder.get(b._id).idx : originalBoardsOrder.indexOf(b._id)
             return indexA - indexB
         })
-
         return fullBoardsCopy
     }
-
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable droppableId="boards">
                 {(provided) => (
                     <nav className="sidebar-board-nav" {...provided.droppableProps} ref={provided.innerRef}>
-                        {boards.map((board, index) => (
+                        {fullBoards.map((board, index) => (
                             <Draggable key={board._id} draggableId={board._id} index={index}>
                                 {(provided) => (
                                     <div

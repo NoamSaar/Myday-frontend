@@ -34,6 +34,7 @@ export async function loadBoards() {
     try {
         // const filterBy = store.getState().boardModule.filterBy
         const boards = await boardService.query()
+        boards.sort((a, b) => a.order - b.order)
         store.dispatch(getActionSetBoards(boards))
         return boards
     } catch (err) {
@@ -76,13 +77,12 @@ export function loadFilteredBoard() {
     }
     setFilteredBoard(board)
     return board
-
 }
 
 export async function saveNewBoards(boards) {
     try {
-        await boardService.saveBoards(boards)
-        store.dispatch(getActionSetBoards(boards))
+        const savedBoards = await boardService.saveBoards(boards)
+        store.dispatch(getActionSetBoards(savedBoards))
     } catch (err) {
         console.log('Cannot save boards', err)
         throw err
