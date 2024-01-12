@@ -5,7 +5,7 @@ import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
-import { AddUpdateIcon, DeleteIcon, MenuIcon, OpenIcon } from "../../../services/svg.service"
+import { AddUpdateIcon, DeleteIcon, MenuIcon, OpenIcon, UpdateIcon } from "../../../services/svg.service"
 import { DynamicPreview } from "./Picker/DynamicPreview"
 import { EditableTxt } from "../../EditableTxt"
 import { useNavigate } from "react-router"
@@ -196,7 +196,10 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                                 <p>Open</p>
                             </button>}
 
-                            <button className="flex align-center task-details-btn-updates"><AddUpdateIcon /></button>
+                            <button className="flex align-center task-details-btn-updates">
+                                {currTask.updates.length ? <UpdateIcon /> : <AddUpdateIcon />}
+
+                            </button>
                         </div>
 
                     </li>
