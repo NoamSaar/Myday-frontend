@@ -8,6 +8,7 @@ import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from
 
 import { EditableTxt } from "../../EditableTxt"
 import { TaskTable } from "./Task/TaskTable"
+import { TaskHeaderList } from "./Task/TaskHeaderList"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed }) {
     const menuBtnRef = useRef(null)
@@ -204,6 +205,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>
                 </div>
+                <TaskHeaderList groupColor={groupColor} titlesOrder={titlesOrder} />
             </div>
 
             <TaskTable titlesOrder={titlesOrder} groupColor={groupColor} highlightText={highlightText} filterBy={filterBy} group={group} board={board} />

@@ -133,11 +133,10 @@
         .task-header-list-container {
 
             .task-header-list {
-                display: flex;
 
                 .color-display {
                     // margin-top: -0.5px;
-                    height: 36px;
+                    height: 37px;
                     border-top-left-radius: 8px;
                 }
 
@@ -295,6 +294,7 @@
         min-width: 40px;
         height: 36px;
         background-color: white;
+        box-shadow: -1px 12px white;
         z-index: 5;
 
         margin-block-start: -1px;
