@@ -7,7 +7,7 @@
     .group-sticky-container {
         top: 182px;
         z-index: 25;
-        background-color: white;
+        // background-color: white;
         width: 100%;
 
         &.board-header-collapsed {
@@ -19,11 +19,13 @@
             display: flex;
             align-items: center;
             width: 100%;
+            background-color: white;
+
 
             .title-container {
                 display: flex;
                 padding-inline-start: 3px;
-                background-color: white;
+                // background-color: white;
 
                 &:not(.collapsed .title-container) {
                     align-items: center;
@@ -145,8 +147,6 @@
 
                         padding-inline: 9px;
                     }
-
-                    height: 35px;
                 }
             }
         }
@@ -294,7 +294,7 @@
         min-width: 40px;
         height: 36px;
         background-color: white;
-        box-shadow: -1px 12px white;
+        box-shadow: -1px 6px white;
         z-index: 5;
 
         margin-block-start: -1px;

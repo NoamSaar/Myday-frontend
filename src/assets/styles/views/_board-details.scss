@@ -15,11 +15,20 @@
 
     .bottom-shadow {
         .task-header-list {
-            box-shadow: 4px 6px 15px -8px $clr-btn-border;
-            border-block-end: $clr-group-border 0.5px solid;
+
+            .task-title-container,
+            .group-titles-list {
+
+                box-shadow: 1px 5px 15px -8px $clr-btn-border;
+                border-block-end: $clr-group-border 0.5px solid;
+            }
+
+            .task-row-placeholder {
+                box-shadow: 0px 14px white;
+            }
 
             .color-display {
-                // border-bottom-left-radius: 8px;
+                border-bottom-left-radius: 8px;
             }
         }
 

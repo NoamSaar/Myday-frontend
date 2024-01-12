@@ -171,7 +171,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         <div className="checkbox"></div>
                     </li>
 
-                    <li className="task-title single-task flex"
+                    <li className="task-title single-task"
                         onClick={() => {
                             setSidePanelOpen(true)
                             navigate('task/' + currTask.id)

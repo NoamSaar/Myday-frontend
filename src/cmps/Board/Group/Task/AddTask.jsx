@@ -42,7 +42,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                                     <div className="checkbox"></div>
                                 </li>
 
-                                <li className="task-title single-task flex">
+                                <li className="task-title single-task">
                                     <EditableTxt
                                         isEditing={isInputFocus}
                                         txtValue={'+ Add task'}

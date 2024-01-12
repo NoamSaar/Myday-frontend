@@ -6,6 +6,10 @@
 
         .group-titles-list {
             grid-column: 1 / -2;
+
+            li {
+                height: 100%;
+            }
         }
 
 

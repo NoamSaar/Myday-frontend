@@ -10,12 +10,12 @@ import { EditableTxt } from "../../EditableTxt"
 import { TaskTable } from "./Task/TaskTable"
 import { TaskHeaderList } from "./Task/TaskHeaderList"
 
-export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed }) {
+export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed, isHeaderCollapsed }) {
     const menuBtnRef = useRef(null)
     const colorBtnParentRef = useRef(null)
 
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
-    const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
+
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
@@ -169,42 +169,44 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     return (
         <section className={`${(isGroupCollapsed || isGroupsCollapsed) && 'collapsed'} board-group`}>
             <div className={`full-width subgrid full-grid-column ${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
-                <div className="group-title-container flex align-center sticky-left">
-                    <div className={`menu-container flex align-center justify-center sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
-                        <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
-                            <MenuIcon />
-                        </button>
-                    </div>
-
-                    {(isGroupCollapsed || isGroupsCollapsed) && <div
-                        style={{ backgroundColor: groupColor }}
-                        className="color-display sticky-left-36">
-                    </div>}
-
-                    <div className="sticky-left-40 title-container flex align-center">
-                        <div className="flex align-center">
-
-                            <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">
-                                <AngleDownIcon />
+                <div className="subgrid full-grid-column group-title-container sticky-left">
+                    <div className="flex align-center sticky-left">
+                        <div className={`menu-container flex align-center justify-center sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
+                            <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
+                                <MenuIcon />
                             </button>
-
-                            <div ref={colorBtnParentRef}>
-                                <EditableTxt
-                                    isEditing={isEditing}
-                                    txtValue={highlightText(groupTitle, filterBy.txt)}
-                                    onTxtClick={() => setIsEditing(true)}
-                                    inputValue={groupTitle}
-                                    onInputChange={onChangeTitle}
-                                    onEditClose={onGroupEditExit}
-                                    style={{ color: groupColor }}
-                                    extraBtns={extraTitleInputBtn}
-
-                                />
-                            </div>
                         </div>
 
+                        {(isGroupCollapsed || isGroupsCollapsed) && <div
+                            style={{ backgroundColor: groupColor }}
+                            className="color-display sticky-left-36">
+                        </div>}
 
-                        <p className="tasks-count">{group.tasks.length} Tasks</p>
+                        <div className="sticky-left-40 title-container flex align-center">
+                            <div className="flex align-center">
+
+                                <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">
+                                    <AngleDownIcon />
+                                </button>
+
+                                <div ref={colorBtnParentRef}>
+                                    <EditableTxt
+                                        isEditing={isEditing}
+                                        txtValue={highlightText(groupTitle, filterBy.txt)}
+                                        onTxtClick={() => setIsEditing(true)}
+                                        inputValue={groupTitle}
+                                        onInputChange={onChangeTitle}
+                                        onEditClose={onGroupEditExit}
+                                        style={{ color: groupColor }}
+                                        extraBtns={extraTitleInputBtn}
+
+                                    />
+                                </div>
+                            </div>
+
+
+                            <p className="tasks-count">{group.tasks.length} Tasks</p>
+                        </div>
                     </div>
                 </div>
                 <TaskHeaderList groupColor={groupColor} titlesOrder={titlesOrder} />

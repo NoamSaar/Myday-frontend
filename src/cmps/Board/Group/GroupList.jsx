@@ -2,9 +2,11 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { BoardGroup } from "./BoardGroup";
 import { useRef, useState } from "react";
 import { updateBoardOrder } from "../../../store/actions/board.actions";
+import { useSelector } from "react-redux";
 
 export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop }) {
     const [isGroupsCollapsed, setIsGroupsCollapsed] = useState(false)
+    const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
 
     const handleDragEnd = (result) => {
         setIsGroupsCollapsed(false)
@@ -37,7 +39,9 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
             const groupScrollTop = groupEl.getBoundingClientRect().y - 48
 
             if (!scrollTop) return
-            if (182 > groupScrollTop) {
+
+            const topGap = isHeaderCollapsed ? 134.5 : 182
+            if (topGap > groupScrollTop) {
                 return 'bottom-shadow'
             }
         }
@@ -67,6 +71,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
                                                     isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
                                                     onTitleEditLeave={onSetIsFocusLastGroup}
                                                     isGroupsCollapsed={isGroupsCollapsed}
+                                                    isHeaderCollapsed={isHeaderCollapsed}
 
                                                 />
                                             </div>
