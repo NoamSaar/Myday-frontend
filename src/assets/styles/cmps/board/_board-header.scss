@@ -1,6 +1,7 @@
 .board-header {
-    padding-inline: 34px;
+    padding: 30px 30px 15px 30px;
     padding-top: 16px;
+    padding-left: 38px;
 
     display: grid;
     grid-template-areas:
@@ -57,9 +58,9 @@
         &:not(.editable-txt-container .focused-input):hover {
             outline: 1px solid $clr-btn-border;
         }
-
-
     }
+
+
 
     .info-favorite {
         grid-area: info-favorite;
@@ -101,6 +102,10 @@
                 width: 1px;
                 background-color: $clr-group-border;
             }
+        }
+
+        .main-table svg {
+            width: 16px;
         }
     }
 
@@ -147,6 +152,7 @@
         .new-task {
             @include btn($type: clrblue);
             margin-inline-end: 8px;
+            padding-block: 4px;
         }
 
         .search {

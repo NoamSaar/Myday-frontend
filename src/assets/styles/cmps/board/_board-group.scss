@@ -37,12 +37,15 @@
                     .editable-txt,
                     .focused-input {
                         font-size: rem(18px);
-                        padding-inline: 4px;
                         font-family: poppins-medium;
                         cursor: text;
 
-                        &:not(.collapsed .editable-txt, .collapsed .focused-input) {
+                        &:not(.board-header .editable-txt) {
 
+                            padding-inline: 4px;
+                        }
+
+                        &:not(.collapsed .editable-txt, .collapsed .focused-input) {
                             margin-block: 9px;
                         }
                     }
