@@ -134,11 +134,13 @@
 
 }
 
-@media (max-width: $mobile-breakpoint) {
-    .add-task {
+// @media (max-width: $mobile-breakpoint) {
 
-        .task-selection {
-            max-width: 37.7px;
-        }
-    }
-}
+//     // @include for-mobile-only-layout {
+//     .add-task {
+
+//         .task-selection {
+//             max-width: 37.7px;
+//         }
+//     }
+// }
