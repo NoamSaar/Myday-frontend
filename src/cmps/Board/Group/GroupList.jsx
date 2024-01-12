@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { updateBoardOrder } from "../../../store/actions/board.actions";
 
 export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop }) {
-    const groupRef = useRef(null)
     const [isGroupsCollapsed, setIsGroupsCollapsed] = useState(false)
 
     const handleDragEnd = (result) => {
@@ -36,12 +35,12 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
         const groupEl = document.querySelector(`.group-${idx}`)
         if (groupEl) {
             const groupScrollTop = groupEl.getBoundingClientRect().y - 48
-            console.log(`groupScrollTop ${idx}`, groupScrollTop)
+
+            if (!scrollTop) return
             if (182 > groupScrollTop) {
                 return 'bottom-shadow'
             }
         }
-
     }
 
     return (
@@ -51,7 +50,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
                     <ul className="clean-list group-list"  {...provided.droppableProps} ref={provided.innerRef}>
                         {
                             board.groups.map((group, idx) => (
-                                <div className={`${getScrollTopClass(idx)} group-container group-${idx}`} key={group.id} ref={groupRef}>
+                                <div className={`${getScrollTopClass(idx)} group-container group-${idx}`} key={group.id}>
                                     <Draggable draggableId={group.id} index={idx} >
                                         {(provided, snapshot) => (
                                             <div

@@ -18,7 +18,7 @@
     .msg-btn {
         height: 100%;
         padding-inline: 20px;
-        border-inline-start: #d0d4e4 0.5px solid;
+        border-inline-start: $clr-group-border 0.5px solid;
         cursor: pointer;
 
         &:hover svg {

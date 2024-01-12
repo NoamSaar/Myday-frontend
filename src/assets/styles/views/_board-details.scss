@@ -16,6 +16,11 @@
     .bottom-shadow {
         .task-header-list {
             box-shadow: 4px 6px 15px -8px $clr-btn-border;
+            border-block-end: $clr-group-border 0.5px solid;
+
+            .color-display {
+                // border-bottom-left-radius: 8px;
+            }
         }
 
     }
