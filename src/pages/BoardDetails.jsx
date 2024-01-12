@@ -5,7 +5,6 @@ import { Outlet, useParams } from "react-router"
 import { addGroup, loadBoard, loadFilteredBoard, setFilterBy, getTask } from "../store/actions/board.actions"
 
 import { BigPlusIcon } from "../services/svg.service"
-import { BoardGroup } from "../cmps/Board/Group/BoardGroup"
 import { BoardHeader } from "../cmps/Board/BoardHeader"
 import { TaskDetails } from "./TaskDetails"
 import { GroupList } from "../cmps/Board/Group/GroupList"
@@ -15,6 +14,7 @@ export function BoardDetails() {
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const isLoading = useSelector((storeState) => storeState.systemModule.isLoading)
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const [scrollTop, setScrollTop] = useState(0)
     // const user = useSelector((storeState) => storeState.userModule.loggedinUser)
 
     const [isFocusLastGroup, setIsFocusLastGroup] = useState(false)
@@ -58,18 +58,22 @@ export function BoardDetails() {
         setFilterBy(filterBy)
     }
 
+    function onDetailsScroll(ev) {
+        setScrollTop(ev.target.scrollTop)
+    }
+
     const { txt } = filterBy
 
     if (isLoading || !board) return <div className="board-details">Loading...</div>
     return (
-        <section className={`board-details ${modalData.isOpen && 'overflow-hidden'}`}>
+        <section onScroll={onDetailsScroll} className={`board-details ${modalData.isOpen && 'overflow-hidden'}`}>
             <BoardHeader
                 board={board}
                 filterBy={{ txt }}
                 onSetFilter={onSetFilter}
             />
 
-            <GroupList board={board} isFocusLastGroup={isFocusLastGroup} onSetIsFocusLastGroup={() => setIsFocusLastGroup(false)} />
+            <GroupList scrollTop={scrollTop} board={board} isFocusLastGroup={isFocusLastGroup} onSetIsFocusLastGroup={() => setIsFocusLastGroup(false)} />
 
 
             <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>

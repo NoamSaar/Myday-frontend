@@ -13,6 +13,13 @@
         // padding-right: 10px;
     }
 
+    .bottom-shadow {
+        .task-header-list {
+            box-shadow: 4px 6px 15px -8px $clr-btn-border;
+        }
+
+    }
+
 
     .add-group-btn {
         width: fit-content;

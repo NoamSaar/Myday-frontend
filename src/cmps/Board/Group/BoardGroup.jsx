@@ -147,6 +147,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
     }
 
+
     const menuOptions = [
         {
             icon: <DeleteIcon />,
@@ -163,6 +164,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
 
     ]
+
 
     return (
         <section className={`${(isGroupCollapsed || isGroupsCollapsed) && 'collapsed'} board-group`}>

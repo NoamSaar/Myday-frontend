@@ -13,9 +13,6 @@
         &.board-header-collapsed {
             top: 134.5px;
 
-            .task-header-list {
-                box-shadow: 4px 6px 15px -8px $clr-btn-border;
-            }
         }
 
         .group-title-container {
@@ -167,6 +164,10 @@
         .group-sticky-container {
             grid-column: 1 / 2;
             box-shadow: 0 5px white;
+        }
+
+        .task-header-list-container {
+            display: none;
         }
 
         .task-table {

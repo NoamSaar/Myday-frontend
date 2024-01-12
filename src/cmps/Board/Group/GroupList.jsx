@@ -1,9 +1,10 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { BoardGroup } from "./BoardGroup";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { updateBoardOrder } from "../../../store/actions/board.actions";
 
-export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup }) {
+export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop }) {
+    const groupRef = useRef(null)
     const [isGroupsCollapsed, setIsGroupsCollapsed] = useState(false)
 
     const handleDragEnd = (result) => {
@@ -30,6 +31,19 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup }) {
         setIsGroupsCollapsed(true)
     }
 
+
+    function getScrollTopClass(idx) {
+        const groupEl = document.querySelector(`.group-${idx}`)
+        if (groupEl) {
+            const groupScrollTop = groupEl.getBoundingClientRect().y - 48
+            console.log(`groupScrollTop ${idx}`, groupScrollTop)
+            if (182 > groupScrollTop) {
+                return 'bottom-shadow'
+            }
+        }
+
+    }
+
     return (
         <DragDropContext onBeforeDragStart={onBeforeDragStart} onDragEnd={handleDragEnd}>
             <Droppable droppableId={board._id}>
@@ -37,26 +51,29 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup }) {
                     <ul className="clean-list group-list"  {...provided.droppableProps} ref={provided.innerRef}>
                         {
                             board.groups.map((group, idx) => (
-                                <Draggable key={group.id} draggableId={group.id} index={idx} >
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                        >
+                                <div className={`${getScrollTopClass(idx)} group-container group-${idx}`} key={group.id} ref={groupRef}>
+                                    <Draggable draggableId={group.id} index={idx} >
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
 
-                                            <BoardGroup
-                                                key={group.id}
-                                                group={group}
-                                                titlesOrder={board.titlesOrder}
-                                                isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
-                                                onTitleEditLeave={onSetIsFocusLastGroup}
-                                                isGroupsCollapsed={isGroupsCollapsed}
+                                            >
 
-                                            />
-                                        </div>
-                                    )}
-                                </Draggable>
+                                                <BoardGroup
+                                                    key={group.id}
+                                                    group={group}
+                                                    titlesOrder={board.titlesOrder}
+                                                    isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
+                                                    onTitleEditLeave={onSetIsFocusLastGroup}
+                                                    isGroupsCollapsed={isGroupsCollapsed}
+
+                                                />
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                </div>
                             ))
                         }
                         {provided.placeholder}
