@@ -5,10 +5,11 @@ import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
 import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
-import { DeleteIcon, MenuIcon, OpenIcon } from "../../../services/svg.service"
+import { AddUpdateIcon, DeleteIcon, MenuIcon, OpenIcon } from "../../../services/svg.service"
 import { DynamicPreview } from "./Picker/DynamicPreview"
 import { EditableTxt } from "../../EditableTxt"
 import { useNavigate } from "react-router"
+import { Button } from "react-day-picker"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
@@ -189,11 +190,13 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             onEditClose={onTitleEditExit}
                         />
 
-                        <div className="open-details-container">
-                            {(isShowTaskDetailsBtn && !isEditing) && <div className="task-details-btn flex justify-center">
+                        <div className="flex align-center open-details-container">
+                            {(isShowTaskDetailsBtn && !isEditing) && <button className="task-details-btn flex justify-center">
                                 <OpenIcon />
                                 <p>Open</p>
-                            </div>}
+                            </button>}
+
+                            <button className="flex align-center task-details-btn-updates"><AddUpdateIcon /></button>
                         </div>
 
                     </li>
