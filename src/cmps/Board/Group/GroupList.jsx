@@ -68,38 +68,3 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup }) {
         </DragDropContext>
     )
 }
-
-{/* <DragDropContext onDragEnd={handleDragEnd}>
-<Droppable droppableId={group.id}>
-    {(provided) => (
-        <div className="subgrid full-grid-column tasks-container" {...provided.droppableProps} ref={provided.innerRef}>
-            {
-                group.tasks.map((task, idx) => (
-                    <Draggable key={task.id} draggableId={task.id} index={idx} >
-                        {(provided, snapshot) => (
-                            <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                className={`${snapshot.isDragging && 'dragged-task'}`}
-                            >
-                                <TaskPreview
-                                    key={task.id}
-                                    task={task}
-                                    groupId={groupId}
-                                    groupColor={groupColor}
-                                    onSetActiveTask={onSetActiveTask}
-                                    highlightText={highlightText}
-                                    filterBy={filterBy}
-                                />
-                            </div>
-                        )}
-                    </Draggable>
-                ))
-            }
-
-            {provided.placeholder}
-        </div>
-    )}
-</Droppable>
-</DragDropContext> */}
