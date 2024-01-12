@@ -66,7 +66,7 @@ export function BoardDetails() {
 
     if (isLoading || !board) return <div className="board-details">Loading...</div>
     return (
-        <section onScroll={onDetailsScroll} className={`board-details ${modalData.isOpen && 'overflow-hidden'}`}>
+        <section onScroll={onDetailsScroll} className={`board-details ${modalData.isOpen ? 'overflow-hidden' : ''}`}>
             <BoardHeader
                 board={board}
                 filterBy={{ txt }}

@@ -15,7 +15,8 @@ export const utilService = {
     millisecondsToDays,
     isValidTimestamp,
     areObjsIdentical,
-    hasTimePassed
+    hasTimePassed,
+    timeSince
 }
 
 function readJsonFile(path) {
@@ -137,4 +138,28 @@ function capitalizeFirstLetter(string) {
 function areObjsIdentical(obj1, obj2) {
     //works only in case that props in both are in tje same order
     return JSON.stringify(obj1) === JSON.stringify(obj2)
+}
+
+function timeSince(timeStamp) {
+    let now = new Date(),
+        secondsPast = (now.getTime() - timeStamp) / 1000
+    if (secondsPast < 60) {
+        return parseInt(secondsPast) + 's'
+    }
+    if (secondsPast < 3600) {
+        return parseInt(secondsPast / 60) + 'm'
+    }
+    if (secondsPast <= 86400) {
+        return parseInt(secondsPast / 3600) + 'h'
+    }
+    if (secondsPast > 86400) {
+        const date = new Date(timeStamp)
+        const day = date.getDate()
+        const month = date
+            .toDateString()
+            .match(/ [a-zA-Z]*/)[0]
+            .replace(' ', '')
+        const year = date.getFullYear() === now.getFullYear() ? '' : ' ' + date.getFullYear()
+        return day + ' ' + month + year
+    }
 }

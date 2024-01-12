@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { addTask, getMemberFromBoard } from "../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
 
-import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
+import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 import { UserImg } from "../UserImg"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
@@ -113,6 +113,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         <div className="board-filter">
 
             <button title="New task" className="btn new-task" onClick={onAddTask}>
+                <PlusIcon />
                 <span>New Task</span>
             </button>
 

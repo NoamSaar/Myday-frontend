@@ -9,6 +9,18 @@
         padding: 0;
         background-color: $clr-bg-header;
 
+        @include for-narrow-only-layout {
+
+            &.mobile-hp {
+                grid-template-columns: 1fr 0;
+
+                .sidebar {
+                    // transition: min-width 6s;
+                    min-width: 100vw;
+                }
+            }
+        }
+
         .sidebar-container {
             padding: 0;
         }
