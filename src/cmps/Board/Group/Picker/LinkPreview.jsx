@@ -6,7 +6,7 @@ import { CloseIcon } from "../../../../services/svg.service"
 
 export function LinkPreview({ info, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
-    console.log('info', info)
+    // console.log('info', info)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isCurrPickerOpen = parentId === `${taskId}-linkPicker`
