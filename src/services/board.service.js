@@ -248,6 +248,6 @@ function _getDefaultTask(title) {
         status: 'l100',
         priority: 'l200',
         members: [],
-        updates: [],
+        msgs: [],
     }
 }

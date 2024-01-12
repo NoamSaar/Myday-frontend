@@ -36,6 +36,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     useEffect(() => {
         setIsEditing(isEditingTitle)
     }, [isEditingTitle])
+
     async function onGroupChange(field, data) {
         try {
             const updatedGroup = { ...group, [field]: data }
