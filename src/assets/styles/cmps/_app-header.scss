@@ -1,6 +1,6 @@
 .app-header {
     background-color: $clr-bg-header;
-    padding: 10px 40px;
+    padding: 10px 20px;
 
     .header-logo {
         gap: 4px;
@@ -9,6 +9,10 @@
             font-size: rem(16px);
             font-family: poppins-bold;
             color: $clr-font
+        }
+
+        .logo {
+            width: 20px;
         }
     }
 

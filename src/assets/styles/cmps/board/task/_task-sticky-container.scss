@@ -1,6 +1,6 @@
 .task-sticky-container {
     display: flex;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.804);
     z-index: 20;
 
     .color-display {
@@ -8,20 +8,12 @@
     }
 
     ul:not(.add-task .task-preview) {
-        border-block-start: #d0d4e4 0.5px solid;
+        border-block-start: $clr-group-border 0.5px solid;
     }
 
     li {
         white-space: nowrap;
         height: 36px;
-
-        // &:not(.active li) {
-        //     background-color: white;
-        // }
-
-        // &:not(.task-selection) {
-        //     cursor: pointer;
-        // }
 
         &:not(.task-title) {
             text-align: center;
@@ -32,5 +24,11 @@
 
     .focused-input {
         width: 100%;
+    }
+
+
+    @include for-narrow-layout {
+        background-color: white;
+
     }
 }

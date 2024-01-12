@@ -23,23 +23,29 @@
 @import "cmps/sidebar/sidebar";
 
 // board
+@import "cmps/board/board-app";
 @import "cmps/board/board-header";
 @import "cmps/board/board-group";
 
 //summary
 @import "cmps/board/summary/group-summary";
 @import "cmps/board/summary/label-summary";
+@import "cmps/board/summary/file-summary";
 
 // tasks
 @import "cmps/board/task/task-list";
 @import "cmps/board/task/task-preview";
 @import "cmps/board/task/member-preview";
 @import "cmps/board/task/link-preview";
+@import "cmps/board/task/date-preview";
 @import "cmps/board/task/file-preview";
 @import "cmps/board/task/status-preview";
 @import "cmps/board/task/task-header-list";
 @import "cmps/board/task/task-sticky-container";
 @import "cmps/board/task/task-table";
+@import "cmps/board/task/timeline";
+@import "cmps/board/task/time-indicator";
+@import "cmps/board/task/open-details";
 
 // modals
 @import "cmps/modals/menu-option-modal";

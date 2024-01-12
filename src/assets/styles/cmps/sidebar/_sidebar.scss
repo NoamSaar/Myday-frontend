@@ -7,6 +7,7 @@
     border-top-right-radius: 8px;
     transition: left 150ms;
 
+
     &>.sidebar-workspace,
     .sidebar-board-nav,
     .app-sidebar-resizer {
@@ -69,4 +70,13 @@
     @import './sidebar-main-nav.scss';
     @import './sidebar-workspace.scss';
     @import './sidebar-board-nav.scss';
+
+    @include for-narrow-layout {
+        min-width: 190px;
+        max-width: 250px;
+    }
+
+    @include for-normal-layout {
+        max-width: 400px;
+    }
 }

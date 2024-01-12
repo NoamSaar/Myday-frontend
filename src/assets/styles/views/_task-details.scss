@@ -35,7 +35,7 @@
                 content: "";
                 height: 16px;
                 border-right: 1px solid;
-                border-color: #d0d4e4;
+                border-color: $clr-group-border;
                 position: absolute;
                 top: 8px;
                 right: 0;
@@ -46,7 +46,7 @@
     .panel-subjects {
         padding-inline: 24px;
         margin-block-start: 20px;
-        border-bottom: 1px solid #d0d4e4;
+        border-bottom: 1px solid $clr-group-border;
 
         button {
             font-size: rem(14px);
@@ -58,7 +58,7 @@
                 content: "";
                 height: 16px;
                 border-right: 1px solid;
-                border-color: #d0d4e4;
+                border-color: $clr-group-border;
                 position: absolute;
                 top: 8px;
                 right: 0;
@@ -72,7 +72,7 @@
                 width: 98%;
                 position: absolute;
                 bottom: -4px;
-                background-color: #0073ea;
+                background-color: $clr-btn-add;
             }
 
             // background-color: gray;
@@ -80,6 +80,8 @@
     }
 
     .panel-update {
+        flex-grow: 1;
+
         .post_not_found {
             margin-block-start: 80px;
         }
@@ -100,6 +102,63 @@
         img {
             width: 290px;
             height: 150px;
+        }
+
+        .update-post {
+            flex-grow: 1;
+            margin: 20px;
+            border: 1px solid #d0d4e4;
+            border-radius: $border-radius-small;
+
+            .post-header {
+                padding: 16px;
+                padding-block-end: 8px;
+            }
+
+            .post-creator {
+                gap: 10px;
+                font-size: rem(16px);
+
+                .user-img {
+                    max-height: 40px;
+                    max-width: 40px;
+                    min-height: 40px;
+                    min-width: 40px;
+                }
+            }
+
+            .post-content {
+                padding: 15px;
+                padding-block-start: 8px;
+
+                p {
+                    margin-block-end: 8px;
+                }
+            }
+
+            .post-actions {
+                justify-content: space-around;
+                border: 1px solid #d0d4e4;
+
+                div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-grow: 1;
+
+                    &:first-of-type {
+                        border-right: 1px solid #d0d4e4;
+                    }
+
+                    .btn {
+                        display: grid;
+                        place-content: center;
+                        flex-grow: 1;
+                        margin: 4px;
+                        padding: 7px;
+                    }
+                }
+            }
         }
     }
 }

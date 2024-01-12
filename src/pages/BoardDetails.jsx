@@ -2,17 +2,15 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { Outlet, useParams } from "react-router"
 
-import { boardService } from "../services/board.service.local"
-
 import { addGroup, loadBoard, loadFilteredBoard, setFilterBy, getTask } from "../store/actions/board.actions"
 
 import { BigPlusIcon } from "../services/svg.service"
 import { BoardGroup } from "../cmps/Board/Group/BoardGroup"
 import { BoardHeader } from "../cmps/Board/BoardHeader"
 import { TaskDetails } from "./TaskDetails"
+import { GroupList } from "../cmps/Board/Group/GroupList"
 
 export function BoardDetails() {
-    const fullBoard = useSelector((storeState) => storeState.boardModule.currBoard)
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const isLoading = useSelector((storeState) => storeState.systemModule.isLoading)
@@ -43,7 +41,7 @@ export function BoardDetails() {
             await loadBoard(boardId)
             // loadFilteredBoard()
         } catch (err) {
-            console.err('Error loading board:', err)
+            console.error('Error loading board:', err)
         }
     }
 
@@ -52,7 +50,7 @@ export function BoardDetails() {
             await addGroup(board._id)
             setIsFocusLastGroup(true)
         } catch (err) {
-            console.err("Error adding group:", err)
+            console.error("Error adding group:", err)
         }
     }
 
@@ -71,18 +69,19 @@ export function BoardDetails() {
                 onSetFilter={onSetFilter}
             />
 
-            {board.groups.map((group, idx) =>
+            <GroupList board={board} isFocusLastGroup={isFocusLastGroup} onSetIsFocusLastGroup={() => setIsFocusLastGroup(false)} />
+            {/* {board.groups.map((group, idx) =>
                 <BoardGroup
                     key={group.id}
                     group={group}
                     titlesOrder={board.titlesOrder}
                     isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
                     onTitleEditLeave={() => setIsFocusLastGroup(false)}
-                />)}
+                />)} */}
 
             <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
                 <BigPlusIcon />
-                Add new group
+                <p>Add new group</p>
             </button>
 
             <Outlet

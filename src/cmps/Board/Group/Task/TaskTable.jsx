@@ -1,4 +1,4 @@
-import { GroupSummary } from "./Summary/GroupSummary";
+import { GroupSummary } from "../Summary/GroupSummary";
 import { TaskHeaderList } from "./TaskHeaderList";
 import { TaskList } from "./TaskList";
 

@@ -1,4 +1,4 @@
-import { GroupTitlesList } from "./GroupTitlesList";
+import { GroupTitlesList } from "../GroupTitlesList";
 
 export function TaskHeaderList({ groupColor, titlesOrder }) {
     return (

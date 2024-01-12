@@ -1,15 +1,15 @@
 import { useRef, useState } from "react"
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
 import { resetDynamicModal, setDynamicModal, setIsLoading } from "../../store/actions/system.actions"
 import { setCurrBoard } from "../../store/actions/board.actions"
 
-export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBoard }) {
+export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, updateBoard }) {
+    const { boardId } = useParams()
     const menuBtnRef = useRef(null)
 
-    const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
@@ -19,7 +19,7 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
 
     const navigate = useNavigate()
 
-    const isMenuOpen = parentId === `${board.id}-sidebar-menu`
+    const isMenuOpen = parentId === `${board._id}-sidebar-menu`
 
     async function onRemoveBoard() {
         removeBoard(board._id)
@@ -41,7 +41,7 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
             setDynamicModal({
                 isOpen: true,
                 parentRefCurrent: menuBtnRef.current,
-                parentId: `${board.id}-sidebar-menu`,
+                parentId: `${board._id}-sidebar-menu`,
                 type: 'menuOptions',
                 data: { options: menuOptions },
                 isPosBlock: true
@@ -66,10 +66,11 @@ export function SidebarBoardLink({ board, currActiveBoard, removeBoard, updateBo
     }
 
     function onLinkClick() {
+        if (boardId === board._id) return
         setIsLoading(true)
         setCurrBoard(null)
         navigate(`/board/${board._id}`)
-        resetDynamicModal()
+        // resetDynamicModal()
     }
 
     const menuOptions = [

@@ -9,7 +9,8 @@ import { SidebarWorkspace } from "./SidebarWorkspace"
 import { SidebarBoardNav } from "./SidebarBoardNav"
 // import { LottieAnimation } from "./LottieAnimation"
 
-import { addBoard, loadBoards, removeBoard, setFilterBy, updateBoard } from "../../store/actions/board.actions"
+import { addBoard, loadBoards, removeBoard, updateBoard } from "../../store/actions/board.actions"
+import { boardService } from "../../services/board.service"
 
 export function Sidebar() {
     const sidebarRef = useRef(null)
@@ -18,31 +19,49 @@ export function Sidebar() {
     const [sidebarWidth, setSidebarWidth] = useState(250)
 
     const boards = useSelector((storeState) => storeState.boardModule.boards)
-    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const [filteredBoards, setFilteredBoards] = useState(boards)
+    const [filterBy, setFilterBy] = useState(boardService.getDefaultBoardsFilter())
     const navigate = useNavigate()
 
     useEffect(() => {
         _loadDataBoards()
-    }, [filterBy])
+    }, [])
+
+    useEffect(() => {
+        filterBoards()
+    }, [filterBy, boards])
 
     async function _loadDataBoards() {
         try {
-            await loadBoards(filterBy)
+            const boards = await loadBoards()
+            // setFilteredBoards(boards)
         } catch (err) {
             console.error('Error loading Boards:', err)
             showErrorMsg('Cannot load Boards')
         }
     }
 
+    function filterBoards() {
+
+        if (filterBy.title) {
+            const regex = new RegExp(filterBy.title, 'i')
+            const newBoards = boards.filter(board => regex.test(board.title))
+            setFilteredBoards(newBoards)
+        } else {
+            setFilteredBoards(boards)
+
+        }
+    }
+
     async function onAddNewBoard() {
         try {
             const newBoard = await addBoard()
-            navigate('board/' + newBoard._id)
+            navigate(newBoard._id)
         } catch (err) {
             console.error('Error adding new Board:', err)
             showErrorMsg('Cannot add new Board')
@@ -52,6 +71,7 @@ export function Sidebar() {
     async function _onRemoveBoard(boardId) {
         try {
             await removeBoard(boardId)
+            // setFilteredBoards(boards)
             showSuccessMsg('We successfully deleted the board')
             // navigate('board/b101')
         } catch (err) {
@@ -70,7 +90,7 @@ export function Sidebar() {
     }
 
     function onSetFilter(filterBy) {
-        setFilterBy(filterBy)
+        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
 
     function onOpenSidebar() {
@@ -160,10 +180,11 @@ export function Sidebar() {
                     onToggleDropdown={onToggleDropdown}
                     onSetFilter={onSetFilter} />
                 <SidebarBoardNav
-                    boards={boards}
+                    boards={filteredBoards}
                     currActiveBoard={currActiveBoard}
                     removeBoard={onRemoveBoard}
                     updateBoard={onUpdateBoard}
+                    filterBy={filterBy}
                 />
                 <div className="app-sidebar-resizer" onMouseDown={startResizing} />
                 {/* <LottieAnimation /> */}

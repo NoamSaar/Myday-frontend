@@ -40,13 +40,9 @@ const gColors = [
 
 _initBoards()
 
-async function query(filterBy = { title: '' }) {
+async function query() {
     try {
         let boards = await storageService.query(STORAGE_KEY)
-        if (filterBy.title) {
-            const regex = new RegExp(filterBy.title, 'i')
-            boards = boards.filter(board => regex.test(board.title))
-        }
         return boards
     } catch (err) {
         throw new Error(err.message || 'An err occurred during getting boards')

@@ -10,7 +10,12 @@ export const utilService = {
     getFormatDate,
     getAcronym,
     capitalizeFirstLetter,
-    getFullFormatDate
+    getFullFormatDate,
+    timeStampToDate,
+    millisecondsToDays,
+    isValidTimestamp,
+    areObjsIdentical,
+    hasTimePassed
 }
 
 function readJsonFile(path) {
@@ -80,6 +85,23 @@ function getFormatDate(timestamp) {
     return formatter.format(date)
 }
 
+function timeStampToDate(timeStamp) {
+    const timelineToSave = new Date(timeStamp).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+    })
+    return timelineToSave
+}
+
+function millisecondsToDays(ms) {
+    return Math.floor(ms / 86400000)
+}
+
+function isValidTimestamp(timestamp) {
+    return !isNaN(new Date(timestamp).getTime())
+}
+
+
 function getFullFormatDate(timestamp) {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
@@ -99,10 +121,20 @@ function getFullFormatDate(timestamp) {
     return formattedDate
 }
 
+function hasTimePassed(timestamp) {
+    const currentTimestamp = Date.now();
+    return timestamp < currentTimestamp;
+}
+
 function getAcronym(name) {
     return name.split(' ')[0][0] + name.split(' ')[1][0]
 }
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+function areObjsIdentical(obj1, obj2) {
+    //works only in case that props in both are in tje same order
+    return JSON.stringify(obj1) === JSON.stringify(obj2)
 }

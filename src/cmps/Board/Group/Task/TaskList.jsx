@@ -1,9 +1,9 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useSelector } from "react-redux"
+import { useState } from "react"
+import { addTask, setActiveTask, updateBoardOrder } from "../../../../store/actions/board.actions"
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
-import { useState } from "react"
-import { addTask, getBoardById, setActiveTask, updateBoard } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -12,57 +12,21 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
     const group = board.groups[groupIdx]
 
-    const handleDragEnd = async (result) => {
-        try {
-            if (!result.destination) return
-            const fullBoard = await getBoardById(board._id)
-            console.log('fullBoard', fullBoard)
+    const handleDragEnd = (result) => {
+        if (!result.destination) return
 
-            // const newOrderedTasks = group.tasks
-
-            const filteredSourceGroupIdx = board.groups.findIndex(group => group.id === result.source.droppableId)
-            const filteredDestinationGroupIdx = board.groups.findIndex(group => group.id === result.destination.droppableId)
-            const filteredSourceGroupTasks = board.groups[filteredSourceGroupIdx].tasks
-            const filteredDestinationGroupTasks = board.groups[filteredDestinationGroupIdx].tasks
-            console.log('filteredSourceGroupTasks', filteredSourceGroupTasks)
-            console.log('filteredDestinationGroupTasks', filteredDestinationGroupTasks)
-
-            const trueSourceGroupIdx = fullBoard.groups.findIndex(group => group.id === result.source.droppableId)
-            const trueDestinationGroupIdx = fullBoard.groups.findIndex(group => group.id === result.destination.droppableId)
-            const trueSourceGroupTasks = fullBoard.groups[trueSourceGroupIdx].tasks
-            const trueDestinationGroupTasks = fullBoard.groups[trueDestinationGroupIdx].tasks
-            console.log('trueSourceGroupTasks', trueSourceGroupTasks)
-            console.log('trueDestinationGroupTasks', trueDestinationGroupTasks)
-
-            const sourceTaskId = filteredSourceGroupTasks[result.source.index].id
-            const destinationTaskId = filteredDestinationGroupTasks[result.destination.index].id
-            console.log('sourceTaskId', sourceTaskId)
-            console.log('destinationTaskId', destinationTaskId)
-
-
-            const sourceTaskIdx = trueSourceGroupTasks.findIndex(task => task.id === sourceTaskId)
-            const destinationTaskIdx = trueDestinationGroupTasks.findIndex(task => task.id === destinationTaskId)
-            console.log('sourceTaskIdx', sourceTaskIdx)
-            console.log('destinationTaskIdx', destinationTaskIdx)
-
-
-            const [removed] = trueSourceGroupTasks.splice(sourceTaskIdx, 1)
-            trueDestinationGroupTasks.splice(destinationTaskIdx, 0, removed)
-            saveNewOrder(fullBoard, filteredSourceGroupIdx, fullBoard.groups[filteredSourceGroupIdx])
-            saveNewOrder(fullBoard, filteredDestinationGroupIdx, fullBoard.groups[filteredDestinationGroupIdx])
-        } catch (error) {
-            console.log(error)
-        }
+        const newOrderedTasks = group.tasks
+        const [removed] = newOrderedTasks.splice(result.source.index, 1)
+        newOrderedTasks.splice(result.destination.index, 0, removed)
+        saveNewOrder()
     }
 
-    async function saveNewOrder(board, groupIdx, group) {
+    async function saveNewOrder() {
         try {
-            const newBoard = { ...board }
-            newBoard.groups.splice(groupIdx, 1, group)
-            await updateBoard(newBoard)
+            await updateBoardOrder(board)
         } catch (err) {
             console.log('Cannot save group:', err)
-            showErrorMsg('Cannot save group')
+            // showErrorMsg('Cannot save group')
         }
     }
 
@@ -76,7 +40,7 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
             await addTask(board._id, groupId, taskTitle)
             setTaskTitle('')
         } catch (err) {
-            console.err('Error adding task:', err)
+            console.error('Error adding task:', err)
             showErrorMsg('Cannot add Task')
         }
     }

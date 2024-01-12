@@ -1,60 +1,61 @@
 /* Breakpoint mixins */
 
-@mixin for-mobile-layout {
-    @media (max-width: calc($mobile-breakpoint + 40px)) {
+//mobile only
+@mixin for-mobile-only-layout {
+    @media (max-width: $mobile-breakpoint) {
         @content;
     }
 }
 
+// //mobile & tablet only
+@mixin for-narrow-only-layout {
+    @media (max-width: $narrow-breakpoint) {
+        @content;
+    }
+}
+
+//tablet and wider
 @mixin for-narrow-layout {
-    @media (min-width: calc($mobile-breakpoint + 40px)) {
+    @media (min-width: $narrow-breakpoint) {
         @content;
     }
 }
 
+//small desktop and wider
 @mixin for-normal-layout {
-    @media (min-width: calc($narrow-breakpoint + 40px)) {
+    @media (min-width: $normal-breakpoint) {
         @content;
     }
 }
 
-@mixin for-wide-layout {
-    @media (min-width: calc($normal-breakpoint + 40px)) {
-        @content;
-    }
-}
 
 @mixin btn($type: regular, $width: auto) {
     display: grid;
     grid-auto-flow: column;
     align-items: center;
     justify-content: start;
-    gap: 8px;
+    gap: em(8px, 14px);
+    // min-height: 30px;
 
     width: $width;
-    padding-inline: 8px;
-    padding-block: 4px;
+    padding-inline: em(8px, 14px);
+    padding-block: em(4px, 14px);
     // height: 32px;
 
     line-height: normal;
     border-radius: $border-radius-small;
     cursor: pointer;
 
-    // img,
-    // svg {
-    //     height: 100%;
-    //     width: auto;
-    // }
     svg {
-        height: rem(20px);
-        width: rem(20px);
+        height: em(20px, 14px);
+        width: em(20px, 14px);
     }
 
     @if $type ==regular {
 
-        &:not(.person.active) {
-            background-color: $clr0;
-        }
+        // &:not(.person.active):not(.date-preview .btn):not(.link-preview .btn) {
+        //     background-color: $clr0;
+        // }
 
         color: $clr-font;
 

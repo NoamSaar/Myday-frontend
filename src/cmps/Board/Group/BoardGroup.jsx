@@ -6,10 +6,8 @@ import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.servi
 import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
-import { TaskList } from "./TaskList"
-import { TaskHeaderList } from "./TaskHeaderList"
 import { EditableTxt } from "../../EditableTxt"
-import { TaskTable } from "./TaskTable"
+import { TaskTable } from "./Task/TaskTable"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
     const menuBtnRef = useRef(null)
@@ -42,6 +40,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     async function onGroupChange(field, data) {
         try {
             const updatedGroup = { ...group, [field]: data }
+            // console.log('board from updateeeeee:', board)
             updateGroup(board._id, updatedGroup)
         } catch (err) {
             console.error('Error updating group:', err)
@@ -165,7 +164,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     ]
 
     return (
-        <section className={`${isGroupCollapsed && 'collapsed'} board-group flex column`}>
+        <section className={`${isGroupCollapsed && 'collapsed'} board-group`}>
             <div className={`full-width subgrid full-grid-column ${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
                 <div className="group-title-container flex align-center sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
@@ -173,24 +172,34 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                             <MenuIcon />
                         </button>
                     </div>
+
+                    {isGroupCollapsed && <div
+                        style={{ backgroundColor: groupColor }}
+                        className="color-display sticky-left-36">
+                    </div>}
+
                     <div className="sticky-left-40 title-container flex align-center">
-                        <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">
-                            <AngleDownIcon />
-                        </button>
+                        <div className="flex align-center">
 
-                        <div ref={colorBtnParentRef}>
-                            <EditableTxt
-                                isEditing={isEditing}
-                                txtValue={highlightText(groupTitle, filterBy.txt)}
-                                onTxtClick={() => setIsEditing(true)}
-                                inputValue={groupTitle}
-                                onInputChange={onChangeTitle}
-                                onEditClose={onGroupEditExit}
-                                style={{ color: groupColor }}
-                                extraBtns={extraTitleInputBtn}
+                            <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">
+                                <AngleDownIcon />
+                            </button>
 
-                            />
+                            <div ref={colorBtnParentRef}>
+                                <EditableTxt
+                                    isEditing={isEditing}
+                                    txtValue={highlightText(groupTitle, filterBy.txt)}
+                                    onTxtClick={() => setIsEditing(true)}
+                                    inputValue={groupTitle}
+                                    onInputChange={onChangeTitle}
+                                    onEditClose={onGroupEditExit}
+                                    style={{ color: groupColor }}
+                                    extraBtns={extraTitleInputBtn}
+
+                                />
+                            </div>
                         </div>
+
 
                         <p className="tasks-count">{group.tasks.length} Tasks</p>
                     </div>

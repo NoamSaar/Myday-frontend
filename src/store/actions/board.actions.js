@@ -1,9 +1,11 @@
-import { boardService } from '../../services/board.service.local.js'
+import { boardService } from '../../services/board.service.js'
+// import { boardService } from '../../services/board.service.local.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD } from '../reducers/board.reducer.js'
 import { setIsLoading } from './system.actions.js'
+import { utilService } from '../../services/util.service.js'
 
 
 // Store - saveTask (from board.js)
@@ -26,16 +28,14 @@ import { setIsLoading } from './system.actions.js'
 // dispatch to store: updateTask(task, activity)
 // }
 
-
-
 /**************** board actions ****************/
 
-//maybe needs getAction as the rest for consistency?
 export async function loadBoards() {
     try {
-        const filterBy = store.getState().boardModule.filterBy
-        const boards = await boardService.query(filterBy)
+        // const filterBy = store.getState().boardModule.filterBy
+        const boards = await boardService.query()
         store.dispatch(getActionSetBoards(boards))
+        return boards
     } catch (err) {
         console.log('Cannot load boards', err)
         throw err
@@ -55,7 +55,7 @@ export async function loadBoard(boardId) {
     }
 }
 
-export async function loadFilteredBoard() {
+export function loadFilteredBoard() {
     const filterBy = store.getState().boardModule.filterBy
     const board = JSON.parse(JSON.stringify(store.getState().boardModule.currBoard))
     if (filterBy.txt) {
@@ -79,17 +79,7 @@ export async function loadFilteredBoard() {
 
 }
 
-// export async function getBoardById(boardId) {
-//     try {
-//         const board = await boardService.getById(boardId)
-//         return board
-//     } catch (err) {
-//         console.log('Had issues in board details', err)
-//         throw err
-//     }
-// }
-
-export async function saveBoards(boards) {
+export async function saveNewBoards(boards) {
     try {
         await boardService.saveBoards(boards)
         store.dispatch(getActionSetBoards(boards))
@@ -117,7 +107,6 @@ export function getMemberFromBoard(board, memberId) {
     return board.members.find(member => member._id === memberId)
 }
 
-//not working currently on the store!
 export async function addBoard(board) {
     try {
         const savedBoard = await boardService.save(board)
@@ -148,57 +137,73 @@ export async function updateBoard(board) {
     }
 }
 
-export async function updateGroupOrder(filteredBoard) {
+export async function updateBoardOrder(filteredBoard) {
     setFilteredBoard(filteredBoard) //save order in filtered board store
-    const fullBoard = store.getState().boardModule.currBoard
-    //order full according to filtered
+    let fullBoard = store.getState().boardModule.currBoard
 
-    fullBoard.groups = fullBoard.groups.filter(group => {
-        group.tasks = group.tasks.filter(task => regex.test(task.title))
-        // Return groups that have matching title or have at least one matching task title
-        return regex.test(group.title) || group.tasks.length > 0
-    })
-
-
+    // if no filter is applied, skip ordering filtered board vs fullBoard
+    const currFilter = store.getState().boardModule.filterBy
+    const emptyFilter = boardService.getDefaultFilter()
+    if ((utilService.areObjsIdentical(currFilter, emptyFilter))) {
+        fullBoard = filteredBoard
+    } else {
+        //order full according to filtered
+        sortFullBoard(fullBoard, filteredBoard)
+    }
 
     try {
         //save full and ordered on db
-        const savedBoard = await boardService.save(fullBoard)
-        store.dispatch(getActionUpdateBoard(savedBoard))
+        const savedFullBoard = await boardService.save(fullBoard)
+
+        store.dispatch(getActionUpdateBoard(savedFullBoard)) //update all boards in store
 
         const currBoardId = store.getState().boardModule.currBoard._id
-        if (savedBoard._id === currBoardId) {
-            //update the full board in store
-            store.dispatch({ type: SET_CURR_BOARD, board }) //update curr board only
+        if (savedFullBoard._id === currBoardId) { //redundant?
+            //update the full curr board only in store
+            store.dispatch({ type: SET_CURR_BOARD, board: savedFullBoard })
         }
 
-        return savedBoard
+        return savedFullBoard
     } catch (err) {
         console.log('Cannot save board', err)
         throw err
     }
 }
 
-// export async function updateBoard(board) {
-//     try {
-//         loadBoard(board._id)
-//         // setCurrBoard(savedBoard)
-//         const savedBoard = await boardService.save(board)
-//         // console.log('Updated Board:', savedBoard)
-//         store.dispatch(getActionUpdateBoard(savedBoard))
+function sortFullBoard(fullBoard, filteredBoard) {
+    // Create a map for quick access to group order in filteredBoard
+    const groupOrder = new Map()
+    filteredBoard.groups.forEach((group, idx) => {
+        groupOrder.set(group.id, { idx, tasks: group.tasks.map(task => task.id) })
+    })
 
-//         // const currBoardId = store.getState().boardModule.currBoard._id
-//         // if (savedBoard._id === currBoardId) {
-//         //     // console.log('this is curr board!')
-//         // }
+    // Create a copy of fullBoard.groups for reference to original order
+    const originalGroupOrder = fullBoard.groups.map(group => group.id)
 
-//         return savedBoard
+    // Sort groups in fullBoard based on filteredBoard order
+    fullBoard.groups.sort((a, b) => {
+        const indexA = groupOrder.has(a.id) ? groupOrder.get(a.id).idx : originalGroupOrder.indexOf(a.id)
+        const indexB = groupOrder.has(b.id) ? groupOrder.get(b.id).idx : originalGroupOrder.indexOf(b.id)
+        return indexA - indexB
+    })
 
-//     } catch (err) {
-//         console.log('Cannot save board', err)
-//         throw err
-//     }
-// }
+    // Sort tasks within each group based on filteredBoard order
+    fullBoard.groups.forEach(group => {
+        if (groupOrder.has(group.id)) {
+            const taskOrder = groupOrder.get(group.id).tasks
+            // Create a copy of group's task for reference to original order
+            const originalTaskOrder = group.tasks.map(task => task.id)
+
+            group.tasks.sort((a, b) => {
+                const indexA = taskOrder.includes(a.id) ? taskOrder.indexOf(a.id) : originalTaskOrder.indexOf(a.id)
+                const indexB = taskOrder.includes(b.id) ? taskOrder.indexOf(b.id) : originalTaskOrder.indexOf(b.id)
+                return indexA - indexB
+            })
+        }
+    })
+
+    return fullBoard
+}
 
 export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })
@@ -257,6 +262,8 @@ export async function addGroup(boardId) {
 }
 
 export async function removeGroup(boardId, groupId) {
+    console.log('removeGroup ~ groupId:', groupId)
+    console.log('removeGroup ~ boardId:', boardId)
     try {
         const board = await boardService.removeGroup(boardId, groupId)
         setCurrBoard(board)
@@ -352,6 +359,13 @@ export function getActionSetBoards(boards) {
         boards
     }
 }
+
+// export function getActionSetFilteredBoards(boards) {
+//     return {
+//         type: SET_FILTERED_BOARDS,
+//         boards
+//     }
+// }
 
 export function getActionSetActiveTask(taskId) {
     return {

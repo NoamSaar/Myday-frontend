@@ -1,12 +1,13 @@
 import { useRef } from "react"
 import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
 import { useSelector } from "react-redux"
+import { CloseIcon } from "../../../../services/svg.service"
 
-export function FilePreview({ file, onUpdate, taskId }) {
+export function FilePreview({ file, onUpdate, parentElementId, taskId }) {
     const previewBtnRef = useRef(null)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isCurrPickerOpen = parentId === `${taskId}-filePicker`
+    const isCurrPickerOpen = parentId === `${parentElementId}-filePicker`
 
     function onFilePreviewClick() {
         if (isCurrPickerOpen) {
@@ -18,19 +19,29 @@ export function FilePreview({ file, onUpdate, taskId }) {
                 type: 'filePicker',
                 data: {
                     file,
-                    onChangeFile: onUpdate
+                    onChangeFile: onUpdate,
+                    taskId
                 },
-                parentId: `${taskId}-filePicker`,
+                parentId: `${parentElementId}-filePicker`,
                 isPosBlock: true,
             })
         }
     }
 
+    function onRemoveFileClick(ev) {
+        ev.stopPropagation()
+        onUpdate('file', null)
+    }
+
     return (
         <li ref={previewBtnRef} onClick={onFilePreviewClick}
-            className="file-preview file-col flex align-center-justify-center"
+            className="data-preview-container file-preview file-col"
         >
-            {file && <img src={file} />}
+            <div className="data-preview-content flex align-center justify-center">
+                {file && <img src={file} />}
+            </div>
+
+            {file && <button className="btn remove-btn" onClick={onRemoveFileClick}><CloseIcon /></button>}
         </li>
     )
 }

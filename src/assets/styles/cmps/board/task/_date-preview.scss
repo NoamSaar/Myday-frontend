@@ -1,0 +1,28 @@
+.date-preview {
+    padding: 2px;
+
+    p {
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+
+        cursor: text;
+
+    }
+
+    .time-passed-icon {
+        position: absolute;
+        left: 8px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        color: white;
+        background-color: #e0394e;
+
+        p {
+            height: 16px;
+
+        }
+    }
+
+}

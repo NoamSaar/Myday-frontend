@@ -130,7 +130,7 @@ function DynamicModalRouter(props) {
             return (
                 <DatePicker
                     selectedDate={props.data.selectedDate}
-                    onChangeDate={props.data.onChangeDate}
+                    onUpdate={props.data.onUpdate}
                 />)
 
         case 'labelPicker':
@@ -154,6 +154,7 @@ function DynamicModalRouter(props) {
                 <FilePicker
                     chosenFile={props.data.chosenFile}
                     changeFile={props.data.onChangeFile}
+                    taskId={props.data.taskId}
                 />)
 
         case 'memberPicker':
