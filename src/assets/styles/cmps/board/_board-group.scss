@@ -25,7 +25,7 @@
 
             .title-container {
                 display: flex;
-                padding-inline-start: 8px;
+                padding-inline-start: 3px;
                 background-color: white;
 
                 &:not(.collapsed .title-container) {
@@ -239,7 +239,7 @@
         }
 
         .tasks-count {
-            margin-inline-start: 37px;
+            margin-inline-start: 39px;
         }
 
         .color-display {

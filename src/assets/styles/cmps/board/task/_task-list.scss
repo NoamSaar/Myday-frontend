@@ -1,7 +1,7 @@
 .task-list {
 
     .task-header-list {
-        margin-inline-start: 36px;
+        // margin-inline-start: 36px;
 
         li {
             padding-block: 0;
@@ -17,10 +17,6 @@
     li {
         display: flex;
         align-items: center;
-
-        &:not(.link-preview):not(.task-selection):not(.date-preview):not(.file-preview) {
-            padding: 8px;
-        }
 
         &:not(.task-title) {
             justify-content: center;

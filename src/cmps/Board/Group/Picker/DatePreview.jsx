@@ -38,7 +38,7 @@ export function DatePreview({ selectedDate, onUpdate, taskId }) {
             className="date-col data-preview-container date-preview"
             ref={previewBtnRef}
         >
-            <p className="data-preview-content">{selectedDate && utilService.getFormatDate(selectedDate)}</p>
+            <p className="data-preview-content flex align-center justify-center">{selectedDate && utilService.getFormatDate(selectedDate)}</p>
 
             {selectedDate && <button className="btn remove-btn" onClick={onRemoveDateClick}><CloseIcon /></button>}
 
