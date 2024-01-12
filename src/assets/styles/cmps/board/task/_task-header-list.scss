@@ -10,7 +10,7 @@
 
 
         .color-display {
-            height: 36px;
+            margin-top: -1px;
             border-top-left-radius: 8px;
             box-shadow: 0 -15px white;
         }
@@ -22,11 +22,6 @@
             align-items: center;
             padding-block: 0;
             background-color: white;
-
-
-            // &:not(.task-selection) {
-            //     padding: 8px;
-            // }
 
             &:not(.line-end) {
                 border-inline-end: $clr-group-border 0.5px solid;
