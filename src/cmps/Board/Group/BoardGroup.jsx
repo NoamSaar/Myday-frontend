@@ -7,7 +7,7 @@ import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { EditableTxt } from "../../EditableTxt"
-import { TaskTable } from "./TaskTable"
+import { TaskTable } from "./Task/TaskTable"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
     const menuBtnRef = useRef(null)

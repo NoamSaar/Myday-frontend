@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
-import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
+import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
 
-import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
+import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../../store/actions/system.actions"
 
-import { AddUpdateIcon, DeleteIcon, MenuIcon, OpenIcon, UpdateIcon } from "../../../services/svg.service"
-import { DynamicPreview } from "./Picker/DynamicPreview"
-import { EditableTxt } from "../../EditableTxt"
+import { AddMsgIcon, DeleteIcon, MenuIcon, OpenIcon, MsgIcon } from "../../../../services/svg.service"
+import { DynamicPreview } from "../Picker/DynamicPreview"
+import { EditableTxt } from "../../../EditableTxt"
 import { useNavigate } from "react-router"
-import { Button } from "react-day-picker"
+import { MsgBtn } from "./MsgBtn"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
@@ -196,15 +196,10 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                                 <p>Open</p>
                             </button>}
 
-                            <button className="flex align-center task-details-btn-updates">
-                                {currTask.updates.length ? <UpdateIcon /> : <AddUpdateIcon />}
-
-                            </button>
+                            <MsgBtn msgsLength={currTask.msgs.length} />
                         </div>
 
                     </li>
-
-
                 </ul>
             </div>
 

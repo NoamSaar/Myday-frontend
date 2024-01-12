@@ -1,9 +1,9 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useSelector } from "react-redux"
+import { useState } from "react"
+import { addTask, setActiveTask, updateBoardOrder } from "../../../../store/actions/board.actions"
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
-import { useState } from "react"
-import { addTask, setActiveTask, updateBoard, updateBoardOrder } from "../../../store/actions/board.actions"
 
 export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
