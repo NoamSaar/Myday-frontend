@@ -1,0 +1,20 @@
+.date-preview {
+    position: relative;
+    padding: 2px;
+
+    p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 95%;
+        height: 90%;
+
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+
+        cursor: text;
+
+    }
+
+}

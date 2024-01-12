@@ -1,7 +1,7 @@
 .link-preview {
     padding: 2px;
 
-    button {
+    .data-preview-content {
         width: 95%;
         height: 90%;
 
@@ -11,10 +11,6 @@
         text-overflow: ellipsis;
 
         cursor: text;
-
-        &:hover {
-            outline: 1px solid $clr-btn-border;
-        }
 
         a {
             padding-inline: 4px;

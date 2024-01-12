@@ -18,7 +18,7 @@
         display: flex;
         align-items: center;
 
-        &:not(.link-preview):not(.task-selection) {
+        &:not(.link-preview):not(.task-selection):not(.date-preview) {
             padding: 8px;
         }
 

@@ -53,7 +53,7 @@
 
     @if $type ==regular {
 
-        &:not(.person.active) {
+        &:not(.person.active):not(.date-preview .btn):not(.link-preview .btn) {
             background-color: $clr0;
         }
 
