@@ -152,11 +152,11 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseLeave={handleMouseLeave}
         >
             <div className={`${isActive && 'active'} task-sticky-container sticky-left`}>
-                <div className="menu-container">
+                <div className="menu-container flex align-center justify-center">
                     {isShowMenuBtn && (
                         <button
                             ref={menuBtnRef}
-                            className="btn svg-inherit-color"
+                            className="btn svg-inherit-color flex align-center justify-center"
                             onClick={toggleMenu}><MenuIcon className="btn" />
                         </button>
                     )}

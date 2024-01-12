@@ -167,7 +167,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         <section className={`${(isGroupCollapsed || isGroupsCollapsed) && 'collapsed'} board-group`}>
             <div className={`full-width subgrid full-grid-column ${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
                 <div className="group-title-container flex align-center sticky-left">
-                    <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
+                    <div className={`menu-container flex align-center justify-center sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
                         <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
                             <MenuIcon />
                         </button>
