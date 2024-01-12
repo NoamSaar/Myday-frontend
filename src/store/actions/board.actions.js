@@ -5,6 +5,7 @@ import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD } from '../reducers/board.reducer.js'
 import { setIsLoading } from './system.actions.js'
+import { utilService } from '../../services/util.service.js'
 
 
 // Store - saveTask (from board.js)
@@ -150,8 +151,14 @@ export async function updateBoardOrder(filteredBoard) {
     setFilteredBoard(filteredBoard) //save order in filtered board store
     const fullBoard = store.getState().boardModule.currBoard
 
-    //order full according to filtered
-    sortFullBoard(fullBoard, filteredBoard)
+    // if no filter is applied, skip ordering filtered board vs fullBoard
+    const currFilter = store.getState().boardModule.filterBy
+    const emptyFilter = boardService.getDefaultFilter()
+    if (!(utilService.areObjsIdentical(currFilter, emptyFilter))) {
+        //order full according to filtered
+        sortFullBoard(fullBoard, filteredBoard)
+    }
+
     try {
         //save full and ordered on db
         const savedFullBoard = await boardService.save(fullBoard)

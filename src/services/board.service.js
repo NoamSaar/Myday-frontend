@@ -21,6 +21,7 @@ export const boardService = {
     removeTask,
     updateTask,
     getTaskById,
+    getDefaultBoardsFilter
 }
 window.boardService = boardService
 
@@ -89,7 +90,11 @@ function getBoardColors() {
 }
 
 function getDefaultFilter() {
-    return { title: '', txt: '', includedCols: [], member: '' }
+    return { txt: '', includedCols: [], member: '' }
+}
+
+function getDefaultBoardsFilter() {
+    return { title: '' }
 }
 
 //group

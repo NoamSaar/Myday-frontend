@@ -13,7 +13,8 @@ export const utilService = {
     getFullFormatDate,
     timeStampToDate,
     millisecondsToDays,
-    isValidTimestamp
+    isValidTimestamp,
+    areObjsIdentical
 }
 
 function readJsonFile(path) {
@@ -125,4 +126,9 @@ function getAcronym(name) {
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+function areObjsIdentical(obj1, obj2) {
+    //works only in case that props in both are in tje same order
+    return JSON.stringify(obj1) === JSON.stringify(obj2)
 }

@@ -10,6 +10,7 @@ import { SidebarBoardNav } from "./SidebarBoardNav"
 // import { LottieAnimation } from "./LottieAnimation"
 
 import { addBoard, loadBoards, removeBoard, updateBoard } from "../../store/actions/board.actions"
+import { boardService } from "../../services/board.service"
 
 export function Sidebar() {
     const sidebarRef = useRef(null)
@@ -24,7 +25,7 @@ export function Sidebar() {
     const [isHovered, setIsHovered] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [filteredBoards, setFilteredBoards] = useState(boards)
-    const [filterBy, setFilterBy] = useState({ title: '' })
+    const [filterBy, setFilterBy] = useState(boardService.getDefaultBoardsFilter())
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -183,6 +184,7 @@ export function Sidebar() {
                     currActiveBoard={currActiveBoard}
                     removeBoard={onRemoveBoard}
                     updateBoard={onUpdateBoard}
+                    filterBy={filterBy}
                 />
                 <div className="app-sidebar-resizer" onMouseDown={startResizing} />
                 {/* <LottieAnimation /> */}
