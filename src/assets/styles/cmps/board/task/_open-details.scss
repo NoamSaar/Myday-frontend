@@ -14,6 +14,7 @@
         height: 100%;
         padding-inline: 20px;
         border-inline-start: #d0d4e4 0.5px solid;
+        cursor: pointer;
 
         &:hover svg {
             fill: $clr-btn-add;
