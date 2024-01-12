@@ -2,12 +2,17 @@
     height: 100%;
 
     .task-details-btn {
+        @include for-narrow-only-layout {
+            display: none;
+        }
+
         margin-inline-end: 15px;
 
         svg {
             width: 17px;
             margin-inline-end: 5px;
         }
+
     }
 
     .msg-btn {
@@ -44,11 +49,5 @@
             }
 
         }
-    }
-}
-
-@media (max-width: $narrow-breakpoint) {
-    .task-details-btn {
-        display: none;
     }
 }
