@@ -1,0 +1,29 @@
+.open-details-container {
+    height: 100%;
+
+    .task-details-btn {
+        margin-inline-end: 15px;
+
+        svg {
+            width: 17px;
+            margin-inline-end: 5px;
+        }
+    }
+
+    .task-details-btn-updates {
+        height: 100%;
+        padding-inline: 20px;
+        border-inline-start: #d0d4e4 0.5px solid;
+        cursor: pointer;
+
+        &:hover svg {
+            fill: $clr-btn-add;
+        }
+    }
+}
+
+@media (max-width: $narrow-breakpoint) {
+    .task-details-btn {
+        display: none;
+    }
+}

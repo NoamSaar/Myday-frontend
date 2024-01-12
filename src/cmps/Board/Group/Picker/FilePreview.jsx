@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
 import { useSelector } from "react-redux"
+import { CloseIcon } from "../../../../services/svg.service"
 
 export function FilePreview({ file, onUpdate, parentElementId, taskId }) {
     const previewBtnRef = useRef(null)
@@ -27,11 +28,20 @@ export function FilePreview({ file, onUpdate, parentElementId, taskId }) {
         }
     }
 
+    function onRemoveFileClick(ev) {
+        ev.stopPropagation()
+        onUpdate('file', null)
+    }
+
     return (
         <li ref={previewBtnRef} onClick={onFilePreviewClick}
-            className="file-preview file-col flex align-center-justify-center"
+            className="data-preview-container file-preview file-col"
         >
-            {file && <img src={file} />}
+            <div className="data-preview-content flex align-center justify-center">
+                {file && <img src={file} />}
+            </div>
+
+            {file && <button className="btn remove-btn" onClick={onRemoveFileClick}><CloseIcon /></button>}
         </li>
     )
 }

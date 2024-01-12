@@ -1,0 +1,13 @@
+.date-preview {
+    padding: 2px;
+
+    p {
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+
+        cursor: text;
+
+    }
+
+}

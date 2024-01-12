@@ -21,7 +21,7 @@ export function FileSummary({ group, board }) {
         updateTask(board._id, group.id, updatedTask);
     }
 
-    if (!fileSummaries || !fileSummaries.length) return <li></li>;
+    if (!fileSummaries || !fileSummaries.length) return <li className="file-summary flex column"><p>File</p></li>;
     return (
         <li className="file-summary flex column">
             <p>File</p>

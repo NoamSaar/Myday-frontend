@@ -130,7 +130,7 @@ function DynamicModalRouter(props) {
             return (
                 <DatePicker
                     selectedDate={props.data.selectedDate}
-                    onChangeDate={props.data.onChangeDate}
+                    onUpdate={props.data.onUpdate}
                 />)
 
         case 'labelPicker':

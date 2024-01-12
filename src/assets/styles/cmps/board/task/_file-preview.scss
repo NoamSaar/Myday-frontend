@@ -1,6 +1,11 @@
 .file-preview {
-    img {
-        height: 17px;
-        width: fit-content;
+    padding: 2px;
+
+    .data-preview-content {
+
+        img {
+            height: 17px;
+            width: fit-content;
+        }
     }
 }

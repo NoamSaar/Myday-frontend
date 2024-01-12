@@ -1,7 +1,7 @@
 .task-list {
 
     .task-header-list {
-        margin-inline-start: 36px;
+        // margin-inline-start: 36px;
 
         li {
             padding-block: 0;
@@ -18,16 +18,19 @@
         display: flex;
         align-items: center;
 
-        &:not(.link-preview):not(.task-selection) {
-            padding: 8px;
-        }
-
         &:not(.task-title) {
             justify-content: center;
         }
 
         &:not(.add-task .task-title):not(.line-end) {
             border-inline-end: $clr-group-border .5px solid;
+        }
+
+        &.task-title {
+            display: grid;
+            grid-template-columns: minmax(30px, 1fr) auto;
+
+
         }
     }
 

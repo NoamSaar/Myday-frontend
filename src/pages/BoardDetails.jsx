@@ -80,7 +80,7 @@ export function BoardDetails() {
 
             <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
                 <BigPlusIcon />
-                Add new group
+                <p>Add new group</p>
             </button>
 
             <Outlet
