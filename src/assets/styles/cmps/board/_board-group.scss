@@ -156,6 +156,7 @@
     }
 
     &.collapsed {
+        max-height: 60px;
 
         .arrow-container svg {
             rotate: -90deg;
@@ -168,6 +169,7 @@
 
         .task-table {
             grid-column: 2 / -1;
+            max-height: 60px;
 
             .task-header-list-container,
             .task-list {
@@ -219,6 +221,7 @@
                 }
             }
         }
+
 
         .title-container {
             flex-direction: column;
