@@ -7,9 +7,9 @@ import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
 
 import { EditableTxt } from "../../EditableTxt"
-import { TaskTable } from "./TaskTable"
+import { TaskTable } from "./Task/TaskTable"
 
-export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave }) {
+export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed }) {
     const menuBtnRef = useRef(null)
     const colorBtnParentRef = useRef(null)
 
@@ -36,6 +36,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     useEffect(() => {
         setIsEditing(isEditingTitle)
     }, [isEditingTitle])
+
     async function onGroupChange(field, data) {
         try {
             const updatedGroup = { ...group, [field]: data }
@@ -163,7 +164,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     ]
 
     return (
-        <section className={`${isGroupCollapsed && 'collapsed'} board-group`}>
+        <section className={`${(isGroupCollapsed || isGroupsCollapsed) && 'collapsed'} board-group`}>
             <div className={`full-width subgrid full-grid-column ${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
                 <div className="group-title-container flex align-center sticky-left">
                     <div className={`menu-container sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
@@ -172,7 +173,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         </button>
                     </div>
 
-                    {isGroupCollapsed && <div
+                    {(isGroupCollapsed || isGroupsCollapsed) && <div
                         style={{ backgroundColor: groupColor }}
                         className="color-display sticky-left-36">
                     </div>}

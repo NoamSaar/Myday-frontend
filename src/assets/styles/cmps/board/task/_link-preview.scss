@@ -1,20 +1,13 @@
 .link-preview {
     padding: 2px;
 
-    button {
-        width: 95%;
-        height: 90%;
-
+    .data-preview-content {
         color: $clr-link;
         white-space: nowrap;
         overflow-x: hidden;
         text-overflow: ellipsis;
 
         cursor: text;
-
-        &:hover {
-            outline: 1px solid $clr-btn-border;
-        }
 
         a {
             padding-inline: 4px;

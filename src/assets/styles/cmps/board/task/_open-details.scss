@@ -1,0 +1,53 @@
+.open-details-container {
+    height: 100%;
+
+    .task-details-btn {
+        @include for-narrow-only-layout {
+            display: none;
+        }
+
+        margin-inline-end: 15px;
+
+        svg {
+            width: 17px;
+            margin-inline-end: 5px;
+        }
+
+    }
+
+    .msg-btn {
+        height: 100%;
+        padding-inline: 20px;
+        border-inline-start: #d0d4e4 0.5px solid;
+        cursor: pointer;
+
+        &:hover svg {
+            fill: $clr-btn-add;
+        }
+
+        .msg-icon-btn {
+            position: relative;
+
+            svg {
+                fill: $clr-btn-add;
+            }
+
+            .msg-counter {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 13px;
+                height: 13px;
+                background-color: $clr-btn-add;
+                color: white;
+                font-size: rem(10px);
+                border-radius: 50%;
+
+                p {
+                    height: 13px;
+                }
+            }
+
+        }
+    }
+}

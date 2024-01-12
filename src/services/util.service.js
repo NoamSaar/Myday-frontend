@@ -14,6 +14,8 @@ export const utilService = {
     timeStampToDate,
     millisecondsToDays,
     isValidTimestamp,
+    areObjsIdentical,
+    hasTimePassed,
     timeSince
 }
 
@@ -120,12 +122,22 @@ function getFullFormatDate(timestamp) {
     return formattedDate
 }
 
+function hasTimePassed(timestamp) {
+    const currentTimestamp = Date.now();
+    return timestamp < currentTimestamp;
+}
+
 function getAcronym(name) {
     return name.split(' ')[0][0] + name.split(' ')[1][0]
 }
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+function areObjsIdentical(obj1, obj2) {
+    //works only in case that props in both are in tje same order
+    return JSON.stringify(obj1) === JSON.stringify(obj2)
 }
 
 function timeSince(timeStamp) {

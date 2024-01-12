@@ -24,6 +24,7 @@ export const boardService = {
     updateTask,
     getTaskById,
     getNewUpdate,
+    getDefaultBoardsFilter
 }
 window.boardService = boardService
 
@@ -92,7 +93,11 @@ function getBoardColors() {
 }
 
 function getDefaultFilter() {
-    return { title: '', txt: '', includedCols: [], member: '' }
+    return { txt: '', includedCols: [], member: '' }
+}
+
+function getDefaultBoardsFilter() {
+    return { title: '' }
 }
 
 //group
@@ -229,7 +234,7 @@ function _getDefaultGroup() {
                 status: 'l102',
                 priority: 'l200',
                 date: 1703706909537,
-                updates: [],
+                msgs: [],
             },
             {
                 id: 'c102',
@@ -238,7 +243,7 @@ function _getDefaultGroup() {
                 status: 'l101',
                 priority: 'l200',
                 date: 1703708909537,
-                updates: [],
+                msgs: [],
             },
             {
                 id: 'c103',
@@ -247,7 +252,7 @@ function _getDefaultGroup() {
                 status: 'l100',
                 priority: 'l200',
                 date: 1703706909537,
-                updates: [],
+                msgs: [],
             },
         ],
         color: '#579bfc',
@@ -261,6 +266,7 @@ function _getDefaultTask(title) {
         status: 'l100',
         priority: 'l200',
         members: [],
+        msgs: [],
     }
 }
 
@@ -272,5 +278,6 @@ function getNewUpdate(txt) {
         memberId: '659fd52d810c3f98c2054719',
         // memberId: userService.getLoggedinUser(),
         txt,
+        msgs: [],
     }
 }

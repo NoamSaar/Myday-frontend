@@ -3,8 +3,10 @@ import { useRef } from "react"
 
 import { utilService } from "../../../../services/util.service"
 import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/system.actions"
+import { CloseIcon } from "../../../../services/svg.service"
+import { TimeIndicator } from "../Task/TimeIndicator"
 
-export function DatePreview({ selectedDate, onChangeDate, taskId }) {
+export function DatePreview({ selectedDate, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -18,7 +20,7 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
                 isOpen: true,
                 parentRefCurrent: previewBtnRef.current,
                 type: 'datePicker',
-                data: { selectedDate: selectedDate || Date.now(), onChangeDate },
+                data: { selectedDate: selectedDate || Date.now(), onUpdate },
                 parentId: `${taskId}-datePicker`,
                 isPosBlock: true,
                 isCenter: true
@@ -26,13 +28,30 @@ export function DatePreview({ selectedDate, onChangeDate, taskId }) {
         }
     }
 
+    function onRemoveDateClick(ev) {
+        ev.stopPropagation()
+        onUpdate('date', null)
+    }
+
+
+
     return (
         <li
             onClick={onDatePreviewClick}
-            className="date-col"
+            className="date-col data-preview-container date-preview"
             ref={previewBtnRef}
         >
-            {selectedDate && utilService.getFormatDate(selectedDate)}
+            <p className="data-preview-content flex align-center justify-center">
+                {selectedDate && utilService.getFormatDate(selectedDate)}
+            </p>
+
+
+            {selectedDate && <>
+                {utilService.hasTimePassed(selectedDate) && <div className="time-passed-icon"><p className="flex align-center justify-center">!</p></div>}
+                {/* <TimeIndicator timestamp={selectedDate} /> */}
+                <button className="btn remove-btn" onClick={onRemoveDateClick}><CloseIcon /></button>
+            </>}
+
         </li>
     )
 }

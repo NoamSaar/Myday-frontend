@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { showErrorMsg } from "../../../store/actions/system.actions"
-import { EditableTxt } from "../../EditableTxt"
+import { showErrorMsg } from "../../../../store/actions/system.actions"
+import { EditableTxt } from "../../../EditableTxt"
 
 export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTask, groupId }) {
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)

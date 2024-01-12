@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
-import { useEffectUpdate } from "../../../customHooks/useEffectUpdate"
+import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
 
-import { getMembersFromBoard, removeTask, updateTask } from "../../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
+import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
+import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../../store/actions/system.actions"
 
-import { DeleteIcon, MenuIcon } from "../../../services/svg.service"
-import { DynamicPreview } from "./Picker/DynamicPreview"
-import { EditableTxt } from "../../EditableTxt"
+import { AddMsgIcon, DeleteIcon, MenuIcon, OpenIcon, MsgIcon } from "../../../../services/svg.service"
+import { DynamicPreview } from "../Picker/DynamicPreview"
+import { EditableTxt } from "../../../EditableTxt"
 import { useNavigate } from "react-router"
+import { MsgBtn } from "./MsgBtn"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
@@ -21,6 +22,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenuBtn, setIsShowMenuBtn] = useState(false)
+    const [isShowTaskDetailsBtn, setIsShowTaskDetailsBtn] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
     const isMenuOpen = parentId === `${task.id}-menu`
@@ -174,7 +176,11 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             setSidePanelOpen(true)
                             navigate('task/' + currTask.id)
                         }}
+
+                        onMouseEnter={() => setIsShowTaskDetailsBtn(true)}
+                        onMouseLeave={() => setIsShowTaskDetailsBtn(false)}
                     >
+
                         <EditableTxt
                             isEditing={isEditing}
                             txtValue={highlightText(taskTitle, filterBy.txt)}
@@ -183,8 +189,17 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             onInputChange={onChangeTitle}
                             onEditClose={onTitleEditExit}
                         />
-                    </li>
 
+                        <div className="flex align-center open-details-container">
+                            {(isShowTaskDetailsBtn && !isEditing) && <button className="task-details-btn flex justify-center">
+                                <OpenIcon />
+                                <p>Open</p>
+                            </button>}
+
+                            <MsgBtn msgsLength={currTask.msgs.length} />
+                        </div>
+
+                    </li>
                 </ul>
             </div>
 

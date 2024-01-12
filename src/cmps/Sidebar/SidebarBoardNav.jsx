@@ -5,8 +5,10 @@ import { SidebarBoardLink } from './SidebarBoardLink'
 
 import { showErrorMsg } from '../../store/actions/system.actions'
 import { saveNewBoards } from '../../store/actions/board.actions'
+import { boardService } from "../../services/board.service"
+import { utilService } from '../../services/util.service'
 
-export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBoard }) {
+export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBoard, filterBy }) {
 
     const fullBoards = useSelector((storeState) => storeState.boardModule.boards)
 
@@ -23,7 +25,12 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
 
     async function saveNewOrder(boards) {
         try {
-            const orderedNewBoard = sortFullBoards(fullBoards, boards)
+            // if no filter is applied, skip ordering filtered boards vs fullBoards
+            let orderedNewBoard = boards
+            const emptyFilter = boardService.getDefaultBoardsFilter()
+            if (!(utilService.areObjsIdentical(filterBy, emptyFilter))) {
+                orderedNewBoard = sortFullBoards(fullBoards, boards)
+            }
             await saveNewBoards(orderedNewBoard)
         } catch (err) {
             console.error('Error loading Boards:', err)

@@ -97,7 +97,7 @@ export function getBoardsData() {
                                     url: 'https://socket.io/get-started/chat',
                                     displayTxt: 'Sockets docs',
                                 },
-                                updates: [
+                                msgs: [
                                     {
                                         id: 'u123',
                                         memberId: 'u101',
@@ -119,7 +119,7 @@ export function getBoardsData() {
                                     url: 'https://www.turing.com/kb/implementing-javascript-pagination',
                                     displayTxt: 'How to page',
                                 },
-                                updates: [],
+                                msgs: [],
                             },
                             {
                                 id: 'c103',
@@ -127,7 +127,7 @@ export function getBoardsData() {
                                 members: ['u101'],
                                 status: 'l102',
                                 priority: 'l202',
-                                updates: [
+                                msgs: [
                                     {
                                         id: 'u555',
                                         memberId: 'u101',
@@ -155,7 +155,7 @@ export function getBoardsData() {
                                 link: {
                                     url: 'https://bryanlrobinson.com/blog/refactoring-css-into-sass-mixin/',
                                 },
-                                updates: [
+                                msgs: [
                                     {
                                         id: 'u127',
                                         memberId: 'u103',
@@ -171,7 +171,7 @@ export function getBoardsData() {
                                 members: [],
                                 status: 'l104',
                                 priority: 'l203',
-                                updates: [],
+                                msgs: [],
                             },
                             {
                                 id: 'c203',
@@ -183,7 +183,7 @@ export function getBoardsData() {
                                 link: {
                                     url: 'https://redux.js.org/',
                                 },
-                                updates: [
+                                msgs: [
                                     {
                                         id: 'u777',
                                         memberId: 'u103',
@@ -201,7 +201,7 @@ export function getBoardsData() {
                                 priority: 'l200',
                                 date: 1703720101090,
                                 file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704304383/large-Screenshot_2024-01-03_at_11.35.48_qclnrt.png',
-                                updates: [],
+                                msgs: [],
                             },
                             {
                                 id: 'c205',
@@ -210,7 +210,7 @@ export function getBoardsData() {
                                 status: 'l100',
                                 priority: 'l204',
                                 date: 1703728412860,
-                                updates: [],
+                                msgs: [],
                             },
                         ],
                         color: '#bb3354',
@@ -232,7 +232,7 @@ export function getBoardsData() {
                                     url: 'https://stackoverflow.com/questions/22776702/unresponsive-button-after-calling-javascript',
                                     displayTxt: 'Unresponsive button after calling javascript',
                                 },
-                                updates: [
+                                msgs: [
                                     {
                                         id: 'u157',
                                         memberId: 'u102',
@@ -262,7 +262,7 @@ export function getBoardsData() {
                                     url: 'https://stackoverflow.com/questions/29740966/layout-distorted-when-viewed-on-mobile',
                                     displayTxt: 'Layout distorted when viewed on mobile',
                                 },
-                                updates: [],
+                                msgs: [],
                             },
                             {
                                 id: 'c303',
@@ -270,7 +270,7 @@ export function getBoardsData() {
                                 members: ['u103'],
                                 status: 'l102',
                                 priority: 'l204',
-                                updates: [],
+                                msgs: [],
                             },
                             {
                                 id: 'c304',
@@ -279,7 +279,7 @@ export function getBoardsData() {
                                 status: 'l101',
                                 priority: 'l202',
                                 date: 1703995874889,
-                                updates: [],
+                                msgs: [],
                             },
                             {
                                 id: 'c305',
@@ -288,7 +288,7 @@ export function getBoardsData() {
                                 status: 'l104',
                                 priority: 'l201',
                                 date: 1704299392298,
-                                updates: [],
+                                msgs: [],
                             },
                         ],
                         color: '#8050ab',
@@ -759,7 +759,7 @@ export function getDefaultBoard() {
                         link: {
                             url: 'https://redux.js.org/',
                         },
-                        updates: [],
+                        msgs: [],
                     },
                     {
                         id: 'c102',
@@ -769,7 +769,7 @@ export function getDefaultBoard() {
                         priority: 'l201',
                         date: 1703708909537,
                         file: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704304383/large-Screenshot_2024-01-03_at_11.35.48_qclnrt.png',
-                        updates: [],
+                        msgs: [],
                     },
                     {
                         id: 'c103',
@@ -777,7 +777,7 @@ export function getDefaultBoard() {
                         status: 'l100',
                         priority: 'l200',
                         members: [],
-                        updates: [],
+                        msgs: [],
                     },
                 ],
                 color: '#579bfc',
@@ -793,7 +793,7 @@ export function getDefaultBoard() {
                         status: 'l100',
                         priority: 'l200',
                         members: [],
-                        updates: [],
+                        msgs: [],
                     },
                     {
                         id: 'c202',
@@ -801,7 +801,7 @@ export function getDefaultBoard() {
                         status: 'l100',
                         priority: 'l200',
                         members: [],
-                        updates: [],
+                        msgs: [],
                     },
 
                 ],

@@ -30,7 +30,7 @@ export function DynamicPreview({ title, task, onUpdate, allMembers }) {
             return (
                 <DatePreview
                     selectedDate={task.date}
-                    onChangeDate={onUpdate}
+                    onUpdate={onUpdate}
                     taskId={task.id}
                 />)
 

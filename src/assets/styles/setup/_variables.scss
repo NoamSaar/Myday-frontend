@@ -10,7 +10,7 @@ $clr1: #000;
     // --dark-mode-bg: #181b34;
 
     //board group
-    --task-col: 200px;
+    --task-col: 300px;
     --first-col: calc(var(--task-col) + 42px);
     --person-col: 97px;
     --status-col: 139px;
@@ -95,9 +95,16 @@ $mobile-breakpoint: 600px;
 $narrow-breakpoint: 905px;
 $normal-breakpoint: 1055px;
 
-
+//wider than 600px
 @media (min-width: $mobile-breakpoint) {
     :root {
-        --task-col: 304px;
+        --task-col: 393px;
+    }
+}
+
+//wider than 600px
+@media (min-width: $narrow-breakpoint) {
+    :root {
+        --task-col: 538px;
     }
 }
