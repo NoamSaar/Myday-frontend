@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
-import { showErrorMsg } from "../../store/actions/system.actions"
+import { setIsMobileHP, showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
-import { InfoIcon, StarIcon } from "../../services/svg.service"
+import { ArrowLeftIcon, InfoIcon, StarIcon } from "../../services/svg.service"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -46,6 +46,9 @@ export function BoardEdit({ board }) {
 
     return (
         <>
+            <button className="btn back" onClick={() => setIsMobileHP(true)}>
+                <ArrowLeftIcon />
+            </button>
 
             <EditableTxt
                 isEditing={isEditing}
@@ -69,3 +72,5 @@ export function BoardEdit({ board }) {
         </>
     )
 }
+
+

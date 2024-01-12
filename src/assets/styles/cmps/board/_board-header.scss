@@ -1,13 +1,11 @@
 .board-header {
-    padding-inline: 34px;
+    padding-inline: 10px;
     padding-top: 16px;
 
     display: grid;
     grid-template-areas:
-        "title info-favorite activities invite"
-        "display-opts display-opts display-opts actions"
-        "filter filter filter filter";
-    grid-template-columns: auto 1fr 1fr auto;
+        "back title info-favorite";
+    justify-content: space-between;
     align-items: center;
     gap: 8px;
 
@@ -17,31 +15,30 @@
     background-color: $clr0;
     z-index: 30;
 
-    &.collapsed {
-        grid-template-areas:
-            "title display-opts invite actions"
-            "filter filter filter filter";
-        grid-template-columns: auto 1fr 1fr;
+    @include for-narrow-only-layout {
 
+        .activities,
+        .display-opts,
+        .actions,
         .invite-more-bts {
-            justify-self: end;
-        }
-
-        .automate {
             display: none;
         }
 
-        .activities {
-            display: none;
-        }
+        .board-filter {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: $clr0;
+            box-shadow: 0 4px 17px 6px rgb(0 0 0 / 25%);
+            border-radius: 20px;
+            min-width: 95%;
+            justify-content: space-evenly;
 
-        .info-favorite {
-            display: none;
-        }
-
-        .editable-txt-container .editable-txt,
-        .editable-txt-container .focused-input {
-            font-size: rem(24px);
+            .btn span,
+            .btn input {
+                display: none;
+            }
         }
     }
 
@@ -59,6 +56,10 @@
         }
 
 
+    }
+
+    .back {
+        grid-area: back;
     }
 
     .info-favorite {
@@ -138,15 +139,19 @@
         grid-area: filter;
         display: grid;
         grid-auto-flow: column;
-        justify-content: start;
+        // justify-content: start;
         gap: 6px;
         padding-block: 16px;
         border-top: 1px solid $clr-group-border;
-        min-width: max-content;
+        // min-width: max-content;
 
         .new-task {
             @include btn($type: clrblue);
             margin-inline-end: 8px;
+
+            svg {
+                fill: $clr0;
+            }
         }
 
         .search {
@@ -204,6 +209,56 @@
             }
         }
 
+    }
+
+    @include for-narrow-layout {
+        padding-inline: 34px;
+        grid-template-areas:
+            "title info-favorite activities invite"
+            "display-opts display-opts display-opts actions"
+            "filter filter filter filter";
+        grid-template-columns: auto 1fr 1fr auto;
+
+        .board-filter {
+            min-width: max-content;
+            justify-content: start;
+
+            .new-task svg {
+                display: none;
+            }
+        }
+
+        .back {
+            display: none;
+        }
+
+        &.collapsed {
+            grid-template-areas:
+                "title display-opts invite actions"
+                "filter filter filter filter";
+            grid-template-columns: auto 1fr 1fr;
+
+            .invite-more-bts {
+                justify-self: end;
+            }
+
+            .automate {
+                display: none;
+            }
+
+            .activities {
+                display: none;
+            }
+
+            .info-favorite {
+                display: none;
+            }
+
+            .editable-txt-container .editable-txt,
+            .editable-txt-container .focused-input {
+                font-size: rem(24px);
+            }
+        }
     }
 }
 

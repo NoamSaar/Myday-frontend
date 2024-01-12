@@ -7,7 +7,6 @@
     border-top-right-radius: 8px;
     transition: left 150ms;
 
-
     &>.sidebar-workspace,
     .sidebar-board-nav,
     .app-sidebar-resizer {
@@ -50,6 +49,10 @@
         }
 
     }
+
+    // &.mobile-hp {
+    //     width: 100vw;
+    // }
 
     /* ResizableSidebar.css */
 
