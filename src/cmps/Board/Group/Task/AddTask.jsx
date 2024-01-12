@@ -39,7 +39,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
 
                             <div className="sticky-left-40 flex full-width">
                                 <li className="task-selection">
-                                    <input disabled type="checkbox" />
+                                    <div className="checkbox"></div>
                                 </li>
 
                                 <li className="task-title single-task flex">

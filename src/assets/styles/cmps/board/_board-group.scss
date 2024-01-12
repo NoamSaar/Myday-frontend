@@ -257,20 +257,17 @@
 
     .task-selection {
         border-inline-start: $clr-group-border 0.5px solid;
-        padding: 11px 11px 12px;
-        // opacity: .5;
+        padding: 8px;
 
-        &:not(.task-selection) {
-            background-color: white;
-        }
 
-        input {
+        .checkbox {
             width: 16px;
             height: 16px;
             margin: 0;
-            border-color: red !important;
+            border: $clr-btn-border 0.5px solid;
+            border-radius: 2px;
 
-            &:not(.add-task input) {
+            &:not(.add-task .checkbox) {
                 cursor: pointer;
             }
         }

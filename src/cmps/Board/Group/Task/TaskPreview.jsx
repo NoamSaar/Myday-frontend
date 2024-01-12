@@ -168,7 +168,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 </div>
                 <ul className={`clean-list task-title-container flex ${isActive && 'active'}`}>
                     <li className="task-selection">
-                        <input type="checkbox" />
+                        <div className="checkbox"></div>
                     </li>
 
                     <li className="task-title single-task flex"

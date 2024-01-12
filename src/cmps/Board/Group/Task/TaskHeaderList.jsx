@@ -11,7 +11,7 @@ export function TaskHeaderList({ groupColor, titlesOrder }) {
 
                     <div className="task-title-container">
                         <li className="task-selection">
-                            <input type="checkbox" />
+                            <div className="checkbox"></div>
                         </li>
 
                         <li className="task-title">Task</li>
