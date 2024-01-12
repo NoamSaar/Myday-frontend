@@ -10,13 +10,14 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
                 >
                     <div className="workspace-logo flex justify-center align-center">
                         M
-                        <div><HomeBlackFillIcon /></div>
-                        {/* <img src="../../public/icons/HomeBlackFill.svg" alt="home-icon" /> */}
+                        <div className="home-icon"><HomeBlackFillIcon /></div>
                     </div>
 
                     <span>Main workspace</span>
 
-                    <AngleDownIcon />
+                    <div className="flex angle-down-container">
+                        <AngleDownIcon />
+                    </div>
                 </div>
             </section>
             <button className="btn btn-option-menu">

@@ -40,10 +40,17 @@
         }
     }
 
-    .sidebar-workspace-nav svg:last-of-type {
-        width: 20px;
-        height: 20px;
-        // color: $clr-font;
+    .sidebar-workspace-nav {
+
+        .home-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .angle-down-container svg {
+            width: 13px;
+            height: 13px;
+        }
     }
 
     .workspace-logo {

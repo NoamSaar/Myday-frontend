@@ -12,12 +12,12 @@ $clr1: #000;
     //board group
     --task-col: 300px;
     --first-col: calc(var(--task-col) + 42px);
-    --person-col: 97px;
+    --person-col: 123px;
     --status-col: 139px;
     --priority-col: 139px;
     --date-col: 174px;
     --link-col: 139px;
-    --file-col: 138px;
+    --file-col: 139px;
     --line-end: minmax(90px, 1fr);
 
     --board-grid: var(--first-col) var(--person-col) var(--status-col) var(--priority-col) var(--date-col) var(--link-col) var(--file-col) var(--line-end);
@@ -105,6 +105,6 @@ $normal-breakpoint: 1055px;
 //wider than 600px
 @media (min-width: $narrow-breakpoint) {
     :root {
-        --task-col: 538px;
+        --task-col: 498px;
     }
 }
