@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export function PanelFile({ files }) {
-    console.log('PanelFile ~ files:', files)
     const [selectedImage, setSelectedImage] = useState(null);
 
     const openImagePreview = (image) => {
@@ -14,11 +13,10 @@ export function PanelFile({ files }) {
     return (
         <section className="panel-file grid">
             {(files.length > 0 && files[0] !== undefined) ? (
-                files.map((file, index) => (
-                    <div className="file-container">
-
-                        <div key={index} className="file-item" onClick={() => openImagePreview(file)}>
-                            <img src={file} alt={`File ${index}`} />
+                files.map((file, idx) => (
+                    <div className="file-container" key={`file ${idx}`}>
+                        <div key={idx} className="file-item" onClick={() => openImagePreview(file)}>
+                            <img src={file} alt={`File ${idx}`} />
                         </div>
                     </div>
                 ))

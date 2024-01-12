@@ -20,7 +20,6 @@ export function DynamicSidePanelHeader(props) {
     }, [])
 
     async function getUser(userId) {
-        console.log('getUser ~ userId:', userId)
         try {
             if (userId === undefined) return setUser('guest')
             const user = await userService.getById(userId)
@@ -37,7 +36,6 @@ export function DynamicSidePanelHeader(props) {
 
     // console.log('user:', user)
     if (!user) return <div>Loading...</div>
-    console.log('type:', type)
     return (
         <section className="panel-header grid">
             <button className="btn" onClick={() => {
