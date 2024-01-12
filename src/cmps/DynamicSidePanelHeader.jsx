@@ -8,17 +8,19 @@ import { setSidePanelOpen } from "../store/actions/system.actions"
 import { useNavigate } from "react-router"
 
 export function DynamicSidePanelHeader(props) {
-    const { type, title, subjects, onSwitchToSubject, members } = props.headerProps
-    const { currSubject, boardId } = props
+    const { type, title, subjects } = props.headerProps
+    const { boardId } = props
     const [user, setUser] = useState(null)
-    const [activeSubject, setActiveSubject] = useState('Updates')
+    const [activeSubject, setActiveSubject] = (type === 'taskDetails') ? useState('Updates') : useState('Activity Log')
     const navigate = useNavigate()
 
     useEffect(() => {
-        getUser(members[0])
+        if (props.headerProps.members) getUser(props.headerProps.members[0])
+        else setUser('guest')
     }, [])
 
     async function getUser(userId) {
+        console.log('getUser ~ userId:', userId)
         try {
             if (userId === undefined) return setUser('guest')
             const user = await userService.getById(userId)
@@ -35,6 +37,7 @@ export function DynamicSidePanelHeader(props) {
 
     // console.log('user:', user)
     if (!user) return <div>Loading...</div>
+    console.log('type:', type)
     return (
         <section className="panel-header grid">
             <button className="btn" onClick={() => {
@@ -45,7 +48,9 @@ export function DynamicSidePanelHeader(props) {
             </button>
 
             <section className="panel-title-section flex align-center space-between">
-                <span>{title}</span>
+                <span className="title">{title}
+                    {type === 'activitylog' && <span> Log</span>}
+                </span>
                 {type === 'taskDetails' && (
                     <div className="title-section-actions flex justify-center align-center">
                         <span className="panel-members flex justify-center align-center">
@@ -63,7 +68,7 @@ export function DynamicSidePanelHeader(props) {
                         key={sub}
                         className={`btn ${sub === activeSubject ? 'active' : ''}`}
                         onClick={() => {
-                            onSwitchToSubject(sub)
+                            props.headerProps.onSwitchToSubject(sub)
                             setActiveSubject(sub)
                         }}
                     >

@@ -1,4 +1,5 @@
 
+import { store } from '../store/store.js'
 import { getDefaultBoard } from './boards.service.js'
 import { httpService } from './http.service.js'
 import { utilService } from './util.service.js'
@@ -17,10 +18,12 @@ export const boardService = {
     addGroup,
     removeGroup,
     updateGroup,
+    findGroupIdByTaskId,
     addTask,
     removeTask,
     updateTask,
     getTaskById,
+    getNewUpdate,
 }
 window.boardService = boardService
 
@@ -127,6 +130,21 @@ async function updateGroup(boardId, group) {
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing group')
     }
+}
+
+
+function findGroupIdByTaskId(taskId) {
+    const currBoard = store.getState().boardModule.currBoard
+
+    if (currBoard) {
+        for (const group of currBoard.groups) {
+            const taskIndex = group.tasks.findIndex(task => task.id === taskId)
+            if (taskIndex !== -1) {
+                return group.id
+            }
+        }
+    }
+    return null
 }
 
 //tasks
@@ -243,6 +261,16 @@ function _getDefaultTask(title) {
         status: 'l100',
         priority: 'l200',
         members: [],
-        updates: [],
+    }
+}
+
+function getNewUpdate(txt) {
+    return {
+        createdAt: Date.now().toString(),
+        id: utilService.makeId(),
+        likes: [],
+        memberId: '659fd52d810c3f98c2054719',
+        // memberId: userService.getLoggedinUser(),
+        txt,
     }
 }
