@@ -13,7 +13,13 @@
             padding: 0;
         }
 
+        @include for-narrow-layout {
+            grid-template-columns: minmax(30px, auto) 1fr;
+            gap: 10px;
+            position: relative;
+        }
     }
+
 }
 
 .main-container {
@@ -28,26 +34,20 @@
         }
     }
 
-    @include for-narrow-layout {
-        grid-template-columns:
-            minmax(20px, 1fr) minmax(auto, $mobile-breakpoint) minmax(20px, 1fr);
-    }
+    // @include for-narrow-layout {
+    //     grid-template-columns:
+    //         minmax(20px, 1fr) minmax(auto, $mobile-breakpoint) minmax(20px, 1fr);
+    // }
 
-    @include for-normal-layout {
-        grid-template-columns:
-            minmax(20px, 1fr) minmax(auto, $narrow-breakpoint) minmax(20px, 1fr);
-    }
+    // @include for-normal-layout {
+    //     grid-template-columns:
+    //         minmax(20px, 1fr) minmax(auto, $narrow-breakpoint) minmax(20px, 1fr);
+    // }
 
-    @include for-wide-layout {
-        grid-template-columns:
-            minmax(20px, 1fr) minmax(auto, $normal-breakpoint) minmax(20px, 1fr);
-    }
-}
-
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 20px;
+    // @include for-wide-layout {
+    //     grid-template-columns:
+    //         minmax(20px, 1fr) minmax(auto, $normal-breakpoint) minmax(20px, 1fr);
+    // }
 }
 
 [role="button"] {
@@ -60,23 +60,11 @@
     }
 }
 
-@media (max-width: $narrow-breakpoint) {
-    .main-layout {
-        .content-container {
-            overflow: auto;
-        }
-    }
-}
-
-@media (min-width: $narrow-breakpoint) {
-    .main-layout {
-
-
-        .content-container {
-            grid-template-columns: minmax(30px, auto) 1fr;
-            gap: 10px;
-            position: relative;
-
-        }
-    }
-}
+//tablet and down be like that
+// @media (max-width: $narrow-breakpoint) {
+//     .main-layout {
+//         .content-container {
+//             overflow: auto;
+//         }
+//     }
+// }
