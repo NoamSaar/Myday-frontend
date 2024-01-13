@@ -245,7 +245,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                         onInputChange={onChangeTitle}
                                         onEditClose={onGroupEditExit}
                                         style={{ color: groupColor }}
-                                        extraBtns={extraTitleInputBtn}
+                                        extraBtnsStart={extraTitleInputBtn}
 
                                     />
                                 </div>

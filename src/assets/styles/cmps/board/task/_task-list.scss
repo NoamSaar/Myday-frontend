@@ -43,8 +43,18 @@
 
         .task-title {
 
+            @include for-narrow-layout {
+
+                background-color: white;
+            }
+
             .editable-txt-container {
-                width: 95%;
+                width: 75%;
+
+                @include for-narrow-layout {
+                    width: 95%;
+
+                }
 
                 form {
                     width: 100%;
@@ -63,13 +73,23 @@
             width: 100%;
 
             &.single-task {
+
+                // &:not(.add-task .single-task) {
+
+                @include for-mobile-only-layout {
+                    padding-inline-start: 20px;
+                }
+
                 padding-inline-start: 36px;
+                // }
+
 
                 .focused-input form,
                 .editable-txt {
                     padding-block: 3px 2px;
                     padding-inline-start: 3px;
                 }
+
             }
         }
     }
@@ -86,7 +106,22 @@
                         width: 100%;
 
                         .task-title {
-                            padding-inline-start: 16px;
+
+                            @include for-narrow-only-layout {
+                                padding-inline-start: 13px;
+                            }
+
+                            @include for-mobile-only-layout {
+                                padding-inline-start: unset;
+                            }
+
+                            @include for-narrow-layout {
+                                padding-inline-start: 16px;
+                            }
+
+                            .focused-input {
+                                background-color: white;
+                            }
 
                             .editable-txt,
                             .focused-input form {
@@ -95,6 +130,15 @@
 
                             .editable-txt {
                                 width: 99%;
+                            }
+
+                            .add-task-btn {
+                                font-size: rem(12px);
+                                padding: 2px 4px;
+                                margin-inline-end: 2px;
+                                color: white;
+                                background-color: $clr-btn-add;
+                                border-radius: 4px;
                             }
 
                         }
