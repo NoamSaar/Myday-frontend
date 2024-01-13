@@ -6,8 +6,23 @@ import { HomePage } from './pages/HomePage'
 import { Workspace } from './pages/Workspace'
 import { TaskDetails } from './pages/TaskDetails'
 import { BoardApp } from './pages/BoardApp'
+import { setIsMobile } from './store/actions/system.actions'
+import { useEffect } from 'react'
 
 export function RootCmp() {
+
+    useEffect(() => {
+        window.addEventListener('resize', handleScreenResize)
+
+        return () => {
+            window.removeEventListener('resize', handleScreenResize)
+        }
+    }, [])
+
+    function handleScreenResize() {
+        setIsMobile(window.innerWidth <= 905)
+    }
+
     return (
         <section className="app">
             <Routes>

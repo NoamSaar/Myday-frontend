@@ -1,4 +1,4 @@
-import { SET_DYNAMIC_MODAL, SET_DYNAMIC_MODAL_OPEN, SET_DYNAMIC_MODAL_PARENT_REF, SET_DYNAMIC_MODAL_TYPE, SET_DYNAMIC_MODAL_DATA, SET_DYNAMIC_MODAL_PARENT, SET_IS_LOADING, SET_DYNAMIC_PANEL_OPEN, SET_DYNAMIC_PANEL_TYPE, SET_DYNAMIC_PANEL_DATA, SET_SIDE_PANEL_OPEN, SET_IS_MOBILE_HP } from '../reducers/system.reducer'
+import { SET_DYNAMIC_MODAL, SET_DYNAMIC_MODAL_OPEN, SET_DYNAMIC_MODAL_PARENT_REF, SET_DYNAMIC_MODAL_TYPE, SET_DYNAMIC_MODAL_DATA, SET_DYNAMIC_MODAL_PARENT, SET_IS_LOADING, SET_DYNAMIC_PANEL_OPEN, SET_DYNAMIC_PANEL_TYPE, SET_DYNAMIC_PANEL_DATA, SET_SIDE_PANEL_OPEN, SET_IS_FULL_SIDEBAR_MOBILE, SET_IS_MOBILE } from '../reducers/system.reducer'
 import { SET_MSG } from '../reducers/system.reducer.js'
 import { store } from '../store'
 
@@ -20,8 +20,8 @@ export function setMsg(msg) {
     store.dispatch({ type: SET_MSG, msg })
 }
 
-export function setIsMobileHP(isMobileHP) {
-    store.dispatch({ type: SET_IS_MOBILE_HP, isMobileHP })
+export function setIsFullSidebarMobile(isFullSidebarMobile) {
+    store.dispatch({ type: SET_IS_FULL_SIDEBAR_MOBILE, isFullSidebarMobile })
 }
 
 // modal
@@ -93,4 +93,12 @@ export function setDynamicPanelData(dynamicPanelData) {
         type: SET_DYNAMIC_PANEL_DATA,
         dynamicPanelData,
     }
+}
+
+//mobile
+export function setIsMobile(isMobile) {
+    store.dispatch({
+        type: SET_IS_MOBILE,
+        isMobile,
+    })
 }

@@ -35,12 +35,11 @@
     }
 
     .task-title-container {
-        position: sticky;
-        left: 42px;
 
         min-width: var(--task-col);
         max-width: var(--task-col);
         z-index: 10;
+
 
         .task-title {
 
@@ -62,7 +61,6 @@
 
         .task-title {
             width: 100%;
-            // max-width: 440px;
 
             &.single-task {
                 padding-inline-start: 36px;
@@ -137,14 +135,3 @@
     }
 
 }
-
-// @media (max-width: $mobile-breakpoint) {
-
-//     // @include for-mobile-only-layout {
-//     .add-task {
-
-//         .task-selection {
-//             max-width: 37.7px;
-//         }
-//     }
-// }

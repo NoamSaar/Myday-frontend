@@ -17,6 +17,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [currTask, setCurrTask] = useState(null)
@@ -152,19 +153,22 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             onMouseLeave={handleMouseLeave}
         >
             <div className={`${isActive && 'active'} task-sticky-container sticky-left`}>
-                <div className="menu-container flex align-center justify-center">
-                    {isShowMenuBtn && (
-                        <button
-                            ref={menuBtnRef}
-                            className="btn svg-inherit-color flex align-center justify-center"
-                            onClick={toggleMenu}><MenuIcon className="btn" />
-                        </button>
-                    )}
-                </div>
+                {isMobile ?
+                    <div className="task-row-placeholder"></div>
+                    :
+                    <div className="menu-container flex align-center justify-center">
+                        {isShowMenuBtn && (
+                            <button
+                                ref={menuBtnRef}
+                                className="btn svg-inherit-color flex align-center justify-center"
+                                onClick={toggleMenu}><MenuIcon className="btn" />
+                            </button>
+                        )}
+                    </div>}
 
                 <div
                     style={{ backgroundColor: groupColor }}
-                    className="color-display sticky-left-36">
+                    className={`${isMobile ? 'sticky-left' : 'sticky-left-36'} color-display`}>
                 </div>
                 <ul className={`clean-list task-title-container flex ${isActive && 'active'}`}>
                     <li className="task-selection">

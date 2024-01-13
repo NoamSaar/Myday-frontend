@@ -9,7 +9,7 @@ import { MenuOptionsModal } from "./MenuOptionsModal"
 
 export function AppHeader() {
     var user = useSelector(storeState => storeState.userModule.user)
-    const [isModalOpen, setisModalOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     async function onLogin(credentials) {
         try {
@@ -40,7 +40,7 @@ export function AppHeader() {
     }
 
     function onOpenModal() {
-        setisModalOpen(!isModalOpen)
+        setIsModalOpen(!isModalOpen)
     }
 
     const menuOptions = user ? [

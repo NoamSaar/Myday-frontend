@@ -5,6 +5,7 @@ import { EditableTxt } from "../../../EditableTxt"
 
 export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTask, groupId }) {
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const [isInputFocus, setIsInputFocus] = useState(false)
 
     function onTitleClick() {
@@ -35,9 +36,9 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
 
 
                             <div className="task-row-placeholder"></div>
-                            <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
+                            <div style={{ backgroundColor: groupColor }} className={`${isMobile ? 'sticky-left' : 'sticky-left-36'} color-display`}></div>
 
-                            <div className="sticky-left-40 flex full-width">
+                            <div className="flex full-width">
                                 <li className="task-selection">
                                     <div className="checkbox"></div>
                                 </li>

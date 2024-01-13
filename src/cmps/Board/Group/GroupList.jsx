@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop }) {
     const [isGroupsCollapsed, setIsGroupsCollapsed] = useState(false)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
 
     const handleDragEnd = (result) => {
         setIsGroupsCollapsed(false)
@@ -28,6 +29,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
         }
     }
 
+
     function onBeforeDragStart() {
         setIsGroupsCollapsed(true)
     }
@@ -39,8 +41,14 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
             const groupScrollTop = groupEl.getBoundingClientRect().y - 48
 
             if (!scrollTop) return
+            let topGap
 
-            const topGap = isHeaderCollapsed ? 134.5 : 182
+            if (isMobile) {
+                topGap = 59.41
+            } else {
+                topGap = isHeaderCollapsed ? 134.5 : 182
+            }
+
             if (topGap > groupScrollTop) {
                 return 'bottom-shadow'
             }
@@ -72,7 +80,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
                                                     onTitleEditLeave={onSetIsFocusLastGroup}
                                                     isGroupsCollapsed={isGroupsCollapsed}
                                                     isHeaderCollapsed={isHeaderCollapsed}
-
+                                                    isMobile={isMobile}
                                                 />
                                             </div>
                                         )}
