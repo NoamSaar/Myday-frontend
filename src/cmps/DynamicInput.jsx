@@ -18,7 +18,8 @@ export function DynamicInput({ inputProps }) {
         isSearchInput,
         additionalBtns,
         handleChange,
-        onBlur
+        onBlur,
+        isRequired
     } = inputProps
 
     return (
@@ -41,6 +42,7 @@ export function DynamicInput({ inputProps }) {
                 onFocus={() => setIsFocused(true)}
                 onBlur={onInputBlur}
                 onChange={handleChange}
+                required={isRequired}
             />
 
             {additionalBtns && additionalBtns.length &&

@@ -4,10 +4,13 @@ import { DynamicInput } from '../cmps/DynamicInput'
 import { userService } from '../services/user.service'
 import { uploadService } from '../services/upload.service'
 import { UserImg } from '../cmps/UserImg'
+import { setIsLoading } from '../store/actions/system.actions'
+import { useNavigate } from 'react-router'
 
 export function LoginSignup() {
     const [isLogin, setIsLogin] = useState(false)
     const [user, setUser] = useState(userService.getEmptyUser())
+    const navigate = useNavigate()
 
     function toggleLogin() {
         setIsLogin(prevLogin => !prevLogin)
@@ -36,10 +39,29 @@ export function LoginSignup() {
     async function onImgUpload(ev) {
         try {
             const imgData = await uploadService.uploadImg(ev)
-            console.log('imgData.url', imgData.url)
             setUser(prevUser => ({ ...prevUser, imgUrl: imgData.url }))
         } catch (err) {
             console.log('err', err)
+        }
+    }
+
+    async function onSubmitForm(ev) {
+        ev.preventDefault()
+        setIsLoading(true)
+        try {
+            if (isLogin) {
+                await userService.login(user)
+                navigate('/board')
+            } else {
+                await userService.signup(user)
+                navigate('/board')
+            }
+
+        } catch (error) {
+            console.log('err', err)
+        } finally {
+
+            setIsLoading(false)
         }
     }
 
@@ -48,6 +70,7 @@ export function LoginSignup() {
         inputValue: user.username,
         placeholder: 'Enter your username',
         handleChange: handleChange,
+        isRequired: true
     }
 
     const fullnameInputProps = {
@@ -55,6 +78,7 @@ export function LoginSignup() {
         inputValue: user.fullname,
         placeholder: 'Enter your fullname',
         handleChange: handleChange,
+        isRequired: true
     }
 
     const passwordInputProps = {
@@ -63,6 +87,7 @@ export function LoginSignup() {
         type: 'password',
         placeholder: 'Enter your password',
         handleChange: handleChange,
+        isRequired: true
     }
 
     const noticeContent = isLogin ?
@@ -78,7 +103,7 @@ export function LoginSignup() {
                     <h1>Welcome to myday</h1>
                     <h2>{isLogin ? 'Log in to your account' : 'Get started - it\'s free. No credit card needed.'}</h2>
 
-                    <form className='full-width'>
+                    <form onSubmit={onSubmitForm} className='full-width'>
 
                         <div className="flex column full-width form-section-container">
                             <label>Username:</label>

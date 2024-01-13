@@ -21,9 +21,6 @@ export const userService = {
 
 window.userService = userService
 
-// const gUsers = getUsers()
-
-// _initUsers()
 
 async function getUsers() {
     try {
