@@ -4,7 +4,7 @@ import { utilService } from "../../services/util.service"
 
 import { DynamicInput } from "../DynamicInput"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
-import { PlusIcon, SearchIcon, FilterIcon } from "../../services/svg.service"
+import { PlusIcon, FilterIcon } from "../../services/svg.service"
 
 export function SidebarFilter({ filterBy, onSetFilter, onAddNewBoard }) {
     onSetFilter = useRef(utilService.debounce(onSetFilter))
