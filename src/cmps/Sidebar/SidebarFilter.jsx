@@ -27,6 +27,7 @@ export function SidebarFilter({ filterBy, onSetFilter, onAddNewBoard }) {
         type: 'search',
         handleChange: handleChange,
         isSearchInput: true,
+        isResetBtn: true,
         // additionalBtns: [
         //     {
         //         name: 'filter',

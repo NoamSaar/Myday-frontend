@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { addTask, getMemberFromBoard } from "../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
 
-import { CloseFilledIcon, CloseIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
+import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 import { UserImg } from "../UserImg"
 import { DynamicInput } from "../DynamicInput"
 
@@ -86,7 +86,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
-        // console.log('field', field)
 
         switch (target.type) {
             case 'number':
@@ -102,11 +101,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
-    function resetTxtFilter() {
-        setFilterByToEdit(prevFilter => ({ ...prevFilter, txt: '' }))
-    }
-
-    // const dynFocusedClass = isFocused ? 'focused' : ''
     const dynActiveClass = filterByToEdit.txt ? 'active' : ''
     const { txt } = filterByToEdit
 
@@ -120,11 +114,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         isAutoFocus: true,
         isResetBtn: true,
         additionalBtns: [
-            // {
-            //     name: 'reset',
-            //     icon: <CloseIcon />,
-            //     func: resetTxtFilter,
-            // },
             {
                 name: 'filter',
                 icon: <SettingsKnobsIcon />,
@@ -142,9 +131,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             </button>
 
             <div className={dynActiveClass + ' search'} ref={filterSearchRef}>
-                {/* <div className="search"> */}
-                {/* <div className={"btn search " + dynFocusedClass} onClick={onToggleIsFocused} ref={filterSearchRef}> */}
-
                 {!isFocused ?
                     <div className="btn" onClick={() => setIsFocused(true)}>
                         <SearchIcon />

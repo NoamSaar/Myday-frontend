@@ -50,8 +50,8 @@ export function DynamicInput({ inputProps }) {
 
             />
 
-            {isResetBtn && inputValue &&
-                <div className="btn reset" onClick={() => handleChange({ target: { name, value: '' } })}>
+            {isResetBtn &&
+                <div className={(!inputValue ? 'hide ' : '') + 'btn reset'} onClick={() => handleChange({ target: { name, value: '' } })}>
                     <CloseIcon />
                 </div>
             }
