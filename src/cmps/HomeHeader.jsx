@@ -47,7 +47,7 @@ export function HomeHeader({ scrolled }) {
                 <div className='btn-header-login' onClick={() => navigate('/auth/login')}>
                     Log in
                 </div>
-                <button onClick={() => navigate('/board')} className='btn-get-started'><span className='get-started-txt'>Get Started</span>
+                <button onClick={() => navigate('/board/659fb84f43565a19c57dd627')} className='btn-get-started'><span className='get-started-txt'>Get Started</span>
                     <ArrowRightIcon />
                 </button>
             </div>
