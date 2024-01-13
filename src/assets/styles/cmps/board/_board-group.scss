@@ -50,7 +50,11 @@
                         }
 
                         &:not(.collapsed .editable-txt, .collapsed .focused-input) {
-                            margin-block: 9px;
+                            margin-block: 5px;
+
+                            @include for-narrow-layout {
+                                margin-block: 9px;
+                            }
                         }
                     }
                 }
