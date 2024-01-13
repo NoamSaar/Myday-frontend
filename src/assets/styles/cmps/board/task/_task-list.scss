@@ -42,7 +42,11 @@
 
 
         .task-title {
-            background-color: white;
+
+            @include for-narrow-layout {
+
+                background-color: white;
+            }
 
             .editable-txt-container {
                 width: 95%;
