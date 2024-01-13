@@ -129,7 +129,13 @@ function hasTimePassed(timestamp) {
 }
 
 function getAcronym(name) {
-    return name.split(' ')[0][0] + name.split(' ')[1][0]
+    const words = name.split(' ');
+
+    if (words.length === 1) {
+        return name.length > 1 ? name.slice(0, 2) : name[0];
+    }
+
+    return words[0][0] + words[1][0];
 }
 
 function capitalizeFirstLetter(string) {

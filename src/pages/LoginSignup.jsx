@@ -4,8 +4,9 @@ import { DynamicInput } from '../cmps/DynamicInput'
 import { userService } from '../services/user.service'
 import { uploadService } from '../services/upload.service'
 import { UserImg } from '../cmps/UserImg'
-import { setIsLoading } from '../store/actions/system.actions'
+import { setIsLoading, showErrorMsg } from '../store/actions/system.actions'
 import { useNavigate } from 'react-router'
+import { login, signup } from '../store/actions/user.actions'
 
 export function LoginSignup() {
     const [isLogin, setIsLogin] = useState(false)
@@ -50,15 +51,16 @@ export function LoginSignup() {
         setIsLoading(true)
         try {
             if (isLogin) {
-                await userService.login(user)
-                navigate('/board')
+                await login(user)
+                navigate('/board/65a2e5b6a2060938a0c7f88b')
             } else {
-                await userService.signup(user)
-                navigate('/board')
+                await signup(user)
+                navigate('/board/65a2e5b6a2060938a0c7f88b')
             }
 
         } catch (error) {
             console.log('err', err)
+            showErrorMsg('Cannot login, please try again')
         } finally {
 
             setIsLoading(false)
@@ -124,7 +126,7 @@ export function LoginSignup() {
                             <label className='user-img-label'>Your Image:</label>
                             <label className="flex custom-file-upload">
                                 <input type="file" onChange={onImgUpload} />
-                                {user.imgUrl ? <UserImg user={user} /> : <UserImg />}
+                                {(user.imgUrl || user.fullname) ? <UserImg user={user} /> : <UserImg />}
                             </label>
                         </div>}
 

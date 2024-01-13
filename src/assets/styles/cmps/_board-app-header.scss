@@ -17,25 +17,18 @@
     }
 
     .user-info {
-        // background-color: $clr2;
-        // padding: 2px 8px;
         padding-left: 100px;
         color: $clr-font;
 
-        img {
-            // border: 2px solid #fff;
-            border-radius: 50%;
-            max-height: 25px;
-            max-width: 25px;
-            min-height: 25px;
-            min-width: 25px;
+        .user-img {
+            max-height: 30px;
+            max-width: 30px;
+            min-height: 30px;
+            min-width: 30px;
             cursor: pointer;
         }
     }
 
-    // .user-info .btn-link {
-    //     color: $clr2;
-    // }
 
     nav a:first-child {
         margin-right: 30px;

@@ -69,6 +69,7 @@
 
                     label {
                         width: max-content;
+                        margin-block-end: unset;
                     }
 
                     input[type="file"] {
@@ -83,7 +84,9 @@
                         margin-inline-end: 10px;
                     }
 
-                    .user-img {
+                    .user-img,
+                    .extra-members-box {
+                        min-width: 35px;
                         max-width: 35px;
                         min-height: 35px;
                         object-fit: cover;
