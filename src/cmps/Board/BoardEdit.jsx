@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { updateBoard } from "../../store/actions/board.actions"
-import { setIsMobileHP, showErrorMsg } from "../../store/actions/system.actions"
+import { setisFullSidebarMobile, showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
 import { ArrowLeftIcon, InfoIcon, StarIcon } from "../../services/svg.service"
 
@@ -46,7 +46,7 @@ export function BoardEdit({ board }) {
 
     return (
         <>
-            <button className="btn back" onClick={() => setIsMobileHP(true)}>
+            <button className="btn back" onClick={() => setisFullSidebarMobile(true)}>
                 <ArrowLeftIcon />
             </button>
 
