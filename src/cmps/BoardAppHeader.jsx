@@ -7,7 +7,7 @@ import { login, logout, signup } from "../store/actions/user.actions.js"
 import { LogoIcon, LoginIcon } from "../services/svg.service.jsx"
 import { MenuOptionsModal } from "./MenuOptionsModal"
 
-export function AppHeader() {
+export function BoardAppHeader() {
     var user = useSelector(storeState => storeState.userModule.user)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -77,7 +77,7 @@ export function AppHeader() {
     }
 
     return (
-        <header className="app-header flex space-between align-center">
+        <header className="board-app-header flex space-between align-center">
             <section className="header-logo grid column place-center">
                 <img className="logo" src="/img/myday-temp-logo.png" />
                 {/* <LogoIcon /> */}
