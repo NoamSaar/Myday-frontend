@@ -81,12 +81,22 @@
         padding: 6px;
         height: 32px;
 
-        // img {
-        //     height: 20px
-        // }
-
         svg {
+            @include for-narrow-only-layout {
+                width: 30px;
+                height: 30px;
+            }
+
             fill: $clr0;
+        }
+
+        @include for-narrow-only-layout {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            border-radius: 10px;
+            height: auto;
+            // box-shadow: 0 4px 17px 0px $clr-btn-add;
         }
     }
 

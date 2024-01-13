@@ -6,8 +6,12 @@
 
 html {
     font-family: figtree;
-    font-size: 14px;
+    font-size: 12px;
     line-height: lh(23px);
+
+    @include for-narrow-layout {
+        font-size: 14px;
+    }
 }
 
 body {
