@@ -88,6 +88,10 @@
                         .task-title {
                             padding-inline-start: 16px;
 
+                            .focused-input {
+                                background-color: white;
+                            }
+
                             .editable-txt,
                             .focused-input form {
                                 padding-inline-start: 11.5px;
@@ -95,6 +99,15 @@
 
                             .editable-txt {
                                 width: 99%;
+                            }
+
+                            .add-task-btn {
+                                font-size: rem(12px);
+                                padding: 2px 4px;
+                                margin-inline-end: 2px;
+                                color: white;
+                                background-color: $clr-btn-add;
+                                border-radius: 4px;
                             }
 
                         }

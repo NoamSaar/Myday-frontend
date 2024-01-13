@@ -13,8 +13,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
         onSetActiveTask(groupId)
     }
 
-    async function onAddTask(ev) {
-        // ev.preventDefault()
+    async function onAddTask() {
         try {
             setIsInputFocus(false)
             if (activeTask === groupId) onSetActiveTask(null)
@@ -24,6 +23,16 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
             showErrorMsg('Cannot add Task')
         }
     }
+
+    const inputExtraBts = isMobile ? [
+        {
+            className: "add-task-btn",
+            txt: 'Add Task',
+            onMouseDown: onAddTask
+        }
+    ]
+        :
+        []
 
     return (
         <ul className="clean-list subgrid full-grid-column task-preview-container add-task">
@@ -52,6 +61,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                                         onInputChange={onSetTitle}
                                         onEditClose={onAddTask}
                                         placeholder={'+ Add task'}
+                                        extraBtnsEnd={inputExtraBts}
                                     />
                                 </li>
                             </div>
