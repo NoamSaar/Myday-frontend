@@ -298,13 +298,16 @@
     }
 
     .task-row-placeholder {
-        min-width: 40px;
+        min-width: 10px;
         height: 36px;
+        margin-block-start: -1px;
         background-color: white;
         box-shadow: -1px 6px white;
         z-index: 5;
 
-        margin-block-start: -1px;
+        @include for-narrow-layout {
+            min-width: 40px;
+        }
     }
 
     .task-title {
