@@ -12,7 +12,6 @@ export function TaskDetails() {
     const { boardId, taskId } = useParams()
     const [currTask, setCurrTask] = useState(null)
     const [currSubject, setCurrSubject] = useState('Updates')
-    const isSidePanelOpen = useSelector((storeState) => storeState.systemModule.isSidePanelOpen)
 
     useEffect(() => {
         _getTaskById()
@@ -58,7 +57,7 @@ export function TaskDetails() {
     }
 
     return (
-        <section className={`task-details ${isSidePanelOpen ? 'open' : ''}`}>
+        <section className={`task-details`}>
             <DynamicSidePanelHeader boardId={boardId} headerProps={{ ...headerProps }} currSubject={currSubject} />
             <DynamicSidePanelRouter type={currSubject} bodyProps={bodyProps} onAddUpdate={onAddUpdate} />
         </section>

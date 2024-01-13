@@ -4,15 +4,27 @@
     position: fixed;
     top: 48px;
     bottom: 0;
-    right: -760px;
-    width: 760px;
+    right: 0;
+    // right: -760px;
+    width: 60%;
+    max-width: 760px;
     z-index: 100;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     transition: right 150ms cubic-bezier(0, 0, 0.35, 1);
 
-    &.open {
-        right: 0;
+    @include for-narrow-only-layout {
+        max-width: 100%;
+        width: 100%;
     }
+
+    // &.open {
+    //     // width: 0;
+
+    //     @include for-narrow-only-layout {
+    //         max-width: 100%;
+    //         width: 100%;
+    //     }
+    // }
 
     .panel-header>button {
         margin: 20px 20px 0 20px;
