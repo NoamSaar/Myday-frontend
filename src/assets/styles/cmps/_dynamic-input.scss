@@ -1,4 +1,8 @@
 .dynamic-input {
+    @include for-narrow-only-layout {
+        margin-inline-end: 0;
+    }
+
     justify-self: stretch;
     outline: 1px solid $clr-group-border;
     border-radius: $border-radius-small;

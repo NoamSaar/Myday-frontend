@@ -101,6 +101,10 @@
     }
 
     .sidebar-filter {
+        @include for-narrow-only-layout {
+            grid-column: 1/-1;
+        }
+
         grid-template-columns: 1fr auto;
         align-items: stretch;
 
