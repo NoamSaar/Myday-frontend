@@ -49,7 +49,12 @@
             }
 
             .editable-txt-container {
-                width: 95%;
+                width: 75%;
+
+                @include for-narrow-layout {
+                    width: 95%;
+
+                }
 
                 form {
                     width: 100%;

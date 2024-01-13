@@ -1,13 +1,22 @@
 .member-picker-modal {
-    width: 360px;
+    width: 270px;
     min-height: 155px;
+
+    @include for-narrow-layout {
+        width: 360px;
+    }
 
     .chosen-members-list {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         align-items: center;
-        padding-inline: 16px 5px;
-        padding-block-start: 16px;
+        padding-inline: 10px;
+        padding-block-start: 10px;
+
+        @include for-narrow-layout {
+            padding-inline: 16px 5px;
+            padding-block-start: 16px;
+        }
 
         .chosen-member {
             display: flex;
@@ -45,7 +54,8 @@
     }
 
     .new-member-picker-container {
-        padding: 16px 20px;
+        padding: 16px 14px;
+        // padding: 16px 20px;
 
         .suggested-people-title {
             margin-block: 8px 4px;

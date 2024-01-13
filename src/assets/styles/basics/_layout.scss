@@ -40,7 +40,7 @@
 
 .main-container {
     display: grid;
-    grid-template-columns: 20px 1fr 20px;
+    grid-template-columns: 32px 1fr 32px;
 
     >* {
         grid-column: 2;

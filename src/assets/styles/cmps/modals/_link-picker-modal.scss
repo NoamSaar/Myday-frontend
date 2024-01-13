@@ -1,8 +1,14 @@
 .link-picker-modal {
     display: flex;
     flex-direction: column;
-    padding: 16px 24px 24px;
-    width: 266px;
+    padding: 10px 14px 14px;
+    width: 150px;
+
+    @include for-narrow-layout {
+        padding: 16px 24px 24px;
+        width: 266px;
+
+    }
 
     h4 {
         font-size: rem(18px);
@@ -15,9 +21,14 @@
     }
 
     .dynamic-input {
-        padding: 8px 16px;
-        margin-block-end: 24px;
+        padding: 4px 8px;
+        margin-block-end: 14px;
         transition: outline-color .2s;
+
+        @include for-narrow-layout {
+            padding: 8px 16px;
+            margin-block-end: 24px;
+        }
 
         &:hover {
             outline-color: black;

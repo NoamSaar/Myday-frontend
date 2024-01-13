@@ -13,11 +13,16 @@
     .workspace-section {
         gap: 7px;
         justify-content: start;
+        grid-template-columns: auto auto 1fr;
         height: 32px;
 
         padding-inline: 8px;
         margin-inline-end: 12px;
         font-family: figtree-bold;
+
+        div:last-of-type {
+            justify-self: end;
+        }
 
         span {
             font-size: rem(16px);

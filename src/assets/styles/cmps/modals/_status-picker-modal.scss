@@ -1,6 +1,11 @@
 .status-picker-modal {
-    padding: 16px 24px;
-    width: 200px;
+    padding: 10px 18px;
+    width: 150px;
+
+    @include for-narrow-layout {
+        padding: 16px 24px;
+        width: 200px;
+    }
 
     .manual-select {
         display: grid;

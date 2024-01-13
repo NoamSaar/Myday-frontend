@@ -75,6 +75,44 @@
 
 }
 
+@mixin getStartedBtn($padding, $font-size, $arrow-before : 0.8rem, $arrow-after : 0.5rem) {
+    position: relative;
+    padding: $padding;
+    background-color: #6161ff;
+    border: none;
+    border-radius: 2.5rem;
+    color: #ffff;
+    cursor: pointer;
+    text-transform: none;
+    display: flex;
+    font-family: poppins-light;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+
+
+    .get-started-txt {
+        padding-right: 1.2em;
+        font-size: $font-size
+    }
+
+    .arrow-icon {
+        position: absolute;
+        right: $arrow-before;
+        transition: right .3s;
+
+    }
+
+    &:hover {
+        .arrow-icon {
+            right: $arrow-after;
+        }
+
+        background-color: #5151d5
+    }
+
+}
+
 /* Media  Mixins */
 @mixin aspect-ratio($width, $height) {
     position: relative;

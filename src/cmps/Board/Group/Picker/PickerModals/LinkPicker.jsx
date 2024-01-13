@@ -5,17 +5,19 @@ export function LinkPicker({ url, displayTxt, changeLink }) {
     const [newUrl, setNewUrl] = useState(url)
     const [newDisplayTxt, setNewDisplayTxt] = useState(displayTxt)
 
-    function onChangeLink(ev) {
+    function onChangeLink(ev,) {
         if (ev) ev.preventDefault()
         changeLink('link', { url: newUrl, displayTxt: newDisplayTxt })
     }
 
     function onSetUrl({ target }) {
         setNewUrl(target.value)
+        changeLink('link', { url: target.value, displayTxt: newDisplayTxt })
     }
 
     function onSetDisplayTxt({ target }) {
         setNewDisplayTxt(target.value)
+        changeLink('link', { url: newUrl, displayTxt: target.value })
     }
 
     const urlInputProps = {
