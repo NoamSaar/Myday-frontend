@@ -4,8 +4,9 @@ import { useSelector } from "react-redux"
 import { addTask, getMemberFromBoard } from "../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
 
-import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
+import { CloseFilledIcon, CloseIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 import { UserImg } from "../UserImg"
+import { DynamicInput } from "../DynamicInput"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
@@ -18,29 +19,25 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
     const isMemberPickerOpen = parentId === `${board._id}-memberFilterPicker`
 
     useEffect(() => {
-        function handleClickOutsideSearch(event) {
-            if (filterSearchRef.current
-                && !filterSearchRef.current.contains(event.target)
-                //missing logic: && !input.value
-            ) {
-                setIsFocused(false)
-            }
-        }
         document.addEventListener('mousedown', handleClickOutsideSearch)
 
         return () => {
             document.removeEventListener('mousedown', handleClickOutsideSearch)
         }
-    }, [])
+    }, [filterByToEdit.txt])
 
     useEffect(() => {
         onSetFilter(filterByToEdit)
-        // console.log('filterSearchRef', filterSearchRef.current)
 
     }, [filterByToEdit])
 
-    function onToggleIsFocused() {
-        setIsFocused(!isFocused)
+    function handleClickOutsideSearch(event) {
+        if (filterSearchRef.current
+            && !filterSearchRef.current.contains(event.target)) {
+            if (filterByToEdit.txt === '') {
+                setIsFocused(false)
+            }
+        }
     }
 
     async function onAddTask() {
@@ -105,9 +102,36 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
+    function resetTxtFilter() {
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, txt: '' }))
+    }
 
-    const dynFocusedClass = isFocused ? 'focused' : ''
+    // const dynFocusedClass = isFocused ? 'focused' : ''
+    const dynActiveClass = filterByToEdit.txt ? 'active' : ''
     const { txt } = filterByToEdit
+
+    const inputProps = {
+        name: 'txt',
+        inputValue: txt,
+        placeholder: 'Search',
+        type: 'search',
+        handleChange: handleChange,
+        isSearchInput: true,
+        isAutoFocus: true,
+        isResetBtn: true,
+        additionalBtns: [
+            // {
+            //     name: 'reset',
+            //     icon: <CloseIcon />,
+            //     func: resetTxtFilter,
+            // },
+            {
+                name: 'filter',
+                icon: <SettingsKnobsIcon />,
+                func: () => console.log('hi'),
+            }
+        ]
+    }
 
     return (
         <div className="board-filter">
@@ -117,23 +141,19 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 <span>New Task</span>
             </button>
 
-            <div className={"btn search " + dynFocusedClass} onClick={onToggleIsFocused} ref={filterSearchRef}>
-                <SearchIcon />
+            <div className={dynActiveClass + ' search'} ref={filterSearchRef}>
+                {/* <div className="search"> */}
+                {/* <div className={"btn search " + dynFocusedClass} onClick={onToggleIsFocused} ref={filterSearchRef}> */}
 
-                <input
-                    className="reset"
-                    type="search"
-                    placeholder="Search"
-                    value={txt}
-                    onChange={handleChange}
-                    name="txt"
-                    autoComplete="off"
-                />
-
-                {isFocused &&
-                    <SettingsKnobsIcon />
-                }
+                {!isFocused ?
+                    <div className="btn" onClick={() => setIsFocused(true)}>
+                        <SearchIcon />
+                        <span>Search</span>
+                    </div>
+                    :
+                    <DynamicInput inputProps={inputProps} />}
             </div>
+
 
             <button className={` btn ${filterByToEdit.member || isMemberPickerOpen ? 'active' : ''} person`} title="Filter by person" onClick={toggleMemberFilter} ref={personBtnRef}>
                 {filterByToEdit.member ? <UserImg user={getMemberFromBoard(board, filterByToEdit.member)} /> : <PersonIcon />}
