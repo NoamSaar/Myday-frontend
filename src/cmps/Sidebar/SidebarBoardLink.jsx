@@ -66,11 +66,11 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
     }
 
     function onLinkClick() {
+        setIsMobileHP(false)
         if (boardId === board._id) return
         setIsLoading(true)
         setCurrBoard(null)
         navigate(`/board/${board._id}`)
-        setIsMobileHP(false)
         // resetDynamicModal()
     }
 
