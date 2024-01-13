@@ -222,10 +222,12 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                             </button>
                         </div>}
 
-                        {(isGroupCollapsed || isGroupsCollapsed) && <div
-                            style={{ backgroundColor: groupColor }}
-                            className="color-display sticky-left-36">
-                        </div>}
+                        {(isGroupCollapsed || isGroupsCollapsed) && <>
+                            {isMobile && <div className="task-row-placeholder"></div>}
+                            <div
+                                style={{ backgroundColor: groupColor }}
+                                className={`${isMobile ? 'sticky-left-10' : 'sticky-left-36'} color-display `}>
+                            </div></>}
 
                         <div className={`${isMobile ? 'sticky-left' : 'sticky-left-40'} title-container flex align-center`}>
                             <div className="flex align-center">
