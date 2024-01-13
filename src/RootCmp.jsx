@@ -8,6 +8,7 @@ import { TaskDetails } from './pages/TaskDetails'
 import { BoardApp } from './pages/BoardApp'
 import { setIsMobile } from './store/actions/system.actions'
 import { useEffect } from 'react'
+import { LoginSignup } from './pages/LoginSignup'
 
 export function RootCmp() {
 
@@ -28,6 +29,7 @@ export function RootCmp() {
             <Routes>
 
                 <Route element={<HomePage />} path="/" />
+                <Route element={<LoginSignup />} path="/auth" />
 
                 <Route element={<BoardApp />} path="/board" >
                     <Route element={<Workspace />} path="/board/workspace" />
