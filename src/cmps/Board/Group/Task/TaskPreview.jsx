@@ -17,6 +17,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [currTask, setCurrTask] = useState(null)

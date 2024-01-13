@@ -3,20 +3,11 @@ import { BoardGroup } from "./BoardGroup";
 import { useRef, useState } from "react";
 import { updateBoardOrder } from "../../../store/actions/board.actions";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop }) {
     const [isGroupsCollapsed, setIsGroupsCollapsed] = useState(false)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 905);
-
-    useEffect(() => {
-        window.addEventListener('resize', handleScreenResize);
-
-        return () => {
-            window.removeEventListener('resize', handleScreenResize);
-        };
-    }, []);
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
 
     const handleDragEnd = (result) => {
         setIsGroupsCollapsed(false)
@@ -38,9 +29,6 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
         }
     }
 
-    function handleScreenResize() {
-        setIsMobile(window.innerWidth <= 905);
-    }
 
     function onBeforeDragStart() {
         setIsGroupsCollapsed(true)

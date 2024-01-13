@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
-import { resetDynamicModal, setDynamicModal, setIsLoading, setIsMobileHP } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setIsLoading, setisFullSidebarMobile } from "../../store/actions/system.actions"
 import { setCurrBoard } from "../../store/actions/board.actions"
 
 export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, updateBoard }) {
@@ -70,7 +70,7 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
         setIsLoading(true)
         setCurrBoard(null)
         navigate(`/board/${board._id}`)
-        setIsMobileHP(false)
+        setisFullSidebarMobile(false)
         // resetDynamicModal()
     }
 

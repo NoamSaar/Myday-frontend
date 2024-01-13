@@ -13,7 +13,8 @@ export const SET_DYNAMIC_PANEL_OPEN = 'SET_DYNAMIC_PANEL_OPEN'
 export const SET_DYNAMIC_PANEL_TYPE = 'SET_DYNAMIC_PANEL_TYPE'
 export const SET_DYNAMIC_PANEL_DATA = 'SET_DYNAMIC_PANEL_DATA'
 export const SET_SIDE_PANEL_OPEN = 'SET_SIDE_PANEL_OPEN'
-export const SET_IS_MOBILE_HP = 'SET_IS_MOBILE_HP'
+export const SET_IS_FULL_SIDEBAR_MOBILE = 'SET_IS_FULL_SIDEBAR_MOBILE'
+export const SET_IS_MOBILE = 'SET_IS_MOBILE'
 
 const initialState = {
   isLoading: false,
@@ -25,7 +26,8 @@ const initialState = {
     type: '',
     data: {}
   },
-  isMobileHP: true,
+  isFullSidebarMobile: true,
+  isMobile: window.innerWidth <= 905
 }
 
 export function systemReducer(state = initialState, action = {}) {
@@ -55,8 +57,8 @@ export function systemReducer(state = initialState, action = {}) {
     case SET_DYNAMIC_MODAL_DATA:
       return { ...state, dynamicModal: { ...state.dynamicModal, data: action.dynamicModalData } }
 
-    case SET_IS_MOBILE_HP:
-      return { ...state, isMobileHP: action.isMobileHP }
+    case SET_IS_FULL_SIDEBAR_MOBILE:
+      return { ...state, isFullSidebarMobile: action.isFullSidebarMobile }
 
     // PANEL
     case SET_SIDE_PANEL_OPEN:
@@ -85,6 +87,11 @@ export function systemReducer(state = initialState, action = {}) {
           data: action.data,
         }
       }
+
+    //mobile
+    case SET_IS_MOBILE:
+      return { ...state, isMobile: action.isMobile }
+
     default: return state
   }
 }
