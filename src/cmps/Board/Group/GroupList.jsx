@@ -8,7 +8,7 @@ import { useEffect } from "react";
 export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop }) {
     const [isGroupsCollapsed, setIsGroupsCollapsed] = useState(false)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 905);
 
     useEffect(() => {
         window.addEventListener('resize', handleScreenResize);
@@ -39,7 +39,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
     }
 
     function handleScreenResize() {
-        setScreenWidth(window.innerWidth);
+        setIsMobile(window.innerWidth <= 905);
     }
 
     function onBeforeDragStart() {
@@ -55,9 +55,8 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
             if (!scrollTop) return
             let topGap
 
-            if (screenWidth <= 905) {
+            if (isMobile) {
                 topGap = 93
-                console.log('isHeaderCollapsed', isHeaderCollapsed)
             } else {
                 topGap = isHeaderCollapsed ? 134.5 : 182
             }
@@ -93,7 +92,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
                                                     onTitleEditLeave={onSetIsFocusLastGroup}
                                                     isGroupsCollapsed={isGroupsCollapsed}
                                                     isHeaderCollapsed={isHeaderCollapsed}
-
+                                                    isMobile={isMobile}
                                                 />
                                             </div>
                                         )}

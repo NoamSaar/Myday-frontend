@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useEffect, useRef, useState } from "react"
 
-import { AngleDownIcon, DeleteIcon, MenuIcon } from "../../../services/svg.service"
+import { AngleDownIcon, CollapseIcon, DeleteIcon, MenuIcon, PencilIcon } from "../../../services/svg.service"
 
 import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
@@ -10,7 +10,7 @@ import { EditableTxt } from "../../EditableTxt"
 import { TaskTable } from "./Task/TaskTable"
 import { TaskHeaderList } from "./Task/TaskHeaderList"
 
-export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed, isHeaderCollapsed }) {
+export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed, isHeaderCollapsed, isMobile }) {
     const menuBtnRef = useRef(null)
     const colorBtnParentRef = useRef(null)
 
@@ -27,6 +27,8 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     const isMenuOpen = parentId === `${group.id}-menu`
     const isColorPickerOpen = parentId === `${group.id}-colorPicker`
+    const isMobileMenu = parentId === `${group.id}-mobile-menu`
+    // const isMobile = screenWidth <= 905
     const colors = getBoardColors()
 
 
@@ -127,6 +129,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     }
 
     function toggleCollapsed() {
+        resetDynamicModal()
         setIsGroupCollapsed(prevCollapsed => !prevCollapsed)
     }
 
@@ -147,6 +150,34 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
     }
 
+    function onTitleClick() {
+        if (!isMobile) {
+            setIsEditing(true)
+        } else {
+
+            if (isMobileMenu) {
+                resetDynamicModal()
+            } else {
+                setDynamicModal(
+                    {
+                        isOpen: true,
+                        parentRefCurrent: colorBtnParentRef.current,
+                        type: 'menuOptions',
+                        data: { options: menuOptions },
+                        parentId: `${group.id}-mobile-menu`,
+                        isPosBlock: true,
+                        hasTooltip: true
+                    })
+            }
+        }
+    }
+
+    function onEditClick() {
+        resetDynamicModal()
+        setIsEditing(true)
+    }
+
+
 
     const menuOptions = [
         {
@@ -165,12 +196,27 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     ]
 
+    if (isMobile) {
+        menuOptions.push(
+            {
+                icon: <CollapseIcon />,
+                title: 'Collapse',
+                onOptionClick: toggleCollapsed
+            },
+            {
+                icon: <PencilIcon />,
+                title: 'Edit',
+                onOptionClick: onEditClick
+            }
+        )
+    }
+
 
     return (
         <section className={`${(isGroupCollapsed || isGroupsCollapsed) && 'collapsed'} board-group`}>
             <div className={`full-width subgrid full-grid-column ${isHeaderCollapsed && "board-header-collapsed"} group-sticky-container sticky-left`}>
                 <div className="subgrid full-grid-column group-title-container sticky-left">
-                    <div className="flex align-center sticky-left">
+                    <div className="flex align-center sticky-left full-width">
                         <div className={`menu-container flex align-center justify-center sticky-left ${isMenuOpen && 'full-opacity'}`} ref={menuBtnRef}>
                             <button className="btn svg-inherit-color" onClick={toggleMenu} style={{ fill: 'black' }}>
                                 <MenuIcon />
@@ -193,7 +239,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                                     <EditableTxt
                                         isEditing={isEditing}
                                         txtValue={highlightText(groupTitle, filterBy.txt)}
-                                        onTxtClick={() => setIsEditing(true)}
+                                        onTxtClick={onTitleClick}
                                         inputValue={groupTitle}
                                         onInputChange={onChangeTitle}
                                         onEditClose={onGroupEditExit}
