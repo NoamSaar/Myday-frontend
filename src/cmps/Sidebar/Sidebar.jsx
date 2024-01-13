@@ -11,6 +11,7 @@ import { SidebarBoardNav } from "./SidebarBoardNav"
 
 import { addBoard, loadBoards, removeBoard, updateBoard } from "../../store/actions/board.actions"
 import { boardService } from "../../services/board.service"
+import { utilService } from "../../services/util.service"
 
 export function Sidebar() {
     const sidebarRef = useRef(null)
@@ -39,7 +40,7 @@ export function Sidebar() {
     async function _loadDataBoards() {
         try {
             const boards = await loadBoards()
-            // setFilteredBoards(boards)
+            setFilteredBoards(boards)
         } catch (err) {
             console.error('Error loading Boards:', err)
             showErrorMsg('Cannot load Boards')
@@ -48,13 +49,22 @@ export function Sidebar() {
 
     function filterBoards() {
         if (filterBy.title) {
-            const regex = new RegExp(filterBy.title, 'i')
+            const escapedFilter = utilService.escapeRegExp(filterBy.title)
+            const regex = new RegExp(escapedFilter, 'i')
             const newBoards = boards.filter(board => regex.test(board.title))
+            console.log('filterBoards ~ newBoards:', newBoards)
             setFilteredBoards(newBoards)
         } else {
             setFilteredBoards(boards)
-
         }
+        // if (filterBy.title) {
+        //     const regex = new RegExp(filterBy.title, 'i')
+        //     const newBoards = boards.filter(board => regex.test(board.title))
+        //     setFilteredBoards(newBoards)
+        // } else {
+        //     setFilteredBoards(boards)
+
+        // }
     }
 
     async function onAddNewBoard() {
