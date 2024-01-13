@@ -227,7 +227,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                             className="color-display sticky-left-36">
                         </div>}
 
-                        <div className={`${!isMobile && 'sticky-left-40'} title-container flex align-center`}>
+                        <div className={`${isMobile ? 'sticky-left' : 'sticky-left-40'} title-container flex align-center`}>
                             <div className="flex align-center">
 
                                 <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">

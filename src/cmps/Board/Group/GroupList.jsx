@@ -44,7 +44,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
             let topGap
 
             if (isMobile) {
-                topGap = 93
+                topGap = 59.41
             } else {
                 topGap = isHeaderCollapsed ? 134.5 : 182
             }
