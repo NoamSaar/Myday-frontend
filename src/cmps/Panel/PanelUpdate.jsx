@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { LikeIcon, PersonIcon, ReplyIcon } from "../../services/svg.service"
 import { UserImg } from '../UserImg'
 import { boardService } from '../../services/board.service'
@@ -6,6 +6,7 @@ import { boardService } from '../../services/board.service'
 export function PanelUpdate({ msgs, onAddUpdate }) {
     const [users, setUsers] = useState([])
     const [updateTxt, setUpdateText] = useState('')
+    const inputRef = useRef()
 
     useEffect(() => {
         async function fetchUsers() {
@@ -37,6 +38,9 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
         const newUpdate = boardService.getNewUpdate(updateTxt)
         onAddUpdate(newUpdate)
         setUpdateText('')
+        if (inputRef.current) {
+            inputRef.current.value = ''
+        }
     }
 
     function onLikeComment() {
@@ -48,6 +52,7 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
             <div className="input-container">
                 <form onSubmit={handleSubmit}>
                     <input
+                        ref={inputRef}
                         type="text"
                         placeholder="Write an update..."
                         onChange={(ev) => setUpdateText(ev.target.value)}

@@ -1,0 +1,126 @@
+.login-signup {
+    display: grid;
+    grid-template-columns: 1.5fr 0;
+    height: 100vh;
+    overflow: hidden;
+    color: $clr-font;
+
+    @include for-narrow-layout {
+        grid-template-columns: 1.5fr 1fr;
+
+    }
+
+    .login-content-container {
+
+
+        .form-container {
+            flex-grow: 1;
+
+            h1 {
+                margin-block-end: 8px;
+                font-family: poppins-medium;
+                font-size: rem(32px);
+            }
+
+            h2 {
+                margin-block-end: 48px;
+                font-family: poppins-light;
+                font-size: rem(16px);
+
+            }
+
+            form {
+
+                .form-section-container {
+                    margin-block-end: 15px;
+
+                    label {
+                        margin-block-end: 6px;
+                    }
+
+                    .dynamic-input {
+                        padding: 8px 16px;
+                        margin-inline: unset;
+                        width: 100%;
+                        transition: outline-color .2s;
+
+                        &:hover {
+                            outline-color: black;
+                        }
+                    }
+
+                }
+
+                button {
+                    width: 100%;
+                    padding: 8px 16px;
+                    margin-block-start: 15px;
+                    background-color: $clr-btn-add;
+                    color: white;
+                    border-radius: 4px;
+
+                    &:hover {
+                        background-color: darken($color: $clr-btn-add, $amount: 7);
+                    }
+                }
+
+                .user-img-selection {
+                    display: flex;
+
+                    label {
+                        width: max-content;
+                        margin-block-end: unset;
+                    }
+
+                    input[type="file"] {
+                        display: none;
+                    }
+
+                    .custom-file-upload {
+                        cursor: pointer;
+                    }
+
+                    .user-img-label {
+                        margin-inline-end: 10px;
+                    }
+
+                    .user-img,
+                    .extra-members-box {
+                        min-width: 35px;
+                        max-width: 35px;
+                        min-height: 35px;
+                        object-fit: cover;
+
+                        &:hover {
+                            filter: brightness(80%);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .notice-navigation {
+            margin-block-end: 64px;
+            font-size: rem(16px);
+
+            span {
+                color: #1f76c2;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .img-container {
+        height: 100vh;
+
+        img {
+            height: 100vh;
+            object-fit: cover;
+        }
+    }
+}

@@ -1,36 +1,30 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useSelector } from "react-redux"
 
-import { showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
-import { login, logout, signup } from "../store/actions/user.actions.js"
+import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
+import { logout } from "../store/actions/user.actions.js"
 
 import { LogoIcon, LoginIcon } from "../services/svg.service.jsx"
-import { MenuOptionsModal } from "./MenuOptionsModal"
+import { UserImg } from "./UserImg.jsx"
+import { useNavigate } from "react-router"
 
 export function BoardAppHeader() {
+    const menuBtnRef = useRef(null)
     var user = useSelector(storeState => storeState.userModule.user)
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const navigate = useNavigate()
 
-    async function onLogin(credentials) {
-        try {
-            const user = await login(credentials)
-            showSuccessMsg(`Welcome: ${user.fullname}`)
-        } catch (err) {
-            console.error('Error logging in:', err)
-            showErrorMsg('Cannot login')
-        }
+    const isMenuOpen = parentId === `user-auth-menu`
+
+    function onLoginClick() {
+        resetDynamicModal()
+        navigate('/auth')
     }
-    async function onSignup(credentials) {
-        try {
-            const user = await signup(credentials)
-            showSuccessMsg(`Welcome new user: ${user.fullname}`)
-        } catch (err) {
-            console.error('Error signing up:', err)
-            showErrorMsg('Cannot signup')
-        }
-    }
+
     async function onLogout() {
         try {
+            resetDynamicModal()
             await logout()
             showSuccessMsg(`Bye now`)
         } catch (err) {
@@ -39,8 +33,21 @@ export function BoardAppHeader() {
         }
     }
 
-    function onOpenModal() {
-        setIsModalOpen(!isModalOpen)
+    function toggleMenu(ev) {
+        if (isMenuOpen) {
+            resetDynamicModal()
+        } else {
+            setDynamicModal(
+                {
+                    isOpen: true,
+                    parentRefCurrent: menuBtnRef.current,
+                    type: 'menuOptions',
+                    data: { options: menuOptions },
+                    parentId: 'user-auth-menu',
+                    isPosBlock: true,
+                    hasTooltip: true
+                })
+        }
     }
 
     const menuOptions = user ? [
@@ -53,28 +60,23 @@ export function BoardAppHeader() {
         {
             icon: <LoginIcon />,
             title: 'Login',
-            onOptionClick: onLogin
+            onOptionClick: onLoginClick
         },
         {
             icon: <LoginIcon />,
             title: 'Signup',
-            onOptionClick: onSignup
+            onOptionClick: onLoginClick
         },
     ]
 
-    const posOptions = {
-        left: '-80px',
-        right: 0,
-        top: '38px',
-        button: 0,
-    }
 
-    if (!user) {
-        user = {
-            fullname: "Guest",
-            imgUrl: "https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg",
-        }
-    }
+
+    // if (!user) {
+    //     user = {
+    //         fullname: "Guest",
+    //         imgUrl: "https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg",
+    //     }
+    // }
 
     return (
         <header className="board-app-header flex space-between align-center">
@@ -88,11 +90,14 @@ export function BoardAppHeader() {
                     <button
                         className="flex align-center justify-center relative"
                         title="User Profile"
-                        onClick={onOpenModal}
+                        onClick={toggleMenu}
+                        ref={menuBtnRef}
                     >
-                        <img src={`${user.imgUrl}`} alt="user-profile" />
+                        <UserImg user={user} />
+
+                        {/* <img src={`${user.imgUrl}`} alt="user-profile" /> */}
                         {/* {isModalOpen && <MenuOptionsModal options={menuOptions} />} */}
-                        {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />}
+                        {/* {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />} */}
                     </button>
                 </div>
 

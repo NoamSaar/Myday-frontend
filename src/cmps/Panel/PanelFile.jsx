@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useRef, useState } from "react"
+import { BigPlusIcon } from "../../services/svg.service"
 
-export function PanelFile({ files }) {
-    const [selectedImage, setSelectedImage] = useState(null);
+export function PanelFile({ files, onAddFile }) {
+    const [selectedImage, setSelectedImage] = useState(null)
+    const fileInputRef = useRef(null)
 
     const openImagePreview = (image) => {
-        setSelectedImage(image);
-    };
+        setSelectedImage(image)
+    }
 
     const closeImagePreview = () => {
-        setSelectedImage(null);
+        setSelectedImage(null)
     }
+
+    const handleButtonClick = () => {
+        fileInputRef.current.click()
+    }
+
+    const handleFileChange = (ev) => {
+        const selectedFiles = ev.target.files
+        console.log('Selected files:', selectedFiles)
+        onAddFile(selectedFiles)
+    }
+
+    console.log('files:', files)
     return (
         <section className="panel-file grid">
             {(files.length > 0 && files[0] !== undefined) ? (
@@ -23,13 +37,26 @@ export function PanelFile({ files }) {
             ) : (
                 <div className="no-files-message grid place-center">
                     <img src="../../../public/icons/empty-file.svg" alt="" />
+
                     <div>
                         <span className="bold">Drag & drop</span>
                         <span> or </span>
                         <span className="bold">add files here</span>
                     </div>
+
                     <div>Upload, comment and review all files in this item to easily collaborate in context</div>
-                    <input type="file" onChange={(e) => console.log("Selected files:", e.target.files)} />
+
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange} />
+
+                    <button
+                        className="btn btn-add clrblue" onClick={handleButtonClick}>
+                        <BigPlusIcon />
+                        Add file
+                    </button>
                 </div>
             )}
 
@@ -38,7 +65,7 @@ export function PanelFile({ files }) {
                 <div className="image-preview">
                     <div className="preview-content">
                         <img src={selectedImage} alt="Preview" />
-                        <button onClick={closeImagePreview}>Close</button>
+                        <button onClick={closeImagePreview}>X</button>
                     </div>
                 </div>
             )}

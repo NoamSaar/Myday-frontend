@@ -16,13 +16,11 @@ export const userService = {
     getById,
     remove,
     save,
+    getEmptyUser
 }
 
 window.userService = userService
 
-// const gUsers = getUsers()
-
-// _initUsers()
 
 async function getUsers() {
     try {
@@ -94,6 +92,14 @@ async function signup(userCred) {
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
     // return await httpService.post('auth/logout')
+}
+
+function getEmptyUser() {
+    return {
+        fullname: '',
+        username: '',
+        password: ''
+    }
 }
 
 // session storage

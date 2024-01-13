@@ -20,7 +20,8 @@ export function DynamicInput({ inputProps }) {
         handleChange,
         onBlur,
         isAutoFocus = false,
-        isResetBtn = false
+        isResetBtn = false,
+        isRequired
     } = inputProps
 
     return (
@@ -43,6 +44,7 @@ export function DynamicInput({ inputProps }) {
                 onFocus={() => setIsFocused(true)}
                 onBlur={onInputBlur}
                 onChange={handleChange}
+                required={isRequired}
                 autoComplete="off"
                 autoFocus={isAutoFocus}
 

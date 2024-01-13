@@ -101,7 +101,7 @@
             font-size: rem(16px);
             border-radius: 8px;
             border: none;
-            outline: 1px solid #0073ea;
+            outline: 1px solid $clr-btn-add;
         }
 
         .post_not_found {
@@ -279,6 +279,16 @@
             .bold {
                 font-family: figtree-bold;
             }
+        }
+
+        .btn.clrblue {
+            @include btn($type: clrblue);
+            padding: 8px 16px;
+
+            svg {
+                fill: $clr0
+            }
+
         }
     }
 }
