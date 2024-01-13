@@ -280,5 +280,15 @@
                 font-family: figtree-bold;
             }
         }
+
+        .btn.clrblue {
+            @include btn($type: clrblue);
+            padding: 8px 16px;
+
+            svg {
+                fill: $clr0
+            }
+
+        }
     }
 }

@@ -31,7 +31,14 @@ export function TaskDetails() {
     }
 
     function onAddUpdate(update) {
-        const updatedTask = { ...currTask, msgs: [...currTask.msgs, update] }
+        const updatedTask = { ...currTask, msgs: [update, ...currTask.msgs] }
+        setCurrTask(updatedTask)
+        const groupId = boardService.findGroupIdByTaskId(taskId)
+        updateTask(boardId, groupId, updatedTask)
+    }
+
+    function onAddFile(file) {
+        const updatedTask = { ...currTask, file }
         setCurrTask(updatedTask)
         const groupId = boardService.findGroupIdByTaskId(taskId)
         updateTask(boardId, groupId, updatedTask)
@@ -59,7 +66,7 @@ export function TaskDetails() {
     return (
         <section className={`task-details`}>
             <DynamicSidePanelHeader boardId={boardId} headerProps={{ ...headerProps }} currSubject={currSubject} />
-            <DynamicSidePanelRouter type={currSubject} bodyProps={bodyProps} onAddUpdate={onAddUpdate} />
+            <DynamicSidePanelRouter type={currSubject} bodyProps={bodyProps} onAddUpdate={onAddUpdate} onAddFile={onAddFile} />
         </section>
     )
 }

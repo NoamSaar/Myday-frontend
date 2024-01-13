@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { Outlet, useParams } from "react-router"
-
+import loader from "/img/board-loader.gif"
 import { addGroup, loadBoard, loadFilteredBoard, setFilterBy, getTask } from "../store/actions/board.actions"
 
 import { BigPlusIcon } from "../services/svg.service"
@@ -64,7 +64,12 @@ export function BoardDetails() {
 
     const { txt } = filterBy
 
-    if (isLoading || !board) return <div className="board-details">Loading...</div>
+    if (isLoading || !board) return (
+        <section className="loader-container grid place-center">
+            <img className="myday-loader" src={loader} alt="" />
+        </section>
+    )
+    // if (isLoading || !board) return <div className="board-details">Loading...</div>
     return (
         <section onScroll={onDetailsScroll} className={`board-details ${modalData.isOpen ? 'overflow-hidden' : ''}`}>
             <BoardHeader
