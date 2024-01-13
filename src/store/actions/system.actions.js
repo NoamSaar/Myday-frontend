@@ -20,7 +20,7 @@ export function setMsg(msg) {
     store.dispatch({ type: SET_MSG, msg })
 }
 
-export function setisFullSidebarMobile(isFullSidebarMobile) {
+export function setIsFullSidebarMobile(isFullSidebarMobile) {
     store.dispatch({ type: SET_IS_FULL_SIDEBAR_MOBILE, isFullSidebarMobile })
 }
 

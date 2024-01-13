@@ -5,13 +5,14 @@
 }
 
 html {
+    @include for-mobile-only-layout {
+        font-size: 12px;
+    }
+
     font-family: figtree;
-    font-size: 12px;
+    font-size: 14px;
     line-height: lh(23px);
 
-    @include for-narrow-layout {
-        font-size: 14px;
-    }
 }
 
 body {
