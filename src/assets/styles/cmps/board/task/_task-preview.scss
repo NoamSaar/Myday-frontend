@@ -11,6 +11,11 @@
         &:not(.active li) {
             background-color: white;
         }
+
+        .status-preview {
+            opacity: .8;
+            box-shadow: 0px 10px 13px -3px rgba(255, 255, 255, 0.75);
+        }
     }
 
     .task-preview {

@@ -1,5 +1,5 @@
 
-export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, inputName = '', placeholder = '', onInputChange, onEditClose, extraBtns, style = {} }) {
+export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, inputName = '', placeholder = '', onInputChange, onEditClose, extraBtnsStart, extraBtnsEnd, style = {} }) {
     return (
         <div className="editable-txt-container">
             {isEditing ? (
@@ -9,7 +9,7 @@ export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, input
                     className="focused-input flex align-center"
                 >
 
-                    {(extraBtns && extraBtns.length) && extraBtns.map((btn, idx) => {
+                    {(extraBtnsStart && extraBtnsStart.length) && extraBtnsStart.map((btn, idx) => {
                         return <div
                             key={idx}
                             className={btn.className}
@@ -31,6 +31,18 @@ export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, input
                             placeholder={placeholder}
                         />
                     </form>
+
+
+                    {(extraBtnsEnd && !!extraBtnsEnd.length) && extraBtnsEnd.map((btn, idx) => {
+                        return <div
+                            key={idx}
+                            className={btn.className}
+                            style={btn.style || {}}
+                            onMouseDown={btn.onMouseDown}
+                        >
+                            {btn.txt && <p>{btn.txt}</p>}
+                        </div>
+                    })}
 
                 </div>
             ) : (

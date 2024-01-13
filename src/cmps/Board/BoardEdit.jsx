@@ -46,7 +46,7 @@ export function BoardEdit({ board }) {
 
     return (
         <>
-            <button className="btn back" onClick={() => setIsFullSidebarMobile(true)}>
+            <button className="back" onClick={() => setIsFullSidebarMobile(true)}>
                 <ArrowLeftIcon />
             </button>
 

@@ -39,8 +39,6 @@
         }
 
         .task-title-container {
-            position: sticky;
-            left: 42px;
             display: flex;
             min-width: var(--task-col);
             max-width: var(--task-col);
@@ -48,19 +46,10 @@
             .task-title {
                 display: flex;
                 width: 100%;
-                background-color: white;
+                // background-color: white;
 
             }
 
         }
     }
 }
-
-// @media (max-width: $mobile-breakpoint) {
-//     .task-header-list-container {
-
-//         .task-selection {
-//             max-width: 37.7px;
-//         }
-//     }
-// }

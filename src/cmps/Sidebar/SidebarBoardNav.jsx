@@ -83,7 +83,7 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
             <Droppable droppableId="boards">
                 {(provided) => (
                     <nav className="sidebar-board-nav" {...provided.droppableProps} ref={provided.innerRef}>
-                        {fullBoards.map((board, index) => (
+                        {boards.map((board, index) => (
                             <Draggable key={board._id} draggableId={board._id} index={index}>
                                 {(provided) => (
                                     <div

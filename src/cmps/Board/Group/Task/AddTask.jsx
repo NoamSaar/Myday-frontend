@@ -5,6 +5,7 @@ import { EditableTxt } from "../../../EditableTxt"
 
 export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTask, groupId }) {
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const [isInputFocus, setIsInputFocus] = useState(false)
 
     function onTitleClick() {
@@ -12,8 +13,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
         onSetActiveTask(groupId)
     }
 
-    async function onAddTask(ev) {
-        // ev.preventDefault()
+    async function onAddTask() {
         try {
             setIsInputFocus(false)
             if (activeTask === groupId) onSetActiveTask(null)
@@ -23,6 +23,16 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
             showErrorMsg('Cannot add Task')
         }
     }
+
+    const inputExtraBts = isMobile ? [
+        {
+            className: "add-task-btn",
+            txt: 'Add Task',
+            onMouseDown: onAddTask
+        }
+    ]
+        :
+        []
 
     return (
         <ul className="clean-list subgrid full-grid-column task-preview-container add-task">
@@ -35,9 +45,9 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
 
 
                             <div className="task-row-placeholder"></div>
-                            <div style={{ backgroundColor: groupColor }} className="color-display sticky-left-36"></div>
+                            <div style={{ backgroundColor: groupColor }} className={`${isMobile ? 'sticky-left' : 'sticky-left-36'} color-display`}></div>
 
-                            <div className="sticky-left-40 flex full-width">
+                            <div className="flex full-width">
                                 <li className="task-selection">
                                     <div className="checkbox"></div>
                                 </li>
@@ -51,6 +61,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                                         onInputChange={onSetTitle}
                                         onEditClose={onAddTask}
                                         placeholder={'+ Add task'}
+                                        extraBtnsEnd={inputExtraBts}
                                     />
                                 </li>
                             </div>

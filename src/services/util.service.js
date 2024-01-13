@@ -16,7 +16,8 @@ export const utilService = {
     isValidTimestamp,
     areObjsIdentical,
     hasTimePassed,
-    timeSince
+    timeSince,
+    escapeRegExp
 }
 
 function readJsonFile(path) {
@@ -162,4 +163,8 @@ function timeSince(timeStamp) {
         const year = date.getFullYear() === now.getFullYear() ? '' : ' ' + date.getFullYear()
         return day + ' ' + month + year
     }
+}
+
+function escapeRegExp(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
