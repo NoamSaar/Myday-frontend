@@ -1,9 +1,9 @@
 import { Outlet } from "react-router";
 import { useSelector } from "react-redux";
 
-import { AppHeader } from "../cmps/AppHeader";
 import { Sidebar } from "../cmps/Sidebar/Sidebar";
 import { DynamicModal } from "../cmps/DynamicModal";
+import { BoardAppHeader } from "../cmps/BoardAppHeader";
 
 
 export function BoardApp() {
@@ -11,7 +11,7 @@ export function BoardApp() {
 
     return (
         <section className="main-layout grid board-app">
-            <AppHeader />
+            <BoardAppHeader />
             <main className={`content-container  ${isFullSidebarMobile ? 'mobile-hp' : ''}`}>
                 <Sidebar />
                 <Outlet />

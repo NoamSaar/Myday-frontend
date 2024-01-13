@@ -1,9 +1,113 @@
-import { HomeHero } from "../cmps/HomeHero"
+import { useState } from "react"
+
+import { HomeHeader } from "../cmps/HomeHeader"
+
+import creativeDesignImg from '/img/home_page/CreativeDesignImg.png'
+import ITImg from '/img/home_page/ITImg.png'
+import MarketingImg from '/img/home_page/MarketingImg.png'
+import ProjectManagementImg from '/img/home_page/ProjectManagementImg.png'
+import TaskManagementImg from '/img/home_page/TaskManagementImg.png'
+import HRImg from '/img/home_page/HRImg.png'
+import OperationsImg from '/img/home_page/OperationsImg.png'
+import MoreWorkflowsImg from '/img/home_page/MoreWorkflowsImg.png'
+import { ArrowLeftIcon, ArrowRightIcon } from "../services/svg.service"
+
+import HomeAppPreviewImg from '/img/home_page/HomeAppPreviewImg.png'
+import HoltCatImg from '/img/home_page/HoltCatImg.avif'
+import CanvaImg from '/img/home_page/CanvaImg.png'
+import CocaColaImg from '/img/home_page/CocaColaImg.png'
+import OxyImg from '/img/home_page/OxyImg.png'
+import LionsgateImg from '/img/home_page/LionsgateImg.png'
+import CarrefourImg from '/img/home_page/CarrefourImg.png'
+import BdImg from '/img/home_page/BdImg.png'
+import GlossierImg from '/img/home_page/GlossierImg.png'
+import UniversalImg from '/img/home_page/UniversalImg.png'
+import { useNavigate } from "react-router"
 
 export function HomePage() {
+    const [scrolled, setScrolled] = useState(false)
+    const navigate = useNavigate()
+
+    // const [activeTab, setActiveTab] = useState('work-management-tab')
+
+    window.onscroll = function handleScroll() {
+        const isScrolled = window.scrollY > 0
+        setScrolled(isScrolled)
+    }
     return (
-        <section className='main-container home-page'>
-            <HomeHero />
+        <section className="home-page page">
+            <HomeHeader scrolled={scrolled} />
+            <main className="home-page-content main-layout">
+                <section className='main-titles-container'>
+                    <h1 className='home-main-title'>
+                        A platform built for a <br />
+                        new way of working
+                    </h1>
+                    <p>What would you like to manage?</p>
+                </section>
+
+                <section className='home-cards-options'>
+                    <article className='card'>
+                        <img src={creativeDesignImg} alt="" />
+                        <span>Creative & design</span>
+                    </article>
+                    <article className='card'>
+                        <img src={OperationsImg} alt="" />
+                        <span>Operations</span>
+                    </article>
+                    <article className='card'>
+                        <img src={MarketingImg} alt="" />
+                        <span>Marketing</span>
+                    </article>
+                    <article className='card'>
+                        <img src={ProjectManagementImg} alt="" />
+                        <span>Project management</span>
+                    </article>
+                    <article className='card'>
+                        <img src={TaskManagementImg} alt="" />
+                        <span>Task management</span>
+                    </article>
+                    <article className='card'>
+                        <img src={HRImg} alt="" />
+                        <span>HR</span>
+                    </article>
+                    <article className='card'>
+                        <img src={ITImg} alt="" />
+                        <span>IT</span>
+                    </article>
+                    <article className='card'>
+                        <img src={MoreWorkflowsImg} alt="" />
+                        <span>More workflows</span>
+                    </article>
+                </section>
+
+                <section className='btn-container'>
+                    <button onClick={() => navigate('/board')} className='btn-big-get-started'>
+                        <span className='get-started-txt'>Get Started</span>
+                        <ArrowRightIcon />
+                    </button>
+                    <p className='no-credit-card-txt'>No credit card needed<span>✦</span>Unlimited time on Free plan</p>
+                </section>
+
+            </main>
+
+            {/* <section className='home-first-img-container full'>
+                <img src={HomeAppPreviewImg} alt="" />
+            </section> */}
+
+            <section className='sponsers-section'>
+                <div className='sponsers-imgs-container'>
+                    <img src={HoltCatImg} alt="" />
+                    <img src={CanvaImg} alt="" />
+                    <img src={CocaColaImg} alt="" />
+                    <img className='oxy-img' src={OxyImg} alt="" />
+                    <img src={LionsgateImg} alt="" />
+                    <img className='carrefour-img' src={CarrefourImg} alt="" />
+                    <img src={BdImg} alt="" />
+                    <img src={GlossierImg} alt="" />
+                    <img src={UniversalImg} alt="" />
+                </div>
+            </section>
         </section >
     )
 }
