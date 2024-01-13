@@ -43,9 +43,12 @@
 
         .task-title {
 
-            @include for-narrow-layout {
+            &:not(.active .task-title) {
 
-                background-color: white;
+                @include for-narrow-layout {
+
+                    background-color: white;
+                }
             }
 
             .editable-txt-container {
