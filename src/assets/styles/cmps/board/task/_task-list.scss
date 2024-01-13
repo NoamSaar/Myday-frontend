@@ -63,13 +63,23 @@
             width: 100%;
 
             &.single-task {
+
+                // &:not(.add-task .single-task) {
+
+                @include for-mobile-only-layout {
+                    padding-inline-start: 20px;
+                }
+
                 padding-inline-start: 36px;
+                // }
+
 
                 .focused-input form,
                 .editable-txt {
                     padding-block: 3px 2px;
                     padding-inline-start: 3px;
                 }
+
             }
         }
     }
@@ -86,7 +96,18 @@
                         width: 100%;
 
                         .task-title {
-                            padding-inline-start: 16px;
+
+                            @include for-narrow-only-layout {
+                                padding-inline-start: 13px;
+                            }
+
+                            @include for-mobile-only-layout {
+                                padding-inline-start: unset;
+                            }
+
+                            @include for-narrow-layout {
+                                padding-inline-start: 16px;
+                            }
 
                             .focused-input {
                                 background-color: white;
