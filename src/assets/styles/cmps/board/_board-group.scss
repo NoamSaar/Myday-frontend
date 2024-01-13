@@ -5,15 +5,20 @@
     min-width: max-content;
 
     .group-sticky-container {
-        top: 182px;
+        top: 77px;
         z-index: 25;
-        // background-color: white;
         width: 100%;
 
-        &.board-header-collapsed {
-            top: 134.5px;
+        @include for-narrow-layout {
+            top: 182px;
+
+            &.board-header-collapsed {
+                top: 134.5px;
+
+            }
 
         }
+
 
         .group-title-container {
             display: flex;

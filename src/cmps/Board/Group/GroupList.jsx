@@ -3,10 +3,20 @@ import { BoardGroup } from "./BoardGroup";
 import { useRef, useState } from "react";
 import { updateBoardOrder } from "../../../store/actions/board.actions";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop }) {
     const [isGroupsCollapsed, setIsGroupsCollapsed] = useState(false)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener('resize', handleScreenResize);
+
+        return () => {
+            window.removeEventListener('resize', handleScreenResize);
+        };
+    }, []);
 
     const handleDragEnd = (result) => {
         setIsGroupsCollapsed(false)
@@ -28,6 +38,10 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
         }
     }
 
+    function handleScreenResize() {
+        setScreenWidth(window.innerWidth);
+    }
+
     function onBeforeDragStart() {
         setIsGroupsCollapsed(true)
     }
@@ -39,8 +53,15 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
             const groupScrollTop = groupEl.getBoundingClientRect().y - 48
 
             if (!scrollTop) return
+            let topGap
 
-            const topGap = isHeaderCollapsed ? 134.5 : 182
+            if (screenWidth <= 905) {
+                topGap = 93
+                console.log('isHeaderCollapsed', isHeaderCollapsed)
+            } else {
+                topGap = isHeaderCollapsed ? 134.5 : 182
+            }
+
             if (topGap > groupScrollTop) {
                 return 'bottom-shadow'
             }
