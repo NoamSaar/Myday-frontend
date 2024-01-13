@@ -6,13 +6,20 @@
     grid-template-columns: 1fr auto 1fr;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
+    // gap: 8px;
 
     position: sticky;
     top: 0;
     left: 0;
     background-color: $clr0;
     z-index: 30;
+    max-width: 100%;
+
+    &.collapsed {
+        .btn.main-table {
+            margin-inline-start: 20px;
+        }
+    }
 
     @include for-narrow-only-layout {
 
@@ -41,6 +48,15 @@
         }
     }
 
+    // .editable-txt-container {
+    //     overflow: hidden;
+
+    //     // .focused-input {
+    //     //     overflow: auto;
+    //     // }
+
+    // }
+
     .editable-txt-container .focused-input,
     .editable-txt-container .editable-txt {
         grid-area: title;
@@ -52,6 +68,15 @@
 
         &:not(.editable-txt-container .focused-input):hover {
             outline: 1px solid $clr-btn-border;
+        }
+
+        input {
+
+            @include for-mobile-only-layout {
+                width: 190px;
+            }
+
+            width: auto;
         }
     }
 
@@ -88,20 +113,32 @@
     .display-opts {
         grid-area: display-opts;
 
-        >*:not(:last-child) {
+        button:not(:last-of-type) {
+            font-size: rem(14px);
             position: relative;
+            margin-block-end: 4px;
+            padding-block: 8px;
+            padding-inline: 6px 16px;
 
             &::after {
-                content: '';
-                display: block;
+                content: "";
+                height: 16px;
+                border-right: 1px solid;
+                border-color: $clr-group-border;
                 position: absolute;
-                top: 50%;
+                top: 10px;
                 right: 0;
-                translate: 0 -50%;
-                height: 50%;
-                width: 1px;
-                background-color: $clr-group-border;
             }
+        }
+
+        .btn.main-table::before {
+            content: "";
+            height: 2px;
+            width: 98%;
+            position: absolute;
+            bottom: -4px;
+            background-color: $clr-btn-add;
+
         }
 
         .main-table svg {
@@ -218,7 +255,7 @@
     }
 
     @include for-narrow-layout {
-        padding: 16px 45px 17px 45px;
+        padding: 16px 38px 17px 38px;
         grid-template-areas:
             "title info-favorite activities invite"
             "display-opts display-opts display-opts actions"

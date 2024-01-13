@@ -15,6 +15,7 @@ export function DynamicSidePanelRouter(props) {
             return (
                 <PanelFile
                     files={bodyProps.files}
+                    onAddFile={props.onAddFile}
                 />)
         case 'Activity Log':
             return (

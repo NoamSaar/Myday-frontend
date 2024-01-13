@@ -1,9 +1,29 @@
+import { useEffect, useRef } from "react"
 
 export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, inputName = '', placeholder = '', onInputChange, onEditClose, extraBtnsStart, extraBtnsEnd, style = {} }) {
+    const editableTxtRef = useRef(null)
+
+    useEffect(() => {
+        if (isEditing) {
+            document.addEventListener('mousedown', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [isEditing, onEditClose])
+
+    function handleClickOutside(ev) {
+        if (editableTxtRef.current && !editableTxtRef.current.contains(ev.target)) {
+            onEditClose && onEditClose()
+        }
+    }
+
     return (
         <div className="editable-txt-container">
             {isEditing ? (
                 <div
+                    ref={editableTxtRef}
                     tabIndex={0}
                     onBlur={onEditClose}
                     className="focused-input flex align-center"

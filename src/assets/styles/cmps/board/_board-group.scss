@@ -10,10 +10,10 @@
         width: 100%;
 
         @include for-narrow-layout {
-            top: 182px;
+            top: 180px;
 
             &.board-header-collapsed {
-                top: 134.5px;
+                top: 134px;
 
             }
 

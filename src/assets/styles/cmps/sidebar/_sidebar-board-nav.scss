@@ -30,6 +30,10 @@
     }
 
     .btn-option-menu {
+        @include for-narrow-only-layout {
+            opacity: 1;
+        }
+
         display: flex;
         opacity: 0;
         padding-inline: 0;

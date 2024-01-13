@@ -82,7 +82,7 @@ export function HomePage() {
                 </section>
 
                 <section className='btn-container'>
-                    <button onClick={() => navigate('/board')} className='btn-big-get-started'>
+                    <button onClick={() => navigate('/board/659fb84f43565a19c57dd627')} className='btn-big-get-started'>
                         <span className='get-started-txt'>Get Started</span>
                         <ArrowRightIcon />
                     </button>

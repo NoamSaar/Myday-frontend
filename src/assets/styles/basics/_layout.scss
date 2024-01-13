@@ -34,6 +34,15 @@
             gap: 10px;
             position: relative;
         }
+
+        .loader-container {
+            background-color: $clr0;
+        }
+
+        .myday-loader {
+            width: 100px;
+            height: 100px;
+        }
     }
 
 }
