@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useEffect, useRef, useState } from "react"
 
-import { AngleDownIcon, CollapseIcon, DeleteIcon, MenuIcon, PencilIcon } from "../../../services/svg.service"
+import { AngleDownIcon, CollapseIcon, DeleteIcon, ExpandIcon, MenuIcon, PencilIcon } from "../../../services/svg.service"
 
 import { getBoardColors, removeGroup, updateGroup } from "../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../../../store/actions/system.actions"
@@ -10,7 +10,7 @@ import { EditableTxt } from "../../EditableTxt"
 import { TaskTable } from "./Task/TaskTable"
 import { TaskHeaderList } from "./Task/TaskHeaderList"
 
-export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed, isHeaderCollapsed, isMobile }) {
+export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed, toggleIsGroupsCollapsed, isHeaderCollapsed, isMobile }) {
     const menuBtnRef = useRef(null)
     const colorBtnParentRef = useRef(null)
 
@@ -140,6 +140,12 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     function toggleCollapsed() {
         resetDynamicModal()
         setIsGroupCollapsed(prevCollapsed => !prevCollapsed)
+        if (isGroupsCollapsed) toggleIsGroupsCollapsed()
+    }
+
+    function toggleGroupsCollapsed() {
+        resetDynamicModal()
+        toggleIsGroupsCollapsed()
     }
 
     function onColorDisplayClick(ev) {
@@ -190,6 +196,21 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     const menuOptions = [
         {
+            icon: (isGroupCollapsed || isGroupsCollapsed) ? <ExpandIcon /> : <CollapseIcon />,
+            title: (isGroupCollapsed || isGroupsCollapsed) ? 'Expand this group' : 'Collapse this group',
+            onOptionClick: toggleCollapsed
+        },
+        {
+            icon: (isGroupsCollapsed) ? <ExpandIcon /> : <CollapseIcon />,
+            title: (isGroupsCollapsed) ? 'Expand all groups' : 'Collapse all groups',
+            onOptionClick: toggleGroupsCollapsed
+        },
+        {
+            icon: <PencilIcon />,
+            title: 'Edit',
+            onOptionClick: onEditClick
+        },
+        {
             icon: <DeleteIcon />,
             title: 'Delete',
             onOptionClick: onRemoveGroup
@@ -204,21 +225,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         }
 
     ]
-
-    if (isMobile) {
-        menuOptions.push(
-            {
-                icon: <CollapseIcon />,
-                title: 'Collapse',
-                onOptionClick: toggleCollapsed
-            },
-            {
-                icon: <PencilIcon />,
-                title: 'Edit',
-                onOptionClick: onEditClick
-            }
-        )
-    }
 
 
     return (

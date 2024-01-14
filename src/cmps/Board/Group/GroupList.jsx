@@ -79,6 +79,7 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
                                                     isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
                                                     onTitleEditLeave={onSetIsFocusLastGroup}
                                                     isGroupsCollapsed={isGroupsCollapsed}
+                                                    toggleIsGroupsCollapsed={() => setIsGroupsCollapsed(prevCollapsed => !prevCollapsed)}
                                                     isHeaderCollapsed={isHeaderCollapsed}
                                                     isMobile={isMobile}
                                                 />
