@@ -91,9 +91,9 @@ export function MemberPicker({ chosenMembers, allMembers, onChangeMembers }) {
                             <UserImg user={member} />
                             <p className="username">{member.fullname}</p>
                             <button
-                                className="remove-btn"
+                                className="flex align-center justify-center svg-inherit-color remove-btn"
                                 onClick={() => onRemoveMember(member)}>
-                                X
+                                <CloseIcon />
                             </button>
                         </li>
                     )
