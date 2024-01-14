@@ -27,7 +27,7 @@
             background-color: $clr-chosen-member;
             border-radius: 20px;
             width: fit-content;
-            // padding-inline-end: 7px;
+            color: #333333;
 
             .user-img,
             .extra-members-box {
@@ -41,18 +41,13 @@
 
             .username {
                 font-size: rem(12px);
-                // margin-inline-end: 4px;
                 line-height: 24px;
-                color: #333333;
             }
 
             .remove-btn {
                 font-size: rem(11px);
                 margin-inline-end: 2px;
                 min-height: 24px;
-
-                color: #333333;
-
             }
 
         }
