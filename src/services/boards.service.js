@@ -7,7 +7,7 @@ export function getBoardsData() {
                 isStarred: false,
                 archivedAt: null,
                 createdBy: {
-                    _id: 'u101',
+                    _id: '659fd52d810c3f98c2054719',
                     fullname: 'Eden Rize',
                     imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                 },
@@ -65,16 +65,16 @@ export function getBoardsData() {
                 ],
                 members: [
                     {
-                        _id: 'u101',
+                        _id: '659fd52d810c3f98c2054719',
                         fullname: 'Eden Rize',
                         imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                     },
                     {
-                        _id: 'u102',
+                        _id: '659fd60b810c3f98c205471b',
                         fullname: 'Mor Marzan',
                     },
                     {
-                        _id: 'u103',
+                        _id: '659fd5db810c3f98c205471a',
                         fullname: 'Noam Saar',
                         imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                     },
@@ -88,7 +88,7 @@ export function getBoardsData() {
                             {
                                 id: 'c101',
                                 title: 'Add chat',
-                                members: ['u103'],
+                                members: ['659fd5db810c3f98c205471a'],
                                 status: 'l103',
                                 priority: 'l204',
                                 date: 1703706909537,
@@ -100,7 +100,7 @@ export function getBoardsData() {
                                 msgs: [
                                     {
                                         id: 'u123',
-                                        memberId: 'u101',
+                                        memberId: '659fd52d810c3f98c2054719',
                                         createdAt: 1704302734753,
                                         txt: 'Init socket service 👍',
                                         likes: [],
@@ -110,7 +110,7 @@ export function getBoardsData() {
                             {
                                 id: 'c102',
                                 title: 'Add paging',
-                                members: ['u102', 'u103'],
+                                members: ['659fd60b810c3f98c205471b', '659fd5db810c3f98c205471a'],
                                 status: 'l104',
                                 priority: 'l203',
                                 date: 1704241608991,
@@ -124,16 +124,16 @@ export function getBoardsData() {
                             {
                                 id: 'c103',
                                 title: 'Add about puki page',
-                                members: ['u101'],
+                                members: ['659fd52d810c3f98c2054719'],
                                 status: 'l102',
                                 priority: 'l202',
                                 msgs: [
                                     {
                                         id: 'u555',
-                                        memberId: 'u101',
+                                        memberId: '659fd52d810c3f98c2054719',
                                         createdAt: 1704303445060,
                                         txt: 'Research about puki',
-                                        likes: ['u102'],
+                                        likes: ['659fd60b810c3f98c205471b'],
                                     },
                                 ],
                             },
@@ -148,7 +148,7 @@ export function getBoardsData() {
                             {
                                 id: 'c201',
                                 title: 'Reactor css files to scss',
-                                members: ['u101', 'u103'],
+                                members: ['659fd52d810c3f98c2054719', '659fd5db810c3f98c205471a'],
                                 status: 'l102',
                                 priority: 'l202',
                                 date: 1704074068766,
@@ -158,10 +158,10 @@ export function getBoardsData() {
                                 msgs: [
                                     {
                                         id: 'u127',
-                                        memberId: 'u103',
+                                        memberId: '659fd5db810c3f98c205471a',
                                         createdAt: 1704303744452,
                                         txt: 'Added the imports, missing the vars',
-                                        likes: ['u101'],
+                                        likes: ['659fd52d810c3f98c2054719'],
                                     },
                                 ],
                             },
@@ -176,7 +176,7 @@ export function getBoardsData() {
                             {
                                 id: 'c203',
                                 title: 'Refactor to use Store Redux',
-                                members: ['u101', 'u102', 'u103'],
+                                members: ['659fd52d810c3f98c2054719', '659fd60b810c3f98c205471b', '659fd5db810c3f98c205471a'],
                                 status: 'l103',
                                 priority: 'l201',
                                 date: 1703703756181,
@@ -186,7 +186,7 @@ export function getBoardsData() {
                                 msgs: [
                                     {
                                         id: 'u777',
-                                        memberId: 'u103',
+                                        memberId: '659fd5db810c3f98c205471a',
                                         createdAt: 1704304108853,
                                         txt: "i've begun the refactor but couldn't figure out how to use the dispatch. @Mor Marzan",
                                         likes: [],
@@ -196,7 +196,7 @@ export function getBoardsData() {
                             {
                                 id: 'c204',
                                 title: 'Refactor vars/lets to const',
-                                members: ['u102'],
+                                members: ['659fd60b810c3f98c205471b'],
                                 status: 'l101',
                                 priority: 'l200',
                                 date: 1703720101090,
@@ -206,7 +206,7 @@ export function getBoardsData() {
                             {
                                 id: 'c205',
                                 title: 'Refactor service to use http',
-                                members: ['u103'],
+                                members: ['659fd5db810c3f98c205471a'],
                                 status: 'l100',
                                 priority: 'l204',
                                 date: 1703728412860,
@@ -223,7 +223,7 @@ export function getBoardsData() {
                             {
                                 id: 'c301',
                                 title: 'Unresponsive Button on Click',
-                                members: ['u102'],
+                                members: ['659fd60b810c3f98c205471b'],
                                 status: 'l101',
                                 priority: 'l201',
                                 date: 1703785617881,
@@ -235,14 +235,14 @@ export function getBoardsData() {
                                 msgs: [
                                     {
                                         id: 'u157',
-                                        memberId: 'u102',
+                                        memberId: '659fd60b810c3f98c205471b',
                                         createdAt: 1704305297046,
                                         txt: 'Desperate here, needs help! @Eden Rize',
-                                        likes: ['u101'],
+                                        likes: ['659fd52d810c3f98c2054719'],
                                         comments: [
                                             {
                                                 id: 'u457',
-                                                memberId: 'u101',
+                                                memberId: '659fd52d810c3f98c2054719',
                                                 createdAt: 1704305400521,
                                                 txt: 'Done 😄',
                                             },
@@ -253,7 +253,7 @@ export function getBoardsData() {
                             {
                                 id: 'c302',
                                 title: 'Misaligned Layout on Mobile Devices',
-                                members: ['u101', 'u102'],
+                                members: ['659fd52d810c3f98c2054719', '659fd60b810c3f98c205471b'],
                                 status: 'l102',
                                 priority: 'l204',
                                 date: 1703894345657,
@@ -267,7 +267,7 @@ export function getBoardsData() {
                             {
                                 id: 'c303',
                                 title: 'Broken Image Links',
-                                members: ['u103'],
+                                members: ['659fd5db810c3f98c205471a'],
                                 status: 'l102',
                                 priority: 'l204',
                                 msgs: [],
@@ -275,7 +275,7 @@ export function getBoardsData() {
                             {
                                 id: 'c304',
                                 title: 'Inconsistent Styling Across Browsers',
-                                members: ['u102'],
+                                members: ['659fd60b810c3f98c205471b'],
                                 status: 'l101',
                                 priority: 'l202',
                                 date: 1703995874889,
@@ -284,7 +284,7 @@ export function getBoardsData() {
                             {
                                 id: 'c305',
                                 title: 'Slow Page Load Times',
-                                members: ['u101'],
+                                members: ['659fd52d810c3f98c2054719'],
                                 status: 'l104',
                                 priority: 'l201',
                                 date: 1704299392298,
@@ -300,7 +300,7 @@ export function getBoardsData() {
                         txt: 'Changed Color',
                         createdAt: 1704306285659,
                         byMember: {
-                            _id: 'u101',
+                            _id: '659fd52d810c3f98c2054719',
                             fullname: 'Eden Rize',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                         },
@@ -318,7 +318,7 @@ export function getBoardsData() {
                         txt: 'Change color',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u101',
+                            _id: '659fd52d810c3f98c2054719',
                             fullname: 'Eden Rize',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                         },
@@ -336,7 +336,7 @@ export function getBoardsData() {
                         txt: 'Add file',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u102',
+                            _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
                         },
                         group: {
@@ -353,7 +353,7 @@ export function getBoardsData() {
                         txt: 'Add file',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u103',
+                            _id: '659fd5db810c3f98c205471a',
                             fullname: 'Noam Saar',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                         },
@@ -371,7 +371,7 @@ export function getBoardsData() {
                         txt: 'Change date',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u103',
+                            _id: '659fd5db810c3f98c205471a',
                             fullname: 'Noam Saar',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                         },
@@ -389,7 +389,7 @@ export function getBoardsData() {
                         txt: 'Create',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u103',
+                            _id: '659fd5db810c3f98c205471a',
                             fullname: 'Noam Saar',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                         },
@@ -407,7 +407,7 @@ export function getBoardsData() {
                         txt: 'Add file',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u102',
+                            _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
                         },
                         group: {
@@ -424,7 +424,7 @@ export function getBoardsData() {
                         txt: 'Change status',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u101',
+                            _id: '659fd52d810c3f98c2054719',
                             fullname: 'Eden Rize',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                         },
@@ -442,7 +442,7 @@ export function getBoardsData() {
                         txt: 'Change color',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u102',
+                            _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
                         },
                         group: {
@@ -459,7 +459,7 @@ export function getBoardsData() {
                         txt: 'Change color',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u102',
+                            _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
                         },
                         group: {
@@ -476,7 +476,7 @@ export function getBoardsData() {
                         txt: 'Change date',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u103',
+                            _id: '659fd5db810c3f98c205471a',
                             fullname: 'Noam Saar',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                         },
@@ -494,7 +494,7 @@ export function getBoardsData() {
                         txt: 'Add file',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u101',
+                            _id: '659fd52d810c3f98c2054719',
                             fullname: 'Eden Rize',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                         },
@@ -512,7 +512,7 @@ export function getBoardsData() {
                         txt: 'Create',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u103',
+                            _id: '659fd5db810c3f98c205471a',
                             fullname: 'Noam Saar',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                         },
@@ -530,7 +530,7 @@ export function getBoardsData() {
                         txt: 'Change status',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u102',
+                            _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
                         },
                         group: {
@@ -547,7 +547,7 @@ export function getBoardsData() {
                         txt: 'Change date',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u101',
+                            _id: '659fd52d810c3f98c2054719',
                             fullname: 'Eden Rize',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                         },
@@ -565,7 +565,7 @@ export function getBoardsData() {
                         txt: 'Add person',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u103',
+                            _id: '659fd5db810c3f98c205471a',
                             fullname: 'Noam Saar',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                         },
@@ -583,7 +583,7 @@ export function getBoardsData() {
                         txt: 'Change status',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u103',
+                            _id: '659fd5db810c3f98c205471a',
                             fullname: 'Noam Saar',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
                         },
@@ -601,7 +601,7 @@ export function getBoardsData() {
                         txt: 'Change date',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u101',
+                            _id: '659fd52d810c3f98c2054719',
                             fullname: 'Eden Rize',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                         },
@@ -619,7 +619,7 @@ export function getBoardsData() {
                         txt: 'Change status',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u101',
+                            _id: '659fd52d810c3f98c2054719',
                             fullname: 'Eden Rize',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                         },
@@ -637,7 +637,7 @@ export function getBoardsData() {
                         txt: 'Change color',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u101',
+                            _id: '659fd52d810c3f98c2054719',
                             fullname: 'Eden Rize',
                             imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
                         },
@@ -655,7 +655,7 @@ export function getBoardsData() {
                         txt: 'Change status',
                         createdAt: 1704308766516,
                         byMember: {
-                            _id: 'u102',
+                            _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
                         },
                         group: {
@@ -729,16 +729,16 @@ export function getDefaultBoard() {
         ],
         members: [
             {
-                _id: 'u101',
+                _id: '659fd52d810c3f98c2054719',
                 fullname: 'Eden Rize',
                 imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360556/catt_dytsgq.jpg',
             },
             {
-                _id: 'u102',
+                _id: '659fd60b810c3f98c205471b',
                 fullname: 'Mor Marzan',
             },
             {
-                _id: 'u103',
+                _id: '659fd5db810c3f98c205471a',
                 fullname: 'Noam Saar',
                 imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1704360614/noam_tdr2rp.jpg',
             },
