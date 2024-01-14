@@ -9,11 +9,17 @@
     // gap: 8px;
 
     position: sticky;
+
+    @include for-mobile-only-layout {
+        top: -1px;
+    }
+
     top: 0;
     left: 0;
     background-color: $clr0;
     z-index: 30;
     max-width: 100%;
+
 
     &.collapsed {
         .btn.main-table {

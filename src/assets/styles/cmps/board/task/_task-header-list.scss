@@ -1,4 +1,7 @@
 .task-header-list-container {
+    @include for-mobile-only-layout {
+        margin-block-start: -1px;
+    }
 
     .task-header-list {
         border-block-start: $clr-group-border 0.5px solid;
