@@ -1,6 +1,18 @@
 .dynamic-absolute-modal {
     position: absolute;
     z-index: 30;
+    overflow: initial;
+    text-overflow: initial;
+    white-space: initial;
+
+    p,
+    span {
+        overflow: initial;
+        text-overflow: initial;
+        white-space: initial;
+
+    }
+
 
     //absolute opt
     // .tooltip {

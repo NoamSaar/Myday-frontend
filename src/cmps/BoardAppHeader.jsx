@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
 import { logout } from "../store/actions/user.actions.js"
 
-import { LogoIcon, LoginIcon } from "../services/svg.service.jsx"
+import { LogoIcon, LoginIcon, InviteIcon } from "../services/svg.service.jsx"
 import { UserImg } from "./UserImg.jsx"
 import { useNavigate } from "react-router"
 
@@ -63,7 +63,7 @@ export function BoardAppHeader() {
             onOptionClick: onLoginClick
         },
         {
-            icon: <LoginIcon />,
+            icon: <InviteIcon />,
             title: 'Signup',
             onOptionClick: onLoginClick
         },
