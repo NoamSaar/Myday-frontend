@@ -5,11 +5,14 @@ import { utilService } from "../../../../services/util.service"
 import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/system.actions"
 import { CloseIcon } from "../../../../services/svg.service"
 
-export function DatePreview({ selectedDate, onUpdate, taskId }) {
+export function DatePreview({ task, onUpdate }) {
     const previewBtnRef = useRef(null)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isCurrPickerOpen = parentId === `${taskId}-datePicker`
+    const isCurrPickerOpen = parentId === `${task.id}-datePicker`
+    const selectedDate = task.date
+    const hasTimePassed = utilService.hasTimePassed(selectedDate)
+    const isTaskDone = task.status === 'l101'
 
     function onDatePreviewClick(ev) {
         if (isCurrPickerOpen) {
@@ -20,7 +23,7 @@ export function DatePreview({ selectedDate, onUpdate, taskId }) {
                 parentRefCurrent: previewBtnRef.current,
                 type: 'datePicker',
                 data: { selectedDate: selectedDate || Date.now(), onUpdate },
-                parentId: `${taskId}-datePicker`,
+                parentId: `${task.id}-datePicker`,
                 isPosBlock: true,
                 isCenter: true
             })
@@ -32,21 +35,19 @@ export function DatePreview({ selectedDate, onUpdate, taskId }) {
         onUpdate('date', null)
     }
 
-
-
     return (
         <li
             onClick={onDatePreviewClick}
             className="date-col data-preview-container date-preview"
             ref={previewBtnRef}
         >
-            <p className="data-preview-content flex align-center justify-center">
+            <p className={`${(hasTimePassed && isTaskDone) && 'line-through'} data-preview-content flex align-center justify-center`}>
                 {selectedDate && utilService.getFormatDate(selectedDate)}
             </p>
 
 
             {selectedDate && <>
-                {utilService.hasTimePassed(selectedDate) && <div className="time-passed-icon"><p className="flex align-center justify-center">!</p></div>}
+                {hasTimePassed && <div className={`${!isTaskDone ? 'red' : 'green'} time-passed-icon`}><p className="flex align-center justify-center">!</p></div>}
                 <button className="btn remove-btn" onClick={onRemoveDateClick}><CloseIcon /></button>
             </>}
 

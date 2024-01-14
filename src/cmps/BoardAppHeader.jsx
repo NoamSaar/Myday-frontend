@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
 import { logout } from "../store/actions/user.actions.js"
 
-import { LogoIcon, LoginIcon } from "../services/svg.service.jsx"
+import { LogoIcon, LoginIcon, InviteIcon } from "../services/svg.service.jsx"
 import { UserImg } from "./UserImg.jsx"
 import { useNavigate } from "react-router"
 
@@ -17,9 +17,9 @@ export function BoardAppHeader() {
 
     const isMenuOpen = parentId === `user-auth-menu`
 
-    function onLoginClick() {
+    function onAuthNavClick(navLocation) {
         resetDynamicModal()
-        navigate('/auth')
+        navigate(`/auth/${navLocation}`)
     }
 
     async function onLogout() {
@@ -60,12 +60,12 @@ export function BoardAppHeader() {
         {
             icon: <LoginIcon />,
             title: 'Login',
-            onOptionClick: onLoginClick
+            onOptionClick: () => onAuthNavClick('login')
         },
         {
-            icon: <LoginIcon />,
+            icon: <InviteIcon />,
             title: 'Signup',
-            onOptionClick: onLoginClick
+            onOptionClick: () => onAuthNavClick('signup')
         },
     ]
 

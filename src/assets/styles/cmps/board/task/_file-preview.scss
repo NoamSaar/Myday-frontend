@@ -4,8 +4,9 @@
     .data-preview-content {
 
         img {
-            height: 17px;
-            width: fit-content;
+            width: 20px;
+            height: 20px;
+            object-fit: cover;
         }
     }
 }

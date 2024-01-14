@@ -28,7 +28,7 @@ export function RootCmp() {
         <section className="app">
             <Routes>
                 <Route element={<HomePage />} path="/" />
-                <Route element={<LoginSignup />} path="/auth" />
+                <Route element={<LoginSignup />} path="/auth/:navLocation" />
 
                 <Route element={<BoardApp />} path="/board" >
                     <Route element={<Workspace />} path="/board/workspace" />

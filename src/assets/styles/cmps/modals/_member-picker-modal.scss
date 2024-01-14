@@ -9,6 +9,7 @@
     .chosen-members-list {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
         align-items: center;
         padding-inline: 10px;
         padding-block-start: 10px;
@@ -26,7 +27,7 @@
             background-color: $clr-chosen-member;
             border-radius: 20px;
             width: fit-content;
-            padding-inline-end: 7px;
+            color: #333333;
 
             .user-img,
             .extra-members-box {
@@ -40,13 +41,13 @@
 
             .username {
                 font-size: rem(12px);
-                margin-inline-end: 4px;
+                line-height: 24px;
             }
 
             .remove-btn {
                 font-size: rem(11px);
                 margin-inline-end: 2px;
-
+                min-height: 24px;
             }
 
         }

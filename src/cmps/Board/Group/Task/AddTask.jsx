@@ -47,7 +47,7 @@ export function AddTask({ title, onSetTitle, addTask, groupColor, onSetActiveTas
                             <div className="task-row-placeholder"></div>
                             <div style={{ backgroundColor: groupColor }} className={`${isMobile ? 'sticky-left' : 'sticky-left-36'} color-display`}></div>
 
-                            <div className="flex full-width">
+                            <div className="flex full-width task-edit-container">
                                 <li className="task-selection">
                                     <div className="checkbox"></div>
                                 </li>

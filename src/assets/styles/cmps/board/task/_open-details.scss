@@ -17,9 +17,14 @@
 
     .msg-btn {
         height: 100%;
-        padding-inline: 20px;
+        padding-inline: 10px;
         border-inline-start: $clr-group-border 0.5px solid;
         cursor: pointer;
+
+        @include for-narrow-layout {
+            padding-inline: 20px;
+
+        }
 
         &:hover svg {
             fill: $clr-btn-add;
