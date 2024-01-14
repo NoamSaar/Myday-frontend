@@ -20,6 +20,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
+    const [isChangingToDone, setIsChangingToDone] = useState(false)
     const [currTask, setCurrTask] = useState(null)
     const [taskTitle, setTaskTitle] = useState(task.title)
     const [isShowMenuBtn, setIsShowMenuBtn] = useState(false)
@@ -46,7 +47,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             let data = recivedData
             if (field === 'members') data = data.map(member => member._id)
+            if (field[0] === 'status' && recivedData === 'l101') {
+                setIsChangingToDone(true)
+                setTimeout(() => {
+                    setIsChangingToDone(false)
+                }, 3000)
+            }
 
+            resetDynamicModal()
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask)
 
@@ -61,6 +69,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 default:
                     break
             }
+
         } catch (err) {
             console.error('Error changing task:', err)
             showErrorMsg('Cannot change Task')
@@ -217,6 +226,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             task={currTask}
                             onUpdate={onTaskChange}
                             allMembers={board.members}
+                            isChangingToDone={isChangingToDone}
                         />
                     )
                 })}

@@ -2,8 +2,9 @@ import { useSelector } from "react-redux"
 import { useRef } from "react"
 
 import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/system.actions"
+import { utilService } from "../../../../services/util.service"
 
-export function LabelPreview({ title, info, onUpdate, taskId }) {
+export function LabelPreview({ title, info, onUpdate, taskId, isChangingToDone }) {
     const previewBtnRef = useRef(null)
 
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -31,11 +32,15 @@ export function LabelPreview({ title, info, onUpdate, taskId }) {
         }
     }
 
+    const animations = ['balloon', 'confetti', 'crazy_balls']
+    const dynClass = animations[utilService.getRandomIntInclusive(0, animations.length - 1)]
+
     return (
         <li
             onClick={onLabelPreviewClick}
             style={style}
-            className="status-preview status-col priority-col"
+            className={`status-preview status-col priority-col 
+            ${isChangingToDone && label.id === 'l101' ? dynClass : ''}`}
             ref={previewBtnRef}
         >
             <p>{label.title}</p>
