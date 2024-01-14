@@ -43,6 +43,34 @@
             width: 100px;
             height: 100px;
         }
+
+        .empty-search-container {
+            background-color: $clr0;
+            text-align: center;
+            padding-block-start: em(56px, 14px);
+            padding-inline: em(16px, 14px);
+            color: $clr-light-font;
+        }
+
+
+        .empty-search {
+
+            h4 {
+                font-size: em(18px, 14px);
+                padding-block-end: em(10px, 14px);
+            }
+
+            p {
+                font-size: em(16px, 14px);
+                line-height: lh(24px);
+                white-space: normal;
+            }
+
+            img {
+                width: 60%
+            }
+
+        }
     }
 
 }

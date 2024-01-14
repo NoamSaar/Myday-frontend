@@ -4,7 +4,11 @@ import { useRef, useState } from "react";
 import { updateBoardOrder } from "../../../store/actions/board.actions";
 import { useSelector } from "react-redux";
 
-export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop }) {
+import emptySearch from "/img/search-empty.svg"
+import { BigPlusIcon } from "../../../services/svg.service";
+
+
+export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop, onAddGrop }) {
     const [isGroupsCollapsed, setIsGroupsCollapsed] = useState(false)
     const isHeaderCollapsed = useSelector((storeState) => storeState.boardModule.isHeaderCollapsed)
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
@@ -55,44 +59,66 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
         }
     }
 
+    if (!board.groups.length) return (
+        <section className="empty-search-container grid place-center">
+            <div className="empty-search">
+                <img src={emptySearch} alt="" />
+                <h4>No results found</h4>
+                <p>
+                    Try using a different search term, configuring the search options or
+                    <br></br>
+                    use ”Search Everything” to search across the entire account
+                </p>
+            </div>
+
+        </section>
+    )
+
     return (
-        <DragDropContext onBeforeDragStart={onBeforeDragStart} onDragEnd={handleDragEnd}>
-            <Droppable droppableId={board._id}>
-                {(provided) => (
-                    <ul className="clean-list group-list"  {...provided.droppableProps} ref={provided.innerRef}>
-                        {
-                            board.groups.map((group, idx) => (
-                                <div className={`${getScrollTopClass(idx)} group-container group-${idx}`} key={group.id}>
-                                    <Draggable draggableId={group.id} index={idx} >
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
+        <>
+            <DragDropContext onBeforeDragStart={onBeforeDragStart} onDragEnd={handleDragEnd}>
+                <Droppable droppableId={board._id}>
+                    {(provided) => (
+                        <ul className="clean-list group-list"  {...provided.droppableProps} ref={provided.innerRef}>
+                            {
+                                board.groups.map((group, idx) => (
+                                    <div className={`${getScrollTopClass(idx)} group-container group-${idx}`} key={group.id}>
+                                        <Draggable draggableId={group.id} index={idx} >
+                                            {(provided, snapshot) => (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
 
-                                            >
+                                                >
 
-                                                <BoardGroup
-                                                    key={group.id}
-                                                    group={group}
-                                                    titlesOrder={board.titlesOrder}
-                                                    isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
-                                                    onTitleEditLeave={onSetIsFocusLastGroup}
-                                                    isGroupsCollapsed={isGroupsCollapsed}
-                                                    toggleIsGroupsCollapsed={() => setIsGroupsCollapsed(prevCollapsed => !prevCollapsed)}
-                                                    isHeaderCollapsed={isHeaderCollapsed}
-                                                    isMobile={isMobile}
-                                                />
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                </div>
-                            ))
-                        }
-                        {provided.placeholder}
-                    </ul>
-                )}
-            </Droppable>
-        </DragDropContext>
+                                                    <BoardGroup
+                                                        key={group.id}
+                                                        group={group}
+                                                        titlesOrder={board.titlesOrder}
+                                                        isEditingTitle={isFocusLastGroup && idx === board.groups.length - 1}
+                                                        onTitleEditLeave={onSetIsFocusLastGroup}
+                                                        isGroupsCollapsed={isGroupsCollapsed}
+                                                        toggleIsGroupsCollapsed={() => setIsGroupsCollapsed(prevCollapsed => !prevCollapsed)}
+                                                        isHeaderCollapsed={isHeaderCollapsed}
+                                                        isMobile={isMobile}
+                                                    />
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    </div>
+                                ))
+                            }
+                            {provided.placeholder}
+                        </ul>
+                    )}
+                </Droppable>
+            </DragDropContext>
+
+            <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
+                <BigPlusIcon />
+                <p>Add new group</p>
+            </button>
+        </>
     )
 }

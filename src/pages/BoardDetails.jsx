@@ -2,12 +2,13 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { Outlet, useParams } from "react-router"
 import loader from "/img/board-loader.gif"
+
 import { addGroup, loadBoard, loadFilteredBoard, setFilterBy, getTask } from "../store/actions/board.actions"
 
-import { BigPlusIcon } from "../services/svg.service"
 import { BoardHeader } from "../cmps/Board/BoardHeader"
 import { TaskDetails } from "./TaskDetails"
 import { GroupList } from "../cmps/Board/Group/GroupList"
+import { boardService } from "../services/board.service"
 
 export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -24,6 +25,8 @@ export function BoardDetails() {
         setTimeout(() => {
             _loadBoard()
         }, 1600)
+
+        setFilterBy(boardService.getDefaultFilter()) // restart filter on nav
         // TODO : Emit watch on the user + add a listener for when user changes
         // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId)
         // socketService.on(SOCKET_EVENT_BOARD_UPDATED, (board) => {
@@ -70,6 +73,9 @@ export function BoardDetails() {
             <img className="myday-loader" src={loader} alt="" />
         </section>
     )
+
+
+
     // if (isLoading || !board) return <div className="board-details">Loading...</div>
     return (
         <section onScroll={onDetailsScroll} className={`board-details ${modalData.isOpen ? 'overflow-hidden' : ''}`}>
@@ -79,13 +85,13 @@ export function BoardDetails() {
                 onSetFilter={onSetFilter}
             />
 
-            <GroupList scrollTop={scrollTop} board={board} isFocusLastGroup={isFocusLastGroup} onSetIsFocusLastGroup={() => setIsFocusLastGroup(false)} />
-
-
-            <button className="btn add-group-btn sticky-left-40" onClick={onAddGrop}>
-                <BigPlusIcon />
-                <p>Add new group</p>
-            </button>
+            <GroupList
+                scrollTop={scrollTop}
+                board={board}
+                isFocusLastGroup={isFocusLastGroup}
+                onSetIsFocusLastGroup={() => setIsFocusLastGroup(false)}
+                onAddGrop={onAddGrop}
+            />
 
             <Outlet
                 routes={{

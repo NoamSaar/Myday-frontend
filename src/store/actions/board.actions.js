@@ -32,7 +32,6 @@ import { utilService } from '../../services/util.service.js'
 
 export async function loadBoards() {
     try {
-        // const filterBy = store.getState().boardModule.filterBy
         const boards = await boardService.query()
         boards.sort((a, b) => a.order - b.order)
         store.dispatch(getActionSetBoards(boards))
