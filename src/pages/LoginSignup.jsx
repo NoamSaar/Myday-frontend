@@ -14,7 +14,6 @@ export function LoginSignup() {
     const navigate = useNavigate()
     const { navLocation } = useParams()
     const isLogin = navLocation === 'login'
-    console.log('navLocation', navLocation)
 
     function toggleLogin(navLocation) {
         navigate(`/auth/${navLocation}`)
@@ -56,10 +55,10 @@ export function LoginSignup() {
         try {
             if (isLogin) {
                 await login(user)
-                navigate('/board/65a2e5b6a2060938a0c7f88b')
+                navigate('/board/659fb84f43565a19c57dd627')
             } else {
                 await signup(user)
-                navigate('/board/65a2e5b6a2060938a0c7f88b')
+                navigate('/board/659fb84f43565a19c57dd627')
             }
 
         } catch (error) {
