@@ -5,7 +5,7 @@ import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
 import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../../store/actions/system.actions"
 
-import { AddMsgIcon, DeleteIcon, MenuIcon, OpenIcon, MsgIcon } from "../../../../services/svg.service"
+import { DeleteIcon, MenuIcon, OpenIcon } from "../../../../services/svg.service"
 import { DynamicPreview } from "../Picker/DynamicPreview"
 import { EditableTxt } from "../../../EditableTxt"
 import { useNavigate } from "react-router"
@@ -54,7 +54,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 }, 3000)
             }
 
-            resetDynamicModal()
+            if (field !== 'members' && field !== 'link') resetDynamicModal()
+
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask)
 
@@ -154,7 +155,36 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         },
     ]
 
-    if (!currTask) return <ul className="task-preview-container task-title">Loading</ul>
+    if (!currTask) return <ul className="clean-list flex subgrid full-grid-column loading-task task-preview-container">
+        <div className='task-sticky-container sticky-left'>
+            {isMobile ?
+                <div className="task-row-placeholder"></div>
+                :
+                <div className="menu-container flex align-center justify-center">
+
+                </div>}
+
+            <div
+                style={{ backgroundColor: groupColor }}
+                className={`${isMobile ? 'sticky-left' : 'sticky-left-36'} color-display`}>
+            </div>
+            <ul className='clean-list task-title-container flex'>
+                <li className="task-selection">
+                    <div className="checkbox"></div>
+                </li>
+
+                <li className="task-title single-task"
+                >
+
+                    <div className="flex align-center open-details-container">
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+    </ul>
     return (
         <ul
             className="clean-list flex subgrid full-grid-column task-preview-container"

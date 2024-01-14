@@ -56,7 +56,6 @@
 
     .new-member-picker-container {
         padding: 16px 14px;
-        // padding: 16px 20px;
 
         .suggested-people-title {
             margin-block: 8px 4px;
@@ -69,28 +68,7 @@
             margin-inline: 0;
         }
 
-        .member-options-list {
 
-            .member-option {
-                display: flex;
-                justify-content: flex-start;
-                width: 100%;
-                padding: 8px;
-
-                .user-img,
-                .extra-members-box {
-                    min-width: 26px;
-                    min-height: 26px;
-                    max-width: 26px;
-                    max-height: 26px;
-                    border: unset;
-                }
-
-                .username {
-                    padding-inline: 8px;
-                }
-            }
-        }
     }
 
 

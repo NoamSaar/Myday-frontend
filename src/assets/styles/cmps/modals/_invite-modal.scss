@@ -1,0 +1,47 @@
+.invite-modal {
+    background-color: white;
+    padding: 0 32px 10px 32px;
+    width: 530px;
+    height: 484px;
+    border-radius: 8px;
+
+    .sticky-container {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        padding-block-start: 24px;
+        margin-block-end: 10px;
+        background-color: white;
+        border-block-end: 1px solid $clr-btn-border;
+
+        span {
+            font-size: rem(24px);
+            padding-block-start: 3.5px;
+        }
+
+        .dynamic-input {
+            justify-content: space-between;
+            padding: 2px 2px 2px 16px;
+            margin-inline: 0;
+            margin-block: 10px;
+        }
+    }
+
+    .member-list {
+        overflow-y: scroll;
+        height: 357.5px;
+
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 24px;
+        right: 0;
+        padding: 5px;
+
+        svg {
+            width: 25px;
+            height: 25px;
+        }
+    }
+}

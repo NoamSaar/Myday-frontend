@@ -27,6 +27,7 @@
 
 // board
 @import "cmps/board/board-app";
+@import "cmps/board/member-list";
 @import "cmps/board/board-header";
 @import "cmps/board/board-group";
 
@@ -58,6 +59,7 @@
 @import "cmps/modals/link-picker-modal";
 @import "cmps/modals/status-picker-modal";
 @import "cmps/modals/member-picker-modal";
+@import "cmps/modals/invite-modal";
 @import "cmps/board-member-select";
 @import "cmps/dynamic-dialog";
 

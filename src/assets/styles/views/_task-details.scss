@@ -35,8 +35,11 @@
 
     .panel-title-section {
         margin-inline: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
-        span {
+        .title {
             font-size: rem(18px);
         }
 
@@ -96,6 +99,9 @@
     }
 
     .panel-update {
+        overflow-y: scroll;
+        height: calc(100dvh - 48px);
+
         .input-container {
             padding: 30px 20px 42px;
 
