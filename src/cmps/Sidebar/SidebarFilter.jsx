@@ -4,7 +4,7 @@ import { utilService } from "../../services/util.service"
 
 import { DynamicInput } from "../DynamicInput"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
-import { PlusIcon, SearchIcon } from "../../services/svg.service"
+import { PlusIcon, FilterIcon } from "../../services/svg.service"
 
 export function SidebarFilter({ filterBy, onSetFilter, onAddNewBoard }) {
     onSetFilter = useRef(utilService.debounce(onSetFilter))
@@ -27,10 +27,11 @@ export function SidebarFilter({ filterBy, onSetFilter, onAddNewBoard }) {
         type: 'search',
         handleChange: handleChange,
         isSearchInput: true,
+        isResetBtn: true,
         // additionalBtns: [
         //     {
         //         name: 'filter',
-        //         icon: < SearchIcon />,
+        //         icon: < FilterIcon />,
         //         func: console.log('hi'),
         //     }
         // ]

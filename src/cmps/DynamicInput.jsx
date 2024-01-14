@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { SearchIcon } from "../services/svg.service"
+import { CloseIcon, SearchIcon } from "../services/svg.service"
 
 export function DynamicInput({ inputProps }) {
     const inputRef = useRef(null)
@@ -19,6 +19,8 @@ export function DynamicInput({ inputProps }) {
         additionalBtns,
         handleChange,
         onBlur,
+        isAutoFocus = false,
+        isResetBtn = false,
         isRequired
     } = inputProps
 
@@ -43,7 +45,17 @@ export function DynamicInput({ inputProps }) {
                 onBlur={onInputBlur}
                 onChange={handleChange}
                 required={isRequired}
+                autoComplete="off"
+                autoFocus={isAutoFocus}
+
             />
+
+            {isResetBtn &&
+                <div className={(!inputValue ? 'hide ' : '') + 'btn reset'} onClick={() => handleChange({ target: { name, value: '' } })}>
+                    <CloseIcon />
+                </div>
+            }
+
 
             {additionalBtns && additionalBtns.length &&
                 additionalBtns.map((additionalBtn, index) => (
