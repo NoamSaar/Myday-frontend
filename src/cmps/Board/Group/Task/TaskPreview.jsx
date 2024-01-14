@@ -155,7 +155,36 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         },
     ]
 
-    if (!currTask) return <ul className="task-preview-container task-title">Loading</ul>
+    if (!currTask) return <ul className="clean-list flex subgrid full-grid-column loading-task task-preview-container">
+        <div className='task-sticky-container sticky-left'>
+            {isMobile ?
+                <div className="task-row-placeholder"></div>
+                :
+                <div className="menu-container flex align-center justify-center">
+
+                </div>}
+
+            <div
+                style={{ backgroundColor: groupColor }}
+                className={`${isMobile ? 'sticky-left' : 'sticky-left-36'} color-display`}>
+            </div>
+            <ul className='clean-list task-title-container flex'>
+                <li className="task-selection">
+                    <div className="checkbox"></div>
+                </li>
+
+                <li className="task-title single-task"
+                >
+
+                    <div className="flex align-center open-details-container">
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+    </ul>
     return (
         <ul
             className="clean-list flex subgrid full-grid-column task-preview-container"

@@ -103,4 +103,15 @@
             }
         }
     }
+
+    &.loading-task {
+        background-color: $clr-task-hover;
+        height: 36px;
+
+        .task-title-container,
+        .task-title {
+            background-color: $clr-task-hover;
+
+        }
+    }
 }
