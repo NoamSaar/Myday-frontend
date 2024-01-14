@@ -113,6 +113,18 @@
 
 }
 
+@mixin animation-style($animationName) {
+    position: absolute;
+    left: calc((100% - 139px)/2);
+    right: calc((100% - 139px)/2);
+    top: 0;
+    bottom: 0;
+    background-position: left center;
+    background-size: calc(139px * 75);
+    animation: $animationName calc(75s / 25) steps(75);
+    animation-fill-mode: forwards;
+}
+
 /* Media  Mixins */
 @mixin aspect-ratio($width, $height) {
     position: relative;

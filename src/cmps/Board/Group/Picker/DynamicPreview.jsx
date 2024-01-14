@@ -4,7 +4,7 @@ import { LinkPreview } from "./LinkPreview"
 import { MemberPreview } from "./MemberPreview"
 import { LabelPreview } from "./LabelPreview"
 
-export function DynamicPreview({ title, task, onUpdate, allMembers }) {
+export function DynamicPreview({ title, task, onUpdate, allMembers, isChangingToDone }) {
     switch (title) {
 
         case "status":
@@ -15,6 +15,7 @@ export function DynamicPreview({ title, task, onUpdate, allMembers }) {
                     info={{ chosenOption: task[title] }}
                     onUpdate={onUpdate}
                     taskId={task.id}
+                    isChangingToDone={isChangingToDone}
                 />)
 
         case "member":

@@ -1,0 +1,79 @@
+.confetti {
+    @include animation-style(confetti);
+}
+
+.balloon {
+    @include animation-style(balloon);
+}
+
+.crazy_balls {
+    @include animation-style(crazy_balls);
+}
+
+@keyframes balloon {
+    0% {
+        background-image: url("/img/balloon_animation.png")
+    }
+
+    99.9% {
+        background-image: url("/img/balloon_animation.png");
+        background-position: calc(100% * -75)
+    }
+}
+
+@keyframes confetti {
+    0% {
+        background-image: url("/img/confetti_animation.png")
+    }
+
+    99.9% {
+        background-image: url("/img/confetti_animation.png");
+        background-position: calc(100% * -75)
+    }
+}
+
+@keyframes crazy_balls {
+    0% {
+        background-image: url("/img/crazy_balls_animation.png")
+    }
+
+    99.9% {
+        background-image: url("/img/crazy_balls_animation.png");
+        background-position: calc(100% * -75)
+    }
+}
+
+.status-cell-component .confetti-sprite-animation.animated-status {
+    position: absolute;
+    left: calc((100% - 139px)/2);
+    right: calc((100% - 139px)/2);
+    top: 0;
+    bottom: 0;
+    background-position: left center;
+    background-size: calc(139px * 75);
+    animation: confetti calc(75s / 25) steps(75);
+    animation-fill-mode: forwards
+}
+
+// @keyframes on_point {
+//     0% {
+//         background-image: url("/img/status_animations/on_point_animation.png")
+//     }
+
+//     99.9% {
+//         background-image: url("/img/status_animations/on_point_animation.png");
+//         background-position: calc(100% * -75)
+//     }
+// }
+
+.status-cell-component .on-point-sprite-animation.animated-status {
+    position: absolute;
+    left: calc((100% - 138px)/2);
+    right: calc((100% - 138px)/2);
+    top: 0;
+    bottom: 0;
+    background-position: left center;
+    background-size: calc(138px * 75);
+    animation: on_point calc(75s / 25) steps(75);
+    animation-fill-mode: forwards
+}
