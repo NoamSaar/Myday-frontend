@@ -7,7 +7,7 @@ import { DynamicInput } from "../DynamicInput"
 import { updateBoard } from "../../store/actions/board.actions"
 import { showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
 
-export function InviteModal({ board }) {
+export function InviteModal({ board, onCloseDialog }) {
     const [users, setUsers] = useState(null)
     const [filteredUsers, setFilteredUsers] = useState(null)
     const [usersFilter, setUsersFilter] = useState('')
@@ -89,8 +89,10 @@ export function InviteModal({ board }) {
             <div className="sticky-container">
                 <span>Invite Users</span>
                 <DynamicInput inputProps={inputProps} />
+                <button className="btn close-btn" onClick={onCloseDialog}><CloseIcon /></button>
             </div>
             <MemberList members={filteredUsers} onMemberClick={onUserSelect} />
+
         </div>
     )
 }

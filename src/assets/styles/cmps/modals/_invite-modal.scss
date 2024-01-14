@@ -30,4 +30,16 @@
         height: 367.5px;
 
     }
+
+    .close-btn {
+        position: absolute;
+        top: 24px;
+        right: 0;
+        padding: 5px;
+
+        svg {
+            width: 25px;
+            height: 25px;
+        }
+    }
 }
