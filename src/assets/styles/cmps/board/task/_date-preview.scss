@@ -1,12 +1,16 @@
 .date-preview {
     padding: 2px;
 
-    p {
+    .data-preview-content {
         white-space: nowrap;
         overflow-x: hidden;
         text-overflow: ellipsis;
-
         cursor: text;
+
+        &.line-through {
+
+            text-decoration: line-through;
+        }
 
     }
 
@@ -17,11 +21,17 @@
         height: 16px;
         border-radius: 50%;
         color: white;
-        background-color: #e0394e;
+
+        &.red {
+            background-color: #e0394e;
+        }
+
+        &.green {
+            background-color: $clr-success;
+        }
 
         p {
-            height: 16px;
-
+            height: 18.8px;
         }
     }
 

@@ -29,9 +29,8 @@ export function DynamicPreview({ title, task, onUpdate, allMembers }) {
         case "date":
             return (
                 <DatePreview
-                    selectedDate={task.date}
+                    task={task}
                     onUpdate={onUpdate}
-                    taskId={task.id}
                 />)
 
         case "file":
