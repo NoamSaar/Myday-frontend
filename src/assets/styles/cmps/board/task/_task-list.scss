@@ -108,43 +108,48 @@
                     .add-task-content-layout {
                         width: 100%;
 
-                        .task-title {
+                        .task-edit-container {
+                            box-shadow: 0 8px 8px -8px rgba(0, 0, 0, 0.1);
 
-                            @include for-narrow-only-layout {
-                                padding-inline-start: 13px;
+                            .task-title {
+
+                                @include for-narrow-only-layout {
+                                    padding-inline-start: 13px;
+                                }
+
+                                @include for-mobile-only-layout {
+                                    padding-inline-start: unset;
+                                }
+
+                                @include for-narrow-layout {
+                                    padding-inline-start: 16px;
+                                }
+
+                                .focused-input {
+                                    background-color: white;
+                                }
+
+                                .editable-txt,
+                                .focused-input form {
+                                    padding-inline-start: 11.5px;
+                                }
+
+                                .editable-txt {
+                                    width: 99%;
+                                }
+
+                                .add-task-btn {
+                                    font-size: rem(12px);
+                                    padding: 2px 4px;
+                                    margin-inline-end: 2px;
+                                    color: white;
+                                    background-color: $clr-btn-add;
+                                    border-radius: 4px;
+                                }
+
                             }
-
-                            @include for-mobile-only-layout {
-                                padding-inline-start: unset;
-                            }
-
-                            @include for-narrow-layout {
-                                padding-inline-start: 16px;
-                            }
-
-                            .focused-input {
-                                background-color: white;
-                            }
-
-                            .editable-txt,
-                            .focused-input form {
-                                padding-inline-start: 11.5px;
-                            }
-
-                            .editable-txt {
-                                width: 99%;
-                            }
-
-                            .add-task-btn {
-                                font-size: rem(12px);
-                                padding: 2px 4px;
-                                margin-inline-end: 2px;
-                                color: white;
-                                background-color: $clr-btn-add;
-                                border-radius: 4px;
-                            }
-
                         }
+
 
                         .checkbox {
                             border-color: $clr-group-border;
