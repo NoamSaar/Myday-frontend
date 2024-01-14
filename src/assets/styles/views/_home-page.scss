@@ -1,47 +1,12 @@
 .home-page {
-    // .home-header {
-    //     min-height: 72px;
-    //     // padding: 0 270px;
-    //     align-items: center;
-    //     background-color: white;
-    //     box-shadow: 0px 10px 15px 10px #3a3a3a06;
-    //     grid-auto-flow: column;
 
-    //     a {
-    //         font-size: 0.875rem;
-    //         cursor: pointer;
-    //         padding: 8px 10px;
-    //         border-radius: 8px;
-
-    //         &:hover {
-    //             color: #5034FF;
-    //             background-color: #f0f3ff;
-    //         }
-    //     }
-
-    //     img {
-    //         height: 42px;
-    //         margin-right: 16px;
-    //     }
-
-    //     .get-started-btn {
-    //         height: 40px;
-    //         min-width: 130px;
-    //         font-size: 0.8125rem;
-    //         padding: 8px 16px;
-    //         font-weight: 300;
-    //         background-color: #6161FF;
-    //         color: #ffffff;
-    //         border-radius: 40px;
-    //         line-height: 17px;
-    //         border: none;
-
-    //         &:hover {
-    //             background-color: #5151d5;
-    //             color: #ffffff;
-    //         }
-    //     }
-    // }
+    h1,
+    h2,
+    span {
+        overflow: initial;
+        text-overflow: initial;
+        white-space: initial;
+    }
 
     .home-page-content {
         display: flex;
@@ -209,5 +174,215 @@
                 width: 4.375em;
             }
         }
+    }
+
+    .boost-your-team {
+        justify-content: center;
+        padding: 90px;
+
+        & div>div,
+        h2 {
+            max-width: 620px;
+        }
+
+        &>div {
+            padding-inline: 32px;
+        }
+
+        h2 {
+            width: 50%;
+            text-align: left;
+            font-size: 2.25rem;
+            line-height: 48px;
+            font-family: poppins-bold;
+            padding-inline-end: 60px;
+            color: #333;
+        }
+
+        .boost-your-team-cta {
+            width: 50%;
+
+            span {
+                font-size: rem(16px);
+                font-family: poppins-light;
+                line-height: 40px;
+                word-break: break-word;
+                // padding-bottom: 16px;
+            }
+
+            .btn-get-started {
+                min-width: 130px;
+                font-size: 0.8125rem;
+                margin-block-start: 32px;
+                padding: 6px 50px 6px 32px;
+                font-weight: 300;
+                background-color: #6161FF;
+                color: #ffffff;
+                border-radius: 40px;
+                line-height: 17px;
+                border: none;
+                margin-bottom: 16px;
+
+                &:hover {
+                    background-color: #5151d5;
+                }
+
+                .get-started-txt {
+                    padding: 0;
+                }
+
+                svg {
+                    margin-inline-end: 10px;
+                }
+            }
+        }
+
+
+        @media (max-width: 991px) {
+            &>div {
+                flex-direction: column;
+            }
+
+            h2 {
+                width: 100%;
+                padding: 0 60px 60px 60px;
+                overflow: initial;
+                text-overflow: initial;
+                white-space: initial;
+            }
+
+            .boost-your-team-cta {
+                width: 100%;
+            }
+        }
+    }
+
+    .preview-images-section {
+        padding-bottom: 64px;
+
+        .masonry-grid {
+            max-width: 1440px;
+            margin: auto;
+
+            .grid-container {
+                // padding-left: 32px;
+                display: grid;
+                grid-template-areas:
+                    "column1 battery phone automation comment ."
+                    "column2 battery phone . . . "
+                    "column2 battery phone dashboard dashboard dashboard"
+                    "intergration intergration phone dashboard dashboard dashboard"
+                    ". pie phone dashboard dashboard dashboard"
+                    ". . . dashboard dashboard dashboard";
+                grid-template-columns: 12.64vw 11.54vw 14.79vw 14.72vw 12.64vw 18%;
+                grid-template-rows: 5vw 2.5vw 1.25vw 6.39vw 9.17vw auto;
+                grid-gap: 1.67vw;
+
+                @media (max-width: 991px) {
+                    display: grid;
+                    grid-template-areas:
+                        "phone automation comment"
+                        "phone . ."
+                        "phone column1 battery"
+                        "phone column2 battery"
+                        "phone integration integration";
+                    grid-template-columns: 33% 29% 28%;
+                    grid-template-rows: 18% 2% 18% 18% 22%;
+                    grid-gap: 4%;
+                    padding: 10px;
+                    padding-inline-start: 24px;
+                }
+
+                .item {
+                    filter: drop-shadow(-10.8923px 14.523px 35.0973px rgba(29, 140, 242, 0.2));
+                    z-index: 1;
+
+                    img {
+                        border-radius: 8px;
+                    }
+                }
+
+                .item1 {
+                    grid-area: column1;
+                }
+
+                .item2 {
+                    grid-area: column2;
+                }
+
+                .item3 {
+                    grid-area: battery;
+
+                }
+
+                .item4 {
+                    grid-area: intergration;
+                }
+
+                .item5 {
+                    grid-area: pie;
+                }
+
+                .item6 {
+                    grid-area: phone;
+                }
+
+                .item7 {
+                    grid-area: automation;
+                }
+
+                .item8 {
+                    grid-area: comment;
+                }
+
+                .item9 {
+                    grid-area: dashboard;
+                }
+
+                @media (min-width: 991px) {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    .footer-section {
+        height: 312px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+        color: rgb(255, 255, 255);
+        background: #181b34;
+        padding: rem(64px) 0;
+        margin-block-start: rem(100px);
+        font-family: poppins-light;
+
+        h2 {
+            font-size: rem(28px);
+            line-height: 40px;
+            font-family: poppins-light;
+
+            span {
+                font-family: poppins-bold;
+                font-size: rem(28px);
+            }
+        }
+
+        p {
+            font-size: rem(18px);
+            line-height: 32px;
+            margin-bottom: 20px;
+
+            span {
+                margin-inline: 15px;
+            }
+        }
+
+        .btn-footer-get-started {
+            @include getStartedBtn($padding :14px 40px 14px 36px, $font-size : 1rem, $arrow-before : 1.6rem, $arrow-after : 1.2rem)
+        }
+
     }
 }

@@ -10,9 +10,9 @@ import TaskManagementImg from '/img/home_page/TaskManagementImg.png'
 import HRImg from '/img/home_page/HRImg.png'
 import OperationsImg from '/img/home_page/OperationsImg.png'
 import MoreWorkflowsImg from '/img/home_page/MoreWorkflowsImg.png'
-import { ArrowLeftIcon, ArrowRightIcon } from "../services/svg.service"
+import { ArrowRightIcon } from "../services/svg.service"
 
-import HomeAppPreviewImg from '/img/home_page/HomeAppPreviewImg.png'
+import HomeAppPreviewImg from '/img/home_page/HomeAppPreviewImg.avif'
 import HoltCatImg from '/img/home_page/HoltCatImg.avif'
 import CanvaImg from '/img/home_page/CanvaImg.png'
 import CocaColaImg from '/img/home_page/CocaColaImg.png'
@@ -23,6 +23,16 @@ import BdImg from '/img/home_page/BdImg.png'
 import GlossierImg from '/img/home_page/GlossierImg.png'
 import UniversalImg from '/img/home_page/UniversalImg.png'
 import { useNavigate } from "react-router"
+
+import TimeLine from '/img/home_page/Timeline_column.png'
+import Status from '/img/home_page/Status_column.png'
+import Battery from '/img/home_page/Battery.png'
+import Integration from '/img/home_page/Integration.avif'
+import Pie from '/img/home_page/Pie.png'
+import Mobile from '/img/home_page/MobileApp.avif'
+import Automation from '/img/home_page/Automation.avif'
+import Comment from '/img/home_page/Talk.avif'
+import Dashboard from '/img/home_page/Dash.avif'
 
 export function HomePage() {
     const [scrolled, setScrolled] = useState(false)
@@ -91,9 +101,9 @@ export function HomePage() {
 
             </main>
 
-            {/* <section className='home-first-img-container full'>
+            <section className='home-first-img-container full'>
                 <img src={HomeAppPreviewImg} alt="" />
-            </section> */}
+            </section>
 
             <section className='sponsers-section'>
                 <div className='sponsers-imgs-container'>
@@ -107,6 +117,67 @@ export function HomePage() {
                     <img src={GlossierImg} alt="" />
                     <img src={UniversalImg} alt="" />
                 </div>
+            </section>
+
+            <section className="boost-your-team flex">
+                <div className="flex justify-center">
+                    <h2>The Work OS that lets you shape workflows, your way</h2>
+                    <div className="boost-your-team-cta flex column">
+                        <span>
+                            Boost your team’s alignment, efficiency, and productivity by
+                            customizing any workflow to fit your needs.
+                        </span>
+                        <div className="flex">
+                            <button onClick={() => navigate('/board/659fb84f43565a19c57dd627')} className='btn-get-started'><span className='get-started-txt'>Get Started</span>
+                                <ArrowRightIcon />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="preview-images-section">
+                <div className="masonry-grid">
+                    <div className="grid-container">
+                        <div className="item item1 timeline">
+                            <img src={TimeLine} alt="" />
+                        </div>
+                        <div className="item item2 status">
+                            <img src={Status} alt="" />
+                        </div>
+                        <div className="item item3 battery">
+                            <img src={Battery} alt="" />
+                        </div>
+                        <div className="item item4 integration">
+                            <img src={Integration} alt="" />
+                        </div>
+                        <div className="item item5 pie">
+                            <img src={Pie} alt="" />
+                        </div>
+                        <div className="item item6 mobile">
+                            <img src={Mobile} alt="" />
+                        </div>
+                        <div className="item item7 automation">
+                            <img src={Automation} alt="" />
+                        </div>
+                        <div className="item item8 comment">
+                            <img src={Comment} alt="" />
+                        </div>
+                        <div className="item item9 dashboard">
+                            <img src={Dashboard} alt="" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="footer-section full">
+                <h2>Deliver your best work <span>with myday.com</span></h2>
+                <p>No credit card needed   <span>✦</span>   Unlimited time on Free plan</p>
+                <button className="btn-footer-get-started" onClick={() => navigate('/board/659fb84f43565a19c57dd627')}>
+                    <span className="get-started-txt">Get Started</span>
+                    <ArrowRightIcon />
+                </button>
+
             </section>
         </section >
     )

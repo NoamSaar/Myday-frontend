@@ -24,13 +24,14 @@
         align-items: center;
         gap: 1em;
         cursor: pointer;
-        font-size: .875rem;
+        font-size: 1rem;
+        padding: 10px;
     }
 }
 
 .home-header-logo {
-    height: 42px;
-    width: 50px;
+    height: 32px;
+    width: 36px;
 }
 
 .btn-header-login {
