@@ -5,16 +5,20 @@ import { userService } from '../services/user.service'
 import { uploadService } from '../services/upload.service'
 import { UserImg } from '../cmps/UserImg'
 import { setIsLoading, showErrorMsg } from '../store/actions/system.actions'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { login, signup } from '../store/actions/user.actions'
 
 export function LoginSignup() {
-    const [isLogin, setIsLogin] = useState(false)
+    // const [isLogin, setIsLogin] = useState(false)
     const [user, setUser] = useState(userService.getEmptyUser())
     const navigate = useNavigate()
+    const { navLocation } = useParams()
+    const isLogin = navLocation === 'login'
+    console.log('navLocation', navLocation)
 
-    function toggleLogin() {
-        setIsLogin(prevLogin => !prevLogin)
+    function toggleLogin(navLocation) {
+        navigate(`/auth/${navLocation}`)
+        // setIsLogin(prevLogin => !prevLogin)
     }
 
     function handleChange({ target }) {
@@ -93,9 +97,9 @@ export function LoginSignup() {
     }
 
     const noticeContent = isLogin ?
-        <p>Don't have an account yet? <span onClick={toggleLogin}>Sign up</span></p>
+        <p>Don't have an account yet? <span onClick={() => toggleLogin('signup')}>Sign up</span></p>
         :
-        <p>Already have an account? <span onClick={toggleLogin}>Log in</span></p>
+        <p>Already have an account? <span onClick={() => toggleLogin('login')}>Log in</span></p>
 
     return (
         <section className="login-signup">

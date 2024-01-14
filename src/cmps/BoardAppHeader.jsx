@@ -17,9 +17,9 @@ export function BoardAppHeader() {
 
     const isMenuOpen = parentId === `user-auth-menu`
 
-    function onLoginClick() {
+    function onAuthNavClick(navLocation) {
         resetDynamicModal()
-        navigate('/auth')
+        navigate(`/auth/${navLocation}`)
     }
 
     async function onLogout() {
@@ -60,12 +60,12 @@ export function BoardAppHeader() {
         {
             icon: <LoginIcon />,
             title: 'Login',
-            onOptionClick: onLoginClick
+            onOptionClick: () => onAuthNavClick('login')
         },
         {
             icon: <InviteIcon />,
             title: 'Signup',
-            onOptionClick: onLoginClick
+            onOptionClick: () => onAuthNavClick('signup')
         },
     ]
 
