@@ -42,7 +42,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     async function onGroupChange(field, data) {
         try {
             const updatedGroup = { ...group, [field]: data }
-            // console.log('board from updateeeeee:', board)
+            console.log('updatedGroup', updatedGroup)
             updateGroup(board._id, updatedGroup)
         } catch (err) {
             console.error('Error updating group:', err)
@@ -73,8 +73,18 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     async function onChangeColor(color) {
         try {
+
             setGroupColor(color)
-            onGroupChange('color', color)
+            // onGroupChange('color', color)
+
+            let titleToSave = groupTitle
+            if (!groupTitle) {
+                setGroupTitle(group.title)
+                titleToSave = group.title
+            }
+            const updatedGroup = { ...group, 'color': color, 'title': titleToSave }
+            updateGroup(board._id, updatedGroup)
+            // onGroupChange('title', titleToSave)
             resetDynamicModal()
             setIsEditing(false)
         } catch (err) {
