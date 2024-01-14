@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import { LikeIcon, PersonIcon, ReplyIcon } from "../../services/svg.service"
+import { ClockIcon, LikeIcon, PersonIcon, ReplyIcon } from "../../services/svg.service"
 import { UserImg } from '../UserImg'
 import { boardService } from '../../services/board.service'
+import { utilService } from '../../services/util.service'
 
 export function PanelUpdate({ msgs, onAddUpdate }) {
     const [users, setUsers] = useState([])
@@ -43,10 +44,27 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
         }
     }
 
+    function toggleMenu(ev) {
+        ev.stopPropagation()
+
+        if (isMenuOpen) {
+            resetDynamicModal()
+        } else {
+            setDynamicModal({
+                isOpen: true,
+                parentRefCurrent: menuBtnRef.current,
+                parentId: `${board._id}-sidebar-menu`,
+                type: 'menuOptions',
+                data: { options: menuOptions },
+                isPosBlock: true
+            })
+        }
+    }
+
     function onLikeComment() {
 
     }
-
+    console.log('msgs:', msgs)
     return (
         <section className="panel-update grid align-center">
             <div className="input-container">
@@ -63,7 +81,7 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
             {msgs.length > 0 && users.length === msgs.length ? (
                 msgs.map((msg, idx) => (
                     <article key={msg.id} className="update-post">
-                        <section className="post-header flex align-center">
+                        <section className="post-header flex align-center space-between">
                             <section className="post-creator grid column align-center">
                                 {users[idx] !== 'guest' ? (
                                     <>
@@ -76,6 +94,20 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
                                         Guest
                                     </>
                                 )}
+                            </section>
+                            <section className="post-time flex align-center justify-center">
+                                <ClockIcon />
+                                {utilService.timeSince(msg.createdAt)}
+                                {/* <button
+                                    className={`btn btn-option-menu`}
+                                    alt="update Menu"
+                                    onClick={toggleMenu}
+                                    title="Update Menu"
+                                    data-boardid={board._id}
+                                    ref={menuBtnRef}
+                                >
+                                    <MenuIcon />
+                                </button> */}
                             </section>
                         </section>
                         <section className="post-content">

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import { BigPlusIcon } from "../../services/svg.service"
+import { BigPlusIcon, CloseIcon } from "../../services/svg.service"
 
 export function PanelFile({ files, onAddFile }) {
     const [selectedImage, setSelectedImage] = useState(null)
@@ -23,7 +23,7 @@ export function PanelFile({ files, onAddFile }) {
         onAddFile(selectedFiles)
     }
 
-    console.log('files:', files)
+    // console.log('files:', files)
     return (
         <section className="panel-file grid">
             {(files.length > 0 && files[0] !== undefined) ? (
@@ -65,7 +65,7 @@ export function PanelFile({ files, onAddFile }) {
                 <div className="image-preview">
                     <div className="preview-content">
                         <img src={selectedImage} alt="Preview" />
-                        <button onClick={closeImagePreview}>X</button>
+                        <button onClick={closeImagePreview}><CloseIcon /></button>
                     </div>
                 </div>
             )}

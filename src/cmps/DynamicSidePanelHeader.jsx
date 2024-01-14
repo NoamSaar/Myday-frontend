@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { HomeIcon, MenuIcon, PersonIcon } from "../services/svg.service"
+import { CloseIcon, HomeIcon, MenuIcon, PersonIcon } from "../services/svg.service"
 import { userService } from "../services/user.service"
 // import { MemberPicker } from "./Board/Group/Picker/PickerModals/MemberPicker"
 import { UserImg } from "./UserImg"
@@ -42,7 +42,7 @@ export function DynamicSidePanelHeader(props) {
                 setSidePanelOpen(false)
                 navigate('/board/' + boardId)
             }}>
-                X
+                <CloseIcon />
             </button>
 
             <section className="panel-title-section flex align-center space-between">
