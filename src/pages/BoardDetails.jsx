@@ -21,7 +21,9 @@ export function BoardDetails() {
     const { boardId } = useParams()
 
     useEffect(() => {
-        _loadBoard()
+        setTimeout(() => {
+            _loadBoard()
+        }, 1600)
         // TODO : Emit watch on the user + add a listener for when user changes
         // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId)
         // socketService.on(SOCKET_EVENT_BOARD_UPDATED, (board) => {
@@ -33,7 +35,6 @@ export function BoardDetails() {
 
     useEffect(() => {
         loadFilteredBoard()
-
     }, [filterBy])
 
     async function _loadBoard() {

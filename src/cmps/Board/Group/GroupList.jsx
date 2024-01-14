@@ -91,8 +91,6 @@ export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scro
                         }
                         {provided.placeholder}
                     </ul>
-
-
                 )}
             </Droppable>
         </DragDropContext>

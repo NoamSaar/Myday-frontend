@@ -9,6 +9,7 @@ import { BoardApp } from './pages/BoardApp'
 import { setIsMobile } from './store/actions/system.actions'
 import { useEffect } from 'react'
 import { LoginSignup } from './pages/LoginSignup'
+import { UserMsg } from './cmps/UserMsg'
 
 export function RootCmp() {
 
@@ -37,8 +38,8 @@ export function RootCmp() {
                         {/* <Route path="activity_log" element={<ActivityLog />} /> */}
                     </Route>
                 </Route>
-
             </Routes>
+            <UserMsg />
         </section>
     )
 }
