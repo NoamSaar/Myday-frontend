@@ -7,7 +7,7 @@ import { utilService } from '../../services/util.service'
 export function PanelUpdate({ msgs, onAddUpdate }) {
     const [users, setUsers] = useState([])
     const [updateTxt, setUpdateText] = useState('')
-    const inputRef = useRef()
+    const inputRef = useRef(null)
 
     useEffect(() => {
         async function fetchUsers() {
@@ -64,17 +64,25 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
     function onLikeComment() {
 
     }
-    console.log('msgs:', msgs)
+
+    const dynClass = inputRef.current?.value ? 'contains-txt' : ''
+
     return (
         <section className="panel-update grid align-center">
-            <div className="input-container">
-                <form onSubmit={handleSubmit}>
+            <div className={`input-container ${dynClass}`}>
+                <form onSubmit={handleSubmit} className="grid">
                     <input
                         ref={inputRef}
                         type="text"
                         placeholder="Write an update..."
                         onChange={(ev) => setUpdateText(ev.target.value)}
                     />
+
+                    {inputRef.current?.value &&
+                        <button type="submit" className="btn clrblue">
+                            Update
+                        </button>
+                    }
                 </form>
             </div>
 

@@ -100,7 +100,11 @@
 
     .panel-update {
         .input-container {
-            padding: 30px 20px;
+            padding: 30px 20px 42px;
+
+            &.contains-txt {
+                padding-block-end: 5px;
+            }
         }
 
         input {
@@ -109,6 +113,15 @@
             border-radius: 8px;
             border: none;
             outline: 1px solid $clr-btn-add;
+        }
+
+        .btn.clrblue {
+            @include btn($type: clrblue);
+            margin: 0;
+            padding: 6px;
+            height: 32px;
+            justify-self: end;
+            margin-block-start: 5px;
         }
 
         .post_not_found {
