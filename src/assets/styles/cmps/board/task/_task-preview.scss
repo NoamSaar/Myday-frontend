@@ -62,6 +62,12 @@
             .data-preview-content {
                 width: 95%;
                 height: 90%;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    object-fit: cover;
+                }
             }
 
             .remove-btn {
