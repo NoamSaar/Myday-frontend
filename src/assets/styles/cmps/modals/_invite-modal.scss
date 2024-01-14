@@ -1,0 +1,33 @@
+.invite-modal {
+    background-color: white;
+    padding: 0 32px 10px 32px;
+    width: 530px;
+    height: 484px;
+    border-radius: 8px;
+
+    .sticky-container {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        padding-block-start: 24px;
+        background-color: white;
+
+        span {
+            font-size: rem(24px);
+            padding-block-start: 3.5px;
+        }
+
+        .dynamic-input {
+            justify-content: space-between;
+            padding: 2px 2px 2px 16px;
+            margin-inline: 0;
+            margin-block: 10px;
+        }
+    }
+
+    .member-list {
+        overflow-y: scroll;
+        height: 367.5px;
+
+    }
+}

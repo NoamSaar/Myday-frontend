@@ -1,8 +1,12 @@
 
-export function DynamicDialog() {
+export function DynamicDialog({ dialogContentComponent, onCloseDialog }) {
     return (
-        <dialog className="dynamic-dialog">
+        <div className="dynamic-dialog">
+            <div className="black-screen" onClick={onCloseDialog}></div>
 
-        </dialog>
+            <div className="dialog-content">
+                {dialogContentComponent}
+            </div>
+        </div>
     )
 }

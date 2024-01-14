@@ -6,9 +6,12 @@ import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } fr
 import { setIsHeaderCollapsed } from "../../store/actions/board.actions"
 import { useNavigate } from "react-router"
 import { setSidePanelOpen } from "../../store/actions/system.actions"
+import { DynamicDialog } from "../DynamicDialog"
+import { InviteModal } from "./InviteModal"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
     const [isCollapsed, setIsCollapsed] = useState(false)
+    const [isInviteDialogOpen, setIsInviteDialogOpen] = useState(false)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
     const navigate = useNavigate()
 
@@ -44,7 +47,6 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
     }
 
     const dynCollapsedClass = isCollapsed ? 'collapsed' : ''
-
     return (
         <>
             <div ref={sentinelRef} className="header-sentinel"></div>
@@ -63,7 +65,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                 </button>
 
                 <div className="invite-more-bts flex align-center">
-                    <button className="btn invite">
+                    <button className="btn invite" onClick={() => setIsInviteDialogOpen(true)}>
                         <InviteIcon />
                         <span>Invite / 1</span>
                     </button>
@@ -103,6 +105,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                     filterBy={filterBy}
                     onSetFilter={onSetFilter}
                 />
+                {isInviteDialogOpen && <DynamicDialog dialogContentComponent={<InviteModal boardMembers={board.members} />} onCloseDialog={() => setIsInviteDialogOpen(false)} />}
             </header>
         </>
     )

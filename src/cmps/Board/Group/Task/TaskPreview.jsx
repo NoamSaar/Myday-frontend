@@ -5,7 +5,7 @@ import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
 import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../../store/actions/system.actions"
 
-import { AddMsgIcon, DeleteIcon, MenuIcon, OpenIcon, MsgIcon } from "../../../../services/svg.service"
+import { DeleteIcon, MenuIcon, OpenIcon } from "../../../../services/svg.service"
 import { DynamicPreview } from "../Picker/DynamicPreview"
 import { EditableTxt } from "../../../EditableTxt"
 import { useNavigate } from "react-router"
@@ -54,7 +54,8 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 }, 3000)
             }
 
-            resetDynamicModal()
+            if (field !== 'members' && field !== 'link') resetDynamicModal()
+
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask)
 
