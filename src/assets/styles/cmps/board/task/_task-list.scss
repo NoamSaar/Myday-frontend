@@ -119,6 +119,14 @@
 
                                 @include for-mobile-only-layout {
                                     padding-inline-start: unset;
+
+                                    .focused-input {
+                                        margin-inline-start: 6px;
+
+                                        .add-task-btn {
+                                            padding-block: 1px;
+                                        }
+                                    }
                                 }
 
                                 @include for-narrow-layout {
@@ -128,6 +136,8 @@
                                 .focused-input {
                                     background-color: white;
                                 }
+
+
 
                                 .editable-txt,
                                 .focused-input form {

@@ -35,6 +35,9 @@
 
     .panel-title-section {
         margin-inline: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
         span {
             font-size: rem(18px);
