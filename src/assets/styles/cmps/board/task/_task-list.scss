@@ -43,7 +43,7 @@
 
         .task-title {
 
-            &:not(.active .task-title) {
+            &:not(.active .task-title):not(.task-preview-container:hover .task-title) {
 
                 @include for-narrow-layout {
 

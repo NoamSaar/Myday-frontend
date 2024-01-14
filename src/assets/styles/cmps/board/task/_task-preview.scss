@@ -4,6 +4,7 @@
     }
 
     &:hover {
+
         li:not(.status-preview):not(.active li) {
             background-color: $clr-task-hover;
         }
