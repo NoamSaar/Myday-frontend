@@ -197,7 +197,7 @@ export function LoginIcon() {
 }
 export function CloseIcon() {
   return (
-    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <g id="Menu / Close_SM"><path id="Vector" d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor">
       </path></g>
     </svg>
@@ -306,6 +306,13 @@ export function ArrowRightIcon() {
   return (
     <svg className='arrow-icon' width="14" height="10" viewBox="0 0 9 7" xmlns="http://www.w3.org/2000/svg">
       <path fillRule="evenodd" clipRule="evenodd" d="M4.628.616a.5.5 0 1 0-.64.768L6.203 3.23H.5a.5.5 0 0 0 0 1h5.612L3.988 6a.5.5 0 1 0 .64.769l3.23-2.693a.5.5 0 0 0 0-.768L4.628.616z" fill="#FFFFFF"></path>
+    </svg>
+  )
+}
+export function ClockIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" clipRule="evenodd" d="M9.95001 1.95C7.82828 1.95 5.79345 2.79285 4.29316 4.29314C2.79287 5.79343 1.95001 7.82827 1.95001 9.95C1.95001 12.0717 2.79287 14.1066 4.29316 15.6069C5.79345 17.1071 7.82828 17.95 9.95001 17.95C12.0717 17.95 14.1066 17.1071 15.6069 15.6069C17.1072 14.1066 17.95 12.0717 17.95 9.95C17.95 7.82827 17.1072 5.79343 15.6069 4.29314C14.1066 2.79285 12.0717 1.95 9.95001 1.95ZM5.35382 5.3538C6.5728 4.13482 8.22611 3.45 9.95001 3.45C11.6739 3.45 13.3272 4.13482 14.5462 5.3538C15.7652 6.57279 16.45 8.22609 16.45 9.95C16.45 11.6739 15.7652 13.3272 14.5462 14.5462C13.3272 15.7652 11.6739 16.45 9.95001 16.45C8.22611 16.45 6.5728 15.7652 5.35382 14.5462C4.13483 13.3272 3.45001 11.6739 3.45001 9.95C3.45001 8.22609 4.13483 6.57279 5.35382 5.3538ZM11.1834 6.56667C11.1834 6.15245 10.8476 5.81667 10.4334 5.81667C10.0192 5.81667 9.68338 6.15245 9.68338 6.56667V10.4333C9.68338 10.8475 10.0192 11.1833 10.4334 11.1833H13.3334C13.7476 11.1833 14.0834 10.8475 14.0834 10.4333C14.0834 10.0191 13.7476 9.68333 13.3334 9.68333H11.1834V6.56667Z"></path>
     </svg>
   )
 }

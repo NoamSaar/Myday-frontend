@@ -150,9 +150,12 @@ function areObjsIdentical(obj1, obj2) {
 function timeSince(timeStamp) {
     let now = new Date(),
         secondsPast = (now.getTime() - timeStamp) / 1000
-    if (secondsPast < 60) {
-        return parseInt(secondsPast) + 's'
+    if (secondsPast < 30) {
+        return 'just now'
     }
+    // if (secondsPast < 60) {
+    //     return parseInt(secondsPast) + 's'
+    // }
     if (secondsPast < 3600) {
         return parseInt(secondsPast / 60) + 'm'
     }
