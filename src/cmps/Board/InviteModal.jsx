@@ -4,11 +4,14 @@ import { MemberList } from "../MemberList"
 import { CloseIcon, SearchIcon } from "../../services/svg.service"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { DynamicInput } from "../DynamicInput"
+import { updateBoard } from "../../store/actions/board.actions"
+import { showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
 
-export function InviteModal({ boardMembers }) {
+export function InviteModal({ board }) {
     const [users, setUsers] = useState(null)
     const [filteredUsers, setFilteredUsers] = useState(null)
     const [usersFilter, setUsersFilter] = useState('')
+    const boardMembers = board.members
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,7 +54,17 @@ export function InviteModal({ boardMembers }) {
         const newFilteredUsers = users.filter(user => regex.test(user.fullname))
 
         setFilteredUsers(newFilteredUsers)
+    }
 
+    async function onUserSelect(user) {
+        try {
+            const newBoard = { ...board, members: [...board.members, user] }
+            await updateBoard(newBoard)
+            showSuccessMsg(`user ${user.fullname} was added to ${board.title} board!`)
+        } catch (err) {
+            console.log('err', err)
+            showErrorMsg('Cannot add user to board')
+        }
     }
 
     const inputProps = {
@@ -71,14 +84,13 @@ export function InviteModal({ boardMembers }) {
     }
 
     if (!filteredUsers) return <div className="invite-modal">Loading...</div>
-    if (!filteredUsers.length) return <div className="invite-modal">No Users to Show</div>
     return (
         <div className="invite-modal">
             <div className="sticky-container">
                 <span>Invite Users</span>
                 <DynamicInput inputProps={inputProps} />
             </div>
-            <MemberList members={filteredUsers} />
+            <MemberList members={filteredUsers} onMemberClick={onUserSelect} />
         </div>
     )
 }

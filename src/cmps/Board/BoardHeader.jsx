@@ -105,7 +105,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                     filterBy={filterBy}
                     onSetFilter={onSetFilter}
                 />
-                {isInviteDialogOpen && <DynamicDialog dialogContentComponent={<InviteModal boardMembers={board.members} />} onCloseDialog={() => setIsInviteDialogOpen(false)} />}
+                {isInviteDialogOpen && <DynamicDialog dialogContentComponent={<InviteModal board={board} />} onCloseDialog={() => setIsInviteDialogOpen(false)} />}
             </header>
         </>
     )
