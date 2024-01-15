@@ -68,7 +68,7 @@ export function loadFilteredBoard() {
             return regex.test(group.title) || group.tasks.length > 0
         })
         // const regex = new RegExp(filterBy.txt, 'i')
-        // board.groups = board.groups.filter(group => {
+        // boardToFilter.groups = boardToFilter.groups.filter(group => {
         //     group.tasks = group.tasks.filter(task => regex.test(task.title))
         //     // Return groups that have matching title or have at least one matching task title
         //     return regex.test(group.title) || group.tasks.length > 0
@@ -98,11 +98,13 @@ export async function saveNewBoards(boards) {
 
 export async function removeBoard(boardId) {
     try {
+        const boards = store.getState().boardModule.boards
+        if (boards.length === 1) throw new Error('Must have at least one board')
         await boardService.remove(boardId)
         store.dispatch(getActionRemoveBoard(boardId))
     } catch (err) {
         console.log('Cannot remove board', err)
-        throw err
+        throw new Error(err.message || 'An err occurred during removing board')
     }
 }
 
@@ -269,8 +271,6 @@ export async function addGroup(boardId) {
 }
 
 export async function removeGroup(boardId, groupId) {
-    console.log('removeGroup ~ groupId:', groupId)
-    console.log('removeGroup ~ boardId:', boardId)
     try {
         const board = await boardService.removeGroup(boardId, groupId)
         setCurrBoard(board)

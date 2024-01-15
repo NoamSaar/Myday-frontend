@@ -27,7 +27,7 @@ export function LabelPreview({ title, info, onUpdate, taskId, isChangingToDone }
                 parentId: `${taskId}-${title}Picker`,
                 isPosBlock: true,
                 isCenter: true,
-                hasTooltip: true,
+                hasCaret: true,
 
             })
         }

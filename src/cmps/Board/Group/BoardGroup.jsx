@@ -42,7 +42,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     async function onGroupChange(field, data) {
         try {
             const updatedGroup = { ...group, [field]: data }
-            console.log('updatedGroup', updatedGroup)
             updateGroup(board._id, updatedGroup)
         } catch (err) {
             console.error('Error updating group:', err)
@@ -52,12 +51,20 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     async function onRemoveGroup() {
         try {
-            removeGroup(board._id, group.id)
-            resetDynamicModal()
+            await removeGroup(board._id, group.id)
+
             showSuccessMsg(`Group ${groupTitle} was successfully deleted.`)
         } catch (err) {
-            console.error('Error removing task:', err)
-            showErrorMsg(`Cannot delete Group ${groupTitle}`)
+            console.log('Error removing task:', err)
+
+            if (err) {
+                showErrorMsg(err.message)
+            } else {
+
+                showErrorMsg(`Cannot delete Group ${groupTitle}`)
+            }
+        } finally {
+            resetDynamicModal()
         }
     }
 
@@ -181,7 +188,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         data: { options: menuOptions },
                         parentId: `${group.id}-mobile-menu`,
                         isPosBlock: true,
-                        hasTooltip: true
+                        hasCaret: true
                     })
             }
         }

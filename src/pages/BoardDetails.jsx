@@ -9,6 +9,7 @@ import { BoardHeader } from "../cmps/Board/BoardHeader"
 import { TaskDetails } from "./TaskDetails"
 import { GroupList } from "../cmps/Board/Group/GroupList"
 import { boardService } from "../services/board.service"
+import { useEffectUpdate } from "../customHooks/useEffectUpdate"
 
 export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -36,14 +37,14 @@ export function BoardDetails() {
         // return () => socketService.off(SOCKET_EVENT_BOARD_UPDATED)
     }, [boardId])
 
-    useEffect(() => {
-        loadFilteredBoard()
+    useEffectUpdate(() => {
+        if (board) loadFilteredBoard()
     }, [filterBy])
 
     async function _loadBoard() {
         try {
             await loadBoard(boardId)
-            // loadFilteredBoard()
+            loadFilteredBoard()
         } catch (err) {
             console.error('Error loading board:', err)
         }

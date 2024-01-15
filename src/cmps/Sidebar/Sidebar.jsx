@@ -84,8 +84,14 @@ export function Sidebar() {
             showSuccessMsg('We successfully deleted the board')
             // navigate('board/b101')
         } catch (err) {
-            console.error('Error removing task:', err)
-            showErrorMsg('Cannot delete Board')
+            console.log('Error removing board:', err)
+
+            if (err) {
+                showErrorMsg(err.message)
+            } else {
+
+                showErrorMsg('Cannot delete Board')
+            }
         }
     }
 

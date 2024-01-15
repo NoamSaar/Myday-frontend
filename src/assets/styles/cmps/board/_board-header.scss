@@ -38,7 +38,7 @@
 
         .board-filter {
             position: fixed;
-            bottom: -20px;
+            bottom: -17px;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: $clr-bg-header;
@@ -231,7 +231,7 @@
         grid-auto-flow: column;
         // justify-content: start;
         gap: 6px;
-        padding-block: 16px;
+        padding-block: 10px;
         border-top: 1px solid $clr-group-border;
         // min-width: max-content;
         // min-height: 65px;

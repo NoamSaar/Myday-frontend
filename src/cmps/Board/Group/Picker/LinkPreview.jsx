@@ -45,7 +45,7 @@ export function LinkPreview({ info, onUpdate, taskId }) {
                 data: { options: menuOptions },
                 parentId: `${taskId}-mobile-menu`,
                 isPosBlock: true,
-                hasTooltip: true
+                hasCaret: true
             })
         }
     }

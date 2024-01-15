@@ -14,10 +14,10 @@
         }
 
         @include for-narrow-layout {
-            top: 180px;
+            top: 172px;
 
             &.board-header-collapsed {
-                top: 134px;
+                top: 124px;
 
             }
 

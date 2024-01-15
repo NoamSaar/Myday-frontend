@@ -23,7 +23,7 @@ export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
                 parentId: `${taskId}-memberPicker`,
                 isPosBlock: true,
                 isCenter: true,
-                hasTooltip: true,
+                hasCaret: true,
             })
         }
     }
