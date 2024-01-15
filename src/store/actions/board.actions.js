@@ -269,8 +269,6 @@ export async function addGroup(boardId) {
 }
 
 export async function removeGroup(boardId, groupId) {
-    console.log('removeGroup ~ groupId:', groupId)
-    console.log('removeGroup ~ boardId:', boardId)
     try {
         const board = await boardService.removeGroup(boardId, groupId)
         setCurrBoard(board)

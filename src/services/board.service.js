@@ -116,6 +116,8 @@ async function addGroup(boardId) {
 async function removeGroup(boardId, groupId) {
     try {
         const board = await getById(boardId)
+        if (board.groups.length === 1) throw new Error('Board has to have at least one group')
+
         const idx = board.groups.findIndex(group => group.id === groupId)
         if (idx < 0) throw new Error(`Remove failed, cannot find group with id: ${groupId} in: ${board.title}`)
         board.groups.splice(idx, 1)
