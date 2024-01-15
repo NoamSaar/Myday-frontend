@@ -26,6 +26,9 @@ export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsCha
 
     function onChangeColor(color) {
         setLabelColor(color)
+        setIsColorPickerOpen(false)
+        onLabelsChange({ ...label, title: labelTitle, color: color })
+        // setIsEditingLabel(false)
     }
 
     function onColorDisplayClick(ev) {
