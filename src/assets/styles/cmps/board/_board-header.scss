@@ -47,6 +47,35 @@
             min-width: 95%;
             justify-content: space-evenly;
 
+            &.search-focused {
+                display: block;
+
+                .btn:not(.close-btn) {
+                    display: none;
+                }
+
+                .search.active {
+                    background-color: unset;
+
+                    .dynamic-input {
+                        background-color: $clr-btn-active;
+                    }
+                }
+
+                .search-input-container {
+                    display: grid;
+                    grid-template-columns: 1fr auto;
+                    padding-inline-start: 10px;
+
+                    .close-btn {
+                        margin-inline: 15px 10px;
+                        padding-inline: 5px;
+                        background-color: $clr-btn-hover;
+
+                    }
+                }
+            }
+
             .btn {
                 padding: 0;
 

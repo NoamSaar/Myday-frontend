@@ -1,14 +1,14 @@
-import { useSelector } from "react-redux";
-import { useRef } from "react";
-import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions";
-import { CloseIcon } from "../../../../services/svg.service";
+import { useSelector } from "react-redux"
+import { useRef } from "react"
+import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
+import { CloseIcon } from "../../../../services/svg.service"
 
 export function LinkPreview({ info, onUpdate, taskId }) {
-    const previewBtnRef = useRef(null);
-    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile);
-    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal);
-    const isLinkPickerOpen = parentId === `${taskId}-linkPicker`;
-    const isMobileMenuOpen = parentId === `${taskId}-mobile-menu`;
+    const previewBtnRef = useRef(null)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
+    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isLinkPickerOpen = parentId === `${taskId}-linkPicker`
+    const isMobileMenuOpen = parentId === `${taskId}-mobile-menu`
 
     function onLinkPreviewClick() {
         if (isLinkPickerOpen) {
@@ -30,8 +30,8 @@ export function LinkPreview({ info, onUpdate, taskId }) {
     }
 
     function onRemoveLinkClick(ev) {
-        ev.stopPropagation();
-        onUpdate('link', null);
+        ev.stopPropagation()
+        onUpdate('link', null)
     }
 
     function onMobileHrefClick() {
@@ -70,14 +70,14 @@ export function LinkPreview({ info, onUpdate, taskId }) {
             <p className="link-href" onClick={onMobileHrefClick}>
                 {info.displayTxt || info.url}
             </p>
-        ) : null;
+        ) : null
     } else {
 
         linkContent = info ? (
             <a className="link-href" target="_blank" href={info.url}>
                 {info.displayTxt || info.url}
             </a>
-        ) : null;
+        ) : null
     }
 
     function onLinkClickDynamic() {
@@ -96,5 +96,5 @@ export function LinkPreview({ info, onUpdate, taskId }) {
 
             {info && <button className="btn remove-btn" onClick={onRemoveLinkClick}><CloseIcon /></button>}
         </li>
-    );
+    )
 }
