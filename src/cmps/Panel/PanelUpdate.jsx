@@ -184,7 +184,7 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
                 ))
             ) : (
                 <div className="post_not_found grid place-center">
-                    <img src="../../../public/icons/no-updates.svg" alt="" />
+                    <img src="/icons/no-updates.svg" alt="" />
                     <div className="post-not-found-txt">
                         <h2>No Updates yet for this item</h2>
                         <p className="post_not_found_subtitle">Be the first one to update about progress, mention someone

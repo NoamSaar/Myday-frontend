@@ -1,0 +1,45 @@
+.label-picker-preview {
+    overflow: visible;
+    position: relative;
+
+    .editable-txt-container {
+        max-width: 100%;
+        width: 100%;
+        height: 32px;
+
+        .focused-input,
+        .editable-txt {
+            padding: 4px;
+
+        }
+
+        .focused-input input {
+            width: 113px;
+            margin-inline-start: 7px;
+        }
+
+        .editable-txt {
+            outline: 1px solid #e6e9ef;
+            display: flex;
+            align-items: center;
+
+            span {
+                margin-inline-start: 7px;
+
+            }
+        }
+
+    }
+
+    .label-color-display {
+        min-width: 24px;
+        min-height: 24px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .color-picker-modal {
+        position: absolute;
+        z-index: 10;
+    }
+}

@@ -230,7 +230,6 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
             style: { backgroundColor: groupColor },
             onMouseDown: onColorDisplayClick
         }
-
     ]
 
 
