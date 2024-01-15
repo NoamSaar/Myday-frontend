@@ -51,7 +51,7 @@ export function LabelPicker({ onChangeStatus, title }) {
 
             <LabelList labels={currLabels} handleChange={handleChange} isEditing={isEditing} onLabelsChange={onLabelsChange} onAddLabel={onAddLabel} />
 
-            <button className='btn flex align-center justify-center' onClick={onEditBtnClick}>
+            <button className='btn flex align-center justify-center edit-btn' onClick={onEditBtnClick}>
                 {!isEditing && <PencilIcon />}
                 <p>{isEditing ? 'Apply' : 'Edit Labels'}</p>
             </button>

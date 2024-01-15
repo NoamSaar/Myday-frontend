@@ -35,6 +35,16 @@
 
     .add-label-btn {
         border: 1px solid #e6e9ef;
+        gap: unset;
+
+        p {
+            padding-block-start: 2.5px;
+        }
+
+    }
+
+    .edit-btn p {
+        padding-block-start: 2.5px;
     }
 
 }

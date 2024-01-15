@@ -10,16 +10,16 @@
         .focused-input,
         .editable-txt {
             padding: 4px;
-            border: 1px solid #e6e9ef;
 
         }
 
         .focused-input input {
-            width: 114px;
+            width: 113px;
             margin-inline-start: 7px;
         }
 
         .editable-txt {
+            outline: 1px solid #e6e9ef;
             display: flex;
             align-items: center;
 
