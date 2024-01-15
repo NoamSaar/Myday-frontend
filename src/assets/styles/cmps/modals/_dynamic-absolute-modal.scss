@@ -45,13 +45,23 @@
         &.caret-top {
             border-width: 0 10px 10px 10px;
             border-color: transparent transparent $clr0 transparent;
+
+            &.colored {
+                border-color: transparent transparent $clr-font transparent;
+            }
         }
 
         &.caret-bottom {
             border-width: 10px 10px 0 10px;
             border-color: $clr0 transparent transparent transparent;
             order: 1;
+
+            &.colored {
+                border-color: $clr-font transparent transparent transparent;
+            }
         }
+
+
 
     }
 }

@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { utilService } from "../../../../services/util.service";
+import { useSelector } from "react-redux";
+import { TitleStat } from "./TitleStat";
 
 export function LabelSummary({ title, group, board }) {
     const [titleStats, setTitleStats] = useState(calculateTitleStatsAndPercentage(group, title, board))
+
 
     useEffect(() => {
         setTitleStats(calculateTitleStatsAndPercentage(group, title, board))
@@ -43,17 +46,14 @@ export function LabelSummary({ title, group, board }) {
 
 
 
+
+
     return (
         <li className="label-summary">
             <p>{utilService.capitalizeFirstLetter(title)}</p>
             <div className="label-summary-battery">
                 {titleStats.map((titleStat, idx) => {
-                    return <div
-                        key={idx}
-                        className="label-data"
-                        style={{ backgroundColor: titleStat.color, width: titleStat.percentageMap.percent }}
-                        title={`${titleStat.title ? titleStat.title : ''} ${titleStat.percentageMap.fraction} ${titleStat.percentageMap.percent}`}
-                    ></div>
+                    return <TitleStat idx={idx} titleStat={titleStat} key={idx} />
                 })}
             </div>
         </li>
