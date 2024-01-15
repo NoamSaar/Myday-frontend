@@ -104,7 +104,7 @@ export function DynamicModal() {
     return (
         <div style={style} ref={modalRef} className='dynamic-absolute-modal flex column'>
             {modalData.hasCaret && (
-                <div className={`caret caret-${caretDirection}`}></div>
+                <div className={`caret caret-${caretDirection} ${modalData.caretClred && 'colored'}`}></div>
             )}
             <DynamicModalRouter type={modalData.type} data={modalData.data} />
         </div>

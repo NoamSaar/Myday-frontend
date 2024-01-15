@@ -7,6 +7,7 @@ import { LinkPicker } from "./Board/Group/Picker/PickerModals/LinkPicker"
 import { MenuOptionsModal } from "./MenuOptionsModal"
 import BoardMemberSelect from "./Board/BoardMemberSelect"
 import { FilePicker } from "./Board/Group/Picker/PickerModals/FilePicker"
+import { Tooltip } from "./Tooltip"
 
 export function DynamicModalRouter(props) {
     switch (props.type) {
@@ -58,6 +59,9 @@ export function DynamicModalRouter(props) {
 
         case 'menuOptions':
             return <MenuOptionsModal options={props.data.options} />
+
+        case 'tooltip':
+            return <Tooltip txt={props.data.txt} />
 
         case 'boardMemberSelect':
             return <BoardMemberSelect chosenMember={props.data.chosenMember} members={props.data.members} onChangeMember={props.data.onChangeMember} />
