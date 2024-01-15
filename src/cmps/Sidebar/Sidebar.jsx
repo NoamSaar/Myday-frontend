@@ -151,7 +151,6 @@ export function Sidebar() {
         (ev) => {
             if (isResizing) {
                 let screenWidth = window.innerWidth;
-                console.log('Sidebar ~ screenWidth:', screenWidth)
                 let newWidth = ev.clientX - sidebarRef.current.getBoundingClientRect().left;
 
                 if (screenWidth >= 905 && screenWidth <= 1055) {

@@ -33,14 +33,15 @@ export function LabelPreview({ title, info, onUpdate, taskId, isChangingToDone }
     }
 
     const animations = ['balloon', 'confetti', 'crazy_balls']
-    const dynClass = animations[utilService.getRandomIntInclusive(0, animations.length - 1)]
+    const dynClass = isChangingToDone && label.id === 'l101'
+        ? animations[utilService.getRandomIntInclusive(0, animations.length - 1)]
+        : ''
 
     return (
         <li
             onClick={onLabelPreviewClick}
             style={style}
-            className={`status-preview status-col priority-col 
-            ${isChangingToDone && label.id === 'l101' ? dynClass : ''}`}
+            className={`status-preview status-col priority-col ${dynClass}`}
             ref={previewBtnRef}
         >
             <p>{label.title}</p>

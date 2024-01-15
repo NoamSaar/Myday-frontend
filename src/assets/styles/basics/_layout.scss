@@ -11,11 +11,15 @@
 
         @include for-narrow-only-layout {
 
+            .sidebar {
+                left: -1000px;
+            }
+
             &.mobile-hp {
                 grid-template-columns: 1fr 0;
 
                 .sidebar {
-                    // transition: min-width 6s;
+                    left: 0;
                     min-width: 100vw;
                 }
 
