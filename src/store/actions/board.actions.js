@@ -98,11 +98,13 @@ export async function saveNewBoards(boards) {
 
 export async function removeBoard(boardId) {
     try {
+        const boards = store.getState().boardModule.boards
+        if (boards.length === 1) throw new Error('Must have at least one board')
         await boardService.remove(boardId)
         store.dispatch(getActionRemoveBoard(boardId))
     } catch (err) {
         console.log('Cannot remove board', err)
-        throw err
+        throw new Error(err.message || 'An err occurred during removing board')
     }
 }
 
