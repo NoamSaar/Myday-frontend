@@ -13,11 +13,10 @@ export function DynamicSidePanelHeader(props) {
     const [users, setUsers] = useState(null)
     const [activeSubject, setActiveSubject] = (type === 'taskDetails') ? useState('Updates') : useState('Activity Log')
     const navigate = useNavigate()
-
     useEffect(() => {
-        if (members) getUsers(members)
+        if (members && members.length > 0) getUsers(members)
         else setUsers(['guest'])
-    }, [taskId])
+    }, [taskId, members])
 
     async function getUsers(userIds) {
         try {
@@ -34,7 +33,6 @@ export function DynamicSidePanelHeader(props) {
     //     // navigate('borad/' + boardId)
     // }
 
-    // console.log('user:', user)
     if (!users?.length) return <div>Loading...</div>
     return (
         <section className="panel-header grid">
@@ -52,9 +50,12 @@ export function DynamicSidePanelHeader(props) {
                 {type === 'taskDetails' && (
                     <div className="title-section-actions flex justify-center align-center">
                         <span className="panel-members flex justify-center align-center">
-                            {users.map((user, index) => (
-                                <UserImg key={index} user={user} />
-                            ))}
+                            {users[0] !== 'guest'
+                                ? users.map((user, index) => (
+                                    <UserImg key={index} user={user} />
+                                ))
+                                : <UserImg />
+                            }
                         </span>
                         <button className="btn">
                             <MenuIcon />
