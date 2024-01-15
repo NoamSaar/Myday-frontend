@@ -15,6 +15,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [isFocused, setIsFocused] = useState(false)
 
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isMemberPickerOpen = parentId === `${board._id}-memberFilterPicker`
 
@@ -101,6 +102,11 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
+    function onCancelSearch() {
+        setIsFocused(false)
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, 'txt': '' }))
+    }
+
     const dynActiveClass = filterByToEdit.txt ? 'active' : ''
     const { txt } = filterByToEdit
 
@@ -117,13 +123,13 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             {
                 name: 'filter',
                 icon: <SettingsKnobsIcon />,
-                func: () => console.log('hi'),
+                func: () => { },
             }
         ]
     }
 
     return (
-        <div className="board-filter">
+        <div className={`${isFocused && 'search-focused'} board-filter`}>
 
             <button title="New task" className="btn new-task" onClick={onAddTask}>
                 <PlusIcon />
@@ -137,7 +143,11 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                         <span>Search</span>
                     </div>
                     :
-                    <DynamicInput inputProps={inputProps} />}
+                    <div className="flex search-input-container">
+                        <DynamicInput inputProps={inputProps} />
+
+                        {(isMobile && isFocused) && <button className="btn close-btn" onClick={onCancelSearch}>Cancel</button>}
+                    </div>}
             </div>
 
 
