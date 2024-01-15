@@ -89,8 +89,10 @@ export function MemberPicker({ chosenMembers, allMembers, onChangeMembers }) {
                 {currChosenMembers.map((member, idx) => {
                     return (
                         <li key={idx} className="chosen-member">
-                            <UserImg user={member} />
-                            <p className="username">{member.fullname}</p>
+                            <div className="flex align-center justify-center member-details">
+                                <UserImg user={member} />
+                                <p className="username">{member.fullname}</p>
+                            </div>
                             <button
                                 className="flex align-center justify-center svg-inherit-color remove-btn"
                                 onClick={() => onRemoveMember(member)}>
