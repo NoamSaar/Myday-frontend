@@ -9,13 +9,19 @@
         padding: 0;
         background-color: $clr-bg-header;
 
+        &.is-sidebar-full-mobile {
+            .sidebar-workspace .btn.clrblue {
+                display: block;
+            }
+        }
+
         @include for-narrow-only-layout {
 
             .sidebar {
                 left: -1000px;
             }
 
-            &.mobile-hp {
+            &.is-sidebar-full-mobile {
                 grid-template-columns: 1fr 0;
 
                 .sidebar {

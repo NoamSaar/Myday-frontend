@@ -7,6 +7,15 @@
     justify-content: end;
     align-content: start;
 
+    &.hovered {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
+    }
+
+    @include for-narrow-layout {
+        &.hovered {
+            justify-content: normal;
+        }
+    }
 
     &:not(.hovered) {
 
@@ -18,20 +27,17 @@
         }
     }
 
-    &:not(.hovered)>.sidebar-main-nav a {
-        // transition: opacity 350ms;
-        opacity: 0;
+    &:not(.hovered) {
+        .sidebar-main-nav a {
+            opacity: 0;
+        }
     }
 
 
-    // .btn-nav {
-    //     padding-inline-start: 0;
-    // }
     @include for-narrow-only-layout {
         &:hover {
             left: 0;
             z-index: 35;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
             justify-content: normal;
 
             &>.sidebar-workspace,
@@ -70,18 +76,16 @@
             box-shadow: none;
         }
 
+        &.hovered {
+            box-shadow: none;
+        }
+
 
         .sidebar-main-nav a {
             opacity: 1;
         }
 
     }
-
-    // &.mobile-hp {
-    //     width: 100vw;
-    // }
-
-    /* ResizableSidebar.css */
 
     .app-sidebar-resizer {
         width: 5px;
