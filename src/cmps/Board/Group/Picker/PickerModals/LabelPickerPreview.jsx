@@ -12,6 +12,7 @@ export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsCha
     const [isColorPickerOpen, setIsColorPickerOpen] = useState(false)
 
     const colors = getBoardColors()
+    const isDefault = label.id === 'l100' || label.id === 'l200'
 
     useEffect(() => {
         setLabelTitle(label.title)
@@ -50,14 +51,14 @@ export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsCha
             {isEditing ? (
                 <EditableTxt
                     isEditing={isEditingLabel}
-                    txtValue={labelTitle || 'Default Label'}
+                    txtValue={labelTitle || (isDefault ? 'Default Label' : 'Add Label')}
                     onTxtClick={() => setIsEditingLabel(true)}
                     inputValue={labelTitle || ''}
                     onInputChange={onTitleChange}
                     onEditClose={onEditClose}
                     extraBtnsStart={extraTitleInputBtn}
                     isBtnsInTxt={true}
-                    placeholder={labelTitle ? 'Add Label' : 'Default Label'}
+                    placeholder={labelTitle ? 'Add Label' : (isDefault ? 'Default Label' : 'Add Label')}
                 />
             ) : (
                 <button
