@@ -68,7 +68,7 @@ export function loadFilteredBoard() {
             return regex.test(group.title) || group.tasks.length > 0
         })
         // const regex = new RegExp(filterBy.txt, 'i')
-        // board.groups = board.groups.filter(group => {
+        // boardToFilter.groups = boardToFilter.groups.filter(group => {
         //     group.tasks = group.tasks.filter(task => regex.test(task.title))
         //     // Return groups that have matching title or have at least one matching task title
         //     return regex.test(group.title) || group.tasks.length > 0
