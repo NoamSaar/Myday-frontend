@@ -1,28 +1,55 @@
 import { useState, useEffect, useRef } from 'react'
+import { useParams } from 'react-router'
 import { ClockIcon, LikeIcon, PersonIcon, ReplyIcon } from "../../services/svg.service"
 import { UserImg } from '../UserImg'
 import loader from "/img/board-loader.gif"
 import { boardService } from '../../services/board.service'
 import { utilService } from '../../services/util.service'
+import { SOCKET_EMIT_SEND_MSG, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_ADD_MSG, socketService } from '../../services/socket.service'
 
 export function PanelUpdate({ msgs, onAddUpdate }) {
+    const { boardId, taskId } = useParams()
+
     const [users, setUsers] = useState([])
     const [updateTxt, setUpdateText] = useState('')
+    const [currMsgs, setCurrMsgs] = useState(msgs)
+
     const inputRef = useRef(null)
 
     useEffect(() => {
+        setCurrMsgs(msgs)
+    }, [msgs])
+
+    useEffect(() => {
         async function fetchUsers() {
-            const userPromises = msgs.map(async (msg) => {
+            const userPromises = currMsgs.map(async (msg) => {
                 const user = await getUser(msg.memberId)
                 return user
             })
 
             const resolvedUsers = await Promise.all(userPromises)
-            setUsers(resolvedUsers)
+            setTimeout(() => setUsers(resolvedUsers), 1000)
         }
 
         fetchUsers()
-    }, [msgs])
+    }, [currMsgs])
+
+
+    useEffect(() => {
+        socketService.on(SOCKET_EVENT_ADD_MSG, addMsg) //listen to other people msgs
+        return () => {
+            socketService.off(SOCKET_EVENT_ADD_MSG, addMsg)
+        }
+    }, [])
+
+    useEffect(() => {
+        socketService.emit(SOCKET_EMIT_SET_TOPIC, taskId) //send topic change onmount and on topic change
+    }, [taskId])
+
+    function addMsg(newMsg) {
+        console.log(newMsg)
+        setCurrMsgs(prevMsgs => [newMsg, ...prevMsgs])
+    }
 
     async function getUser(userId) {
         try {
@@ -38,7 +65,9 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
     function handleSubmit(ev) {
         ev.preventDefault()
         const newUpdate = boardService.getNewUpdate(updateTxt)
+        socketService.emit(SOCKET_EMIT_SEND_MSG, newUpdate)
         onAddUpdate(newUpdate)
+
         setUpdateText('')
         if (inputRef.current) {
             inputRef.current.value = ''
@@ -67,12 +96,15 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
     }
 
     const dynClass = inputRef.current?.value ? 'contains-txt' : ''
-    // console.log('users:', users)
-    if (!users) {
-        <section className="loader-container grid place-center">
-            <img className="myday-loader" src={loader} alt="" />
-        </section>
+
+    if (currMsgs.length && users.length !== currMsgs.length) {
+        return (
+            <section className="loader-container panel-update flex align-center justify-center">
+                <img className="myday-loader" src={loader} alt="" />
+            </section>
+        )
     }
+
     return (
         <section className="panel-update grid">
             <div className={`input-container ${dynClass}`}>
@@ -92,8 +124,8 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
                 </form>
             </div>
 
-            {msgs.length > 0 && users.length === msgs.length ? (
-                msgs.map((msg, idx) => (
+            {currMsgs.length > 0 && users.length === currMsgs.length ? (
+                currMsgs.map((msg, idx) => (
                     <article key={msg.id} className="update-post">
                         <section className="post-header flex align-center space-between">
                             <section className="post-creator grid column align-center">
