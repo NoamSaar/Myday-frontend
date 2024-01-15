@@ -63,7 +63,7 @@ export function getEmptyDynamicModal() {
         parentId: '',
         isPosBlock: true,
         isCenter: true,
-        hasTooltip: false,
+        hasCaret: false,
     }
 }
 

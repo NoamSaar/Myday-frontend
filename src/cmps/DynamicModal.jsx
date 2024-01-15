@@ -8,7 +8,7 @@ export function DynamicModal() {
     const modalRef = useRef()
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const [ModalDimensions, setModalDimensions] = useState({ width: 0, height: 0 })
-    const [tooltipDirection, setTooltipDirection] = useState('top') // Default direction
+    const [caretDirection, setCaretDirection] = useState('top') // Default direction
 
     const parentBoundingRect = modalData.parentRefCurrent?.getBoundingClientRect()
 
@@ -27,8 +27,8 @@ export function DynamicModal() {
             // Position below the parent element
             newTop = parentBoundingRect.bottom
 
-            if (modalData.hasTooltip) {
-                setTooltipDirection('top')
+            if (modalData.hasCaret) {
+                setCaretDirection('top')
             }
 
             if (modalData.isCenter) {
@@ -42,8 +42,8 @@ export function DynamicModal() {
             if (newTop + modalHeight > viewportHeight) {
                 newTop = parentBoundingRect.top - modalHeight
 
-                if (modalData.hasTooltip) {
-                    setTooltipDirection('bottom')
+                if (modalData.hasCaret) {
+                    setCaretDirection('bottom')
                 }
             }
 
@@ -103,8 +103,8 @@ export function DynamicModal() {
 
     return (
         <div style={style} ref={modalRef} className='dynamic-absolute-modal flex column'>
-            {modalData.hasTooltip && (
-                <div className={`tooltip tooltip-${tooltipDirection}`}></div>
+            {modalData.hasCaret && (
+                <div className={`caret caret-${caretDirection}`}></div>
             )}
             <DynamicModalRouter type={modalData.type} data={modalData.data} />
         </div>

@@ -181,7 +181,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         data: { options: menuOptions },
                         parentId: `${group.id}-mobile-menu`,
                         isPosBlock: true,
-                        hasTooltip: true
+                        hasCaret: true
                     })
             }
         }
