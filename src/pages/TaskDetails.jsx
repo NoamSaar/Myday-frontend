@@ -46,7 +46,6 @@ export function TaskDetails() {
 
     if (!currTask) return
 
-    console.log('TaskDetails ~ currTask:', currTask)
     const { title, members, file, msgs } = currTask
 
     const headerProps = {

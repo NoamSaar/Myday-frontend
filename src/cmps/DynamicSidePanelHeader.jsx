@@ -8,24 +8,24 @@ import { setSidePanelOpen } from "../store/actions/system.actions"
 import { useNavigate } from "react-router"
 
 export function DynamicSidePanelHeader(props) {
-    const { type, title, subjects } = props.headerProps
-    const { boardId } = props
-    const [user, setUser] = useState(null)
+    const { type, title, subjects, members } = props.headerProps
+    const { boardId, taskId } = props
+    const [users, setUsers] = useState(null)
     const [activeSubject, setActiveSubject] = (type === 'taskDetails') ? useState('Updates') : useState('Activity Log')
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (props.headerProps.members) getUser(props.headerProps.members[0])
-        else setUser('guest')
-    }, [])
+        if (members) getUsers(members)
+        else setUsers(['guest'])
+    }, [taskId])
 
-    async function getUser(userId) {
+    async function getUsers(userIds) {
         try {
-            if (userId === undefined) return setUser('guest')
-            const user = await userService.getById(userId)
-            setUser(user)
+            const userPromises = userIds.map(async (userId) => await userService.getById(userId))
+            const resolvedUsers = await Promise.all(userPromises)
+            setUsers(resolvedUsers)
         } catch (err) {
-            console.error('error getting user', err)
+            console.error('error getting users', err)
         }
     }
 
@@ -35,7 +35,7 @@ export function DynamicSidePanelHeader(props) {
     // }
 
     // console.log('user:', user)
-    if (!user) return <div>Loading...</div>
+    if (!users?.length) return <div>Loading...</div>
     return (
         <section className="panel-header grid">
             <button className="btn" onClick={() => {
@@ -52,7 +52,9 @@ export function DynamicSidePanelHeader(props) {
                 {type === 'taskDetails' && (
                     <div className="title-section-actions flex justify-center align-center">
                         <span className="panel-members flex justify-center align-center">
-                            {user !== 'guest' ? <UserImg user={user} /> : <PersonIcon />}
+                            {users.map((user, index) => (
+                                <UserImg key={index} user={user} />
+                            ))}
                         </span>
                         <button className="btn">
                             <MenuIcon />
