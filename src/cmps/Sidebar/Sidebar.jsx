@@ -21,7 +21,7 @@ export function Sidebar() {
 
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
-
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -149,7 +149,7 @@ export function Sidebar() {
 
     const resize = useCallback(
         (ev) => {
-            if (isResizing) {
+            if (isResizing && !isMobile) {
                 let screenWidth = window.innerWidth;
                 let newWidth = ev.clientX - sidebarRef.current.getBoundingClientRect().left;
 
@@ -197,7 +197,7 @@ export function Sidebar() {
                 ref={sidebarRef}
                 style={style}
                 onMouseDown={(ev) => ev.preventDefault()}
-                className={`${sidebarClass} ${isHovered ? 'hovered' : ''}`}
+                className={`${sidebarClass} ${isHovered && !isMobile ? 'hovered' : ''}`}
                 onMouseEnter={() => !isResizing && setIsHovered(true)}
                 onMouseLeave={() => !isResizing && setIsHovered(false)}
             >
