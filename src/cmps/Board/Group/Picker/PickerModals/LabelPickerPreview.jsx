@@ -3,16 +3,16 @@ import { useSelector } from "react-redux"
 import { resetDynamicModal, setDynamicModal } from "../../../../../store/actions/system.actions"
 import { getBoardColors } from "../../../../../store/actions/board.actions"
 import { EditableTxt } from "../../../../EditableTxt"
+import { ColorPicker } from "./ColorPicker"
 
 export function LabelPickerPreview({ label, isEditing, handleChange }) {
     const colorBtnParentRef = useRef(null)
-    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [isEditingLabel, setIsEditingLabel] = useState(false)
     const [labelTitle, setLabelTitle] = useState(label.title || 'Default Label')
     const [labelColor, setLabelColor] = useState(label.color)
+    const [isColorPickerOpen, setIsColorPickerOpen] = useState(false)
 
-    const isColorPickerOpen = parentId === `${label.id}-colorPicker`
     const colors = getBoardColors()
 
     useEffect(() => {
@@ -31,19 +31,8 @@ export function LabelPickerPreview({ label, isEditing, handleChange }) {
 
     function onColorDisplayClick(ev) {
         ev.stopPropagation()
+        setIsColorPickerOpen(prevIsOpen => !prevIsOpen)
 
-        if (isColorPickerOpen) {
-            resetDynamicModal()
-        } else {
-            setDynamicModal({
-                isOpen: true,
-                parentRefCurrent: colorBtnParentRef.current,
-                type: 'colorPicker',
-                data: { colors, onColorClick: onChangeColor },
-                parentId: `${label.id}-colorPicker`,
-                isPosBlock: true,
-            })
-        }
     }
 
     const extraTitleInputBtn = [
@@ -63,7 +52,7 @@ export function LabelPickerPreview({ label, isEditing, handleChange }) {
                     onTxtClick={() => setIsEditingLabel(true)}
                     inputValue={labelTitle || ''}
                     onInputChange={onTitleChange}
-                    onEditClose={() => console.log('hi')}
+                    onEditClose={() => setIsEditingLabel(false)}
                     extraBtnsStart={extraTitleInputBtn}
                     isBtnsInTxt={true}
                 />
@@ -77,6 +66,8 @@ export function LabelPickerPreview({ label, isEditing, handleChange }) {
                     <span>{labelTitle || ''}</span>
                 </button>
             )}
+
+            {isColorPickerOpen && <ColorPicker colors={colors} onColorClick={onChangeColor} />}
         </li>
     )
 }

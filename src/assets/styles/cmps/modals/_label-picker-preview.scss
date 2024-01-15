@@ -1,5 +1,6 @@
 .label-picker-preview {
     overflow: visible;
+    position: relative;
 
     .editable-txt-container {
         max-width: 100%;
@@ -33,5 +34,11 @@
         min-width: 24px;
         min-height: 24px;
         border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .color-picker-modal {
+        position: absolute;
+        z-index: 10;
     }
 }
