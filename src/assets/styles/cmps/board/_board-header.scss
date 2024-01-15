@@ -38,7 +38,7 @@
 
         .board-filter {
             position: fixed;
-            bottom: 0;
+            bottom: -15px;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: $clr0;
@@ -47,9 +47,23 @@
             min-width: 95%;
             justify-content: space-evenly;
 
-            .btn span,
-            .btn input {
-                display: none;
+            .btn {
+                padding: 0;
+
+                span,
+                input {
+                    display: none;
+                }
+
+                svg {
+                    width: 25px;
+                    height: 25px;
+                }
+
+                &.new-task {
+                    margin-inline-end: 0;
+                }
+
             }
         }
     }
