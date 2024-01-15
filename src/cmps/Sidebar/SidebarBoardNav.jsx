@@ -8,6 +8,8 @@ import { saveNewBoards } from '../../store/actions/board.actions'
 import { boardService } from "../../services/board.service"
 import { utilService } from '../../services/util.service'
 
+import emptySearch from "/img/search-empty.svg"
+
 export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBoard, filterBy }) {
     const fullBoards = useSelector((storeState) => storeState.boardModule.boards)
 
@@ -77,6 +79,19 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
         })
         return fullBoardsCopy
     }
+
+    if (!boards.length) return (
+        <section className="empty-search-container grid place-center">
+            <div className="empty-search">
+                <img src={emptySearch} alt="" />
+                <h4>No results found</h4>
+                <p>
+                    Please check your search terms or filters
+                </p>
+            </div>
+
+        </section>
+    )
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>

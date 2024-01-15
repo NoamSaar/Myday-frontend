@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { CloseIcon, SearchIcon } from "../../../../../services/svg.service"
 import { DynamicInput } from "../../../../DynamicInput"
 import { UserImg } from "../../../../UserImg"
+import { MemberList } from "../../../../MemberList"
 
 export function MemberPicker({ chosenMembers, allMembers, onChangeMembers }) {
     const [membersFilter, setMembersFilter] = useState('')
@@ -105,21 +106,7 @@ export function MemberPicker({ chosenMembers, allMembers, onChangeMembers }) {
 
                 {!membersFilter && <p className="suggested-people-title">Suggested people</p>}
 
-                <ul className="clean-list member-options-list">
-                    {currAllMembers.map((member, idx) => {
-                        return (
-                            <li key={idx}>
-                                <button
-                                    className="btn member-option"
-                                    onClick={() => onAddMember(member)}
-                                >
-                                    <UserImg user={member} />
-                                    <p className="username">{member.fullname}</p>
-                                </button>
-                            </li>
-                        )
-                    })}
-                </ul>
+                <MemberList members={currAllMembers} onMemberClick={onAddMember} />
             </div>
         </div>
     )

@@ -1,55 +1,18 @@
 .dynamic-dialog {
-    dialog {
-        align-content: center;
+    position: fixed;
+    inset: 0;
+
+    .black-screen {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(41, 47, 76, 0.7);
+    }
+
+    .dialog-content {
+        position: fixed;
         top: 50%;
         left: 50%;
         translate: -50% -50%;
-        padding: 2.5rem;
-        margin: 0;
-        border: none;
-        border-radius: $border-radius-small;
-        text-align: justify;
-        color: $clr-btn-hover;
-        color: $clr-btn-hover;
-
-        &[open] {
-            display: grid;
-            justify-items: center;
-        }
-
-        .close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            background-color: unset;
-            border: none;
-            font-size: inherit;
-
-            &:hover {
-                color: $clr-btn-hover;
-            }
-        }
-
-        input::placeholder {
-            text-align: center;
-        }
-
-        &::backdrop {
-            background-color: rgba(128, 128, 128, 0.63);
-        }
-
-        .profile {
-            width: 10em;
-            border-radius: 50%;
-        }
-
-        h3 {
-            display: flex;
-            align-items: center;
-
-            a {
-                margin-inline-start: 15px;
-            }
-        }
     }
+
 }

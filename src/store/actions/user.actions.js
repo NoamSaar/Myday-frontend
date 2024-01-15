@@ -6,13 +6,13 @@ import { SET_IS_LOADING } from '../reducers/system.reducer.js'
 import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from '../reducers/user.reducer.js'
 import { showErrorMsg } from './system.actions.js'
 
-export async function loadUsers() {
+export async function getUsers() {
     try {
-        store.dispatch({ type: SET_IS_LOADING, isLoading: true })
-        const users = await userService.getUsers()
-        store.dispatch({ type: SET_USERS, users })
+        // store.dispatch({ type: SET_IS_LOADING, isLoading: true })
+        return await userService.getUsers()
+        // store.dispatch({ type: SET_USERS, users })
     } catch (err) {
-        console.log('UserActions: err in loadUsers', err)
+        console.log('UserActions: err in getUsers', err)
     } finally {
         store.dispatch({ type: SET_IS_LOADING, isLoading: false })
     }
