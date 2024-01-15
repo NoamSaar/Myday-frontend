@@ -30,9 +30,15 @@
         }
 
         @include for-narrow-layout {
-            grid-template-columns: minmax(30px, auto) 1fr;
+            // grid-template-columns: minmax(30px, auto) 1fr;
+            grid-template-columns: var(--sidebar-width) 1fr;
             gap: 10px;
             position: relative;
+            transition: grid-template-columns 250ms;
+
+            &:has(.sidebar.open) {
+                transition: unset;
+            }
         }
 
         .loader-container {
