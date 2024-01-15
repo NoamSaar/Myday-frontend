@@ -1,22 +1,20 @@
 import { useEffect, useRef, useState } from "react"
-import { useSelector } from "react-redux"
-import { resetDynamicModal, setDynamicModal } from "../../../../../store/actions/system.actions"
 import { getBoardColors } from "../../../../../store/actions/board.actions"
 import { EditableTxt } from "../../../../EditableTxt"
 import { ColorPicker } from "./ColorPicker"
 
-export function LabelPickerPreview({ label, isEditing, handleChange }) {
+export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsChange }) {
     const colorBtnParentRef = useRef(null)
 
     const [isEditingLabel, setIsEditingLabel] = useState(false)
-    const [labelTitle, setLabelTitle] = useState(label.title || 'Default Label')
+    const [labelTitle, setLabelTitle] = useState(label.title)
     const [labelColor, setLabelColor] = useState(label.color)
     const [isColorPickerOpen, setIsColorPickerOpen] = useState(false)
 
     const colors = getBoardColors()
 
     useEffect(() => {
-        setLabelTitle(label.title || 'Default Label')
+        setLabelTitle(label.title)
         setLabelColor(label.color)
     }, [label])
 
@@ -32,7 +30,11 @@ export function LabelPickerPreview({ label, isEditing, handleChange }) {
     function onColorDisplayClick(ev) {
         ev.stopPropagation()
         setIsColorPickerOpen(prevIsOpen => !prevIsOpen)
+    }
 
+    function onEditClose() {
+        onLabelsChange({ ...label, title: labelTitle, color: labelColor })
+        setIsEditingLabel(false)
     }
 
     const extraTitleInputBtn = [
@@ -48,13 +50,14 @@ export function LabelPickerPreview({ label, isEditing, handleChange }) {
             {isEditing ? (
                 <EditableTxt
                     isEditing={isEditingLabel}
-                    txtValue={labelTitle || ''}
+                    txtValue={labelTitle || 'Default Label'}
                     onTxtClick={() => setIsEditingLabel(true)}
                     inputValue={labelTitle || ''}
                     onInputChange={onTitleChange}
-                    onEditClose={() => setIsEditingLabel(false)}
+                    onEditClose={onEditClose}
                     extraBtnsStart={extraTitleInputBtn}
                     isBtnsInTxt={true}
+                    placeholder={labelTitle ? 'Add Label' : 'Default Label'}
                 />
             ) : (
                 <button
