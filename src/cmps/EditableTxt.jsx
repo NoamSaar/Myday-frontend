@@ -66,7 +66,7 @@ export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, input
 
                 </div>
             ) : (
-                <p
+                <div
                     className="editable-txt"
                     onClick={onTxtClick}
                     style={style}>
@@ -82,7 +82,7 @@ export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, input
                     })}
 
                     <span>{txtValue}</span>
-                </p>
+                </div>
             )}
         </div>
     )
