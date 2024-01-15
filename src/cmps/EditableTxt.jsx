@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, inputName = '', placeholder = '', onInputChange, onEditClose, extraBtnsStart, extraBtnsEnd, style = {} }) {
+export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, inputName = '', placeholder = '', onInputChange, onEditClose, extraBtnsStart, extraBtnsEnd, style = {}, isBtnsInTxt }) {
     const editableTxtRef = useRef(null)
 
     useEffect(() => {
@@ -70,7 +70,18 @@ export function EditableTxt({ isEditing, txtValue, onTxtClick, inputValue, input
                     className="editable-txt"
                     onClick={onTxtClick}
                     style={style}>
-                    {txtValue}
+
+                    {(isBtnsInTxt && extraBtnsStart && extraBtnsStart.length) && extraBtnsStart.map((btn, idx) => {
+                        return <div
+                            key={idx}
+                            className={btn.className}
+                            style={btn.style || {}}
+                            onMouseDown={btn.onMouseDown}
+                        >
+                        </div>
+                    })}
+
+                    <span>{txtValue}</span>
                 </p>
             )}
         </div>
