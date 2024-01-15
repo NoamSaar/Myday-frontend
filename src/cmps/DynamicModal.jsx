@@ -7,7 +7,7 @@ import { DynamicModalRouter } from "./DynamicModalRouter"
 export function DynamicModal() {
     const modalRef = useRef()
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const [ModalDimensions, setModalDimensions] = useState({ width: 0, height: 0 })
+    const [ModalPos, setModalPos] = useState({ left: 0, top: 0 })
     const [caretDirection, setCaretDirection] = useState('top') // Default direction
 
     const parentBoundingRect = modalData.parentRefCurrent?.getBoundingClientRect()
@@ -69,9 +69,7 @@ export function DynamicModal() {
             newTop = Math.max(0, newTop)
         }
 
-        setModalDimensions({
-            width: modalWidth,
-            height: modalHeight,
+        setModalPos({
             left: newLeft,
             top: newTop
         })
@@ -97,8 +95,8 @@ export function DynamicModal() {
     if (!modalData.isOpen) return
 
     const style = {
-        left: `${ModalDimensions.left}px`,
-        top: `${ModalDimensions.top}px`
+        left: `${ModalPos.left}px`,
+        top: `${ModalPos.top}px`
     }
 
     return (
