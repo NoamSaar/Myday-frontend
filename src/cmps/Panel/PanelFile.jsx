@@ -36,7 +36,7 @@ export function PanelFile({ files, onAddFile }) {
                 ))
             ) : (
                 <div className="no-files-message grid place-center">
-                    <img src="../../../public/icons/empty-file.svg" alt="" />
+                    <img src="/icons/empty-file.svg" alt="" />
 
                     <div>
                         <span className="bold">Drag & drop</span>
