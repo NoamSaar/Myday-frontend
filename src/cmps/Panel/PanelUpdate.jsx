@@ -83,7 +83,7 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
             setDynamicModal({
                 isOpen: true,
                 parentRefCurrent: menuBtnRef.current,
-                parentId: `${board._id}-sidebar-menu`,
+                parentId: `${boardId}-sidebar-menu`,
                 type: 'menuOptions',
                 data: { options: menuOptions },
                 isPosBlock: true
