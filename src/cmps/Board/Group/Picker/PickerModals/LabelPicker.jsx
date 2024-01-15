@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { PencilIcon } from '../../../../../services/svg.service'
 
 export function LabelPicker({ onChangeStatus, title }) {
     const { [title]: statuses } = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -24,7 +25,8 @@ export function LabelPicker({ onChangeStatus, title }) {
                 ))}
             </ul>
 
-            <button className='btn'>
+            <button className='btn flex align-center justify-center'>
+                <PencilIcon />
                 <p>Edit Labels</p>
             </button>
 

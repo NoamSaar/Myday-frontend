@@ -11,6 +11,9 @@
         display: grid;
         gap: 8px;
         width: 100%;
+        padding-block-end: 16px;
+        margin-block-end: 8px;
+        border-block-end: 1px solid $clr-group-border;
 
         .manual-option {
             border-radius: calc($border-radius-small / 2);
@@ -23,6 +26,10 @@
                 opacity: .85;
             }
         }
+    }
+
+    .btn {
+        width: 100%;
     }
 
 }
