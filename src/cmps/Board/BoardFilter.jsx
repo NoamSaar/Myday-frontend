@@ -117,7 +117,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             {
                 name: 'filter',
                 icon: <SettingsKnobsIcon />,
-                func: () => console.log('hi'),
+                func: () => { },
             }
         ]
     }
