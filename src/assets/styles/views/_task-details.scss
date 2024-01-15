@@ -57,6 +57,10 @@
                 top: 8px;
                 right: 0;
             }
+
+            img {
+                margin-inline-end: -10px;
+            }
         }
     }
 
@@ -101,6 +105,7 @@
     .panel-update {
         overflow-y: scroll;
         height: calc(100dvh - 48px);
+        align-content: start;
 
         .input-container {
             padding: 30px 20px 42px;

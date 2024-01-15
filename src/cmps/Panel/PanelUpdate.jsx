@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ClockIcon, LikeIcon, PersonIcon, ReplyIcon } from "../../services/svg.service"
 import { UserImg } from '../UserImg'
+import loader from "/img/board-loader.gif"
 import { boardService } from '../../services/board.service'
 import { utilService } from '../../services/util.service'
 
@@ -66,9 +67,14 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
     }
 
     const dynClass = inputRef.current?.value ? 'contains-txt' : ''
-    console.log('users:', users)
+    // console.log('users:', users)
+    if (!users) {
+        <section className="loader-container grid place-center">
+            <img className="myday-loader" src={loader} alt="" />
+        </section>
+    }
     return (
-        <section className="panel-update grid align-center">
+        <section className="panel-update grid">
             <div className={`input-container ${dynClass}`}>
                 <form onSubmit={handleSubmit} className="grid">
                     <input
