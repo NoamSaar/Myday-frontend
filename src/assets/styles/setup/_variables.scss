@@ -22,6 +22,8 @@ $clr1: #000;
 
     --board-grid: var(--first-col) var(--person-col) var(--status-col) var(--priority-col) var(--date-col) var(--link-col) var(--file-col) var(--line-end);
 
+    --sidebar-width: 250px;
+    --layout-transition: 250ms;
 }
 
 
@@ -105,6 +107,7 @@ $border-radius-small: 4px;
 $mobile-breakpoint: 600px;
 $narrow-breakpoint: 905px;
 $normal-breakpoint: 1055px;
+
 
 //wider than 600px
 @media (min-width: $mobile-breakpoint) {

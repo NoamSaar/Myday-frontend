@@ -11,6 +11,7 @@ export function LabelPreview({ title, info, onUpdate, taskId, isChangingToDone }
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const label = board[title].find(option => option.id === info.chosenOption)
+    if (!label) return <li className="status-preview status-col priority-col">Loading...</li>
     const style = { backgroundColor: label.color }
     const isCurrPickerOpen = parentId === `${taskId}-${title}Picker`
 
@@ -33,14 +34,17 @@ export function LabelPreview({ title, info, onUpdate, taskId, isChangingToDone }
     }
 
     const animations = ['balloon', 'confetti', 'crazy_balls']
-    const dynClass = animations[utilService.getRandomIntInclusive(0, animations.length - 1)]
+
+    const dynClass = isChangingToDone && label.id === 'l101'
+        ? animations[utilService.getRandomIntInclusive(0, animations.length - 1)]
+        : ''
+
 
     return (
         <li
             onClick={onLabelPreviewClick}
             style={style}
-            className={`status-preview status-col priority-col 
-            ${isChangingToDone && label.id === 'l101' ? dynClass : ''}`}
+            className={`status-preview status-col priority-col ${dynClass}`}
             ref={previewBtnRef}
         >
             <p>{label.title}</p>

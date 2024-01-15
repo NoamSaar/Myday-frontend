@@ -12,7 +12,7 @@ export function BoardApp() {
     return (
         <section className="main-layout grid board-app">
             <BoardAppHeader />
-            <main className={`content-container  ${isFullSidebarMobile ? 'mobile-hp' : ''}`}>
+            <main className={`content-container  ${isFullSidebarMobile ? 'is-sidebar-full-mobile' : ''}`}>
                 <Sidebar />
                 <Outlet />
             </main>

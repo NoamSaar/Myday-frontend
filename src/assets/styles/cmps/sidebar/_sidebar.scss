@@ -1,36 +1,64 @@
 .sidebar {
+    display: grid;
     background-color: $clr0;
     height: 100%;
-    width: 250px;
-    position: absolute;
-    left: -220px;
+    width: var(--sidebar-width);
     border-top-right-radius: 8px;
-    transition: left 150ms;
+    justify-content: end;
+    align-content: start;
 
-    &>.sidebar-workspace,
-    .sidebar-board-nav,
-    .app-sidebar-resizer {
-        opacity: 0;
+    &.hovered {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
     }
 
-    &:hover {
-        left: 0;
-        z-index: 35;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
+    @include for-narrow-layout {
+        &.hovered {
+            justify-content: normal;
+        }
+    }
 
-        &>.sidebar-workspace,
+    &:not(.hovered) {
+
+        .sidebar-workspace,
         .sidebar-board-nav,
         .app-sidebar-resizer {
-            opacity: 1;
+            // transition: opacity 350ms;
+            opacity: 0;
         }
+    }
 
-        .btn-menu {
-            opacity: 1;
+    &:not(.hovered) {
+        .sidebar-main-nav a {
+            opacity: 0;
+        }
+    }
+
+
+    @include for-narrow-only-layout {
+        &:hover {
+            left: 0;
+            z-index: 35;
+            justify-content: normal;
+
+            &>.sidebar-workspace,
+            .sidebar-board-nav,
+            .app-sidebar-resizer {
+                opacity: 1;
+            }
+
+            .btn-menu {
+                opacity: 1;
+            }
+
+            .sidebar-main-nav a {
+                opacity: 1;
+            }
         }
     }
 
     &.open {
         position: static;
+        justify-content: normal;
 
         &:not(:hover) {
             .btn-menu {
@@ -48,13 +76,16 @@
             box-shadow: none;
         }
 
+        &.hovered {
+            box-shadow: none;
+        }
+
+
+        .sidebar-main-nav a {
+            opacity: 1;
+        }
+
     }
-
-    // &.mobile-hp {
-    //     width: 100vw;
-    // }
-
-    /* ResizableSidebar.css */
 
     .app-sidebar-resizer {
         width: 5px;
@@ -74,12 +105,18 @@
     @import './sidebar-workspace.scss';
     @import './sidebar-board-nav.scss';
 
-    @include for-narrow-layout {
-        min-width: 190px;
-        max-width: 250px;
+    @include for-narrow-only-layout {
+        &.open {
+            position: absolute;
+            left: -400px;
+
+            .btn.clrblue {
+                display: none;
+            }
+        }
     }
 
-    @include for-normal-layout {
-        max-width: 400px;
-    }
+    // @include for-normal-layout {
+    //     max-width: 400px;
+    // }
 }

@@ -21,7 +21,7 @@ export function Sidebar() {
 
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
-
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -103,6 +103,12 @@ export function Sidebar() {
     }
 
     function onOpenSidebar() {
+        if (isSidebarOpen) {
+            changeWidthVariable(30)
+            // changeTransitionVariable(0)
+        }
+
+        else changeWidthVariable(sidebarWidth)
         setIsSidebarOpen(!isSidebarOpen)
     }
 
@@ -120,9 +126,18 @@ export function Sidebar() {
 
     // resizing functionality
 
-    const onResize = (newWidth) => {
-        setSidebarWidth(newWidth)
+    // const onResize = (newWidth) => {
+    //     setSidebarWidth(newWidth)
+
+    // }
+
+    const changeWidthVariable = (newWidth) => {
+        document.documentElement.style.setProperty('--sidebar-width', newWidth + 'px');
     }
+
+    // const changeTransitionVariable = (length) => {
+    //     document.documentElement.style.setProperty('--layout-transition', length + 'ms');
+    // }
 
     const startResizing = useCallback(() => {
         setIsResizing(true)
@@ -134,9 +149,20 @@ export function Sidebar() {
 
     const resize = useCallback(
         (ev) => {
-            if (isResizing) {
-                const newWidth = ev.clientX - sidebarRef.current.getBoundingClientRect().left
-                onResize(newWidth)
+            if (isResizing && !isMobile) {
+                let screenWidth = window.innerWidth;
+                let newWidth = ev.clientX - sidebarRef.current.getBoundingClientRect().left;
+
+                if (screenWidth >= 905 && screenWidth <= 1055) {
+                    if (newWidth > 250) newWidth = 250;
+                    if (newWidth < 200) newWidth = 200;
+                } else if (screenWidth > 1055) {
+                    if (newWidth > 400) newWidth = 400;
+                    if (newWidth < 200) newWidth = 200;
+                };
+                setSidebarWidth(newWidth)
+                changeWidthVariable(newWidth)
+                // onResize(newWidth);
             }
         },
         [isResizing]
@@ -151,18 +177,17 @@ export function Sidebar() {
         }
     }, [resize, stopResizing])
 
-    var style = isSidebarOpen ?
-        {
-            width: sidebarWidth,
-            left: 0
-        } : {
-            width: sidebarWidth,
-            left: -(sidebarWidth - 30)
-        }
+    // var style = isSidebarOpen ?
+    //     {
+    //         justifyContent: 'start',
+    //     } : {
+    //         justifyContent: 'end',
+    //     }
 
-    style = !isHovered ? style : {
+    var style = !isHovered && !isSidebarOpen ? style : {
         width: sidebarWidth,
-        left: 0
+        position: 'absolute',
+        zIndex: 100,
     }
 
     const sidebarClass = `sidebar ${isSidebarOpen ? 'open' : ''}`
@@ -172,7 +197,7 @@ export function Sidebar() {
                 ref={sidebarRef}
                 style={style}
                 onMouseDown={(ev) => ev.preventDefault()}
-                className={`${sidebarClass} ${isHovered ? 'hovered' : ''}`}
+                className={`${sidebarClass} ${isHovered && !isMobile ? 'hovered' : ''}`}
                 onMouseEnter={() => !isResizing && setIsHovered(true)}
                 onMouseLeave={() => !isResizing && setIsHovered(false)}
             >

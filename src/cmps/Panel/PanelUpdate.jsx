@@ -66,7 +66,7 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
     }
 
     const dynClass = inputRef.current?.value ? 'contains-txt' : ''
-
+    console.log('users:', users)
     return (
         <section className="panel-update grid align-center">
             <div className={`input-container ${dynClass}`}>

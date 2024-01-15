@@ -38,18 +38,61 @@
 
         .board-filter {
             position: fixed;
-            bottom: 0;
+            bottom: -17px;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: $clr0;
+            background-color: $clr-bg-header;
             box-shadow: 0 4px 17px 0px rgba(0, 0, 0, 0.25);
-            border-radius: 20px;
+            border-radius: 8px;
             min-width: 95%;
             justify-content: space-evenly;
 
-            .btn span,
-            .btn input {
-                display: none;
+            &.search-focused {
+                display: block;
+
+                .btn:not(.close-btn) {
+                    display: none;
+                }
+
+                .search.active {
+                    background-color: unset;
+
+                    .dynamic-input {
+                        background-color: $clr-btn-active;
+                    }
+                }
+
+                .search-input-container {
+                    display: grid;
+                    grid-template-columns: 1fr auto;
+                    padding-inline-start: 10px;
+
+                    .close-btn {
+                        margin-inline: 15px 10px;
+                        padding-inline: 5px;
+                        background-color: $clr-btn-hover;
+
+                    }
+                }
+            }
+
+            .btn {
+                padding: 0;
+
+                span,
+                input {
+                    display: none;
+                }
+
+                svg {
+                    width: 25px;
+                    height: 25px;
+                }
+
+                &.new-task {
+                    margin-inline-end: 0;
+                }
+
             }
         }
     }
@@ -188,7 +231,7 @@
         grid-auto-flow: column;
         // justify-content: start;
         gap: 6px;
-        padding-block: 16px;
+        padding-block: 10px;
         border-top: 1px solid $clr-group-border;
         // min-width: max-content;
         // min-height: 65px;

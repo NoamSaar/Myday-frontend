@@ -9,13 +9,23 @@
         padding: 0;
         background-color: $clr-bg-header;
 
+        &.is-sidebar-full-mobile {
+            .sidebar-workspace .btn.clrblue {
+                display: block;
+            }
+        }
+
         @include for-narrow-only-layout {
 
-            &.mobile-hp {
+            .sidebar {
+                left: -1000px;
+            }
+
+            &.is-sidebar-full-mobile {
                 grid-template-columns: 1fr 0;
 
                 .sidebar {
-                    // transition: min-width 6s;
+                    left: 0;
                     min-width: 100vw;
                 }
 
@@ -30,9 +40,15 @@
         }
 
         @include for-narrow-layout {
-            grid-template-columns: minmax(30px, auto) 1fr;
+            // grid-template-columns: minmax(30px, auto) 1fr;
+            grid-template-columns: var(--sidebar-width) 1fr;
             gap: 10px;
             position: relative;
+            transition: grid-template-columns 250ms;
+
+            &:has(.sidebar.open) {
+                transition: unset;
+            }
         }
 
         .loader-container {
