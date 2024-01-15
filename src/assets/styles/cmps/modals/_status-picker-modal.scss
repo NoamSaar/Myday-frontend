@@ -10,6 +10,7 @@
     .manual-select {
         display: grid;
         gap: 8px;
+        width: 100%;
 
         .manual-option {
             border-radius: calc($border-radius-small / 2);

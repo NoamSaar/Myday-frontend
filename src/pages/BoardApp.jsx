@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Sidebar } from "../cmps/Sidebar/Sidebar";
 import { DynamicModal } from "../cmps/DynamicModal";
 import { BoardAppHeader } from "../cmps/BoardAppHeader";
+import { DynamicDialog } from "../cmps/DynamicDialog";
 
 
 export function BoardApp() {
@@ -17,6 +18,7 @@ export function BoardApp() {
                 <Outlet />
             </main>
             <DynamicModal />
+            <DynamicDialog />
         </section>
     )
 }

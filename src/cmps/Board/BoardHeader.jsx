@@ -5,13 +5,11 @@ import { BoardEdit } from "./BoardEdit"
 import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
 import { setIsHeaderCollapsed } from "../../store/actions/board.actions"
 import { useNavigate } from "react-router"
-import { setSidePanelOpen } from "../../store/actions/system.actions"
-import { DynamicDialog } from "../DynamicDialog"
+import { resetDynamicDialog, setDynamicDialog, setSidePanelOpen } from "../../store/actions/system.actions"
 import { InviteModal } from "./InviteModal"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
     const [isCollapsed, setIsCollapsed] = useState(false)
-    const [isInviteDialogOpen, setIsInviteDialogOpen] = useState(false)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
     const navigate = useNavigate()
 
@@ -46,6 +44,13 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
         setIsHeaderCollapsed(currIsCollapsed)
     }
 
+    function onInviteClick() {
+        setDynamicDialog({
+            isOpen: true,
+            contentCmp: <InviteModal board={board} onCloseDialog={resetDynamicDialog} />
+        })
+    }
+
     const dynCollapsedClass = isCollapsed ? 'collapsed' : ''
     return (
         <>
@@ -65,7 +70,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                 </button>
 
                 <div className="invite-more-bts flex align-center">
-                    <button className="btn invite" onClick={() => setIsInviteDialogOpen(true)}>
+                    <button className="btn invite" onClick={onInviteClick}>
                         <InviteIcon />
                         <span>Invite / 1</span>
                     </button>
@@ -105,7 +110,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                     filterBy={filterBy}
                     onSetFilter={onSetFilter}
                 />
-                {isInviteDialogOpen && <DynamicDialog dialogContentComponent={<InviteModal board={board} onCloseDialog={() => setIsInviteDialogOpen(false)} />} onCloseDialog={() => setIsInviteDialogOpen(false)} />}
+                {/* <DynamicDialog dialogContentComponent={<InviteModal board={board} onCloseDialog={() => setIsInviteDialogOpen(false)} />} onCloseDialog={() => setIsInviteDialogOpen(false)} /> */}
             </header>
         </>
     )

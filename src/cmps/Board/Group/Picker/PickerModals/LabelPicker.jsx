@@ -8,7 +8,7 @@ export function LabelPicker({ onChangeStatus, title }) {
     }
 
     return (
-        <div className="general-modal status-picker-modal">
+        <div className="general-modal flex column align-center justify-center status-picker-modal">
 
             <ul className='clean-list manual-select'>
                 {statuses.map(status => (
@@ -23,6 +23,10 @@ export function LabelPicker({ onChangeStatus, title }) {
                     </li>
                 ))}
             </ul>
+
+            <button className='btn'>
+                <p>Edit Labels</p>
+            </button>
 
         </div>
     )

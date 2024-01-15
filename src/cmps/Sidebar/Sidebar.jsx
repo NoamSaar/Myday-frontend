@@ -193,7 +193,7 @@ export function Sidebar() {
     var style = !isHovered && !isSidebarOpen ? style : {
         width: sidebarWidth,
         position: 'absolute',
-        zIndex: 100,
+        zIndex: 35,
     }
 
     const sidebarClass = `sidebar ${isSidebarOpen ? 'open' : ''}`

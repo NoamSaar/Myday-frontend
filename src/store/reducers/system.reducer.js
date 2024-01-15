@@ -1,4 +1,4 @@
-import { getEmptyDynamicModal } from "../actions/system.actions"
+import { getEmptyDynamicDialog, getEmptyDynamicModal } from "../actions/system.actions"
 
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 export const SET_MSG = 'SET_MSG'
@@ -9,6 +9,7 @@ export const SET_DYNAMIC_MODAL_TYPE = 'SET_DYNAMIC_MODAL_TYPE'
 export const SET_DYNAMIC_MODAL_DATA = 'SET_DYNAMIC_MODAL_DATA'
 export const SET_DYNAMIC_MODAL_PARENT = 'SET_DYNAMIC_MODAL_PARENT'
 export const SET_DYNAMIC_MODAL = 'SET_DYNAMIC_MODAL'
+export const SET_DYNAMIC_DIALOG = 'SET_DYNAMIC_DIALOG'
 export const SET_DYNAMIC_PANEL_OPEN = 'SET_DYNAMIC_PANEL_OPEN'
 export const SET_DYNAMIC_PANEL_TYPE = 'SET_DYNAMIC_PANEL_TYPE'
 export const SET_DYNAMIC_PANEL_DATA = 'SET_DYNAMIC_PANEL_DATA'
@@ -20,6 +21,7 @@ const initialState = {
   isLoading: false,
   msg: null,
   dynamicModal: getEmptyDynamicModal(),
+  dynamicDialog: getEmptyDynamicDialog(),
   isSidePanelOpen: false,
   slidePanelData: {
     isPanelOpen: false,
@@ -87,6 +89,9 @@ export function systemReducer(state = initialState, action = {}) {
           data: action.data,
         }
       }
+
+    case SET_DYNAMIC_DIALOG:
+      return { ...state, dynamicDialog: action.dynamicDialog }
 
     //mobile
     case SET_IS_MOBILE:

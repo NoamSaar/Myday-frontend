@@ -1,11 +1,15 @@
+import { useSelector } from "react-redux"
 
-export function DynamicDialog({ dialogContentComponent, onCloseDialog }) {
+export function DynamicDialog() {
+    const dialogData = useSelector((storeState) => storeState.systemModule.dynamicDialog)
+
+    if (!dialogData.isOpen) return
     return (
         <div className="dynamic-dialog">
-            <div className="black-screen" onClick={onCloseDialog}></div>
+            <div className="black-screen"></div>
 
             <div className="dialog-content">
-                {dialogContentComponent}
+                {dialogData.contentCmp}
             </div>
         </div>
     )
