@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 import { CloseIcon, HomeIcon, MenuIcon, PersonIcon } from "../services/svg.service"
-import { userService } from "../services/user.service"
 // import { MemberPicker } from "./Board/Group/Picker/PickerModals/MemberPicker"
 import { UserImg } from "./UserImg"
 import { utilService } from "../services/util.service"
 import { setSidePanelOpen } from "../store/actions/system.actions"
-import { useNavigate } from "react-router"
+import { getUserById } from "../store/actions/user.actions"
 
 export function DynamicSidePanelHeader(props) {
     const { type, title, subjects, members } = props.headerProps
@@ -13,19 +13,15 @@ export function DynamicSidePanelHeader(props) {
     const [users, setUsers] = useState(null)
     const [activeSubject, setActiveSubject] = (type === 'taskDetails') ? useState('Updates') : useState('Activity Log')
     const navigate = useNavigate()
+
     useEffect(() => {
-        if (members && members.length > 0) getUsers(members)
+        if (members && members.length > 0) getTaskMembers(members)
         else setUsers(['guest'])
     }, [taskId, members])
 
-    async function getUsers(userIds) {
-        try {
-            const userPromises = userIds.map(async (userId) => await userService.getById(userId))
-            const resolvedUsers = await Promise.all(userPromises)
-            setUsers(resolvedUsers)
-        } catch (err) {
-            console.error('error getting users', err)
-        }
+    async function getTaskMembers(memberIds) {
+        const taskMembers = memberIds.map(memberId => getUserById(memberId))
+        setUsers(taskMembers)
     }
 
     // function onClosePanel() {
@@ -33,7 +29,8 @@ export function DynamicSidePanelHeader(props) {
     //     // navigate('borad/' + boardId)
     // }
 
-    if (!users?.length) return <div>Loading...</div>
+    if (!users?.length) return
+
     return (
         <section className="panel-header grid">
             <button className="btn" onClick={() => {

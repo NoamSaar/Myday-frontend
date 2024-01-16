@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { useSelector } from "react-redux"
 
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
@@ -7,11 +8,28 @@ import { setIsHeaderCollapsed } from "../../store/actions/board.actions"
 import { useNavigate } from "react-router"
 import { resetDynamicDialog, setDynamicDialog, setSidePanelOpen } from "../../store/actions/system.actions"
 import { InviteModal } from "./InviteModal"
+import { getUsers } from "../../store/actions/user.actions"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
+    const users = useSelector((storeState) => storeState.userModule.users)
+
     const [isCollapsed, setIsCollapsed] = useState(false)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
     const navigate = useNavigate()
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+    async function loadUsers() {
+        try {
+            const users = await getUsers()
+        } catch (err) {
+            console.error('Error loading Users:', err)
+            showErrorMsg('Cannot load Users')
+        }
+    }
+
 
     useEffect(() => {
         const observer = new IntersectionObserver(

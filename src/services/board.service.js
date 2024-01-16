@@ -2,6 +2,7 @@
 import { store } from '../store/store.js'
 import { getDefaultBoard } from './boards.service.js'
 import { httpService } from './http.service.js'
+import { userService } from './user.service.js'
 import { utilService } from './util.service.js'
 
 const BASE_URL = 'board/'
@@ -251,12 +252,14 @@ function getNewUpdate(txt) {
         createdAt: Date.now().toString(),
         id: utilService.makeId(),
         likes: [],
-        memberId: '659fd52d810c3f98c2054719',
-        // memberId: userService.getLoggedinUser(),
+        // memberId: userService.getLoggedinUser() ? userService.getLoggedinUser()._id : '659fd52d810c3f98c2054719',
+        memberId: userService.getLoggedinUser() ? userService.getLoggedinUser()._id : null,
         txt,
         msgs: [],
     }
 }
+
+
 
 
 function getDefaultLabel() {
