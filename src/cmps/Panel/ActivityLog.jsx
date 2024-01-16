@@ -19,7 +19,7 @@ export function ActivityLog() {
 
     useEffect(() => {
         _loadBoardActivities(boardId)
-    }, [boardId])
+    }, [boardId, currBoard])
 
     async function _loadBoardActivities(boardId) {
         try {
