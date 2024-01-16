@@ -8,13 +8,14 @@
 
     .chosen-members-list {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 5px;
         align-items: center;
         padding-inline: 10px;
         padding-block-start: 10px;
 
         @include for-narrow-layout {
+            grid-template-columns: repeat(3, 1fr);
             padding-inline: 16px 5px;
             padding-block-start: 16px;
         }
@@ -22,12 +23,16 @@
         .chosen-member {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin: 4px;
             text-align: center;
             background-color: $clr-chosen-member;
             border-radius: 20px;
-            width: fit-content;
             color: #333333;
+
+            @include for-narrow-layout {
+                width: fit-content;
+            }
 
             .user-img,
             .extra-members-box {

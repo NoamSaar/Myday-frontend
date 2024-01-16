@@ -72,6 +72,7 @@ export function getBoardsData() {
                     {
                         _id: '659fd60b810c3f98c205471b',
                         fullname: 'Mor Marzan',
+                        imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1705356175/7B12EEEE-8B9C-489B-882B-D5B8E47D9874_pjpibk.jpg',
                     },
                     {
                         _id: '659fd5db810c3f98c205471a',
@@ -338,6 +339,7 @@ export function getBoardsData() {
                         byMember: {
                             _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
+                            imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1705356175/7B12EEEE-8B9C-489B-882B-D5B8E47D9874_pjpibk.jpg'
                         },
                         group: {
                             id: 'g101',
@@ -409,6 +411,7 @@ export function getBoardsData() {
                         byMember: {
                             _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
+                            imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1705356175/7B12EEEE-8B9C-489B-882B-D5B8E47D9874_pjpibk.jpg'
                         },
                         group: {
                             id: 'g102',
@@ -444,6 +447,7 @@ export function getBoardsData() {
                         byMember: {
                             _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
+                            imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1705356175/7B12EEEE-8B9C-489B-882B-D5B8E47D9874_pjpibk.jpg'
                         },
                         group: {
                             id: 'g101',
@@ -461,6 +465,7 @@ export function getBoardsData() {
                         byMember: {
                             _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
+                            imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1705356175/7B12EEEE-8B9C-489B-882B-D5B8E47D9874_pjpibk.jpg'
                         },
                         group: {
                             id: 'g102',
@@ -532,6 +537,7 @@ export function getBoardsData() {
                         byMember: {
                             _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
+                            imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1705356175/7B12EEEE-8B9C-489B-882B-D5B8E47D9874_pjpibk.jpg'
                         },
                         group: {
                             id: 'g102',
@@ -657,6 +663,7 @@ export function getBoardsData() {
                         byMember: {
                             _id: '659fd60b810c3f98c205471b',
                             fullname: 'Mor Marzan',
+                            imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1705356175/7B12EEEE-8B9C-489B-882B-D5B8E47D9874_pjpibk.jpg'
                         },
                         group: {
                             id: 'g103',
@@ -736,6 +743,7 @@ export function getDefaultBoard() {
             {
                 _id: '659fd60b810c3f98c205471b',
                 fullname: 'Mor Marzan',
+                imgUrl: 'https://res.cloudinary.com/dkvliixzt/image/upload/v1705356175/7B12EEEE-8B9C-489B-882B-D5B8E47D9874_pjpibk.jpg'
             },
             {
                 _id: '659fd5db810c3f98c205471a',

@@ -11,6 +11,9 @@
         display: grid;
         gap: 8px;
         width: 100%;
+        padding-block-end: 16px;
+        margin-block-end: 8px;
+        border-block-end: 1px solid $clr-group-border;
 
         .manual-option {
             border-radius: calc($border-radius-small / 2);
@@ -23,6 +26,25 @@
                 opacity: .85;
             }
         }
+    }
+
+    .btn {
+        width: 100%;
+        height: 32px;
+    }
+
+    .add-label-btn {
+        border: 1px solid #e6e9ef;
+        gap: unset;
+
+        p {
+            padding-block-start: 2.5px;
+        }
+
+    }
+
+    .edit-btn p {
+        padding-block-start: 2.5px;
     }
 
 }
