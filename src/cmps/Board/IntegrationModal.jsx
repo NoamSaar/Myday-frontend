@@ -3,6 +3,8 @@ import { GoogleBtn } from './GoogleBtn'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { updateUser } from '../../store/actions/user.actions'
+import { GoogleCalendarIcon } from '../../services/svg.service'
+import { IntegrationList } from './IntegrationList'
 
 export function IntegrationModal() {
     const session = useSession() //tokens, when session exists we have a user
@@ -67,6 +69,15 @@ export function IntegrationModal() {
         }
     }
 
+    const integrations = [
+        {
+            txt: 'Calendar Integration',
+            icon: <GoogleCalendarIcon />,
+            name: 'calendar',
+            isChecked: isCalendarChecked
+        }
+    ]
+
     if (isLoading) return <div className="integration-modal">Loading...</div>
     return (
         <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} integration-modal`}>
@@ -76,14 +87,16 @@ export function IntegrationModal() {
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
                 txt={session ? 'Sign out of google' : 'Sign in with google'} />
 
-            <div className={`${isDisabled && 'disabled'} flex align-center justify-center switch-container`}>
+            <IntegrationList integrations={integrations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
+
+            {/* <div className={`${isDisabled && 'disabled'} flex align-center justify-center integration-container`}>
                 <label className="switch">
                     <input disabled={isDisabled} type="checkbox" checked={isCalendarChecked} onChange={ev => handleSwitchChange(ev, 'calendar')} />
                     <span className="slider round"></span>
                 </label>
 
                 <p>Calendar Integration</p>
-            </div>
+            </div> */}
         </div>
     )
 }
