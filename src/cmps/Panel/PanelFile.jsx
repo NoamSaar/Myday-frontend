@@ -1,5 +1,7 @@
 import { useRef, useState } from "react"
 import { BigPlusIcon, CloseIcon } from "../../services/svg.service"
+import { uploadService } from '../../services/upload.service'
+
 
 export function PanelFile({ files, onAddFile }) {
     const [selectedImage, setSelectedImage] = useState(null)
@@ -17,10 +19,23 @@ export function PanelFile({ files, onAddFile }) {
         fileInputRef.current.click()
     }
 
-    const handleFileChange = (ev) => {
-        const selectedFiles = ev.target.files
-        console.log('Selected files:', selectedFiles)
-        onAddFile(selectedFiles)
+    // const handleFileChange = (ev) => {
+    //     const selectedFiles = ev.target.files
+    //     onAddFile(selectedFiles)
+    // }
+
+
+    function handleFileChange(ev) {
+        const file = ev.target.files[0]
+
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = async () => {
+                const imgURL = await uploadService.uploadImg(ev)
+                onAddFile(imgURL)
+            }
+            reader.readAsDataURL(file)
+        }
     }
 
     // console.log('files:', files)

@@ -96,19 +96,75 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
                 </form>
             </div>
 
-            {currMsgs.length ?
-                <MsgList msgs={currMsgs} onLikeComment={onLikeComment} />
-                : (
-                    <div className="post_not_found grid place-center">
-                        <img src="/icons/no-updates.svg" alt="" />
-                        <div className="post-not-found-txt">
-                            <h2>No Updates yet for this item</h2>
-                            <p className="post_not_found_subtitle">Be the first one to update about progress, mention someone
-                                <br />
-                                or upload files to share with your team members</p>
-                        </div>
+            {currMsgs.length > 0 && users.length === currMsgs.length ? (
+                currMsgs.map((msg, idx) => (
+                    <article key={msg.id} className="update-post">
+                        <section className="post-header flex align-center space-between">
+                            <section className="post-creator grid column align-center">
+                                {users[idx] !== 'guest' ? (
+                                    <>
+                                        <UserImg user={users[idx]} />
+                                        {users[idx].fullname}
+                                    </>
+                                ) : (
+                                    <>
+                                        <PersonIcon />
+                                        Guest
+                                    </>
+                                )}
+                            </section>
+                            <section className="post-time flex align-center justify-center">
+                                <ClockIcon />
+                                {utilService.timeSince(msg.createdAt)}
+                                {/* <button
+                                    className={`btn btn-option-menu`}
+                                    alt="update Menu"
+                                    onClick={toggleMenu}
+                                    title="Update Menu"
+                                    data-boardid={board._id}
+                                    ref={menuBtnRef}
+                                >
+                                    <MenuIcon />
+                                </button> */}
+                            </section>
+                        </section>
+                        <section className="post-content">
+                            <p>{msg.txt}</p>
+                        </section>
+
+                        <section className="likes-section flex">
+                            {
+                                msg.likes && msg.likes.length > 0 && (
+                                    <article className="btn flex">
+                                        👍 {msg.likes.length}
+                                    </article>
+                                )
+                            }
+                        </section>
+
+                        <section className="post-actions flex align-center">
+                            <div>
+                                <button className="btn" onClick={onLikeComment}>
+                                    <LikeIcon />Like
+                                </button>
+                            </div>
+                            <div>
+                                <button className="btn"><ReplyIcon />Reply</button>
+                            </div>
+                        </section>
+                    </article>
+                ))
+            ) : (
+                <div className="post-not-found grid place-center">
+                    <img src="/icons/no-updates.svg" alt="" />
+                    <div className="post-not-found-txt">
+                        <h2>No Updates yet for this item</h2>
+                        <p className="post-not-found-subtitle">Be the first one to update about progress, mention someone
+                            <br />
+                            or upload files to share with your team members</p>
                     </div>
-                )}
+                </div>
+            )}
         </section>
     )
 }

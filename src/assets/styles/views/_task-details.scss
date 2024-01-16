@@ -37,7 +37,6 @@
         margin-inline: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
 
         .title {
             font-size: rem(18px);
@@ -103,6 +102,7 @@
     }
 
     .panel-update {
+        padding-block-end: 140px;
         overflow-y: scroll;
         height: calc(100dvh - 48px);
         align-content: start;
@@ -133,25 +133,29 @@
         }
 
         .post_not_found {
-            margin-block-start: 80px;
+            margin-block-start: 35px;
         }
 
         .post-not-found-txt {
             text-align: center;
+            padding: 20px;
 
             h2 {
                 margin-block-start: 40px;
+                white-space: normal;
             }
 
             p {
                 margin-block-start: 16px;
                 font-size: rem(16px);
+                white-space: normal;
             }
         }
 
         img {
-            width: 290px;
-            height: 150px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 150px;
         }
 
         .update-post {
@@ -297,8 +301,13 @@
             margin-block-start: 100px;
 
             img {
-                width: 300px;
+                max-width: 300px;
+                width: 80%;
                 height: 130px
+            }
+
+            div {
+                text-align: center;
             }
 
             div>span {

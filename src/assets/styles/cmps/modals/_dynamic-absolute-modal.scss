@@ -5,7 +5,7 @@
     text-overflow: initial;
     white-space: initial;
 
-    p,
+    p:not(.username),
     span {
         overflow: initial;
         text-overflow: initial;
