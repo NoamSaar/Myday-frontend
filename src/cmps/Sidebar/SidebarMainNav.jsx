@@ -2,13 +2,16 @@ import { NavLink } from "react-router-dom"
 import { HomeIcon, AngleRightIcon, CalendarIcon } from "../../services/svg.service"
 import { setCurrBoard } from "../../store/actions/board.actions"
 
-export function SidebarMainNav({ isSidebarOpen, onOpenSidebar }) {
+export function SidebarMainNav({ isSidebarOpen, onOpenSidebar, changeWidthVariable }) {
     return (
         <nav className="sidebar-main-nav">
             <NavLink className={`btn btn-nav svg-inherit-color`}
                 to="/"
                 title="Home Button"
-                onClick={() => setCurrBoard(null)}
+                onClick={() => {
+                    changeWidthVariable(250)
+                    setCurrBoard(null)
+                }}
             >
                 <HomeIcon />
                 <span>Home</span>

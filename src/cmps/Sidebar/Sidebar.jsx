@@ -210,6 +210,7 @@ export function Sidebar() {
                 <SidebarMainNav
                     isSidebarOpen={isSidebarOpen}
                     onOpenSidebar={onOpenSidebar}
+                    changeWidthVariable={changeWidthVariable}
                 />
                 <SidebarWorkspace
                     filterBy={filterBy}

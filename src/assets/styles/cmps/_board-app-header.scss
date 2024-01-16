@@ -1,9 +1,11 @@
 .board-app-header {
     background-color: $clr-bg-header;
     padding: 10px 20px;
+    user-select: none;
 
     .header-logo {
         gap: 4px;
+        cursor: pointer;
 
         .app-title {
             font-size: rem(16px);
