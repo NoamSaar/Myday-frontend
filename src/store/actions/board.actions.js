@@ -3,9 +3,10 @@ import { boardService } from '../../services/board.service.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD, UPDATE_TASK } from '../reducers/board.reducer.js'
 import { setIsLoading } from './system.actions.js'
 import { utilService } from '../../services/util.service.js'
+import { parseJSON } from 'date-fns'
 
 
 // Store - saveTask (from board.js)
@@ -331,6 +332,15 @@ export async function getTask(boardId, taskId) {
     }
 }
 
+//dispatching only func for sockets
+export function addMgs(taskId, groupId, msg) {
+    store.dispatch(getActionUpdateTask(taskId, groupId, msg)) //updating currBoard
+    const currBoard = store.getState().boardModule.currBoard
+    const copyCurrBoard = JSON.parse(JSON.stringify(currBoard))
+    setFilteredBoard(copyCurrBoard) //updating filterBoard
+    store.dispatch(getActionUpdateBoard(copyCurrBoard)) //updating boards
+}
+
 /**************** get actions ****************/
 
 export function getActionRemoveBoard(boardId) {
@@ -372,6 +382,15 @@ export function getActionSetActiveTask(taskId) {
     return {
         type: SET_ACTIVE_TASK,
         taskId
+    }
+}
+
+export function getActionUpdateTask(taskId, groupId, msg) {
+    return {
+        type: UPDATE_TASK,
+        taskId,
+        groupId,
+        msg
     }
 }
 

@@ -8,6 +8,7 @@ export const SET_CURR_BOARD = 'SET_CURR_BOARD'
 export const SET_FILTERED_BOARD = 'SET_FILTERED_BOARD'
 export const SET_ACTIVE_TASK = 'SET_ACTIVE_TASK'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
+export const UPDATE_TASK = 'UPDATE_TASK'
 export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const SET_IS_HEADER_COLLAPSED = 'SET_IS_HEADER_COLLAPSED'
@@ -25,6 +26,7 @@ const initialState = {
 export function boardReducer(state = initialState, action) {
     var newState = state
     var boards
+    var board
     switch (action.type) {
         case SET_BOARDS:
             newState = { ...state, boards: action.boards }
@@ -45,6 +47,19 @@ export function boardReducer(state = initialState, action) {
         case UPDATE_BOARD:
             boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
             newState = { ...state, boards }
+            break
+
+        case UPDATE_TASK:
+            board = state.currBoard.groups.map(group => {
+                if (group.id !== action.groupId) return group
+                const updatedTasks = group.tasks.map(task => {
+                    if (task.id !== action.taskId) return task
+                    const updatedMsgs = task.msgs ? [action.msg, ...task.msgs] : [action.msg]
+                    return { ...task, msgs: updatedMsgs }
+                })
+                return { ...group, tasks: updatedTasks }
+            })
+            newState = { ...state, currBoard: board }
             break
 
         case REMOVE_BOARD:
