@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { getUsers } from "../../store/actions/user.actions"
+import { useSelector } from "react-redux"
+// import { getUsers } from "../../store/actions/user.actions"
 import { MemberList } from "../MemberList"
 import { CloseIcon, SearchIcon } from "../../services/svg.service"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
@@ -8,25 +9,31 @@ import { updateBoard } from "../../store/actions/board.actions"
 import { showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
 
 export function InviteModal({ board, onCloseDialog }) {
-    const [users, setUsers] = useState(null)
+    var users = useSelector(storeState => storeState.userModule.users)
+
+    // const [users, setUsers] = useState(null)
     const [filteredUsers, setFilteredUsers] = useState(null)
     const [usersFilter, setUsersFilter] = useState('')
     const boardMembers = board.members
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const usersFromDb = await getUsers()
-                setUsers(usersFromDb || [])
 
-                const usersToShow = getUsersToShow(usersFromDb)
-                setFilteredUsers(usersToShow || [])
-            } catch (error) {
-                console.error("Error fetching data:", error)
-            }
-        }
+        const usersToShow = getUsersToShow(users)
+        setFilteredUsers(usersToShow || [])
 
-        fetchData()
+        // const fetchData = async () => {
+        //     try {
+        //         const usersFromDb = await getUsers()
+        //         setUsers(usersFromDb || [])
+
+        //         const usersToShow = getUsersToShow(usersFromDb)
+        //         setFilteredUsers(usersToShow || [])
+        //     } catch (error) {
+        //         console.error("Error fetching data:", error)
+        //     }
+        // }
+
+        // fetchData()
 
     }, [boardMembers])
 
