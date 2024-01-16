@@ -46,7 +46,6 @@ export function LabelPicker({ onChangeStatus, title }) {
             let newBoard = { ...board, [title]: currLabels }
 
             newBoard = updateTasksInBoard(newBoard, title, labelId, replacementLabel)
-            console.log('newBoard', newBoard)
             await updateBoard(newBoard)
         } catch (err) {
             console.log('err', err)
