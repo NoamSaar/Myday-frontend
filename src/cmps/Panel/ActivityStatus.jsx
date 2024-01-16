@@ -8,6 +8,8 @@ export function ActivityStatus({ type, fromStatus, toStatus, activityTitle = nul
         switch (type) {
             case 'create':
                 return ''
+            case 'remove':
+                return ''
             case 'date':
                 if (!title || title === '-') return '-'
                 return utilService.timeStampToDate(title)

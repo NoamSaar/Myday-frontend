@@ -10,6 +10,7 @@ export const activityService = {
     query,
     getById,
     save,
+    getFieldTitle,
 }
 window.activityService = activityService
 
@@ -63,7 +64,7 @@ async function save(activity) {
             newActivity.from = 'Added'
         }
         if (type === 'status' || type === 'priority' && !activity.from) {
-            activity.from = '-'
+            newActivity.from = '-'
         }
 
         if (activity.from) {
@@ -74,11 +75,20 @@ async function save(activity) {
             newActivity.to = activity.to
         }
 
-        console.log('newActivity:', newActivity)
-
         return await httpService.post(BASE_URL, newActivity)
     } catch (err) {
         throw new Error(err.message || 'An err occurred during saving activity')
     }
 }
 
+function getFieldTitle(board, field, data) {
+    switch (field) {
+        case 'status':
+            const title = board.status.find(status => status.id === data).title
+            return title
+        case 'priority':
+            return board.priority.find(priority => priority.id === data).title
+        default:
+            return data
+    }
+}
