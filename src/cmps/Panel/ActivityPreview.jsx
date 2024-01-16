@@ -12,7 +12,6 @@ export function ActivityPreview({ activity }) {
     const activityTitle = activity.task?.title || activity.group?.title || currBoard.title
 
     const { byMember, createdAt, type } = activity
-    console.log('ActivityPreview ~ byMember:', byMember)
 
     function getStatusColor(statusTitle) {
         if (statusTitle === '-') return '#c4c4c4'
