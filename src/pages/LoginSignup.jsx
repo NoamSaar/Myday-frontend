@@ -61,7 +61,7 @@ export function LoginSignup() {
                 navigate('/board/659fb84f43565a19c57dd627')
             }
 
-        } catch (error) {
+        } catch (err) {
             console.log('err', err)
             showErrorMsg('Cannot login, please try again')
         } finally {

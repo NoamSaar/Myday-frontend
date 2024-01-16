@@ -18,13 +18,16 @@ export function userReducer(state = initialState, action) {
     var newState = state
     switch (action.type) {
         case SET_USER:
-            // newState = { ...state, user: action.user }
-            const updatedUsers = state.users.map(user => user._id === action.user._id ? action.user : user)
+            if (action.user) {
+                const updatedUsers = state.users.map(user => user._id === action.user._id ? action.user : user)
 
-            newState = {
-                ...state,
-                user: action.user,
-                users: updatedUsers
+                newState = {
+                    ...state,
+                    user: action.user,
+                    users: updatedUsers
+                }
+            } else {
+                newState = { ...state, user: action.user }
             }
             break
         case SET_WATCHED_USER:
