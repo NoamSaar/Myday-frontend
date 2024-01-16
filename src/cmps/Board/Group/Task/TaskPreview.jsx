@@ -10,6 +10,7 @@ import { DynamicPreview } from "../Picker/DynamicPreview"
 import { EditableTxt } from "../../../EditableTxt"
 import { useNavigate } from "react-router"
 import { MsgBtn } from "./MsgBtn"
+import { activityService } from "../../../../services/activity.service"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
@@ -56,8 +57,31 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
             if (field !== 'members' && field !== 'link') resetDynamicModal()
 
+            // getting the prev (from) and new (to) titles for the activity object
+            let activityField
+            let prevFieldTitle
+            let NewFieldTitle
+
+            if (field[0] === 'status' || field[0] === 'priority') {
+                activityField = field[0]
+                prevFieldTitle = activityService.getFieldTitle(board, field[0], task[field[0]])
+                NewFieldTitle = activityService.getFieldTitle(board, field[0], recivedData)
+            } else {
+                activityField = field
+                prevFieldTitle = activityService.getFieldTitle(board, field, task[field])
+                NewFieldTitle = activityService.getFieldTitle(board, field, recivedData)
+            }
+
+            const prevState = {
+                field: activityField === 'members' ? 'person' : activityField,
+                data: prevFieldTitle
+            }
+            const newState = {
+                field: activityField === 'members' ? 'person' : activityField,
+                data: NewFieldTitle
+            }
             const updatedTask = { ...task, members: task.members, [field]: data }
-            updateTask(board._id, groupId, updatedTask)
+            updateTask(board._id, groupId, updatedTask, prevState, newState)
 
             switch (field) {
                 case 'members':
