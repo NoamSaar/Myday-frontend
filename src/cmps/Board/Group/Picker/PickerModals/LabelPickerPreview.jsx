@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { getBoardColors } from "../../../../../store/actions/board.actions"
 import { EditableTxt } from "../../../../EditableTxt"
 import { ColorPicker } from "./ColorPicker"
+import { CloseIcon } from "../../../../../services/svg.service"
 
 export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsChange }) {
     const colorBtnParentRef = useRef(null)
@@ -52,17 +53,21 @@ export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsCha
     return (
         <li className="label-picker-preview" ref={colorBtnParentRef}>
             {isEditing ? (
-                <EditableTxt
-                    isEditing={isEditingLabel}
-                    txtValue={labelTitle || (isDefault ? 'Default Label' : 'Add Label')}
-                    onTxtClick={() => setIsEditingLabel(true)}
-                    inputValue={labelTitle || ''}
-                    onInputChange={onTitleChange}
-                    onEditClose={onEditClose}
-                    extraBtnsStart={extraTitleInputBtn}
-                    isBtnsInTxt={true}
-                    placeholder={labelTitle ? 'Add Label' : (isDefault ? 'Default Label' : 'Add Label')}
-                />
+                <div className="flex align-center edit-label-container">
+
+                    <EditableTxt
+                        isEditing={isEditingLabel}
+                        txtValue={labelTitle || (isDefault ? 'Default Label' : 'Add Label')}
+                        onTxtClick={() => setIsEditingLabel(true)}
+                        inputValue={labelTitle || ''}
+                        onInputChange={onTitleChange}
+                        onEditClose={onEditClose}
+                        extraBtnsStart={extraTitleInputBtn}
+                        isBtnsInTxt={true}
+                        placeholder={labelTitle ? 'Add Label' : (isDefault ? 'Default Label' : 'Add Label')}
+                    />
+                    <button className="flex align-center svg-inherit-color remove-label-btn"><CloseIcon /></button>
+                </div>
             ) : (
                 <button
                     className='manual-option btn'
