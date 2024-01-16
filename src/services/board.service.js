@@ -1,5 +1,6 @@
 
 import { store } from '../store/store.js'
+import { activityService } from './activity.service.js'
 import { getDefaultBoard } from './boards.service.js'
 import { httpService } from './http.service.js'
 import { userService } from './user.service.js'
@@ -107,9 +108,23 @@ function getDefaultBoardsFilter() {
 async function addGroup(boardId) {
     try {
         const board = await getById(boardId)
-        board.groups.push(_getDefaultGroup())
+        const newGroup = _getDefaultGroup()
+        board.groups.push(newGroup)
 
-        return await save(board)
+        const savedBoard = await save(board)
+
+        const activity = {
+            type: 'create',
+            entity: 'group',
+            boardId,
+            group: {
+                id: newGroup.id,
+                title: 'Group Title'
+            }
+        }
+        activityService.save(activity)
+
+        return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during adding group')
     }
@@ -122,20 +137,49 @@ async function removeGroup(boardId, groupId) {
 
         const idx = board.groups.findIndex(group => group.id === groupId)
         if (idx < 0) throw new Error(`Remove failed, cannot find group with id: ${groupId} in: ${board.title}`)
+
+        const activity = {
+            type: 'remove',
+            entity: 'group',
+            boardId,
+            group: {
+                id: board.groups[idx].id,
+                title: board.groups[idx].title
+            }
+        }
+
         board.groups.splice(idx, 1)
-        return await save(board)
+        const savedBoard = await save(board)
+
+        // activityService.save(activity)
+        return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing group')
     }
 }
 
-async function updateGroup(boardId, group) {
+async function updateGroup(boardId, group, prevState, newState) {
     try {
         const board = await getById(boardId)
         const groupIdx = board.groups.findIndex(currgroup => currgroup.id === group.id)
 
+        const activity = {
+            type: prevState.field,
+            entity: 'group',
+            boardId,
+            group: {
+                id: board.groups[groupIdx].id,
+                title: board.groups[groupIdx].title
+            },
+            from: prevState.data,
+            to: newState.data
+        }
+
         board.groups.splice(groupIdx, 1, group)
-        return await save(board)
+        const savedBoard = await save(board)
+
+        activityService.save(activity)
+        return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing group')
     }
@@ -165,9 +209,26 @@ async function addTask(boardId, groupId, taskTitle, unshiftTask = false) {
         const group = board.groups[groupIdx]
 
         const taskMethod = unshiftTask ? 'unshift' : 'push'
-        group.tasks[taskMethod](_getDefaultTask(taskTitle))
+        const newTask = _getDefaultTask(taskTitle)
+        group.tasks[taskMethod](newTask)
 
-        return await save(board)
+        const activity = {
+            type: 'create',
+            entity: 'task',
+            boardId,
+            group: {
+                id: groupId,
+                title: group.title
+            },
+            task: {
+                id: newTask.id,
+                title: newTask.title
+            }
+        }
+        const savedBoard = await save(board)
+
+        activityService.save(activity)
+        return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during adding task')
     }
@@ -178,28 +239,74 @@ async function removeTask(boardId, groupId, taskId) {
         const board = await getById(boardId)
         const groupIdx = board.groups.findIndex(group => group.id === groupId)
         let group = board.groups[groupIdx]
+        const task = group.find(task => task.id === taskId)
         const tasks = group.tasks.filter(task => task.id !== taskId)
 
         group = { ...group, tasks }
         board.groups.splice(groupIdx, 1, group)
 
-        return await save(board)
+        const activity = {
+            type: 'remove',
+            entity: 'task',
+            boardId,
+            group: {
+                id: groupId,
+                title: group.title
+            },
+            task: {
+                id: taskId,
+                title: task.txt
+            }
+        }
+        const savedBoard = await save(board)
+
+        // activityService.save(activity)
+        return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing task')
     }
 }
 
-async function updateTask(boardId, groupId, task) {
+async function updateTask(boardId, groupId, task, prevState, newState) {
     try {
         const board = await getById(boardId)
         const groupIdx = board.groups.findIndex(group => group.id === groupId)
         let group = board.groups[groupIdx]
         const tasks = group.tasks.map(currTask => currTask.id === task.id ? task : currTask)
 
+        let activityFrom
+        let activityTo
+
+        if (prevState.field === 'person') {
+            activityFrom = null
+            activityTo = newState.data[0]._id
+        } else {
+            activityFrom = prevState.data
+            activityTo = newState.data
+        }
+
+        const activity = {
+            type: prevState.field,
+            entity: 'task',
+            boardId,
+            group: {
+                id: board.groups[groupIdx].id,
+                title: board.groups[groupIdx].title
+            },
+            task: {
+                id: task.id,
+                title: task.title
+            },
+            from: activityFrom,
+            to: activityTo
+        }
         group = { ...group, tasks }
         board.groups.splice(groupIdx, 1, group)
 
-        return await save(board)
+        const savedBoard = await save(board)
+
+        activityService.save(activity)
+        return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing task')
     }
