@@ -333,8 +333,8 @@ export async function getTask(boardId, taskId) {
 }
 
 //dispatching only func for sockets
-export function addMgs(taskId, groupId, msg) {
-    store.dispatch(getActionUpdateTask(taskId, groupId, msg)) //updating currBoard
+export function addMgs(taskId, msg) {
+    store.dispatch(getActionUpdateTask(taskId, msg)) //updating currBoard
     const currBoard = store.getState().boardModule.currBoard
     const copyCurrBoard = JSON.parse(JSON.stringify(currBoard))
     setFilteredBoard(copyCurrBoard) //updating filterBoard
@@ -385,11 +385,10 @@ export function getActionSetActiveTask(taskId) {
     }
 }
 
-export function getActionUpdateTask(taskId, groupId, msg) {
+export function getActionUpdateTask(taskId, msg) {
     return {
         type: UPDATE_TASK,
         taskId,
-        groupId,
         msg
     }
 }

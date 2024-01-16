@@ -5,18 +5,19 @@ import loader from "/img/board-loader.gif"
 import { boardService } from '../../services/board.service'
 import { SOCKET_EMIT_SEND_MSG, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_ADD_MSG, socketService } from '../../services/socket.service'
 import { MsgList } from './MsgList'
+import { addMgs } from '../../store/actions/board.actions'
 
 export function PanelUpdate({ msgs, onAddUpdate }) {
     const { taskId } = useParams()
 
     const [updateTxt, setUpdateText] = useState('')
-    const [currMsgs, setCurrMsgs] = useState(msgs)
+    // const [currMsgs, setCurrMsgs] = useState(msgs)
 
     const inputRef = useRef(null)
 
-    useEffect(() => {
-        setCurrMsgs(msgs)
-    }, [msgs])
+    // useEffect(() => {
+    //     setCurrMsgs(msgs)
+    // }, [msgs])
 
     useEffect(() => {
         socketService.on(SOCKET_EVENT_ADD_MSG, addMsg) //listen to other people msgs
@@ -31,7 +32,8 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
 
     function addMsg(newMsg) {
         console.log(newMsg)
-        setCurrMsgs(prevMsgs => [newMsg, ...prevMsgs])
+        addMgs(taskId, newMsg)
+        // setCurrMsgs(prevMsgs => [newMsg, ...prevMsgs])
     }
 
     function handleSubmit(ev) {
@@ -97,8 +99,8 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
                 </form>
             </div>
 
-            {currMsgs.length ?
-                <MsgList msgs={currMsgs} onLikeComment={onLikeComment} />
+            {msgs.length ?
+                <MsgList msgs={msgs} onLikeComment={onLikeComment} />
                 : (
                     <div className="post-not-found grid place-center">
                         <img src="/icons/no-updates.svg" alt="" />

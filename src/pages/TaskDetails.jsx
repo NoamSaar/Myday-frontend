@@ -9,21 +9,31 @@ import { DynamicSidePanelHeader } from "../cmps/DynamicSidePanelHeader";
 import { DynamicSidePanelRouter } from "../cmps/DynamicSidePanelRouter";
 
 export function TaskDetails() {
+    const board = useSelector((storeState) => storeState.boardModule.currBoard)
     const { boardId, taskId } = useParams()
     const [currTask, setCurrTask] = useState(null)
     const [currSubject, setCurrSubject] = useState('Updates')
 
-    useEffect(() => {
-        _getTaskById()
-    }, [boardId, taskId, currSubject])
+    // console.log('board', board)
 
-    async function _getTaskById() {
-        try {
-            const task = await getTask(boardId, taskId)
-            setCurrTask(task)
-        } catch (err) {
-            console.error("Error getting task:", err)
-        }
+    useEffect(() => {
+        getTaskById()
+        // _getTaskById()
+    }, [boardId, taskId, currSubject, board])
+
+    // async function _getTaskById() {
+    //     try {
+    //         const task = await getTask(boardId, taskId)
+    //         setCurrTask(task)
+    //     } catch (err) {
+    //         console.error("Error getting task:", err)
+    //     }
+    // }
+
+    function getTaskById() {
+        const allBoardTasks = board.groups.flatMap(group => group.tasks)
+        const task = allBoardTasks.find(task => task.id === taskId)
+        setCurrTask(task)
     }
 
     function onSwitchToSubject(subject) {
