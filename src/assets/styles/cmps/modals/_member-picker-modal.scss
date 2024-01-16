@@ -16,7 +16,7 @@
 
         @include for-narrow-layout {
             grid-template-columns: repeat(3, 1fr);
-            padding-inline: 16px 5px;
+            padding-inline: 16px;
             padding-block-start: 16px;
         }
 
@@ -47,6 +47,7 @@
             .username {
                 font-size: rem(12px);
                 line-height: 24px;
+                max-width: 58px;
             }
 
             .remove-btn {
