@@ -77,6 +77,7 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
         )
     }
 
+
     return (
         <section className="panel-update grid">
             <div className={`input-container ${dynClass}`}>
