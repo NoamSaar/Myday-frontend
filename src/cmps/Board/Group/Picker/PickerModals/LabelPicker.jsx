@@ -41,13 +41,37 @@ export function LabelPicker({ onChangeStatus, title }) {
             const newLabels = [...currLabels]
             newLabels.splice(labelIdx, 1)
             setCurrLabels(newLabels)
-            const newBoard = { ...board, [title]: currLabels }
+
+            const replacementLabel = getReplacementLabel(title)
+
+            const newBoard = updateTasksInBoard(board, title, labelId, replacementLabel)
             await updateBoard(newBoard)
         } catch (err) {
             console.log('err', err)
             showErrorMsg('Cannot remove label')
         }
     }
+
+    function getReplacementLabel(title) {
+        return title === 'status'
+            ? { id: 'l100', color: '#c4c4c4' }
+            : title === 'priority'
+                ? { id: 'l200', color: '#c4c4c4' }
+                : null
+    }
+
+    function updateTasksInBoard(board, title, removedLabelId, replacementLabel) {
+        const updatedGroups = board.groups.map(group => ({
+            ...group,
+            tasks: group.tasks.map(task => ({
+                ...task,
+                [title]: task[title] === removedLabelId ? replacementLabel.id : task[title],
+            })),
+        }))
+
+        return { ...board, groups: updatedGroups }
+    }
+
 
     async function onEditBtnClick() {
         try {
