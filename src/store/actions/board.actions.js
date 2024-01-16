@@ -67,12 +67,6 @@ export function loadFilteredBoard() {
             // Return groups that have matching title or have at least one matching task title
             return regex.test(group.title) || group.tasks.length > 0
         })
-        // const regex = new RegExp(filterBy.txt, 'i')
-        // boardToFilter.groups = boardToFilter.groups.filter(group => {
-        //     group.tasks = group.tasks.filter(task => regex.test(task.title))
-        //     // Return groups that have matching title or have at least one matching task title
-        //     return regex.test(group.title) || group.tasks.length > 0
-        // })
     }
     if (filterBy.member) {
         board.groups = board.groups.map(group => {

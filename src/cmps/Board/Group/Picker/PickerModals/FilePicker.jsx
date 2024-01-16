@@ -1,19 +1,24 @@
 import { useRef, useState } from "react"
 import { resetDynamicModal } from "../../../../../store/actions/system.actions"
 import { AttachIcon } from "../../../../../services/svg.service"
+import { uploadService } from "../../../../../services/upload.service";
 
 export function FilePicker({ chosenFile, changeFile, taskId }) {
     const [newFile, setNewFile] = useState(chosenFile)
     const fileInputRef = useRef(null);
 
     function onUploadFile(ev) {
+        console.log('onUploadFile ~ ev:', ev)
         const file = ev.target.files[0]
+        console.log('onUploadFile ~ file:', file)
 
         if (file) {
             const reader = new FileReader()
-            reader.onloadend = () => {
-                setNewFile(reader.result)
-                changeFile('file', reader.result, taskId)
+            reader.onloadend = async () => {
+                const imgURL = await uploadService.uploadImg(ev)
+
+                setNewFile(imgURL)
+                changeFile('file', imgURL, taskId)
                 resetDynamicModal()
             }
             reader.readAsDataURL(file)

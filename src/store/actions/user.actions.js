@@ -8,14 +8,15 @@ import { showErrorMsg } from './system.actions.js'
 
 export async function getUsers() {
     try {
-        // store.dispatch({ type: SET_IS_LOADING, isLoading: true })
-        return await userService.getUsers()
-        // store.dispatch({ type: SET_USERS, users })
+        const users = await userService.getUsers()
+        store.dispatch({ type: SET_USERS, users })
+        return users
     } catch (err) {
         console.log('UserActions: err in getUsers', err)
-    } finally {
-        store.dispatch({ type: SET_IS_LOADING, isLoading: false })
     }
+    // finally {
+    //     store.dispatch({ type: SET_IS_LOADING, isLoading: false })
+    // }
 }
 
 export async function removeUser(userId) {
@@ -117,4 +118,10 @@ export async function fetchUsers(userIds) {
         showErrorMsg('Cannot load user')
         console.log('Cannot fetch users', err)
     }
+}
+
+export function getUserById(userId) {
+    const users = store.getState().userModule.users
+    const user = users.find(user => user._id === userId)
+    return user || null
 }
