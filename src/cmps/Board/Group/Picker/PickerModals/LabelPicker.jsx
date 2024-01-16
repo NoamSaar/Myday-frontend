@@ -43,8 +43,10 @@ export function LabelPicker({ onChangeStatus, title }) {
             setCurrLabels(newLabels)
 
             const replacementLabel = getReplacementLabel(title)
+            let newBoard = { ...board, [title]: currLabels }
 
-            const newBoard = updateTasksInBoard(board, title, labelId, replacementLabel)
+            newBoard = updateTasksInBoard(newBoard, title, labelId, replacementLabel)
+            console.log('newBoard', newBoard)
             await updateBoard(newBoard)
         } catch (err) {
             console.log('err', err)
