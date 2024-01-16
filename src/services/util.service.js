@@ -17,7 +17,7 @@ export const utilService = {
     areObjsIdentical,
     hasTimePassed,
     timeSince,
-    escapeRegExp
+    escapeRegExp,
 }
 
 function readJsonFile(path) {
@@ -177,3 +177,4 @@ function timeSince(timeStamp) {
 function escapeRegExp(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
+
