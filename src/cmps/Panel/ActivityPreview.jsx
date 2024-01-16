@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { ActivityCalendarIcon, ClockIcon, CreateIcon, LinkIcon, PersonIcon, TitleIcon, VerticalLogoIcon } from "../../services/svg.service"
+import { ActivityCalendarIcon, ClockIcon, CreateIcon, LinkIcon, BlackPencilIcon, PersonIcon, TitleIcon, VerticalLogoIcon, PencilIcon, DeleteIcon } from "../../services/svg.service"
 import { utilService } from "../../services/util.service"
 import { UserImg } from "../UserImg"
 import { ActivityStatus } from "./ActivityStatus"
@@ -11,7 +11,7 @@ export function ActivityPreview({ activity }) {
     const members = currBoard.members
     const activityTitle = activity.task?.title || activity.group?.title || currBoard.title
 
-    const { byMember, createdAt, type } = activity
+    const { byMember, createdAt, type, entity } = activity
 
     function getStatusColor(statusTitle) {
         if (statusTitle === '-') return '#c4c4c4'
@@ -45,6 +45,7 @@ export function ActivityPreview({ activity }) {
     }
 
     function getTypeIcon(type) {
+        console.log('getTypeIcon ~ type:', type)
         switch (type) {
             case 'date':
                 return <ActivityCalendarIcon />
@@ -52,6 +53,8 @@ export function ActivityPreview({ activity }) {
                 return <LinkIcon />
             case 'create':
                 return <CreateIcon />
+            case 'remove':
+                return <DeleteIcon />
             case 'person':
                 return <PersonIcon />
             case 'title':
@@ -60,9 +63,13 @@ export function ActivityPreview({ activity }) {
                 return <VerticalLogoIcon />
             case 'priority':
                 return <VerticalLogoIcon />
+            case 'group color':
+                return <PencilIcon />
         }
     }
 
+    const titleColor = (type === 'group color') ? activity.to : 'unset'
+    const dynTitle = (type === 'remove') ? `${entity} Deleted` : type
     return (
         <>
             <div className="created-at flex align-center">
@@ -74,14 +81,14 @@ export function ActivityPreview({ activity }) {
                 <UserImg user={byMember} />
             </div>
 
-            <div className="title">
+            <div className="title" style={{ color: titleColor }}>
                 {activity.task?.title || activity.group?.title || currBoard.title}
             </div>
 
             <div className="activity-type">
                 <div className="title grid column align-center">
                     <span className="grid align-center">{getTypeIcon(type)}</span>
-                    <span>{type}</span>
+                    <span>{utilService.capitalizeFirstLetter(dynTitle)}</span>
                 </div>
             </div>
 

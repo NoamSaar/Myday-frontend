@@ -98,8 +98,18 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                 setGroupTitle(group.title)
                 titleToSave = group.title
             }
+
+            const prevState = {
+                field: 'group color',
+                data: group.color
+            }
+            const newState = {
+                field: 'group color',
+                data: color
+            }
+
             const updatedGroup = { ...group, 'color': color, 'title': titleToSave }
-            updateGroup(board._id, updatedGroup)
+            updateGroup(board._id, updatedGroup, prevState, newState)
             // onGroupChange('title', titleToSave)
             resetDynamicModal()
             setIsEditing(false)

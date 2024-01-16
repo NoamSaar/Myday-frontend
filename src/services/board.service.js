@@ -151,7 +151,7 @@ async function removeGroup(boardId, groupId) {
         board.groups.splice(idx, 1)
         const savedBoard = await save(board)
 
-        // activityService.save(activity)
+        activityService.save(activity)
         return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing group')
@@ -178,7 +178,7 @@ async function updateGroup(boardId, group, prevState, newState) {
         board.groups.splice(groupIdx, 1, group)
         const savedBoard = await save(board)
 
-        activityService.save(activity)
+        if (prevState.data !== newState.data) activityService.save(activity)
         return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing group')
@@ -239,7 +239,8 @@ async function removeTask(boardId, groupId, taskId) {
         const board = await getById(boardId)
         const groupIdx = board.groups.findIndex(group => group.id === groupId)
         let group = board.groups[groupIdx]
-        const task = group.find(task => task.id === taskId)
+        console.log('removeTask ~ group:', group)
+        const task = group.tasks.find(task => task.id === taskId)
         const tasks = group.tasks.filter(task => task.id !== taskId)
 
         group = { ...group, tasks }
@@ -260,7 +261,7 @@ async function removeTask(boardId, groupId, taskId) {
         }
         const savedBoard = await save(board)
 
-        // activityService.save(activity)
+        activityService.save(activity)
         return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing task')
@@ -268,6 +269,8 @@ async function removeTask(boardId, groupId, taskId) {
 }
 
 async function updateTask(boardId, groupId, task, prevState, newState) {
+    console.log('updateTask ~ newState:', newState)
+    console.log('updateTask ~ prevState:', prevState)
     try {
         const board = await getById(boardId)
         const groupIdx = board.groups.findIndex(group => group.id === groupId)
@@ -277,35 +280,42 @@ async function updateTask(boardId, groupId, task, prevState, newState) {
         let activityFrom
         let activityTo
 
-        if (prevState.field === 'person') {
-            activityFrom = null
-            activityTo = newState.data[0]._id
-        } else {
-            activityFrom = prevState.data
-            activityTo = newState.data
+        if (newState || prevState) {
+            if (prevState.field === 'person') {
+                activityFrom = null
+                activityTo = newState.data[0]._id
+            } else {
+                activityFrom = prevState.data
+                activityTo = newState.data
+            }
         }
 
-        const activity = {
-            type: prevState.field,
-            entity: 'task',
-            boardId,
-            group: {
-                id: board.groups[groupIdx].id,
-                title: board.groups[groupIdx].title
-            },
-            task: {
-                id: task.id,
-                title: task.title
-            },
-            from: activityFrom,
-            to: activityTo
+        var activity
+
+        if (newState || prevState) {
+            activity = {
+                type: prevState.field,
+                entity: 'task',
+                boardId,
+                group: {
+                    id: board.groups[groupIdx].id,
+                    title: board.groups[groupIdx].title
+                },
+                task: {
+                    id: task.id,
+                    title: task.title
+                },
+                from: activityFrom,
+                to: activityTo
+            }
         }
+
         group = { ...group, tasks }
         board.groups.splice(groupIdx, 1, group)
 
         const savedBoard = await save(board)
 
-        activityService.save(activity)
+        if (newState || prevState && activityFrom !== activityTo) activityService.save(activity)
         return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing task')

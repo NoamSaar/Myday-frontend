@@ -18,6 +18,17 @@ export function ActivityStatus({ type, fromStatus, toStatus, activityTitle = nul
                 return <div className="activity-members-container">
                     <UserImg user={title} />
                 </div>
+            case 'File':
+                if (!title || title === '-') return '-'
+                idx = (title.length > 0) ? 0 : (title.length - 1)
+                return title[idx]?.url ? <img className="activity-file-img" src={title[idx].url} alt="" /> : '-'
+            case 'group color':
+                if (!title || title === '-') return '-'
+                return <div className="activity-group-color-container" >
+                    <div style={{ color: title }}>
+                        {activityTitle}
+                    </div>
+                </div>
             // case 'Timeline':
             //     if (!title || title === '-') return <div className="activity-timeline-container">
             //         <Text style={{ color: 'white' }} ellipsis>
@@ -36,18 +47,6 @@ export function ActivityStatus({ type, fromStatus, toStatus, activityTitle = nul
             //     if (!title || title === '-') return '-'
             //     idx = (title.length > 0) ? 0 : (title.length - 1)
             //     return title[idx]?.txt ? title[idx].txt : '-'
-            case 'File':
-                if (!title || title === '-') return '-'
-                idx = (title.length > 0) ? 0 : (title.length - 1)
-                return title[idx]?.url ? <img className="activity-file-img" src={title[idx].url} alt="" /> : '-'
-            // case 'Group Color':
-            //     if (!title || title === '-') return '-'
-            //     console.log('activityTitle:', activityTitle)
-            //     return <div className="activity-group-color-container" >
-            //         <Text ellipsis style={{ color: `var(--color-${title})` }}>
-            //             {activityTitle}
-            //         </Text>
-            //     </div>
             default:
                 return title
         }
