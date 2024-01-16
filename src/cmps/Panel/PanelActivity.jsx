@@ -1,8 +1,9 @@
-export function PanelActivity() {
+import { ActivityList } from "./ActivityList";
 
+export function PanelActivity({ activities }) {
     return (
         <section className="panel-activity">
-            activities
+            <ActivityList activities={activities} />
         </section>
     )
 }

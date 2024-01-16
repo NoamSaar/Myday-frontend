@@ -17,7 +17,7 @@ export const utilService = {
     areObjsIdentical,
     hasTimePassed,
     timeSince,
-    escapeRegExp
+    escapeRegExp,
 }
 
 function readJsonFile(path) {
@@ -150,7 +150,7 @@ function areObjsIdentical(obj1, obj2) {
 function timeSince(timeStamp) {
     let now = new Date(),
         secondsPast = (now.getTime() - timeStamp) / 1000
-    if (secondsPast < 30) {
+    if (secondsPast < 60) {
         return 'just now'
     }
     // if (secondsPast < 60) {
@@ -177,3 +177,5 @@ function timeSince(timeStamp) {
 function escapeRegExp(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
+

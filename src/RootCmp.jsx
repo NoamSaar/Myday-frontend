@@ -10,6 +10,8 @@ import { setIsMobile } from './store/actions/system.actions'
 import { useEffect } from 'react'
 import { LoginSignup } from './pages/LoginSignup'
 import { UserMsg } from './cmps/UserMsg'
+import { ActivityLog } from './cmps/Panel/ActivityLog'
+
 
 export function RootCmp() {
 
@@ -35,7 +37,7 @@ export function RootCmp() {
                     <Route element={<Workspace />} path="/board/workspace" />
                     <Route element={<BoardDetails />} path="/board/:boardId" >
                         <Route path="/board/:boardId/task/:taskId" element={<TaskDetails />} />
-                        {/* <Route path="activity_log" element={<ActivityLog />} /> */}
+                        <Route path="/board/:boardId/activity_log" element={<ActivityLog />} />
                     </Route>
                 </Route>
             </Routes>

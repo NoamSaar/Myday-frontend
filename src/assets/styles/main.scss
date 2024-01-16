@@ -25,6 +25,7 @@
 @import "cmps/sidebar/sidebar";
 @import "cmps/done-status-animation";
 @import "cmps/tooltip";
+@import "cmps/activity-preview";
 
 // board
 @import "cmps/board/board-app";
@@ -61,6 +62,8 @@
 @import "cmps/modals/status-picker-modal";
 @import "cmps/modals/member-picker-modal";
 @import "cmps/modals/invite-modal";
+@import "cmps/modals/integration-modal";
+@import "cmps/modals/integration-list";
 @import "cmps/modals/label-picker-preview";
 @import "cmps/board-member-select";
 @import "cmps/dynamic-dialog";

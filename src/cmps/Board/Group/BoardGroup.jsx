@@ -42,8 +42,16 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     async function onGroupChange(field, data) {
         try {
+            const prevState = {
+                field,
+                data: group[field]
+            }
+            const newState = {
+                field,
+                data
+            }
             const updatedGroup = { ...group, [field]: data }
-            updateGroup(board._id, updatedGroup)
+            updateGroup(board._id, updatedGroup, prevState, newState)
         } catch (err) {
             console.error('Error updating group:', err)
             showErrorMsg(`Cannot update Group ${groupTitle} ${field}`)
@@ -90,8 +98,18 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                 setGroupTitle(group.title)
                 titleToSave = group.title
             }
+
+            const prevState = {
+                field: 'group color',
+                data: group.color
+            }
+            const newState = {
+                field: 'group color',
+                data: color
+            }
+
             const updatedGroup = { ...group, 'color': color, 'title': titleToSave }
-            updateGroup(board._id, updatedGroup)
+            updateGroup(board._id, updatedGroup, prevState, newState)
             // onGroupChange('title', titleToSave)
             resetDynamicModal()
             setIsEditing(false)

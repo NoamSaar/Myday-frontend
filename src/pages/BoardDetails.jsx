@@ -10,6 +10,8 @@ import { TaskDetails } from "./TaskDetails"
 import { GroupList } from "../cmps/Board/Group/GroupList"
 import { boardService } from "../services/board.service"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate"
+import { activityService } from "../services/activity.service"
+import { ActivityLog } from "../cmps/Panel/ActivityLog"
 
 export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -74,9 +76,6 @@ export function BoardDetails() {
             <img className="myday-loader" src={loader} alt="" />
         </section>
     )
-
-
-
     // if (isLoading || !board) return <div className="board-details">Loading...</div>
     return (
         <section onScroll={onDetailsScroll} className={`board-details ${(modalData.isOpen && modalData.type !== 'tooltip') ? 'overflow-hidden' : ''}`}>
@@ -96,8 +95,8 @@ export function BoardDetails() {
 
             <Outlet
                 routes={{
-                    'task/:taskId': { element: <TaskDetails boardId={boardId} /> },
-                    // 'activity_log': { element: <ActivityLog boardId={boardId} /> },
+                    'task/:taskId': { element: <TaskDetails /> },
+                    'activity_log': { element: <ActivityLog /> },
                 }}
             />
             {/* the outlet is to display the nested route- task details */}

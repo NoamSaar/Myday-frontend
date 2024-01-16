@@ -54,7 +54,9 @@ async function save(user) {
     try {
         if (user._id) {
             // return await storageService.put(STORAGE_KEY, user)
-            return await httpService.put(USER_BASE_URL + user._id, user)
+            const updatedUser = await httpService.put(USER_BASE_URL + user._id, user)
+            saveLocalUser(updatedUser)
+            return updatedUser
         } else {
             return await storageService.post(STORAGE_KEY, user)
         }
@@ -105,7 +107,7 @@ function getEmptyUser() {
 // session storage
 
 function saveLocalUser(user) {
-    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
+    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, automations: user.automations }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
