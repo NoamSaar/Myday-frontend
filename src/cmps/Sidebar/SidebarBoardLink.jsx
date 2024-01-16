@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router"
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
 import { resetDynamicModal, setDynamicModal, setIsLoading, setIsFullSidebarMobile } from "../../store/actions/system.actions"
 import { setCurrBoard } from "../../store/actions/board.actions"
+import { utilService } from "../../services/util.service"
 
 export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, updateBoard }) {
     const { boardId } = useParams()
@@ -57,7 +58,9 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
 
     function highlightText(text, query) {
         if (!query) return text
-        const parts = text.split(new RegExp(`(${query})`, 'gi'))
+        const escapedQuery = utilService.escapeRegExp(query)
+
+        const parts = text.split(new RegExp(`(${escapedQuery})`, 'gi'))
         return parts.map((part, index) =>
             part.toLowerCase() === query.toLowerCase()
                 ? <span key={index} className="highlight">{part}</span>
