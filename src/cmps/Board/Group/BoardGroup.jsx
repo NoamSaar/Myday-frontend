@@ -9,6 +9,7 @@ import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from
 import { EditableTxt } from "../../EditableTxt"
 import { TaskTable } from "./Task/TaskTable"
 import { TaskHeaderList } from "./Task/TaskHeaderList"
+import { utilService } from "../../../services/util.service"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed, toggleIsGroupsCollapsed, isHeaderCollapsed, isMobile }) {
     const menuBtnRef = useRef(null)
@@ -123,7 +124,9 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     function highlightText(text, query) {
         if (!query) return text
-        const parts = text.split(new RegExp(`(${query})`, 'gi'))
+        const escapedQuery = utilService.escapeRegExp(query)
+
+        const parts = text.split(new RegExp(`(${escapedQuery})`, 'gi'))
         return parts.map((part, index) =>
             part.toLowerCase() === query.toLowerCase()
                 ? <span key={index} className="highlight">{part}</span>
