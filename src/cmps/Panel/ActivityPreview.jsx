@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux"
-import { ClockIcon } from "../../services/svg.service"
+import { ActivityCalendarIcon, ClockIcon, CreateIcon, LinkIcon, PersonIcon, TitleIcon, VerticalLogoIcon } from "../../services/svg.service"
 import { utilService } from "../../services/util.service"
 import { UserImg } from "../UserImg"
 import { ActivityStatus } from "./ActivityStatus"
 
 export function ActivityPreview({ activity }) {
-    // console.log('ActivityPreview ~ activity:', activity)
     const currBoard = useSelector(state => state.boardModule.currBoard)
     const statuses = currBoard.status
     const priorities = currBoard.priority
@@ -46,10 +45,28 @@ export function ActivityPreview({ activity }) {
         else return null
     }
 
-    return (
-        <li className="activity-preview grid">
+    function getTypeIcon(type) {
+        switch (type) {
+            case 'date':
+                return <ActivityCalendarIcon />
+            case 'link':
+                return <LinkIcon />
+            case 'create':
+                return <CreateIcon />
+            case 'person':
+                return <PersonIcon />
+            case 'title':
+                return <TitleIcon />
+            case 'status':
+                return <VerticalLogoIcon />
+            case 'priority':
+                return <VerticalLogoIcon />
+        }
+    }
 
-            <div className="created-at">
+    return (
+        <>
+            <div className="created-at flex align-center">
                 <ClockIcon />
                 <span>{utilService.timeSince(createdAt)}</span>
             </div>
@@ -63,12 +80,13 @@ export function ActivityPreview({ activity }) {
             </div>
 
             <div className="activity-type">
-                <div className="title">
-                    {type}
+                <div className="title grid column align-center">
+                    <span className="grid align-center">{getTypeIcon(type)}</span>
+                    <span>{type}</span>
                 </div>
             </div>
 
-            <div className="action-description">
+            <div className="action-description grid column">
                 <ActivityStatus
                     type={type}
                     fromStatus={{
@@ -82,8 +100,7 @@ export function ActivityPreview({ activity }) {
                     activityTitle={activityTitle}
                 />
             </div>
-
-        </li>
+        </>
     )
 }
 

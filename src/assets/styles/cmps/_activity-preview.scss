@@ -1,3 +1,78 @@
+.activity-list {
+    display: grid;
+    // grid-template-columns: 56px 30px;
+    grid-template-columns: auto minmax(auto, 1fr) 2fr 1fr 2.5fr;
+    padding: 10px 24px;
+}
+
 .activity-preview {
-    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    padding-block: 10px;
+    border-bottom: 1px solid $clr-btn-border;
+
+    img {
+        margin-inline-end: 3px;
+    }
+
+    .created-by {
+        margin-inline-start: 25px;
+    }
+
+    .title {
+        margin-inline-start: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .action-description {
+        margin-inline-start: 30px;
+        grid-template-columns: 1fr auto 1fr;
+        justify-items: center;
+        align-items: center;
+
+        .create+svg {
+            fill: transparent;
+        }
+
+        .person+svg {
+            fill: transparent;
+        }
+    }
+
+    .new-status,
+    .old-status {
+        display: grid;
+        justify-self: stretch;
+        align-content: center;
+        text-align: center;
+        padding-inline: 8px;
+        min-width: 70px;
+
+        &.status div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &.priority div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &:not(.person) {
+            padding-block: 8px;
+        }
+
+        &.link {
+            text-decoration: underline;
+            color: #0086c0;
+        }
+    }
+
+    .activity-type>.title {
+        gap: 3px;
+        justify-content: start;
+    }
 }
