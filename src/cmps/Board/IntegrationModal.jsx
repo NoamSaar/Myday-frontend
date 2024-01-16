@@ -44,9 +44,8 @@ export function IntegrationModal() {
         }
     }
 
-    async function handleSwitchChange(ev, automation) {
+    async function handleSwitchChange(isChecked, automation) {
         try {
-            const isChecked = ev.target.checked
             let newAtomations = loggedInUser.automations || []
             if (isChecked) {
                 newAtomations.push(automation)
@@ -71,7 +70,7 @@ export function IntegrationModal() {
 
     const integrations = [
         {
-            txt: 'Calendar Integration',
+            txt: 'Add Calendar event when task is assigned to me',
             icon: <GoogleCalendarIcon />,
             name: 'calendar',
             isChecked: isCalendarChecked
