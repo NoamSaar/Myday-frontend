@@ -45,7 +45,6 @@ export function BoardAppHeader() {
                     data: { options: menuOptions },
                     parentId: 'user-auth-menu',
                     isPosBlock: true,
-                    hasCaret: true
                 })
         }
     }

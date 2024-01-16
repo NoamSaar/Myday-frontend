@@ -81,21 +81,12 @@ export function IntegrationModal() {
     return (
         <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} integration-modal`}>
             <h1>Integrations</h1>
-            {session && <h2>Hey {session.user.email}</h2>}
+            {isDisabled && <p>To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
                 txt={session ? 'Sign out of google' : 'Sign in with google'} />
 
             <IntegrationList integrations={integrations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
-
-            {/* <div className={`${isDisabled && 'disabled'} flex align-center justify-center integration-container`}>
-                <label className="switch">
-                    <input disabled={isDisabled} type="checkbox" checked={isCalendarChecked} onChange={ev => handleSwitchChange(ev, 'calendar')} />
-                    <span className="slider round"></span>
-                </label>
-
-                <p>Calendar Integration</p>
-            </div> */}
         </div>
     )
 }

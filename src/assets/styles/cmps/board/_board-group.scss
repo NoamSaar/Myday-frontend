@@ -282,9 +282,6 @@
             border: $clr-btn-border 0.5px solid;
             border-radius: 2px;
 
-            &:not(.add-task .checkbox) {
-                cursor: pointer;
-            }
         }
     }
 
