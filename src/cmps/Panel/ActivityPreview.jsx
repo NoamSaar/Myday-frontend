@@ -45,7 +45,6 @@ export function ActivityPreview({ activity }) {
     }
 
     function getTypeIcon(type) {
-        console.log('getTypeIcon ~ type:', type)
         switch (type) {
             case 'date':
                 return <ActivityCalendarIcon />

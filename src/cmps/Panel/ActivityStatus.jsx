@@ -18,10 +18,10 @@ export function ActivityStatus({ type, fromStatus, toStatus, activityTitle = nul
                 return <div className="activity-members-container">
                     <UserImg user={title} />
                 </div>
-            case 'File':
-                if (!title || title === '-') return '-'
-                idx = (title.length > 0) ? 0 : (title.length - 1)
-                return title[idx]?.url ? <img className="activity-file-img" src={title[idx].url} alt="" /> : '-'
+            // case 'File':
+            //     if (!title || title === '-') return '-'
+            //     idx = (title.length > 0) ? 0 : (title.length - 1)
+            //     return title[idx]?.url ? <img className="activity-file-img" src={title[idx].url} alt="" /> : '-'
             case 'group color':
                 if (!title || title === '-') return '-'
                 return <div className="activity-group-color-container" >
