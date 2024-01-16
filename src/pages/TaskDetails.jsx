@@ -38,7 +38,7 @@ export function TaskDetails() {
     }
 
     function onAddFile(file) {
-        const updatedTask = { ...currTask, file }
+        const updatedTask = { ...currTask, file: file.url }
         setCurrTask(updatedTask)
         const groupId = boardService.findGroupIdByTaskId(taskId)
         updateTask(boardId, groupId, updatedTask)
