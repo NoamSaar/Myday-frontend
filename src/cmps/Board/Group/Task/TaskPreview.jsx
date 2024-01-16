@@ -63,7 +63,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             updateTask(board._id, groupId, updatedTask)
 
 
-
             switch (field) {
                 case 'members':
                     setDynamicModalData({
@@ -72,7 +71,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         onChangeMembers: onTaskChange
                     })
 
-                    if (loggedInUser && data.includes(loggedInUser._id) && updatedTask.date && session && session.provider_token) {
+                    if (loggedInUser &&
+                        loggedInUser.automations &&
+                        loggedInUser.automations.includes('calendar') &&
+                        data.includes(loggedInUser._id) &&
+                        updatedTask.date &&
+                        session &&
+                        session.provider_token) {
+                        console.log('here');
                         const date = new Date(updatedTask.date)
                         await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
                     }
