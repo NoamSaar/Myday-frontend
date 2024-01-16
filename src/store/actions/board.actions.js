@@ -3,9 +3,10 @@ import { boardService } from '../../services/board.service.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD, UPDATE_TASK, SET_BOARD_ACTIVITIES } from '../reducers/board.reducer.js'
 import { setIsLoading } from './system.actions.js'
 import { utilService } from '../../services/util.service.js'
+import { activityService } from '../../services/activity.service.js'
 
 
 // Store - saveTask (from board.js)
@@ -251,6 +252,17 @@ export function setFilteredBoard(board) {
     store.dispatch({ type: SET_FILTERED_BOARD, board })
 }
 
+export async function loadBoardActivities(filterBy = {}) {
+    try {
+        const activities = await activityService.query(filterBy)
+        store.dispatch(getActionSetBoardActivities(activities))
+        return activities
+    } catch (err) {
+        console.log('Cannot load boards', err)
+        throw err
+    }
+}
+
 /**************** group actions ****************/
 
 export async function addGroup(boardId) {
@@ -275,8 +287,8 @@ export async function removeGroup(boardId, groupId) {
 
 }
 
-export async function updateGroup(boardId, group) {
-    const board = await boardService.updateGroup(boardId, group)
+export async function updateGroup(boardId, group, prevState, newState) {
+    const board = await boardService.updateGroup(boardId, group, prevState, newState)
     setCurrBoard(board)
     store.dispatch(getActionUpdateBoard(board))
 }
@@ -312,8 +324,8 @@ export async function removeTask(boardId, groupId, taskId) {
     }
 }
 
-export async function updateTask(boardId, groupId, task) {
-    const board = await boardService.updateTask(boardId, groupId, task)
+export async function updateTask(boardId, groupId, task, prevState, newState) {
+    const board = await boardService.updateTask(boardId, groupId, task, prevState, newState)
     setCurrBoard(board)
     store.dispatch(getActionUpdateBoard(board))
 }
@@ -329,6 +341,15 @@ export async function getTask(boardId, taskId) {
         console.error('Error fetching task:', error)
         throw new Error('Failed to fetch task')
     }
+}
+
+//dispatching only func for sockets
+export function addMgs(taskId, msg) {
+    store.dispatch(getActionUpdateTask(taskId, msg)) //updating currBoard
+    const currBoard = store.getState().boardModule.currBoard
+    const copyCurrBoard = JSON.parse(JSON.stringify(currBoard))
+    setFilteredBoard(copyCurrBoard) //updating filterBoard
+    store.dispatch(getActionUpdateBoard(copyCurrBoard)) //updating boards
 }
 
 /**************** get actions ****************/
@@ -361,6 +382,13 @@ export function getActionSetBoards(boards) {
     }
 }
 
+export function getActionSetBoardActivities(activities) {
+    return {
+        type: SET_BOARD_ACTIVITIES,
+        activities
+    }
+}
+
 // export function getActionSetFilteredBoards(boards) {
 //     return {
 //         type: SET_FILTERED_BOARDS,
@@ -372,6 +400,14 @@ export function getActionSetActiveTask(taskId) {
     return {
         type: SET_ACTIVE_TASK,
         taskId
+    }
+}
+
+export function getActionUpdateTask(taskId, msg) {
+    return {
+        type: UPDATE_TASK,
+        taskId,
+        msg
     }
 }
 

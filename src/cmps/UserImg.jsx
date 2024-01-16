@@ -3,7 +3,7 @@ import { utilService } from "../services/util.service";
 export function UserImg({ user }) {
     return (
         <>
-            {user ? (
+            {user && user !== 'Added' ? (
                 user.imgUrl ? (
                     <img className="user-img" src={user.imgUrl} alt="User" />
                 ) : (
