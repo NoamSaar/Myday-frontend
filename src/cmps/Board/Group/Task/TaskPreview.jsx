@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
+import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react'
 
 import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../../store/actions/system.actions"
@@ -15,10 +16,12 @@ import { activityService } from "../../../../services/activity.service"
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
     const navigate = useNavigate()
+    const session = useSession() //tokens, when session exists we have a user
 
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
+    const loggedInUser = useSelector(storeState => storeState.userModule.user)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [isChangingToDone, setIsChangingToDone] = useState(false)
@@ -83,6 +86,13 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask, prevState, newState)
 
+            const isCalenderAutomate = loggedInUser &&
+                loggedInUser.automations &&
+                loggedInUser.automations.includes('calendar') &&
+                updatedTask.date &&
+                session &&
+                session.provider_token
+
             switch (field) {
                 case 'members':
                     setDynamicModalData({
@@ -90,9 +100,21 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         allMembers: board.members,
                         onChangeMembers: onTaskChange
                     })
+                    if (isCalenderAutomate && data.includes(loggedInUser._id)) {
+                        const date = new Date(updatedTask.date)
+                        await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
+                    }
+                    break;
+
+                case 'date':
+                    if (isCalenderAutomate) {
+                        const date = new Date(updatedTask.date)
+                        await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
+                    }
                     break
+
                 default:
-                    break
+                    break;
             }
 
         } catch (err) {
@@ -167,6 +189,42 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         } catch (err) {
             console.error('Error changing task title:', err)
             showErrorMsg('Cannot changing Task Title')
+        }
+    }
+
+    async function createCalendarEvent({ name, description = '', startTime, endTime }) {
+        try {
+            const event = {
+                'summary': name,
+                'description': description,
+                'start': {
+                    'dateTime': startTime.toISOString(),
+                    'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+                },
+                'end': {
+                    'dateTime': endTime.toISOString(),
+                    'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+                }
+            };
+
+            const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
+                method: 'post',
+                headers: {
+                    'Authorization': `Bearer ${session.provider_token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(event),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to create calendar event. Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            showSuccessMsg('Event added to google calender')
+
+        } catch (err) {
+            console.error('Error creating calendar event:', err);
         }
     }
 

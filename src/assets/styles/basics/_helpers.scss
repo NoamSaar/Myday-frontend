@@ -264,6 +264,12 @@
     cursor: pointer;
 }
 
+.disabled,
+.disabled * {
+    cursor: not-allowed !important;
+    opacity: .7;
+}
+
 //refernce to after caret from top
 // &::after {
 //     content: "";

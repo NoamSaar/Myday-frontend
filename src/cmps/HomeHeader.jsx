@@ -10,36 +10,6 @@ export function HomeHeader({ scrolled }) {
     const navigate = useNavigate()
     const user = useSelector((storeState) => storeState.userModule.user)
 
-    async function onLogin(credentials = { username: 'Noam', password: 'noam' }) {
-        try {
-            const user = await login(credentials)
-            showSuccessMsg(`Welcome: ${user.fullname}`)
-            navigate('/board')
-            // navigate('/workspace')
-        } catch (err) {
-            showErrorMsg('Cannot login')
-        }
-    }
-
-    async function onSignup(credentials) {
-        try {
-            const user = await signup(credentials)
-            showSuccessMsg(`Welcome new user: ${user.fullname}`)
-        } catch (err) {
-            showErrorMsg('Cannot signup')
-        }
-    }
-
-    async function onLogout() {
-        try {
-            await logout()
-            showSuccessMsg(`Bye now`)
-            navigate('/')
-        } catch (err) {
-            showErrorMsg('Cannot logout')
-        }
-    }
-
     return (
         <header className={"home-header-container full " + (scrolled ? 'scrolled' : '')}>
             <img src={Logo} className='home-header-logo' alt="" />

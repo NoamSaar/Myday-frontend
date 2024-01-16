@@ -92,6 +92,20 @@ export async function getUser(userId) {
     }
 }
 
+export async function updateUser(user) {
+    try {
+        const updatedUser = await userService.save(user)
+        store.dispatch({
+            type: SET_USER,
+            user
+        })
+        return updatedUser
+    } catch (err) {
+        showErrorMsg('Cannot load user')
+        console.log('Cannot load user', err)
+    }
+}
+
 export async function fetchUsers(userIds) {
     try {
         return await Promise.all(

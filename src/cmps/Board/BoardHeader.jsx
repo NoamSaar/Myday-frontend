@@ -9,6 +9,7 @@ import { useNavigate } from "react-router"
 import { resetDynamicDialog, setDynamicDialog, setSidePanelOpen } from "../../store/actions/system.actions"
 import { InviteModal } from "./InviteModal"
 import { getUsers } from "../../store/actions/user.actions"
+import { IntegrationModal } from "./IntegrationModal"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
     const users = useSelector((storeState) => storeState.userModule.users)
@@ -69,6 +70,13 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
         })
     }
 
+    function onIntegrateClick() {
+        setDynamicDialog({
+            isOpen: true,
+            contentCmp: <IntegrationModal />
+        })
+    }
+
     const dynCollapsedClass = isCollapsed ? 'collapsed' : ''
     return (
         <>
@@ -110,7 +118,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                 </div>
 
                 <div className="actions flex align-center">
-                    <button className="btn automate">
+                    <button className="btn automate" onClick={onIntegrateClick}>
                         <RobotIcon />
                         <span>Automate</span>
                     </button>
