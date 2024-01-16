@@ -287,8 +287,8 @@ export async function removeGroup(boardId, groupId) {
 
 }
 
-export async function updateGroup(boardId, group) {
-    const board = await boardService.updateGroup(boardId, group)
+export async function updateGroup(boardId, group, prevState, newState) {
+    const board = await boardService.updateGroup(boardId, group, prevState, newState)
     setCurrBoard(board)
     store.dispatch(getActionUpdateBoard(board))
 }
@@ -324,8 +324,8 @@ export async function removeTask(boardId, groupId, taskId) {
     }
 }
 
-export async function updateTask(boardId, groupId, task) {
-    const board = await boardService.updateTask(boardId, groupId, task)
+export async function updateTask(boardId, groupId, task, prevState, newState) {
+    const board = await boardService.updateTask(boardId, groupId, task, prevState, newState)
     setCurrBoard(board)
     store.dispatch(getActionUpdateBoard(board))
 }

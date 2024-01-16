@@ -364,8 +364,8 @@ export function CreateIcon() {
 export function TitleIcon() {
   return (
     <svg width="20" height="20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <text x="5" y="15" font-size="16" font-family="serif">T</text>
-      <text x="25" y="15" font-size="10" font-family="serif">T</text>
+      <text x="5" y="15" fontSize="16" fontFamily="serif">T</text>
+      <text x="25" y="15" fontSize="10" fontFamily="serif">T</text>
     </svg>
   )
 }
