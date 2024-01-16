@@ -83,7 +83,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     break;
 
                 case 'date':
-                    if (isCalenderAutomate) {
+                    if (isCalenderAutomate && updatedTask.members.includes(loggedInUser._id)) {
                         const date = new Date(updatedTask.date)
                         await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
                     }
