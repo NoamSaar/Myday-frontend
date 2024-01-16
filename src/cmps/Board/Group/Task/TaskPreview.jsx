@@ -72,7 +72,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         onChangeMembers: onTaskChange
                     })
 
-                    if (data.includes(loggedInUser._id) && updatedTask.date) {
+                    if (loggedInUser && data.includes(loggedInUser._id) && updatedTask.date && session && session.provider_token) {
                         const date = new Date(updatedTask.date)
                         await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
                     }
@@ -186,6 +186,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
             const data = await response.json();
             showSuccessMsg('Event added to google calender')
+
         } catch (err) {
             console.error('Error creating calendar event:', err);
         }

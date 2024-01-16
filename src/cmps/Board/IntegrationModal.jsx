@@ -65,6 +65,7 @@ export function IntegrationModal() {
         }
     }
 
+    // console.log('session.user', session.user)
 
     if (isLoading) return <div className="integration-modal">Loading...</div>
     // createCalendarEvent()
