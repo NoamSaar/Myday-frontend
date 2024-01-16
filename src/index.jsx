@@ -7,13 +7,22 @@ import { Provider } from 'react-redux'
 import { store } from './store/store'
 import { RootCmp } from './RootCmp'
 import './assets/styles/main.scss'
+import { createClient } from '@supabase/supabase-js'
+import { SessionContextProvider } from '@supabase/auth-helpers-react'
+
+const supabase = createClient(
+  "https://xsjwgpefjvojzodrgato.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzandncGVmanZvanpvZHJnYXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDU0MDk4NDIsImV4cCI6MjAyMDk4NTg0Mn0.C_knKrGIqZKoB8dqEon7mbIBMJojx6ClxUF7p5o4jH4"
+)
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Provider store={store}>
-    <Router>
-      <RootCmp />
-    </Router>
+    <SessionContextProvider supabaseClient={supabase}>
+      <Router>
+        <RootCmp />
+      </Router>
+    </SessionContextProvider>
   </Provider>
 )
 
