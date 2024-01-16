@@ -62,6 +62,12 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask)
 
+            const isCalenderAutomate = loggedInUser &&
+                loggedInUser.automations &&
+                loggedInUser.automations.includes('calendar') &&
+                updatedTask.date &&
+                session &&
+                session.provider_token
 
             switch (field) {
                 case 'members':
@@ -70,21 +76,21 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         allMembers: board.members,
                         onChangeMembers: onTaskChange
                     })
+                    if (isCalenderAutomate && data.includes(loggedInUser._id)) {
+                        const date = new Date(updatedTask.date)
+                        await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
+                    }
+                    break;
 
-                    if (loggedInUser &&
-                        loggedInUser.automations &&
-                        loggedInUser.automations.includes('calendar') &&
-                        data.includes(loggedInUser._id) &&
-                        updatedTask.date &&
-                        session &&
-                        session.provider_token) {
-                        console.log('here');
+                case 'date':
+                    if (isCalenderAutomate) {
                         const date = new Date(updatedTask.date)
                         await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
                     }
                     break
+
                 default:
-                    break
+                    break;
             }
 
         } catch (err) {
