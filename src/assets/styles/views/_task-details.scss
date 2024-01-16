@@ -138,9 +138,11 @@
 
         .post-not-found-txt {
             text-align: center;
+            padding: 20px;
 
             h2 {
                 margin-block-start: 40px;
+                white-space: normal;
             }
 
             p {
@@ -151,8 +153,9 @@
         }
 
         img {
-            width: 290px;
-            height: 150px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 150px;
         }
 
         .update-post {
