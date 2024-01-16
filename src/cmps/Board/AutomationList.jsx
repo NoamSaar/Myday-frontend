@@ -1,10 +1,10 @@
 import { ArrowRightColoredIcon, ArrowRightIcon } from "../../services/svg.service"
 
-export function IntegrationList({ integrations, isDisabled, handleSwitchChange }) {
+export function AutomationList({ automations, isDisabled, handleSwitchChange }) {
     return (
-        <ul className="clean-list integration-list">
-            {integrations.map((integration, idx) => {
-                return <li key={idx} className={`${isDisabled && 'disabled'} flex column align-center integration-container`}>
+        <ul className="clean-list automation-list">
+            {automations.map((automation, idx) => {
+                return <li key={idx} className={`${isDisabled && 'disabled'} flex column align-center automation-container`}>
                     <div className="flex column  justify-center info-container">
                         <div className="flex flow-container">
                             <div className="flex align-center justify-center icon-container">
@@ -14,18 +14,18 @@ export function IntegrationList({ integrations, isDisabled, handleSwitchChange }
                                 <ArrowRightColoredIcon />
                             </div>
                             <div className="flex align-center justify-center icon-container">
-                                {integration.icon}
+                                {automation.icon}
                             </div>
                         </div>
 
-                        <p>{integration.txt}</p>
+                        <p>{automation.txt}</p>
                     </div>
 
                     <button
                         disabled={isDisabled}
-                        onClick={() => handleSwitchChange(!integration.isChecked, integration.name)}
-                        className={`btn flex justify-center ${integration.isChecked && 'checked'}`}>
-                        {integration.isChecked ? 'Remove Integration' : 'Add Integration'}
+                        onClick={() => handleSwitchChange(!automation.isChecked, automation.name)}
+                        className={`btn flex justify-center ${automation.isChecked && 'checked'}`}>
+                        {automation.isChecked ? 'Remove Automation' : 'Add Automation'}
                     </button>
                 </li>
             })}

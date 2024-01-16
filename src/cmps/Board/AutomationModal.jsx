@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { updateUser } from '../../store/actions/user.actions'
 import { GoogleCalendarIcon } from '../../services/svg.service'
-import { IntegrationList } from './IntegrationList'
+import { AutomationList } from './AutomationList'
 
-export function IntegrationModal() {
+export function AutomationModal() {
     const session = useSession() //tokens, when session exists we have a user
     const supaBase = useSupabaseClient() //talk to supabase
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
@@ -68,7 +68,7 @@ export function IntegrationModal() {
         }
     }
 
-    const integrations = [
+    const automations = [
         {
             txt: 'Add Calendar event when task is assigned to me',
             icon: <GoogleCalendarIcon />,
@@ -77,16 +77,16 @@ export function IntegrationModal() {
         }
     ]
 
-    if (isLoading) return <div className="integration-modal">Loading...</div>
+    if (isLoading) return <div className="automation-modal">Loading...</div>
     return (
-        <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} integration-modal`}>
-            <h1>Integrations</h1>
+        <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} automation-modal`}>
+            <h1>Automations</h1>
             {isDisabled && <p>To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
                 txt={session ? 'Sign out of google' : 'Sign in with google'} />
 
-            <IntegrationList integrations={integrations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
+            <AutomationList automations={automations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
         </div>
     )
 }

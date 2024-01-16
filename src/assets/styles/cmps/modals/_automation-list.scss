@@ -1,8 +1,8 @@
-.integration-list {
+.automation-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
-    .integration-container {
+    .automation-container {
         justify-content: space-between;
         padding: 16px;
         border-radius: 8px;
