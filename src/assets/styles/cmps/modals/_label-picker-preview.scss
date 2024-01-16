@@ -1,6 +1,24 @@
 .label-picker-preview {
     overflow: visible;
-    position: relative;
+    // position: relative;
+
+
+    .edit-label-container {
+        position: relative;
+
+        .remove-label-btn {
+            position: absolute;
+            right: -22px;
+            color: #d1d4da;
+            opacity: 0;
+        }
+    }
+
+    &:hover {
+        .remove-label-btn {
+            opacity: 1;
+        }
+    }
 
     .editable-txt-container {
         max-width: 100%;

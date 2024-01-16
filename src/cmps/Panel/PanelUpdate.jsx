@@ -183,11 +183,11 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
                     </article>
                 ))
             ) : (
-                <div className="post_not_found grid place-center">
+                <div className="post-not-found grid place-center">
                     <img src="/icons/no-updates.svg" alt="" />
                     <div className="post-not-found-txt">
                         <h2>No Updates yet for this item</h2>
-                        <p className="post_not_found_subtitle">Be the first one to update about progress, mention someone
+                        <p className="post-not-found-subtitle">Be the first one to update about progress, mention someone
                             <br />
                             or upload files to share with your team members</p>
                     </div>
