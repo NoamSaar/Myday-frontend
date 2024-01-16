@@ -4,7 +4,7 @@ import { EditableTxt } from "../../../../EditableTxt"
 import { ColorPicker } from "./ColorPicker"
 import { CloseIcon } from "../../../../../services/svg.service"
 
-export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsChange }) {
+export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsChange, onRemoveLabel }) {
     const colorBtnParentRef = useRef(null)
 
     const [isEditingLabel, setIsEditingLabel] = useState(false)
@@ -66,7 +66,9 @@ export function LabelPickerPreview({ label, isEditing, handleChange, onLabelsCha
                         isBtnsInTxt={true}
                         placeholder={labelTitle ? 'Add Label' : (isDefault ? 'Default Label' : 'Add Label')}
                     />
-                    <button className="flex align-center svg-inherit-color remove-label-btn"><CloseIcon /></button>
+                    <button className="flex align-center svg-inherit-color remove-label-btn" onClick={() => onRemoveLabel(label.id)}>
+                        <CloseIcon />
+                    </button>
                 </div>
             ) : (
                 <button
