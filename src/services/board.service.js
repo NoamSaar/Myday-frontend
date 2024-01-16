@@ -269,8 +269,6 @@ async function removeTask(boardId, groupId, taskId) {
 }
 
 async function updateTask(boardId, groupId, task, prevState, newState) {
-    console.log('updateTask ~ newState:', newState)
-    console.log('updateTask ~ prevState:', prevState)
     try {
         const board = await getById(boardId)
         const groupIdx = board.groups.findIndex(group => group.id === groupId)
