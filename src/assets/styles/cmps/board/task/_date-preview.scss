@@ -17,21 +17,31 @@
     .time-passed-icon {
         position: absolute;
         left: 8px;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        &.red {
-            background-color: #e0394e;
+        &.red svg {
+            fill: #e0394e;
         }
 
-        &.green {
-            background-color: $clr-success;
+        &.green svg {
+            fill: $clr-success;
         }
 
-        p {
-            height: 18.8px;
+        svg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 16px;
+            height: 16px;
+
+            path {
+
+                min-width: 16px;
+                min-height: 16px;
+            }
         }
     }
 

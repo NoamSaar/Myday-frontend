@@ -3,7 +3,7 @@ import { useRef } from "react"
 
 import { utilService } from "../../../../services/util.service"
 import { setDynamicModal, resetDynamicModal } from "../../../../store/actions/system.actions"
-import { CloseIcon } from "../../../../services/svg.service"
+import { CloseIcon, DangerIcon } from "../../../../services/svg.service"
 
 export function DatePreview({ task, onUpdate }) {
     const previewBtnRef = useRef(null)
@@ -47,7 +47,7 @@ export function DatePreview({ task, onUpdate }) {
 
 
             {selectedDate && <>
-                {hasTimePassed && <div className={`${!isTaskDone ? 'red' : 'green'} time-passed-icon`}><p className="flex align-center justify-center">!</p></div>}
+                {hasTimePassed && <div className={`${!isTaskDone ? 'red' : 'green'} time-passed-icon`}><DangerIcon /></div>}
                 <button className="btn remove-btn" onClick={onRemoveDateClick}><CloseIcon /></button>
             </>}
 
