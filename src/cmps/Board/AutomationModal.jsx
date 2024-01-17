@@ -3,20 +3,22 @@ import { GoogleBtn } from './GoogleBtn'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { updateUser } from '../../store/actions/user.actions'
-import { GoogleCalendarIcon } from '../../services/svg.service'
+import { GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
 import { AutomationList } from './AutomationList'
 
 export function AutomationModal() {
     const session = useSession() //tokens, when session exists we have a user
     const supaBase = useSupabaseClient() //talk to supabase
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
-    const [isCalendarChecked, setIsCaledarChecked] = useState(false);
+    const [isCalendarChecked, setIsCalendarChecked] = useState(false);
+    const [isGmailChecked, setIsGmailChecked] = useState(false);
     const { isLoading } = useSessionContext()
     const isDisabled = !loggedInUser || !session
 
     useEffect(() => {
         if (loggedInUser && loggedInUser.automations) {
-            setIsCaledarChecked(loggedInUser.automations.includes('calendar'))
+            setIsCalendarChecked(loggedInUser.automations.includes('calendar'))
+            setIsGmailChecked(loggedInUser.automations.includes('gmail'))
         }
     }, [loggedInUser])
 
@@ -56,7 +58,11 @@ export function AutomationModal() {
             await updateUser(updatedUser)
             switch (automation) {
                 case 'calendar':
-                    setIsCaledarChecked(isChecked)
+                    setIsCalendarChecked(isChecked)
+                    break;
+
+                case 'gmail':
+                    setIsGmailChecked(isChecked)
                     break;
 
                 default:
@@ -74,17 +80,26 @@ export function AutomationModal() {
             icon: <GoogleCalendarIcon />,
             name: 'calendar',
             isChecked: isCalendarChecked
+        },
+        {
+            txt: 'Recive an email when a task is assigned to you',
+            icon: <GmailIcon />,
+            name: 'gmail',
+            isChecked: isGmailChecked
         }
     ]
 
     if (isLoading) return <div className="automation-modal">Loading...</div>
     return (
         <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} automation-modal`}>
-            <h1>Automations</h1>
-            {isDisabled && <p>To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
+            <header className="flex align-center">
+                <img className="logo" src="/img/myday-temp-logo.png" />
+                <h1>Automations</h1>
+            </header>
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
                 txt={session ? 'Sign out of google' : 'Sign in with google'} />
+            {isDisabled && <p className="disabled-msg">To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
 
             <AutomationList automations={automations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
         </div>

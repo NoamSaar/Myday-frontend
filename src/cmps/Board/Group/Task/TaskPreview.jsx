@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
 import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react'
+import emailjs from '@emailjs/browser';
 
 import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../../store/actions/system.actions"
@@ -86,12 +87,17 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask, prevState, newState)
 
-            const isCalenderAutomate = loggedInUser &&
+            const isAutomate = loggedInUser &&
                 loggedInUser.automations &&
-                loggedInUser.automations.includes('calendar') &&
-                updatedTask.date &&
                 session &&
                 session.provider_token
+
+            const isCalenderAutomate = isAutomate &&
+                loggedInUser.automations.includes('calendar') &&
+                updatedTask.date
+
+            const isGmailAutomate = isAutomate &&
+                loggedInUser.automations.includes('gmail')
 
             switch (field) {
                 case 'members':
@@ -100,9 +106,25 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         allMembers: board.members,
                         onChangeMembers: onTaskChange
                     })
-                    if (isCalenderAutomate && data.includes(loggedInUser._id)) {
-                        const date = new Date(updatedTask.date)
-                        await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
+
+                    if (data.includes(loggedInUser._id)) {
+
+                        if (isCalenderAutomate) {
+                            const date = new Date(updatedTask.date)
+                            await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
+                        }
+
+                        if (isGmailAutomate) {
+                            var templateParams = {
+                                from_name: loggedInUser.fullname,
+                                to_name: loggedInUser.fullname,
+                                message: updatedTask.title,
+                                to_email: session.user.user_metadata.email
+                            }
+
+                            await emailjs.send('service_w7zj1dk', 'template_aqx3utd', templateParams, 'Gr3D8EPliZGhnC9Ac')
+                            showSuccessMsg('email sent')
+                        }
                     }
                     break;
 
