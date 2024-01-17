@@ -18,6 +18,7 @@ export const utilService = {
     hasTimePassed,
     timeSince,
     escapeRegExp,
+    getBlessingByTime,
 }
 
 function readJsonFile(path) {
@@ -178,4 +179,17 @@ function escapeRegExp(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+export function getBlessingByTime() {
+    const date = new Date()
+    const currentHour = date.getHours()
 
+    if (currentHour >= 5 && currentHour < 12) {
+        return 'Good morning'
+    } else if (currentHour >= 12 && currentHour < 18) {
+        return 'Good afternoon'
+    } else if (currentHour >= 18 && currentHour < 21) {
+        return 'Good evening'
+    } else {
+        return 'Good night'
+    }
+}

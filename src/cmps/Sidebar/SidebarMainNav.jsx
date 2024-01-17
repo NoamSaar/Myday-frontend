@@ -18,7 +18,7 @@ export function SidebarMainNav({ isSidebarOpen, onOpenSidebar, changeWidthVariab
             </NavLink>
 
             <NavLink className={`btn btn-nav svg-inherit-color`}
-                to="/workspace"
+                to="/board/workspace"
                 title="My Work Button"
                 onClick={() => setCurrBoard(null)}
             >

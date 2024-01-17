@@ -1,0 +1,122 @@
+.workspace-page {
+    // max-height: calc(100dvh - 48px);
+
+    .welcome-header {
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        height: 75px;
+        width: 100%;
+        background-color: $clr0;
+        box-shadow: 0px 3px 12px #e6e9ef;
+        border-top-left-radius: 8px;
+
+        .titles-container {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+
+            .first-title {
+                font-size: rem(14px);
+                margin-bottom: 4px;
+            }
+
+            .second-title {
+                font-weight: 500;
+                font-size: rem(16px);
+                line-height: 22px;
+            }
+        }
+    }
+
+    .content-container {
+        background-color: $clr-bg-workspace;
+        max-height: calc(100dvh - 48px - 75px);
+        height: 100%;
+    }
+
+    .boards-container {
+        height: 100%;
+        width: 100%;
+        padding: 24px;
+        margin: 16px;
+        border-radius: 8px;
+        background-color: $clr0;
+        box-shadow: 0px 3px 12px #e6e9ef;
+    }
+
+    .collapsible-header-wrapper {
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        p {
+            margin-inline-start: 10px;
+        }
+    }
+
+    .workspace-aside {
+        margin-top: 16px;
+        margin-inline-end: 16px;
+
+        .explore-templates-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            background-color: $clr0;
+            border-radius: 8px;
+            box-shadow: 0px 3px 12px #e6e9ef;
+
+            button {
+                text-transform: none;
+            }
+
+            img {
+                width: 100%;
+            }
+
+            .banner-content-wrapper {
+                margin-block-start: 16px;
+
+                .banner-text {
+                    margin-block-end: 8px;
+                }
+
+                .banner-button {
+                    width: 100%;
+                }
+            }
+        }
+
+        .get-inspired-content-wrapper {
+            .get-inspired-text {
+                margin-block-end: 16px;
+            }
+
+            .navigation-card-component {
+                display: flex;
+                align-items: center;
+                padding: 16px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
+                background-color: $clr0;
+
+                &:hover {
+                    box-shadow: 0px 6px 20px rgba(0, 0, 0, .2);
+                }
+
+                img {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 8px;
+                }
+
+                .card-content {
+                    margin-left: 16px;
+                }
+            }
+        }
+    }
+}
