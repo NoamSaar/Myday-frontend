@@ -12,6 +12,7 @@ import { boardService } from "../services/board.service"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate"
 import { activityService } from "../services/activity.service"
 import { ActivityLog } from "../cmps/Panel/ActivityLog"
+import { resetDynamicModal } from "../store/actions/system.actions"
 
 export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -67,6 +68,7 @@ export function BoardDetails() {
 
     function onDetailsScroll(ev) {
         setScrollTop(ev.target.scrollTop)
+        resetDynamicModal()
     }
 
     const { txt } = filterBy
@@ -76,9 +78,8 @@ export function BoardDetails() {
             <img className="myday-loader" src={loader} alt="" />
         </section>
     )
-    // if (isLoading || !board) return <div className="board-details">Loading...</div>
     return (
-        <section onScroll={onDetailsScroll} className={`board-details ${(modalData.isOpen && modalData.type !== 'tooltip') ? 'overflow-hidden' : ''}`}>
+        <section onScroll={onDetailsScroll} className="board-details">
             <BoardHeader
                 board={board}
                 filterBy={{ txt }}
