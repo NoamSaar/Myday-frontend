@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router'
+import 'animate.css';
 
 import { BoardDetails } from './pages/BoardDetails'
 import { HomePage } from './pages/HomePage'

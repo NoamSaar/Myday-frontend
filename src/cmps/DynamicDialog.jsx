@@ -6,7 +6,7 @@ export function DynamicDialog() {
 
     if (!dialogData.isOpen) return
     return (
-        <div className="dynamic-dialog">
+        <div className="dynamic-dialog animate__fadeIn animate__animated animate__faster fast-animation">
             <div className="black-screen" onClick={resetDynamicDialog}></div>
 
             <div className="dialog-content">
