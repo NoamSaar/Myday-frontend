@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
 import { useSession } from '@supabase/auth-helpers-react'
-import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser'
 
 import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../../store/actions/system.actions"
@@ -13,7 +13,7 @@ import { EditableTxt } from "../../../EditableTxt"
 import { useNavigate } from "react-router"
 import { MsgBtn } from "./MsgBtn"
 import { activityService } from "../../../../services/activity.service"
-import { utilService } from "../../../../services/util.service";
+import { utilService } from "../../../../services/util.service"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
@@ -91,10 +91,10 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask, prevState, newState)
 
-            const isAutomate = loggedInUser &&
+            const isAutomate = (loggedInUser &&
                 loggedInUser.automations &&
                 session &&
-                utilService.loadFromStorage('provider_token')
+                utilService.loadFromStorage('provider_token'))
 
             const isCalenderAutomate = isAutomate &&
                 loggedInUser.automations.includes('calendar') &&
@@ -130,7 +130,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             showSuccessMsg('Email sent successfully')
                         }
                     }
-                    break;
+                    break
 
                 case 'date':
                     if (isCalenderAutomate && updatedTask.members.includes(loggedInUser._id)) {
@@ -140,7 +140,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     break
 
                 default:
-                    break;
+                    break
             }
 
         } catch (err) {
@@ -220,18 +220,24 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     async function createCalendarEvent({ name, description = '', startTime, endTime }) {
         try {
+            const startDateTime = new Date(startTime)
+            startDateTime.setHours(8, 0, 0) // Set to 12 PM
+
+            const endDateTime = new Date(endTime)
+            endDateTime.setHours(14, 0, 0) // Set to 3 PM
+
             const event = {
                 'summary': name,
                 'description': description,
                 'start': {
-                    'dateTime': startTime.toISOString(),
+                    'dateTime': startDateTime.toISOString(),
                     'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
                 },
                 'end': {
-                    'dateTime': endTime.toISOString(),
+                    'dateTime': endDateTime.toISOString(),
                     'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
                 }
-            };
+            }
 
             const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
                 method: 'post',
@@ -240,17 +246,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(event),
-            });
+            })
+            //HF7gf43CLR2HXYoUmBOruw
 
             if (!response.ok) {
-                throw new Error(`Failed to create calendar event. Status: ${response.status}`);
+                throw new Error(`Failed to create calendar event. Status: ${response.status}`)
             }
 
-            const data = await response.json();
-            showSuccessMsg('Event added to google calender')
+            const data = await response.json()
+            showSuccessMsg('Event added to Google Calendar')
 
         } catch (err) {
-            console.error('Error creating calendar event:', err);
+            console.error('Error creating calendar event:', err)
         }
     }
 
