@@ -31,7 +31,6 @@ export function AutomationModal() {
                 }
             })
             if (error) throw new Error('Error logging in to google provider')
-
         } catch (err) {
             console.log('err', err)
         }
@@ -76,13 +75,13 @@ export function AutomationModal() {
 
     const automations = [
         {
-            txt: 'Add Calendar event when task is assigned to me',
+            txt: <p>When <span>task is assigned</span> to me <span>add Calendar event</span></p>,
             icon: <GoogleCalendarIcon />,
             name: 'calendar',
             isChecked: isCalendarChecked
         },
         {
-            txt: 'Recive an email when a task is assigned to you',
+            txt: <p>When <span>task is assigned</span> to me <span>recive an email</span></p>,
             icon: <GmailIcon />,
             name: 'gmail',
             isChecked: isGmailChecked
@@ -99,7 +98,7 @@ export function AutomationModal() {
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
                 txt={session ? 'Sign out of google' : 'Sign in with google'} />
-            {isDisabled && <p className="disabled-msg">To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
+            {isDisabled && <p className="disabled-msg">To use our Automations, please <span>sign in with Google</span> & make sure to <span>log in to Myday</span></p>}
 
             <AutomationList automations={automations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
         </div>

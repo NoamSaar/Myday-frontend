@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
-import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react'
+import { useSession } from '@supabase/auth-helpers-react'
 import emailjs from '@emailjs/browser';
 
 import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
@@ -13,6 +13,7 @@ import { EditableTxt } from "../../../EditableTxt"
 import { useNavigate } from "react-router"
 import { MsgBtn } from "./MsgBtn"
 import { activityService } from "../../../../services/activity.service"
+import { utilService } from "../../../../services/util.service";
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
@@ -90,7 +91,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             const isAutomate = loggedInUser &&
                 loggedInUser.automations &&
                 session &&
-                session.provider_token
+                utilService.loadFromStorage('provider_token')
 
             const isCalenderAutomate = isAutomate &&
                 loggedInUser.automations.includes('calendar') &&
@@ -232,7 +233,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
                 method: 'post',
                 headers: {
-                    'Authorization': `Bearer ${session.provider_token}`,
+                    'Authorization': `Bearer ${utilService.loadFromStorage('provider_token')}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(event),

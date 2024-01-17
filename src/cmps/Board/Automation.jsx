@@ -16,7 +16,7 @@ export function Automation({ isDisabled, automation, handleSwitchChange }) {
                     </div>
                 </div>
 
-                <p>{automation.txt}</p>
+                {automation.txt}
             </div>
 
             <button
