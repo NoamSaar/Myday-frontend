@@ -4,23 +4,38 @@ import { useSelector } from "react-redux"
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
 import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
-import { setIsHeaderCollapsed } from "../../store/actions/board.actions"
+import { loadBoardActivities, setIsHeaderCollapsed } from "../../store/actions/board.actions"
 import { useNavigate } from "react-router"
 import { resetDynamicDialog, setDynamicDialog, setSidePanelOpen } from "../../store/actions/system.actions"
 import { InviteModal } from "./InviteModal"
 import { getUsers } from "../../store/actions/user.actions"
 import { AutomationModal } from "./AutomationModal"
+import { MembersDisplay } from "./MembersDisplay"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
     const users = useSelector((storeState) => storeState.userModule.users)
 
     const [isCollapsed, setIsCollapsed] = useState(false)
+    const [activityUsers, setActivityUsers] = useState(null)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
     const navigate = useNavigate()
 
     useEffect(() => {
         loadUsers()
     }, [])
+
+    useEffect(() => {
+        _loadBoardActivities(board._id)
+    }, [board])
+
+    async function _loadBoardActivities(boardId) {
+        try {
+            const boardActivities = await loadBoardActivities({ boardId })
+            setActivityUsers(getUniqueMembers(boardActivities))
+        } catch (err) {
+            console.error('Error loading board:', err)
+        }
+    }
 
     async function loadUsers() {
         try {
@@ -56,6 +71,23 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
             }
         }
     }, [])
+
+    function getUniqueMembers(activities) {
+        const uniqueMemberIds = new Set();
+        const uniqueMembers = [];
+
+        activities.forEach(activity => {
+            const member = activity.byMember;
+
+            // Check if 'byMember' is an object and has '_id' property
+            if (member && member._id && !uniqueMemberIds.has(member._id)) {
+                uniqueMemberIds.add(member._id);
+                uniqueMembers.push(member);
+            }
+        });
+
+        return uniqueMembers;
+    }
 
     function onCollapseHeader() {
         const currIsCollapsed = !isCollapsed
@@ -93,6 +125,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                     }}
                 >
                     <span>Activity</span>
+                    <MembersDisplay members={activityUsers} />
                 </button>
 
                 <div className="invite-more-bts flex align-center">

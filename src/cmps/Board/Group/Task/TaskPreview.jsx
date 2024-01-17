@@ -107,7 +107,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         onChangeMembers: onTaskChange
                     })
 
-                    if (data.includes(loggedInUser._id)) {
+                    if (loggedInUser && data.includes(loggedInUser._id)) {
 
                         if (isCalenderAutomate) {
                             const date = new Date(updatedTask.date)

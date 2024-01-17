@@ -3,13 +3,13 @@ import { useRef } from "react"
 
 import { UserImg } from "../../../UserImg"
 import { resetDynamicModal, setDynamicModal } from "../../../../store/actions/system.actions"
+import { MembersDisplay } from "../../MembersDisplay"
 
 export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
     const previewBtnRef = useRef(null)
 
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isCurrPickerOpen = parentId === `${taskId}-memberPicker`
-    const extraMembers = chosenMembers.length - 2
 
     function onMemberPreviewClick(ev) {
         if (isCurrPickerOpen) {
@@ -30,29 +30,7 @@ export function MemberPreview({ chosenMembers, allMembers, onUpdate, taskId }) {
 
     return (
         <li onClick={onMemberPreviewClick} className="member-preview member-col flex justify-center align-center" ref={previewBtnRef}>
-            {!chosenMembers.length &&
-                <img className="user-img"
-                    src="https://res.cloudinary.com/dkvliixzt/image/upload/v1704358773/person-empty_zckbtr_wrffbw.svg"
-                />
-            }
-
-            {!!chosenMembers.length && <div className="member-img-container flex justify-center align-center">
-                {extraMembers > 0 ?
-                    <>
-                        <UserImg user={chosenMembers[0]} />
-                        <span className="extra-members-box">+{extraMembers + 1}</span>
-                    </>
-                    :
-                    <>
-                        {
-                            chosenMembers.map((member, idx) => {
-                                return idx < 2 ? <UserImg key={idx} user={member} /> : ''
-                            })
-                        }
-                    </>
-                }
-            </div>
-            }
+            <MembersDisplay members={chosenMembers} />
         </li >
     )
 }
