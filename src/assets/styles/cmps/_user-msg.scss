@@ -18,10 +18,18 @@
 
     &.success {
         background-color: $clr-success;
+
+        button:hover {
+            background-color: $clr-success-hover;
+        }
     }
 
     &.error {
         background-color: $clr-err;
+
+        button:hover {
+            background-color: $clr-err-hover;
+        }
     }
 
     button {
@@ -31,9 +39,7 @@
         margin-inline-start: 4px;
         border-radius: $border-radius-small;
 
-        &:hover {
-            background-color: $clr-success-hover;
-        }
+
     }
 
     .btn-undo {
