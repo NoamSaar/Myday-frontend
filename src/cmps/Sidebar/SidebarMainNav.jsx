@@ -26,7 +26,7 @@ export function SidebarMainNav({ isSidebarOpen, onOpenSidebar, changeWidthVariab
                 <span>My work</span>
             </NavLink>
 
-            <button className={`btn btn-menu ${isSidebarOpen ? 'open' : ''}`}
+            <button className={`btn svg-inherit-color btn-menu ${isSidebarOpen ? 'open' : ''}`}
                 title="Menu Button"
                 onClick={onOpenSidebar}
             >
