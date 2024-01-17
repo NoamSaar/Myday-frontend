@@ -1,8 +1,14 @@
+.panel-activity {
+    max-height: calc(100dvh - 48px - 123px);
+    overflow: auto;
+}
+
 .activity-list {
     display: grid;
     // grid-template-columns: 56px 30px;
     grid-template-columns: auto minmax(auto, 1fr) 2fr 1fr 2.5fr;
-    padding: 10px 24px;
+    padding-block: 10px;
+    padding-inline: 24px 8px;
 }
 
 .activity-preview {
