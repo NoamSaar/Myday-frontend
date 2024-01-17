@@ -195,6 +195,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
     }
 
     function onTitleClick() {
+        resetDynamicModal()
         if (!isMobile) {
             setIsEditing(true)
         } else {
@@ -240,6 +241,10 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
     function onStatLeave(name) {
         if (parentId === `${name}-tooltip`) resetDynamicModal()
+    }
+
+    function onTtileHover() {
+        if (!isEditing) onStatEnter('Click to edit', `${group.id}-title`, colorBtnParentRef)
     }
 
     const menuOptions = [
@@ -309,7 +314,7 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
 
                                 <div
                                     ref={colorBtnParentRef}
-                                    onMouseEnter={() => onStatEnter('Click to edit', `${group.id}-title`, colorBtnParentRef)}
+                                    onMouseEnter={onTtileHover}
                                     onMouseLeave={() => onStatLeave(`${group.id}-title`)}
                                 >
                                     <EditableTxt
