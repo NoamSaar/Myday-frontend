@@ -101,7 +101,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                         <span>Invite / 1</span>
                     </button>
 
-                    <button className="btn more" title="Options">
+                    <button className="btn svg-inherit-color more" title="Options">
                         <MenuIcon />
                     </button>
                 </div>
@@ -123,7 +123,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                         <span>Automate</span>
                     </button>
 
-                    <button className={dynCollapsedClass + ' btn collapse'}
+                    <button className={dynCollapsedClass + ' btn svg-inherit-color collapse'}
                         title="Collapse header"
                         onClick={onCollapseHeader}
                     >

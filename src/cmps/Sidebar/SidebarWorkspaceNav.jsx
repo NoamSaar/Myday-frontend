@@ -20,7 +20,7 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
                     </div>
                 </div>
             </section>
-            <button className="btn btn-option-menu">
+            <button className="btn btn-option-menu svg-inherit-color">
                 <MenuIcon />
             </button>
         </>

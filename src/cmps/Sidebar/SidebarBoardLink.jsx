@@ -151,7 +151,7 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
                         <span>{highlightText(board.title, filterBy.title)}</span>
 
                         <button
-                            className={`btn btn-option-menu ${dynModalClass}`}
+                            className={`btn btn-option-menu svg-inherit-color ${dynModalClass}`}
                             style={style}
                             alt="Board Menu"
                             onClick={toggleMenu}

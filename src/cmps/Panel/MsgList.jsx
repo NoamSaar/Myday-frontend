@@ -43,7 +43,7 @@ export function MsgList({ msgs, onLikeComment }) {
                             <ClockIcon />
                             {utilService.timeSince(msg.createdAt)}
                             {/* <button
-                                    className={`btn btn-option-menu`}
+                                    className={`btn btn-option-menu svg-inherit-color`}
                                     alt="update Menu"
                                     onClick={toggleMenu}
                                     title="Update Menu"

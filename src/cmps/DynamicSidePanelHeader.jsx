@@ -54,7 +54,7 @@ export function DynamicSidePanelHeader(props) {
                                 : <UserImg />
                             }
                         </span>
-                        <button className="btn">
+                        <button className="btn svg-inherit-color">
                             <MenuIcon />
                         </button>
                     </div>
