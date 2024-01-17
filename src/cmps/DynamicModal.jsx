@@ -7,12 +7,13 @@ import { DynamicModalRouter } from "./DynamicModalRouter"
 export function DynamicModal() {
     const modalRef = useRef()
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const [ModalPos, setModalPos] = useState({ left: 0, top: 0 })
+    const [ModalPos, setModalPos] = useState({ left: -500, top: -500 })
     const [caretDirection, setCaretDirection] = useState('top') // Default direction
 
     const parentBoundingRect = modalData.parentRefCurrent?.getBoundingClientRect()
 
     useEffect(() => {
+        setModalPos({ left: -500, top: -500 })
         if (!modalRef.current) return
 
         const modalWidth = modalRef.current.offsetWidth
@@ -68,6 +69,7 @@ export function DynamicModal() {
             }
             newTop = Math.max(0, newTop)
         }
+
 
         setModalPos({
             left: newLeft,
