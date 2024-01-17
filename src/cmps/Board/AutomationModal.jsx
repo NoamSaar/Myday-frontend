@@ -3,20 +3,22 @@ import { GoogleBtn } from './GoogleBtn'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { updateUser } from '../../store/actions/user.actions'
-import { GoogleCalendarIcon } from '../../services/svg.service'
+import { GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
 import { AutomationList } from './AutomationList'
 
 export function AutomationModal() {
     const session = useSession() //tokens, when session exists we have a user
     const supaBase = useSupabaseClient() //talk to supabase
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
-    const [isCalendarChecked, setIsCaledarChecked] = useState(false);
+    const [isCalendarChecked, setIsCalendarChecked] = useState(false);
+    const [isGmailChecked, setIsGmailChecked] = useState(false);
     const { isLoading } = useSessionContext()
     const isDisabled = !loggedInUser || !session
 
     useEffect(() => {
         if (loggedInUser && loggedInUser.automations) {
-            setIsCaledarChecked(loggedInUser.automations.includes('calendar'))
+            setIsCalendarChecked(loggedInUser.automations.includes('calendar'))
+            setIsGmailChecked(loggedInUser.automations.includes('gmail'))
         }
     }, [loggedInUser])
 
@@ -56,7 +58,11 @@ export function AutomationModal() {
             await updateUser(updatedUser)
             switch (automation) {
                 case 'calendar':
-                    setIsCaledarChecked(isChecked)
+                    setIsCalendarChecked(isChecked)
+                    break;
+
+                case 'gmail':
+                    setIsGmailChecked(isChecked)
                     break;
 
                 default:
@@ -74,6 +80,12 @@ export function AutomationModal() {
             icon: <GoogleCalendarIcon />,
             name: 'calendar',
             isChecked: isCalendarChecked
+        },
+        {
+            txt: 'Recive an email when a task is assigned to you',
+            icon: <GmailIcon />,
+            name: 'gmail',
+            isChecked: isGmailChecked
         }
     ]
 
