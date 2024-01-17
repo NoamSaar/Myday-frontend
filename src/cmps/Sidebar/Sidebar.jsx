@@ -97,7 +97,6 @@ export function Sidebar() {
 
     async function _onUpdateBoard(board, title) {
         try {
-            console.log(title)
             await updateBoard({ ...board, title })
         } catch (err) {
             console.error('Error removing task:', err)
