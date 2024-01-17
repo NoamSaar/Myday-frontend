@@ -5,26 +5,41 @@
     color: $clr-font;
     user-select: none;
 
-    h1 {
+    header {
         margin-block-end: 15px;
         border-block-end: 1px solid $clr-group-border;
+        padding-block-end: 10px;
+
+        .logo {
+            width: 32px;
+            margin-inline-end: 10px;
+        }
+
+    }
+
+    .disabled-msg {
+        text-align: center;
+        margin-block-end: 40px;
     }
 
     .google-btn {
-        background-color: #4285f4;
-        color: white;
-        padding: 1px;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
+        background-color: white;
+        color: $clr-font;
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid $clr-btn-border;
+        width: 400px;
         transition: box-shadow .2s;
-        margin-block-end: 40px;
+        margin-block: 15px;
+        margin-inline: auto;
+
 
         &:hover {
-            box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
+            background-color: $clr-btn-hover;
         }
 
         .google-logo-caontainer {
-            background-color: white;
-            padding: 15px;
+            margin-inline-end: 8px;
 
             svg {
                 width: 22px;
@@ -33,9 +48,9 @@
         }
 
         .txt-container {
-            padding: 15px;
+            // padding: 15px;
             font-size: rem(16px);
-            height: 52px;
+            // height: 52px;
         }
     }
 

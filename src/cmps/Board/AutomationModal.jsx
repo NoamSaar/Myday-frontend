@@ -80,11 +80,14 @@ export function AutomationModal() {
     if (isLoading) return <div className="automation-modal">Loading...</div>
     return (
         <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} automation-modal`}>
-            <h1>Automations</h1>
-            {isDisabled && <p>To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
+            <header className="flex align-center">
+                <img className="logo" src="/img/myday-temp-logo.png" />
+                <h1>Automations</h1>
+            </header>
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
                 txt={session ? 'Sign out of google' : 'Sign in with google'} />
+            {isDisabled && <p className="disabled-msg">To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
 
             <AutomationList automations={automations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
         </div>
