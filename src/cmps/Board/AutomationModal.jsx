@@ -3,8 +3,9 @@ import { GoogleBtn } from './GoogleBtn'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { updateUser } from '../../store/actions/user.actions'
-import { GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
+import { CloseIcon, GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
 import { AutomationList } from './AutomationList'
+import { resetDynamicDialog } from '../../store/actions/system.actions'
 
 export function AutomationModal() {
     const session = useSession() //tokens, when session exists we have a user
@@ -92,8 +93,12 @@ export function AutomationModal() {
     return (
         <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} automation-modal`}>
             <header className="flex align-center">
-                <img className="logo" src="/img/myday-temp-logo.png" />
-                <h1>Automations</h1>
+                <div className="flex align-center">
+                    <img className="logo" src="/img/myday-temp-logo.png" />
+                    <h1>Automations</h1>
+                </div>
+
+                <button className='flex' onClick={resetDynamicDialog}><CloseIcon /></button>
             </header>
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}

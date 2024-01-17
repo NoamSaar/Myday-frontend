@@ -6,6 +6,7 @@
     user-select: none;
 
     header {
+        justify-content: space-between;
         margin-block-end: 15px;
         border-block-end: 1px solid $clr-group-border;
         padding-block-end: 10px;
@@ -13,6 +14,19 @@
         .logo {
             width: 32px;
             margin-inline-end: 10px;
+        }
+
+        button svg {
+            width: 35px;
+            height: 35px;
+
+            &:hover path {
+                stroke: $clr-group-border;
+            }
+
+            path {
+                stroke-width: 1;
+            }
         }
 
     }
