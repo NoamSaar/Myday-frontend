@@ -16,6 +16,9 @@ import { activityService } from "../../../../services/activity.service"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
+    const openDetailsBtnRef = useRef(null)
+    const msgsBtnRef = useRef(null)
+
     const navigate = useNavigate()
     const session = useSession() //tokens, when session exists we have a user
 
@@ -23,7 +26,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
-    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [isChangingToDone, setIsChangingToDone] = useState(false)
     const [currTask, setCurrTask] = useState(null)
@@ -250,6 +253,26 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         }
     }
 
+    function onStatEnter(txt, name, ref) {
+        if (isOpen && type !== 'tooltip') return
+
+        setDynamicModal(
+            {
+                isOpen: true,
+                parentRefCurrent: ref.current,
+                type: 'tooltip',
+                data: { txt },
+                parentId: `${name}-tooltip`,
+                hasCaret: true,
+                isCenter: true,
+                isPosBlock: true,
+                caretClred: true
+            })
+    }
+
+    function onStatLeave(name) {
+        if (parentId === `${name}-tooltip`) resetDynamicModal()
+    }
 
     const menuOptions = [
         {
@@ -289,6 +312,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         </div>
 
     </ul>
+
     return (
         <ul
             className="clean-list flex subgrid full-grid-column task-preview-container"
@@ -338,11 +362,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         />
 
                         <div className="flex align-center open-details-container">
-                            {(isShowTaskDetailsBtn && !isEditing) && <button className="task-details-btn flex justify-center">
-                                <OpenIcon />
-                                <p>Open</p>
-                            </button>}
-
+                            {
+                                (isShowTaskDetailsBtn && !isEditing) &&
+                                <button
+                                    className="task-details-btn flex justify-center"
+                                    ref={openDetailsBtnRef}
+                                    onMouseEnter={() => onStatEnter('Open task page', `${currTask.id}-open-details-title`, openDetailsBtnRef)}
+                                    onMouseLeave={() => onStatLeave(`${currTask.id}-open-details-title`)}
+                                >
+                                    <OpenIcon />
+                                    <p>Open</p>
+                                </button>
+                            }
                             <MsgBtn msgsLength={currTask.msgs.length} />
                         </div>
 
