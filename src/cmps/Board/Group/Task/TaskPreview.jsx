@@ -99,6 +99,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 session &&
                 session.provider_token
             console.log('isCalenderAutomate', isCalenderAutomate)
+            console.log('data', data)
 
             switch (field) {
                 case 'members':
