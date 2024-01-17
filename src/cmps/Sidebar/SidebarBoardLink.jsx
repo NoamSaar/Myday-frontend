@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
 
@@ -9,7 +9,7 @@ import { utilService } from "../../services/util.service"
 
 export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, updateBoard }) {
     const { boardId } = useParams()
-    const menuBtnRef = useRef(null)
+
 
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
@@ -18,15 +18,40 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
     const [editedTitle, setEditedTitle] = useState(board.title)
     const [lastClickedBoardId, setLastClickedBoardId] = useState(null)
 
+    const menuBtnRef = useRef(null)
+    const boardNavBtnRef = useRef(null)
+    const editedTitleRef = useRef(editedTitle)
+
     const navigate = useNavigate()
 
     const isMenuOpen = parentId === `${board._id}-sidebar-menu`
 
-    async function onRemoveBoard() {
+    useEffect(() => {
+        editedTitleRef.current = editedTitle
+    }, [editedTitle])
+
+    useEffect(() => {
+        if (isEditing) {
+            document.addEventListener('mousedown', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [isEditing])
+
+    function handleClickOutside(ev) {
+        if (boardNavBtnRef.current && !boardNavBtnRef.current.contains(ev.target)) {
+            updateBoard(board, editedTitleRef.current)
+            setIsEditing(false)
+        }
+    }
+
+    function onRemoveBoard() {
         removeBoard(board._id)
     }
 
-    async function onUpdateBoard() {
+    function onUpdateBoard() {
         updateBoard(board, editedTitle)
         setIsEditing(false)
     }
@@ -109,6 +134,7 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
             <div className={`grid btn btn-board-nav ${dynActiveNavClass} ${dynHoverNavClass}`}
                 onClick={onLinkClick}
                 title={`${board.title} Board`}
+                ref={boardNavBtnRef}
             >
                 <BoardIcon />
                 {isEditing ? (
