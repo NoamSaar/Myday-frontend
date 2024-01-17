@@ -22,6 +22,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
     const mainTableRef = useRef(null)
     const addTableRef = useRef(null)
     const collapseBtneRef = useRef(null)
+    const optTopHeaderRef = useRef(null)
 
     useEffect(() => {
         loadUsers()
@@ -127,7 +128,13 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                         <span>Invite / 1</span>
                     </button>
 
-                    <button className="btn svg-inherit-color more" title="Options">
+                    <button
+                        className="btn svg-inherit-color more"
+                        // title="Options"
+                        ref={optTopHeaderRef}
+                        onMouseEnter={() => onStatEnter('Options', 'options-board-header-top-title', optTopHeaderRef)}
+                        onMouseLeave={() => onStatLeave('options-board-header-top-title')}
+                    >
                         <MenuIcon />
                     </button>
                 </div>
@@ -164,10 +171,10 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                     <button
                         className={dynCollapsedClass + ' btn svg-inherit-color collapse'}
                         onClick={onCollapseHeader}
-                    // title="Collapse header"
-                    // ref={collapseBtneRef}
-                    // onMouseEnter={() => onStatEnter('Collapse header', 'collapse-header-title', collapseBtneRef)}
-                    // onMouseLeave={() => onStatLeave('collapse-header-title')}
+                        // title="Collapse header"
+                        ref={collapseBtneRef}
+                        onMouseEnter={() => onStatEnter('Collapse header', 'collapse-header-title', collapseBtneRef)}
+                        onMouseLeave={() => onStatLeave('collapse-header-title')}
                     >
                         <AngleDownIcon />
                     </button>
