@@ -123,7 +123,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                             }
 
                             await emailjs.send('service_w7zj1dk', 'template_aqx3utd', templateParams, 'Gr3D8EPliZGhnC9Ac')
-                            showSuccessMsg('email sent')
+                            showSuccessMsg('Email sent successfully')
                         }
                     }
                     break;
