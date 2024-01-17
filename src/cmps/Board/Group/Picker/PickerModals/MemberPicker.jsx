@@ -52,6 +52,7 @@ export function MemberPicker({ chosenMembers, allMembers, onChangeMembers }) {
     }
 
     function onRemoveMember(member) {
+
         const newChosenMembers = currChosenMembers.filter(currMember => currMember._id !== member._id)
         const newAllMembers = [member, ...currAllMembers]
 

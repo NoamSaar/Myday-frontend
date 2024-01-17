@@ -279,7 +279,7 @@ async function updateTask(boardId, groupId, task, prevState, newState) {
         let activityTo
 
         if (newState || prevState) {
-            if (prevState.field === 'person') {
+            if (prevState.field === 'person' && newState.data.length !== 0) {
                 activityFrom = null
                 activityTo = newState.data[0]._id
             } else {
