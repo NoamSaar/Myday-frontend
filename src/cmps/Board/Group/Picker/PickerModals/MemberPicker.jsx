@@ -83,6 +83,7 @@ export function MemberPicker({ chosenMembers, allMembers, onChangeMembers }) {
         ]
     }
 
+
     return (
         <div className="general-modal member-picker-modal">
 
