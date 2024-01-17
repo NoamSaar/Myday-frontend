@@ -15,7 +15,7 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
 
                     <span>Main workspace</span>
 
-                    <div className="flex angle-down-container">
+                    <div className="flex svg-inherit-color angle-down-container">
                         <AngleDownIcon />
                     </div>
                 </div>
