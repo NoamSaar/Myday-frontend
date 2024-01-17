@@ -13,12 +13,13 @@ import { utilService } from "../../../services/util.service"
 
 export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeave, isGroupsCollapsed, toggleIsGroupsCollapsed, isHeaderCollapsed, isMobile }) {
     const menuBtnRef = useRef(null)
+    const collapseBtnRef = useRef(null)
     const colorBtnParentRef = useRef(null)
 
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
 
     const filterBy = useSelector(storeState => storeState.boardModule.filterBy)
-    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
 
     const [isEditing, setIsEditing] = useState(isEditingTitle)
@@ -220,7 +221,26 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
         setIsEditing(true)
     }
 
+    function onStatEnter(txt, name, ref) {
+        if (isOpen && type !== 'tooltip') return
 
+        setDynamicModal(
+            {
+                isOpen: true,
+                parentRefCurrent: ref.current,
+                type: 'tooltip',
+                data: { txt },
+                parentId: `${name}-tooltip`,
+                hasCaret: true,
+                isCenter: true,
+                isPosBlock: true,
+                caretClred: true
+            })
+    }
+
+    function onStatLeave(name) {
+        if (parentId === `${name}-tooltip`) resetDynamicModal()
+    }
 
     const menuOptions = [
         {
@@ -275,11 +295,23 @@ export function BoardGroup({ group, titlesOrder, isEditingTitle, onTitleEditLeav
                         <div className={`${isMobile ? 'sticky-left' : 'sticky-left-40'} title-container flex align-center`}>
                             <div className="flex align-center">
 
-                                <button onClick={toggleCollapsed} title="Collapse group" style={{ fill: groupColor }} className="arrow-container flex svg-inherit-color">
+                                <button
+                                    onClick={toggleCollapsed}
+                                    // title="Collapse group"
+                                    style={{ fill: groupColor }}
+                                    className="arrow-container flex svg-inherit-color"
+                                    ref={collapseBtnRef}
+                                    onMouseEnter={() => onStatEnter(`${isGroupCollapsed ? 'Expand group' : 'Collapse group'}`, `${group.id}-collapse-title`, collapseBtnRef)}
+                                    onMouseLeave={() => onStatLeave(`${group.id}-collapse-title`)}
+                                >
                                     <AngleDownIcon />
                                 </button>
 
-                                <div ref={colorBtnParentRef}>
+                                <div
+                                    ref={colorBtnParentRef}
+                                    onMouseEnter={() => onStatEnter('Click to edit', `${group.id}-title`, colorBtnParentRef)}
+                                    onMouseLeave={() => onStatLeave(`${group.id}-title`)}
+                                >
                                     <EditableTxt
                                         isEditing={isEditing}
                                         txtValue={highlightText(groupTitle, filterBy.txt)}

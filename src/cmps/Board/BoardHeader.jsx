@@ -6,7 +6,7 @@ import { BoardEdit } from "./BoardEdit"
 import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
 import { loadBoardActivities, setIsHeaderCollapsed } from "../../store/actions/board.actions"
 import { useNavigate } from "react-router"
-import { resetDynamicDialog, setDynamicDialog, setSidePanelOpen } from "../../store/actions/system.actions"
+import { resetDynamicDialog, resetDynamicModal, setDynamicDialog, setDynamicModal, setSidePanelOpen } from "../../store/actions/system.actions"
 import { InviteModal } from "./InviteModal"
 import { getUsers } from "../../store/actions/user.actions"
 import { AutomationModal } from "./AutomationModal"
@@ -19,6 +19,11 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
     const [activityUsers, setActivityUsers] = useState(null)
     const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
     const navigate = useNavigate()
+
+    const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const mainTableRef = useRef(null)
+    const addTableRef = useRef(null)
+    const collapseBtneRef = useRef(null)
 
     useEffect(() => {
         loadUsers()
@@ -71,6 +76,27 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
             }
         }
     }, [])
+
+    function onStatEnter(txt, name, ref) {
+        if (isOpen && type !== 'tooltip') return
+
+        setDynamicModal(
+            {
+                isOpen: true,
+                parentRefCurrent: ref.current,
+                type: 'tooltip',
+                data: { txt },
+                parentId: `${name}-tooltip`,
+                hasCaret: true,
+                isCenter: true,
+                isPosBlock: true,
+                caretClred: true
+            })
+    }
+
+    function onStatLeave(name) {
+        if (parentId === `${name}-tooltip`) resetDynamicModal()
+    }
 
     function getUniqueMembers(activities) {
         const uniqueMemberIds = new Set();
@@ -140,12 +166,24 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                 </div>
 
                 <div className="display-opts flex align-center">
-                    <button className="btn main-table" title="Main Table">
+                    <button
+                        className="btn main-table"
+                        // title="Main Table"
+                        ref={mainTableRef}
+                        onMouseEnter={() => onStatEnter('Main Table', 'main-table-title', mainTableRef)}
+                        onMouseLeave={() => onStatLeave('main-table-title')}
+                    >
                         <HomeIcon />
                         <span>Main Table</span>
                     </button>
 
-                    <button className="btn add-view svg-inherit-color" title="Add view">
+                    <button
+                        className="btn add-view svg-inherit-color"
+                        // title="Add view"
+                        ref={addTableRef}
+                        onMouseEnter={() => onStatEnter('Add view', 'add-table-title', addTableRef)}
+                        onMouseLeave={() => onStatLeave('add-table-title')}
+                    >
                         <PlusIcon />
                     </button>
                 </div>
@@ -156,9 +194,13 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                         <span>Automate</span>
                     </button>
 
-                    <button className={dynCollapsedClass + ' btn svg-inherit-color collapse'}
-                        title="Collapse header"
+                    <button
+                        className={dynCollapsedClass + ' btn svg-inherit-color collapse'}
                         onClick={onCollapseHeader}
+                    // title="Collapse header"
+                    // ref={collapseBtneRef}
+                    // onMouseEnter={() => onStatEnter('Collapse header', 'collapse-header-title', collapseBtneRef)}
+                    // onMouseLeave={() => onStatLeave('collapse-header-title')}
                     >
                         <AngleDownIcon />
                     </button>
