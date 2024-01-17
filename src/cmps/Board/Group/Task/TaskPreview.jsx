@@ -86,12 +86,19 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask, prevState, newState)
 
+            console.log('loggedInUser', loggedInUser)
+            console.log('loggedInUser.automations', loggedInUser.automations)
+            console.log('loggedInUser.automations.includes(calendar)', loggedInUser.automations.includes('calendar'))
+            console.log('updatedTask.date', updatedTask.date)
+            console.log('session', session)
+            console.log('session.provider_token', session.provider_token)
             const isCalenderAutomate = loggedInUser &&
                 loggedInUser.automations &&
                 loggedInUser.automations.includes('calendar') &&
                 updatedTask.date &&
                 session &&
                 session.provider_token
+            console.log('isCalenderAutomate', isCalenderAutomate)
 
             switch (field) {
                 case 'members':
@@ -101,6 +108,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         onChangeMembers: onTaskChange
                     })
                     if (isCalenderAutomate && data.includes(loggedInUser._id)) {
+                        console.log('members');
                         const date = new Date(updatedTask.date)
                         await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
                     }
@@ -108,6 +116,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
                 case 'date':
                     if (isCalenderAutomate && updatedTask.members.includes(loggedInUser._id)) {
+                        console.log('date');
                         const date = new Date(updatedTask.date)
                         await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
                     }
