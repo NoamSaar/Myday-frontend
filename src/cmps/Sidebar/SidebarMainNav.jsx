@@ -17,14 +17,20 @@ export function SidebarMainNav({ isSidebarOpen, onOpenSidebar, changeWidthVariab
                 <span>Home</span>
             </NavLink>
 
-            <NavLink className={`btn btn-nav svg-inherit-color`}
+            <div className={`btn btn-nav svg-inherit-color`}
+                title="My Work Button"
+            >
+                <CalendarIcon />
+                <span>My work</span>
+            </div>
+            {/* <NavLink className={`btn btn-nav svg-inherit-color`}
                 to="/workspace"
                 title="My Work Button"
                 onClick={() => setCurrBoard(null)}
             >
                 <CalendarIcon />
                 <span>My work</span>
-            </NavLink>
+            </NavLink> */}
 
             <button className={`btn btn-menu ${isSidebarOpen ? 'open' : ''}`}
                 title="Menu Button"
