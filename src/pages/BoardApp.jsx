@@ -7,8 +7,10 @@ import { BoardAppHeader } from "../cmps/BoardAppHeader";
 import { DynamicDialog } from "../cmps/DynamicDialog";
 
 
+
 export function BoardApp() {
     const isFullSidebarMobile = useSelector((storeState) => storeState.systemModule.isFullSidebarMobile)
+
 
     return (
         <section className="main-layout grid board-app">

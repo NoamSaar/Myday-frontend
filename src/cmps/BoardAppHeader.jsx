@@ -27,7 +27,6 @@ export function BoardAppHeader() {
         try {
             resetDynamicModal()
             await logout()
-            showSuccessMsg(`Bye now`)
         } catch (err) {
             console.error('Error logging out:', err)
             showErrorMsg('Cannot logout')

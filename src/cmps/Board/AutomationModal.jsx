@@ -3,8 +3,9 @@ import { GoogleBtn } from './GoogleBtn'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { updateUser } from '../../store/actions/user.actions'
-import { GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
+import { CloseIcon, GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
 import { AutomationList } from './AutomationList'
+import { resetDynamicDialog } from '../../store/actions/system.actions'
 
 export function AutomationModal() {
     const session = useSession() //tokens, when session exists we have a user
@@ -31,7 +32,6 @@ export function AutomationModal() {
                 }
             })
             if (error) throw new Error('Error logging in to google provider')
-
         } catch (err) {
             console.log('err', err)
         }
@@ -76,13 +76,13 @@ export function AutomationModal() {
 
     const automations = [
         {
-            txt: 'Add Calendar event when task is assigned to me',
+            txt: <p>When <span>task is assigned</span> to me <span>add Calendar event</span></p>,
             icon: <GoogleCalendarIcon />,
             name: 'calendar',
             isChecked: isCalendarChecked
         },
         {
-            txt: 'Recive an email when a task is assigned to you',
+            txt: <p>When <span>task is assigned</span> to me <span>recive an email</span></p>,
             icon: <GmailIcon />,
             name: 'gmail',
             isChecked: isGmailChecked
@@ -93,13 +93,17 @@ export function AutomationModal() {
     return (
         <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} automation-modal`}>
             <header className="flex align-center">
-                <img className="logo" src="/img/myday-temp-logo.png" />
-                <h1>Automations</h1>
+                <div className="flex align-center">
+                    <img className="logo" src="/img/myday-temp-logo.png" />
+                    <h1>Automations</h1>
+                </div>
+
+                <button className='flex' onClick={resetDynamicDialog}><CloseIcon /></button>
             </header>
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
                 txt={session ? 'Sign out of google' : 'Sign in with google'} />
-            {isDisabled && <p className="disabled-msg">To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
+            {isDisabled && <p className="disabled-msg">To use our Automations, please <span>sign in with Google</span> & make sure to <span>log in to Myday</span></p>}
 
             <AutomationList automations={automations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
         </div>
