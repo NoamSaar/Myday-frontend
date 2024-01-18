@@ -1,12 +1,13 @@
 import { useRef, useState } from "react"
 import { useSelector } from "react-redux"
 
-import { resetDynamicModal, setDynamicModal, showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
+import { resetDynamicModal, setDynamicDialog, setDynamicModal, showErrorMsg, showSuccessMsg } from "../store/actions/system.actions.js"
 import { logout } from "../store/actions/user.actions.js"
 
-import { LogoIcon, LoginIcon, InviteIcon } from "../services/svg.service.jsx"
+import { LogoIcon, LoginIcon, InviteIcon, AboutUsIcon } from "../services/svg.service.jsx"
 import { UserImg } from "./UserImg.jsx"
 import { useNavigate } from "react-router"
+import { AboutUs } from "./AboutUs.jsx"
 
 export function BoardAppHeader() {
     const menuBtnRef = useRef(null)
@@ -49,6 +50,13 @@ export function BoardAppHeader() {
         }
     }
 
+    function onAboutUs() {
+        setDynamicDialog({
+            isOpen: true,
+            contentCmp: <AboutUs />
+        })
+    }
+
     const menuOptions = user ? [
         {
             icon: <LoginIcon />,
@@ -85,7 +93,11 @@ export function BoardAppHeader() {
                 <span className="app-title">myday</span>
             </section>
             <nav className="header-nav">
-                <div className="user-info">
+                <div className="user-info flex align-center">
+                    <button className="btn about-us-icon flex align-center justify-center" title="About Us"
+                        onClick={onAboutUs}>
+                        <AboutUsIcon />
+                    </button>
                     <button
                         className="flex align-center justify-center relative"
                         title="User Profile"
@@ -98,6 +110,7 @@ export function BoardAppHeader() {
                         {/* {isModalOpen && <MenuOptionsModal options={menuOptions} />} */}
                         {/* {isModalOpen && <MenuOptionsModal options={menuOptions} relative={posOptions} />} */}
                     </button>
+
                 </div>
 
             </nav>

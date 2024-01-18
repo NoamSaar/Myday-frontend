@@ -1,0 +1,24 @@
+.about-us {
+    background-color: #eceff8;
+    width: 70vw;
+    height: 60vh;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 1px 0px 2px 0px grey;
+
+    .about-us-img {
+        max-width: 100%;
+        margin-inline-end: 16px;
+
+        img {
+            border-radius: 16px;
+        }
+    }
+
+    .about-us-txt {
+        white-space: normal;
+        font-size: rem(16px);
+    }
+
+    .about-us-contact {}
+}

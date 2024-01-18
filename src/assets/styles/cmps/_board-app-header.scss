@@ -22,6 +22,12 @@
         padding-left: 100px;
         color: $clr-font;
 
+        .about-us-icon {
+            scale: 1.2;
+            margin-inline-end: 7px;
+            margin-block-start: 3px;
+        }
+
         .user-img {
             max-height: 30px;
             max-width: 30px;
