@@ -1,8 +1,15 @@
+import { useRef } from 'react'
+import { EmailIcon, GithubIcon, LinkdinIcon } from '../services/svg.service'
 import AboutUsImg from '/img/AboutUsImg.png'
 
 export function AboutUs() {
+    const githubRef = useRef()
+    const mailRef = useRef()
+    const linkRef = useRef()
+
     return (
         <section className="about-us grid">
+            <div className="myday-story">Myday Story</div>
             <div className="about-us-img">
                 <img src={AboutUsImg} alt="" />
             </div>
@@ -26,9 +33,9 @@ export function AboutUs() {
                 invaluable as they guide our learning journey and help us refine our skills.
             </p>
             <div className="about-us-contact">
-                <span>website Email:</span>
-                <span>Project Github Repo:</span>
-                <span>Our Linkdin Profiles:</span>
+                <span ref={githubRef}><GithubIcon /></span>
+                <span ref={mailRef}><EmailIcon /></span>
+                <span ref={linkRef}><LinkdinIcon /></span>
             </div>
         </section>
     )
