@@ -1,14 +1,14 @@
 .about-us {
     position: relative;
     grid-template-rows: auto auto 1fr auto;
-    background-color: #eceff8;
+    background-color: $clr0;
     width: 70vw;
     max-width: 950px;
     height: 80vh;
     border-radius: 16px;
     padding: 16px;
     box-shadow: 1px 0px 2px 0px grey;
-    overflow: hidden;
+    overflow-y: auto;
 
     /* Ensure the gradient doesn't overflow */
     &::before {
@@ -18,7 +18,8 @@
         left: 0;
         width: 100%;
         height: 40%;
-        background: linear-gradient(to right, #04CC77, #FFCE04, #F6335A);
+        background: #eceff8;
+        // background: linear-gradient(to right, #04CC77, #FFCE04, #F6335A);
         border-top-right-radius: 16px;
         border-top-left-radius: 16px;
 
@@ -51,11 +52,18 @@
         }
     }
 
+    .about-us-content {
+        z-index: 2;
+        display: grid;
+        grid-template-rows: 1fr;
+        height: 100%;
+    }
+
     .about-us-img {
         width: 100%;
         text-align: center;
-        z-index: 2;
         margin-block-end: 20px;
+        object-fit: contain;
 
         img {
             border-radius: 16px;
@@ -73,6 +81,7 @@
         white-space: normal;
         font-size: rem(18px);
         margin-inline: 40px;
+        margin-block: 20px;
     }
 
 
