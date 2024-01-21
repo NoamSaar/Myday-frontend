@@ -46,23 +46,15 @@ export function SidebarMainNav({ isSidebarOpen, onOpenSidebar, changeWidthVariab
                 <span>Home</span>
             </NavLink>
 
-            <div className={`btn btn-nav svg-inherit-color`}
+            {/* <div className={`btn btn-nav svg-inherit-color`}
                 title="My Work Button"
             >
                 <CalendarIcon />
                 <span>My work</span>
-            </div>
-            {/* <NavLink className={`btn btn-nav svg-inherit-color`}
-                to="/workspace"
-                // title="My Work Button"
-                onClick={() => setCurrBoard(null)}
-            >
-                <CalendarIcon />
-                <span>My work</span>
-            </NavLink> */}
+            </div> */}
+
 
             <button className={`btn svg-inherit-color btn-menu ${isSidebarOpen ? 'open' : ''}`}
-                // title="Menu Button"
                 onClick={onOpenSidebar}
                 ref={titleRef}
                 onMouseEnter={() => onStatEnter(`${isSidebarOpen ? 'Close' : 'Open'} navigation`, 'collapse-sidebar')}
