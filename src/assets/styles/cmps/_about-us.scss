@@ -1,12 +1,13 @@
 .about-us {
     position: relative;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto auto;
     background-color: $clr0;
     width: 70vw;
     max-width: 950px;
-    height: 80vh;
+    height: 90vh;
     border-radius: 16px;
     padding: 16px;
+    padding-block-end: unset;
     box-shadow: 1px 0px 2px 0px grey;
     overflow: hidden;
     // overflow-y: auto;
@@ -36,7 +37,7 @@
     .myday-story {
         height: 100%;
         padding-block: 10px 30px;
-        font-size: 4rem;
+        font-size: 3rem;
         border-top-right-radius: 16px;
         border-top-left-radius: 16px;
         text-align: center;
@@ -61,15 +62,18 @@
     }
 
     .about-us-img {
-        width: 100%;
+        // width: 100%;
         text-align: center;
-        margin-block-end: 20px;
+        // margin-block-end: 20px;
         object-fit: contain;
 
         img {
+            // height: 20%;
+            // aspect-ratio: 1 / 1;
             border-radius: 16px;
-            width: 100%;
-            max-width: 300px;
+            width: unset;
+            width: 30%;
+            // max-width: 300px;
             box-shadow: 0 4px 17px 6px rgba(0, 0, 0, .1);
         }
 
@@ -82,8 +86,8 @@
         white-space: normal;
         font-size: rem(18px);
         margin-inline: 40px;
-        margin-block: 20px;
-        height: 200px;
+        margin-block-start: 20px;
+        height: calc(90vh - 486px);
         overflow-y: auto;
     }
 
@@ -110,7 +114,7 @@
         justify-content: center;
         gap: 50px;
         align-items: center;
-        padding-block: 10px 5px;
+        padding-block: 10px;
         z-index: 30;
 
         span {
