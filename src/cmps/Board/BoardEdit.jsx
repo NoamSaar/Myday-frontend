@@ -93,7 +93,7 @@ export function BoardEdit({ board }) {
                 />
             </div>
 
-            <div className="info-favorite flex align-center">
+            {/* <div className="info-favorite flex align-center">
                 <button
                     className="btn info"
                     // title="Show board description"
@@ -113,7 +113,7 @@ export function BoardEdit({ board }) {
                 >
                     <StarIcon />
                 </button>
-            </div>
+            </div> */}
         </>
     )
 }

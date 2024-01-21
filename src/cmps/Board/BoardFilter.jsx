@@ -193,7 +193,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 </div>}
             </button>
 
-            <button
+            {/* <button
                 className="btn filter"
                 // title="Filter by anything"
                 ref={filterBtnRef}
@@ -224,7 +224,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             >
                 <HideIcon />
                 <span>Hide</span>
-            </button>
+            </button> */}
 
         </div>
     )
