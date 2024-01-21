@@ -10,6 +10,11 @@
     box-shadow: 1px 0px 2px 0px grey;
     overflow: hidden;
 
+    @include for-narrow-only-layout {
+        width: 40vh;
+
+    }
+
     @include for-narrow-layout {
         grid-template-rows: auto auto auto;
 
