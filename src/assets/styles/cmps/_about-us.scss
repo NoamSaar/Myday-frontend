@@ -1,8 +1,7 @@
 .about-us {
     position: relative;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto 1fr auto;
     background-color: $clr0;
-    width: 70vw;
     max-width: 950px;
     height: 90vh;
     border-radius: 16px;
@@ -10,7 +9,11 @@
     padding-block-end: unset;
     box-shadow: 1px 0px 2px 0px grey;
     overflow: hidden;
-    // overflow-y: auto;
+
+    @include for-narrow-layout {
+        grid-template-rows: auto auto auto;
+
+    }
 
     /* Ensure the gradient doesn't overflow */
     &::before {
@@ -21,7 +24,6 @@
         width: 100%;
         height: 40%;
         background: #eceff8;
-        // background: linear-gradient(to right, #04CC77, #FFCE04, #F6335A);
         border-top-right-radius: 16px;
         border-top-left-radius: 16px;
 
@@ -37,69 +39,66 @@
     .myday-story {
         height: 100%;
         padding-block: 10px 30px;
-        font-size: 3rem;
+        font-size: 2rem;
         border-top-right-radius: 16px;
         border-top-left-radius: 16px;
         text-align: center;
         z-index: 2;
 
-        @media (max-width: 475px) {
+        @include for-narrow-layout {
             font-size: 3rem;
-            padding-block: 10px;
+
         }
 
-        @media (max-width: 600px) {
-            padding-block: 10px;
-            max-height: 100px;
-        }
+        // @media (max-width: 475px) {
+        //     font-size: 3rem;
+        //     padding-block: 10px;
+        // }
+
+        // @media (max-width: 600px) {
+        //     padding-block: 10px;
+        //     max-height: 100px;
+        // }
     }
 
     .about-us-content {
         z-index: 2;
         display: grid;
-        grid-template-rows: 1fr;
+        grid-template-rows: auto 1fr;
         height: 100%;
     }
 
     .about-us-img {
-        // width: 100%;
         text-align: center;
-        // margin-block-end: 20px;
         object-fit: contain;
 
         img {
-            // height: 20%;
-            // aspect-ratio: 1 / 1;
             border-radius: 16px;
-            width: unset;
-            width: 30%;
-            // max-width: 300px;
+            width: 50%;
             box-shadow: 0 4px 17px 6px rgba(0, 0, 0, .1);
+
+            @include for-narrow-layout {
+                width: 30%;
+
+            }
         }
 
-        @media (max-width: 475px) {
-            top: 90px;
-        }
+        // @media (max-width: 475px) {
+        //     top: 90px;
+        // }
     }
 
     .about-us-txt {
         white-space: normal;
         font-size: rem(18px);
-        margin-inline: 40px;
+        margin-inline: 20px;
         margin-block-start: 20px;
-        height: calc(90vh - 486px);
+        height: calc(90vh - 372px);
         overflow-y: auto;
-    }
 
-
-    .github {
-        width: 24px;
-        height: 24px;
-
-        path {
-
-            width: 24px;
-            height: 24px;
+        @include for-narrow-layout {
+            margin-inline: 40px;
+            height: calc(90vh - 486px);
 
         }
     }
@@ -112,10 +111,15 @@
         display: grid;
         grid-auto-flow: column;
         justify-content: center;
-        gap: 50px;
+        gap: 30px;
         align-items: center;
         padding-block: 10px;
         z-index: 30;
+
+        @include for-narrow-layout {
+            gap: 50px;
+
+        }
 
         span {
             display: flex;
@@ -123,8 +127,14 @@
             cursor: pointer;
 
             svg {
-                width: 50px;
-                height: 50px;
+                width: 30px;
+                height: 30px;
+
+                @include for-narrow-layout {
+                    width: 50px;
+                    height: 50px;
+
+                }
             }
 
             &:hover svg {
