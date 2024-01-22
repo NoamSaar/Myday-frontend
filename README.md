@@ -19,7 +19,7 @@ MyDay is a web application inspired by the popular project management platform '
 This open-source replica offers users a user-friendly interface for organizing tasks, managing projects, and enhancing team collaboration.
 With customizable features and a sleek design, MyDay empowers users to streamline their daily workflow and boost productivity.
 
-Thus is my final sprint in Coding Academy, developed with React, Redux, MongoDB, Sass & NodeJS 👩🏻‍💻
+This is my final sprint in Coding Academy, developed with React, Redux, MongoDB, Sass & NodeJS 👩🏻‍💻
 
 ## <a id="start" /> Getting Started
 
