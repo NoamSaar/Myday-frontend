@@ -92,7 +92,7 @@ export function HomePage() {
                 </section>
 
                 <section className='btn-container'>
-                    <button onClick={() => navigate('/board/659fb84f43565a19c57dd627')} className='btn-big-get-started'>
+                    <button onClick={() => navigate('/board/workspace')} className='btn-big-get-started'>
                         <span className='get-started-txt'>Get Started</span>
                         <ArrowRightIcon />
                     </button>
@@ -128,7 +128,7 @@ export function HomePage() {
                             customizing any workflow to fit your needs.
                         </span>
                         <div className="flex">
-                            <button onClick={() => navigate('/board/659fb84f43565a19c57dd627')} className='btn-get-started'><span className='get-started-txt'>Get Started</span>
+                            <button onClick={() => navigate('/board/workspace')} className='btn-get-started'><span className='get-started-txt'>Get Started</span>
                                 <ArrowRightIcon />
                             </button>
                         </div>
@@ -173,7 +173,7 @@ export function HomePage() {
             <section className="footer-section full">
                 <h2>Deliver your best work <span>with myday.com</span></h2>
                 <p>No credit card needed   <span>✦</span>   Unlimited time on Free plan</p>
-                <button className="btn-footer-get-started" onClick={() => navigate('/board/659fb84f43565a19c57dd627')}>
+                <button className="btn-footer-get-started" onClick={() => navigate('/board/workspace')}>
                     <span className="get-started-txt">Get Started</span>
                     <ArrowRightIcon />
                 </button>
