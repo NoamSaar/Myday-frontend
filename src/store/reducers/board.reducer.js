@@ -52,8 +52,6 @@ export function boardReducer(state = initialState, action) {
             break
 
         case UPDATE_TASK:
-            console.log('msg, taskId', action.msg, action.taskId)
-
             const newGroups = state.currBoard.groups.map(group => {
                 const updatedTasks = group.tasks.map(task => {
                     if (task.id !== action.taskId) return task

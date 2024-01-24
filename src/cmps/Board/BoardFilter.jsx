@@ -11,12 +11,15 @@ import { DynamicInput } from "../DynamicInput"
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
     const personBtnRef = useRef(null)
+    const filterBtnRef = useRef(null)
+    const sortBtnRef = useRef(null)
+    const hideBtnRef = useRef(null)
 
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [isFocused, setIsFocused] = useState(false)
 
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
-    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isMemberPickerOpen = parentId === `${board._id}-memberFilterPicker`
 
     useEffect(() => {
@@ -107,6 +110,27 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, 'txt': '' }))
     }
 
+    function onStatEnter(txt, name, ref) {
+        if (isOpen && type !== 'tooltip') return
+
+        setDynamicModal(
+            {
+                isOpen: true,
+                parentRefCurrent: ref.current,
+                type: 'tooltip',
+                data: { txt },
+                parentId: `${name}-tooltip`,
+                hasCaret: true,
+                isCenter: true,
+                isPosBlock: true,
+                caretClred: true
+            })
+    }
+
+    function onStatLeave(name) {
+        if (parentId === `${name}-tooltip`) resetDynamicModal()
+    }
+
     const dynActiveClass = filterByToEdit.txt ? 'active' : ''
     const { txt } = filterByToEdit
 
@@ -151,7 +175,14 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             </div>
 
 
-            <button className={` btn ${filterByToEdit.member || isMemberPickerOpen ? 'active' : ''} person`} title="Filter by person" onClick={toggleMemberFilter} ref={personBtnRef}>
+            <button
+                className={` btn ${filterByToEdit.member || isMemberPickerOpen ? 'active' : ''} person`}
+                // title="Filter by person"
+                onClick={toggleMemberFilter}
+                ref={personBtnRef}
+                onMouseEnter={() => onStatEnter('Filter by person', 'person-filter-title', personBtnRef)}
+                onMouseLeave={() => onStatLeave('person-filter-title')}
+            >
                 {filterByToEdit.member ? <UserImg user={getMemberFromBoard(board, filterByToEdit.member)} /> : <PersonIcon />}
                 <span>Person</span>
                 {filterByToEdit.member && <div className="close-btn svg-inherit-color"
@@ -162,17 +193,35 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 </div>}
             </button>
 
-            <button className="btn filter" title="Filter by anything">
+            <button
+                className="btn filter"
+                // title="Filter by anything"
+                ref={filterBtnRef}
+                onMouseEnter={() => onStatEnter('Filter by anything', 'general-filter-title', filterBtnRef)}
+                onMouseLeave={() => onStatLeave('general-filter-title')}
+            >
                 <FilterIcon />
                 <span>Filter</span>
             </button>
 
-            <button className="btn sort" title="Sort by column">
+            <button
+                className="btn sort"
+                title="Sort by column"
+                ref={sortBtnRef}
+                onMouseEnter={() => onStatEnter('Sort by column', 'sort-title', sortBtnRef)}
+                onMouseLeave={() => onStatLeave('sort-title')}
+            >
                 <SortIcon />
                 <span>Sort</span>
             </button>
 
-            <button className="btn hide" title="Hidden columns">
+            <button
+                className="btn hide"
+                title="Hidden columns"
+                ref={hideBtnRef}
+                onMouseEnter={() => onStatEnter('Hidden columns', 'hide-btn-title', hideBtnRef)}
+                onMouseLeave={() => onStatLeave('hide-btn-title')}
+            >
                 <HideIcon />
                 <span>Hide</span>
             </button>

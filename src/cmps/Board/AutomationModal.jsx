@@ -3,20 +3,23 @@ import { GoogleBtn } from './GoogleBtn'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { updateUser } from '../../store/actions/user.actions'
-import { GoogleCalendarIcon } from '../../services/svg.service'
+import { CloseIcon, GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
 import { AutomationList } from './AutomationList'
+import { resetDynamicDialog } from '../../store/actions/system.actions'
 
 export function AutomationModal() {
     const session = useSession() //tokens, when session exists we have a user
     const supaBase = useSupabaseClient() //talk to supabase
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
-    const [isCalendarChecked, setIsCaledarChecked] = useState(false);
+    const [isCalendarChecked, setIsCalendarChecked] = useState(false);
+    const [isGmailChecked, setIsGmailChecked] = useState(false);
     const { isLoading } = useSessionContext()
     const isDisabled = !loggedInUser || !session
 
     useEffect(() => {
         if (loggedInUser && loggedInUser.automations) {
-            setIsCaledarChecked(loggedInUser.automations.includes('calendar'))
+            setIsCalendarChecked(loggedInUser.automations.includes('calendar'))
+            setIsGmailChecked(loggedInUser.automations.includes('gmail'))
         }
     }, [loggedInUser])
 
@@ -29,7 +32,6 @@ export function AutomationModal() {
                 }
             })
             if (error) throw new Error('Error logging in to google provider')
-
         } catch (err) {
             console.log('err', err)
         }
@@ -56,7 +58,11 @@ export function AutomationModal() {
             await updateUser(updatedUser)
             switch (automation) {
                 case 'calendar':
-                    setIsCaledarChecked(isChecked)
+                    setIsCalendarChecked(isChecked)
+                    break;
+
+                case 'gmail':
+                    setIsGmailChecked(isChecked)
                     break;
 
                 default:
@@ -70,21 +76,34 @@ export function AutomationModal() {
 
     const automations = [
         {
-            txt: 'Add Calendar event when task is assigned to me',
+            txt: <p>When <span>task is assigned</span> to me <span>add Calendar event</span></p>,
             icon: <GoogleCalendarIcon />,
             name: 'calendar',
             isChecked: isCalendarChecked
+        },
+        {
+            txt: <p>When <span>task is assigned</span> to me <span>recive an email</span></p>,
+            icon: <GmailIcon />,
+            name: 'gmail',
+            isChecked: isGmailChecked
         }
     ]
 
     if (isLoading) return <div className="automation-modal">Loading...</div>
     return (
         <div className={`${loggedInUser && 'logged-in-user'} ${session && 'session'} automation-modal`}>
-            <h1>Automations</h1>
-            {isDisabled && <p>To use our Automations, please sign in with Google & make sure to log in to Myday</p>}
+            <header className="flex align-center">
+                <div className="flex align-center">
+                    <img className="logo" src="/img/myday-temp-logo.png" />
+                    <h1>Automations</h1>
+                </div>
+
+                <button className='flex' onClick={resetDynamicDialog}><CloseIcon /></button>
+            </header>
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
                 txt={session ? 'Sign out of google' : 'Sign in with google'} />
+            {isDisabled && <p className="disabled-msg">To use our Automations, please <span>sign in with Google</span> & make sure to <span>log in to Myday</span></p>}
 
             <AutomationList automations={automations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
         </div>

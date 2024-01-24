@@ -44,9 +44,9 @@ export function UserMsg() {
         <div className="svg-white-fill flex justify-center align-center"><CheckIcon /></div>
       }
       <p>{msg.txt}</p>
-      {msg.type === 'success' &&
+      {/* {msg.type === 'success' &&
         <button className="btn-undo flex align-center justify-center">Undo</button>
-      }
+      } */}
       <button className="flex align-center justify-center" onClick={closeMsg}><CloseIcon /></button>
     </section>
   )

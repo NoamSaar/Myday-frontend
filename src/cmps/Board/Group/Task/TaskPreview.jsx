@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useEffectUpdate } from "../../../../customHooks/useEffectUpdate"
-import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react'
+import { useSession } from '@supabase/auth-helpers-react'
+import emailjs from '@emailjs/browser'
 
 import { getMembersFromBoard, removeTask, updateTask } from "../../../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, setDynamicModalData, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../../../store/actions/system.actions"
@@ -12,9 +13,13 @@ import { EditableTxt } from "../../../EditableTxt"
 import { useNavigate } from "react-router"
 import { MsgBtn } from "./MsgBtn"
 import { activityService } from "../../../../services/activity.service"
+import { utilService } from "../../../../services/util.service"
 
 export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
     const menuBtnRef = useRef(null)
+    const openDetailsBtnRef = useRef(null)
+    const msgsBtnRef = useRef(null)
+
     const navigate = useNavigate()
     const session = useSession() //tokens, when session exists we have a user
 
@@ -22,7 +27,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
-    const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [isChangingToDone, setIsChangingToDone] = useState(false)
     const [currTask, setCurrTask] = useState(null)
@@ -86,12 +91,17 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
             const updatedTask = { ...task, members: task.members, [field]: data }
             updateTask(board._id, groupId, updatedTask, prevState, newState)
 
-            const isCalenderAutomate = loggedInUser &&
+            const isAutomate = (loggedInUser &&
                 loggedInUser.automations &&
-                loggedInUser.automations.includes('calendar') &&
-                updatedTask.date &&
                 session &&
-                session.provider_token
+                utilService.loadFromStorage('provider_token'))
+
+            const isCalenderAutomate = isAutomate &&
+                loggedInUser.automations.includes('calendar') &&
+                updatedTask.date
+
+            const isGmailAutomate = isAutomate &&
+                loggedInUser.automations.includes('gmail')
 
             switch (field) {
                 case 'members':
@@ -100,11 +110,27 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         allMembers: board.members,
                         onChangeMembers: onTaskChange
                     })
-                    if (isCalenderAutomate && data.includes(loggedInUser._id)) {
-                        const date = new Date(updatedTask.date)
-                        await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
+
+                    if (loggedInUser && data.includes(loggedInUser._id)) {
+
+                        if (isCalenderAutomate) {
+                            const date = new Date(updatedTask.date)
+                            await createCalendarEvent({ name: updatedTask.title, startTime: date, endTime: date })
+                        }
+
+                        if (isGmailAutomate) {
+                            var templateParams = {
+                                from_name: loggedInUser.fullname,
+                                to_name: loggedInUser.fullname,
+                                message: updatedTask.title,
+                                to_email: session.user.user_metadata.email
+                            }
+
+                            await emailjs.send('service_w7zj1dk', 'template_aqx3utd', templateParams, 'Gr3D8EPliZGhnC9Ac')
+                            showSuccessMsg('Email sent successfully')
+                        }
                     }
-                    break;
+                    break
 
                 case 'date':
                     if (isCalenderAutomate && updatedTask.members.includes(loggedInUser._id)) {
@@ -114,7 +140,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                     break
 
                 default:
-                    break;
+                    break
             }
 
         } catch (err) {
@@ -194,40 +220,67 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
     async function createCalendarEvent({ name, description = '', startTime, endTime }) {
         try {
+            const startDateTime = new Date(startTime)
+            startDateTime.setHours(8, 0, 0) // Set to 12 PM
+
+            const endDateTime = new Date(endTime)
+            endDateTime.setHours(14, 0, 0) // Set to 3 PM
+
             const event = {
                 'summary': name,
                 'description': description,
                 'start': {
-                    'dateTime': startTime.toISOString(),
+                    'dateTime': startDateTime.toISOString(),
                     'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
                 },
                 'end': {
-                    'dateTime': endTime.toISOString(),
+                    'dateTime': endDateTime.toISOString(),
                     'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
                 }
-            };
+            }
 
             const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
                 method: 'post',
                 headers: {
-                    'Authorization': `Bearer ${session.provider_token}`,
+                    'Authorization': `Bearer ${utilService.loadFromStorage('provider_token')}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(event),
-            });
+            })
+            //HF7gf43CLR2HXYoUmBOruw
 
             if (!response.ok) {
-                throw new Error(`Failed to create calendar event. Status: ${response.status}`);
+                throw new Error(`Failed to create calendar event. Status: ${response.status}`)
             }
 
-            const data = await response.json();
-            showSuccessMsg('Event added to google calender')
+            const data = await response.json()
+            showSuccessMsg('Event added to Google Calendar')
 
         } catch (err) {
-            console.error('Error creating calendar event:', err);
+            console.error('Error creating calendar event:', err)
         }
     }
 
+    function onStatEnter(txt, name, ref) {
+        if (isOpen && type !== 'tooltip') return
+
+        setDynamicModal(
+            {
+                isOpen: true,
+                parentRefCurrent: ref.current,
+                type: 'tooltip',
+                data: { txt },
+                parentId: `${name}-tooltip`,
+                hasCaret: true,
+                isCenter: true,
+                isPosBlock: true,
+                caretClred: true
+            })
+    }
+
+    function onStatLeave(name) {
+        if (parentId === `${name}-tooltip`) resetDynamicModal()
+    }
 
     const menuOptions = [
         {
@@ -267,6 +320,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         </div>
 
     </ul>
+
     return (
         <ul
             className="clean-list flex subgrid full-grid-column task-preview-container"
@@ -316,11 +370,18 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                         />
 
                         <div className="flex align-center open-details-container">
-                            {(isShowTaskDetailsBtn && !isEditing) && <button className="task-details-btn flex justify-center">
-                                <OpenIcon />
-                                <p>Open</p>
-                            </button>}
-
+                            {
+                                (isShowTaskDetailsBtn && !isEditing) &&
+                                <button
+                                    className="task-details-btn flex justify-center"
+                                    ref={openDetailsBtnRef}
+                                    onMouseEnter={() => onStatEnter('Open task page', `${currTask.id}-open-details-title`, openDetailsBtnRef)}
+                                    onMouseLeave={() => onStatLeave(`${currTask.id}-open-details-title`)}
+                                >
+                                    <OpenIcon />
+                                    <p>Open</p>
+                                </button>
+                            }
                             <MsgBtn msgsLength={currTask.msgs.length} />
                         </div>
 

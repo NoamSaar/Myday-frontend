@@ -10,7 +10,10 @@
             position: absolute;
             right: -22px;
             color: #d1d4da;
-            opacity: 0;
+
+            @include for-narrow-layout {
+                opacity: 0;
+            }
         }
     }
 

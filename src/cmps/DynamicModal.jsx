@@ -7,13 +7,14 @@ import { DynamicModalRouter } from "./DynamicModalRouter"
 export function DynamicModal() {
     const modalRef = useRef()
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const [ModalPos, setModalPos] = useState({ left: -500, top: -500 })
+    const [ModalPos, setModalPos] = useState({ left: -500, top: 500 })
     const [caretDirection, setCaretDirection] = useState('top') // Default direction
+    const [caretPos, setCaretPos] = useState('auto') // Default direction
 
     const parentBoundingRect = modalData.parentRefCurrent?.getBoundingClientRect()
 
     useEffect(() => {
-        setModalPos({ left: -500, top: -500 })
+        setModalPos({ left: -500, top: 500 })
         if (!modalRef.current) return
 
         const modalWidth = modalRef.current.offsetWidth
@@ -30,6 +31,7 @@ export function DynamicModal() {
 
             if (modalData.hasCaret) {
                 setCaretDirection('top')
+                setCaretPos('auto')
             }
 
             if (modalData.isCenter) {
@@ -51,6 +53,14 @@ export function DynamicModal() {
             // Check and adjust for left/right viewport boundaries
             if (newLeft + modalWidth > viewportWidth) {
                 newLeft = viewportWidth - modalWidth
+
+                if (parentBoundingRect.right > viewportWidth) { //if parent is not fully shown
+                    const newCartpos = getParentVisibleWidth() > 30 ? getParentVisibleWidth() / 2 : 7
+                    setCaretPos(newCartpos)
+                } else {
+                    setCaretPos(parentBoundingRect.width / 2 + 5)
+                }
+
             }
             newLeft = Math.max(0, newLeft)
         } else {
@@ -94,6 +104,24 @@ export function DynamicModal() {
         }
     }, [modalRef, modalData])
 
+    function getParentVisibleWidth() {
+        const viewportWidth = window.innerWidth
+
+        // Check if the element is within the viewport horizontally
+        const isWithinViewport = parentBoundingRect.left < viewportWidth && parentBoundingRect.right > 0
+
+        if (!isWithinViewport) {
+            // No part of the element is visible
+            return 0
+        }
+
+        const leftEdge = parentBoundingRect.left < 0 ? 0 : parentBoundingRect.left // Adjust for left overflow
+        const rightEdge = parentBoundingRect.right > viewportWidth ? viewportWidth : parentBoundingRect.right // Adjust for right overflow
+
+        return rightEdge - leftEdge // Visible width
+    }
+
+
     if (!modalData.isOpen) return
 
     const style = {
@@ -104,7 +132,11 @@ export function DynamicModal() {
     return (
         <div style={style} ref={modalRef} className='dynamic-absolute-modal flex column animate__fadeIn animate__animated animate__faster'>
             {modalData.hasCaret && (
-                <div className={`caret caret-${caretDirection} ${modalData.caretClred && 'colored'}`}></div>
+                <div
+                    style={{ marginInlineEnd: caretPos }}
+                    className={`caret caret-${caretDirection} ${modalData.caretClred && 'colored'}`}
+                >
+                </div>
             )}
             <DynamicModalRouter type={modalData.type} data={modalData.data} />
         </div>
