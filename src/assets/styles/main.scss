@@ -11,7 +11,6 @@
 @import "basics/forms";
 
 // Views
-@import "views/about-us";
 @import "views/home-page";
 @import "views/board-details";
 @import "views/user-details";
@@ -28,6 +27,7 @@
 @import "cmps/activity-preview";
 @import "cmps/about-us";
 @import "cmps/workspace-page";
+@import "cmps/workspace";
 
 // board
 @import "cmps/board/board-app";
@@ -68,6 +68,7 @@
 @import "cmps/modals/automation-modal";
 @import "cmps/modals/automation-list";
 @import "cmps/modals/label-picker-preview";
+@import "cmps/modals/info-modal";
 @import "cmps/board-member-select";
 @import "cmps/dynamic-dialog";
 
