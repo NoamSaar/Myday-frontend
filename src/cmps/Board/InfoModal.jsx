@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { updateBoard } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, showErrorMsg } from "../../store/actions/system.actions"
+import { resetDynamicDialog, resetDynamicModal, setDynamicModal, showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
-import { FeedbackIcon } from "../../services/svg.service"
+import { CloseIcon, FeedbackIcon } from "../../services/svg.service"
+import WorkspaceDisplay from "../WorkspaceDisplay"
+import { UserImg } from "../UserImg"
+import { utilService } from "../../services/util.service"
 
 export function InfoModal() {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    console.log('board', board)
 
     const [boardToEdit, setBoardToEdit] = useState(board)
     const [isEditingTitle, setIsEditingTitle] = useState(false)
@@ -15,6 +19,7 @@ export function InfoModal() {
 
     const titleRef = useRef(null)
     const txtareaRef = useRef(null)
+    const creatorRef = useRef(null)
 
     useEffect(() => {
         setBoardToEdit(board)
@@ -50,6 +55,16 @@ export function InfoModal() {
         }
     }
 
+    function getFormatDate(id) {
+        const timestamp = utilService.getCreationTimeFromId(id)
+        const date = new Date(timestamp);
+        const day = date.getDate();
+        const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
+        const year = date.getFullYear();
+        return `${day} ${month}, ${year}`;
+    }
+
+
     function onStatEnter(txt, name, ref) {
         if ((isOpen && type !== 'tooltip') || isEditingTitle) return
 
@@ -81,7 +96,11 @@ export function InfoModal() {
         }
     }
 
-    const txtPlaceholder = isEditingDesc ? '' : 'Add a description here to make sure your team is aligned on the purpose of this board'
+    function onUserImgHover() {
+        if (board.createdBy) onStatEnter(board.createdBy.fullname, 'header-title', creatorRef)
+    }
+
+    const txtPlaceholder = isEditingDesc ? '' : 'Add a description here to make sure your team is aligned on the \npurpose of this board'
 
     return (
         <div className="flex info-modal">
@@ -125,8 +144,30 @@ export function InfoModal() {
             </div>
 
             <div className="flex column board-data-container">
-                <h2>Board info</h2>
+                <p className="board-info-title">Board info</p>
+
+                <div className="flex column additional-info">
+                    <p className="title">Workspace</p>
+                    <WorkspaceDisplay />
+                </div>
+                <div className="flex column additional-info">
+                    <p className="title">Created by</p>
+                    <div className="flex align-center creation-info">
+                        <div
+                            className="flex user-container"
+                            ref={creatorRef}
+                            onMouseEnter={onUserImgHover}
+                            onMouseLeave={() => onStatLeave('header-title')}
+                        >
+                            <UserImg user={board.createdBy} />
+                        </div>
+
+                        <p>{getFormatDate(board._id)}</p>
+                    </div>
+                </div>
             </div>
+
+            <button className='flex close-btn' onClick={resetDynamicDialog}><CloseIcon /></button>
         </div>
     )
 }

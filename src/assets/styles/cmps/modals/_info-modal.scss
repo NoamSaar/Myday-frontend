@@ -1,4 +1,5 @@
 .info-modal {
+    position: relative;
 
     .board-description-container {
         padding: 16px 32px 32px 32px;
@@ -64,9 +65,75 @@
     }
 
     .board-data-container {
+        width: 323px;
         background-color: $clr-task-hover;
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
         padding: 32px;
+        color: $clr-font;
+
+        &>* {
+            margin-block-end: 24px;
+        }
+
+        .board-info-title {
+            font-size: rem(16px);
+
+        }
+
+        .additional-info {
+            .title {
+                color: $clr-light-font;
+                margin-block-end: 8px;
+            }
+
+            .workspace-display {
+                padding: 0;
+                margin: 0;
+                height: fit-content;
+
+            }
+
+            .creation-info {
+                .user-container {
+                    width: fit-content;
+                    height: fit-content;
+                    border-radius: 50%;
+
+                    .user-img {
+                        max-height: 32px;
+                        max-width: 32px;
+                        min-height: 32px;
+                        min-width: 32px;
+                        margin-inline-end: 8px;
+                    }
+                }
+            }
+
+            span {
+                font-size: rem(14px);
+                font-family: figtree;
+            }
+        }
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 6px;
+        right: 8px;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: $clr-btn-hover;
+        }
+
+        svg {
+            width: 35px;
+            height: 35px;
+
+            path {
+                stroke-width: 1;
+            }
+        }
     }
 }
