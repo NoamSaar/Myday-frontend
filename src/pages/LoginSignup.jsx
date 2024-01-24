@@ -55,10 +55,10 @@ export function LoginSignup() {
         try {
             if (isLogin) {
                 await login(user)
-                navigate('/board/659fb84f43565a19c57dd627')
+                navigate('/board/workspace')
             } else {
                 await signup(user)
-                navigate('/board/659fb84f43565a19c57dd627')
+                navigate('/board/workspace')
             }
 
         } catch (err) {

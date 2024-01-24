@@ -7,10 +7,9 @@ import { WorkspaceBoardsList } from '../cmps/Workspace/WorkspaceBoardsList'
 import workspaceHeaderConfetti from '/img/workspaceHeaderConfetti.svg'
 import { useSelector } from 'react-redux'
 export function Workspace() {
-    const [toggleBoardsList, setToggleBoardsList] = useState(true)
+    const [isBoardListShown, setIsBoardListShown] = useState(true)
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const loggedInUser = userService.getLoggedinUser()
-
 
     return (
         <section className="workspace-page">
@@ -23,12 +22,12 @@ export function Workspace() {
             </div>
 
             <div className="content-container">
-                <div className="boards-container">
+                <div className={`boards-container ${isBoardListShown ? 'open' : ''}`}>
                     <div className="collapsible-header-wrapper flex align-center">
                         <button
                             title="Collapse Header"
-                            className="arrow-container flex svg-inherit-color"
-                            onClick={() => setToggleBoardsList((prevToggleList => !prevToggleList))}
+                            className={`arrow-container flex svg-inherit-color  ${isBoardListShown ? '' : 'rotated'}`}
+                            onClick={() => setIsBoardListShown((prevToggleList => !prevToggleList))}
                         >
                             <AngleDownIcon />
                         </button>
@@ -36,7 +35,7 @@ export function Workspace() {
                     </div>
 
                     <section className="collapsible-content">
-                        {toggleBoardsList && <WorkspaceBoardsList boards={boards} />}
+                        {isBoardListShown && <WorkspaceBoardsList boards={boards} />}
                     </section>
                 </div>
 
