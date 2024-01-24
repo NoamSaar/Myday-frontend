@@ -4,13 +4,11 @@ export const utilService = {
     makeLorem,
     getRandomIntInclusive,
     debounce,
-    randomPastTime,
     saveToStorage,
     loadFromStorage,
     getFormatDate,
     getAcronym,
     capitalizeFirstLetter,
-    getFullFormatDate,
     timeStampToDate,
     millisecondsToDays,
     isValidTimestamp,
@@ -19,6 +17,7 @@ export const utilService = {
     timeSince,
     escapeRegExp,
     getBlessingByTime,
+    getCreationTimeFromId
 }
 
 function readJsonFile(path) {
@@ -52,16 +51,6 @@ function getRandomIntInclusive(min, max) {
     min = Math.ceil(min)
     max = Math.floor(max)
     return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive 
-}
-
-
-function randomPastTime() {
-    const HOUR = 1000 * 60 * 60
-    const DAY = 1000 * 60 * 60 * 24
-    const WEEK = 1000 * 60 * 60 * 24 * 7
-
-    const pastTime = getRandomIntInclusive(HOUR, WEEK)
-    return Date.now() - pastTime
 }
 
 function debounce(func, timeout = 300) {
@@ -102,26 +91,6 @@ function millisecondsToDays(ms) {
 
 function isValidTimestamp(timestamp) {
     return !isNaN(new Date(timestamp).getTime())
-}
-
-
-function getFullFormatDate(timestamp) {
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-
-    const options = {
-        weekday: 'short',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        timeZoneName: 'short',
-        timeZone
-    }
-
-    const formattedDate = new Date(timestamp).toLocaleString('en-US', options)
-    return formattedDate
 }
 
 function hasTimePassed(timestamp) {
@@ -192,4 +161,10 @@ export function getBlessingByTime() {
     } else {
         return 'Good night'
     }
+}
+
+function getCreationTimeFromId(id) {
+    const timestamp = parseInt(id.substring(0, 8), 16) * 1000
+    const creationDate = new Date(timestamp)
+    return creationDate
 }

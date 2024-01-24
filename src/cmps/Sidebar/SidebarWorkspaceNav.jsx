@@ -1,11 +1,11 @@
 import { HomeBlackFillIcon, MenuIcon } from "../../services/svg.service"
-import Workspace from "../Workspace"
+import WorkspaceDisplay from "../WorkspaceDisplay"
 
 export function SidebarWorkspaceNav() {
     return (
         <>
             <section className="sidebar-workspace-nav">
-                <Workspace />
+                <WorkspaceDisplay />
             </section>
             <button className="btn btn-option-menu svg-inherit-color">
                 <MenuIcon />
