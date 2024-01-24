@@ -4,7 +4,7 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
     return (
         <>
             <section className="sidebar-workspace-nav">
-                <div className={`btn workspace-section grid column ${isDropdownOpen ? 'open' : ''}`}
+                <div className={` workspace-section grid column ${isDropdownOpen ? 'open' : ''}`}
                     onClick={onToggleDropdown}
                     title="Main Workspace"
                 >
@@ -15,9 +15,9 @@ export function SidebarWorkspaceNav({ onToggleDropdown, isDropdownOpen }) {
 
                     <span>Main workspace</span>
 
-                    <div className="flex svg-inherit-color angle-down-container">
+                    {/* <div className="flex svg-inherit-color angle-down-container">
                         <AngleDownIcon />
-                    </div>
+                    </div> */}
                 </div>
             </section>
             <button className="btn btn-option-menu svg-inherit-color">

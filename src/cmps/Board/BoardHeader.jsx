@@ -129,7 +129,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
         })
     }
 
-    function onIntegrateClick() {
+    function onAutomateClick() {
         setDynamicDialog({
             isOpen: true,
             contentCmp: <AutomationModal />
@@ -196,7 +196,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                 </div>
 
                 <div className="actions flex align-center">
-                    <button className="btn automate" onClick={onIntegrateClick}>
+                    <button className="btn automate" onClick={onAutomateClick}>
                         <RobotIcon />
                         <span>Automate</span>
                     </button>

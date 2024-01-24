@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 
 import { addTask, getMemberFromBoard } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicDialog, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
 
-import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
+import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, RobotIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 import { UserImg } from "../UserImg"
 import { DynamicInput } from "../DynamicInput"
+import { AutomationModal } from "./AutomationModal"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
@@ -131,6 +132,13 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         if (parentId === `${name}-tooltip`) resetDynamicModal()
     }
 
+    function onAutomateClick() {
+        setDynamicDialog({
+            isOpen: true,
+            contentCmp: <AutomationModal />
+        })
+    }
+
     const dynActiveClass = filterByToEdit.txt ? 'active' : ''
     const { txt } = filterByToEdit
 
@@ -193,7 +201,12 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 </div>}
             </button>
 
-            <button
+            {isMobile && <button className="btn automate" onClick={onAutomateClick}>
+                <RobotIcon />
+                <span>Automate</span>
+            </button>}
+
+            {/* <button
                 className="btn filter"
                 // title="Filter by anything"
                 ref={filterBtnRef}
@@ -224,7 +237,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             >
                 <HideIcon />
                 <span>Hide</span>
-            </button>
+            </button> */}
 
         </div>
     )
