@@ -3,7 +3,7 @@ import { HomeIcon, AngleRightIcon, CalendarIcon } from "../../services/svg.servi
 import { setCurrBoard } from "../../store/actions/board.actions"
 import { useRef } from "react"
 import { useSelector } from "react-redux"
-import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicModal, setIsFullSidebarMobile } from "../../store/actions/system.actions"
 
 export function SidebarMainNav({ isSidebarOpen, onOpenSidebar, changeWidthVariable }) {
 
@@ -52,6 +52,17 @@ export function SidebarMainNav({ isSidebarOpen, onOpenSidebar, changeWidthVariab
                 <CalendarIcon />
                 <span>My work</span>
             </div> */}
+            <NavLink className={`btn btn-nav svg-inherit-color`}
+                to="/board/workspace"
+                title="My Work Button"
+                onClick={() => {
+                    setCurrBoard(null)
+                    setIsFullSidebarMobile(false)
+                }}
+            >
+                <CalendarIcon />
+                <span>My work</span>
+            </NavLink>
 
 
             <button className={`btn svg-inherit-color btn-menu ${isSidebarOpen ? 'open' : ''}`}

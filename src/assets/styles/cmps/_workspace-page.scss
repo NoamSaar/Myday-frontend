@@ -1,5 +1,6 @@
 .workspace-page {
-    // max-height: calc(100dvh - 48px);
+    max-height: calc(100dvh - 48px);
+    overflow: scroll;
 
     .welcome-header {
         padding-left: 20px;
@@ -20,6 +21,10 @@
             .first-title {
                 font-size: rem(14px);
                 margin-bottom: 4px;
+
+                @media (max-width: 440px) {
+                    display: none;
+                }
             }
 
             .second-title {
@@ -32,15 +37,25 @@
 
     .content-container {
         background-color: $clr-bg-workspace;
-        max-height: calc(100dvh - 48px - 75px);
-        height: 100%;
+        min-height: calc(100dvh - 48px - 75px);
+        // height: 100dvh;
+        // min-height: 100dvh;
+        grid-template-columns: 1fr minmax(auto, 300px);
+        gap: 10px;
+
+        @media (max-width: 660px) {
+            grid-template-columns: 1fr;
+            margin-inline-end: 10px;
+        }
     }
 
     .boards-container {
-        height: 100%;
-        width: 100%;
+        // height: 100%;
+        min-height: calc(100dvh - 48px - 115px);
+        height: fit-content;
         padding: 24px;
         margin: 16px;
+        margin-inline-end: 5px;
         border-radius: 8px;
         background-color: $clr0;
         box-shadow: 0px 3px 12px #e6e9ef;
@@ -61,6 +76,10 @@
         margin-top: 16px;
         margin-inline-end: 16px;
 
+        @media (max-width: 660px) {
+            display: none;
+        }
+
         .explore-templates-container {
             position: relative;
             display: inline-block;
@@ -68,6 +87,8 @@
             background-color: $clr0;
             border-radius: 8px;
             box-shadow: 0px 3px 12px #e6e9ef;
+            padding: 8px;
+            margin-block-end: 24px;
 
             button {
                 text-transform: none;
@@ -78,10 +99,11 @@
             }
 
             .banner-content-wrapper {
-                margin-block-start: 16px;
+                margin-block-start: 8px;
 
                 .banner-text {
-                    margin-block-end: 8px;
+                    // margin-block-end: 8px;
+                    white-space: unset;
                 }
 
                 .banner-button {
@@ -102,6 +124,7 @@
                 border-radius: 8px;
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
                 background-color: $clr0;
+                margin-block: 24px;
 
                 &:hover {
                     box-shadow: 0px 6px 20px rgba(0, 0, 0, .2);
@@ -117,6 +140,41 @@
                     margin-left: 16px;
                 }
             }
+        }
+    }
+
+    .workspace-boards-list {
+        position: relative;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 24px;
+        padding: 16px 16px 24px 16px;
+
+        li {
+            overflow: unset;
+        }
+    }
+
+    .workspace-board-preview {
+        border: 1px solid $clr-group-border;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 4px;
+
+        &:hover {
+            position: relative;
+            z-index: 1;
+            border-color: transparent;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .board-title {
+            padding-inline-start: 6px;
+            padding-block-start: 1px;
+        }
+
+        img {
+            margin-block-end: 6px;
         }
     }
 }

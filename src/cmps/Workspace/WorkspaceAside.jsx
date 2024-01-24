@@ -14,7 +14,7 @@ export function WorkspaceAside() {
                         Boost your workflow in minutes with ready-made templates
                     </p>
 
-                    <button className="banner-button">Explore templates</button>
+                    {/* <button className="banner-button">Explore templates</button> */}
                 </div>
             </section>
 
@@ -53,7 +53,7 @@ export function WorkspaceAside() {
                     </div>
 
                 </div>
-
+                {/* 
                 <div className="navigation-card-component">
 
                     <img src={Webinars} alt="" />
@@ -68,7 +68,7 @@ export function WorkspaceAside() {
                         </p>
                     </div>
 
-                </div>
+                </div> */}
             </section>
         </section>
     )

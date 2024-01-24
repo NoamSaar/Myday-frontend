@@ -1,10 +1,16 @@
-import { WorkspaceAside } from '../cmps/WorkspaceAside'
+import { useState } from 'react'
+import { WorkspaceAside } from '../cmps/Workspace/WorkspaceAside'
 import { AngleDownIcon } from '../services/svg.service'
 import { userService } from '../services/user.service'
 import { utilService } from '../services/util.service'
+import { WorkspaceBoardsList } from '../cmps/Workspace/WorkspaceBoardsList'
 import workspaceHeaderConfetti from '/img/workspaceHeaderConfetti.svg'
+import { useSelector } from 'react-redux'
 export function Workspace() {
+    const [toggleBoardsList, setToggleBoardsList] = useState(true)
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
     const loggedInUser = userService.getLoggedinUser()
+
 
     return (
         <section className="workspace-page">
@@ -19,28 +25,19 @@ export function Workspace() {
             <div className="content-container">
                 <div className="boards-container">
                     <div className="collapsible-header-wrapper flex align-center">
-                        <button title="Collapse Header" className="arrow-container flex svg-inherit-color">
+                        <button
+                            title="Collapse Header"
+                            className="arrow-container flex svg-inherit-color"
+                            onClick={() => setToggleBoardsList((prevToggleList => !prevToggleList))}
+                        >
                             <AngleDownIcon />
                         </button>
                         <p>Recently visited</p>
                     </div>
 
-                    {/* <section className="collapsible-content">
-                        {toggleBoardList && <BoardList boards={boards} />}
+                    <section className="collapsible-content">
+                        {toggleBoardsList && <WorkspaceBoardsList boards={boards} />}
                     </section>
-
-                    <div className="collapsible-header-wrapper">
-                        <Icon iconType={Icon.type.SVG} icon={toggleInbox ? DropdownChevronDown : DropdownChevronRight}
-                            iconSize={18} onClick={() => setToggleInbox((prevToggle => !prevToggle))} />
-                        <Text
-                            weight="bold"
-                            align="start"
-                            element="span"
-                        >
-                            Update feed (inbox)
-                        </Text>
-                        <Counter count={0} />
-                    </div> */}
                 </div>
 
                 <WorkspaceAside />
