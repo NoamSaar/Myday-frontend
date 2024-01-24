@@ -24,6 +24,7 @@
         border-top-left-radius: 16px;
         text-align: center;
         z-index: 2;
+        font-family: 'figtree-bold';
 
         @include for-narrow-layout {
             font-size: 3rem;
@@ -84,9 +85,21 @@
             align-items: center;
             cursor: pointer;
 
+            &.email svg {
+                width: 35px;
+                height: 35px;
+
+                @include for-narrow-layout {
+                    width: 55px;
+                    height: 55px;
+
+                }
+            }
+
             svg {
                 width: 30px;
                 height: 30px;
+                transition: all 5ms;
 
                 @include for-narrow-layout {
                     width: 50px;
@@ -96,7 +109,7 @@
             }
 
             &:hover svg {
-                fill: $clr-status-done;
+                fill: lightenColor($clr-light-font);
             }
         }
     }
