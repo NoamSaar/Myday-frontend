@@ -125,7 +125,7 @@ export function InfoModal() {
             </div>
 
             <div className="flex column board-data-container">
-
+                <h2>Board info</h2>
             </div>
         </div>
     )
