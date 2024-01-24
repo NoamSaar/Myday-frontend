@@ -2,25 +2,52 @@
     position: relative;
 
     .board-description-container {
-        padding: 16px 32px 32px 32px;
         background-color: white;
         color: $clr-font;
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
-        height: 550px;
+        padding: 10px 26px 26px 26px;
+        height: 450px;
+
+        @include for-narrow-layout {
+            padding: 16px 32px 32px 32px;
+            height: 550px;
+        }
 
         .editable-txt-container {
-            min-width: 460px;
-            max-width: 460px;
+
+            @include for-narrow-layout {
+                min-width: 460px;
+                max-width: 460px;
+
+            }
         }
 
         .title-container .editable-txt-container {
-            font-size: rem(32px);
+            font-size: rem(20px);
             font-family: poppins-medium;
+
+            @include for-narrow-layout {
+                font-size: rem(32px);
+            }
 
             .editable-txt,
             .focused-input {
                 padding-inline: 4px;
+            }
+
+            @include for-narrow-only-layout {
+
+                .editable-txt,
+                .focused-input input {
+                    max-width: 110px;
+                }
+            }
+
+            .editable-txt {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
 
@@ -36,14 +63,18 @@
                 border: unset;
                 resize: none;
                 line-height: 1.2;
+                font-size: rem(14px);
 
                 &:hover:not(.edit-mode) {
                     outline: 1px dashed $clr-btn-border;
-
                 }
 
                 &.edit-mode {
                     outline: 1px solid $clr-btn-border;
+                }
+
+                @include for-narrow-layout {
+                    font-size: initial;
                 }
             }
         }
@@ -65,12 +96,17 @@
     }
 
     .board-data-container {
-        width: 323px;
+
         background-color: $clr-task-hover;
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
-        padding: 32px;
+        padding: 15px;
         color: $clr-font;
+
+        @include for-narrow-layout {
+            width: 323px;
+            padding: 32px;
+        }
 
         &>* {
             margin-block-end: 24px;
@@ -128,8 +164,13 @@
         }
 
         svg {
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
+
+            @include for-narrow-layout {
+                width: 35px;
+                height: 35px;
+            }
 
             path {
                 stroke-width: 1;
