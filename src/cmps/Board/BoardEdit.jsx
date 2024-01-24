@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { updateBoard } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setIsFullSidebarMobile, showErrorMsg } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicDialog, setDynamicModal, setDynamicModalData, setIsFullSidebarMobile, showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
-import { ArrowLeftIcon, InfoIcon, StarIcon } from "../../services/svg.service"
+import { ArrowLeftIcon, FilledStarIcon, InfoIcon, StarIcon } from "../../services/svg.service"
+import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
+import { InfoModal } from "./InfoModal"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -18,8 +20,13 @@ export function BoardEdit({ board }) {
         setBoardToEdit(board)
     }, [board])
 
+    useEffectUpdate(() => {
+        onUpdateBoard()
+    }, [boardToEdit.isStarred])
+
     function onStatEnter(txt, name, ref) {
         if (isOpen && type !== 'tooltip') return
+        // if (isOpen && parentId === 'favorite-title-tooltip') return
 
         setDynamicModal(
             {
@@ -68,8 +75,21 @@ export function BoardEdit({ board }) {
         }
     }
 
+    function onStarClick() {
+        setBoardToEdit(prevBoard => ({ ...prevBoard, isStarred: !prevBoard.isStarred }))
+        setDynamicModalData({ txt: boardToEdit.isStarred ? 'Add to favorites' : 'Remove from favorites' })
+    }
+
+    function onInfoClick() {
+        setDynamicDialog({
+            isOpen: true,
+            contentCmp: <InfoModal />
+        })
+    }
+
 
     const { title } = boardToEdit
+    const favoriteTooltip = boardToEdit.isStarred ? 'Remove from favorites' : 'Add to favorites'
 
     return (
         <>
@@ -93,27 +113,27 @@ export function BoardEdit({ board }) {
                 />
             </div>
 
-            {/* <div className="info-favorite flex align-center">
+            <div className="info-favorite flex align-center">
                 <button
                     className="btn info"
-                    // title="Show board description"
                     ref={infoRef}
                     onMouseEnter={() => onStatEnter('Show board description', 'info-title', infoRef)}
                     onMouseLeave={() => onStatLeave('info-title')}
+                    onClick={onInfoClick}
                 >
                     <InfoIcon />
                 </button>
 
                 <button
-                    className="btn favorite"
-                    // title="Add to favorites"
+                    className={`btn ${boardToEdit.isStarred && 'starred svg-inherit-color'} favorite`}
                     ref={favoriteRef}
-                    onMouseEnter={() => onStatEnter('Add to favorites', 'favorite-title', favoriteRef)}
+                    onMouseEnter={() => onStatEnter(favoriteTooltip, 'favorite-title', favoriteRef)}
                     onMouseLeave={() => onStatLeave('favorite-title')}
+                    onClick={onStarClick}
                 >
-                    <StarIcon />
+                    {boardToEdit.isStarred ? <FilledStarIcon /> : <StarIcon />}
                 </button>
-            </div> */}
+            </div>
         </>
     )
 }
