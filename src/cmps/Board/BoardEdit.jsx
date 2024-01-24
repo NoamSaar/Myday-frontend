@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { updateBoard } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicModal, setDynamicModalData, setIsFullSidebarMobile, showErrorMsg } from "../../store/actions/system.actions"
+import { resetDynamicModal, setDynamicDialog, setDynamicModal, setDynamicModalData, setIsFullSidebarMobile, showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
 import { ArrowLeftIcon, FilledStarIcon, InfoIcon, StarIcon } from "../../services/svg.service"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
+import { InfoModal } from "./InfoModal"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -79,6 +80,13 @@ export function BoardEdit({ board }) {
         setDynamicModalData({ txt: boardToEdit.isStarred ? 'Add to favorites' : 'Remove from favorites' })
     }
 
+    function onInfoClick() {
+        setDynamicDialog({
+            isOpen: true,
+            contentCmp: <InfoModal />
+        })
+    }
+
 
     const { title } = boardToEdit
     const favoriteTooltip = boardToEdit.isStarred ? 'Remove from favorites' : 'Add to favorites'
@@ -111,6 +119,7 @@ export function BoardEdit({ board }) {
                     ref={infoRef}
                     onMouseEnter={() => onStatEnter('Show board description', 'info-title', infoRef)}
                     onMouseLeave={() => onStatLeave('info-title')}
+                    onClick={onInfoClick}
                 >
                     <InfoIcon />
                 </button>
