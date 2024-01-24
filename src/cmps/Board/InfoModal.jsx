@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import { updateBoard } from "../../store/actions/board.actions"
 import { resetDynamicModal, setDynamicModal, showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
+import { FeedbackIcon } from "../../services/svg.service"
 
 export function InfoModal() {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
@@ -100,6 +101,11 @@ export function InfoModal() {
                         onEditClose={onUpdateBoard}
                     />
                 </div>
+
+                <a className="flex align-center svg-inherit-color feedback" href="https://mail.google.com/mail/u/0/?fs=1&to=edenrize@gmail.com,mormarzan@gmail.com,noamsaar11@gmail.com&su=Feedback%20on%20Myday&tf=cm" target="_blank">
+                    <FeedbackIcon />
+                    <p>Give feedback</p>
+                </a>
             </div>
 
             <div className="flex column board-data-container">

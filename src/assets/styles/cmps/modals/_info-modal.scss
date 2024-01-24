@@ -25,6 +25,8 @@
 
         .description-container {
             height: 100%;
+            margin-block: 24px 20px;
+
 
             .editable-txt-container {
                 height: 100%;
@@ -55,6 +57,21 @@
                     border-radius: unset;
                     padding: 2px;
                 }
+            }
+        }
+
+        .feedback {
+            width: fit-content;
+            padding: 8px;
+            fill: $clr-font;
+
+            svg {
+                margin-inline-end: 8px;
+            }
+
+            &:hover {
+                color: #0073ea;
+                fill: #0073ea;
             }
         }
     }
