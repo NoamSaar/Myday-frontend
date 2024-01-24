@@ -138,6 +138,10 @@
     .info-favorite {
         grid-area: info-favorite;
         justify-self: end;
+
+        .starred {
+            fill: #ffcb00;
+        }
     }
 
     .activities {
