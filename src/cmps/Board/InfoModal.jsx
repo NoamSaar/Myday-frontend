@@ -14,6 +14,7 @@ export function InfoModal() {
     const [isEditingDesc, setIsEditingDesc] = useState(false)
 
     const titleRef = useRef(null)
+    const txtareaRef = useRef(null)
 
     useEffect(() => {
         setBoardToEdit(board)
@@ -70,6 +71,18 @@ export function InfoModal() {
         if (parentId === `${name}-tooltip`) resetDynamicModal()
     }
 
+    function handleKeyDown(ev) {
+        if (ev.key === 'Enter' && (!ev.ctrlKey && !ev.shiftKey)) {
+            txtareaRef.current.blur()
+        } else if (ev.key === 'Enter' && (ev.ctrlKey || ev.shiftKey)) {
+            let boardDesc = boardToEdit.description || ''
+            boardDesc += '\n'
+            setBoardToEdit(prevBoard => ({ ...prevBoard, description: boardDesc }))
+        }
+    }
+
+    const txtPlaceholder = isEditingDesc ? '' : 'Add a description here to make sure your team is aligned on the purpose of this board'
+
     return (
         <div className="flex info-modal">
             <div className="flex column board-description-container">
@@ -91,15 +104,18 @@ export function InfoModal() {
                 </div>
 
                 <div className="description-container">
-                    <EditableTxt
-                        isEditing={isEditingDesc}
-                        txtValue={boardToEdit.description || 'Add a description here to make sure your team is aligned on the purpose of this board'}
-                        onTxtClick={() => setIsEditingDesc(true)}
-                        inputValue={boardToEdit.description || ''}
-                        inputName={'description'}
-                        onInputChange={handleChange}
-                        onEditClose={onUpdateBoard}
-                    />
+                    <textarea
+                        className={`${isEditingDesc && 'edit-mode'}`}
+                        value={boardToEdit.description || ''}
+                        placeholder={txtPlaceholder}
+                        onFocus={() => setIsEditingDesc(true)}
+                        onBlur={onUpdateBoard}
+                        name="description"
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+                        ref={txtareaRef}
+                    >
+                    </textarea>
                 </div>
 
                 <a className="flex align-center svg-inherit-color feedback" href="https://mail.google.com/mail/u/0/?fs=1&to=edenrize@gmail.com,mormarzan@gmail.com,noamsaar11@gmail.com&su=Feedback%20on%20Myday&tf=cm" target="_blank">

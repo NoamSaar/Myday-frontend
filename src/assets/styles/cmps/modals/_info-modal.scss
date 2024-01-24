@@ -27,35 +27,22 @@
             height: 100%;
             margin-block: 24px 20px;
 
-
-            .editable-txt-container {
+            textarea {
+                width: 100%;
                 height: 100%;
                 font-family: figtree;
                 color: $clr-light-font;
+                border: unset;
+                resize: none;
+                line-height: 1.2;
 
-                .editable-txt {
-                    height: 100%;
+                &:hover:not(.edit-mode) {
+                    outline: 1px dashed $clr-btn-border;
 
-                    span {
-                        display: block;
-                        width: 90%;
-                    }
-
-                    &:hover {
-                        outline-style: dashed;
-                    }
                 }
 
-                .focused-input {
-                    min-height: 106px;
-                    align-items: flex-start;
-                    outline-color: $clr-btn-border;
-                }
-
-                .editable-txt,
-                .focused-input {
-                    border-radius: unset;
-                    padding: 2px;
+                &.edit-mode {
+                    outline: 1px solid $clr-btn-border;
                 }
             }
         }
