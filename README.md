@@ -12,7 +12,7 @@
 * [Features](#features)
   
 * [Authors](#authors)
-  <hr />
+<hr />
 
 
 ## <a id="showcase" /> Showcase
