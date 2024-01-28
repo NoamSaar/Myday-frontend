@@ -166,6 +166,10 @@
     .display-opts {
         grid-area: display-opts;
 
+        .add-view {
+            display: none;
+        }
+
         button:not(:last-of-type) {
             font-size: rem(14px);
             position: relative;
