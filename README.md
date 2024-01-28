@@ -4,17 +4,17 @@
 ## Table Of Contents
 
 * [Showcase](#showcase)
-
+  
 * [Getting Started](#start)
   
 * [Myday Description](#desc)
-
+  
 * [Features](#features)
-
+  
 * [Authors](#authors)
 
 
-## <a id="showcase" /* Showcase
+## <a id="showcase" /> Showcase
 
 
 <img width="600px" src="https://res.cloudinary.com/dkvliixzt/image/upload/v1705848842/Screenshot_2024-01-21_165252_en8pzv.png" />
@@ -55,16 +55,16 @@ This is my final sprint in Coding Academy, developed with React, Redux, MongoDB,
 ### Authors
 
 #### Eden Rize
-* [LinkedIn](https://www.linkedin.com/in/eden-rize-9476541b7/)
+[LinkedIn](https://www.linkedin.com/in/eden-rize-9476541b7/)
 
-* [GitHub](https://github.com/EdenRize)
+[GitHub](https://github.com/EdenRize)
 
 #### Mor Marzan
-* [LinkedIn](https://www.linkedin.com/in/mor-marzan-26b48621a/)
+[LinkedIn](https://www.linkedin.com/in/mor-marzan-26b48621a/)
 
-* [GitHub](https://github.com/MorMarzan)
+[GitHub](https://github.com/MorMarzan)
 
 #### Noam Saar
-* [LinkedIn](https://www.linkedin.com/in/noam-saar-8266662a1/)
+[LinkedIn](https://www.linkedin.com/in/noam-saar-8266662a1/)
 
-* [GitHub](https://github.com/noam-sa11/)
+[GitHub](https://github.com/noam-sa11/)
