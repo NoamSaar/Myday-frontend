@@ -33,6 +33,7 @@ import Mobile from '/img/home_page/MobileApp.avif'
 import Automation from '/img/home_page/Automation.avif'
 import Comment from '/img/home_page/Talk.avif'
 import Dashboard from '/img/home_page/Dash.avif'
+import { BrowserWarning } from "../cmps/BrowserWarning"
 
 export function HomePage() {
     const [scrolled, setScrolled] = useState(false)
@@ -48,6 +49,7 @@ export function HomePage() {
         <section className="home-page page">
             <HomeHeader scrolled={scrolled} />
             <main className="home-page-content main-layout">
+                <BrowserWarning />
                 <section className='main-titles-container'>
                     <h1 className='home-main-title'>
                         A platform built for a <br />

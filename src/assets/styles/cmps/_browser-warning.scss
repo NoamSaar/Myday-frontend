@@ -1,0 +1,33 @@
+.browser-warning {
+    background: #F6335A;
+    color: $clr1;
+    padding-block: 15px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+
+    .scrolling-text {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: nowrap;
+        display: flex;
+        animation: moveText 20s linear infinite;
+
+        p {
+            margin-right: 20px;
+            overflow: visible;
+        }
+    }
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateX(0) translateY(-50%);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
