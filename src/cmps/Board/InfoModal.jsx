@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { updateBoard } from "../../store/actions/board.actions"
-import { resetDynamicDialog, resetDynamicModal, setDynamicModal, showErrorMsg } from "../../store/actions/system.actions"
+import { onTooltipParentEnter, onTooltipParentLeave, resetDynamicDialog, resetDynamicModal, setDynamicModal, showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
 import { CloseIcon, FeedbackIcon } from "../../services/svg.service"
 import WorkspaceDisplay from "../WorkspaceDisplay"
@@ -11,7 +11,8 @@ import { utilService } from "../../services/util.service"
 export function InfoModal() {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    console.log('board', board)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
+
 
     const [boardToEdit, setBoardToEdit] = useState(board)
     const [isEditingTitle, setIsEditingTitle] = useState(false)
@@ -65,25 +66,8 @@ export function InfoModal() {
     }
 
 
-    function onStatEnter(txt, name, ref) {
-        if ((isOpen && type !== 'tooltip') || isEditingTitle) return
-
-        setDynamicModal(
-            {
-                isOpen: true,
-                parentRefCurrent: ref.current,
-                type: 'tooltip',
-                data: { txt },
-                parentId: `${name}-tooltip`,
-                hasCaret: true,
-                isCenter: true,
-                isPosBlock: true,
-                caretClred: true
-            })
-    }
-
-    function onStatLeave(name) {
-        if (parentId === `${name}-tooltip`) resetDynamicModal()
+    function onTitelParentHover(txt, name, ref) {
+        if (!isEditingTitle) onTooltipParentEnter(isMobile, isOpen, type, txt, name, ref)
     }
 
     function handleKeyDown(ev) {
@@ -97,7 +81,7 @@ export function InfoModal() {
     }
 
     function onUserImgHover() {
-        if (board.createdBy) onStatEnter(board.createdBy.fullname, 'header-title', creatorRef)
+        if (board.createdBy) onTitelParentHover(board.createdBy.fullname, 'header-title', creatorRef)
     }
 
     const txtPlaceholder = isEditingDesc ? '' : 'Add a description here to make sure your team is aligned on the \npurpose of this board'
@@ -108,8 +92,8 @@ export function InfoModal() {
                 <div
                     className="title-container"
                     ref={titleRef}
-                    onMouseEnter={() => onStatEnter('Click to edit', 'header-title', titleRef)}
-                    onMouseLeave={() => onStatLeave('header-title')}
+                    onMouseEnter={() => onTitelParentHover('Click to edit', 'header-title', titleRef)}
+                    onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'header-title')}
                 >
                     <EditableTxt
                         isEditing={isEditingTitle}
@@ -157,7 +141,7 @@ export function InfoModal() {
                             className="flex user-container"
                             ref={creatorRef}
                             onMouseEnter={onUserImgHover}
-                            onMouseLeave={() => onStatLeave('header-title')}
+                            onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'header-title')}
                         >
                             <UserImg user={board.createdBy} />
                         </div>

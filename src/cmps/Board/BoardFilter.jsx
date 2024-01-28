@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 
 import { addTask, getMemberFromBoard } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicDialog, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
+import { onTooltipParentEnter, onTooltipParentLeave, resetDynamicModal, setDynamicDialog, setDynamicModal, setDynamicModalData, showErrorMsg } from "../../store/actions/system.actions"
 
 import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, RobotIcon, SearchIcon, SettingsKnobsIcon, SortIcon } from "../../services/svg.service"
 import { UserImg } from "../UserImg"
@@ -12,9 +12,7 @@ import { AutomationModal } from "./AutomationModal"
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
     const personBtnRef = useRef(null)
-    const filterBtnRef = useRef(null)
     const sortBtnRef = useRef(null)
-    const hideBtnRef = useRef(null)
 
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
     const [isFocused, setIsFocused] = useState(false)
@@ -111,27 +109,6 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, 'txt': '' }))
     }
 
-    function onStatEnter(txt, name, ref) {
-        if (isOpen && type !== 'tooltip') return
-
-        setDynamicModal(
-            {
-                isOpen: true,
-                parentRefCurrent: ref.current,
-                type: 'tooltip',
-                data: { txt },
-                parentId: `${name}-tooltip`,
-                hasCaret: true,
-                isCenter: true,
-                isPosBlock: true,
-                caretClred: true
-            })
-    }
-
-    function onStatLeave(name) {
-        if (parentId === `${name}-tooltip`) resetDynamicModal()
-    }
-
     function onAutomateClick() {
         setDynamicDialog({
             isOpen: true,
@@ -188,8 +165,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 // title="Filter by person"
                 onClick={toggleMemberFilter}
                 ref={personBtnRef}
-                onMouseEnter={() => onStatEnter('Filter by person', 'person-filter-title', personBtnRef)}
-                onMouseLeave={() => onStatLeave('person-filter-title')}
+                onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Filter by person', 'person-filter-title', personBtnRef)}
+                onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'person-filter-title')}
             >
                 {filterByToEdit.member ? <UserImg user={getMemberFromBoard(board, filterByToEdit.member)} /> : <PersonIcon />}
                 <span>Person</span>
@@ -210,8 +187,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 className="btn filter"
                 // title="Filter by anything"
                 ref={filterBtnRef}
-                onMouseEnter={() => onStatEnter('Filter by anything', 'general-filter-title', filterBtnRef)}
-                onMouseLeave={() => onStatLeave('general-filter-title')}
+                onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Filter by anything', 'general-filter-title', filterBtnRef)}
+                onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'general-filter-title')}
             >
                 <FilterIcon />
                 <span>Filter</span>
@@ -221,8 +198,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 className="btn sort"
                 title="Sort by column"
                 ref={sortBtnRef}
-                onMouseEnter={() => onStatEnter('Sort by column', 'sort-title', sortBtnRef)}
-                onMouseLeave={() => onStatLeave('sort-title')}
+                onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Sort by column', 'sort-title', sortBtnRef)}
+                onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'sort-title')}
             >
                 <SortIcon />
                 <span>Sort</span>
@@ -232,8 +209,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 className="btn hide"
                 title="Hidden columns"
                 ref={hideBtnRef}
-                onMouseEnter={() => onStatEnter('Hidden columns', 'hide-btn-title', hideBtnRef)}
-                onMouseLeave={() => onStatLeave('hide-btn-title')}
+                onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Hidden columns', 'hide-btn-title', hideBtnRef)}
+                onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'hide-btn-title')}
             >
                 <HideIcon />
                 <span>Hide</span>

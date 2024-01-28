@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { updateBoard } from "../../store/actions/board.actions"
-import { resetDynamicModal, setDynamicDialog, setDynamicModal, setDynamicModalData, setIsFullSidebarMobile, showErrorMsg } from "../../store/actions/system.actions"
+import { onTooltipParentEnter, onTooltipParentLeave, resetDynamicModal, setDynamicDialog, setDynamicModal, setDynamicModalData, setIsFullSidebarMobile, showErrorMsg } from "../../store/actions/system.actions"
 import { EditableTxt } from "../EditableTxt"
 import { ArrowLeftIcon, FilledStarIcon, InfoIcon, StarIcon } from "../../services/svg.service"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
@@ -12,6 +12,7 @@ export function BoardEdit({ board }) {
     const [isEditing, setIsEditing] = useState(false)
 
     const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const titleRef = useRef(null)
     const favoriteRef = useRef(null)
     const infoRef = useRef(null)
@@ -23,28 +24,6 @@ export function BoardEdit({ board }) {
     useEffectUpdate(() => {
         onUpdateBoard()
     }, [boardToEdit.isStarred])
-
-    function onStatEnter(txt, name, ref) {
-        if (isOpen && type !== 'tooltip') return
-        // if (isOpen && parentId === 'favorite-title-tooltip') return
-
-        setDynamicModal(
-            {
-                isOpen: true,
-                parentRefCurrent: ref.current,
-                type: 'tooltip',
-                data: { txt },
-                parentId: `${name}-tooltip`,
-                hasCaret: true,
-                isCenter: true,
-                isPosBlock: true,
-                caretClred: true
-            })
-    }
-
-    function onStatLeave(name) {
-        if (parentId === `${name}-tooltip`) resetDynamicModal()
-    }
 
     function handleChange({ target }) {
         const field = target.name
@@ -99,8 +78,8 @@ export function BoardEdit({ board }) {
 
             <div
                 ref={titleRef}
-                onMouseEnter={() => onStatEnter('Click to edit', 'header-title', titleRef)}
-                onMouseLeave={() => onStatLeave('header-title')}
+                onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Click to edit', 'header-title', titleRef)}
+                onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'header-title')}
             >
                 <EditableTxt
                     isEditing={isEditing}
@@ -117,8 +96,8 @@ export function BoardEdit({ board }) {
                 <button
                     className="btn info"
                     ref={infoRef}
-                    onMouseEnter={() => onStatEnter('Show board description', 'info-title', infoRef)}
-                    onMouseLeave={() => onStatLeave('info-title')}
+                    onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Show board description', 'info-title', infoRef)}
+                    onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'info-title')}
                     onClick={onInfoClick}
                 >
                     <InfoIcon />
@@ -127,8 +106,8 @@ export function BoardEdit({ board }) {
                 <button
                     className={`btn ${boardToEdit.isStarred && 'starred svg-inherit-color'} favorite`}
                     ref={favoriteRef}
-                    onMouseEnter={() => onStatEnter(favoriteTooltip, 'favorite-title', favoriteRef)}
-                    onMouseLeave={() => onStatLeave('favorite-title')}
+                    onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, favoriteTooltip, 'favorite-title', favoriteRef)}
+                    onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'favorite-title')}
                     onClick={onStarClick}
                 >
                     {boardToEdit.isStarred ? <FilledStarIcon /> : <StarIcon />}
