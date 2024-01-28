@@ -39,7 +39,8 @@ export function HomePage() {
     const [scrolled, setScrolled] = useState(false)
     const navigate = useNavigate()
 
-    // const [activeTab, setActiveTab] = useState('work-management-tab')
+
+
 
     window.onscroll = function handleScroll() {
         const isScrolled = window.scrollY > 0

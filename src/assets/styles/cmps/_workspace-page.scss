@@ -40,11 +40,10 @@
         min-height: calc(100dvh - 48px - 75px);
         // height: 100dvh;
         // min-height: 100dvh;
-        grid-template-columns: 1fr minmax(auto, 300px);
+        grid-template-columns: 1fr;
         gap: 10px;
 
         @media (max-width: 660px) {
-            grid-template-columns: 1fr;
             margin-inline-end: 10px;
         }
     }
@@ -59,7 +58,6 @@
         height: fit-content;
         padding: 24px;
         margin: 16px;
-        margin-inline-end: 5px;
         border-radius: 8px;
         background-color: $clr0;
         box-shadow: 0px 3px 12px #e6e9ef;

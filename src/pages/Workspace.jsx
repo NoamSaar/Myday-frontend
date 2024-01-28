@@ -39,7 +39,7 @@ export function Workspace() {
                     </section>
                 </div>
 
-                <WorkspaceAside />
+                {/* <WorkspaceAside /> */}
             </div>
         </section >
     )
