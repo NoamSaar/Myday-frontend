@@ -20,6 +20,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isMemberPickerOpen = parentId === `${board._id}-memberFilterPicker`
+    const isSortPickerOpen = parentId === `${board._id}-sortPicker`
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutsideSearch)
@@ -55,7 +56,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
 
     function toggleMemberFilter(ev) {
         ev.stopPropagation()
-        if (isMemberPickerOpen) { //check if curr modal picker is open
+        if (isMemberPickerOpen) {
             resetDynamicModal()
         } else {
             setDynamicModal({
@@ -66,6 +67,24 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 data: { chosenMember: filterByToEdit.member, onChangeMember: setMemberFilter, members: board.members },
                 isPosBlock: true,
                 isCenter: true
+            })
+        }
+    }
+
+    function toggleSortPicker(ev) {
+        if (isSortPickerOpen) {
+            resetDynamicModal()
+        } else {
+            setDynamicModal({
+                isOpen: true,
+                parentRefCurrent: sortBtnRef.current,
+                type: 'sortPicker',
+                // data: { selectedStatus: info.chosenOption, title, onUpdate },
+                parentId: `${board._id}-sortPicker`,
+                isPosBlock: true,
+                isCenter: false,
+                hasCaret: false,
+
             })
         }
     }
@@ -192,7 +211,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             >
                 <FilterIcon />
                 <span>Filter</span>
-            </button>
+            </button> */}
 
             <button
                 className="btn sort"
@@ -200,12 +219,13 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 ref={sortBtnRef}
                 onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Sort by column', 'sort-title', sortBtnRef)}
                 onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'sort-title')}
+                onClick={toggleSortPicker}
             >
                 <SortIcon />
                 <span>Sort</span>
             </button>
 
-            <button
+            {/* <button
                 className="btn hide"
                 title="Hidden columns"
                 ref={hideBtnRef}
