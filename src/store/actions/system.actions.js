@@ -110,6 +110,7 @@ export function getEmptyDynamicDialog() {
     return {
         isOpen: false,
         contentCmp: null,
+        onClose: null
     }
 }
 

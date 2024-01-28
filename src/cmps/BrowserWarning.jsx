@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { BrowserWarningTxt } from './BrowserWarningTxt'
 
 export function BrowserWarning() {
     const isIncompatibleBrowser = useSelector((storeState) => storeState.systemModule.isIncompatibleBrowser)
@@ -10,14 +11,8 @@ export function BrowserWarning() {
     return (
         <section className="browser-warning">
             <div className="scrolling-text">
-                <p>
-                    ⚠️ It seems you're using Samsung Internet, which does not support some features on this site.
-                    For the best experience, we recommend using a different browser.
-                </p>
-                <p>
-                    ⚠️ It seems you're using Samsung Internet, which does not support some features on this site.
-                    For the best experience, we recommend using a different browser.
-                </p>
+                <BrowserWarningTxt />
+                <BrowserWarningTxt />
             </div>
         </section>
     )

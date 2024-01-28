@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { Outlet, useParams } from "react-router"
+import { Outlet, useNavigate, useParams } from "react-router"
 import loader from "/img/board-loader.gif"
 
 import { addGroup, loadBoard, loadFilteredBoard, setFilterBy, getTask } from "../store/actions/board.actions"
@@ -12,18 +12,27 @@ import { boardService } from "../services/board.service"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate"
 import { activityService } from "../services/activity.service"
 import { ActivityLog } from "../cmps/Panel/ActivityLog"
-import { resetDynamicModal } from "../store/actions/system.actions"
+import { resetDynamicModal, setDynamicDialog } from "../store/actions/system.actions"
+import { BrowserWarningTxt } from "../cmps/BrowserWarningTxt"
 
 export function BoardDetails() {
+    const isIncompatibleBrowser = useSelector((storeState) => storeState.systemModule.isIncompatibleBrowser)
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const isLoading = useSelector((storeState) => storeState.systemModule.isLoading)
     const modalData = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const [scrollTop, setScrollTop] = useState(0)
+    const navigate = useNavigate()
     // const user = useSelector((storeState) => storeState.userModule.loggedinUser)
 
     const [isFocusLastGroup, setIsFocusLastGroup] = useState(false)
     const { boardId } = useParams()
+
+    useEffect(() => {
+        if (isIncompatibleBrowser) {
+            incompatibleBrowserAlert()
+        }
+    }, [])
 
     useEffect(() => {
         setTimeout(() => {
@@ -43,6 +52,14 @@ export function BoardDetails() {
     useEffectUpdate(() => {
         if (board) loadFilteredBoard()
     }, [filterBy])
+
+    function incompatibleBrowserAlert() {
+        setDynamicDialog({
+            isOpen: true,
+            onClose: () => navigate('/'),
+            contentCmp: <BrowserWarningTxt className={'browser-warning-modal'} />
+        })
+    }
 
     async function _loadBoard() {
         try {
