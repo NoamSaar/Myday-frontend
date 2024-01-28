@@ -3,10 +3,10 @@ import { useSelector } from "react-redux"
 
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
-import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon } from "../../services/svg.service"
-import { loadBoardActivities, setIsHeaderCollapsed } from "../../store/actions/board.actions"
+import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon, DeleteIcon } from "../../services/svg.service"
+import { loadBoardActivities, removeBoard, setIsHeaderCollapsed } from "../../store/actions/board.actions"
 import { useNavigate } from "react-router"
-import { onTooltipParentEnter, onTooltipParentLeave, resetDynamicDialog, resetDynamicModal, setDynamicDialog, setDynamicModal, setSidePanelOpen } from "../../store/actions/system.actions"
+import { onTooltipParentEnter, onTooltipParentLeave, resetDynamicDialog, resetDynamicModal, setDynamicDialog, setDynamicModal, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
 import { InviteModal } from "./InviteModal"
 import { getUsers } from "../../store/actions/user.actions"
 import { AutomationModal } from "./AutomationModal"
@@ -25,6 +25,8 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
     const addTableRef = useRef(null)
     const collapseBtneRef = useRef(null)
     const optTopHeaderRef = useRef(null)
+
+    const isMenuOpen = parentId === 'board-header-menu'
 
     useEffect(() => {
         loadUsers()
@@ -115,6 +117,47 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
         })
     }
 
+    function toggleMenu() {
+        if (isMenuOpen) {
+            resetDynamicModal()
+        } else {
+            setDynamicModal(
+                {
+                    isOpen: true,
+                    parentRefCurrent: optTopHeaderRef.current,
+                    type: 'menuOptions',
+                    data: { options: menuOption },
+                    parentId: 'board-header-menu',
+                    isPosBlock: true,
+                })
+        }
+    }
+
+    async function onRemoveBoard() {
+        try {
+            await removeBoard(board._id)
+            showSuccessMsg('We successfully deleted the board')
+            resetDynamicModal()
+            navigate('/board/workspace')
+        } catch (err) {
+            console.log('Error removing board:', err)
+
+            if (err) {
+                showErrorMsg(err.message)
+            } else {
+                showErrorMsg('Cannot delete Board')
+            }
+        }
+    }
+
+    const menuOption = [
+        {
+            icon: <DeleteIcon />,
+            title: 'Delete Board',
+            onOptionClick: onRemoveBoard
+        },
+    ]
+
     const dynCollapsedClass = isCollapsed ? 'collapsed' : ''
     return (
         <>
@@ -145,6 +188,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
                         ref={optTopHeaderRef}
                         onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Options', 'options-board-header-top-title', optTopHeaderRef)}
                         onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'options-board-header-top-title')}
+                        onClick={toggleMenu}
                     >
                         <MenuIcon />
                     </button>
