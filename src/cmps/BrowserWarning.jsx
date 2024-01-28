@@ -1,16 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 export function BrowserWarning() {
-    const [showWarning, setShowWarning] = useState(false)
+    const isIncompatibleBrowser = useSelector((storeState) => storeState.systemModule.isIncompatibleBrowser)
 
-    useEffect(() => {
-        const userAgent = navigator.userAgent
-        if (userAgent.includes("SamsungBrowser")) {
-            setShowWarning(true)
-        }
-    }, [])
-
-    if (!showWarning) {
+    if (!isIncompatibleBrowser) {
         return null
     }
 
