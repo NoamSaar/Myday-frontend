@@ -3,7 +3,7 @@ import { boardService } from '../../services/board.service.js'
 // import { userService } from '../services/user.service.js'
 import { store } from '../store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD, UPDATE_TASK, SET_BOARD_ACTIVITIES } from '../reducers/board.reducer.js'
+import { ADD_BOARD, REMOVE_BOARD, SET_CURR_BOARD, SET_BOARDS, SET_IS_HEADER_COLLAPSED, UPDATE_BOARD, SET_FILTER_BY, SET_ACTIVE_TASK, SET_FILTERED_BOARD, UPDATE_TASK, SET_BOARD_ACTIVITIES, SET_SORT_BY } from '../reducers/board.reducer.js'
 import { setIsLoading } from './system.actions.js'
 import { utilService } from '../../services/util.service.js'
 import { activityService } from '../../services/activity.service.js'
@@ -58,6 +58,7 @@ export async function loadBoard(boardId) {
 
 export function loadFilteredBoard() {
     const filterBy = store.getState().boardModule.filterBy
+    const sortBy = store.getState().boardModule.sortBy
     const board = JSON.parse(JSON.stringify(store.getState().boardModule.currBoard))
     if (filterBy.txt) {
         const escapedFilter = utilService.escapeRegExp(filterBy.txt)
@@ -73,6 +74,27 @@ export function loadFilteredBoard() {
         board.groups = board.groups.map(group => {
             group.tasks = group.tasks.filter(task => {
                 return task.members.some(member => filterBy.member === member) //works here with the memeber's id
+            })
+            return group
+        })
+    }
+
+
+    if (sortBy.type === 'date') {
+        board.groups = board.groups.map(group => {
+            group.tasks.sort((t1, t2) => {
+                //if there's no date, tret it as latest
+                let date1 = t1.date ? new Date(t1.date) : new Date('9999-12-31')
+                let date2 = t2.date ? new Date(t2.date) : new Date('9999-12-31')
+                return (date1 - date2) * sortBy.dir
+            })
+            return group
+        })
+    }
+    if (['title', 'status', 'priority'].includes(sortBy.type)) {
+        board.groups = board.groups.map(group => {
+            group.tasks.sort((t1, t2) => {
+                return t1[sortBy.type].localeCompare(t2[sortBy.type]) * sortBy.dir
             })
             return group
         })
@@ -211,6 +233,10 @@ function sortFullBoard(fullBoard, filteredBoard) {
 
 export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })
+}
+
+export function setSortBy(sortBy) {
+    store.dispatch({ type: SET_SORT_BY, sortBy })
 }
 
 export function setIsHeaderCollapsed(isCollapsed) {

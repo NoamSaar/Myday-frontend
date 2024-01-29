@@ -17,6 +17,7 @@ export const boardService = {
     saveBoards,
     getBoardColors,
     getDefaultFilter,
+    getDefaultSort,
     addGroup,
     removeGroup,
     updateGroup,
@@ -97,6 +98,10 @@ function getBoardColors() {
 
 function getDefaultFilter() {
     return { txt: '', includedCols: [], member: '' }
+}
+
+function getDefaultSort() {
+    return { type: '', dir: 1 }
 }
 
 function getDefaultBoardsFilter() {
