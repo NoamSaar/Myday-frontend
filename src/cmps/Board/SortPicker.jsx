@@ -2,6 +2,9 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import { setSortBy } from "../../store/actions/board.actions"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
+// import { labelImg } from "../../../public/img/col-types/color-column-icon.svg"
+import { CustomSelect } from "../CustomSelect"
+import { SortDownIcon, SortUpIcon } from "../../services/svg.service"
 
 export function SortPicker() {
     const sortBy = useSelector((storeState) => storeState.boardModule.sortBy)
@@ -33,6 +36,20 @@ export function SortPicker() {
         setSortByToEdit(prevSort => ({ ...prevSort, [field]: value }))
     }
 
+    const typeOptions = [
+        { value: 'title', title: 'Name', img: "../../../public/img/col-types/name-column-icon.svg" },
+        { value: 'status', title: 'Status', img: "../../../public/img/col-types/color-column-icon.svg" },
+        { value: 'date', title: 'Date', img: "../../../public/img/col-types/date-column-icon.svg" },
+        { value: 'priotity', title: 'Priority', img: "../../../public/img/col-types/color-column-icon.svg" },
+    ]
+
+    const dirOptions = [
+        { value: 1, title: 'Ascending', img: "../../../public/img/col-types/name-column-icon.svg" },
+        { value: -1, title: 'Descending', img: "../../../public/img/col-types/color-column-icon.svg" },
+
+    ]
+
+
     const { type, dir } = sortByToEdit
 
     return (
@@ -40,7 +57,10 @@ export function SortPicker() {
 
             <h4>Sort by</h4>
 
-            <select
+            <CustomSelect options={typeOptions} onSelect={handleChange} name="type" />
+            <CustomSelect options={dirOptions} onSelect={handleChange} name="dir" />
+
+            {/* <select
                 name="type"
                 onChange={handleChange}
                 value={type}
@@ -58,7 +78,7 @@ export function SortPicker() {
             >
                 <option value={1}>Ascending</option>
                 <option value={-1}>Descending</option>
-            </select>
+            </select> */}
 
             <button className="btn">+ Add new sort</button>
 

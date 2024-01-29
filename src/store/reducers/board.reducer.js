@@ -22,7 +22,6 @@ const initialState = {
     filteredBoard: null,
     activeTask: null,
     filterBy: boardService.getDefaultFilter(),
-    // sortBy: { type: 'title', dir: -1 },
     sortBy: boardService.getDefaultSort(),
     isHeaderCollapsed: false,
     activities: []
