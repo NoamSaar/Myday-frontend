@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { AngleDownIcon } from "../services/svg.service"
 import { useOutsideClick } from "../customHooks/useOutsideClick"
 
-export function CustomSelect({ options, onSelect, name, selectedOptValue }) {
+export function CustomSelect({ options, onSelect, name, selectedOptValue, openUp }) {
     const intialSelection = options.find(option => option.value === selectedOptValue) || options[0]
     const [selectedOption, setSelectedOption] = useState(intialSelection)
     const [isOpen, setIsOpen] = useState(false)
@@ -28,7 +28,7 @@ export function CustomSelect({ options, onSelect, name, selectedOptValue }) {
             </div>
 
             {isOpen && (
-                <div className="options-dropdown">
+                <div className={(openUp ? 'open-up' : '') + ' options-dropdown'}>
                     {options.map(option => (
                         <div key={option.value} className={(option.value === selectedOption.value ? 'selected' : '') + " option"} onClick={() => handleSelect(option)}>
                             <div className="img-wrap" style={{ backgroundColor: option.imgClr }}>

@@ -55,6 +55,11 @@
         margin-top: 5px;
         padding: 4px 6px;
 
+        &.open-up {
+            bottom: 100%;
+            top: unset;
+        }
+
         .option {
             border-radius: $border-radius-small;
             padding: 7px 0px 7px 14px;

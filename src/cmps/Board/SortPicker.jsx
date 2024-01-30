@@ -7,6 +7,7 @@ import { CustomSelect } from "../CustomSelect"
 import { SortDownIcon, SortUpIcon } from "../../services/svg.service"
 
 export function SortPicker() {
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const sortBy = useSelector((storeState) => storeState.boardModule.sortBy)
     const [sortByToEdit, setSortByToEdit] = useState(sortBy)
 
@@ -58,8 +59,8 @@ export function SortPicker() {
             <h4 className="title">Sort by</h4>
 
             <div className="selects">
-                <CustomSelect options={typeOptions} onSelect={handleChange} name="type" selectedOptValue={type} />
-                <CustomSelect options={dirOptions} onSelect={handleChange} name="dir" selectedOptValue={dir} />
+                <CustomSelect options={typeOptions} onSelect={handleChange} name="type" selectedOptValue={type} openUp={isMobile} />
+                <CustomSelect options={dirOptions} onSelect={handleChange} name="dir" selectedOptValue={dir} openUp={isMobile} />
             </div>
 
             {/* <button className="btn">+ Add new sort</button> */}
