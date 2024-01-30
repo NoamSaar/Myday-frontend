@@ -37,15 +37,15 @@ export function SortPicker() {
     }
 
     const typeOptions = [
-        { value: 'title', title: 'Name', img: "../../../public/img/col-types/name-column-icon.svg" },
-        { value: 'status', title: 'Status', img: "../../../public/img/col-types/color-column-icon.svg" },
-        { value: 'date', title: 'Date', img: "../../../public/img/col-types/date-column-icon.svg" },
-        { value: 'priotity', title: 'Priority', img: "../../../public/img/col-types/color-column-icon.svg" },
+        { value: 'title', title: 'Name', img: "../../../public/img/col-types/name-column-icon.svg", imgClr: '#ffcc00' },
+        { value: 'status', title: 'Status', img: "../../../public/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
+        { value: 'date', title: 'Date', img: "../../../public/img/col-types/date-column-icon.svg", imgClr: '#11dd80' },
+        { value: 'priotity', title: 'Priority', img: "../../../public/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
     ]
 
     const dirOptions = [
-        { value: 1, title: 'Ascending', img: "../../../public/img/col-types/name-column-icon.svg" },
-        { value: -1, title: 'Descending', img: "../../../public/img/col-types/color-column-icon.svg" },
+        { value: 1, title: 'Ascending', svgCmp: <SortDownIcon /> },
+        { value: -1, title: 'Descending', svgCmp: <SortUpIcon /> },
 
     ]
 
@@ -53,34 +53,16 @@ export function SortPicker() {
     const { type, dir } = sortByToEdit
 
     return (
-        <section className="sort-picker general-modal board-member-select">
+        <section className="sort-picker general-modal">
 
-            <h4>Sort by</h4>
+            <h4 className="title">Sort by</h4>
 
-            <CustomSelect options={typeOptions} onSelect={handleChange} name="type" />
-            <CustomSelect options={dirOptions} onSelect={handleChange} name="dir" />
+            <div className="selects">
+                <CustomSelect options={typeOptions} onSelect={handleChange} name="type" selectedOptValue={type} />
+                <CustomSelect options={dirOptions} onSelect={handleChange} name="dir" selectedOptValue={dir} />
+            </div>
 
-            {/* <select
-                name="type"
-                onChange={handleChange}
-                value={type}
-            >
-                <option value={'title'}>Name</option>
-                <option value={'status'}>Status</option>
-                <option value={'date'}>Date</option>
-                <option value={'priotity'}>Priority</option>
-            </select>
-
-            <select
-                name="dir"
-                onChange={handleChange}
-                value={dir}
-            >
-                <option value={1}>Ascending</option>
-                <option value={-1}>Descending</option>
-            </select> */}
-
-            <button className="btn">+ Add new sort</button>
+            {/* <button className="btn">+ Add new sort</button> */}
 
         </section>
     )
