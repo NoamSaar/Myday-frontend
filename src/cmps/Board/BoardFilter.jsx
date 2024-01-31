@@ -8,6 +8,7 @@ import { CloseFilledIcon, FilterIcon, HideIcon, PersonIcon, PlusIcon, RobotIcon,
 import { UserImg } from "../UserImg"
 import { DynamicInput } from "../DynamicInput"
 import { AutomationModal } from "./AutomationModal"
+import { boardService } from "../../services/board.service"
 
 export function BoardFilter({ board, filterBy, onSetFilter }) {
     const filterSearchRef = useRef(null)
@@ -21,6 +22,9 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
     const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isMemberPickerOpen = parentId === `${board._id}-memberFilterPicker`
     const isSortPickerOpen = parentId === `${board._id}-sortPicker`
+
+    const sortBy = useSelector(storeState => storeState.boardModule.sortBy)
+    const isIntialSortEmpty = JSON.stringify(sortBy) === JSON.stringify(boardService.getDefaultSort())
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutsideSearch)
@@ -79,7 +83,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 isOpen: true,
                 parentRefCurrent: sortBtnRef.current,
                 type: 'sortPicker',
-                // data: { selectedStatus: info.chosenOption, title, onUpdate },
+                data: { isIntialSortEmpty },
                 parentId: `${board._id}-sortPicker`,
                 isPosBlock: true,
                 isCenter: false,
@@ -214,7 +218,8 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
             </button> */}
 
             <button
-                className="btn sort"
+                // className="btn sort"
+                className={` btn ${!isIntialSortEmpty || isSortPickerOpen ? 'active' : ''} sort`}
                 title="Sort by column"
                 ref={sortBtnRef}
                 onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, 'Sort by column', 'sort-title', sortBtnRef)}
@@ -222,7 +227,7 @@ export function BoardFilter({ board, filterBy, onSetFilter }) {
                 onClick={toggleSortPicker}
             >
                 <SortIcon />
-                <span>Sort</span>
+                <span>Sort{!isIntialSortEmpty && ' / 1'}</span>
             </button>
 
             {/* <button

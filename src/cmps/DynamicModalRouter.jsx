@@ -68,6 +68,6 @@ export function DynamicModalRouter(props) {
             return <BoardMemberSelect chosenMember={props.data.chosenMember} members={props.data.members} onChangeMember={props.data.onChangeMember} />
 
         case 'sortPicker':
-            return <SortPicker />
+            return <SortPicker isIntialSortEmpty={props.data.isIntialSortEmpty} />
     }
 }

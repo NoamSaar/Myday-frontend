@@ -4,11 +4,13 @@ import { setSortBy } from "../../store/actions/board.actions"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { CustomSelect } from "../CustomSelect"
 import { SortDownIcon, SortUpIcon } from "../../services/svg.service"
+import { boardService } from "../../services/board.service"
 
-export function SortPicker() {
+export function SortPicker({ isIntialSortEmpty }) {
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const sortBy = useSelector((storeState) => storeState.boardModule.sortBy)
     const [sortByToEdit, setSortByToEdit] = useState(sortBy)
+    const [isSortOn, setIsSortOn] = useState(!isIntialSortEmpty)
 
     useEffectUpdate(() => {
         onSetSort(sortByToEdit)
@@ -36,6 +38,21 @@ export function SortPicker() {
         setSortByToEdit(prevSort => ({ ...prevSort, [field]: value }))
     }
 
+    function resetSort() {
+        setSortByToEdit(boardService.getDefaultSort())
+        setIsSortOn(false)
+    }
+
+    function startSort() {
+        setSortByToEdit({ type: 'title', dir: 1 })
+        setIsSortOn(true)
+    }
+
+    function toggleIsSortOn() {
+        if (isSortOn) resetSort()
+        else startSort()
+    }
+
     const typeOptions = [
         { value: 'title', title: 'Name', img: "/img/col-types/name-column-icon.svg", imgClr: '#ffcc00' },
         { value: 'status', title: 'Status', img: "/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
@@ -57,12 +74,19 @@ export function SortPicker() {
 
             <h4 className="title">Sort by</h4>
 
-            <div className="selects">
-                <CustomSelect options={typeOptions} onSelect={handleChange} name="type" selectedOptValue={type} openUp={isMobile} />
-                <CustomSelect options={dirOptions} onSelect={handleChange} name="dir" selectedOptValue={dir} openUp={isMobile} />
-            </div>
+            {
+                isSortOn ?
+                    <div className="selects">
+                        <CustomSelect options={typeOptions} onSelect={handleChange} name="type" selectedOptValue={type} openUp={isMobile} resetFunc={resetSort} />
+                        <CustomSelect options={dirOptions} onSelect={handleChange} name="dir" selectedOptValue={dir} openUp={isMobile} />
+                    </div>
+                    :
+                    <p className="no-select">Sort your items by priority, creation date, price or <br></br>any column you have on your board.</p>
+            }
 
-            {/* <button className="btn">+ Add new sort</button> */}
+            <button className="btn add" onClick={toggleIsSortOn}>
+                {isSortOn ? 'Remove sort' : '+ Add new sort'}
+            </button>
 
         </section>
     )
