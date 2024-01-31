@@ -128,7 +128,7 @@ export function LoginSignup() {
                         {!isLogin && <div className="flex align-center full-width form-section-container user-img-selection">
                             <label className='user-img-label'>Your Image:</label>
                             <label className="flex custom-file-upload">
-                                <input type="file" onChange={onImgUpload} />
+                                <input type="file" accept="image/*" onChange={onImgUpload} />
                                 {(user.imgUrl || user.fullname) ? <UserImg user={user} /> : <UserImg />}
                             </label>
                         </div>}
