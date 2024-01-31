@@ -19,26 +19,16 @@ export function PanelFile({ files, onAddFile }) {
         fileInputRef.current.click()
     }
 
-    // const handleFileChange = (ev) => {
-    //     const selectedFiles = ev.target.files
-    //     onAddFile(selectedFiles)
-    // }
 
-
-    function handleFileChange(ev) {
-        const file = ev.target.files[0]
-
-        if (file) {
-            const reader = new FileReader()
-            reader.onloadend = async () => {
-                const imgURL = await uploadService.uploadImg(ev)
-                onAddFile(imgURL)
-            }
-            reader.readAsDataURL(file)
+    async function handleFileChange(ev) {
+        try {
+            const imgData = await uploadService.uploadImg(ev)
+            onAddFile(imgData.url)
+        } catch (err) {
+            console.log('err', err)
         }
     }
 
-    // console.log('files:', files)
     return (
         <section className="panel-file grid">
             {(files.length > 0 && files[0] !== undefined) ? (
