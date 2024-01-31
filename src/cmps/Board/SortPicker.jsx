@@ -2,7 +2,6 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import { setSortBy } from "../../store/actions/board.actions"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
-// import { labelImg } from "../../../public/img/col-types/color-column-icon.svg"
 import { CustomSelect } from "../CustomSelect"
 import { SortDownIcon, SortUpIcon } from "../../services/svg.service"
 
@@ -38,10 +37,10 @@ export function SortPicker() {
     }
 
     const typeOptions = [
-        { value: 'title', title: 'Name', img: "../../../public/img/col-types/name-column-icon.svg", imgClr: '#ffcc00' },
-        { value: 'status', title: 'Status', img: "../../../public/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
-        { value: 'date', title: 'Date', img: "../../../public/img/col-types/date-column-icon.svg", imgClr: '#11dd80' },
-        { value: 'priotity', title: 'Priority', img: "../../../public/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
+        { value: 'title', title: 'Name', img: "/img/col-types/name-column-icon.svg", imgClr: '#ffcc00' },
+        { value: 'status', title: 'Status', img: "/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
+        { value: 'date', title: 'Date', img: "/img/col-types/date-column-icon.svg", imgClr: '#11dd80' },
+        { value: 'priotity', title: 'Priority', img: "/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
     ]
 
     const dirOptions = [

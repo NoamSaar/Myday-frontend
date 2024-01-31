@@ -83,15 +83,14 @@ export function loadFilteredBoard() {
     if (sortBy.type === 'date') {
         board.groups = board.groups.map(group => {
             group.tasks.sort((t1, t2) => {
-                //if there's no date, tret it as latest
+                //if there's no date, treat it as latest
                 let date1 = t1.date ? new Date(t1.date) : new Date('9999-12-31')
                 let date2 = t2.date ? new Date(t2.date) : new Date('9999-12-31')
                 return (date1 - date2) * sortBy.dir
             })
             return group
         })
-    }
-    if (['title', 'status', 'priority'].includes(sortBy.type)) {
+    } else if (['title', 'status', 'priority'].includes(sortBy.type)) {
         board.groups = board.groups.map(group => {
             group.tasks.sort((t1, t2) => {
                 return t1[sortBy.type].localeCompare(t2[sortBy.type]) * sortBy.dir
@@ -99,6 +98,7 @@ export function loadFilteredBoard() {
             return group
         })
     }
+
     setFilteredBoard(board)
     return board
 }
