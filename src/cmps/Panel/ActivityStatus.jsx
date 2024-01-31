@@ -13,6 +13,10 @@ export function ActivityStatus({ type, fromStatus, toStatus, activityTitle = nul
             case 'date':
                 if (!title || title === '-') return '-'
                 return utilService.timeStampToDate(title)
+            case 'link':
+                return <a href={title.url} target="_blank">
+                    <p>{title.displayTxt || title.url}</p>
+                </a>
             case 'person':
                 if (title === 'Added') return 'Added'
                 return <div className="activity-members-container">
