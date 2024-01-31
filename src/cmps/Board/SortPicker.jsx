@@ -55,17 +55,16 @@ export function SortPicker({ isIntialSortEmpty }) {
 
     const typeOptions = [
         { value: 'title', title: 'Name', img: "/img/col-types/name-column-icon.svg", imgClr: '#ffcc00' },
+        { value: 'members', title: 'Person', img: "/img/col-types/multiple-person-column-icon.svg", imgClr: '#00cff4' },
         { value: 'status', title: 'Status', img: "/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
-        { value: 'date', title: 'Date', img: "/img/col-types/date-column-icon.svg", imgClr: '#11dd80' },
         { value: 'priotity', title: 'Priority', img: "/img/col-types/color-column-icon.svg", imgClr: '#11dd80' },
+        { value: 'date', title: 'Date', img: "/img/col-types/date-column-icon.svg", imgClr: '#11dd80' },
     ]
 
     const dirOptions = [
         { value: 1, title: 'Ascending', svgCmp: <SortDownIcon /> },
         { value: -1, title: 'Descending', svgCmp: <SortUpIcon /> },
-
     ]
-
 
     const { type, dir } = sortByToEdit
 
