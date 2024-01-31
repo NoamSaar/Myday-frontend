@@ -139,6 +139,11 @@
         grid-area: info-favorite;
         justify-self: end;
 
+        .info,
+        .favorite {
+            padding: 6px;
+        }
+
         .starred {
             fill: #ffcb00;
         }
@@ -147,6 +152,7 @@
     .activities {
         grid-area: activities;
         justify-self: end;
+        padding-block: 2px;
     }
 
     .invite-more-bts {
@@ -156,10 +162,12 @@
         .invite {
             border: 1px solid $clr-btn-border;
             margin-inline-end: 8px;
+            padding-block: 6px;
         }
 
         .more {
-            padding-inline: 4px;
+            padding: 6px 6px;
+            // padding-inline: 4px;
         }
     }
 
