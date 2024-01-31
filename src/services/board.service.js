@@ -318,7 +318,13 @@ async function updateTask(boardId, groupId, task, prevState, newState) {
 
         const savedBoard = await save(board)
 
-        if (newState || prevState && activityFrom !== activityTo) activityService.save(activity)
+        if ((newState || prevState) &&
+            (activityFrom !== activityTo) &&
+            newState.field !== 'link' &&
+            newState.field !== 'file' &&
+            prevState.field !== 'link' &&
+            prevState.field !== 'file'
+        ) activityService.save(activity)
         return savedBoard
     } catch (err) {
         throw new Error(err.message || 'An err occurred during removing task')
