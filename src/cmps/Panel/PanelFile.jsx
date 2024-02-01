@@ -31,7 +31,7 @@ export function PanelFile({ files, onAddFile }) {
 
     return (
         <section className="panel-file grid">
-            {(files.length > 0 && files[0] !== undefined) ? (
+            {(files.length > 0 && files[0] !== undefined && files[0] !== null) ? (
                 files.map((file, idx) => (
                     <div className="file-container" key={`file ${idx}`}>
                         <div key={idx} className="file-item" onClick={() => openImagePreview(file)}>

@@ -79,7 +79,6 @@ export function loadFilteredBoard() {
         })
     }
 
-
     if (sortBy.type === 'date') {
         board.groups = board.groups.map(group => {
             group.tasks.sort((t1, t2) => {
@@ -97,10 +96,25 @@ export function loadFilteredBoard() {
             })
             return group
         })
+    } else if (sortBy.type === 'members') {
+        board.groups = board.groups.map(group => {
+            group.tasks.sort((t1, t2) => {
+                const memberName1 = getMemberName(t1.members[0], board.members)
+                const memberName2 = getMemberName(t2.members[0], board.members)
+                return memberName1.localeCompare(memberName2) * sortBy.dir
+            })
+            return group
+        })
     }
 
     setFilteredBoard(board)
     return board
+}
+
+function getMemberName(memberId, boardMembers) {
+    const member = boardMembers.find(member => member._id === memberId)
+    //if there's no member, sort it in the end with high Unicode character
+    return member ? member.fullname : '\uffff'
 }
 
 export async function saveNewBoards(boards) {

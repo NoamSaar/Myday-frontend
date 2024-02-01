@@ -375,17 +375,14 @@ function _getDefaultTask(title) {
 
 function getNewUpdate(txt) {
     return {
-        createdAt: Date.now().toString(),
+        createdAt: Date.now(),
         id: utilService.makeId(),
         likes: [],
-        // memberId: userService.getLoggedinUser() ? userService.getLoggedinUser()._id : '659fd52d810c3f98c2054719',
         memberId: userService.getLoggedinUser() ? userService.getLoggedinUser()._id : null,
         txt,
         msgs: [],
     }
 }
-
-
 
 
 function getDefaultLabel() {

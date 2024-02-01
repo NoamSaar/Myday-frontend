@@ -262,6 +262,10 @@
 
         .btn {
             height: 32px;
+
+            span {
+                padding-inline-end: 10px;
+            }
         }
 
         .search {
