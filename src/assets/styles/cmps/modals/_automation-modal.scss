@@ -17,8 +17,13 @@
         }
 
         button svg {
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
+
+            @include for-narrow-layout {
+                width: 35px;
+                height: 35px;
+            }
 
             &:hover path {
                 stroke: $clr-group-border;
@@ -34,6 +39,10 @@
     .disabled-msg {
         text-align: center;
         margin-block-end: 40px;
+
+        @include for-narrow-only-layout {
+            text-wrap: wrap;
+        }
     }
 
     .google-btn {
@@ -42,10 +51,15 @@
         padding: 8px 16px;
         border-radius: 8px;
         border: 1px solid $clr-btn-border;
-        width: 400px;
+        width: 270px;
         transition: box-shadow .2s;
         margin-block: 15px;
         margin-inline: auto;
+
+        @include for-narrow-layout {
+            width: 400px;
+
+        }
 
 
         &:hover {

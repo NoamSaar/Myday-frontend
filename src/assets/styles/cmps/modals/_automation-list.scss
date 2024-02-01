@@ -9,8 +9,16 @@
         padding: 16px;
         border-radius: 8px;
         outline: 1px solid $clr-group-border;
-        width: 303px;
+        width: 150px;
         height: 259px;
+        text-align: center;
+
+        @include for-narrow-layout {
+            width: 303px;
+            height: 259px;
+            text-align: start;
+
+        }
 
         transition: .1s;
 
@@ -21,8 +29,12 @@
 
         .info-container {
             width: 100%;
-            margin-block-end: 56px;
-            font-size: rem(18px);
+
+            @include for-narrow-layout {
+                font-size: rem(18px);
+                margin-block-end: 56px;
+
+            }
 
             .icon-container {
                 width: 40px;

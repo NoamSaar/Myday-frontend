@@ -3,6 +3,7 @@
 
 ## Table Of Contents
 
+
 * [Showcase](#showcase)
   
 * [Getting Started](#start)
@@ -27,6 +28,7 @@
 
 Myday is Available for all right <a href="https://myday-p034.onrender.com" target="_blank">here</a>.
 <hr />
+
 
 ## <a id="desc" /> Myday Description
 
@@ -53,9 +55,18 @@ This is my final sprint in Coding Academy, developed with React, Redux, MongoDB,
 <hr />
 
 
+## <a id="showcase" /> Showcase
+
+<img width="600px" src="https://res.cloudinary.com/dkvliixzt/image/upload/v1705848842/Screenshot_2024-01-21_165252_en8pzv.png" />
+<img width="600px"  src="https://res.cloudinary.com/dkvliixzt/image/upload/v1705848958/Screenshot_2024-01-21_165546_v0agc0.png" />
+<img width="600px"  src="https://res.cloudinary.com/dkvliixzt/image/upload/v1705849006/Screenshot_2024-01-21_165637_jwxpe7.png" />
+<hr />
+
+
 ### Authors
 
 #### Eden Rize
+
 [LinkedIn](https://www.linkedin.com/in/eden-rize-9476541b7/)
 
 [GitHub](https://github.com/EdenRize)
@@ -69,3 +80,4 @@ This is my final sprint in Coding Academy, developed with React, Redux, MongoDB,
 [LinkedIn](https://www.linkedin.com/in/noam-saar-8266662a1/)
 
 [GitHub](https://github.com/noam-sa11/)
+
