@@ -6,6 +6,7 @@ import { EditableTxt } from "../EditableTxt"
 import { ArrowLeftIcon, FilledStarIcon, InfoIcon, StarIcon } from "../../services/svg.service"
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate"
 import { InfoModal } from "./InfoModal"
+import { Star } from "./Star"
 
 export function BoardEdit({ board }) {
     const [boardToEdit, setBoardToEdit] = useState(board)
@@ -14,7 +15,6 @@ export function BoardEdit({ board }) {
     const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
     const titleRef = useRef(null)
-    const favoriteRef = useRef(null)
     const infoRef = useRef(null)
 
     useEffect(() => {
@@ -68,7 +68,6 @@ export function BoardEdit({ board }) {
 
 
     const { title } = boardToEdit
-    const favoriteTooltip = boardToEdit.isStarred ? 'Remove from favorites' : 'Add to favorites'
 
     return (
         <>
@@ -103,15 +102,7 @@ export function BoardEdit({ board }) {
                     <InfoIcon />
                 </button>
 
-                <button
-                    className={`btn ${boardToEdit.isStarred && 'starred svg-inherit-color'} favorite`}
-                    ref={favoriteRef}
-                    onMouseEnter={() => onTooltipParentEnter(isMobile, isOpen, type, favoriteTooltip, 'favorite-title', favoriteRef)}
-                    onMouseLeave={() => onTooltipParentLeave(isMobile, parentId, 'favorite-title')}
-                    onClick={onStarClick}
-                >
-                    {boardToEdit.isStarred ? <FilledStarIcon /> : <StarIcon />}
-                </button>
+                <Star isStarred={boardToEdit.isStarred} onStarClick={onStarClick} />
             </div>
         </>
     )

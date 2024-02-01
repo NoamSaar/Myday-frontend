@@ -139,14 +139,11 @@
         grid-area: info-favorite;
         justify-self: end;
 
-        .info,
-        .favorite {
+        .info {
             padding: 6px;
         }
 
-        .starred {
-            fill: #ffcb00;
-        }
+
     }
 
     .activities {
