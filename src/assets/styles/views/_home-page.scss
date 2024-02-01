@@ -232,10 +232,24 @@
                 overflow: initial;
                 text-overflow: initial;
                 white-space: initial;
+                text-align: center;
             }
 
             .boost-your-team-cta {
                 width: 100%;
+                text-align: center;
+
+                div {
+                    justify-content: center;
+                }
+            }
+        }
+
+        @media (max-width: 720px) {
+            padding-inline: 0;
+
+            h2 {
+                padding-inline: 0;
             }
         }
     }
