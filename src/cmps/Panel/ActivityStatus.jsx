@@ -1,6 +1,6 @@
-import { AngleRightIcon } from "../../services/svg.service";
-import { utilService } from "../../services/util.service";
-import { UserImg } from "../UserImg";
+import { AngleRightIcon } from "../../services/svg.service"
+import { utilService } from "../../services/util.service"
+import { UserImg } from "../UserImg"
 
 export function ActivityStatus({ type, fromStatus, toStatus, activityTitle = null }) {
     function getTitle(type, title) {

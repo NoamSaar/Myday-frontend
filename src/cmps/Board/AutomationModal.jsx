@@ -11,8 +11,8 @@ export function AutomationModal() {
     const session = useSession() //tokens, when session exists we have a user
     const supaBase = useSupabaseClient() //talk to supabase
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
-    const [isCalendarChecked, setIsCalendarChecked] = useState(false);
-    const [isGmailChecked, setIsGmailChecked] = useState(false);
+    const [isCalendarChecked, setIsCalendarChecked] = useState(false)
+    const [isGmailChecked, setIsGmailChecked] = useState(false)
     const { isLoading } = useSessionContext()
     const isDisabled = !loggedInUser || !session
 
@@ -59,14 +59,14 @@ export function AutomationModal() {
             switch (automation) {
                 case 'calendar':
                     setIsCalendarChecked(isChecked)
-                    break;
+                    break
 
                 case 'gmail':
                     setIsGmailChecked(isChecked)
-                    break;
+                    break
 
                 default:
-                    break;
+                    break
             }
 
         } catch (err) {

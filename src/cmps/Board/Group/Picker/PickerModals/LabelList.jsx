@@ -1,5 +1,5 @@
-import { PlusIcon } from "../../../../../services/svg.service";
-import { LabelPickerPreview } from "./LabelPickerPreview";
+import { PlusIcon } from "../../../../../services/svg.service"
+import { LabelPickerPreview } from "./LabelPickerPreview"
 
 export function LabelList({ labels, handleChange, isEditing, onLabelsChange, onAddLabel, onRemoveLabel }) {
 

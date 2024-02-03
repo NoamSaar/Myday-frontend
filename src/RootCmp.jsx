@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { Routes, Route } from 'react-router'
 import { useSession } from '@supabase/auth-helpers-react'
-import 'animate.css';
+import 'animate.css'
 
 import { BoardDetails } from './pages/BoardDetails'
 import { HomePage } from './pages/HomePage'
@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 import { LoginSignup } from './pages/LoginSignup'
 import { UserMsg } from './cmps/UserMsg'
 import { ActivityLog } from './cmps/Panel/ActivityLog'
-import { utilService } from './services/util.service';
+import { utilService } from './services/util.service'
 
 
 export function RootCmp() {
@@ -45,15 +45,15 @@ export function RootCmp() {
             %c Noam Saar: %chttps://www.linkedin.com/in/noam-saar-8266662a1/\n
             %c Eden Rize: %chttps://www.linkedin.com/in/eden-rize-9476541b7/\n
             %c Mor Marzan: %chttps://www.linkedin.com/in/mor-marzan-26b48621a/\n`,
-            "color: #6161ff; font-size:20px;",
-            "color: #FFCE04; font-size:14px;",
-            "color: #F6335A; font-size:14px;",
-            "color: #F6335A; font-size:14px;",
-            "color: #FFCE04; font-size:14px;",
-            "color: #FFCE04; font-size:14px;",
-            "color: #04CC77; font-size:14px;",
-            "color: #04CC77; font-size:14px;"
-        );
+            "color: #6161ff font-size:20px",
+            "color: #FFCE04 font-size:14px",
+            "color: #F6335A font-size:14px",
+            "color: #F6335A font-size:14px",
+            "color: #FFCE04 font-size:14px",
+            "color: #FFCE04 font-size:14px",
+            "color: #04CC77 font-size:14px",
+            "color: #04CC77 font-size:14px"
+        )
 
 
         isLogMsgPrinted.currant = true

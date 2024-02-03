@@ -58,11 +58,11 @@ export function InfoModal() {
 
     function getFormatDate(id) {
         const timestamp = utilService.getCreationTimeFromId(id)
-        const date = new Date(timestamp);
-        const day = date.getDate();
-        const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
-        const year = date.getFullYear();
-        return `${day} ${month}, ${year}`;
+        const date = new Date(timestamp)
+        const day = date.getDate()
+        const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date)
+        const year = date.getFullYear()
+        return `${day} ${month}, ${year}`
     }
 
 

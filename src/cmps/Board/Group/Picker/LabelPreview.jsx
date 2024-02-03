@@ -6,7 +6,7 @@ import { utilService } from "../../../../services/util.service"
 
 export function LabelPreview({ title, info, onUpdate, taskId, isChangingToDone }) {
     const previewBtnRef = useRef(null)
-    const [animationClass, setAnimationClass] = useState('');
+    const [animationClass, setAnimationClass] = useState('')
     const animations = ['balloon', 'confetti', 'crazy_balls']
 
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 
-import { showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
+import { resetDynamicModal, showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
 
 import { SidebarMainNav } from "./SidebarMainNav"
 import { SidebarWorkspace } from "./SidebarWorkspace"
@@ -52,10 +52,11 @@ export function Sidebar() {
             setFilteredBoards(boards)
             setIsFavorite(false)
         } else if (boardsToDisplay === 'favorites') {
-            const favoriteBoards = boards.filter(board => board.isStarred);
+            const favoriteBoards = boards.filter(board => board.isStarred)
             setFilteredBoards(favoriteBoards)
             setIsFavorite(true)
         }
+        resetDynamicModal()
     }
 
     function filterBoards() {
@@ -126,7 +127,7 @@ export function Sidebar() {
     }
 
     const changeWidthVariable = (newWidth) => {
-        document.documentElement.style.setProperty('--sidebar-width', newWidth + 'px');
+        document.documentElement.style.setProperty('--sidebar-width', newWidth + 'px')
     }
 
     const startResizing = useCallback(() => {
@@ -140,16 +141,16 @@ export function Sidebar() {
     const resize = useCallback(
         (ev) => {
             if (isResizing && !isMobile) {
-                let screenWidth = window.innerWidth;
-                let newWidth = ev.clientX - sidebarRef.current.getBoundingClientRect().left;
+                let screenWidth = window.innerWidth
+                let newWidth = ev.clientX - sidebarRef.current.getBoundingClientRect().left
 
                 if (screenWidth >= 905 && screenWidth <= 1055) {
-                    if (newWidth > 250) newWidth = 250;
-                    if (newWidth < 200) newWidth = 200;
+                    if (newWidth > 250) newWidth = 250
+                    if (newWidth < 200) newWidth = 200
                 } else if (screenWidth > 1055) {
-                    if (newWidth > 400) newWidth = 400;
-                    if (newWidth < 200) newWidth = 200;
-                };
+                    if (newWidth > 400) newWidth = 400
+                    if (newWidth < 200) newWidth = 200
+                }
                 setSidebarWidth(newWidth)
                 changeWidthVariable(newWidth)
             }

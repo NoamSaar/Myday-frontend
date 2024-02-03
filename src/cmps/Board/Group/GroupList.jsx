@@ -1,11 +1,11 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import { BoardGroup } from "./BoardGroup";
-import { useRef, useState } from "react";
-import { updateBoardOrder } from "../../../store/actions/board.actions";
-import { useSelector } from "react-redux";
+import { BoardGroup } from "./BoardGroup"
+import { useRef, useState } from "react"
+import { updateBoardOrder } from "../../../store/actions/board.actions"
+import { useSelector } from "react-redux"
 
 import emptySearch from "/img/search-empty.svg"
-import { BigPlusIcon } from "../../../services/svg.service";
+import { BigPlusIcon } from "../../../services/svg.service"
 
 
 export function GroupList({ board, isFocusLastGroup, onSetIsFocusLastGroup, scrollTop, onAddGrop }) {

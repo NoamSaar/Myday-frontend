@@ -23,26 +23,6 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
         saveNewOrder(newOrderedBoards)
     }
 
-    // async function saveNewOrder(boards) {
-    //     try {
-    //         const orderedNewBoard = sortFullBoards(boards);
-    //         await saveNewBoards(orderedNewBoard);
-    //     } catch (err) {
-    //         console.error('Error loading Boards:', err);
-    //         showErrorMsg('Cannot save new Boards order');
-    //     }
-    // }
-
-    // function sortFullBoards(boards) {
-    //     // Create a copy of boards to avoid mutating the original
-    //     const boardsCopy = [...boards];
-
-    //     // Sort boards based on the order field
-    //     boardsCopy.sort((a, b) => a.order - b.order);
-
-    //     return boardsCopy;
-    // }
-
     async function saveNewOrder(boards) {
         try {
             // if no filter is applied, skip ordering filtered boards vs fullBoards

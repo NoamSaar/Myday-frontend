@@ -81,20 +81,20 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
     }, [])
 
     function getUniqueMembers(activities) {
-        const uniqueMemberIds = new Set();
-        const uniqueMembers = [];
+        const uniqueMemberIds = new Set()
+        const uniqueMembers = []
 
         activities.forEach(activity => {
-            const member = activity.byMember;
+            const member = activity.byMember
 
             // Check if 'byMember' is an object and has '_id' property
             if (member && member._id && !uniqueMemberIds.has(member._id)) {
-                uniqueMemberIds.add(member._id);
-                uniqueMembers.push(member);
+                uniqueMemberIds.add(member._id)
+                uniqueMembers.push(member)
             }
-        });
+        })
 
-        return uniqueMembers;
+        return uniqueMembers
     }
 
     function onCollapseHeader() {
