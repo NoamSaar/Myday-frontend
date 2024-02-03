@@ -1,13 +1,15 @@
 import { useRef } from "react"
+import { useSelector } from "react-redux"
+
+import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
+
 import { FilledStarIcon, MenuIcon } from "../../services/svg.service"
 import WorkspaceDisplay from "../WorkspaceDisplay"
-import { resetDynamicModal, setDynamicModal } from "../../store/actions/system.actions"
-import { useSelector } from "react-redux"
 import FavoriteDisplay from "../FavoriteDisplay"
 
 export function SidebarWorkspaceNav({ boardsToDisplay, dynFavoriteClass }) {
-    const menuBtnRef = useRef(null)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const menuBtnRef = useRef(null)
 
     const isMenuOpen = parentId === 'sidebar-workspace-menu'
 

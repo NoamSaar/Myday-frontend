@@ -2,32 +2,33 @@ import { useSelector } from "react-redux"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 
+import { boardService } from "../../services/board.service"
+import { utilService } from "../../services/util.service"
+
 import { resetDynamicModal, showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
+import { addBoard, loadBoards, removeBoard, updateBoard } from "../../store/actions/board.actions"
 
 import { SidebarMainNav } from "./SidebarMainNav"
 import { SidebarWorkspace } from "./SidebarWorkspace"
 import { SidebarBoardNav } from "./SidebarBoardNav"
-// import { LottieAnimation } from "./LottieAnimation"
-
-import { addBoard, loadBoards, removeBoard, updateBoard } from "../../store/actions/board.actions"
-import { boardService } from "../../services/board.service"
-import { utilService } from "../../services/util.service"
 
 export function Sidebar() {
-    const sidebarRef = useRef(null)
-
-    const [isResizing, setIsResizing] = useState(false)
-    const [sidebarWidth, setSidebarWidth] = useState(250)
-
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const currActiveBoard = useSelector((storeState) => storeState.boardModule.currBoard)
     const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-    const [isHovered, setIsHovered] = useState(false)
-    const [filteredBoards, setFilteredBoards] = useState(boards)
+
     const [filterBy, setFilterBy] = useState(boardService.getDefaultBoardsFilter())
+    const [filteredBoards, setFilteredBoards] = useState(boards)
+
+    const [isResizing, setIsResizing] = useState(false)
+    const [isHovered, setIsHovered] = useState(false)
     const [isFavorite, setIsFavorite] = useState(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+
+    const [sidebarWidth, setSidebarWidth] = useState(250)
+
     const navigate = useNavigate()
+    const sidebarRef = useRef(null)
 
     useEffect(() => {
         _loadDataBoards()
@@ -206,7 +207,6 @@ export function Sidebar() {
                     filterBy={filterBy}
                 />
                 <div className="app-sidebar-resizer" onMouseDown={startResizing} />
-                {/* <LottieAnimation /> */}
             </article>
         </section >
 

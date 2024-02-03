@@ -2,15 +2,14 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
 
-import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
-import { resetDynamicModal, setDynamicModal, setIsLoading, setIsFullSidebarMobile } from "../../store/actions/system.actions"
-import { setCurrBoard } from "../../store/actions/board.actions"
 import { utilService } from "../../services/util.service"
 
+import { resetDynamicModal, setDynamicModal, setIsLoading, setIsFullSidebarMobile } from "../../store/actions/system.actions"
+import { setCurrBoard } from "../../store/actions/board.actions"
+
+import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
+
 export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, updateBoard }) {
-    const { boardId } = useParams()
-
-
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
@@ -21,6 +20,7 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
     const menuBtnRef = useRef(null)
     const boardNavBtnRef = useRef(null)
     const editedTitleRef = useRef(editedTitle)
+    const { boardId } = useParams()
 
     const navigate = useNavigate()
 
@@ -99,7 +99,6 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
         setIsLoading(true)
         setCurrBoard(null)
         navigate(`/board/${board._id}`)
-        // resetDynamicModal()
     }
 
     const menuOptions = [

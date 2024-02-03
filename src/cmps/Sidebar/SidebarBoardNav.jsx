@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { useSelector } from "react-redux"
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
-import { SidebarBoardLink } from './SidebarBoardLink'
-
-import { showErrorMsg } from '../../store/actions/system.actions'
-import { saveNewBoards } from '../../store/actions/board.actions'
 import { boardService } from "../../services/board.service"
-import { utilService } from '../../services/util.service'
+import { utilService } from "../../services/util.service"
 
+import { showErrorMsg } from "../../store/actions/system.actions"
+import { saveNewBoards } from "../../store/actions/board.actions"
+
+import { SidebarBoardLink } from "./SidebarBoardLink"
 import emptySearch from "/img/search-empty.svg"
 
 export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBoard, filterBy }) {
