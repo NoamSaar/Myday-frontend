@@ -8,7 +8,6 @@ import { DynamicSidePanelHeader } from "../DynamicSidePanelHeader"
 import { DynamicSidePanelRouter } from "../DynamicSidePanelRouter"
 import { loadBoardActivities } from "../../store/actions/board.actions"
 
-
 export function ActivityLog() {
     const currBoard = useSelector((storeState) => storeState.boardModule.currBoard)
     const isSidePanelOpen = useSelector((storeState) => storeState.systemModule.isSidePanelOpen)
