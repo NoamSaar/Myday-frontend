@@ -1,14 +1,12 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { utilService } from "../../../../services/util.service"
-import { useSelector } from "react-redux"
 import { TitleStat } from "./TitleStat"
 
 export function LabelSummary({ title, group, board }) {
-    const [titleStats, setTitleStats] = useState(calculateTitleStatsAndPercentage(group, title, board))
-
+    const [titleStats, setTitleStats] = useState(calcTitleStatsAndPercentage(group, title, board))
 
     useEffect(() => {
-        setTitleStats(calculateTitleStatsAndPercentage(group, title, board))
+        setTitleStats(calcTitleStatsAndPercentage(group, title, board))
     }, [title, group, board])
 
     function getTitleColor(title, board, labelId) {
@@ -16,7 +14,7 @@ export function LabelSummary({ title, group, board }) {
         return titleInfo ? titleInfo.color : null
     }
 
-    function calculateTitleStatsAndPercentage(group, title, board) {
+    function calcTitleStatsAndPercentage(group, title, board) {
         const totalTasks = group.tasks.length
 
         const titleStats = group.tasks.reduce((acc, task) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { FilePreview } from "../Picker/FilePreview"
 import { updateTask } from "../../../../store/actions/board.actions"
+import { FilePreview } from "../Picker/FilePreview"
 
 export function FileSummary({ group, board }) {
     const [fileSummaries, setFileSummaries] = useState()

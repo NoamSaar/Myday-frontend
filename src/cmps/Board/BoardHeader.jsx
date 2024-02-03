@@ -1,30 +1,35 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router"
 
+import { getUsers } from "../../store/actions/user.actions"
+import { loadBoardActivities, removeBoard, setIsHeaderCollapsed } from "../../store/actions/board.actions"
+import {
+    onTooltipParentEnter, onTooltipParentLeave, resetDynamicDialog,
+    resetDynamicModal, setDynamicDialog, setDynamicModal, setSidePanelOpen, showErrorMsg, showSuccessMsg
+} from "../../store/actions/system.actions"
+
+import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon, DeleteIcon } from "../../services/svg.service"
 import { BoardFilter } from "./BoardFilter"
 import { BoardEdit } from "./BoardEdit"
-import { HomeIcon, InviteIcon, PlusIcon, RobotIcon, MenuIcon, AngleDownIcon, DeleteIcon } from "../../services/svg.service"
-import { loadBoardActivities, removeBoard, setIsHeaderCollapsed } from "../../store/actions/board.actions"
-import { useNavigate } from "react-router"
-import { onTooltipParentEnter, onTooltipParentLeave, resetDynamicDialog, resetDynamicModal, setDynamicDialog, setDynamicModal, setSidePanelOpen, showErrorMsg, showSuccessMsg } from "../../store/actions/system.actions"
 import { InviteModal } from "./InviteModal"
-import { getUsers } from "../../store/actions/user.actions"
 import { AutomationModal } from "./AutomationModal"
 import { MembersDisplay } from "./MembersDisplay"
 
 export function BoardHeader({ board, filterBy, onSetFilter }) {
+    const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
+    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
 
     const [isCollapsed, setIsCollapsed] = useState(false)
     const [activityUsers, setActivityUsers] = useState(null)
-    const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
-    const navigate = useNavigate()
 
-    const { parentId, type, isOpen } = useSelector((storeState) => storeState.systemModule.dynamicModal)
-    const isMobile = useSelector((storeState) => storeState.systemModule.isMobile)
+    const sentinelRef = useRef(null) //since the header is alway sticky, there was a need of static element to detect going outside the viewport
     const mainTableRef = useRef(null)
     const addTableRef = useRef(null)
     const collapseBtneRef = useRef(null)
     const optTopHeaderRef = useRef(null)
+
+    const navigate = useNavigate()
 
     const isMenuOpen = parentId === 'board-header-menu'
 
@@ -47,7 +52,7 @@ export function BoardHeader({ board, filterBy, onSetFilter }) {
 
     async function loadUsers() {
         try {
-            const users = await getUsers()
+            await getUsers()
         } catch (err) {
             console.error('Error loading Users:', err)
             showErrorMsg('Cannot load Users')

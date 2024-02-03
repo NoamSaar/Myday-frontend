@@ -1,18 +1,23 @@
-import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react'
-import { GoogleBtn } from './GoogleBtn'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+
+import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react'
 import { updateUser } from '../../store/actions/user.actions'
-import { CloseIcon, GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
-import { AutomationList } from './AutomationList'
 import { resetDynamicDialog } from '../../store/actions/system.actions'
 
+import { GoogleBtn } from './GoogleBtn'
+import { CloseIcon, GmailIcon, GoogleCalendarIcon } from '../../services/svg.service'
+import { AutomationList } from './AutomationList'
+
 export function AutomationModal() {
+    const loggedInUser = useSelector(storeState => storeState.userModule.user)
+
     const session = useSession() //tokens, when session exists we have a user
     const supaBase = useSupabaseClient() //talk to supabase
-    const loggedInUser = useSelector(storeState => storeState.userModule.user)
+
     const [isCalendarChecked, setIsCalendarChecked] = useState(false)
     const [isGmailChecked, setIsGmailChecked] = useState(false)
+
     const { isLoading } = useSessionContext()
     const isDisabled = !loggedInUser || !session
 
@@ -35,7 +40,6 @@ export function AutomationModal() {
         } catch (err) {
             console.log('err', err)
         }
-
     }
 
     async function signOut() {
@@ -68,7 +72,6 @@ export function AutomationModal() {
                 default:
                     break
             }
-
         } catch (err) {
             console.log('err', err)
         }
@@ -100,12 +103,21 @@ export function AutomationModal() {
 
                 <button className='flex' onClick={resetDynamicDialog}><CloseIcon /></button>
             </header>
+
             <GoogleBtn
                 onBtnClick={session ? () => signOut() : () => googleSignIn()}
-                txt={session ? 'Sign out of google' : 'Sign in with google'} />
-            {isDisabled && <p className="disabled-msg">To use our Automations, please <span>sign in with Google</span> & make sure to <span>log in to Myday</span></p>}
+                txt={session ? 'Sign out of google' : 'Sign in with google'}
+            />
 
-            <AutomationList automations={automations} isDisabled={isDisabled} handleSwitchChange={handleSwitchChange} />
+            {isDisabled &&
+                <p className="disabled-msg">To use our Automations, please <span>sign in with Google</span> & make sure to <span>log in to Myday</span></p>
+            }
+
+            <AutomationList
+                automations={automations}
+                isDisabled={isDisabled}
+                handleSwitchChange={handleSwitchChange}
+            />
         </div>
     )
 }
