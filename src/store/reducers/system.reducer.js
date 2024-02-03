@@ -35,7 +35,6 @@ const initialState = {
 }
 
 export function systemReducer(state = initialState, action = {}) {
-  // console.log('action:', action)
   switch (action.type) {
     case SET_IS_LOADING:
       return { ...state, isLoading: action.isLoading }

@@ -63,8 +63,6 @@ export function RootCmp() {
         setIsMobile(window.innerWidth <= 905)
     }
 
-
-
     return (
         <section className="app">
             <Routes>

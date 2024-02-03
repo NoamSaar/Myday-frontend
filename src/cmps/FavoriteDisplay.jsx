@@ -1,5 +1,5 @@
-import React from 'react'
-import { FilledStarIcon } from '../services/svg.service'
+import React from "react"
+import { FilledStarIcon } from "../services/svg.service"
 
 export default function FavoriteDisplay() {
     return (

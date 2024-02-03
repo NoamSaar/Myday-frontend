@@ -3,18 +3,19 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 
 import { boardService } from "../services/board.service"
-import { getTask, loadBoardActivities, updateTask } from "../store/actions/board.actions"
+import { loadBoardActivities, updateTask } from "../store/actions/board.actions"
 
 import { DynamicSidePanelHeader } from "../cmps/DynamicSidePanelHeader"
 import { DynamicSidePanelRouter } from "../cmps/DynamicSidePanelRouter"
 
 export function TaskDetails() {
     const board = useSelector((storeState) => storeState.boardModule.currBoard)
-    const { boardId, taskId } = useParams()
+
     const [currTask, setCurrTask] = useState(null)
     const [activities, setActivities] = useState(null)
     const [currSubject, setCurrSubject] = useState('Updates')
 
+    const { boardId, taskId } = useParams()
 
     useEffect(() => {
         const task = getTaskById()
