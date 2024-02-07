@@ -72,7 +72,8 @@ export function PanelUpdate({ msgs, onAddUpdate }) {
             </div>
 
             {msgs.length ?
-                <MsgList msgs={msgs} onLikeComment={onLikeComment} />
+                // <MsgList msgs={msgs} onLikeComment={onLikeComment} />
+                <MsgList msgs={msgs} />
                 : (
                     <div className="post-not-found grid place-center">
                         <img src="/img/no-updates.svg" alt="" />
