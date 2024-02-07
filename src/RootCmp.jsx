@@ -39,26 +39,26 @@ export function RootCmp() {
     }, [session])
 
     function printLogMsg() {
-        if (isLogMsgPrinted.current) return
+        if (isLogMsgPrinted.current) return;
         console.log(
-            `%cLooking for web developers?\n%cWe're looking for a job. Contact us!\n\n
-            %c Noam Saar: %chttps://www.linkedin.com/in/noam-saar-8266662a1/\n
-            %c Eden Rize: %chttps://www.linkedin.com/in/eden-rize-9476541b7/\n
-            %c Mor Marzan: %chttps://www.linkedin.com/in/mor-marzan-26b48621a/\n`,
-            "color: #6161ff font-size:20px",
-            "color: #FFCE04 font-size:14px",
-            "color: #F6335A font-size:14px",
-            "color: #F6335A font-size:14px",
-            "color: #FFCE04 font-size:14px",
-            "color: #FFCE04 font-size:14px",
-            "color: #04CC77 font-size:14px",
-            "color: #04CC77 font-size:14px"
+            `%cLooking for web developers?\n%cWe're looking for a job. Contact us!\n\n` +
+            `%cNoam Saar: %chttps://www.linkedin.com/in/noam-saar-8266662a1/\n` +
+            `%cEden Rize: %chttps://www.linkedin.com/in/eden-rize-9476541b7/\n` +
+            `%cMor Marzan: %chttps://www.linkedin.com/in/mor-marzan-26b48621a/\n`,
+            "color: #6161ff; font-size:20px;", // Style for "Looking for web developers?"
+            "color: #FFCE04; font-size:14px;", // Style for "We're looking for a job. Contact us!"
+            "color: #F6335A; font-size:14px;", // Style for "Noam Saar:"
+            "text-decoration: underline; color: #F6335A; font-size:14px;", // Style for Noam Saar's LinkedIn URL
+            "color: #FFCE04; font-size:14px;", // Style for "Eden Rize:"
+            "text-decoration: underline; color: #FFCE04; font-size:14px;", // Style for Eden Rize's LinkedIn URL
+            "color: #04CC77; font-size:14px;", // Style for "Mor Marzan:"
+            "text-decoration: underline; color: #04CC77; font-size:14px;"  // Style for Mor Marzan's LinkedIn URL
         )
 
-
-        isLogMsgPrinted.currant = true
-
+        isLogMsgPrinted.current = true
     }
+
+
     function handleScreenResize() {
         setIsMobile(window.innerWidth <= 905)
     }
