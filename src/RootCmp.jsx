@@ -32,10 +32,14 @@ export function RootCmp() {
 
 
     useEffect(() => {
-        if (session && session.provider_token) {
-            utilService.saveToStorage('provider_token', session.provider_token)
+        if (session) {
+            if (session.provider_token) {
+                utilService.saveToStorage('provider_token', session.provider_token)
+            } else {
+                utilService.saveToStorage('sb-xsjwgpefjvojzodrgato-auth-token', null)
+                utilService.saveToStorage('provider_token', null)
+            }
         }
-
     }, [session])
 
     function printLogMsg() {

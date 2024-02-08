@@ -123,10 +123,11 @@ export function InfoModal() {
                 </div>
 
                 <a className="flex align-center svg-inherit-color feedback"
-                    href="https://mail.google.com/mail/u/0/?fs=1&to=edenrize@gmail.com,mormarzan@gmail.com,noamsaar11@gmail.com&su=Feedback%20on%20Myday&tf=cm" target="_blank">
+                    href="mailto:edenrize@gmail.com,mormarzan@gmail.com,noamsaar11@gmail.com?subject=Feedback%20on%20Myday">
                     <FeedbackIcon />
                     <p>Give feedback</p>
                 </a>
+
             </div>
 
             <div className="flex column board-data-container">
