@@ -123,7 +123,8 @@ export function InfoModal() {
                 </div>
 
                 <a className="flex align-center svg-inherit-color feedback"
-                    href="mailto:edenrize@gmail.com,mormarzan@gmail.com,noamsaar11@gmail.com?subject=Feedback%20on%20Myday">
+                    href="mailto:edenrize@gmail.com?subject=Feedback%20on%20Myday">
+                    {/* href="mailto:edenrize@gmail.com,mormarzan@gmail.com,noamsaar11@gmail.com?subject=Feedback%20on%20Myday"> */}
                     <FeedbackIcon />
                     <p>Give feedback</p>
                 </a>
