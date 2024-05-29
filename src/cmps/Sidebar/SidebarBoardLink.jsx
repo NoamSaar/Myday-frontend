@@ -26,9 +26,15 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
 
     const isMenuOpen = parentId === `${board._id}-sidebar-menu`
 
+    // the ref here is to compensate the closure of editedTitle that maintained by handleClickOutside
     useEffect(() => {
         editedTitleRef.current = editedTitle
     }, [editedTitle])
+
+    useEffect(() => {
+        setEditedTitle(board.title)
+        editedTitleRef.current = editedTitle
+    }, [board.title])
 
     useEffect(() => {
         if (isEditing) {

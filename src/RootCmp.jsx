@@ -43,7 +43,7 @@ export function RootCmp() {
     }, [session])
 
     function printLogMsg() {
-        if (isLogMsgPrinted.current) return;
+        if (isLogMsgPrinted.current) return
         console.log(
             `%cLooking for web developers?\n%cWe're looking for a job. Contact us!\n\n` +
             `%cNoam Saar: %chttps://www.linkedin.com/in/noam-saar-8266662a1/\n` +
