@@ -32,7 +32,6 @@ const initialState = {
   isFullSidebarMobile: true,
   isMobile: window.innerWidth <= 905,
   // isIncompatibleBrowser: navigator.userAgent.includes("SamsungBrowser")
-  isIncompatibleBrowser: false
 }
 
 export function systemReducer(state = initialState, action = {}) {

@@ -33,7 +33,6 @@ export function BoardDetails() {
         // if (isIncompatibleBrowser) {
         //     incompatibleBrowserAlert()
         // }
-        console.log('build was succesful')
     }, [])
 
     useEffect(() => {
