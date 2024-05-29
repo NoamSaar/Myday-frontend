@@ -16,7 +16,7 @@ import { ActivityLog } from "../cmps/Panel/ActivityLog"
 import { BrowserWarningTxt } from "../cmps/BrowserWarningTxt"
 
 export function BoardDetails() {
-    const isIncompatibleBrowser = useSelector((storeState) => storeState.systemModule.isIncompatibleBrowser)
+    // const isIncompatibleBrowser = useSelector((storeState) => storeState.systemModule.isIncompatibleBrowser)
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const sortBy = useSelector((storeState) => storeState.boardModule.sortBy)
@@ -30,9 +30,10 @@ export function BoardDetails() {
     const { boardId } = useParams()
 
     useEffect(() => {
-        if (isIncompatibleBrowser) {
-            incompatibleBrowserAlert()
-        }
+        // if (isIncompatibleBrowser) {
+        //     incompatibleBrowserAlert()
+        // }
+        console.log('build was succesful')
     }, [])
 
     useEffect(() => {
