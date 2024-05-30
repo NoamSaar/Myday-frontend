@@ -59,12 +59,6 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
         try {
             let data = recivedData
             if (field === 'members') data = data.map(member => member._id)
-            if (field[0] === 'status' && recivedData === 'l101') {
-                setIsChangingToDone(true)
-                setTimeout(() => {
-                    setIsChangingToDone(false)
-                }, 4000)
-            }
 
             if (field !== 'members' && field !== 'link') resetDynamicModal()
 
@@ -92,7 +86,14 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 data: NewFieldTitle
             }
             const updatedTask = { ...task, members: task.members, [field]: data }
-            updateTask(board._id, groupId, updatedTask, prevState, newState)
+            await updateTask(board._id, groupId, updatedTask, prevState, newState)
+
+            if (field[0] === 'status' && recivedData === 'l101') {
+                setIsChangingToDone(true)
+                setTimeout(() => {
+                    setIsChangingToDone(false)
+                }, 3000)
+            }
 
             const isAutomate = (loggedInUser &&
                 loggedInUser.automations &&
