@@ -63,7 +63,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
                 setIsChangingToDone(true)
                 setTimeout(() => {
                     setIsChangingToDone(false)
-                }, 3000)
+                }, 4000)
             }
 
             if (field !== 'members' && field !== 'link') resetDynamicModal()
