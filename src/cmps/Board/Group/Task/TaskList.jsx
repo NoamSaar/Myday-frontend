@@ -8,7 +8,7 @@ import { addTask, setActiveTask, updateBoardOrder } from "../../../../store/acti
 import { TaskPreview } from "./TaskPreview"
 import { AddTask } from "./AddTask"
 
-export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
+export function TaskList({ groupId, groupColor, filterBy }) {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const [taskTitle, setTaskTitle] = useState('')
 
@@ -73,7 +73,6 @@ export function TaskList({ groupId, groupColor, highlightText, filterBy }) {
                                                     groupId={groupId}
                                                     groupColor={groupColor}
                                                     onSetActiveTask={onSetActiveTask}
-                                                    highlightText={highlightText}
                                                     filterBy={filterBy}
                                                 />
                                             </div>

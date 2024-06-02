@@ -92,6 +92,7 @@ export function SidebarBoardNav({ boards, currActiveBoard, removeBoard, updateBo
                                             currActiveBoard={currActiveBoard}
                                             removeBoard={removeBoard}
                                             updateBoard={updateBoard}
+                                            filterBy={filterBy}
                                         />
                                     </div>
                                 )}

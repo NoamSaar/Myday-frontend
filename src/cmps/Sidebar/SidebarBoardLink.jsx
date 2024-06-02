@@ -8,9 +8,10 @@ import { resetDynamicModal, setDynamicModal, setIsLoading, setIsFullSidebarMobil
 import { setCurrBoard } from "../../store/actions/board.actions"
 
 import { DeleteIcon, BoardIcon, MenuIcon, PencilIcon } from "../../services/svg.service"
+import { HighlightText } from "../HighlightText"
 
-export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, updateBoard }) {
-    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
+export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, updateBoard, filterBy }) {
+    // const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const { parentId } = useSelector((storeState) => storeState.systemModule.dynamicModal)
 
     const [isEditing, setIsEditing] = useState(false)
@@ -87,18 +88,6 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
         }
     }
 
-    function highlightText(text, query) {
-        if (!query) return text
-        const escapedQuery = utilService.escapeRegExp(query)
-
-        const parts = text.split(new RegExp(`(${escapedQuery})`, 'gi'))
-        return parts.map((part, index) =>
-            part.toLowerCase() === query.toLowerCase()
-                ? <span key={index} className="highlight">{part}</span>
-                : part
-        )
-    }
-
     function onLinkClick() {
         setIsFullSidebarMobile(false)
         if (boardId === board._id) return
@@ -153,7 +142,7 @@ export function SidebarBoardLink({ board, boards, currActiveBoard, removeBoard, 
                     />
                 ) : (
                     <>
-                        <span>{highlightText(board.title, filterBy.title)}</span>
+                        <span><HighlightText text={board.title} query={filterBy.title} /></span>
 
                         <button
                             className={`btn btn-option-menu svg-inherit-color ${dynModalClass}`}

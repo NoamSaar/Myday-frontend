@@ -18,8 +18,9 @@ import { DeleteIcon, MenuIcon, OpenIcon } from "../../../../services/svg.service
 import { DynamicPreview } from "../Picker/DynamicPreview"
 import { EditableTxt } from "../../../EditableTxt"
 import { MsgBtn } from "./MsgBtn"
+import { HighlightText } from "../../../HighlightText"
 
-export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highlightText, filterBy }) {
+export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, filterBy }) {
     const board = useSelector((storeState) => storeState.boardModule.filteredBoard)
     const activeTask = useSelector((storeState) => storeState.boardModule.activeTask)
     const loggedInUser = useSelector((storeState) => storeState.userModule.user)
@@ -340,7 +341,7 @@ export function TaskPreview({ task, groupId, groupColor, onSetActiveTask, highli
 
                         <EditableTxt
                             isEditing={isEditing}
-                            txtValue={highlightText(taskTitle, filterBy.txt)}
+                            txtValue={<HighlightText text={taskTitle} query={filterBy.txt} />}
                             onTxtClick={onTitleClick}
                             inputValue={taskTitle}
                             onInputChange={onChangeTitle}
