@@ -62,7 +62,6 @@ export function Sidebar() {
 
     function filterBoards() {
         if (filterBy.title) {
-            console.log('filterBy.title', filterBy.title)
             const escapedFilter = utilService.escapeRegExp(filterBy.title)
             const regex = new RegExp(escapedFilter, 'i')
             const newBoards = boards.filter(board => regex.test(board.title))
